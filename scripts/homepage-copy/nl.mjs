@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Taal selecteren",
     platform: "Hoe het werkt",
     solutions: "Toepassingen",
-    automation: "WIFIGATE Host",
+    automation: "Zakelijk",
     productGuide: "Instructievideo's",
     contact: "Contact",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "De WIFIGATE-app op een telefoon met de poort thuis, de werkplek en een tijdgebonden gastpas",
   },
   automation: {
-    eyebrow: "Gemaakt voor gastvrijheid",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Eén controller.", "Een plan voor elk bedrijf."],
+    subtitle: "Abonnementen voor bedrijven die meer nodig hebben dan de app. Een abonnement is optioneel: elke controller werkt ook zonder volledig.",
     audienceLabel: "Ontworpen voor",
-    audiences: ["Hotels", "Airbnb", "Vakantieappartementen", "Verblijfsaccommodaties"],
-    promise: "Jij ontvangt je gasten. De toegang regelt zichzelf.",
-    subtitle: "Van hotels tot vakantieappartementen: koppel elke boeking aan een beveiligd toegangsrecht voor de juiste poort, deur of garage. Gasten gaan naar binnen met hun telefoon, en het toegangsrecht gaat in bij het inchecken en eindigt automatisch bij het uitchecken.",
+    promise: "Automatisch gasttoegangsbeheer voor elke boeking.",
+    text: "De toegang gaat in bij het inchecken en vervalt bij het uitchecken. Geen sleutels, geen codes en geen sleutelkluisjes.",
+    audiences: ["Hotels", "Vakantiewoningen", "Gastenverblijven", "Huurparkeerplaatsen", "Opslagdiensten", "En meer…"],
     cta: "Ontdek WIFIGATE Host",
     imageAlt: "Gasten gebruiken hun telefoon om hun accommodatie binnen te gaan",
-    stayCaption: "Elk verblijf, van boeking tot vertrek",
-    staySteps: ["Boeking ontvangen", "Toegang bij het inchecken", "Stopt bij het uitchecken"],
-    points: [
-      {
-        title: "Geen sleutels of passen overdragen",
-        text: "Het toegangsrecht komt rechtstreeks op de telefoon van je gast. Geen sleutels ophalen, geen sleutelkluisjes en geen codes om te delen.",
-      },
-      {
-        title: "Automatisch tijdgebonden",
-        text: "Elk toegangsrecht gaat in bij het inchecken en vervalt bij het uitchecken, helemaal automatisch.",
-      },
-      {
-        icon: "team",
-        title: "Scheelt uren werk",
-        text: "Je team richt zich op de gasten in plaats van op het geregel met sleutelkaarten en andere fysieke toegangsmiddelen.",
-      },
-    ],
+    manager: {
+      tagline: "Al je systemen, waar ter wereld je ook bent.",
+      text: "Alle controllers, gebruikers en toegangsrechten van je organisatie in één dashboard in je browser.",
+      audiences: ["Woongebouwen", "Kantoren", "Sportaccommodaties", "Parkeergarages", "En meer…"],
+      cta: "Praat met ons over Manager",
+      imageAlt: "De ingang van een woongebouw waarvan de toegang wordt beheerd met WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Overzicht van het WIFIGATE-systeem: het IP67-apparaat, de mobiele app en de besturingsprint met aansluitklemmen, USB Type-C en 12-24V-ingang, Wi-Fi 6, Bluetooth LE en een 433,92MHz-ontvanger, naast de platformfuncties – tot 5000 gebruikers en 20 beheerders, onbeperkte gastuitnodigingen, een API voor geautomatiseerde gastuitnodigingen, geen simkaart of router, stabiliteit, snelle gastuitnodiging, 90 dagen geschiedenis, automatisch openen, tot 50 acties, digitaal inleren van RF-afstandsbedieningen, beveiliging en privacy, en geen abonnementskosten.",

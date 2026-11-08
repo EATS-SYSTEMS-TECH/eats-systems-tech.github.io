@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "originalSource": "42ebc994c356a40b806f4a35e16b252f9d603bae",
-  "rawSha256": "9e03c3929fb67f87c10cef1efcba4805f15155a5611c2976d24d401e0b7e34ff",
-  "domSha256": "e9bd67e01eff46730422fbc2960936b63a40626389bf6a25fbf2fc14df2fc320",
+  "rawSha256": "22f14840168e11291100c4c78f735d924a542b0eb8adc0e66a480a2cf382a433",
+  "domSha256": "14bdb7960db107a3f5e8f1cbee71c598a08b45e9500f7703c35b6547b9701c06",
   "sectionOrder": [
     "home",
     "advantages",
@@ -58,6 +58,14 @@
       "width": "1280",
       "height": "720",
       "loading": "lazy"
+    },
+    {
+      "src": "assets/img/wifigate-manager-building.webp",
+      "alt": "The entrance of a residential building whose access is managed with WIFIGATE Manager",
+      "width": "960",
+      "height": "540",
+      "loading": "lazy",
+      "decoding": "async"
     },
     {
       "class": "security-statement__media-image",

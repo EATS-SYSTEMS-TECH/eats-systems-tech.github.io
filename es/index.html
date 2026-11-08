@@ -72,8 +72,8 @@
   <link rel="stylesheet" href="../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
-  <link rel="stylesheet" href="../css/guest-invites.css?v=20261007c">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261026a">
+  <link rel="stylesheet" href="../css/guest-invites.css?v=20261108a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261108a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
   <script src="../js/navigation.js?v=20261022outside1" defer=""></script>
@@ -124,7 +124,7 @@
 
 
 
-<link rel="stylesheet" href="../css/scene-video.css?v=20261019d"><script src="../js/scene-video.js?v=20261019d" defer=""></script>
+<link rel="stylesheet" href="../css/scene-video.css?v=20261108a"><script src="../js/scene-video.js?v=20261019d" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, control de acceso inteligente, abrir portón desde el celular, portón eléctrico, control de acceso, sin suscripción mensual">
   <meta name="description" content="WIFIGATE es un sistema de control de acceso inteligente que abre portones, puertas, estacionamientos, persianas y garajes desde el teléfono. Seguro, cifrado y cómodo, sin suscripción mensual.">
   <meta name="robots" content="index, follow">
@@ -377,7 +377,7 @@
         <span class="nav__toggle-bar"></span>
       </button>
       <div class="nav__links-wrapper" id="primary-navigation">
-        <div class="topbar-nav"><a class="nav-link nav__link" href="/es/#how-it-works" dir="ltr">Cómo funciona</a><a class="nav-link nav__link" href="/es/#use-cases" dir="ltr">Casos de uso</a><a class="nav-link nav__link" href="/es/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/es/#tutorial-videos" dir="ltr">Videotutoriales</a><a class="nav-link nav__link" href="/es/shop/" dir="ltr" lang="en">Shop</a><a class="nav-link nav__link nav__contact-link" href="/es/#get-in-touch" dir="ltr">Contáctanos</a></div>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/es/#how-it-works" dir="ltr">Cómo funciona</a><a class="nav-link nav__link" href="/es/#use-cases" dir="ltr">Casos de uso</a><a class="nav-link nav__link" href="/es/#wifigate-automation" dir="ltr">Para empresas</a><a class="nav-link nav__link" href="/es/#tutorial-videos" dir="ltr">Videotutoriales</a><a class="nav-link nav__link" href="/es/shop/" dir="ltr" lang="en">Shop</a><a class="nav-link nav__link nav__contact-link" href="/es/#get-in-touch" dir="ltr">Contáctanos</a></div>
       </div>
       <a class="site-login__trigger" href="/es/login/" aria-label="Iniciar sesión"><span class="site-login__label" dir="ltr">Iniciar sesión</span><svg class="site-login__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path></svg></a>
       <div class="site-account">
@@ -444,7 +444,7 @@
     <!-- Use cases keep their ordered niche destinations alongside the product image. -->
 
 
-    <!-- Host promotion keeps its hospitality audiences, stay steps and existing detail destination. -->
+    <!-- WIFIGATE For Business: one numbered column per subscription plan. -->
 
 
     <!-- Tutorial cards retain their published coming-soon state and translation positions. -->
@@ -617,31 +617,51 @@
       </div>
     </section><section id="guest-invites-api" class="section guest-invites" data-nav-target="wifigate-automation" aria-labelledby="guest-invites-title">
       <div id="wifigate-automation" class="container">
-        <div class="guest-invites__grid js-reveal">
-          <div class="guest-invites__copy">
-            <p class="guest-invites__eyebrow" dir="ltr">Diseñado para alojamientos</p>
-            <h2 id="guest-invites-title" class="guest-invites__title" dir="ltr">WIFIGATE<br>Host</h2>
+        <header class="business-plans__header js-reveal">
+          <div>
+            <p class="guest-invites__eyebrow" dir="ltr">WIFIGATE For Business</p>
+            <h2 id="guest-invites-title" class="guest-invites__title" dir="ltr">Un solo controlador.<br>Un plan para cada negocio.</h2>
+          </div>
+          <p class="guest-invites__subtitle" dir="ltr">Planes de suscripción para negocios que necesitan más que la app. La suscripción es opcional: cada controlador funciona por completo sin ella.</p>
+        </header>
+        <div class="business-plans js-reveal">
+          <article class="business-plan business-plan--host">
+            <figure class="automation-stay">
+              <div class="automation-stay__media"><picture><source media="(min-width: 769px)" srcset="../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=05868184f816"><source media="(max-width: 768px)" srcset="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="Huéspedes usando el teléfono para entrar en su alojamiento" width="1280" height="720" loading="lazy"></picture></div>
+            </figure>
+            <span class="business-plan__number" aria-hidden="true">01</span>
+            <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
+            <p class="automation-promise" dir="ltr">Gestión automática del acceso de huéspedes en cada reserva.</p>
+            <p class="business-plan__text" dir="ltr">El acceso se activa en el check-in y caduca en el check-out. Sin llaves, sin códigos y sin cajas de llaves.</p>
             <ul class="automation-audiences" aria-label="Pensado para" dir="ltr"><li>Hoteles</li>
-<li>Airbnb</li>
 <li>Alquileres vacacionales</li>
-<li>Alojamientos turísticos</li></ul>
-            <p class="automation-promise" dir="ltr">Recibe a tus huéspedes. La entrada se gestiona sola.</p>
-            <p class="guest-invites__subtitle" dir="ltr">De hoteles a alquileres vacacionales, conecta cada reserva con un permiso de entrada seguro para el portón, la puerta o el garaje que corresponda. Los huéspedes entran con su teléfono: el permiso se activa en el check-in y termina automáticamente en el check-out.</p>
+<li>Casas de huéspedes</li>
+<li>Alquiler de aparcamiento</li>
+<li>Alquiler de trasteros</li>
+<li>Y más…</li></ul>
             <a href="/es/wifigate-host/" class="btn btn--primary guest-invites__cta">
               <span data-i18n="guestInvites.promo.cta" dir="ltr">Descubre WIFIGATE Host</span>
               <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
             </a>
-          </div>
-          <figure class="automation-stay">
-            <div class="automation-stay__media"><picture><source media="(min-width: 769px)" srcset="../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=05868184f816"><source media="(max-width: 768px)" srcset="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="Huéspedes usando el teléfono para entrar en su alojamiento" width="1280" height="720" loading="lazy"></picture></div>
-            <figcaption class="automation-stay__caption">
-              <span class="automation-stay__label" dir="ltr">Cada estadía, de la reserva a la salida</span>
-              <ol class="automation-stay__steps"><li>Reserva recibida</li>
-<li>Acceso en el check-in</li>
-<li>Caduca en el check-out</li></ol>
-            </figcaption>
-          </figure>
-          <ul class="guest-invites__points"><li class="guest-invites__point"><span class="guest-invites__point-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg></span><span class="guest-invites__point-copy"><span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title" dir="ltr">Sin entregar llaves ni tarjetas</span><span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text" dir="ltr">El permiso de entrada llega directamente al teléfono del huésped: sin recoger llaves, sin cajas de llaves y sin compartir códigos.</span></span></li><li class="guest-invites__point"><span class="guest-invites__point-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg></span><span class="guest-invites__point-copy"><span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title" dir="ltr">Vigencia automática</span><span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text" dir="ltr">Cada permiso se activa en el check-in y vence en el check-out, sin que tengas que hacer nada.</span></span></li><li class="guest-invites__point"><span class="guest-invites__point-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path><circle cx="10" cy="8" r="3.5"></circle><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.6-3.4"></path><path d="M15 5.1a3.5 3.5 0 0 1 0 5.8"></path></svg></span><span class="guest-invites__point-copy"><span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title" dir="ltr">Ahorra horas de trabajo</span><span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text" dir="ltr">Tu equipo se dedica a los huéspedes, no a la logística de tarjetas y otros medios de acceso físicos.</span></span></li></ul>
+          </article>
+          <article class="business-plan business-plan--manager">
+            <figure class="business-plan__media">
+              <img src="../assets/img/wifigate-manager-building.webp" alt="La entrada de un edificio residencial cuyo acceso se gestiona con WIFIGATE Manager" width="960" height="540" loading="lazy" decoding="async">
+            </figure>
+            <span class="business-plan__number" aria-hidden="true">02</span>
+            <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
+            <p class="business-plan__tagline" dir="ltr">Todos tus sistemas, desde cualquier lugar del mundo.</p>
+            <p class="business-plan__text" dir="ltr">Todos los controladores, usuarios y permisos de tu organización en un solo panel en el navegador.</p>
+            <ul class="business-plan__audiences" aria-label="Pensado para" dir="ltr"><li>Edificios residenciales</li>
+<li>Oficinas</li>
+<li>Instalaciones deportivas</li>
+<li>Aparcamientos</li>
+<li>Y más…</li></ul>
+            <a href="#get-in-touch" class="btn btn--ghost business-plan__cta">
+              <span dir="ltr">Consúltanos sobre Manager</span>
+              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+            </a>
+          </article>
         </div>
       </div>
     </section><section id="tutorials" class="section" data-nav-target="tutorial-videos" aria-labelledby="tutorials-title">

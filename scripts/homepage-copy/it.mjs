@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Seleziona la lingua",
     platform: "Come funziona",
     solutions: "Casi d'uso",
-    automation: "WIFIGATE Host",
+    automation: "Per le aziende",
     productGuide: "Video tutorial",
     contact: "Contattaci",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "L'app WIFIGATE sullo smartphone, con il cancello di casa, il luogo di lavoro e un'autorizzazione ospite a tempo limitato",
   },
   automation: {
-    eyebrow: "Progettato per l'ospitalità",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Un solo controller.", "Un piano per ogni attività."],
+    subtitle: "Piani in abbonamento per le attività che hanno bisogno di più dell'app. L'abbonamento è facoltativo: ogni controller funziona pienamente anche senza.",
     audienceLabel: "Pensato per",
-    audiences: ["Hotel", "Airbnb", "Case vacanza", "Strutture ricettive"],
-    promise: "Tu accogli gli ospiti. All'ingresso ci pensa WIFIGATE.",
-    subtitle: "Dagli hotel alle case vacanza, collega ogni prenotazione a un'autorizzazione di ingresso sicura per il cancello, la porta o il garage giusti. Gli ospiti entrano con lo smartphone: l'autorizzazione si attiva al check-in e scade in automatico al check-out.",
+    promise: "Gestione automatica degli accessi degli ospiti per ogni prenotazione.",
+    text: "L'accesso si attiva al check-in e scade al check-out. Niente chiavi, niente codici e niente cassette portachiavi.",
+    audiences: ["Hotel", "Case vacanza", "B&B e affittacamere", "Parcheggi in affitto", "Self storage", "E molto altro…"],
     cta: "Scopri WIFIGATE Host",
     imageAlt: "Ospiti che usano lo smartphone per entrare nel loro alloggio",
-    stayCaption: "Ogni soggiorno, dalla prenotazione alla partenza",
-    staySteps: ["Prenotazione ricevuta", "Accesso al check-in", "Scade al check-out"],
-    points: [
-      {
-        title: "Niente chiavi o tessere da consegnare",
-        text: "L'autorizzazione di ingresso arriva direttamente sullo smartphone dell'ospite, senza chiavi da ritirare, cassette portachiavi o codici da condividere.",
-      },
-      {
-        title: "Scadenza automatica",
-        text: "Ogni autorizzazione si attiva al check-in e scade al check-out, in automatico.",
-      },
-      {
-        icon: "team",
-        title: "Ore di lavoro risparmiate",
-        text: "Il personale si dedica all'accoglienza invece che alla logistica di tessere e altri supporti fisici.",
-      },
-    ],
+    manager: {
+      tagline: "Tutti i tuoi sistemi, da qualsiasi parte del mondo.",
+      text: "Tutti i controller, gli utenti e le autorizzazioni della tua organizzazione in un'unica dashboard nel browser.",
+      audiences: ["Condomini", "Uffici", "Impianti sportivi", "Parcheggi", "E molto altro…"],
+      cta: "Parlaci di Manager",
+      imageAlt: "L'ingresso di un condominio con accessi gestiti tramite WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Panoramica del sistema WIFIGATE: il dispositivo IP67, l'app mobile e la scheda di controllo con morsettiere, USB Type-C e ingresso 12-24V, Wi-Fi 6, Bluetooth LE e un ricevitore a 433,92MHz, insieme alle funzioni della piattaforma: fino a 5000 utenti e 20 amministratori, inviti ospite illimitati, API automatica per gli inviti ospite, nessuna SIM né router, stabilità, invito ospite rapido, cronologia di 90 giorni, apertura automatica, fino a 50 eventi, memorizzazione digitale dei telecomandi RF, sicurezza e privacy, nessun abbonamento.",

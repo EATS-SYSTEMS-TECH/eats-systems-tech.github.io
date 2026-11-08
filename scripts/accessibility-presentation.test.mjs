@@ -3,15 +3,11 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { chromium } from "playwright-core";
 import { load } from "cheerio";
-import { installHomeHostPointShells } from "./host-marketing-page.mjs";
 
 const styles = await readFile(new URL("../css/styles.css", import.meta.url), "utf8");
 const accessibility = await readFile(new URL("../css/accessibility.css", import.meta.url), "utf8");
 const guestInvites = await readFile(new URL("../css/guest-invites.css", import.meta.url), "utf8");
 const homeTemplate = load(await readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
-// Compose the same Host cards as the locale builder before mounting this CSS
-// fixture; the raw source template intentionally contains only the list slot.
-installHomeHostPointShells(homeTemplate);
 const hostPromo = homeTemplate.html(homeTemplate("#guest-invites-api"));
 const surface = ["site-header", "feature-card", "contact-cta", "where-showcase", "where-story-card",
   "where-story-card__item", "where-story-card__video-frame", "where-story-card__video-screen",
@@ -26,7 +22,7 @@ const ink = ["where-story-card__video-label", "where-story-card__video-status", 
   "where-story-card__badge", "where-list__link", "where-story-card__close"];
 const classes = [...new Set([...surface, ...subdued, ...ink])];
 
-test("Host promo preserves full band layout, icon/text sizing, overlay and the exact 900px breakpoint", async () => {
+test("For Business band keeps equal plan columns, a white title, its overlay and the exact 900px breakpoint", async () => {
   const browser = await chromium.launch({ channel: "chrome", headless: true });
   try {
     for (const width of [375, 900, 901, 1440]) for (const dir of ["ltr", "rtl"]) {
@@ -39,22 +35,16 @@ test("Host promo preserves full band layout, icon/text sizing, overlay and the e
           <body class="${dir === "rtl" ? "rtl" : ""}">${hostPromo}</body></html>`);
         const result = await page.evaluate(() => {
           const css = selector => getComputedStyle(document.querySelector(selector));
-          const grid = css(".guest-invites__grid"), title = css(".guest-invites__title");
-          const points = css(".guest-invites__points"), icon = css(".guest-invites__point-icon");
-          const vector = css(".guest-invites__point-icon svg"), pointTitle = css(".guest-invites__point-title");
+          const plans = css(".business-plans"), header = css(".business-plans__header"), title = css(".guest-invites__title");
           const overlay = getComputedStyle(document.querySelector(".guest-invites"), "::before");
-          return { columns: grid.gridTemplateColumns.split(" ").length, display: grid.display,
-            titleColor: title.color, lineBreaks: title.whiteSpace, pointsDisplay: points.display,
-            pointsGap: points.rowGap, icon: [icon.width, icon.height], vector: [vector.width, vector.height],
-            pointTitleColor: pointTitle.color, pointTitleWeight: pointTitle.fontWeight,
+          return { plans: plans.gridTemplateColumns.split(" ").length, header: header.gridTemplateColumns.split(" ").length,
+            display: plans.display, count: document.querySelectorAll(".business-plan").length, titleColor: title.color,
             overlayPointer: overlay.pointerEvents, overlayGrid: overlay.backgroundSize, mask: overlay.maskImage };
         });
-        assert.equal(result.columns, width <= 900 ? 1 : 2, `${width}/${dir}`);
-        assert.equal(result.display, "grid"); assert.equal(result.pointsDisplay, "grid");
-        assert.equal(result.titleColor, "rgb(255, 255, 255)"); assert.equal(result.lineBreaks, "pre-line");
-        assert.equal(result.pointsGap, "17.6px"); assert.deepEqual(result.icon, ["40px", "40px"]);
-        for (const dimension of result.vector) assert.ok(Math.abs(parseFloat(dimension) - 20.8) < .01);
-        assert.equal(result.pointTitleColor, "rgb(255, 255, 255)"); assert.equal(result.pointTitleWeight, "700");
+        assert.equal(result.plans, width <= 900 ? 1 : 2, `${width}/${dir}`);
+        assert.equal(result.header, width <= 900 ? 1 : 2, `${width}/${dir}`);
+        assert.equal(result.display, "grid"); assert.equal(result.count, 2);
+        assert.equal(result.titleColor, "rgb(255, 255, 255)");
         assert.equal(result.overlayPointer, "none"); assert.equal(result.overlayGrid, "38px 38px, 38px 38px");
         assert.notEqual(result.mask, "none");
       } finally { await page.close(); }
@@ -156,7 +146,7 @@ test("Host promo CTA preserves LTR/RTL hover and keyboard motion with reduced-mo
         await page.emulateMedia({ reducedMotion: reduced ? "reduce" : "no-preference" });
         await page.setContent(`<html dir="${rtl ? "rtl" : "ltr"}"><head><style>${styles}\n${guestInvites}</style></head>
           <body class="${rtl ? "rtl" : ""}"><button id="before">Before</button><section class="guest-invites">
-          <div class="guest-invites__grid"><a id="cta" class="btn guest-invites__cta" href="#target">Explore Host
+          <div class="business-plans"><a id="cta" class="btn guest-invites__cta" href="#target">Explore Host
           <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24"><path d="M5 12h14" /></svg></a></div></section>
           <code class="giapi-url">https://example.test/?fixture=1</code><svg class="giapi-copy__icon"></svg></body></html>`);
         const arrow = page.locator(".guest-invites__cta-arrow");
@@ -167,7 +157,7 @@ test("Host promo CTA preserves LTR/RTL hover and keyboard motion with reduced-mo
         assert.equal(initial.x, 0);
         assert.equal(initial.scale, rtl ? -1 : 1);
         assert.equal(initial.duration, reduced ? "0s" : "0.16s");
-        assert.equal(await page.locator(".guest-invites__grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length), width <= 900 ? 1 : 2);
+        assert.equal(await page.locator(".business-plans").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length), width <= 900 ? 1 : 2);
         const waitForArrow = () => page.waitForFunction((direction) => {
           const matrix = new DOMMatrix(getComputedStyle(document.querySelector(".guest-invites__cta-arrow")).transform);
           return matrix.m41 === (direction ? -3 : 3) && matrix.m11 === (direction ? -1 : 1);

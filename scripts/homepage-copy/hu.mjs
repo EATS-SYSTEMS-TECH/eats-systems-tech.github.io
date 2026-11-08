@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Nyelv kiválasztása",
     platform: "Így működik",
     solutions: "Felhasználási területek",
-    automation: "WIFIGATE Host",
+    automation: "Vállalkozásoknak",
     productGuide: "Oktatóvideók",
     contact: "Kapcsolat",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "A WIFIGATE alkalmazás egy telefonon, rajta az otthoni kapu, a munkahely és egy időkorlátos vendéghozzáférés",
   },
   automation: {
-    eyebrow: "A vendéglátásra tervezve",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Egy vezérlő.", "Csomag minden vállalkozásnak."],
+    subtitle: "Előfizetéses csomagok azoknak a vállalkozásoknak, amelyeknek az alkalmazásnál többre van szükségük. Az előfizetés nem kötelező: minden vezérlő nélküle is teljes értékűen működik.",
     audienceLabel: "Kinek készült?",
-    audiences: ["Szállodák", "Airbnb", "Vendégapartmanok", "Szálláshelyek"],
-    promise: "Fogadja vendégeit, a beléptetés automatikusan megy.",
-    subtitle: "A szállodáktól az üdülőapartmanokig kapcsoljon minden foglaláshoz biztonságos belépési jogosultságot a megfelelő kapuhoz, ajtóhoz vagy garázshoz. A vendégek telefonnal lépnek be, a jogosultság check-inkor lép életbe, és check-outkor automatikusan lejár.",
+    promise: "Automatikus vendégbeléptetés minden foglaláshoz.",
+    text: "A jogosultság check-inkor lép életbe, és check-outkor lejár. Nincs kulcs, nincs kód és nincs kulcsdoboz.",
+    audiences: ["Szállodák", "Üdülőapartmanok", "Vendégházak", "Bérelhető parkolók", "Tárolóbérlés", "És még sok más…"],
     cta: "Ismerje meg a WIFIGATE Hostot",
     imageAlt: "Vendégek telefonnal lépnek be a szállásukra",
-    stayCaption: "Minden foglalásnál, a visszaigazolástól a távozásig",
-    staySteps: ["Beérkezett a foglalás", "Hozzáférés check-inkor", "Check-outkor lejár"],
-    points: [
-      {
-        title: "Nincs kulcs- és kártyaátadás",
-        text: "A belépési jogosultság közvetlenül a vendég telefonjára érkezik, kulcsátvétel, kulcsdobozok és kódmegosztás nélkül.",
-      },
-      {
-        title: "Automatikus időkorlát",
-        text: "Minden jogosultság check-inkor lép életbe, és check-outkor automatikusan lejár.",
-      },
-      {
-        icon: "team",
-        title: "Munkaórákat takarít meg",
-        text: "A személyzet a vendéglátásra koncentrálhat a kártyák és más fizikai belépőeszközök logisztikája helyett.",
-      },
-    ],
+    manager: {
+      tagline: "Minden rendszere, a világ bármely pontjáról.",
+      text: "A szervezet összes vezérlője, felhasználója és jogosultsága egyetlen böngészős irányítópulton.",
+      audiences: ["Lakóépületek", "Irodák", "Sportlétesítmények", "Parkolóházak", "És még sok más…"],
+      cta: "Beszéljen velünk a Manager csomagról",
+      imageAlt: "Egy lakóépület bejárata, amelynek beléptetését a WIFIGATE Manager kezeli",
+    },
   },
   productGuide: {
     imageAlt: "A WIFIGATE rendszer áttekintése: az IP67-es eszköz, a mobilalkalmazás és a vezérlőpanel sorkapcsokkal, USB Type-C csatlakozóval, 12-24V-os bemenettel, Wi-Fi 6, Bluetooth LE és 433,92 MHz-es vevő, mellette a platform képességei: akár 5000 felhasználó és 20 adminisztrátor, korlátlan vendégmeghívó, automatikus API a vendégmeghívókhoz, nincs szükség SIM-kártyára vagy routerre, stabilitás, gyors vendégmeghívó, 90 napos előzmények, automatikus nyitás, akár 50 esemény, RF-távirányítók digitális betanítása, biztonság és adatvédelem, valamint nincs előfizetési díj.",

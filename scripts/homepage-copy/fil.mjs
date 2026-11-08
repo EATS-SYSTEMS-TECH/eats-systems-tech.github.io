@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Piliin ang wika",
     platform: "Paano ito gumagana",
     solutions: "Mga Gamit",
-    automation: "WIFIGATE Host",
+    automation: "Para sa Negosyo",
     productGuide: "Mga tutorial video",
     contact: "Makipag-usap sa amin",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Ang WIFIGATE app sa telepono, kasama ang gate ng bahay, ang lugar ng trabaho, at isang pahintulot para sa bisita na may takdang oras",
   },
   automation: {
-    eyebrow: "Ginawa para sa hospitality",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Isang controller.", "May plan para sa bawat negosyo."],
+    subtitle: "Mga subscription plan para sa mga negosyong nangangailangan ng higit pa sa app. Hindi sapilitan ang subscription: gumagana nang buo ang bawat controller kahit wala nito.",
     audienceLabel: "Para sa",
-    audiences: ["Mga hotel", "Airbnb", "Mga apartment para sa bisita", "Mga tuluyan"],
-    promise: "Salubungin ang inyong mga bisita. Awtomatiko na ang kanilang pagpasok.",
-    subtitle: "Mula sa mga hotel hanggang sa mga bakasyunang apartment, ikonekta ang bawat booking sa ligtas na pahintulot sa pagpasok para sa tamang gate, pinto, o garahe. Pumapasok ang mga bisita gamit ang kanilang telepono, at nagsisimula ang pahintulot sa check-in at awtomatikong nagtatapos sa check-out.",
+    promise: "Awtomatikong pamamahala ng pagpasok ng mga bisita sa bawat booking.",
+    text: "Nagsisimula ang pahintulot sa check-in at nag-e-expire sa check-out. Walang susi, walang code, at walang lockbox.",
+    audiences: ["Mga hotel", "Mga bakasyunang paupahan", "Mga guesthouse", "Paupahang paradahan", "Mga storage service", "At marami pang iba…"],
     cta: "Tuklasin ang WIFIGATE Host",
     imageAlt: "Mga bisitang gumagamit ng telepono para makapasok sa kanilang tutuluyan",
-    stayCaption: "Bawat pananatili, mula booking hanggang check-out",
-    staySteps: ["Natanggap ang booking", "Access sa check-in", "Mag-e-expire sa check-out"],
-    points: [
-      {
-        title: "Walang susi o card na iaabot",
-        text: "Direktang dumarating ang pahintulot sa pagpasok sa telepono ng bisita, kaya walang susing kukunin, lockbox, o code na ibabahagi.",
-      },
-      {
-        title: "Awtomatikong may takdang oras",
-        text: "Bawat pahintulot ay nagsisimula sa check-in at nag-e-expire sa check-out, nang awtomatiko.",
-      },
-      {
-        icon: "team",
-        title: "Tipid sa oras ng staff",
-        text: "Nakatuon ang staff sa pag-aasikaso ng mga bisita sa halip na sa logistics ng mga card o iba pang pisikal na gamit sa pagpasok.",
-      },
-    ],
+    manager: {
+      tagline: "Lahat ng inyong system, saanman sa mundo.",
+      text: "Lahat ng controller, user, at pahintulot ng inyong organisasyon sa iisang dashboard sa browser.",
+      audiences: ["Mga residential building", "Mga opisina", "Mga pasilidad pang-sports", "Mga paradahan", "At marami pang iba…"],
+      cta: "Makipag-usap sa amin tungkol sa Manager",
+      imageAlt: "Ang pasukan ng isang residential building na ang access ay pinamamahalaan gamit ang WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Pangkalahatang-ideya ng WIFIGATE system: ang IP67 device, ang mobile app, at ang control board na may mga terminal block, USB Type-C at 12-24V input, Wi-Fi 6, Bluetooth LE at 433.92MHz receiver, kasama ang mga kakayahan ng platform - hanggang 5000 user at 20 admin, walang limitasyong imbitasyon sa bisita, API para sa awtomatikong imbitasyon sa bisita, walang SIM o router, katatagan, mabilis na imbitasyon sa bisita, 90 araw na kasaysayan, awtomatikong pagbukas, hanggang 50 event, digital na pagrehistro ng RF remote, seguridad at privacy, at walang bayad sa subscription.",

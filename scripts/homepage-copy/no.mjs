@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Velg språk",
     platform: "Slik fungerer det",
     solutions: "Bruksområder",
-    automation: "WIFIGATE Host",
+    automation: "For bedrifter",
     productGuide: "Opplæringsvideoer",
     contact: "Kontakt oss",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "WIFIGATE-appen på en mobil med porten hjemme, arbeidsplassen og en tidsbegrenset gjestetilgang",
   },
   automation: {
-    eyebrow: "Utviklet for overnattingsbransjen",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Én kontroller.", "En plan for hver bedrift."],
+    subtitle: "Abonnementsplaner for bedrifter som trenger mer enn appen. Abonnement er valgfritt: Hver kontroller fungerer fullt ut også uten.",
     audienceLabel: "Laget for",
-    audiences: ["Hoteller", "Airbnb", "Ferieleiligheter", "Overnattingssteder"],
-    promise: "Ønsk gjestene velkommen. La tilgangen ordne seg selv.",
-    subtitle: "Fra hoteller til ferieleiligheter: Koble hver bestilling til en sikker tilgang til riktig port, dør eller garasje. Gjestene kommer inn med mobilen, og tilgangen gjelder fra innsjekk og avsluttes automatisk ved utsjekk.",
+    promise: "Automatisk styring av gjestetilgang for hver bestilling.",
+    text: "Tilgangen gjelder fra innsjekk og utløper ved utsjekk. Ingen nøkler, ingen koder og ingen nøkkelbokser.",
+    audiences: ["Hoteller", "Ferieboliger", "Gjestehus", "Utleieparkering", "Lagerutleie", "Og mer…"],
     cta: "Utforsk WIFIGATE Host",
     imageAlt: "Gjester bruker mobilen for å komme inn på overnattingsstedet sitt",
-    stayCaption: "Hvert opphold, fra bestilling til avreise",
-    staySteps: ["Bestilling mottatt", "Tilgang ved innsjekk", "Utløper ved utsjekk"],
-    points: [
-      {
-        title: "Ingen nøkler eller kort å levere ut",
-        text: "Tilgangen kommer rett til gjestens mobil, uten nøkkelhenting, nøkkelbokser eller koder som må deles.",
-      },
-      {
-        title: "Automatisk tidsbegrenset",
-        text: "Hver tilgang trer i kraft ved innsjekk og utløper ved utsjekk, helt automatisk.",
-      },
-      {
-        icon: "team",
-        title: "Sparer arbeidstimer",
-        text: "Personalet kan konsentrere seg om gjestene i stedet for logistikken rundt nøkkelkort og andre fysiske adgangsmidler.",
-      },
-    ],
+    manager: {
+      tagline: "Alle systemene dine, fra hvor som helst i verden.",
+      text: "Alle kontrollere, brukere og tilganger i organisasjonen din i ett kontrollpanel i nettleseren.",
+      audiences: ["Boligbygg", "Kontorer", "Idrettsanlegg", "Parkeringsanlegg", "Og mer…"],
+      cta: "Snakk med oss om Manager",
+      imageAlt: "Inngangen til et boligbygg der tilgangen styres med WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Oversikt over WIFIGATE-systemet: IP67-enheten, mobilappen og styrekortet med rekkeklemmer, USB Type-C og 12-24V-inngang, Wi-Fi 6, Bluetooth LE og en 433,92MHz-mottaker, sammen med plattformfunksjonene – opptil 5000 brukere og 20 administratorer, ubegrensede gjesteinvitasjoner, et API for automatiserte gjesteinvitasjoner, uten SIM-kort eller ruter, stabilitet, rask gjesteinvitasjon, 90 dagers historikk, automatisk åpning, opptil 50 hendelser, digital innlæring av RF-fjernkontroller, sikkerhet og personvern, og ingen abonnementsavgifter.",

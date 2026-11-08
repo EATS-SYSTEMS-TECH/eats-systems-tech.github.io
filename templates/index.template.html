@@ -74,8 +74,8 @@
   <link rel="stylesheet" href="css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="css/styles.css?v=20261007d">
   <link rel="stylesheet" href="css/accessibility.css?v=20261027c">
-  <link rel="stylesheet" href="css/guest-invites.css?v=20261007c">
-  <link rel="stylesheet" href="css/home-en.css?v=20261026a">
+  <link rel="stylesheet" href="css/guest-invites.css?v=20261108a">
+  <link rel="stylesheet" href="css/home-en.css?v=20261108a">
   <link rel="stylesheet" href="css/faq.css?v=20261018a">
   <script src="js/utils.js?v=20260402a" defer=""></script>
   <script src="js/navigation.js?v=20260910a" defer=""></script>
@@ -310,34 +310,54 @@
       </div>
     </section>
 
-    <!-- Host promotion keeps its hospitality audiences, stay steps and existing detail destination. -->
+    <!-- WIFIGATE For Business: one numbered column per subscription plan. -->
     <section id="guest-invites-api" class="section guest-invites" data-nav-target="wifigate-automation" aria-labelledby="guest-invites-title">
       <div id="wifigate-automation" class="container">
-        <div class="guest-invites__grid js-reveal">
-          <div class="guest-invites__copy">
-            <p class="guest-invites__eyebrow">Built for hospitality</p>
-            <h2 id="guest-invites-title" class="guest-invites__title">WIFIGATE<br>Host</h2>
+        <header class="business-plans__header js-reveal">
+          <div>
+            <p class="guest-invites__eyebrow">WIFIGATE For Business</p>
+            <h2 id="guest-invites-title" class="guest-invites__title">One controller.<br>A plan for every business.</h2>
+          </div>
+          <p class="guest-invites__subtitle">Subscription plans for businesses that need more than the app. A subscription is optional: every controller works fully without one.</p>
+        </header>
+        <div class="business-plans js-reveal">
+          <article class="business-plan business-plan--host">
+            <figure class="automation-stay">
+              <img src="assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" alt="Guests using a phone to enter their hotel room" width="1280" height="720" loading="lazy">
+            </figure>
+            <span class="business-plan__number" aria-hidden="true">01</span>
+            <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
+            <p class="automation-promise">Automated guest access management for every booking.</p>
+            <p class="business-plan__text">Access starts at check-in and expires at checkout. No keys, no codes and no key boxes.</p>
             <ul class="automation-audiences" aria-label="Made for"><li>Hotels</li>
-<li>Airbnb</li>
-<li>Guest Apartments</li>
-<li>Hospitality spaces</li></ul>
-            <p class="automation-promise">Welcome your guests. Automate their access.</p>
-            <p class="guest-invites__subtitle">From hotel stays to holiday apartments, connect each booking to secure access for the right gate, door or garage. Guests enter using their phone, with access that starts at check-in and ends automatically at checkout.</p>
+<li>Vacation rentals</li>
+<li>Guesthouses</li>
+<li>Rental parking</li>
+<li>Storage services</li>
+<li>And more…</li></ul>
             <a href="/wifigate-host/" class="btn btn--primary guest-invites__cta">
               <span data-i18n="guestInvites.promo.cta" dir="ltr">Explore WIFIGATE Host</span>
               <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
             </a>
-          </div>
-          <figure class="automation-stay">
-            <img src="assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" alt="Guests using a phone to enter their hotel room" width="1280" height="720" loading="lazy">
-            <figcaption class="automation-stay__caption">
-              <span class="automation-stay__label">Every stay, taken care of</span>
-              <ol class="automation-stay__steps"><li>Booking received</li>
-<li>Access at check-in</li>
-<li>Expires at checkout</li></ol>
-            </figcaption>
-          </figure>
-          <ul class="guest-invites__points"></ul>
+          </article>
+          <article class="business-plan business-plan--manager">
+            <figure class="business-plan__media">
+              <img src="assets/img/wifigate-manager-building.webp" alt="The entrance of a residential building whose access is managed with WIFIGATE Manager" width="960" height="540" loading="lazy" decoding="async">
+            </figure>
+            <span class="business-plan__number" aria-hidden="true">02</span>
+            <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
+            <p class="business-plan__tagline">All your systems, from anywhere in the world.</p>
+            <p class="business-plan__text">Every controller, user and permission in your organization in one browser dashboard.</p>
+            <ul class="business-plan__audiences" aria-label="Made for"><li>Residential buildings</li>
+<li>Offices</li>
+<li>Sports facilities</li>
+<li>Parking facilities</li>
+<li>And more…</li></ul>
+            <a href="#get-in-touch" class="btn btn--ghost business-plan__cta">
+              <span>Talk to us about Manager</span>
+              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+            </a>
+          </article>
         </div>
       </div>
     </section>

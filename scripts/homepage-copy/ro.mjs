@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Selectați limba",
     platform: "Cum funcționează",
     solutions: "Utilizări",
-    automation: "WIFIGATE Host",
+    automation: "Pentru afaceri",
     productGuide: "Tutoriale video",
     contact: "Contact",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Aplicația WIFIGATE pe un telefon, cu poarta casei, locul de muncă și o permisiune de acces pentru oaspeți limitată în timp",
   },
   automation: {
-    eyebrow: "Creat pentru ospitalitate",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Un singur controler.", "Un plan pentru fiecare afacere."],
+    subtitle: "Planuri cu abonament pentru afacerile care au nevoie de mai mult decât aplicația. Abonamentul este opțional: fiecare controler funcționează complet și fără el.",
     audienceLabel: "Pentru",
-    audiences: ["Hoteluri", "Airbnb", "Apartamente în regim hotelier", "Spații de cazare"],
-    promise: "Primiți-vă oaspeții. Accesul se gestionează singur.",
-    subtitle: "De la hoteluri la apartamente de vacanță, conectați fiecare rezervare la o permisiune de acces securizată pentru poarta, ușa sau garajul potrivit. Oaspeții intră cu telefonul, iar permisiunea devine activă la check-in și expiră automat la check-out.",
+    promise: "Gestionare automată a accesului oaspeților pentru fiecare rezervare.",
+    text: "Accesul devine activ la check-in și expiră la check-out. Fără chei, fără coduri și fără cutii pentru chei.",
+    audiences: ["Hoteluri", "Case de vacanță", "Pensiuni", "Parcări de închiriat", "Servicii de depozitare", "Și multe altele…"],
     cta: "Descoperiți WIFIGATE Host",
     imageAlt: "Oaspeți care folosesc telefonul pentru a intra în spațiul de cazare",
-    stayCaption: "Fiecare sejur, de la rezervare până la plecare",
-    staySteps: ["Rezervare primită", "Acces la check-in", "Expiră la check-out"],
-    points: [
-      {
-        title: "Fără chei sau carduri de predat",
-        text: "Permisiunea de acces ajunge direct pe telefonul oaspetelui, fără chei de ridicat, cutii pentru chei sau coduri de transmis.",
-      },
-      {
-        title: "Limitare automată în timp",
-        text: "Fiecare permisiune devine activă la check-in și expiră automat la check-out.",
-      },
-      {
-        icon: "team",
-        title: "Economisește ore de muncă",
-        text: "Echipa se concentrează pe ospitalitate, nu pe logistica cardurilor sau a altor mijloace fizice de acces.",
-      },
-    ],
+    manager: {
+      tagline: "Toate sistemele dumneavoastră, de oriunde din lume.",
+      text: "Toate controlerele, utilizatorii și permisiunile organizației într-un singur panou de control în browser.",
+      audiences: ["Clădiri rezidențiale", "Birouri", "Baze sportive", "Parcări", "Și multe altele…"],
+      cta: "Discutați cu noi despre Manager",
+      imageAlt: "Intrarea unei clădiri rezidențiale al cărei acces este gestionat cu WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Prezentarea sistemului WIFIGATE: dispozitivul IP67, aplicația mobilă și placa de control cu borne cu șurub, USB Type-C și intrare de 12-24V, Wi-Fi 6, Bluetooth LE și receptor de 433,92MHz, alături de funcțiile platformei - până la 5000 de utilizatori și 20 de administratori, invitații nelimitate pentru oaspeți, API automat pentru invitațiile oaspeților, fără SIM sau router, stabilitate, invitație rapidă pentru oaspeți, istoric de acces pe 90 de zile, deschidere automată, până la 50 de evenimente, învățarea digitală a telecomenzilor RF, securitate și confidențialitate și fără taxe de abonament.",

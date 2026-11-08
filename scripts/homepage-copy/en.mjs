@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Select language",
     platform: "How it works",
     solutions: "Use cases",
-    automation: "WIFIGATE Host",
+    automation: "For Business",
     productGuide: "Tutorial videos",
     contact: "Get in touch",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "The WIFIGATE app on a phone, listing a home gate, a workplace, and a time-limited guest pass",
   },
   automation: {
-    eyebrow: "Built for hospitality",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["One controller.", "A plan for every business."],
+    subtitle: "Subscription plans for businesses that need more than the app. A subscription is optional: every controller works fully without one.",
     audienceLabel: "Made for",
-    audiences: ["Hotels", "Airbnb", "Vacation rentals", "Hospitality venues"],
-    promise: "Welcome your guests. Let access run itself.",
-    subtitle: "From hotels to vacation rentals, link every booking to secure access for the right gate, door, or garage. Guests get in with their phone, and access starts at check-in and ends automatically at checkout.",
+    promise: "Automated guest access management for every booking.",
+    text: "Access starts at check-in and expires at checkout. No keys, no codes and no key boxes.",
+    audiences: ["Hotels", "Vacation rentals", "Guesthouses", "Rental parking", "Storage services", "And more…"],
     cta: "Explore WIFIGATE Host",
     imageAlt: "Guests using a phone to enter their accommodation",
-    stayCaption: "Every stay, from booking to checkout",
-    staySteps: ["Booking received", "Access at check-in", "Expires at checkout"],
-    points: [
-      {
-        title: "No keys or cards to hand over",
-        text: "Access goes straight to your guest's phone. No key pickups, lockboxes, or codes to share.",
-      },
-      {
-        title: "Automatically time-limited",
-        text: "Access starts at check-in and expires at checkout, automatically, for every stay.",
-      },
-      {
-        icon: "team",
-        title: "Saves staff hours",
-        text: "Your team can focus on hosting, not on juggling key cards and other physical credentials.",
-      },
-    ],
+    manager: {
+      tagline: "All your systems, from anywhere in the world.",
+      text: "Every controller, user and permission in your organization in one browser dashboard.",
+      audiences: ["Residential buildings", "Offices", "Sports facilities", "Parking facilities", "And more…"],
+      cta: "Talk to us about Manager",
+      imageAlt: "The entrance of a residential building whose access is managed with WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - up to 5000 users and 20 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 50 events, digital RF remote pairing, security and privacy, and no subscription fees.",

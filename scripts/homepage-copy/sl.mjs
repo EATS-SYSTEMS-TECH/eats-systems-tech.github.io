@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Izberite jezik",
     platform: "Kako deluje",
     solutions: "Primeri uporabe",
-    automation: "WIFIGATE Host",
+    automation: "Za podjetja",
     productGuide: "Video navodila",
     contact: "Kontakt",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Aplikacija WIFIGATE na telefonu z vrati doma, delovnim mestom in časovno omejenim dovoljenjem za gosta",
   },
   automation: {
-    eyebrow: "Zasnovano za turistične nastanitve",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["En krmilnik.", "Paket za vsako podjetje."],
+    subtitle: "Naročniški paketi za podjetja, ki potrebujejo več kot aplikacijo. Naročnina ni obvezna: vsak krmilnik v celoti deluje tudi brez nje.",
     audienceLabel: "Namenjeno za",
-    audiences: ["Hotele", "Airbnb", "Apartmaje za goste", "Nastanitvene objekte"],
-    promise: "Sprejmite goste, vstop pa prepustite avtomatiki.",
-    subtitle: "Od hotelov do počitniških apartmajev: vsako rezervacijo povežite z varnim dovoljenjem za vstop skozi ustrezna dvoriščna vrata, vhodna vrata ali garažo. Gostje vstopijo s telefonom, dovoljenje pa začne veljati ob prijavi in samodejno poteče ob odjavi.",
+    promise: "Samodejno upravljanje vstopa gostov za vsako rezervacijo.",
+    text: "Dovoljenje začne veljati ob prijavi in poteče ob odjavi. Brez ključev, kod in skrinjic za ključe.",
+    audiences: ["Hoteli", "Počitniški apartmaji", "Gostišča", "Najem parkirišč", "Najem skladišč", "In še več…"],
     cta: "Spoznajte WIFIGATE Host",
     imageAlt: "Gostje s telefonom vstopajo v svojo nastanitev",
-    stayCaption: "Vsako bivanje, od rezervacije do odjave",
-    staySteps: ["Rezervacija prejeta", "Dostop ob prijavi", "Poteče ob odjavi"],
-    points: [
-      {
-        title: "Brez predaje ključev in kartic",
-        text: "Dovoljenje za vstop prispe neposredno na telefon gosta, brez prevzemanja ključev, skrinjic za ključe ali deljenja kod.",
-      },
-      {
-        title: "Samodejna časovna omejitev",
-        text: "Vsako dovoljenje začne veljati ob prijavi in poteče ob odjavi, povsem samodejno.",
-      },
-      {
-        icon: "team",
-        title: "Prihranek delovnih ur",
-        text: "Osebje se lahko posveti gostom, ne logistiki kartic in drugih fizičnih sredstev za vstop.",
-      },
-    ],
+    manager: {
+      tagline: "Vsi vaši sistemi, od koderkoli na svetu.",
+      text: "Vsi krmilniki, uporabniki in dovoljenja vaše organizacije na eni nadzorni plošči v brskalniku.",
+      audiences: ["Stanovanjske stavbe", "Pisarne", "Športni objekti", "Parkirišča", "In še več…"],
+      cta: "Vprašajte nas o rešitvi Manager",
+      imageAlt: "Vhod v stanovanjsko stavbo, katere dostop upravlja WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Pregled sistema WIFIGATE: naprava IP67, mobilna aplikacija in krmilna plošča s priključnimi sponkami, USB Type-C in vhodom 12-24 V, Wi-Fi 6, Bluetooth LE ter sprejemnikom 433,92 MHz, ob tem pa zmožnosti platforme – do 5000 uporabnikov in 20 skrbnikov, neomejena povabila za goste, API za samodejna povabila za goste, brez kartice SIM ali usmerjevalnika, stabilnost, hitro povabilo za gosta, 90-dnevna zgodovina, samodejno odpiranje, do 50 dogodkov, digitalno dodajanje RF-daljincev, varnost in zasebnost ter brez naročnine.",

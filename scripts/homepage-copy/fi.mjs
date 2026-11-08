@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Valitse kieli",
     platform: "Näin se toimii",
     solutions: "Käyttökohteet",
-    automation: "WIFIGATE Host",
+    automation: "Yrityksille",
     productGuide: "Opetusvideot",
     contact: "Ota yhteyttä",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "WIFIGATE-sovellus puhelimessa: kodin portti, työpaikka ja aikarajattu vieraskulkuoikeus",
   },
   automation: {
-    eyebrow: "Rakennettu majoitusalalle",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Yksi ohjain.", "Paketti jokaiselle yritykselle."],
+    subtitle: "Tilauspaketit yrityksille, jotka tarvitsevat enemmän kuin sovelluksen. Tilaus on vapaaehtoinen: jokainen ohjain toimii täysin myös ilman sitä.",
     audienceLabel: "Kenelle",
-    audiences: ["Hotellit", "Airbnb", "Loma-asunnot", "Majoituskohteet"],
-    promise: "Sinä toivotat vieraat tervetulleiksi. Sisäänpääsy hoituu itsestään.",
-    subtitle: "Hotelleista loma-asuntoihin: yhdistä jokainen varaus turvalliseen kulkuoikeuteen oikeaan porttiin, oveen tai autotalliin. Vieraat kulkevat puhelimellaan, ja kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy automaattisesti uloskirjautumiseen.",
+    promise: "Vieraiden kulun automaattinen hallinta jokaiselle varaukselle.",
+    text: "Kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy uloskirjautumiseen. Ei avaimia, ei koodeja eikä avainlaatikoita.",
+    audiences: ["Hotellit", "Loma-asunnot", "Majatalot", "Vuokrapysäköinti", "Varastopalvelut", "Ja paljon muuta…"],
     cta: "Tutustu WIFIGATE Hostiin",
     imageAlt: "Vieraat käyttävät puhelinta päästäkseen majoituskohteeseen",
-    stayCaption: "Jokainen majoitus varauksesta lähtöön",
-    staySteps: ["Varaus vastaanotettu", "Kulku sisäänkirjautuessa", "Päättyy uloskirjautuessa"],
-    points: [
-      {
-        title: "Ei avainten tai korttien luovutusta",
-        text: "Kulkuoikeus tulee suoraan vieraan puhelimeen. Avaimia ei tarvitse noutaa, avainlaatikoita käyttää eikä koodeja jakaa.",
-      },
-      {
-        title: "Automaattisesti aikarajattu",
-        text: "Jokainen kulkuoikeus alkaa automaattisesti sisäänkirjautumisesta ja päättyy uloskirjautumiseen.",
-      },
-      {
-        icon: "team",
-        title: "Säästää työtunteja",
-        text: "Henkilökunnan aika menee vieraisiin eikä avainkorttien tai muiden fyysisten kulkuvälineiden pyörittämiseen.",
-      },
-    ],
+    manager: {
+      tagline: "Kaikki järjestelmäsi mistä päin maailmaa tahansa.",
+      text: "Organisaatiosi kaikki ohjaimet, käyttäjät ja käyttöoikeudet yhdessä selaimen hallintapaneelissa.",
+      audiences: ["Asuinrakennukset", "Toimistot", "Urheilutilat", "Pysäköintilaitokset", "Ja paljon muuta…"],
+      cta: "Kysy meiltä Manager-palvelusta",
+      imageAlt: "Asuinrakennuksen sisäänkäynti, jonka kulkuoikeuksia hallitaan WIFIGATE Manager -palvelulla",
+    },
   },
   productGuide: {
     imageAlt: "WIFIGATE-järjestelmän yleiskuva: IP67-laite, mobiilisovellus ja ohjauskortti liitinriveineen, USB Type-C- ja 12-24V-tuloineen, Wi-Fi 6:lla, Bluetooth LE:llä ja 433,92MHz:n vastaanottimella sekä alustan ominaisuudet: jopa 5000 käyttäjää ja 20 ylläpitäjää, rajattomasti vieraskutsuja, API automaattisille vieraskutsuille, ei SIM-korttia eikä reititintä, vakaus, nopea vieraskutsu, 90 päivän historia, automaattinen avaus, jopa 50 tapahtumaa, RF-kaukosäätimien digitaalinen ohjelmointi, turvallisuus ja yksityisyys sekä ei tilausmaksuja.",

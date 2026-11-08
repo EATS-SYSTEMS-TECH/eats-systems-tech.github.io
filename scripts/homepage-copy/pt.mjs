@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Selecionar idioma",
     platform: "Como funciona",
     solutions: "Casos de utilização",
-    automation: "WIFIGATE Host",
+    automation: "Para empresas",
     productGuide: "Vídeos tutoriais",
     contact: "Fale connosco",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "A aplicação WIFIGATE no telemóvel, com o portão de casa, o local de trabalho e uma permissão de visita limitada no tempo",
   },
   automation: {
-    eyebrow: "Criado para a hotelaria",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Um só controlador.", "Um plano para cada negócio."],
+    subtitle: "Planos de subscrição para negócios que precisam de mais do que a aplicação. A subscrição é opcional: todos os controladores funcionam plenamente sem ela.",
     audienceLabel: "Para",
-    audiences: ["Hotéis", "Airbnb", "Alojamento Local", "Espaços de alojamento"],
-    promise: "Receba os seus hóspedes. A entrada funciona sozinha.",
-    subtitle: "De hotéis a casas de férias, associe cada reserva a uma permissão de entrada segura para o portão, a porta ou a garagem certos. Os hóspedes entram com o telemóvel, e a permissão entra em vigor no check-in e termina automaticamente no check-out.",
+    promise: "Gestão automática da entrada de hóspedes em cada reserva.",
+    text: "O acesso entra em vigor no check-in e expira no check-out. Sem chaves, sem códigos e sem cofres de chaves.",
+    audiences: ["Hotéis", "Casas de férias", "Guest houses", "Estacionamento para arrendar", "Self storage", "E muito mais…"],
     cta: "Conheça o WIFIGATE Host",
     imageAlt: "Hóspedes a usar o telemóvel para entrar no alojamento",
-    stayCaption: "Cada estadia, da reserva à saída",
-    staySteps: ["Reserva recebida", "Acesso no check-in", "Expira no check-out"],
-    points: [
-      {
-        title: "Sem entregar chaves nem cartões",
-        text: "A permissão de entrada chega diretamente ao telemóvel do hóspede, sem recolher chaves, usar cofres de chaves ou partilhar códigos.",
-      },
-      {
-        title: "Limite de tempo automático",
-        text: "Cada permissão entra em vigor no check-in e expira no check-out, automaticamente.",
-      },
-      {
-        icon: "team",
-        title: "Poupa horas de trabalho",
-        text: "A equipa concentra-se em receber os hóspedes, em vez de tratar da logística de cartões ou de outros meios físicos.",
-      },
-    ],
+    manager: {
+      tagline: "Todos os seus sistemas, a partir de qualquer lugar do mundo.",
+      text: "Todos os controladores, utilizadores e permissões da sua organização num único painel no navegador.",
+      audiences: ["Edifícios residenciais", "Escritórios", "Instalações desportivas", "Parques de estacionamento", "E muito mais…"],
+      cta: "Fale connosco sobre o Manager",
+      imageAlt: "A entrada de um edifício residencial cujo acesso é gerido com o WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Visão geral do sistema WIFIGATE: o dispositivo IP67, a aplicação móvel e a placa de controlo com os bornes de parafuso, USB Type-C e entrada de 12-24V, Wi-Fi 6, Bluetooth LE e um recetor de 433,92MHz, a par das funcionalidades da plataforma: até 5000 utilizadores e 20 administradores, convites de visita ilimitados, uma API de convites automáticos, sem SIM nem router, estabilidade, convite rápido para visitas, histórico de 90 dias, abertura automática, até 50 eventos, programação digital de comandos RF, segurança e privacidade, e sem mensalidades.",

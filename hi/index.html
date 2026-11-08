@@ -72,8 +72,8 @@
   <link rel="stylesheet" href="../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
-  <link rel="stylesheet" href="../css/guest-invites.css?v=20261007c">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261026a">
+  <link rel="stylesheet" href="../css/guest-invites.css?v=20261108a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261108a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
   <script src="../js/navigation.js?v=20261022outside1" defer=""></script>
@@ -124,7 +124,7 @@
 
 
 
-<link rel="stylesheet" href="../css/scene-video.css?v=20261019d"><script src="../js/scene-video.js?v=20261019d" defer=""></script>
+<link rel="stylesheet" href="../css/scene-video.css?v=20261108a"><script src="../js/scene-video.js?v=20261019d" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, स्मार्ट एक्सेस कंट्रोल, फ़ोन से गेट खोलें, इलेक्ट्रिक गेट, एंट्री कंट्रोल, बिना मासिक सब्सक्रिप्शन">
   <meta name="description" content="WIFIGATE स्मार्ट एक्सेस कंट्रोल सिस्टम है, जिससे गेट, दरवाज़े, पार्किंग, शटर और गैराज फ़ोन से खुलते हैं। सुरक्षित, एन्क्रिप्टेड और आसान, बिना मासिक सब्सक्रिप्शन।">
   <meta name="robots" content="index, follow">
@@ -377,7 +377,7 @@
         <span class="nav__toggle-bar"></span>
       </button>
       <div class="nav__links-wrapper" id="primary-navigation">
-        <div class="topbar-nav"><a class="nav-link nav__link" href="/hi/#how-it-works" dir="ltr">यह कैसे काम करता है</a><a class="nav-link nav__link" href="/hi/#use-cases" dir="ltr">इस्तेमाल के उदाहरण</a><a class="nav-link nav__link" href="/hi/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/hi/#tutorial-videos" dir="ltr">ट्यूटोरियल वीडियो</a><a class="nav-link nav__link" href="/hi/shop/" dir="ltr" lang="en">Shop</a><a class="nav-link nav__link nav__contact-link" href="/hi/#get-in-touch" dir="ltr">हमसे बात करें</a></div>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/hi/#how-it-works" dir="ltr">यह कैसे काम करता है</a><a class="nav-link nav__link" href="/hi/#use-cases" dir="ltr">इस्तेमाल के उदाहरण</a><a class="nav-link nav__link" href="/hi/#wifigate-automation" dir="ltr">बिज़नेस के लिए</a><a class="nav-link nav__link" href="/hi/#tutorial-videos" dir="ltr">ट्यूटोरियल वीडियो</a><a class="nav-link nav__link" href="/hi/shop/" dir="ltr" lang="en">Shop</a><a class="nav-link nav__link nav__contact-link" href="/hi/#get-in-touch" dir="ltr">हमसे बात करें</a></div>
       </div>
       <a class="site-login__trigger" href="/hi/login/" aria-label="लॉग इन"><span class="site-login__label" dir="ltr">लॉग इन</span><svg class="site-login__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path></svg></a>
       <div class="site-account">
@@ -444,7 +444,7 @@
     <!-- Use cases keep their ordered niche destinations alongside the product image. -->
 
 
-    <!-- Host promotion keeps its hospitality audiences, stay steps and existing detail destination. -->
+    <!-- WIFIGATE For Business: one numbered column per subscription plan. -->
 
 
     <!-- Tutorial cards retain their published coming-soon state and translation positions. -->
@@ -617,31 +617,51 @@
       </div>
     </section><section id="guest-invites-api" class="section guest-invites" data-nav-target="wifigate-automation" aria-labelledby="guest-invites-title">
       <div id="wifigate-automation" class="container">
-        <div class="guest-invites__grid js-reveal">
-          <div class="guest-invites__copy">
-            <p class="guest-invites__eyebrow" dir="ltr">हॉस्पिटैलिटी के लिए बना</p>
-            <h2 id="guest-invites-title" class="guest-invites__title" dir="ltr">WIFIGATE<br>Host</h2>
+        <header class="business-plans__header js-reveal">
+          <div>
+            <p class="guest-invites__eyebrow" dir="ltr">WIFIGATE For Business</p>
+            <h2 id="guest-invites-title" class="guest-invites__title" dir="ltr">एक कंट्रोलर।<br>हर बिज़नेस के लिए एक प्लान।</h2>
+          </div>
+          <p class="guest-invites__subtitle" dir="ltr">उन बिज़नेस के लिए सब्सक्रिप्शन प्लान, जिन्हें ऐप से ज़्यादा चाहिए। सब्सक्रिप्शन ज़रूरी नहीं है: हर कंट्रोलर बिना सब्सक्रिप्शन के भी पूरी तरह काम करता है।</p>
+        </header>
+        <div class="business-plans js-reveal">
+          <article class="business-plan business-plan--host">
+            <figure class="automation-stay">
+              <div class="automation-stay__media"><picture><source media="(min-width: 769px)" srcset="../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=05868184f816"><source media="(max-width: 768px)" srcset="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="मेहमान फ़ोन से अपने ठहरने की जगह में प्रवेश करते हुए" width="1280" height="720" loading="lazy"></picture></div>
+            </figure>
+            <span class="business-plan__number" aria-hidden="true">01</span>
+            <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
+            <p class="automation-promise" dir="ltr">हर बुकिंग के लिए मेहमानों की एंट्री का ऑटोमैटिक मैनेजमेंट।</p>
+            <p class="business-plan__text" dir="ltr">परमिशन चेक-इन पर शुरू होती है और चेक-आउट पर ख़त्म हो जाती है। न चाबियाँ, न कोड, न लॉकबॉक्स।</p>
             <ul class="automation-audiences" aria-label="इनके लिए" dir="ltr"><li>होटल</li>
-<li>Airbnb</li>
-<li>गेस्ट अपार्टमेंट</li>
-<li>हॉस्पिटैलिटी स्पेस</li></ul>
-            <p class="automation-promise" dir="ltr">मेहमानों का स्वागत आप करें। एंट्री अपने-आप होगी।</p>
-            <p class="guest-invites__subtitle" dir="ltr">होटल से लेकर हॉलिडे अपार्टमेंट तक, हर बुकिंग को सही गेट, दरवाज़े या गैराज की सुरक्षित एंट्री परमिशन से जोड़ें। मेहमान फ़ोन से अंदर आते हैं, और परमिशन चेक-इन पर शुरू होकर चेक-आउट पर अपने-आप ख़त्म हो जाती है।</p>
+<li>हॉलिडे रेंटल</li>
+<li>गेस्टहाउस</li>
+<li>किराये की पार्किंग</li>
+<li>स्टोरेज सेवाएँ</li>
+<li>और भी बहुत कुछ…</li></ul>
             <a href="/hi/wifigate-host/" class="btn btn--primary guest-invites__cta">
               <span data-i18n="guestInvites.promo.cta" dir="ltr">WIFIGATE Host को जानें</span>
               <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
             </a>
-          </div>
-          <figure class="automation-stay">
-            <div class="automation-stay__media"><picture><source media="(min-width: 769px)" srcset="../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=05868184f816"><source media="(max-width: 768px)" srcset="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="मेहमान फ़ोन से अपने ठहरने की जगह में प्रवेश करते हुए" width="1280" height="720" loading="lazy"></picture></div>
-            <figcaption class="automation-stay__caption">
-              <span class="automation-stay__label" dir="ltr">हर स्टे, बुकिंग से चेक-आउट तक</span>
-              <ol class="automation-stay__steps"><li>बुकिंग मिली</li>
-<li>चेक-इन पर एक्सेस</li>
-<li>चेक-आउट पर ख़त्म</li></ol>
-            </figcaption>
-          </figure>
-          <ul class="guest-invites__points"><li class="guest-invites__point"><span class="guest-invites__point-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg></span><span class="guest-invites__point-copy"><span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title" dir="ltr">चाबी या कार्ड सौंपने की ज़रूरत नहीं</span><span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text" dir="ltr">एंट्री परमिशन सीधे मेहमान के फ़ोन पर पहुँचती है, न चाबी लेने जाना, न लॉकबॉक्स, न कोड शेयर करना।</span></span></li><li class="guest-invites__point"><span class="guest-invites__point-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg></span><span class="guest-invites__point-copy"><span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title" dir="ltr">अपने-आप समय-सीमित</span><span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text" dir="ltr">हर परमिशन चेक-इन पर शुरू होती है और चेक-आउट पर अपने-आप ख़त्म हो जाती है।</span></span></li><li class="guest-invites__point"><span class="guest-invites__point-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path><circle cx="10" cy="8" r="3.5"></circle><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.6-3.4"></path><path d="M15 5.1a3.5 3.5 0 0 1 0 5.8"></path></svg></span><span class="guest-invites__point-copy"><span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title" dir="ltr">स्टाफ़ के घंटों की बचत</span><span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text" dir="ltr">आपकी टीम की-कार्ड और दूसरे फ़िज़िकल साधनों की भागदौड़ छोड़कर मेहमानों की ख़ातिरदारी पर ध्यान देती है।</span></span></li></ul>
+          </article>
+          <article class="business-plan business-plan--manager">
+            <figure class="business-plan__media">
+              <img src="../assets/img/wifigate-manager-building.webp" alt="एक रिहायशी इमारत का प्रवेश द्वार, जिसकी एंट्री WIFIGATE Manager से मैनेज होती है" width="960" height="540" loading="lazy" decoding="async">
+            </figure>
+            <span class="business-plan__number" aria-hidden="true">02</span>
+            <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
+            <p class="business-plan__tagline" dir="ltr">आपके सारे सिस्टम, दुनिया में कहीं से भी।</p>
+            <p class="business-plan__text" dir="ltr">आपके संगठन के सभी कंट्रोलर, यूज़र और परमिशन, ब्राउज़र के एक ही डैशबोर्ड में।</p>
+            <ul class="business-plan__audiences" aria-label="इनके लिए" dir="ltr"><li>रिहायशी इमारतें</li>
+<li>ऑफ़िस</li>
+<li>खेल सुविधाएँ</li>
+<li>पार्किंग</li>
+<li>और भी बहुत कुछ…</li></ul>
+            <a href="#get-in-touch" class="btn btn--ghost business-plan__cta">
+              <span dir="ltr">Manager के बारे में हमसे बात करें</span>
+              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+            </a>
+          </article>
         </div>
       </div>
     </section><section id="tutorials" class="section" data-nav-target="tutorial-videos" aria-labelledby="tutorials-title">

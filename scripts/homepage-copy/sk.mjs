@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Vyberte jazyk",
     platform: "Ako to funguje",
     solutions: "Možnosti využitia",
-    automation: "WIFIGATE Host",
+    automation: "Pre firmy",
     productGuide: "Videonávody",
     contact: "Kontaktujte nás",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Aplikácia WIFIGATE v telefóne s bránou domu, pracoviskom a časovo obmedzeným prístupom pre hosťa",
   },
   automation: {
-    eyebrow: "Stvorené pre ubytovateľov",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Jeden ovládač.", "Balík pre každú firmu."],
+    subtitle: "Predplatné balíky pre firmy, ktoré potrebujú viac než aplikáciu. Predplatné nie je povinné: každý ovládač funguje naplno aj bez neho.",
     audienceLabel: "Určené pre",
-    audiences: ["Hotely", "Airbnb", "Apartmány", "Ubytovacie zariadenia"],
-    promise: "Privítajte hostí. Vstup nechajte na automatiku.",
-    subtitle: "Od hotelov po rekreačné apartmány: prepojte každú rezerváciu s bezpečným oprávnením na vstup k správnej bráne, dverám alebo garáži. Hostia vstupujú pomocou telefónu, oprávnenie začne platiť pri príchode a automaticky skončí pri odchode.",
+    promise: "Automatická správa vstupu hostí pre každú rezerváciu.",
+    text: "Oprávnenie začne platiť pri príchode a vyprší pri odchode. Bez kľúčov, kódov a schránok na kľúče.",
+    audiences: ["Hotely", "Rekreačné apartmány", "Penzióny", "Prenájom parkovania", "Prenájom skladov", "A ďalšie…"],
     cta: "Objavte WIFIGATE Host",
     imageAlt: "Hostia vstupujú do ubytovania pomocou telefónu",
-    stayCaption: "Každý pobyt, od rezervácie po odchod",
-    staySteps: ["Rezervácia prijatá", "Prístup pri príchode", "Vyprší pri odchode"],
-    points: [
-      {
-        title: "Bez odovzdávania kľúčov a kariet",
-        text: "Oprávnenie na vstup príde priamo do telefónu hosťa, bez preberania kľúčov, schránok na kľúče či zdieľania kódov.",
-      },
-      {
-        title: "Automatické časové obmedzenie",
-        text: "Každé oprávnenie začne platiť pri príchode a vyprší pri odchode, automaticky.",
-      },
-      {
-        icon: "team",
-        title: "Ušetrí hodiny práce",
-        text: "Personál sa môže venovať hosťom, nie vydávaniu kariet a iných fyzických prístupových prostriedkov.",
-      },
-    ],
+    manager: {
+      tagline: "Všetky vaše systémy z akéhokoľvek miesta na svete.",
+      text: "Všetky ovládače, používatelia a oprávnenia vašej organizácie v jednom ovládacom paneli v prehliadači.",
+      audiences: ["Bytové domy", "Kancelárie", "Športové zariadenia", "Parkoviská", "A ďalšie…"],
+      cta: "Opýtajte sa nás na Manager",
+      imageAlt: "Vchod do bytového domu s prístupom spravovaným cez WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Prehľad systému WIFIGATE: zariadenie s krytím IP67, mobilná aplikácia a riadiaca doska so svorkovnicami, USB Type-C a vstupom 12–24 V, Wi-Fi 6, Bluetooth LE a prijímačom 433,92 MHz, spolu s funkciami platformy: až 5000 používateľov a 20 správcov, neobmedzené pozvánky pre hostí, API na automatické pozvánky pre hostí, bez SIM karty a routera, stabilita, rýchla pozvánka pre hosťa, história za 90 dní, automatické otvorenie, až 50 udalostí, digitálne pridávanie RF ovládačov, bezpečnosť a súkromie a žiadne poplatky za predplatné.",

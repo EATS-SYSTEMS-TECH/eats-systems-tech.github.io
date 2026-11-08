@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "언어 선택",
     platform: "작동 방식",
     solutions: "활용 사례",
-    automation: "WIFIGATE Host",
+    automation: "비즈니스",
     productGuide: "튜토리얼 영상",
     contact: "문의하기",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "스마트폰의 WIFIGATE 앱에 집 게이트, 직장, 기간 제한 게스트 권한이 표시된 모습",
   },
   automation: {
-    eyebrow: "숙박업 맞춤 설계",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["컨트롤러 하나.", "모든 비즈니스를 위한 요금제."],
+    subtitle: "앱 이상의 기능이 필요한 비즈니스를 위한 구독 요금제입니다. 구독은 선택 사항이며, 모든 컨트롤러는 구독 없이도 모든 기능을 사용할 수 있습니다.",
     audienceLabel: "대상",
-    audiences: ["호텔", "Airbnb", "공유숙박", "숙박 공간"],
-    promise: "게스트는 반갑게 맞이하고, 출입은 자동으로.",
-    subtitle: "호텔부터 휴가용 숙소까지, 모든 예약을 해당 게이트, 출입문, 차고의 안전한 출입 권한과 연결하세요. 게스트는 스마트폰으로 들어오고, 권한은 체크인 시 활성화되어 체크아웃 시 자동으로 만료됩니다.",
+    promise: "모든 예약에 맞춘 자동 게스트 출입 관리.",
+    text: "권한은 체크인 시 활성화되고 체크아웃 시 만료됩니다. 열쇠도, 비밀번호도, 키 박스도 필요 없습니다.",
+    audiences: ["호텔", "휴가용 숙소", "게스트하우스", "임대 주차장", "보관 서비스", "그 밖에도…"],
     cta: "WIFIGATE Host 알아보기",
     imageAlt: "스마트폰으로 숙소에 들어가는 게스트",
-    stayCaption: "예약부터 체크아웃까지, 모든 숙박에",
-    staySteps: ["예약 접수", "체크인 시 출입", "체크아웃 시 만료"],
-    points: [
-      {
-        title: "열쇠·카드 전달 없이",
-        text: "출입 권한이 게스트의 스마트폰으로 바로 전달됩니다. 열쇠 수령, 키 박스, 비밀번호 공유가 필요 없습니다.",
-      },
-      {
-        title: "자동 기간 제한",
-        text: "모든 권한은 체크인 시 활성화되고 체크아웃 시 자동으로 만료됩니다.",
-      },
-      {
-        icon: "team",
-        title: "인력과 시간 절약",
-        text: "직원들은 카드나 기타 물리적 출입 수단을 챙기는 대신 게스트 응대에 집중할 수 있습니다.",
-      },
-    ],
+    manager: {
+      tagline: "모든 시스템을 세계 어디서나.",
+      text: "조직의 모든 컨트롤러, 사용자, 권한을 브라우저의 대시보드 하나에서 관리하세요.",
+      audiences: ["주거용 건물", "사무실", "스포츠 시설", "주차장", "그 밖에도…"],
+      cta: "Manager 상담하기",
+      imageAlt: "WIFIGATE Manager로 출입을 관리하는 주거용 건물 입구",
+    },
   },
   productGuide: {
     imageAlt: "WIFIGATE 시스템 개요: IP67 기기, 모바일 앱, 단자대·USB Type-C·12-24V 입력·Wi-Fi 6·Bluetooth LE·433.92MHz 수신기를 갖춘 제어 보드, 그리고 플랫폼 기능(사용자 최대 5000명, 관리자 20명, 무제한 게스트 초대, 게스트 초대 자동화 API, SIM·공유기 불필요, 안정성, 빠른 게스트 초대, 90일 기록, 자동 열림, 최대 50개 이벤트, RF 리모컨 디지털 등록, 보안과 개인정보 보호, 구독료 없음).",

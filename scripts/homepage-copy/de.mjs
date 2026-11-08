@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Sprache wählen",
     platform: "So funktioniert's",
     solutions: "Anwendungsfälle",
-    automation: "WIFIGATE Host",
+    automation: "Für Unternehmen",
     productGuide: "Videoanleitungen",
     contact: "Kontakt",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Die WIFIGATE-App auf einem Smartphone mit dem Tor zu Hause, dem Arbeitsplatz und einem zeitlich begrenzten Gastzugang",
   },
   automation: {
-    eyebrow: "Für Gastgeber entwickelt",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Ein Controller.", "Ein Tarif für jedes Unternehmen."],
+    subtitle: "Abonnements für Unternehmen, die mehr als die App brauchen. Ein Abo ist optional: Jeder Controller funktioniert auch ohne Abo voll und ganz.",
     audienceLabel: "Entwickelt für",
-    audiences: ["Hotels", "Airbnb", "Ferienwohnungen", "Unterkünfte"],
-    promise: "Gäste willkommen heißen. Zutritt automatisch regeln.",
-    subtitle: "Vom Hotel bis zur Ferienwohnung: Verknüpfen Sie jede Buchung mit einer sicheren Zutrittsberechtigung für das richtige Tor, die richtige Tür oder die richtige Garage. Gäste kommen mit ihrem Smartphone hinein, und die Berechtigung gilt ab dem Check-in und endet automatisch beim Check-out.",
+    promise: "Automatische Verwaltung des Gästezutritts für jede Buchung.",
+    text: "Die Berechtigung gilt ab dem Check-in und endet beim Check-out. Keine Schlüssel, keine Codes und keine Schlüsselboxen.",
+    audiences: ["Hotels", "Ferienwohnungen", "Gästehäuser", "Mietparkplätze", "Lagerraumvermietung", "Und mehr…"],
     cta: "WIFIGATE Host entdecken",
     imageAlt: "Gäste betreten ihre Unterkunft mit dem Smartphone",
-    stayCaption: "Jeder Aufenthalt, von der Buchung bis zur Abreise",
-    staySteps: ["Buchung eingegangen", "Zutritt ab Check-in", "Endet beim Check-out"],
-    points: [
-      {
-        title: "Keine Übergabe von Schlüsseln oder Karten",
-        text: "Die Zutrittsberechtigung kommt direkt auf das Smartphone Ihres Gastes. Schlüssel abholen, Schlüsselboxen und weitergegebene Codes entfallen.",
-      },
-      {
-        title: "Automatisch zeitlich begrenzt",
-        text: "Jede Berechtigung wird beim Check-in gültig und läuft beim Check-out ab, ganz automatisch.",
-      },
-      {
-        icon: "team",
-        title: "Spart Arbeitszeit",
-        text: "Ihr Team kümmert sich um die Gäste statt um die Logistik von Schlüsselkarten und anderen physischen Zugangsmitteln.",
-      },
-    ],
+    manager: {
+      tagline: "Alle Ihre Systeme, von überall auf der Welt.",
+      text: "Alle Controller, Nutzer und Berechtigungen Ihrer Organisation in einem Dashboard im Browser.",
+      audiences: ["Wohngebäude", "Büros", "Sportanlagen", "Parkhäuser", "Und mehr…"],
+      cta: "Mit uns über Manager sprechen",
+      imageAlt: "Der Eingang eines Wohngebäudes, dessen Zutritt mit WIFIGATE Manager verwaltet wird",
+    },
   },
   productGuide: {
     imageAlt: "WIFIGATE-Systemübersicht: das IP67-Gerät, die mobile App und die Steuerplatine mit Anschlussklemmen, USB Type-C und 12-24-V-Eingang, Wi-Fi 6, Bluetooth LE und einem 433,92-MHz-Empfänger, dazu die Plattformfunktionen: bis zu 5000 Nutzer und 20 Admins, unbegrenzte Gasteinladungen, eine API für automatisierte Gasteinladungen, keine SIM-Karte und kein Router, Stabilität, schnelle Gasteinladung, 90-Tage-Historie, automatisches Öffnen, bis zu 50 Ereignisse, digitales Einlernen von Funk-Handsendern, Sicherheit und Datenschutz sowie keine Abogebühren.",

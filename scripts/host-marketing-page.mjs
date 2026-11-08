@@ -70,26 +70,6 @@ export function installHostPricingShells($) {
   grid.empty().append(...cards);
 }
 
-// The three icon geometries and public translation slots are existing data.
-// Scope replacement to the home Host band, leaving all other lists untouched.
-export function installHomeHostPointShells($) {
-  const geometries = [
-    [["rect", { x: "7", y: "2", width: "10", height: "20", rx: "2" }], ["path", { d: "M11 18h2" }]],
-    [["circle", { cx: "12", cy: "12", r: "9" }], ["path", { d: "M12 7v5l3 3" }]],
-    [["rect", { x: "4", y: "10", width: "16", height: "11", rx: "2" }], ["path", { d: "M8 10V7a4 4 0 0 1 8 0v3" }]],
-  ];
-  const rows = geometries.map((shapes, index) => {
-    const text = ["title", "text"].map((kind, slot) => node($, "span", {
-      class: `guest-invites__point-${kind}`, "data-i18n": `guestInvites.promo.point${index + 1}${slot ? "Text" : "Title"}`, dir: "ltr",
-    }));
-    return node($, "li", { class: "guest-invites__point" }, [
-      node($, "span", { class: "guest-invites__point-icon", "aria-hidden": "true" }, [outline($, shapes)]),
-      node($, "span", { class: "guest-invites__point-copy" }, text),
-    ]);
-  });
-  $("#wifigate-automation .guest-invites__points").empty().append(...rows);
-}
-
 // Validate the entire destination before touching any list; missing/ambiguous
 // sections cannot leave a partly updated public fragment.
 export function installHostDetailShells($) {

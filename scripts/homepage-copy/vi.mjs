@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Chọn ngôn ngữ",
     platform: "Cách hoạt động",
     solutions: "Tình huống sử dụng",
-    automation: "WIFIGATE Host",
+    automation: "Cho doanh nghiệp",
     productGuide: "Video hướng dẫn",
     contact: "Liên hệ",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Ứng dụng WIFIGATE trên điện thoại, với cổng nhà, nơi làm việc và quyền ra vào cho khách có thời hạn",
   },
   automation: {
-    eyebrow: "Thiết kế cho ngành lưu trú",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Một bộ điều khiển.", "Một gói cho mọi doanh nghiệp."],
+    subtitle: "Các gói thuê bao dành cho doanh nghiệp cần nhiều hơn ứng dụng. Thuê bao là tùy chọn: mọi bộ điều khiển đều hoạt động đầy đủ mà không cần thuê bao.",
     audienceLabel: "Dành cho",
-    audiences: ["Khách sạn", "Airbnb", "Căn hộ cho thuê", "Cơ sở lưu trú"],
-    promise: "Bạn đón khách. Việc ra vào để hệ thống tự lo.",
-    subtitle: "Từ khách sạn đến căn hộ nghỉ dưỡng, liên kết mỗi lượt đặt phòng với quyền ra vào bảo mật cho đúng cổng, cửa hoặc gara. Khách vào bằng điện thoại, quyền ra vào có hiệu lực khi nhận phòng và tự động kết thúc khi trả phòng.",
+    promise: "Tự động quản lý quyền ra vào của khách cho mọi lượt đặt phòng.",
+    text: "Quyền ra vào có hiệu lực khi nhận phòng và hết hạn khi trả phòng. Không chìa khóa, không mã và không hộp đựng chìa khóa.",
+    audiences: ["Khách sạn", "Căn hộ nghỉ dưỡng", "Nhà khách", "Bãi đỗ xe cho thuê", "Kho chứa đồ cho thuê", "Và nhiều hơn nữa…"],
     cta: "Khám phá WIFIGATE Host",
     imageAlt: "Khách dùng điện thoại để vào nơi lưu trú",
-    stayCaption: "Mỗi kỳ lưu trú, từ lúc đặt phòng đến khi trả phòng",
-    staySteps: ["Đã nhận đặt phòng", "Vào cửa khi nhận phòng", "Hết hạn khi trả phòng"],
-    points: [
-      {
-        title: "Không cần bàn giao chìa khóa hay thẻ",
-        text: "Quyền ra vào được gửi thẳng đến điện thoại của khách, không cần nhận chìa khóa, dùng hộp đựng chìa khóa hay chia sẻ mã.",
-      },
-      {
-        title: "Tự động giới hạn thời gian",
-        text: "Mỗi quyền ra vào tự động có hiệu lực khi nhận phòng và hết hạn khi trả phòng.",
-      },
-      {
-        icon: "team",
-        title: "Tiết kiệm giờ công",
-        text: "Đội ngũ tập trung vào việc đón tiếp khách thay vì lo hậu cần thẻ phòng hay các phương tiện ra vào vật lý khác.",
-      },
-    ],
+    manager: {
+      tagline: "Mọi hệ thống của bạn, từ bất cứ đâu trên thế giới.",
+      text: "Mọi bộ điều khiển, người dùng và quyền ra vào trong tổ chức của bạn trên một bảng điều khiển trong trình duyệt.",
+      audiences: ["Tòa nhà chung cư", "Văn phòng", "Cơ sở thể thao", "Bãi đỗ xe", "Và nhiều hơn nữa…"],
+      cta: "Trao đổi với chúng tôi về Manager",
+      imageAlt: "Lối vào một tòa nhà chung cư có quyền ra vào được quản lý bằng WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các cầu đấu dây, cổng USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - tối đa 5000 người dùng và 20 quản trị viên, lời mời khách không giới hạn, API tự động cho lời mời khách, không cần SIM hay router, ổn định, mời khách nhanh chóng, lịch sử 90 ngày, tự động mở, tối đa 50 sự kiện, học mã remote RF trên ứng dụng, bảo mật và quyền riêng tư, không mất phí thuê bao.",

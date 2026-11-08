@@ -6,7 +6,6 @@ import { chromium } from 'playwright-core';
 import { readHtmlTemplate, setBodyDirection, updateSharedHeader, updateFooterStaticUi } from './localized-builder-document.mjs';
 import { applyHomepageCopy, updateHomeWhereLinks } from './localized-builder-content.mjs';
 import { installHomeFeatureCards } from './homepage-feature-grid.mjs';
-import { installHomeHostPointShells } from './host-marketing-page.mjs';
 import { SITE_LANGUAGES } from './site-languages.mjs';
 import english from './homepage-copy/en.mjs';
 import hebrew from './homepage-copy/he.mjs';
@@ -30,7 +29,7 @@ const legacy=`<section aria-label="Style compatibility examples">
 
 function fixture(locale){
  const $=load(template),copy=copies[locale];
- installHomeFeatureCards($);installHomeHostPointShells($);setBodyDirection($,locale);
+ installHomeFeatureCards($);setBodyDirection($,locale);
  updateFooterStaticUi($,locale,copy.footer);updateHomeWhereLinks($,locale);applyHomepageCopy($,copy,locale);
  updateSharedHeader($,{homepageCopies:copies,localeOptions:SITE_LANGUAGES},locale,'home');
  $('script,link,style').remove();$('img,source').removeAttr('src');$('video').removeAttr('poster');

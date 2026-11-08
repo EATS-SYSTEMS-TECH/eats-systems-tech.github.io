@@ -58,7 +58,9 @@ export function applyHomepageCopy($, copy, locale) {
     ['#how-it-works .section__eyebrow', copy.platform.eyebrow], ['#features-title', copy.platform.title], ['#how-it-works .section__subtitle', copy.platform.subtitle],
     ['#private-access .security-statement__eyebrow', copy.privateAccess.eyebrow], ['#private-access-title', copy.privateAccess.title], ['#private-access .security-statement__copy p', copy.privateAccess.description],
     ['#use-cases .section__eyebrow', copy.solutions.eyebrow], ['#where-subtitle', copy.solutions.subtitle],
-    ['#wifigate-automation .guest-invites__eyebrow', copy.automation.eyebrow], ['#wifigate-automation .automation-promise', copy.automation.promise], ['#wifigate-automation .guest-invites__subtitle', copy.automation.subtitle], ['#wifigate-automation .guest-invites__cta span', copy.automation.cta], ['#wifigate-automation .automation-stay__label', copy.automation.stayCaption],
+    ['#wifigate-automation .guest-invites__eyebrow', copy.automation.eyebrow], ['#wifigate-automation .guest-invites__subtitle', copy.automation.subtitle],
+    ['#wifigate-automation .automation-promise', copy.automation.promise], ['.business-plan--host .business-plan__text', copy.automation.text], ['#wifigate-automation .guest-invites__cta span', copy.automation.cta],
+    ['.business-plan--manager .business-plan__tagline', copy.automation.manager.tagline], ['.business-plan--manager .business-plan__text', copy.automation.manager.text], ['.business-plan--manager .business-plan__cta span', copy.automation.manager.cta],
     ['#tutorial-videos .section__eyebrow', copy.productGuide.eyebrow], ['#tutorials-title', copy.productGuide.title], ['#tutorial-videos .section__subtitle', copy.productGuide.subtitle],
     ['#one-tap-invite .security-statement__eyebrow', copy.oneTapInvite.eyebrow], ['#one-tap-invite-title', copy.oneTapInvite.title], ['#one-tap-invite .security-statement__copy p', copy.oneTapInvite.description],
     ['#wifi-gate-faq .section__eyebrow', copy.faq.eyebrow], ['#wifi-gate-faq-title', copy.faq.title], ['#wifi-gate-faq .section__subtitle', copy.faq.subtitle],
@@ -74,20 +76,12 @@ export function applyHomepageCopy($, copy, locale) {
     if (!$(selector).length) continue;
     if (value) { $(selector).removeAttr('hidden'); text(selector, value); } else $(selector).remove();
   }
-  for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt], ['#wifigate-automation .automation-stay img', copy.automation.imageAlt]]) $(selector).attr('alt', value);
+  for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt], ['#wifigate-automation .automation-stay img', copy.automation.imageAlt], ['.business-plan--manager .business-plan__media img', copy.automation.manager.imageAlt]]) $(selector).attr('alt', value);
   $('#how-it-works .feature-card').each((index, node) => { text($(node).find('.feature-card__title'), copy.platform.features[index].title); text($(node).find('.feature-card__text'), copy.platform.features[index].text); });
-  $('#wifigate-automation .automation-audiences').attr('aria-label', copy.automation.audienceLabel).attr('dir', direction);
-  $('#wifigate-automation .automation-audiences li').each((index, node) => $(node).text(copy.automation.audiences[index]));
-  $('#wifigate-automation .automation-stay__steps li').each((index, node) => $(node).text(copy.automation.staySteps[index]));
-  // The sole supported override is the existing team illustration geometry.
-  $('#wifigate-automation .guest-invites__point').each((index, node) => {
-    const point = copy.automation.points[index];
-    text($(node).find('.guest-invites__point-title'), point.title); text($(node).find('.guest-invites__point-text'), point.text);
-    if (point.icon) {
-      if (point.icon !== 'team') throw Error(`${locale}: automation.points.${index}.icon references unknown icon "${point.icon}"`);
-      $(node).find('.guest-invites__point-icon svg').html('<path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path><circle cx="10" cy="8" r="3.5"></circle><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.6-3.4"></path><path d="M15 5.1a3.5 3.5 0 0 1 0 5.8"></path>');
-    }
-  });
+  for (const [list, items] of [['.automation-audiences', copy.automation.audiences], ['.business-plan__audiences', copy.automation.manager.audiences]]) {
+    $(`#wifigate-automation ${list}`).attr('aria-label', copy.automation.audienceLabel).attr('dir', direction);
+    $(`#wifigate-automation ${list} li`).each((index, node) => $(node).text(items[index]));
+  }
   $('#tutorial-videos .tutorial-card').each((index, node) => { text($(node).find('.tutorial-card__title'), copy.productGuide.items[index]); text($(node).find('.tutorial-card__status'), copy.productGuide.status); });
   $('#wifi-gate-faq .seo-faq__item').each((index, node) => { text($(node).find('summary'), copy.faq.items[index].question); text($(node).find('.seo-faq__answer p'), copy.faq.items[index].answer); });
   $('#why-wifigate .entry-point__label').each((index, node) => { if (copy.why.points[index]) text($(node), copy.why.points[index]); });

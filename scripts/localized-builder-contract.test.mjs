@@ -19,7 +19,7 @@ function actual(name, dependencies = {}) {
   assert.ok(declaration, `Actual ${name} declaration must remain testable`);
   return vm.runInNewContext(declaration.replace(/^export /, '') + `\n${name};`, dependencies);
 }
-const optional = new Set(['hero.statement', 'footer.taglineLines', 'platform.subscriptionNote', 'why.pointsNote', ...[0, 1, 2].map(i => `automation.points.${i}.icon`)]);
+const optional = new Set(['hero.statement', 'footer.taglineLines', 'platform.subscriptionNote', 'why.pointsNote']);
 function shape() {
   const context = { OPTIONAL_COPY_KEYS: optional };
   context.validateCopyShape = actual('validateCopyShape', context);

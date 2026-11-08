@@ -905,24 +905,30 @@ html[lang="he"] body.home-en #where .section__header {
   display: none;
 }
 
-.home-en .guest-invites__grid {
-  gap: 3.5rem;
-}
-
+/* The eyebrow matches the other black bands: a short blue rule, then the label. */
 .home-en .guest-invites__eyebrow {
+  display: flex;
+  gap: 0.7rem;
   margin: 0 0 1.15rem;
   padding: 0;
-  color: #62a0ff;
+  color: rgba(255, 255, 255, 0.72);
   border: 0;
   border-radius: 0;
   background: transparent;
-  font-size: 0.875rem;
+  font-size: 0.76rem;
   letter-spacing: 0;
+}
+
+.home-en .guest-invites__eyebrow::before {
+  width: 1.8rem;
+  height: 2px;
+  content: "";
+  background: var(--home-blue);
 }
 
 .home-en .guest-invites__title {
   max-width: none;
-  margin-bottom: 1.35rem;
+  margin: 0;
   color: #ffffff;
   font-size: 4rem;
   font-weight: 600;
@@ -932,26 +938,89 @@ html[lang="he"] body.home-en #where .section__header {
 }
 
 .home-en .guest-invites__subtitle {
+  margin: 0;
   color: #adadad;
   font-size: 1.05rem;
 }
 
-.home-en .guest-invites__points {
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin: 0;
-  padding: 1.5rem 0 0;
-  list-style: none;
+.home-en .business-plans__header {
+  margin-bottom: 4rem;
+  text-align: start;
+}
+
+.home-en .business-plans {
   border-top: 1px solid #343434;
 }
 
-.home-en .guest-invites__point {
-  padding: 1rem 0;
-  border-bottom: 0;
+.home-en .business-plan {
+  padding-top: 2.5rem;
 }
 
-.home-en .automation-audiences {
+.home-en .business-plan + .business-plan {
+  padding-inline-start: 3rem;
+  border-inline-start: 1px solid #343434;
+}
+
+.home-en .business-plan:not(:last-child) {
+  padding-inline-end: 3rem;
+}
+
+.home-en .automation-stay,
+.home-en .business-plan__media {
+  width: 100%;
+  margin: 0 0 1.75rem;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #181818;
+}
+
+.home-en .automation-stay img,
+.home-en .business-plan__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.home-en .automation-stay img {
+  object-position: 35% center;
+}
+
+.home-en .business-plan__number {
+  margin-bottom: 0.6rem;
+  color: #62a0ff;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.home-en .business-plan__name {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+  line-height: 1.04;
+}
+
+.home-en .automation-promise,
+.home-en .business-plan__tagline {
+  margin: 0.75rem 0 0;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.home-en .business-plan__text {
+  margin: 0.6rem 0 1.5rem;
+  color: #adadad;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home-en .automation-audiences,
+.home-en .business-plan__audiences {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -960,7 +1029,8 @@ html[lang="he"] body.home-en #where .section__header {
   list-style: none;
 }
 
-.home-en .automation-audiences li {
+.home-en .automation-audiences li,
+.home-en .business-plan__audiences li {
   padding: 0.5rem 0.75rem;
   border: 1px solid #414141;
   border-radius: 4px;
@@ -968,83 +1038,10 @@ html[lang="he"] body.home-en #where .section__header {
   font-size: 0.875rem;
 }
 
-.home-en .automation-promise {
-  margin: 0 0 0.75rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.home-en .automation-stay {
-  min-width: 0;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid #343434;
-  border-radius: 8px;
-  background: #181818;
-}
-
-.home-en .automation-stay img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1.1;
-  object-fit: cover;
-  object-position: 35% center;
-}
-
-.home-en .automation-stay__caption {
-  padding: 1.5rem;
-}
-
-.home-en .automation-stay__label {
-  display: block;
-  margin-bottom: 1rem;
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.home-en .automation-stay__steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem 1.75rem;
-  padding-left: 1.1rem;
-  margin: 0;
-  color: #c5c5c5;
-  font-size: 0.875rem;
-}
-
-html[lang="he"] body.home-en .automation-stay__steps {
-  padding-right: 1.1rem;
-  padding-left: 0;
-}
-
-@media (max-width: 600px) {
-  .home-en .automation-stay__steps {
-    grid-template-columns: 1fr;
-    gap: 0.55rem;
-  }
-}
-
-@media (max-width: 960px) {
-  .home-en .guest-invites__points {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-}
-
-.home-en .guest-invites__point-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  color: #ffffff;
-  border: 1px solid #474747;
-  border-radius: 4px;
-  background: #171717;
-}
-
-.home-en .guest-invites__point-text {
-  color: #969696;
+/* The plan action sits at the bottom of each column, so both buttons align. */
+.home-en .guest-invites__cta,
+.home-en .business-plan__cta {
+  margin-top: auto;
 }
 
 .home-en .guest-invites .btn--primary {
@@ -1059,6 +1056,40 @@ html[lang="he"] body.home-en .automation-stay__steps {
   border-color: var(--home-blue);
   background: var(--home-blue);
   transform: none;
+}
+
+.home-en .business-plan__cta {
+  color: #ffffff;
+  border: 1px solid #5a5a5a;
+  background: transparent;
+}
+
+.home-en .business-plan__cta:hover,
+.home-en .business-plan__cta:focus-visible {
+  border-color: #ffffff;
+  transform: none;
+}
+
+/* Stacked plans divide with a top rule instead of a side rule. */
+@media (max-width: 900px) {
+  .home-en .business-plans__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .home-en .business-plan:not(:last-child) {
+    padding-inline-end: 0;
+    padding-bottom: 2.5rem;
+  }
+
+  .home-en .business-plan + .business-plan {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    border-top: 1px solid #343434;
+  }
+
+  .home-en .business-plan__name {
+    font-size: 2.25rem;
+  }
 }
 
 .home-en .tutorials-layout {
@@ -1291,7 +1322,6 @@ html[lang="he"] body.home-en .automation-stay__steps {
     gap: 1rem 3rem;
   }
 
-  .home-en .guest-invites__grid,
   .home-en .tutorials-layout {
     gap: 4rem;
   }
@@ -1476,7 +1506,6 @@ html[lang="he"] body.home-en .automation-stay__steps {
     display: none;
   }
 
-  .home-en .guest-invites__grid,
   .home-en .tutorials-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 3rem;

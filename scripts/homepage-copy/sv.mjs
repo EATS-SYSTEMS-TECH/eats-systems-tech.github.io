@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Välj språk",
     platform: "Så fungerar det",
     solutions: "Användningsområden",
-    automation: "WIFIGATE Host",
+    automation: "För företag",
     productGuide: "Instruktionsvideor",
     contact: "Kontakta oss",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "WIFIGATE-appen i en mobil med grinden hemma, arbetsplatsen och en tidsbegränsad gästbehörighet",
   },
   automation: {
-    eyebrow: "Utformat för besöksnäringen",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["En styrenhet.", "En plan för varje företag."],
+    subtitle: "Abonnemangsplaner för företag som behöver mer än appen. Abonnemang är frivilligt: varje styrenhet fungerar fullt ut även utan.",
     audienceLabel: "För",
-    audiences: ["Hotell", "Airbnb", "Semesterlägenheter", "Boendeanläggningar"],
-    promise: "Ta emot dina gäster. Låt åtkomsten sköta sig själv.",
-    subtitle: "Från hotell till semesterlägenheter: koppla varje bokning till en säker behörighet för rätt grind, dörr eller garage. Gästerna kommer in med mobilen, och behörigheten börjar gälla vid incheckning och upphör automatiskt vid utcheckning.",
+    promise: "Automatisk hantering av gästernas åtkomst för varje bokning.",
+    text: "Behörigheten börjar gälla vid incheckning och upphör vid utcheckning. Inga nycklar, inga koder och inga nyckelboxar.",
+    audiences: ["Hotell", "Semesterboenden", "Gästhus", "Parkeringsuthyrning", "Förrådsuthyrning", "Och mer…"],
     cta: "Utforska WIFIGATE Host",
     imageAlt: "Gäster använder mobilen för att komma in i sitt boende",
-    stayCaption: "Varje vistelse, från bokning till avresa",
-    staySteps: ["Bokning mottagen", "Åtkomst vid incheckning", "Upphör vid utcheckning"],
-    points: [
-      {
-        title: "Inga nycklar eller kort att lämna över",
-        text: "Behörigheten kommer direkt till gästens mobil, utan nyckelhämtning, nyckelboxar eller koder att dela.",
-      },
-      {
-        title: "Automatiskt tidsbegränsad",
-        text: "Varje behörighet börjar gälla vid incheckning och upphör vid utcheckning, helt automatiskt.",
-      },
-      {
-        icon: "team",
-        title: "Sparar arbetstimmar",
-        text: "Personalen kan fokusera på gästerna i stället för på logistiken kring nyckelkort och andra fysiska passermedel.",
-      },
-    ],
+    manager: {
+      tagline: "Alla dina system, var du än är i världen.",
+      text: "Alla styrenheter, användare och behörigheter i din organisation i en kontrollpanel i webbläsaren.",
+      audiences: ["Flerbostadshus", "Kontor", "Idrottsanläggningar", "Parkeringsanläggningar", "Och mer…"],
+      cta: "Prata med oss om Manager",
+      imageAlt: "Entrén till ett flerbostadshus där åtkomsten hanteras med WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Översikt över WIFIGATE-systemet: IP67-enheten, mobilappen och styrkortet med kopplingsplintar, USB Type-C och 12-24V-ingång, Wi-Fi 6, Bluetooth LE och en 433,92MHz-mottagare, tillsammans med plattformens funktioner – upp till 5000 användare och 20 administratörer, obegränsade gästinbjudningar, ett API för automatiserade gästinbjudningar, inget SIM-kort eller router, stabilitet, snabb gästinbjudan, 90 dagars historik, automatisk öppning, upp till 50 händelser, digital inlärning av RF-fjärrkontroller, säkerhet och integritet samt inga abonnemangsavgifter.",

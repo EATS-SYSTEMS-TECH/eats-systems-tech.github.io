@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "選擇語言",
     platform: "運作方式",
     solutions: "應用情境",
-    automation: "WIFIGATE Host",
+    automation: "企業方案",
     productGuide: "教學影片",
     contact: "聯絡我們",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "手機上的 WIFIGATE App，顯示住家大門、工作場所與限時訪客權限",
   },
   automation: {
-    eyebrow: "專為住宿業打造",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["一個控制器。", "每家企業都有合適的方案。"],
+    subtitle: "為需求超出 App 的企業提供訂閱方案。訂閱並非必要：每個控制器不訂閱也能完整使用。",
     audienceLabel: "適用於",
-    audiences: ["飯店", "Airbnb", "短租公寓", "住宿場所"],
-    promise: "您專心迎接房客，通行交給系統自動完成。",
-    subtitle: "從飯店到度假公寓，將每筆訂房自動連結到對應大門、房門或車庫的安全通行權限。房客用手機就能進入，權限在入住時生效，退房時自動失效。",
+    promise: "每筆訂房的房客通行，全自動管理。",
+    text: "權限在入住時生效，退房時失效。不需要鑰匙、密碼或鑰匙盒。",
+    audiences: ["飯店", "度假公寓", "民宿", "車位出租", "自助倉儲", "更多…"],
     cta: "了解 WIFIGATE Host",
     imageAlt: "房客用手機進入住宿場所",
-    stayCaption: "每一次入住，從訂房到退房",
-    staySteps: ["收到訂房", "入住即可通行", "退房自動失效"],
-    points: [
-      {
-        title: "不必交接鑰匙或房卡",
-        text: "通行權限直接傳送到房客手機，不必領取鑰匙、使用鑰匙盒或分享密碼。",
-      },
-      {
-        title: "自動限時",
-        text: "每項權限都在入住時生效，退房時自動失效。",
-      },
-      {
-        icon: "team",
-        title: "節省人力",
-        text: "團隊能專心接待房客，不必再為房卡或其他實體憑證的交接疲於奔命。",
-      },
-    ],
+    manager: {
+      tagline: "您的所有系統，在全球任何地方都能管理。",
+      text: "組織內所有控制器、使用者和權限，盡在一個瀏覽器控制台。",
+      audiences: ["住宅大樓", "辦公室", "運動場館", "停車場", "更多…"],
+      cta: "聯絡我們了解 Manager",
+      imageAlt: "透過 WIFIGATE Manager 管理門禁的住宅大樓入口",
+    },
   },
   productGuide: {
     imageAlt: "WIFIGATE 系統概覽：IP67 裝置、手機 App，以及具備接線端子、USB Type-C、12-24V 輸入、Wi-Fi 6、Bluetooth LE 與 433.92MHz 接收器的控制板；平台功能包括 最多 5000 位使用者與 20 位管理員、無限訪客邀請、訪客邀請自動化 API、不需 SIM 卡或路由器、穩定可靠、快速邀請訪客、90 天紀錄、自動開門、最多 50 個事件、RF 遙控器數位對碼、安全與隱私，以及免訂閱費。",

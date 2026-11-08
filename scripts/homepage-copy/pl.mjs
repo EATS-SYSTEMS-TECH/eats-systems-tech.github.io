@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Wybierz język",
     platform: "Jak to działa",
     solutions: "Zastosowania",
-    automation: "WIFIGATE Host",
+    automation: "Dla firm",
     productGuide: "Filmy instruktażowe",
     contact: "Kontakt",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Aplikacja WIFIGATE w telefonie z bramą domu, miejscem pracy i ograniczonym czasowo dostępem dla gościa",
   },
   automation: {
-    eyebrow: "Stworzony dla branży noclegowej",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Jeden sterownik.", "Plan dla każdej firmy."],
+    subtitle: "Plany subskrypcyjne dla firm, które potrzebują czegoś więcej niż aplikacja. Subskrypcja jest opcjonalna: każdy sterownik w pełni działa także bez niej.",
     audienceLabel: "Dla",
-    audiences: ["Hoteli", "Obiektów Airbnb", "Apartamentów dla gości", "Obiektów noclegowych"],
-    promise: "Ty witasz gości, a wejście obsługuje się samo.",
-    subtitle: "Od hoteli po apartamenty wakacyjne: połącz każdą rezerwację z bezpiecznym dostępem do właściwej bramy, drzwi lub garażu. Goście wchodzą z telefonem, a dostęp aktywuje się przy zameldowaniu i automatycznie wygasa przy wymeldowaniu.",
+    promise: "Automatyczne zarządzanie wejściem gości przy każdej rezerwacji.",
+    text: "Dostęp aktywuje się przy zameldowaniu i wygasa przy wymeldowaniu. Bez kluczy, bez kodów i bez sejfów na klucze.",
+    audiences: ["Hotele", "Apartamenty wakacyjne", "Pensjonaty", "Parkingi na wynajem", "Self storage", "I wiele więcej…"],
     cta: "Poznaj WIFIGATE Host",
     imageAlt: "Goście wchodzą do miejsca zakwaterowania za pomocą telefonu",
-    stayCaption: "Każdy pobyt, od rezerwacji po wyjazd",
-    staySteps: ["Rezerwacja przyjęta", "Dostęp przy zameldowaniu", "Wygasa przy wymeldowaniu"],
-    points: [
-      {
-        title: "Bez przekazywania kluczy i kart",
-        text: "Uprawnienie do wejścia trafia prosto na telefon gościa, bez odbierania kluczy, sejfów na klucze i przekazywania kodów.",
-      },
-      {
-        title: "Automatyczny limit czasu",
-        text: "Każde uprawnienie samo aktywuje się przy zameldowaniu i wygasa przy wymeldowaniu.",
-      },
-      {
-        icon: "team",
-        title: "Oszczędza czas personelu",
-        text: "Personel zajmuje się gośćmi, a nie wydawaniem kart i innych fizycznych identyfikatorów.",
-      },
-    ],
+    manager: {
+      tagline: "Wszystkie Twoje systemy, z dowolnego miejsca na świecie.",
+      text: "Wszystkie sterowniki, użytkownicy i uprawnienia Twojej organizacji w jednym panelu w przeglądarce.",
+      audiences: ["Budynki mieszkalne", "Biura", "Obiekty sportowe", "Parkingi", "I wiele więcej…"],
+      cta: "Porozmawiaj z nami o Manager",
+      imageAlt: "Wejście do budynku mieszkalnego, w którym dostępem zarządza WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Przegląd systemu WIFIGATE: urządzenie IP67, aplikacja mobilna i płyta sterująca z zaciskami śrubowymi, USB Type-C i wejściem 12-24 V, Wi-Fi 6, Bluetooth LE i odbiornikiem 433,92 MHz, a obok możliwości platformy – do 5000 użytkowników i 20 administratorów, nieograniczone zaproszenia dla gości, automatyczne API zaproszeń dla gości, bez karty SIM i routera, stabilność, szybkie zaproszenie dla gościa, historia z 90 dni, automatyczne otwieranie, do 50 zdarzeń, cyfrowe programowanie pilotów RF, bezpieczeństwo i prywatność oraz brak opłat abonamentowych.",

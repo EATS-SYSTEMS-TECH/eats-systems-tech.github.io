@@ -64,12 +64,12 @@ function attachSceneAssets($, assetPrefix) {
   $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261019d`);
   $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261019d`);
   if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261019d`));
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261108a`));
   }
   if (!$("script[src*='js/scene-video.js']").length) {
     $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`).attr("defer", ""));
   }
-  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261019d`);
+  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261108a`);
   $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`);
 }
 

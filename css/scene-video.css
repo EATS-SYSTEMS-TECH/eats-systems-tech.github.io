@@ -34,8 +34,8 @@ picture[data-scene-picture] { display: contents; }
 .scene-video-controls button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .security-statement__media-image[data-scene-video] { overflow: hidden; }
 .security-statement__media-image[data-scene-video] > img { display: block; width: 100%; height: auto; border-radius: inherit; }
-/* Preserve the original hospitality image frame when it becomes a video. */
-.automation-stay__media { aspect-ratio: 1.1; overflow: hidden; }
+/* Keep the WIFIGATE Host plan photo frame when it becomes a video. */
+.automation-stay__media { aspect-ratio: 16 / 10; overflow: hidden; }
 .automation-stay__media video[data-video-src] { object-position: 35% center; }
 /* The accepted Auto Open scene replaces only this feature's former icon. */
 .home-en .feature-card--auto-open .feature-card__media[data-scene-video] {

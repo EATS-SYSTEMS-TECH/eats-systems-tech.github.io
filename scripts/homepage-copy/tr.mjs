@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Dil seçin",
     platform: "Nasıl çalışır",
     solutions: "Kullanım senaryoları",
-    automation: "WIFIGATE Host",
+    automation: "İşletmeler için",
     productGuide: "Eğitim videoları",
     contact: "Bize ulaşın",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Telefonda WIFIGATE uygulaması: evin bahçe kapısı, işyeri ve süreli misafir yetkisi",
   },
   automation: {
-    eyebrow: "Konaklama sektörü için geliştirildi",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Tek kontrol ünitesi.", "Her işletmeye uygun bir plan."],
+    subtitle: "Uygulamadan fazlasına ihtiyaç duyan işletmeler için abonelik planları. Abonelik zorunlu değildir: her kontrol ünitesi abonelik olmadan da tam olarak çalışır.",
     audienceLabel: "Kimler için",
-    audiences: ["Oteller", "Airbnb", "Kiralık daireler", "Konaklama tesisleri"],
-    promise: "Misafirlerinizi ağırlayın. Girişi sisteme bırakın.",
-    subtitle: "Otellerden tatil evlerine kadar her rezervasyonu doğru kapı, giriş veya garaj için güvenli bir giriş yetkisine bağlayın. Misafirler telefonlarıyla girer; yetki check-in'de başlar ve check-out'ta otomatik olarak sona erer.",
+    promise: "Her rezervasyon için otomatik misafir giriş yönetimi.",
+    text: "Yetki check-in'de başlar ve check-out'ta sona erer. Anahtar, şifre veya anahtar kutusu gerekmez.",
+    audiences: ["Oteller", "Tatil evleri", "Pansiyonlar", "Kiralık otoparklar", "Depolama hizmetleri", "Ve daha fazlası…"],
     cta: "WIFIGATE Host'u keşfedin",
     imageAlt: "Konaklama yerine girmek için telefonlarını kullanan misafirler",
-    stayCaption: "Her konaklama, rezervasyondan ayrılışa kadar",
-    staySteps: ["Rezervasyon alındı", "Check-in'de erişim", "Check-out'ta sona erer"],
-    points: [
-      {
-        title: "Anahtar veya kart teslimi yok",
-        text: "Giriş yetkisi doğrudan misafirin telefonuna gelir; anahtar teslim almaya, anahtar kutusuna veya şifre paylaşmaya gerek kalmaz.",
-      },
-      {
-        title: "Otomatik süre sınırı",
-        text: "Her yetki check-in'de geçerli olur ve check-out'ta otomatik olarak sona erer.",
-      },
-      {
-        icon: "team",
-        title: "Personelinize zaman kazandırır",
-        text: "Ekibiniz kart lojistiği ve diğer fiziksel araçlarla uğraşmak yerine misafirlerle ilgilenir.",
-      },
-    ],
+    manager: {
+      tagline: "Tüm sistemleriniz, dünyanın her yerinden.",
+      text: "Kuruluşunuzdaki tüm kontrol üniteleri, kullanıcılar ve yetkiler tek bir tarayıcı panelinde.",
+      audiences: ["Konut binaları", "Ofisler", "Spor tesisleri", "Otoparklar", "Ve daha fazlası…"],
+      cta: "Manager hakkında bizimle konuşun",
+      imageAlt: "Erişimi WIFIGATE Manager ile yönetilen bir konut binasının girişi",
+    },
   },
   productGuide: {
     imageAlt: "WIFIGATE sistemine genel bakış: IP67 cihaz, mobil uygulama ve vidalı klemensler, USB Type-C ve 12-24V girişi, Wi-Fi 6, Bluetooth LE ve 433,92MHz alıcı bulunan kontrol kartı; yanında platform özellikleri - 5000'e kadar kullanıcı ve 20 yönetici, sınırsız misafir daveti, misafir davetleri için otomatik API, SIM kart veya modem gerektirmemesi, kararlılık, hızlı misafir daveti, 90 günlük geçmiş, otomatik açılış, 50'ye kadar görev, dijital RF kumanda tanıtma, güvenlik ve gizlilik ve abonelik ücreti olmaması.",

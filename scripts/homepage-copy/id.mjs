@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Pilih bahasa",
     platform: "Cara kerja",
     solutions: "Contoh penggunaan",
-    automation: "WIFIGATE Host",
+    automation: "Untuk Bisnis",
     productGuide: "Video tutorial",
     contact: "Hubungi kami",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "Aplikasi WIFIGATE di ponsel, dengan gerbang rumah, tempat kerja, dan izin tamu berbatas waktu",
   },
   automation: {
-    eyebrow: "Dirancang untuk dunia perhotelan",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Satu pengontrol.", "Paket untuk setiap bisnis."],
+    subtitle: "Paket langganan untuk bisnis yang membutuhkan lebih dari sekadar aplikasi. Langganan bersifat opsional: setiap pengontrol tetap berfungsi penuh tanpa langganan.",
     audienceLabel: "Ditujukan untuk",
-    audiences: ["Hotel", "Airbnb", "Apartemen sewa", "Properti penginapan"],
-    promise: "Sambut tamu Anda. Akses masuk diatur otomatis.",
-    subtitle: "Dari hotel hingga apartemen liburan, hubungkan setiap pemesanan dengan izin masuk yang aman ke gerbang, pintu, atau garasi yang sesuai. Tamu masuk dengan ponselnya, dan izin mulai berlaku saat check-in lalu berakhir otomatis saat check-out.",
+    promise: "Pengelolaan akses tamu otomatis untuk setiap pemesanan.",
+    text: "Akses mulai berlaku saat check-in dan berakhir saat check-out. Tanpa kunci, tanpa kode, dan tanpa kotak kunci.",
+    audiences: ["Hotel", "Vila dan apartemen liburan", "Guest house", "Parkir sewa", "Layanan penyimpanan", "Dan lainnya…"],
     cta: "Jelajahi WIFIGATE Host",
     imageAlt: "Tamu menggunakan ponsel untuk masuk ke tempat menginap",
-    stayCaption: "Setiap masa inap, dari pemesanan hingga check-out",
-    staySteps: ["Pemesanan diterima", "Akses saat check-in", "Berakhir saat check-out"],
-    points: [
-      {
-        title: "Tanpa serah terima kunci atau kartu",
-        text: "Izin masuk dikirim langsung ke ponsel tamu, tanpa perlu mengambil kunci, memakai kotak kunci, atau membagikan kode.",
-      },
-      {
-        title: "Batas waktu otomatis",
-        text: "Setiap izin mulai berlaku saat check-in dan berakhir saat check-out, secara otomatis.",
-      },
-      {
-        icon: "team",
-        title: "Hemat waktu staf",
-        text: "Tim Anda bisa fokus melayani tamu, bukan mengurus kartu kunci atau sarana fisik lainnya.",
-      },
-    ],
+    manager: {
+      tagline: "Semua sistem Anda, dari mana saja di dunia.",
+      text: "Semua pengontrol, pengguna, dan izin di organisasi Anda dalam satu dasbor di browser.",
+      audiences: ["Gedung hunian", "Kantor", "Fasilitas olahraga", "Area parkir", "Dan lainnya…"],
+      cta: "Bicarakan Manager dengan kami",
+      imageAlt: "Pintu masuk gedung hunian yang aksesnya dikelola dengan WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Gambaran umum sistem WIFIGATE: perangkat IP67, aplikasi seluler, dan papan kontrol dengan terminal sekrup, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE, serta penerima 433,92MHz, beserta kemampuan platform - hingga 5000 pengguna dan 20 admin, undangan tamu tanpa batas, API otomatis untuk undangan tamu, tanpa SIM atau router, stabilitas, undangan tamu cepat, riwayat 90 hari, buka otomatis, hingga 50 jadwal, pendaftaran remote RF digital, keamanan dan privasi, serta tanpa biaya langganan.",

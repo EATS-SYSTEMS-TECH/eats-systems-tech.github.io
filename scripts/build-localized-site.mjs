@@ -9,7 +9,7 @@ import { SITE_LANGUAGES } from './site-languages.mjs';
 import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index.mjs';
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
-import { HOST_PAGE_KEY, getHostPageContent, installHomeHostPointShells, installHostDetailShells, appendHostMarketingDetails } from './host-marketing-page.mjs';
+import { HOST_PAGE_KEY, getHostPageContent, installHostDetailShells, appendHostMarketingDetails } from './host-marketing-page.mjs';
 import { installHomeFeatureCards } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
 import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
@@ -121,7 +121,7 @@ async function buildHomePages(homeData) {
   const source = await readHtmlTemplate(template('index')), entries = [];
   for (const { code: locale } of homeData.localeOptions) {
     const $ = cheerio.load(source, { decodeEntities: false }), copy = homeData.homepageCopies[locale];
-    installHomeFeatureCards($); installHomeHostPointShells($);
+    installHomeFeatureCards($);
     setBodyDirection($, locale); rewriteStaticAssets($, locale, 'home');
     removeScripts($, ['js/language-selector.js']); appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, 'home');
     updateFooterStaticUi($, locale, copy.footer); updateHomeStaticUi($, copy, getBundle(homeData.accessibilityCopy, locale), locale);

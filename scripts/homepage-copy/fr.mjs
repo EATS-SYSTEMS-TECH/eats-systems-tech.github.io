@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Choisir la langue",
     platform: "Comment ça marche",
     solutions: "Cas d'usage",
-    automation: "WIFIGATE Host",
+    automation: "Entreprises",
     productGuide: "Tutoriels vidéo",
     contact: "Nous contacter",
     account: {
@@ -82,31 +82,22 @@ const copy = {
     imageAlt: "L'application WIFIGATE sur un téléphone, avec le portail de la maison, le lieu de travail et un accès invité limité dans le temps",
   },
   automation: {
-    eyebrow: "Conçu pour l'hôtellerie",
-    titleLines: ["WIFIGATE", "Host"],
+    eyebrow: "WIFIGATE For Business",
+    titleLines: ["Un seul contrôleur.", "Une offre pour chaque entreprise."],
+    subtitle: "Des abonnements pour les entreprises qui ont besoin de plus que l'application. L'abonnement est facultatif : chaque contrôleur fonctionne pleinement même sans abonnement.",
     audienceLabel: "Pour",
-    audiences: ["Hôtels", "Airbnb", "Locations saisonnières", "Lieux d'hébergement"],
-    promise: "Accueillez vos voyageurs. L'accès se gère tout seul.",
-    subtitle: "De l'hôtel à la location saisonnière, associez chaque réservation à un accès sécurisé au portail, à la porte ou au garage concerné. Vos voyageurs entrent avec leur téléphone : l'accès s'active à l'arrivée et expire automatiquement au départ.",
+    promise: "La gestion automatique de l'accès des voyageurs, pour chaque réservation.",
+    text: "L'accès s'active à l'arrivée et expire au départ. Ni clés, ni codes, ni boîtes à clés.",
+    audiences: ["Hôtels", "Locations saisonnières", "Maisons d'hôtes", "Parkings en location", "Garde-meubles", "Et plus encore…"],
     cta: "Découvrir WIFIGATE Host",
     imageAlt: "Des voyageurs utilisent leur téléphone pour entrer dans leur hébergement",
-    stayCaption: "Chaque séjour, de la réservation au départ",
-    staySteps: ["Réservation reçue", "Accès à l'arrivée", "Expiration au départ"],
-    points: [
-      {
-        title: "Ni clé ni carte à remettre",
-        text: "L'autorisation d'accès arrive directement sur le téléphone du voyageur, sans clés à récupérer, sans boîte à clés et sans code à partager.",
-      },
-      {
-        title: "Durée limitée automatiquement",
-        text: "Chaque autorisation s'active à l'arrivée et expire au départ, sans la moindre intervention.",
-      },
-      {
-        icon: "team",
-        title: "Des heures de travail gagnées",
-        text: "Votre équipe se consacre à l'accueil plutôt qu'à la logistique des cartes et autres supports physiques.",
-      },
-    ],
+    manager: {
+      tagline: "Tous vos systèmes, où que vous soyez dans le monde.",
+      text: "Tous les contrôleurs, utilisateurs et autorisations de votre organisation dans un seul tableau de bord, depuis votre navigateur.",
+      audiences: ["Immeubles résidentiels", "Bureaux", "Installations sportives", "Parkings", "Et plus encore…"],
+      cta: "Nous contacter au sujet de Manager",
+      imageAlt: "L'entrée d'un immeuble résidentiel dont l'accès est géré avec WIFIGATE Manager",
+    },
   },
   productGuide: {
     imageAlt: "Vue d'ensemble du système WIFIGATE : le boîtier IP67, l'application mobile et la carte de commande avec ses borniers à vis, l'USB Type-C et l'entrée 12-24 V, le Wi-Fi 6, le Bluetooth LE et un récepteur 433,92 MHz, ainsi que les fonctionnalités de la plateforme : jusqu'à 5000 utilisateurs et 20 administrateurs, invitations illimitées, API d'invitations automatiques, sans carte SIM ni routeur, stabilité, invitation express, historique de 90 jours, ouverture automatique, jusqu'à 50 événements, apprentissage numérique des télécommandes RF, sécurité et confidentialité, sans frais d'abonnement.",
