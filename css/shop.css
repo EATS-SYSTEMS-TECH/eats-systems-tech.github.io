@@ -245,6 +245,82 @@
   object-fit: contain;
   mix-blend-mode: multiply;
 }
+/* The 3D view button sits on the main photo's start corner. */
+.shop-product-gallery__main {
+  position: relative;
+}
+.shop-3d-button {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-start: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid #e3e6e8;
+  border-radius: 999px;
+  background: #fff;
+  color: #151719;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 16px -10px rgb(0 0 0 / 40%);
+  transition: border-color 160ms ease-out, transform 160ms ease-out;
+}
+.shop-3d-button:hover {
+  border-color: #151719;
+  transform: translateY(-1px);
+}
+.shop-3d-button:focus-visible {
+  outline: 2px solid #1265e8;
+  outline-offset: 3px;
+}
+.shop-3d {
+  position: absolute;
+  inset: 0;
+}
+.shop-3d__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+.shop-3d__canvas:active {
+  cursor: grabbing;
+}
+.shop-3d__canvas:focus-visible {
+  outline: 2px solid #1265e8;
+  outline-offset: -4px;
+}
+.shop-viewer.is-3d .shop-viewer__nav,
+.shop-viewer.is-3d .shop-viewer__count-wrap {
+  display: none;
+}
+.shop-viewer__reset {
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-start: 16px;
+  padding: 10px 16px;
+  border: 1px solid #e3e6e8;
+  border-radius: 999px;
+  background: #fff;
+  color: #151719;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.shop-viewer__reset:hover {
+  border-color: #151719;
+}
+.shop-viewer__reset:focus-visible {
+  outline: 2px solid #1265e8;
+  outline-offset: 3px;
+}
+
 /* Product photos are buttons that open the full-screen viewer. */
 .shop-zoom {
   position: relative;

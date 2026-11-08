@@ -15,6 +15,7 @@ import {
   pickerBundle,
   reservationsBundle,
   payPointBundle,
+  shop3dBundle,
   pickerPages,
   hostPage,
   overviewPage,
@@ -24,7 +25,7 @@ import {
 // A Windows checkout may hold the committed files with CRLF line endings.
 const text = (value) => value.replace(/\r\n/g, "\n");
 
-for (const options of [apiBundle, dashboardBundle, pickerBundle, reservationsBundle, payPointBundle])
+for (const options of [apiBundle, dashboardBundle, pickerBundle, reservationsBundle, payPointBundle, shop3dBundle])
   test(`${options.outfile} matches its sources`, async () => {
     const result = await build({ ...options, write: false });
     assert.equal(result.outputFiles.length, 1);

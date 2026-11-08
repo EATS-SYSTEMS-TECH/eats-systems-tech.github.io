@@ -88,6 +88,14 @@ export const payPointBundle = {
   logOverride: { "commonjs-variable-in-esm": "silent" },
 };
 
+// js/shop-3d.bundle.js: the 3D product view, loaded by js/shop-page.js only
+// when a shopper opens it, so three.js never weighs on the product page.
+export const shop3dBundle = {
+  ...common,
+  entryPoints: ["js/shop-3d.js"],
+  outfile: "js/shop-3d.bundle.js",
+};
+
 // The pages that load the picker bundle.
 export const pickerPages = [
   "dashboard/index.html",

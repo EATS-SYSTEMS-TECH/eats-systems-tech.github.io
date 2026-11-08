@@ -6,6 +6,7 @@ import {
   pickerBundle,
   reservationsBundle,
   payPointBundle,
+  shop3dBundle,
   hostPage,
   overviewPage,
   root,
@@ -16,6 +17,7 @@ await Promise.all([
   build(pickerBundle),
   build(reservationsBundle),
   build(payPointBundle),
+  build(shop3dBundle),
 ]);
 
 // Static hosting needs a real document for the Platform deep link.
