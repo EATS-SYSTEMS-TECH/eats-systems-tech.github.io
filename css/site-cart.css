@@ -55,7 +55,9 @@ html[dir="rtl"] .site-cart__drawer:not([lang="en"]) .site-cart__item-name { text
 .site-cart__tile { display: flex; flex-direction: column; justify-content: center; gap: .1rem; width: 5rem; height: 5rem; padding: .55rem .6rem; border-radius: 7px; background: #1f2937; color: #fff; line-height: 1.1; text-align: left; }
 .site-cart__tile small { font-size: .55rem; font-weight: 700; letter-spacing: .14em; opacity: .8; }
 .site-cart__tile b { font-size: .95rem; font-weight: 800; letter-spacing: -.01em; }
-.site-cart__tile--wifigate-host { background: #ea580c; }
-.site-cart__tile--wifigate-manager { background: #0b63ff; }
+.site-cart__tile--wifigate-host, .site-cart__tile--wifigate-manager { align-items: center; gap: .3rem; padding: .5rem .35rem .45rem; border: 1px solid #e4e6e9; background: #fff; text-align: center; }
+.site-cart__tile img { width: 3.4rem; height: auto; }
+.site-cart__tile--wifigate-host b { color: #c2410c; font-size: .78rem; }
+.site-cart__tile--wifigate-manager b { color: #0b63ff; font-size: .78rem; }
 .site-cart__tile--wifigate-roller-shutter { background: #eef0f2; color: #1f2937; }
 .site-cart__tile--wifigate-roller-shutter b { font-size: .78rem; }

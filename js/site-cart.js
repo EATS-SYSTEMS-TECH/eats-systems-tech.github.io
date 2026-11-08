@@ -1,11 +1,12 @@
 // The site cart drawer. Items live in the wifigate_cart cookie (cart-cookie.js).
 // Products are not on sale yet: the cart is sent as a WhatsApp message to the
-// WIFIGATE WhatsApp Business account to join the waitlist. No online payment.
+// WIFIGATE WhatsApp Business account asking for details. No online payment.
 import { CART_CATALOG, cartProduct, normalizeCart, readCart, writeCart } from "./cart-cookie.js?v=20261108b";
 
 // The number behind the public wa.me/message/NZWNMX6V2XVHJ1 business link; only a
 // number link can carry the prefilled cart text.
 const WHATSAPP_BUSINESS = "972553092029";
+const SUBSCRIPTION_LOGO = "/assets/img/shop/wifigate-stacked-logo.webp";
 const TRASH_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>';
 
 const trigger = document.querySelector(".site-cart__trigger");
@@ -21,8 +22,8 @@ if (trigger && drawer && backdrop) {
   const copy = JSON.parse(drawer.dataset.cartCopy || "{}");
   const isHebrew = document.documentElement.lang === "he";
   const text = isHebrew
-    ? { items: "פריטים", controller: "בקר", subscription: "מנוי", subscriptionNote: "הצוות יתאם איתכם את המסלול", greeting: "שלום WIFIGATE, אשמח להירשם לרשימת ההמתנה עבור:", units: "יח׳" }
-    : { items: "items", controller: "Controller", subscription: "Subscription", subscriptionNote: "Our team will arrange the plan with you", greeting: "Hi WIFIGATE, I'd like to join the waitlist for:", units: "units" };
+    ? { items: "פריטים", controller: "בקר", subscription: "מנוי", subscriptionNote: "הצוות יתאם איתכם את המסלול", greeting: "שלום WIFIGATE, אשמח לשמוע פרטים על:", units: "יח׳" }
+    : { items: "items", controller: "Controller", subscription: "Subscription", subscriptionNote: "Our team will arrange the plan with you", greeting: "Hi WIFIGATE, I'd like to hear more about:", units: "units" };
   // Earlier preview builds kept a priced test cart in local storage.
   try { localStorage.removeItem("wifigate-cart-v1"); } catch { /* Storage may be disabled. */ }
   // The cookie is the source of truth; memory keeps the cart usable when cookies are blocked.
@@ -88,12 +89,16 @@ if (trigger && drawer && backdrop) {
         image.height = 80;
         row.append(image);
       } else if (product.tile) {
-        // A wordmark tile stands in for products without a product photo.
+        // Products without a photo get a tile: subscriptions show the WIFIGATE
+        // logo over their name, the controller a wordmark.
         const tile = document.createElement("span");
         tile.className = `site-cart__tile site-cart__tile--${productId}`;
         tile.dir = "ltr";
         tile.setAttribute("aria-hidden", "true");
-        tile.append(Object.assign(document.createElement("small"), { textContent: "WIFIGATE" }), Object.assign(document.createElement("b"), { textContent: product.tile }));
+        const top = product.kind === "subscription"
+          ? Object.assign(document.createElement("img"), { src: SUBSCRIPTION_LOGO, alt: "", width: 60, height: 42 })
+          : Object.assign(document.createElement("small"), { textContent: "WIFIGATE" });
+        tile.append(top, Object.assign(document.createElement("b"), { textContent: product.tile }));
         row.append(tile);
       } else {
         const placeholder = document.createElement("span");
