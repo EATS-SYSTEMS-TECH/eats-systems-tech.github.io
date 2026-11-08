@@ -16,7 +16,7 @@ export const repoRoot = process.cwd();
 export const defaultLocale = 'en';
 export const siteOrigin = SITE_ORIGIN;
 export const nowDate = new Date().toISOString().slice(0, 10);
-export const COOKIE_CONSENT_VERSION = '20261016a';
+export const COOKIE_CONSENT_VERSION = '20261108a';
 export const changedFiles = new Set();
 export const isRtl = locale => RTL_LANGUAGES.has(locale);
 export const normalizeLocalePath = locale => locale.toLowerCase();
@@ -250,7 +250,7 @@ export function serialize($, data, locale, key = 'home') {
   $('head').append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=${COOKIE_CONSENT_VERSION}">`);
   $('body').append(`<script>window.WIFIGATE_COOKIE_COPY = ${inlineJson({ [locale]: data.cookieCopy[locale] })};</script>`);
   $("script[src*='js/accessibility-copy.js']").replaceWith(`<script>window.accessibilityCopy = ${inlineJson({ [locale]: data.accessibilityCopy[locale] })};</script>`);
-  const version = key === HOST_PAGE_KEY ? '20261018host1' : key === AUTO_OPEN_PAGE_KEY ? '20261018ao1' : COOKIE_CONSENT_VERSION;
+  const version = key === HOST_PAGE_KEY ? '20261108host1' : key === AUTO_OPEN_PAGE_KEY ? '20261108ao1' : COOKIE_CONSENT_VERSION;
   $('body').append(`<script src="${prefix}js/cookie-consent.js?v=${version}" defer></script>`);
   return ensureTrailingNewline($.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, ''));
 }

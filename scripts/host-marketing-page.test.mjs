@@ -44,6 +44,27 @@ test("all 39 Host locales reuse existing hero, steps, benefits and SEO without n
   }
 });
 
+test("all 39 Manager locales supply the shared page layout with the Manager plans and photo", async () => {
+  for (const { locale, home } of copies) {
+    const manager = (await import(`./manager-page-copy/${locale}.mjs`)).default;
+    const content = getHostPageContent(manager, home, "manager");
+    assert.equal(content.label, "WIFIGATE Manager");
+    assert.equal(content.eyebrow, "WIFIGATE Manager", locale);
+    assert.equal(content.imageAlt, home.automation.manager.imageAlt, locale);
+    assert.equal(content.highlights.length, 3);
+    assert.equal(content.benefits.length, 6);
+    content.benefits.forEach((item) => assert.ok(BENEFIT_ICONS[item.icon], `${locale}: existing benefit icon`));
+    for (const plan of ["systems", "organizations", "example"]) {
+      for (const key of ["Name", "Per", "Range", "Desc", "F1", "F2", "F3", "F4"]) assert.ok(manager.marketing.pricing[`${plan}${key}`]?.trim(), `${locale}: ${plan}${key}`);
+    }
+    assert.match(manager.marketing.pricing.exampleDesc, /\$1\.90/, `${locale}: the documented USD price`);
+  }
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  installHostDetailShells($, "manager");
+  assert.deepEqual($(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["$1.90", "$1", "$21"]);
+  assert.deepEqual($(".wa-chip").map((_, node) => $(node).attr("data-i18n")).get(), ["residential", "offices", "sports", "parking"].map(key => `guestInvites.marketing.audience.${key}`));
+});
+
 test("missing localized copy fails instead of publishing a partial page or a fallback", () => {
   const { host, home } = copies.find(item => item.locale === "he");
   const fields = ["marketing.hero.title", "marketing.steps.s2x", "marketing.benefits.b6t", "metaDescription"];
@@ -98,7 +119,7 @@ test("homepage For Business section numbers each plan and keeps the Host destina
   assert.deepEqual(plans.map((_, node) => $(node).find(".business-plan__name").text()).get(), ["WIFIGATE Host", "WIFIGATE Manager"]);
   assert.deepEqual(plans.map((_, node) => $(node).find(".business-plan__number").text()).get(), ["01", "02"]);
   assert.equal(plans.first().find(".guest-invites__cta").attr("href"), "/wifigate-host/");
-  assert.equal(plans.last().find(".business-plan__cta").attr("href"), "#get-in-touch");
+  assert.equal(plans.last().find(".business-plan__cta").attr("href"), "/wifigate-manager/");
   assert.equal($("#wifigate-for-business .automation-stay > img").length, 1, "the Host photo keeps its scene-media slot");
   assert.equal($(".guest-invites__points, .automation-stay__steps").length, 0);
 });

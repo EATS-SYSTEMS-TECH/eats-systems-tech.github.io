@@ -9,7 +9,7 @@ import { SITE_LANGUAGES } from './site-languages.mjs';
 import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index.mjs';
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
-import { HOST_PAGE_KEY, getHostPageContent, installHostDetailShells, appendHostMarketingDetails } from './host-marketing-page.mjs';
+import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, appendHostMarketingDetails } from './host-marketing-page.mjs';
 import { installHomeFeatureCards } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
 import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
@@ -131,6 +131,7 @@ async function buildHomePages(homeData) {
     title.wrapInner($('<a>').attr('href', buildPagePath(locale, AUTO_OPEN_PAGE_KEY)));
     applyHomeSceneMedia($, { scene: homeData.sceneMedia.get('homepage-montage'), hotelScene: homeData.sceneMedia.get('hotels-airbnb'), assetPrefix: buildAssetPrefix(locale, 'home'), copy: copy.hero.media });
     $('.guest-invites__cta').attr('href', buildPagePath(locale, guestInvitesPageKey));
+    $('.business-plan__cta').attr('href', buildPagePath(locale, MANAGER_PAGE_KEY));
     const main = $('#main-content');
     for (const id of ['home', 'advantages', 'private-access', 'where', 'guest-invites-api', 'tutorials', 'one-tap-invite', 'wifi-gate-faq', 'why-wifigate', 'system-overview', 'contact']) {
       const section = main.children('#' + id); if (section.length) main.append(section);
@@ -242,38 +243,52 @@ async function buildAutoOpenPages(homeData) {
   return entries;
 }
 
-// Optional Host files are cached; missing locales retain the English fallback.
-async function loadHostPageCopy(locale) {
-  if (!hostPageCopyCache.has(locale)) {
-    const filename = path.join(repoRoot, 'scripts/host-page-copy', locale + '.mjs');
-    hostPageCopyCache.set(locale, await fs.access(filename).then(() => import(pathToFileURL(filename).href).then(module => module.default), () => null));
+// The WIFIGATE Host and WIFIGATE Manager pages share one layout and builder.
+const SUBSCRIPTION_PAGES = [
+  { product: 'host', pageKey: guestInvitesPageKey, copyDir: 'host-page-copy', scene: 'hotels-airbnb', bodyClass: 'wifigate-host-page',
+    serviceType: 'Automated guest access for hospitality', legacyKeys: ['automation', 'Automated-Guest-Invites-API'] },
+  { product: 'manager', pageKey: MANAGER_PAGE_KEY, copyDir: 'manager-page-copy', scene: 'residential-buildings', bodyClass: 'wifigate-manager-page',
+    serviceType: 'Web management of access control systems for organizations', legacyKeys: [] },
+];
+
+// Optional page copy files are cached; missing locales retain the English fallback.
+async function loadSubscriptionCopy(copyDir, locale) {
+  const cacheKey = `${copyDir}/${locale}`;
+  if (!hostPageCopyCache.has(cacheKey)) {
+    const filename = path.join(repoRoot, 'scripts', copyDir, locale + '.mjs');
+    hostPageCopyCache.set(cacheKey, await fs.access(filename).then(() => import(pathToFileURL(filename).href).then(module => module.default), () => null));
   }
-  return hostPageCopyCache.get(locale) || loadHostPageCopy(defaultLocale);
+  return hostPageCopyCache.get(cacheKey) || loadSubscriptionCopy(copyDir, defaultLocale);
 }
-async function buildGuestInvitesPages(homeData) {
+async function buildSubscriptionPages(homeData) {
+  const entries = [];
+  for (const page of SUBSCRIPTION_PAGES) entries.push(...await buildSubscriptionPage(homeData, page));
+  return entries;
+}
+async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scene: sceneKey, bodyClass, serviceType, legacyKeys }) {
   const source = await readHtmlTemplate(nicheTemplatePath), details = await readHtmlTemplate(guestInvitesTemplatePath);
-  const scene = homeData.sceneMedia.get('hotels-airbnb');
-  if (!scene) throw Error('Accepted hospitality media is required for WIFIGATE Host');
+  const scene = homeData.sceneMedia.get(sceneKey);
+  if (!scene) throw Error(`Accepted ${sceneKey} media is required for ${pageKey}`);
   const image = { hero: scene.poster.path, og: scene.poster.path, heroWidth: scene.width, heroHeight: scene.height, ogWidth: scene.width, ogHeight: scene.height }, entries = [];
   for (const { code: locale } of homeData.localeOptions) {
-    const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale), hostCopy = await loadHostPageCopy(locale);
+    const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale), hostCopy = await loadSubscriptionCopy(copyDir, locale);
     const $ = cheerio.load(source, { decodeEntities: false }), legacy = cheerio.load(details, { decodeEntities: false });
-    installHostDetailShells(legacy);
-    const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale]), chrome = getNicheChrome(locale);
-    prepareUseCaseShell($, locale, guestInvitesPageKey, 'wifigate-host-page');
-    fillUseCaseBody($, { chrome, content, image, locale, pageKey: guestInvitesPageKey, accessibilityBundle });
+    installHostDetailShells(legacy, product);
+    const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale], product), chrome = getNicheChrome(locale);
+    prepareUseCaseShell($, locale, pageKey, bodyClass);
+    fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle });
     $('#niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
     setUseCaseNavigation($, { chrome, content });
-    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, guestInvitesPageKey), copy: homeData.homepageCopies[locale].hero.media });
-    rewriteStaticAssets(legacy, locale, guestInvitesPageKey);
+    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, pageKey), copy: homeData.homepageCopies[locale].hero.media });
+    rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, guestInvitesPageKey)}css/automation.css?v=20261108a" />`);
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261108a" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
-    setUseCaseMeta($, { pageKey: guestInvitesPageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
-      service: { '@type': 'Service', '@id': `${siteOrigin}/${HOST_PAGE_KEY}/#service`, name: 'WIFIGATE Host', serviceType: 'Automated guest access for hospitality', provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, guestInvitesPageKey), description: hostCopy.metaDescription } });
-    await publishNicheVariant({ locale, pageKey: guestInvitesPageKey, render: () => serialize($, homeData, locale, guestInvitesPageKey), legacyKeys: () => ['automation', 'Automated-Guest-Invites-API'] }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
-    entries.push({ loc: buildPageUrl(locale, guestInvitesPageKey), changefreq: 'monthly', priority: '0.9' });
+    setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
+      service: { '@type': 'Service', '@id': `${siteOrigin}/${pageKey}/#service`, name: content.label, serviceType, provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, pageKey), description: hostCopy.metaDescription } });
+    await publishNicheVariant({ locale, pageKey, render: () => serialize($, homeData, locale, pageKey), legacyKeys: () => legacyKeys }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
+    entries.push({ loc: buildPageUrl(locale, pageKey), changefreq: 'monthly', priority: '0.9' });
   }
   return entries;
 }
@@ -316,7 +331,7 @@ async function main() {
   const englishNiches = () => NICHE_DEFINITIONS.map(niche => ({ key: niche.key, content: getNichePageContent(defaultLocale).niches[niche.key] }));
   const notFound = () => buildNotFoundPage({ niches: englishNiches(), pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION });
   if (process.argv.includes('--consumer-consent-only')) { await writeOutputFile(path.join(repoRoot, '404.html'), notFound()); return; }
-  entries.push(...await buildGuestInvitesPages(homeData), ...await buildUtilityPages(homeData));
+  entries.push(...await buildSubscriptionPages(homeData), ...await buildUtilityPages(homeData));
   await buildLoginPages(writeOutputFile);
   entries.push({ loc: siteOrigin + '/contact-us/', lastmod: execFileSync('git', ['log', '-1', '--format=%cs', '--', 'contact-us/index.html'], { cwd: repoRoot, encoding: 'utf8' }).trim() || nowDate, changefreq: 'yearly', priority: '0.5' });
   await writeOutputFile(path.join(repoRoot, 'sitemap.xml'), buildSitemap(entries, await readPreviousLastmods()));

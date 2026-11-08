@@ -95,7 +95,7 @@ const copy = {
       tagline: "Semua sistem anda, dari mana-mana sahaja di dunia.",
       text: "Semua pengawal, pengguna dan kebenaran organisasi anda dalam satu papan pemuka pelayar.",
       audiences: ["Bangunan kediaman", "Pejabat", "Kemudahan sukan", "Kemudahan parkir", "Dan banyak lagi…"],
-      cta: "Bincang dengan kami tentang Manager",
+      cta: "Terokai WIFIGATE Manager",
       imageAlt: "Pintu masuk bangunan kediaman yang aksesnya diurus dengan WIFIGATE Manager",
     },
   },

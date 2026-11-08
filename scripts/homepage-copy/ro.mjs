@@ -95,7 +95,7 @@ const copy = {
       tagline: "Toate sistemele dumneavoastră, de oriunde din lume.",
       text: "Toate controlerele, utilizatorii și permisiunile organizației într-un singur panou de control în browser.",
       audiences: ["Clădiri rezidențiale", "Birouri", "Baze sportive", "Parcări", "Și multe altele…"],
-      cta: "Discutați cu noi despre Manager",
+      cta: "Descoperiți WIFIGATE Manager",
       imageAlt: "Intrarea unei clădiri rezidențiale al cărei acces este gestionat cu WIFIGATE Manager",
     },
   },

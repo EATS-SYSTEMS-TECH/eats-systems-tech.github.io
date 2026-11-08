@@ -95,7 +95,7 @@ const copy = {
       tagline: "Svi vaši sustavi, s bilo kojeg mjesta na svijetu.",
       text: "Svi kontroleri, korisnici i dopuštenja vaše organizacije na jednoj nadzornoj ploči u pregledniku.",
       audiences: ["Stambene zgrade", "Uredi", "Sportski objekti", "Parkirališta", "I još mnogo toga…"],
-      cta: "Razgovarajte s nama o paketu Manager",
+      cta: "Upoznajte WIFIGATE Manager",
       imageAlt: "Ulaz u stambenu zgradu čijim se pristupom upravlja putem WIFIGATE Manager",
     },
   },

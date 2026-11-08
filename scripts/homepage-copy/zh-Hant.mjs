@@ -95,7 +95,7 @@ const copy = {
       tagline: "您的所有系統，在全球任何地方都能管理。",
       text: "組織內所有控制器、使用者和權限，盡在一個瀏覽器控制台。",
       audiences: ["住宅大樓", "辦公室", "運動場館", "停車場", "更多…"],
-      cta: "聯絡我們了解 Manager",
+      cta: "了解 WIFIGATE Manager",
       imageAlt: "透過 WIFIGATE Manager 管理門禁的住宅大樓入口",
     },
   },

@@ -95,7 +95,7 @@ const copy = {
       tagline: "Wszystkie Twoje systemy, z dowolnego miejsca na świecie.",
       text: "Wszystkie sterowniki, użytkownicy i uprawnienia Twojej organizacji w jednym panelu w przeglądarce.",
       audiences: ["Budynki mieszkalne", "Biura", "Obiekty sportowe", "Parkingi", "I wiele więcej…"],
-      cta: "Porozmawiaj z nami o Manager",
+      cta: "Poznaj WIFIGATE Manager",
       imageAlt: "Wejście do budynku mieszkalnego, w którym dostępem zarządza WIFIGATE Manager",
     },
   },

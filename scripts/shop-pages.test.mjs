@@ -81,7 +81,7 @@ test("shop renderer provides usable catalog and product content before any JavaS
       assert.equal(main.find("h1").length, 1);
       assert.equal(main.find("script").length, 0, "Product information and links are server-rendered HTML");
       assert.equal(main.find(".shop-product-card").length, product ? 0 : 2);
-      if (!product) assert.ok(main.find(`a[href='${locale === "en" ? "/" : `/${locale.toLowerCase()}/`}#get-in-touch']`).length);
+      if (!product) assert.equal(main.find(`[data-business='manager'] a[href='${locale === "en" ? "" : `/${locale.toLowerCase()}`}/wifigate-manager/']`).length, 1);
       assertUnavailable($, main, locale, product);
     }
   }
@@ -166,7 +166,6 @@ for (const { code: locale } of SITE_LANGUAGES) {
         assert.ok(controller.find("img[src$='assets/img/wifigate-product-v3.webp']").length, "WIFIGATE leads with the controller and app photo");
       }
       const contactLinks = main.find("a[href$='#get-in-touch']");
-      if (!product) assert.ok(contactLinks.length, "The catalog keeps a contact route for the subscriptions");
       contactLinks.each((_, element) => assert.equal($(element).attr("href"), `${locale === "en" ? "/" : `/${locale.toLowerCase()}/`}#get-in-touch`));
       for (const [selector, attribute] of [["script[src]", "src"], ["img[src], source[src], video[src]", "src"], ["video[poster]", "poster"], ["link[rel='stylesheet'], link[rel='icon']", "href"], [".shop-main a[href], .language-selector__option[href]", "href"]]) {
         for (const element of $(selector).toArray()) {

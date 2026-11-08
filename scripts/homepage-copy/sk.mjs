@@ -95,7 +95,7 @@ const copy = {
       tagline: "Všetky vaše systémy z akéhokoľvek miesta na svete.",
       text: "Všetky ovládače, používatelia a oprávnenia vašej organizácie v jednom ovládacom paneli v prehliadači.",
       audiences: ["Bytové domy", "Kancelárie", "Športové zariadenia", "Parkoviská", "A ďalšie…"],
-      cta: "Opýtajte sa nás na Manager",
+      cta: "Objavte WIFIGATE Manager",
       imageAlt: "Vchod do bytového domu s prístupom spravovaným cez WIFIGATE Manager",
     },
   },

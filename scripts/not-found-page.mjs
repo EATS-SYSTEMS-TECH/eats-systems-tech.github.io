@@ -42,6 +42,7 @@ export function buildNotFoundPage({ niches, pageUrl, cookieConsentVersion }) {
     <ul>
 ${links}
       <li><a href="/wifigate-host/">WIFIGATE Host</a></li>
+      <li><a href="/wifigate-manager/">WIFIGATE Manager</a></li>
       <li><a href="/contact-us/">Contact us</a></li>
     </ul>
   </main>

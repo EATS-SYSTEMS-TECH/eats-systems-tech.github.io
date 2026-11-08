@@ -18,7 +18,7 @@ import { runInNewContext } from "node:vm";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
-import { HOST_PAGE_KEY } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, MANAGER_PAGE_KEY } from "./host-marketing-page.mjs";
 import { SHOP_PAGE_KEYS } from "./shop-pages.mjs";
 
 const repoRoot = process.cwd();
@@ -37,10 +37,11 @@ const hreflangPattern = /^(x-default|[a-z]{2}(-[A-Z][a-z]{3})?(-[A-Z]{2})?)$/;
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
 const landingKeys = LANDING_PAGES.map((page) => page.key);
-const indexablePages = ["home", HOST_PAGE_KEY, AUTO_OPEN_PAGE_KEY, ...nicheKeys, ...landingKeys];
+const indexablePages = ["home", HOST_PAGE_KEY, MANAGER_PAGE_KEY, AUTO_OPEN_PAGE_KEY, ...nicheKeys, ...landingKeys];
 const interactivePages = [
   "home",
   HOST_PAGE_KEY,
+  MANAGER_PAGE_KEY,
   AUTO_OPEN_PAGE_KEY,
   ...nicheKeys,
   ...landingKeys,

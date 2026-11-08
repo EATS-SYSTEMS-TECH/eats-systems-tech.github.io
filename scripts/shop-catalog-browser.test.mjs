@@ -63,7 +63,7 @@ async function assertSharedCatalog(page, locale, width, product) {
     await page.evaluate(() => window.WIFIGATE_CART.clear());
     await page.keyboard.press("Escape");
   }
-  if (!product) assert.ok(await page.locator(".shop-main a[href$='#get-in-touch']").count(), "Contact remains available for the subscriptions");
+  if (!product) assert.equal(await page.locator("[data-business='manager'] a[href$='/wifigate-manager/']").count(), 1, "Manager details lead to its page");
   assert.equal(await page.locator(".shop-main a[href*='reservations']").count(), 0,
     "Unavailable products do not lead to a reservation or purchase flow");
   const geometry = await page.evaluate(() => {

@@ -95,7 +95,7 @@ const copy = {
       tagline: "Mọi hệ thống của bạn, từ bất cứ đâu trên thế giới.",
       text: "Mọi bộ điều khiển, người dùng và quyền ra vào trong tổ chức của bạn trên một bảng điều khiển trong trình duyệt.",
       audiences: ["Tòa nhà chung cư", "Văn phòng", "Cơ sở thể thao", "Bãi đỗ xe", "Và nhiều hơn nữa…"],
-      cta: "Trao đổi với chúng tôi về Manager",
+      cta: "Khám phá WIFIGATE Manager",
       imageAlt: "Lối vào một tòa nhà chung cư có quyền ra vào được quản lý bằng WIFIGATE Manager",
     },
   },

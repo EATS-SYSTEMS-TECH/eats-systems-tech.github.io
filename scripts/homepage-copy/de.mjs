@@ -95,7 +95,7 @@ const copy = {
       tagline: "Alle Ihre Systeme, von überall auf der Welt.",
       text: "Alle Controller, Nutzer und Berechtigungen Ihrer Organisation in einem Dashboard im Browser.",
       audiences: ["Wohngebäude", "Büros", "Sportanlagen", "Parkhäuser", "Und mehr…"],
-      cta: "Mit uns über Manager sprechen",
+      cta: "WIFIGATE Manager entdecken",
       imageAlt: "Der Eingang eines Wohngebäudes, dessen Zutritt mit WIFIGATE Manager verwaltet wird",
     },
   },

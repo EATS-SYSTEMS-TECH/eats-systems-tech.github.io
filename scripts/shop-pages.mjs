@@ -150,7 +150,7 @@ function renderBusinessCard(copy, { id, name, href }) {
 function renderBusiness(locale, copy) {
   const cards = [
     { id: "host", name: "WIFIGATE Host", href: localePath(locale, "wifigate-host") },
-    { id: "manager", name: "WIFIGATE Manager", href: `${localePath(locale)}#get-in-touch` },
+    { id: "manager", name: "WIFIGATE Manager", href: localePath(locale, "wifigate-manager") },
   ];
   return `<div class="shop-divider" aria-hidden="true"><span>${copy.businessEyebrow}</span></div>
     <section class="shop-business" id="for-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, card)).join("\n")}</div></section>`;

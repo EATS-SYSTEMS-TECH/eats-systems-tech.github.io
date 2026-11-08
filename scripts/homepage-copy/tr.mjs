@@ -95,7 +95,7 @@ const copy = {
       tagline: "Tüm sistemleriniz, dünyanın her yerinden.",
       text: "Kuruluşunuzdaki tüm kontrol üniteleri, kullanıcılar ve yetkiler tek bir tarayıcı panelinde.",
       audiences: ["Konut binaları", "Ofisler", "Spor tesisleri", "Otoparklar", "Ve daha fazlası…"],
-      cta: "Manager hakkında bizimle konuşun",
+      cta: "WIFIGATE Manager'u keşfedin",
       imageAlt: "Erişimi WIFIGATE Manager ile yönetilen bir konut binasının girişi",
     },
   },

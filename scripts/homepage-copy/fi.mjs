@@ -95,7 +95,7 @@ const copy = {
       tagline: "Kaikki järjestelmäsi mistä päin maailmaa tahansa.",
       text: "Organisaatiosi kaikki ohjaimet, käyttäjät ja käyttöoikeudet yhdessä selaimen hallintapaneelissa.",
       audiences: ["Asuinrakennukset", "Toimistot", "Urheilutilat", "Pysäköintilaitokset", "Ja paljon muuta…"],
-      cta: "Kysy meiltä Manager-palvelusta",
+      cta: "Tutustu WIFIGATE Manageriin",
       imageAlt: "Asuinrakennuksen sisäänkäynti, jonka kulkuoikeuksia hallitaan WIFIGATE Manager -palvelulla",
     },
   },

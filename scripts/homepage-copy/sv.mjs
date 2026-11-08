@@ -95,7 +95,7 @@ const copy = {
       tagline: "Alla dina system, var du än är i världen.",
       text: "Alla styrenheter, användare och behörigheter i din organisation i en kontrollpanel i webbläsaren.",
       audiences: ["Flerbostadshus", "Kontor", "Idrottsanläggningar", "Parkeringsanläggningar", "Och mer…"],
-      cta: "Prata med oss om Manager",
+      cta: "Utforska WIFIGATE Manager",
       imageAlt: "Entrén till ett flerbostadshus där åtkomsten hanteras med WIFIGATE Manager",
     },
   },

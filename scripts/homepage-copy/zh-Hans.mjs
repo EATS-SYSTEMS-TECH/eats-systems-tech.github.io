@@ -95,7 +95,7 @@ const copy = {
       tagline: "您的所有系统，在全球任何地方都能管理。",
       text: "组织内所有控制器、用户和权限，尽在一个浏览器控制台。",
       audiences: ["住宅楼", "办公室", "体育场馆", "停车场", "更多…"],
-      cta: "联系我们了解 Manager",
+      cta: "了解 WIFIGATE Manager",
       imageAlt: "通过 WIFIGATE Manager 管理门禁的住宅楼入口",
     },
   },

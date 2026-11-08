@@ -21,7 +21,7 @@ export function buildLlmsTxt({ homeCopy, homeSeo, niches, pageUrl }) {
     "",
     `- [WIFIGATE home](${pageUrl("en", "home")}): what WIFIGATE is, how it works, use cases and FAQ.`,
     `- [WIFIGATE Host](${pageUrl("en", "wifigate-host")}): ${homeCopy.automation.promise} ${homeCopy.automation.text}`,
-    `- WIFIGATE Manager: ${homeCopy.automation.manager.tagline} ${homeCopy.automation.manager.text}`,
+    `- [WIFIGATE Manager](${pageUrl("en", "wifigate-manager")}): ${homeCopy.automation.manager.tagline} ${homeCopy.automation.manager.text}`,
     "",
     "## Use cases",
     "",

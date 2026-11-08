@@ -95,7 +95,7 @@ const copy = {
       tagline: "Minden rendszere, a világ bármely pontjáról.",
       text: "A szervezet összes vezérlője, felhasználója és jogosultsága egyetlen böngészős irányítópulton.",
       audiences: ["Lakóépületek", "Irodák", "Sportlétesítmények", "Parkolóházak", "És még sok más…"],
-      cta: "Beszéljen velünk a Manager csomagról",
+      cta: "Ismerje meg a WIFIGATE Managerot",
       imageAlt: "Egy lakóépület bejárata, amelynek beléptetését a WIFIGATE Manager kezeli",
     },
   },

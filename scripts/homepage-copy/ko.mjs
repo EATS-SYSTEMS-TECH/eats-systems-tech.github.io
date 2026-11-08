@@ -95,7 +95,7 @@ const copy = {
       tagline: "모든 시스템을 세계 어디서나.",
       text: "조직의 모든 컨트롤러, 사용자, 권한을 브라우저의 대시보드 하나에서 관리하세요.",
       audiences: ["주거용 건물", "사무실", "스포츠 시설", "주차장", "그 밖에도…"],
-      cta: "Manager 상담하기",
+      cta: "WIFIGATE Manager 알아보기",
       imageAlt: "WIFIGATE Manager로 출입을 관리하는 주거용 건물 입구",
     },
   },
