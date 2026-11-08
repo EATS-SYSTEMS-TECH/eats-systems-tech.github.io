@@ -383,6 +383,33 @@
 [dir="rtl"] .shop-accordion__content {
   padding: 0 0 20px 26px;
 }
+.shop-specs {
+  margin: 0;
+}
+.shop-specs > div {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.8fr) minmax(0, 1.6fr);
+  gap: 16px;
+  padding-block: 10px;
+  border-block-end: 1px solid #eef0f1;
+}
+.shop-specs > div:last-child {
+  border-block-end: 0;
+}
+.shop-specs dt {
+  color: #7a8288;
+  font-size: 13px;
+}
+.shop-specs dd {
+  margin: 0;
+  color: #22272b;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.shop-main[dir="rtl"] .shop-specs dd[dir="ltr"] {
+  text-align: right;
+}
 .shop-accordion__content ul {
   padding-inline-start: 18px;
   list-style: disc;
