@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Tek kontrol ünitesi.", "Her işletmeye uygun bir plan."],
-    subtitle: "Uygulamadan fazlasına ihtiyaç duyan işletmeler için abonelik planları. Abonelik zorunlu değildir: her kontrol ünitesi abonelik olmadan da tam olarak çalışır.",
+    titleLines: ["Yerel ya da bulutta.", "Seçim sizin."],
+    subtitle: "WIFIGATE, bulut hizmetleri olmadan doğrudan uygulamadan yerel olarak çalışır. Abonelik planları, daha fazlasına ihtiyaç duyan işletmeler için bulut uzantıları ekler. İhtiyacınıza göre seçim sizin.",
     audienceLabel: "Kimler için",
     promise: "Her rezervasyon için otomatik misafir giriş yönetimi.",
     text: "Yetki check-in'de başlar ve check-out'ta sona erer. Anahtar, şifre veya anahtar kutusu gerekmez.",

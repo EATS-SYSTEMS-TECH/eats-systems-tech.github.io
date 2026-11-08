@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Eén controller.", "Een plan voor elk bedrijf."],
-    subtitle: "Abonnementen voor bedrijven die meer nodig hebben dan de app. Een abonnement is optioneel: elke controller werkt ook zonder volledig.",
+    titleLines: ["Lokaal of in de cloud.", "Jij kiest."],
+    subtitle: "WIFIGATE werkt lokaal, rechtstreeks vanuit de app en zonder clouddiensten. Abonnementen voegen cloudextensies toe voor bedrijven die meer nodig hebben. Jij kiest, afhankelijk van wat je nodig hebt.",
     audienceLabel: "Ontworpen voor",
     promise: "Automatisch gasttoegangsbeheer voor elke boeking.",
     text: "De toegang gaat in bij het inchecken en vervalt bij het uitchecken. Geen sleutels, geen codes en geen sleutelkluisjes.",

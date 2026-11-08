@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Jeden sterownik.", "Plan dla każdej firmy."],
-    subtitle: "Plany subskrypcyjne dla firm, które potrzebują czegoś więcej niż aplikacja. Subskrypcja jest opcjonalna: każdy sterownik w pełni działa także bez niej.",
+    titleLines: ["Lokalnie lub w chmurze.", "Wybór należy do Ciebie."],
+    subtitle: "WIFIGATE działa lokalnie, bezpośrednio z aplikacji i bez usług w chmurze. Plany subskrypcyjne dodają rozszerzenia w chmurze dla firm, które potrzebują więcej. Wybór należy do Ciebie, zależnie od potrzeb.",
     audienceLabel: "Dla",
     promise: "Automatyczne zarządzanie wejściem gości przy każdej rezerwacji.",
     text: "Dostęp aktywuje się przy zameldowaniu i wygasa przy wymeldowaniu. Bez kluczy, bez kodów i bez sejfów na klucze.",

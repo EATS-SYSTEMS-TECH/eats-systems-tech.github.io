@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Un solo controller.", "Un piano per ogni attività."],
-    subtitle: "Piani in abbonamento per le attività che hanno bisogno di più dell'app. L'abbonamento è facoltativo: ogni controller funziona pienamente anche senza.",
+    titleLines: ["In locale o nel cloud.", "Scegli tu."],
+    subtitle: "WIFIGATE funziona in locale, direttamente dall'app e senza servizi cloud. I piani in abbonamento aggiungono estensioni cloud per le attività che hanno bisogno di più. Scegli tu, in base alle tue esigenze.",
     audienceLabel: "Pensato per",
     promise: "Gestione automatica degli accessi degli ospiti per ogni prenotazione.",
     text: "L'accesso si attiva al check-in e scade al check-out. Niente chiavi, niente codici e niente cassette portachiavi.",

@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Un singur controler.", "Un plan pentru fiecare afacere."],
-    subtitle: "Planuri cu abonament pentru afacerile care au nevoie de mai mult decât aplicația. Abonamentul este opțional: fiecare controler funcționează complet și fără el.",
+    titleLines: ["Local sau în cloud.", "Alegerea vă aparține."],
+    subtitle: "WIFIGATE funcționează local, direct din aplicație și fără servicii cloud. Planurile cu abonament adaugă extensii cloud pentru afacerile care au nevoie de mai mult. Alegerea vă aparține, în funcție de nevoi.",
     audienceLabel: "Pentru",
     promise: "Gestionare automată a accesului oaspeților pentru fiecare rezervare.",
     text: "Accesul devine activ la check-in și expiră la check-out. Fără chei, fără coduri și fără cutii pentru chei.",

@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Isang controller.", "May plan para sa bawat negosyo."],
-    subtitle: "Mga subscription plan para sa mga negosyong nangangailangan ng higit pa sa app. Hindi sapilitan ang subscription: gumagana nang buo ang bawat controller kahit wala nito.",
+    titleLines: ["Lokal o sa cloud.", "Ikaw ang pipili."],
+    subtitle: "Gumagana ang WIFIGATE nang lokal, direkta mula sa app at walang cloud services. Nagdadagdag ang mga subscription plan ng cloud extensions para sa mga negosyong nangangailangan ng higit pa. Ikaw ang pipili, ayon sa pangangailangan mo.",
     audienceLabel: "Para sa",
     promise: "Awtomatikong pamamahala ng pagpasok ng mga bisita sa bawat booking.",
     text: "Nagsisimula ang pahintulot sa check-in at nag-e-expire sa check-out. Walang susi, walang code, at walang lockbox.",

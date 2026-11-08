@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Jeden ovládač.", "Balík pre každú firmu."],
-    subtitle: "Predplatné balíky pre firmy, ktoré potrebujú viac než aplikáciu. Predplatné nie je povinné: každý ovládač funguje naplno aj bez neho.",
+    titleLines: ["Lokálne alebo v cloude.", "Voľba je na vás."],
+    subtitle: "WIFIGATE funguje lokálne, priamo z aplikácie a bez cloudových služieb. Predplatné balíky pridávajú cloudové rozšírenia pre firmy, ktoré potrebujú viac. Voľba je na vás, podľa vašich potrieb.",
     audienceLabel: "Určené pre",
     promise: "Automatická správa vstupu hostí pre každú rezerváciu.",
     text: "Oprávnenie začne platiť pri príchode a vyprší pri odchode. Bez kľúčov, kódov a schránok na kľúče.",

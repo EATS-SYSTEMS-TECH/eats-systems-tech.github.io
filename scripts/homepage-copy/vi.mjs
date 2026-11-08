@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Một bộ điều khiển.", "Một gói cho mọi doanh nghiệp."],
-    subtitle: "Các gói thuê bao dành cho doanh nghiệp cần nhiều hơn ứng dụng. Thuê bao là tùy chọn: mọi bộ điều khiển đều hoạt động đầy đủ mà không cần thuê bao.",
+    titleLines: ["Cục bộ hoặc trên đám mây.", "Bạn quyết định."],
+    subtitle: "WIFIGATE hoạt động cục bộ, trực tiếp từ ứng dụng và không cần dịch vụ đám mây. Các gói thuê bao bổ sung tiện ích mở rộng trên đám mây cho doanh nghiệp cần nhiều hơn. Bạn quyết định, tùy theo nhu cầu.",
     audienceLabel: "Dành cho",
     promise: "Tự động quản lý quyền ra vào của khách cho mọi lượt đặt phòng.",
     text: "Quyền ra vào có hiệu lực khi nhận phòng và hết hạn khi trả phòng. Không chìa khóa, không mã và không hộp đựng chìa khóa.",

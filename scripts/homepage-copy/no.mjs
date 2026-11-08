@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Én kontroller.", "En plan for hver bedrift."],
-    subtitle: "Abonnementsplaner for bedrifter som trenger mer enn appen. Abonnement er valgfritt: Hver kontroller fungerer fullt ut også uten.",
+    titleLines: ["Lokalt eller i skyen.", "Valget er ditt."],
+    subtitle: "WIFIGATE fungerer lokalt, direkte fra appen og uten skytjenester. Abonnementsplanene legger til skyutvidelser for bedrifter som trenger mer. Valget er ditt, etter behov.",
     audienceLabel: "Laget for",
     promise: "Automatisk styring av gjestetilgang for hver bestilling.",
     text: "Tilgangen gjelder fra innsjekk og utløper ved utsjekk. Ingen nøkler, ingen koder og ingen nøkkelbokser.",

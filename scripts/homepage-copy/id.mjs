@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Satu pengontrol.", "Paket untuk setiap bisnis."],
-    subtitle: "Paket langganan untuk bisnis yang membutuhkan lebih dari sekadar aplikasi. Langganan bersifat opsional: setiap pengontrol tetap berfungsi penuh tanpa langganan.",
+    titleLines: ["Lokal atau cloud.", "Pilihan ada di tangan Anda."],
+    subtitle: "WIFIGATE bekerja secara lokal, langsung dari aplikasi dan tanpa layanan cloud. Paket langganan menambahkan ekstensi cloud untuk bisnis yang membutuhkan lebih. Pilihan ada di tangan Anda, sesuai kebutuhan.",
     audienceLabel: "Ditujukan untuk",
     promise: "Pengelolaan akses tamu otomatis untuk setiap pemesanan.",
     text: "Akses mulai berlaku saat check-in dan berakhir saat check-out. Tanpa kunci, tanpa kode, dan tanpa kotak kunci.",

@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Egy vezérlő.", "Csomag minden vállalkozásnak."],
-    subtitle: "Előfizetéses csomagok azoknak a vállalkozásoknak, amelyeknek az alkalmazásnál többre van szükségük. Az előfizetés nem kötelező: minden vezérlő nélküle is teljes értékűen működik.",
+    titleLines: ["Helyben vagy a felhőben.", "Ön dönt."],
+    subtitle: "A WIFIGATE helyben működik, közvetlenül az alkalmazásból, felhőszolgáltatások nélkül. Az előfizetéses csomagok felhőbővítményeket adnak azoknak a vállalkozásoknak, amelyeknek többre van szükségük. Ön dönt, az igényei szerint.",
     audienceLabel: "Kinek készült?",
     promise: "Automatikus vendégbeléptetés minden foglaláshoz.",
     text: "A jogosultság check-inkor lép életbe, és check-outkor lejár. Nincs kulcs, nincs kód és nincs kulcsdoboz.",

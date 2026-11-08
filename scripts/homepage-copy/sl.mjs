@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["En krmilnik.", "Paket za vsako podjetje."],
-    subtitle: "Naročniški paketi za podjetja, ki potrebujejo več kot aplikacijo. Naročnina ni obvezna: vsak krmilnik v celoti deluje tudi brez nje.",
+    titleLines: ["Lokalno ali v oblaku.", "Izbira je vaša."],
+    subtitle: "WIFIGATE deluje lokalno, neposredno iz aplikacije in brez storitev v oblaku. Naročniški paketi dodajo razširitve v oblaku za podjetja, ki potrebujejo več. Izbira je vaša, glede na vaše potrebe.",
     audienceLabel: "Namenjeno za",
     promise: "Samodejno upravljanje vstopa gostov za vsako rezervacijo.",
     text: "Dovoljenje začne veljati ob prijavi in poteče ob odjavi. Brez ključev, kod in skrinjic za ključe.",

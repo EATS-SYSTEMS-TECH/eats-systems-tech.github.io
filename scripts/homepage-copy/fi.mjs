@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["Yksi ohjain.", "Paketti jokaiselle yritykselle."],
-    subtitle: "Tilauspaketit yrityksille, jotka tarvitsevat enemmän kuin sovelluksen. Tilaus on vapaaehtoinen: jokainen ohjain toimii täysin myös ilman sitä.",
+    titleLines: ["Paikallisesti tai pilvessä.", "Sinä päätät."],
+    subtitle: "WIFIGATE toimii paikallisesti, suoraan sovelluksesta ja ilman pilvipalveluja. Tilauspaketit tuovat pilvilaajennuksia yrityksille, jotka tarvitsevat enemmän. Sinä päätät tarpeesi mukaan.",
     audienceLabel: "Kenelle",
     promise: "Vieraiden kulun automaattinen hallinta jokaiselle varaukselle.",
     text: "Kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy uloskirjautumiseen. Ei avaimia, ei koodeja eikä avainlaatikoita.",

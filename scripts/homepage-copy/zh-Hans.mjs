@@ -83,8 +83,8 @@ const copy = {
   },
   automation: {
     eyebrow: "WIFIGATE For Business",
-    titleLines: ["一个控制器。", "每家企业都有合适的方案。"],
-    subtitle: "为需求超出 App 的企业提供订阅方案。订阅并非必需：每个控制器无需订阅也能完整使用。",
+    titleLines: ["本地运行，或上云。", "由您决定。"],
+    subtitle: "WIFIGATE 无需云服务，直接通过 App 在本地运行。订阅方案为需要更多功能的企业增加云端扩展。按需选择，由您决定。",
     audienceLabel: "适用于",
     promise: "每笔预订的住客通行，全自动管理。",
     text: "权限在入住时生效，退房时失效。无需钥匙、密码或钥匙盒。",
