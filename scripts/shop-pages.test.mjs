@@ -161,9 +161,8 @@ for (const { code: locale } of SITE_LANGUAGES) {
       }
       const roller = main.find("[data-product='wifigate-roller-shutter']");
       if (roller.length) {
-        assert.equal(roller.find(".shop-no-image").length, 1);
-        assert.equal(roller.find(".shop-product-card__media, .shop-product-gallery").find("img, picture, svg, canvas, video, object, embed").length, 0,
-          "Roller shutter has no product image or illustrative substitute");
+        assert.ok(roller.find("img[src$='assets/img/shop/wifigate-roller-shutter.webp']").length, "Roller shutter shows its WIFIGATE panel photo");
+        assert.equal(roller.find(".shop-no-image").length, 0);
       }
       if (product !== "wifigate-roller-shutter") {
         const controller = main.find("[data-product='wifigate']");

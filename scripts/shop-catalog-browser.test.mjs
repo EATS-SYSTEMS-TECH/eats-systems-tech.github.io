@@ -93,13 +93,8 @@ async function assertSharedCatalog(page, locale, width, product) {
   const brokenImages = await page.locator(".shop-main img").evaluateAll((images) =>
     images.filter((image) => !image.getAttribute("src") || !image.complete || !image.naturalWidth).map((image) => image.getAttribute("src")));
   assert.deepEqual(brokenImages, [], "There are no empty or broken catalog images");
-  if (!product || product === "wifigate-roller-shutter") {
-    const noImage = page.locator(product ? ".shop-no-image" : "[data-product='wifigate-roller-shutter'] .shop-no-image");
-    assert.equal(await noImage.count(), 1);
-    assert.equal(await noImage.locator("img, picture, svg, canvas, video").count(), 0,
-      "Roller shutter deliberately has no illustration or product image");
-    assert.equal(await noImage.evaluate((element) => getComputedStyle(element).backgroundImage), "none");
-  }
+  if (!product || product === "wifigate-roller-shutter")
+    assert.ok(await page.locator(product ? ".shop-product-detail img[src$='wifigate-roller-shutter.webp']" : "[data-product='wifigate-roller-shutter'] img").count(), "Roller shutter shows its panel photo");
   if (!product || product === "wifigate")
     assert.ok(await page.locator(product ? ".shop-product-detail img" : "[data-product='wifigate'] img").count(), "WIFIGATE keeps its real product photo");
   assert.equal(await page.locator(".language-selector__option").count(), SITE_LANGUAGES.length);

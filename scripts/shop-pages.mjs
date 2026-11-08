@@ -2,7 +2,7 @@
 // disabled; the separately authenticated reservations workflow has its own rules.
 export const SHOP_PRODUCTS = [
   { id: "wifigate", name: "WIFIGATE", image: "/assets/img/wifigate-product-v3.webp", width: 1545, height: 905, secondary: "/assets/img/shop/wifigate-enclosure.webp" },
-  { id: "wifigate-roller-shutter", name: "WIFIGATE Roller shutter", image: null },
+  { id: "wifigate-roller-shutter", name: "WIFIGATE Roller shutter", image: "/assets/img/shop/wifigate-roller-shutter.webp", width: 1600, height: 1100 },
 ];
 
 export const SHOP_PAGE_KEYS = ["shop", ...SHOP_PRODUCTS.map(({ id }) => `shop/${id}`)];
@@ -12,10 +12,10 @@ const COPY = {
     shop: "Shop", home: "Home", eyebrow: "WIFIGATE COLLECTION", heading: ["One app.", "All your entrances."],
     products: "2 products", view: "Product details", moreDetails: "More details", addToCart: "Add to cart",
     stock: "Contact us to join the waitlist", waitlist: "Join the waitlist", stockNote: "Add it to your cart and contact us to join the waitlist. There is no payment at this stage.",
-    imageSoon: "Product image coming soon", facts: ["One-time purchase", "No subscription", "Up to 5,000 users"], useCasesLabel: "Use cases", useCases: ["Electric gates and parking barriers", "Garage doors and private parking", "Entry doors and magnetic locks", "Private homes", "Residential buildings", "Office buildings", "Sports facilities", "Storage units and lockers"], shutterFacts: ["One-time purchase", "No subscription"], category: "Smart access controller", shutterCategory: "Electric shutter controller",
+    facts: ["One-time purchase", "No subscription", "Up to 5,000 users"], useCasesLabel: "Use cases", useCases: ["Electric gates and parking barriers", "Garage doors and private parking", "Entry doors and magnetic locks", "Private homes", "Residential buildings", "Office buildings", "Sports facilities", "Storage units and lockers"], shutterFacts: ["One-time purchase", "No subscription"], category: "Smart access controller", shutterCategory: "Electric shutter controller",
     description: "A smart controller for electric gates, garage doors and barriers. Open them from the WIFIGATE app, with no remote needed.",
     shutterDescription: "A smart controller for electric roller shutters. Open and close them from the WIFIGATE app.",
-    imageAlt: "WIFIGATE controller enclosure", overviewAlt: "The WIFIGATE controller beside the WIFIGATE mobile app",
+    imageAlt: "WIFIGATE controller enclosure", overviewAlt: "The WIFIGATE controller beside the WIFIGATE mobile app", shutterAlt: "The WIFIGATE Roller shutter wall panel",
     overview: "Product overview", features: "Everyday use", compatibility: "Installation & compatibility", availability: "Availability", specs: "Technical specifications",
     gateSpecs: [["Enclosure", "Sealed ABS box, IP67"], ["Dimensions", "83 × 81 × 56 mm", true], ["Power input", "12–24V", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Remote receiver", "433.92MHz, digital RF remote pairing"], ["Connections", "Screw terminals · USB Type‑C"], ["Users", "Up to 5,000 users and 20 admins"], ["Guest invites", "Unlimited"], ["History", "90 days"], ["Scheduled events", "Up to 50"], ["Subscription", "Not required · one-time purchase"]],
     shutterSpecs: [["Controllers", "2 WIFIGATE controllers, one to open and one to close"], ["Operation", "Push button, held with your fingerprint"], ["Safety", "Open and close cannot run together; releasing stops the shutter"], ["Enclosure", "Surface-mounted 18-module panel, white polycarbonate"], ["Dimensions", "370 × 155 × 70 mm", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Installation", "Alongside your existing shutter controller"], ["Subscription", "Not required · one-time purchase"]],
@@ -47,10 +47,10 @@ const COPY = {
     shop: "חנות", home: "בית", eyebrow: "הקולקציה של WIFIGATE", heading: ["אפליקציה אחת.", "כל הכניסות שלכם."],
     products: "2 מוצרים", view: "לפרטי המוצר", moreDetails: "פרטים נוספים", addToCart: "הוספה לסל",
     stock: "צרו קשר כדי להירשם לרשימת ההמתנה", waitlist: "להרשמה לרשימת ההמתנה", stockNote: "אפשר להוסיף לסל וליצור קשר כדי להירשם לרשימת ההמתנה. אין תשלום בשלב הזה.",
-    imageSoon: "תמונת המוצר תתווסף בהמשך", facts: ["תשלום חד־פעמי", "בלי מנוי", "עד 5,000 משתמשים"], useCasesLabel: "שימושים", useCases: ["שערים חשמליים ומחסומי חניה", "דלתות גראז׳ וחניות פרטיות", "דלתות כניסה ומנעולים מגנטיים", "בתים פרטיים", "בנייני מגורים", "בנייני משרדים", "מתקני ספורט", "מקומות אחסון ולוקרים"], shutterFacts: ["תשלום חד־פעמי", "בלי מנוי"], category: "בקר גישה חכם", shutterCategory: "בקר לתריס חשמלי",
+    facts: ["תשלום חד־פעמי", "בלי מנוי", "עד 5,000 משתמשים"], useCasesLabel: "שימושים", useCases: ["שערים חשמליים ומחסומי חניה", "דלתות גראז׳ וחניות פרטיות", "דלתות כניסה ומנעולים מגנטיים", "בתים פרטיים", "בנייני מגורים", "בנייני משרדים", "מתקני ספורט", "מקומות אחסון ולוקרים"], shutterFacts: ["תשלום חד־פעמי", "בלי מנוי"], category: "בקר גישה חכם", shutterCategory: "בקר לתריס חשמלי",
     description: "בקר חכם לשערים חשמליים, לדלתות חניה ולמחסומים. פותחים באפליקציית WIFIGATE, בלי לחפש שלט.",
     shutterDescription: "בקר חכם לתריסים חשמליים. פותחים וסוגרים באפליקציית WIFIGATE.",
-    imageAlt: "מארז בקר WIFIGATE", overviewAlt: "בקר WIFIGATE לצד אפליקציית WIFIGATE בטלפון",
+    imageAlt: "מארז בקר WIFIGATE", overviewAlt: "בקר WIFIGATE לצד אפליקציית WIFIGATE בטלפון", shutterAlt: "לוח עה״ט של WIFIGATE Roller shutter",
     overview: "על המוצר", features: "בשימוש היומיומי", compatibility: "התקנה והתאמה", availability: "זמינות", specs: "מפרט טכני",
     gateSpecs: [["מארז", "קופסת ABS אטומה, IP67"], ["מידות", "83 × 81 × 56 מ״מ"], ["מתח הזנה", "12–24V", true], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["מקלט שלטים", "433.92MHz, למידת שלטי RF דיגיטליים"], ["חיבורים", "מחברי הברגה · USB Type‑C"], ["משתמשים", "עד 5,000 משתמשים ו־20 מנהלים"], ["הזמנות אורח", "ללא הגבלה"], ["היסטוריה", "90 יום"], ["אירועים מתוזמנים", "עד 50"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
     shutterSpecs: [["בקרים", "2 בקרי WIFIGATE, אחד לפתיחה ואחד לסגירה"], ["הפעלה", "לחצן בהחזקה עם טביעת אצבע"], ["בטיחות", "אי אפשר להפעיל פתיחה וסגירה יחד; שחרור האצבע עוצר את התריס"], ["מארז", "לוח עה״ט 18 מודולים, פוליקרבונט לבן"], ["מידות", "370 × 155 × 70 מ״מ"], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["התקנה", "לצד בקר התריס הקיים"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
@@ -85,10 +85,8 @@ const localePath = (locale, suffix = "") => `${locale === "en" ? "" : `/${locale
 const productPath = (locale, id) => localePath(locale, `shop/${id}`);
 
 function renderMedia(product, copy, { detail = false } = {}) {
-  if (!product.image) {
-    return `<div class="shop-no-image"><span class="shop-no-image__brand" dir="ltr">WIFIGATE</span><span class="shop-no-image__name" dir="ltr">Roller shutter</span><span class="shop-no-image__note">${copy.imageSoon}</span></div>`;
-  }
-  return `<img src="${product.image}" alt="${copy.overviewAlt}" width="${product.width}" height="${product.height}" loading="${detail ? "eager" : "lazy"}" decoding="async"${detail ? ' fetchpriority="high"' : ""} />`;
+  const alt = product.id === "wifigate-roller-shutter" ? copy.shutterAlt : copy.overviewAlt;
+  return `<img src="${product.image}" alt="${alt}" width="${product.width}" height="${product.height}" loading="${detail ? "eager" : "lazy"}" decoding="async"${detail ? ' fetchpriority="high"' : ""} />`;
 }
 
 const CART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>';
