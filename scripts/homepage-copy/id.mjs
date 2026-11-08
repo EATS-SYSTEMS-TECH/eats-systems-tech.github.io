@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Tanpa Kartu SIM, Tanpa Router Eksternal",
-        text: "WIFIGATE berkomunikasi langsung dengan perangkat yang terpasang, sehingga titik masuk tidak memerlukan kartu SIM, paket internet, atau router WiFi eksternal.",
+        text: "WIFIGATE berkomunikasi langsung dengan perangkat yang terpasang, sehingga titik masuk tidak memerlukan kartu SIM, paket internet, atau router WiFi eksternal. Kecuali paket WIFIGATE Manager, yang memerlukan Wi-Fi.",
       },
       {
         title: "Stabilitas",
@@ -67,7 +67,7 @@ const copy = {
         text: "Bayar sekali untuk perangkat WIFIGATE dan instalasinya, tanpa langganan bulanan, perpanjangan berkala, atau biaya platform berkelanjutan.",
       },
     ],
-    subscriptionNote: "* Penggunaan WIFIGATE Host untuk keperluan komersial memerlukan langganan.",
+    subscriptionNote: "* Kecuali paket WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Seorang kurir menyusuri rute biru putus-putus menuju pintu masuk gedung hunian, sementara seorang penghuni memegang aplikasi WIFIGATE yang menampilkan izin tamu berbatas waktu.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Apakah WIFIGATE memerlukan kartu SIM atau router WiFi eksternal?",
-        answer: "Tidak. WIFIGATE berkomunikasi langsung dengan perangkat yang terpasang, sehingga titik masuk tidak memerlukan kartu SIM, paket internet, atau router WiFi eksternal.",
+        answer: "Tidak. WIFIGATE berkomunikasi langsung dengan perangkat yang terpasang, sehingga titik masuk tidak memerlukan kartu SIM, paket internet, atau router WiFi eksternal. Kecuali paket WIFIGATE Manager, yang memerlukan Wi-Fi.",
       },
       {
         question: "Apakah WIFIGATE memerlukan langganan bulanan?",
-        answer: "Tidak. Anda cukup membayar sekali untuk perangkat WIFIGATE dan instalasinya, tanpa langganan bulanan, perpanjangan berkala, atau biaya platform berkelanjutan. Satu-satunya pengecualian adalah WIFIGATE Host untuk penggunaan komersial, yang memerlukan langganan.",
+        answer: "Tidak. Anda cukup membayar sekali untuk perangkat WIFIGATE dan instalasinya, tanpa langganan bulanan, perpanjangan berkala, atau biaya platform berkelanjutan. Satu-satunya pengecualian adalah paket WIFIGATE For Business, yang memerlukan langganan.",
       },
       {
         question: "Bisakah WIFIGATE memberikan akses tamu sementara?",

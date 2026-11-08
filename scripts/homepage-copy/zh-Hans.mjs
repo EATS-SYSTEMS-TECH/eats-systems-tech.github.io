@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "无需 SIM 卡，无需外接路由器",
-        text: "WIFIGATE 与已安装的设备直接通信，出入口无需 SIM 卡、流量套餐或外接 Wi-Fi 路由器。",
+        text: "WIFIGATE 与已安装的设备直接通信，出入口无需 SIM 卡、流量套餐或外接 Wi-Fi 路由器。WIFIGATE Manager 方案除外，该方案需要 Wi-Fi。",
       },
       {
         title: "稳定可靠",
@@ -67,7 +67,7 @@ const copy = {
         text: "WIFIGATE 设备和安装一次付清，没有月费、没有续费，也没有持续收取的平台费用。",
       },
     ],
-    subscriptionNote: "* WIFIGATE Host 用于商业用途时需要订阅。",
+    subscriptionNote: "* WIFIGATE For Business 方案除外。",
   },
   privateAccess: {
     imageAlt: "快递员沿着蓝色虚线路线走向住宅楼入口，一位住户手持显示限时访客权限的 WIFIGATE App。",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE 需要 SIM 卡或外接 Wi-Fi 路由器吗？",
-        answer: "不需要。WIFIGATE 与已安装的设备直接通信，出入口无需 SIM 卡、流量套餐或外接 Wi-Fi 路由器。",
+        answer: "不需要。WIFIGATE 与已安装的设备直接通信，出入口无需 SIM 卡、流量套餐或外接 Wi-Fi 路由器。WIFIGATE Manager 方案除外，该方案需要 Wi-Fi。",
       },
       {
         question: "WIFIGATE 需要按月订阅吗？",
-        answer: "不需要。WIFIGATE 设备和安装一次付清，没有月费、没有续费，也没有持续收取的平台费用。唯一的例外是用于商业用途的 WIFIGATE Host，需要订阅。",
+        answer: "不需要。WIFIGATE 设备和安装一次付清，没有月费、没有续费，也没有持续收取的平台费用。唯一的例外是 WIFIGATE For Business 方案，需要订阅。",
       },
       {
         question: "WIFIGATE 能提供临时访客通行吗？",

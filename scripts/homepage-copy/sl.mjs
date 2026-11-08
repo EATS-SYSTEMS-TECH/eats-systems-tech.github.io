@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Brez kartice SIM in zunanjega usmerjevalnika",
-        text: "WIFIGATE komunicira neposredno z nameščeno napravo, zato vstopna točka ne potrebuje kartice SIM, internetnega paketa ali zunanjega WiFi usmerjevalnika.",
+        text: "WIFIGATE komunicira neposredno z nameščeno napravo, zato vstopna točka ne potrebuje kartice SIM, internetnega paketa ali zunanjega WiFi usmerjevalnika. Razen paketa WIFIGATE Manager, ki potrebuje Wi-Fi.",
       },
       {
         title: "Stabilnost",
@@ -67,7 +67,7 @@ const copy = {
         text: "Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, periodičnih podaljšanj ali tekočih stroškov platforme.",
       },
     ],
-    subscriptionNote: "* Komercialna uporaba WIFIGATE Host zahteva naročnino.",
+    subscriptionNote: "* Razen paketov WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Kurir sledi modri pikčasti poti do vhoda v stanovanjski blok, stanovalec pa drži aplikacijo WIFIGATE s časovno omejenim dovoljenjem za gosta.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Ali WIFIGATE potrebuje kartico SIM ali zunanji WiFi usmerjevalnik?",
-        answer: "Ne. WIFIGATE komunicira neposredno z nameščeno napravo, zato vstopna točka ne potrebuje kartice SIM, internetnega paketa ali zunanjega WiFi usmerjevalnika.",
+        answer: "Ne. WIFIGATE komunicira neposredno z nameščeno napravo, zato vstopna točka ne potrebuje kartice SIM, internetnega paketa ali zunanjega WiFi usmerjevalnika. Razen paketa WIFIGATE Manager, ki potrebuje Wi-Fi.",
       },
       {
         question: "Ali WIFIGATE zahteva mesečno naročnino?",
-        answer: "Ne. Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, periodičnih podaljšanj ali tekočih stroškov platforme. Edina izjema je WIFIGATE Host za komercialno uporabo, ki zahteva naročnino.",
+        answer: "Ne. Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, periodičnih podaljšanj ali tekočih stroškov platforme. Edina izjema so paketi WIFIGATE For Business, ki zahtevajo naročnino.",
       },
       {
         question: "Ali lahko WIFIGATE omogoči začasen dostop za goste?",

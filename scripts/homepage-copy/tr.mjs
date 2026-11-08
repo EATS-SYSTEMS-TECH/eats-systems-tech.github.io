@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "SIM kart ve harici modem gerekmez",
-        text: "WIFIGATE kurulu cihazla doğrudan iletişim kurar; bu sayede giriş noktasında SIM karta, internet paketine veya harici bir WiFi modeme gerek kalmaz.",
+        text: "WIFIGATE kurulu cihazla doğrudan iletişim kurar; bu sayede giriş noktasında SIM karta, internet paketine veya harici bir WiFi modeme gerek kalmaz. WIFIGATE Manager planı hariç; bu plan Wi-Fi gerektirir.",
       },
       {
         title: "Kararlılık",
@@ -67,7 +67,7 @@ const copy = {
         text: "WIFIGATE cihazı ve kurulumu için bir kez ödersiniz; aylık abonelik, dönemsel yenileme veya sürekli platform ücreti yoktur.",
       },
     ],
-    subscriptionNote: "* WIFIGATE Host'un ticari kullanımı abonelik gerektirir.",
+    subscriptionNote: "* WIFIGATE For Business planları hariç.",
   },
   privateAccess: {
     imageAlt: "Kurye mavi kesik çizgili bir rotayı izleyerek apartman girişine ilerlerken, bir bina sakini elinde süreli misafir yetkisini gösteren WIFIGATE uygulamasını tutuyor.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE için SIM kart veya harici WiFi modem gerekir mi?",
-        answer: "Hayır. WIFIGATE kurulu cihazla doğrudan iletişim kurar; bu sayede giriş noktasında SIM karta, internet paketine veya harici bir WiFi modeme gerek kalmaz.",
+        answer: "Hayır. WIFIGATE kurulu cihazla doğrudan iletişim kurar; bu sayede giriş noktasında SIM karta, internet paketine veya harici bir WiFi modeme gerek kalmaz. WIFIGATE Manager planı hariç; bu plan Wi-Fi gerektirir.",
       },
       {
         question: "WIFIGATE aylık abonelik gerektirir mi?",
-        answer: "Hayır. WIFIGATE cihazı ve kurulumu için bir kez ödersiniz; aylık abonelik, dönemsel yenileme veya sürekli platform ücreti yoktur. Tek istisna, ticari kullanımda abonelik gerektiren WIFIGATE Host'tur.",
+        answer: "Hayır. WIFIGATE cihazı ve kurulumu için bir kez ödersiniz; aylık abonelik, dönemsel yenileme veya sürekli platform ücreti yoktur. Tek istisna WIFIGATE For Business planlarıdır ve bunlar abonelik gerektirir.",
       },
       {
         question: "WIFIGATE geçici misafir erişimi sağlayabilir mi?",

@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "SIM カードも外部ルーターも不要",
-        text: "WIFIGATE は設置された機器と直接通信するため、出入口に SIM カード、インターネット回線の契約、外部 Wi-Fi ルーターは必要ありません。",
+        text: "WIFIGATE は設置された機器と直接通信するため、出入口に SIM カード、インターネット回線の契約、外部 Wi-Fi ルーターは必要ありません。ただし、WIFIGATE Manager プランには Wi-Fi が必要です。",
       },
       {
         title: "安定した動作",
@@ -67,7 +67,7 @@ const copy = {
         text: "WIFIGATE 本体と設置費用のお支払いは一度きり。月額料金も更新料も、継続的なプラットフォーム利用料もかかりません。",
       },
     ],
-    subscriptionNote: "※ WIFIGATE Host の商用利用にはサブスクリプションが必要です。",
+    subscriptionNote: "※ WIFIGATE For Business プランを除きます。",
   },
   privateAccess: {
     imageAlt: "配達員が青い点線のルートをたどってマンションのエントランスへ向かい、住人が有効期限付きのゲスト権限を表示した WIFIGATE アプリを手にしています。",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE には SIM カードや外部 Wi-Fi ルーターが必要ですか？",
-        answer: "いいえ。WIFIGATE は設置された機器と直接通信するため、出入口に SIM カード、インターネット回線の契約、外部 Wi-Fi ルーターは必要ありません。",
+        answer: "いいえ。WIFIGATE は設置された機器と直接通信するため、出入口に SIM カード、インターネット回線の契約、外部 Wi-Fi ルーターは必要ありません。ただし、WIFIGATE Manager プランには Wi-Fi が必要です。",
       },
       {
         question: "WIFIGATE に月額サブスクリプションは必要ですか？",
-        answer: "いいえ。WIFIGATE 本体と設置費用のお支払いは一度きりで、月額料金も更新料も、継続的なプラットフォーム利用料もかかりません。唯一の例外は商用利用の WIFIGATE Host で、こちらはサブスクリプションが必要です。",
+        answer: "いいえ。WIFIGATE 本体と設置費用のお支払いは一度きりで、月額料金も更新料も、継続的なプラットフォーム利用料もかかりません。唯一の例外は WIFIGATE For Business プランで、サブスクリプションが必要です。",
       },
       {
         question: "WIFIGATE で一時的なゲストアクセスを発行できますか？",

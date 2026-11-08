@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Uten SIM-kort og ruter",
-        text: "WIFIGATE kommuniserer direkte med den installerte enheten. Ved inngangen trengs derfor verken SIM-kort, internettabonnement eller ekstern WiFi-ruter.",
+        text: "WIFIGATE kommuniserer direkte med den installerte enheten. Ved inngangen trengs derfor verken SIM-kort, internettabonnement eller ekstern WiFi-ruter. Unntatt WIFIGATE Manager-planen, som trenger Wi-Fi.",
       },
       {
         title: "Stabilitet",
@@ -67,7 +67,7 @@ const copy = {
         text: "Du betaler én gang for WIFIGATE-enheten og installasjonen, uten månedsabonnement, periodiske fornyelser eller løpende plattformavgifter.",
       },
     ],
-    subscriptionNote: "* Kommersiell bruk av WIFIGATE Host krever abonnement.",
+    subscriptionNote: "* Unntatt WIFIGATE For Business-planene.",
   },
   privateAccess: {
     imageAlt: "Et bud følger en blå stiplet rute til inngangen til en boligblokk mens en beboer holder WIFIGATE-appen som viser tidsbegrenset gjestetilgang.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Trenger WIFIGATE et SIM-kort eller en ekstern WiFi-ruter?",
-        answer: "Nei. WIFIGATE kommuniserer direkte med den installerte enheten. Ved inngangen trengs derfor verken SIM-kort, internettabonnement eller ekstern WiFi-ruter.",
+        answer: "Nei. WIFIGATE kommuniserer direkte med den installerte enheten. Ved inngangen trengs derfor verken SIM-kort, internettabonnement eller ekstern WiFi-ruter. Unntatt WIFIGATE Manager-planen, som trenger Wi-Fi.",
       },
       {
         question: "Krever WIFIGATE et månedlig abonnement?",
-        answer: "Nei. Du betaler én gang for WIFIGATE-enheten og installasjonen, uten månedsabonnement, periodiske fornyelser eller løpende plattformavgifter. WIFIGATE Host for kommersiell bruk er det eneste unntaket og krever abonnement.",
+        answer: "Nei. Du betaler én gang for WIFIGATE-enheten og installasjonen, uten månedsabonnement, periodiske fornyelser eller løpende plattformavgifter. WIFIGATE For Business-planene er det eneste unntaket og krever abonnement.",
       },
       {
         question: "Kan WIFIGATE gi midlertidig gjestetilgang?",

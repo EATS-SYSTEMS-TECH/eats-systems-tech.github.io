@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Tanpa Kad SIM, Tanpa Penghala Luaran",
-        text: "WIFIGATE berkomunikasi terus dengan peranti yang dipasang, jadi titik masuk tidak memerlukan kad SIM, pelan internet atau penghala WiFi luaran.",
+        text: "WIFIGATE berkomunikasi terus dengan peranti yang dipasang, jadi titik masuk tidak memerlukan kad SIM, pelan internet atau penghala WiFi luaran. Kecuali pelan WIFIGATE Manager, yang memerlukan Wi-Fi.",
       },
       {
         title: "Kestabilan",
@@ -67,7 +67,7 @@ const copy = {
         text: "Bayar sekali untuk peranti WIFIGATE dan pemasangan, tanpa langganan bulanan, pembaharuan berkala atau yuran platform berterusan.",
       },
     ],
-    subscriptionNote: "* Penggunaan komersial WIFIGATE Host memerlukan langganan.",
+    subscriptionNote: "* Kecuali pelan WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Seorang kurier mengikut laluan biru bertitik ke pintu masuk bangunan kediaman, sementara seorang penghuni memegang aplikasi WIFIGATE yang memaparkan kebenaran tetamu terhad masa.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Adakah WIFIGATE memerlukan kad SIM atau penghala WiFi luaran?",
-        answer: "Tidak. WIFIGATE berkomunikasi terus dengan peranti yang dipasang, jadi titik masuk tidak memerlukan kad SIM, pelan internet atau penghala WiFi luaran.",
+        answer: "Tidak. WIFIGATE berkomunikasi terus dengan peranti yang dipasang, jadi titik masuk tidak memerlukan kad SIM, pelan internet atau penghala WiFi luaran. Kecuali pelan WIFIGATE Manager, yang memerlukan Wi-Fi.",
       },
       {
         question: "Adakah WIFIGATE memerlukan langganan bulanan?",
-        answer: "Tidak. Anda bayar sekali untuk peranti WIFIGATE dan pemasangan, tanpa langganan bulanan, pembaharuan berkala atau yuran platform berterusan. WIFIGATE Host untuk penggunaan komersial ialah satu-satunya pengecualian dan memerlukan langganan.",
+        answer: "Tidak. Anda bayar sekali untuk peranti WIFIGATE dan pemasangan, tanpa langganan bulanan, pembaharuan berkala atau yuran platform berterusan. Satu-satunya pengecualian ialah pelan WIFIGATE For Business, yang memerlukan langganan.",
       },
       {
         question: "Bolehkah WIFIGATE memberikan akses tetamu sementara?",

@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Bez SIM kartice i vanjskog usmjerivača",
-        text: "WIFIGATE komunicira izravno s ugrađenim uređajem, pa na ulazu nisu potrebni SIM kartica, internetski paket ni vanjski WiFi usmjerivač.",
+        text: "WIFIGATE komunicira izravno s ugrađenim uređajem, pa na ulazu nisu potrebni SIM kartica, internetski paket ni vanjski WiFi usmjerivač. Osim paketa WIFIGATE Manager, kojem je potreban Wi-Fi.",
       },
       {
         title: "Stabilnost",
@@ -67,7 +67,7 @@ const copy = {
         text: "Uređaj WIFIGATE i instalaciju plaćate samo jednom, bez mjesečne pretplate, periodičnih obnova ili stalnih naknada za platformu.",
       },
     ],
-    subscriptionNote: "* Komercijalna upotreba usluge WIFIGATE Host zahtijeva pretplatu.",
+    subscriptionNote: "* Osim paketa WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Dostavljač slijedi plavu isprekidanu rutu do ulaza u stambenu zgradu, dok stanar u ruci drži aplikaciju WIFIGATE s vremenski ograničenim pristupom za gosta.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Treba li WIFIGATE SIM karticu ili vanjski WiFi usmjerivač?",
-        answer: "Ne. WIFIGATE komunicira izravno s ugrađenim uređajem, pa na ulazu nisu potrebni SIM kartica, internetski paket ni vanjski WiFi usmjerivač.",
+        answer: "Ne. WIFIGATE komunicira izravno s ugrađenim uređajem, pa na ulazu nisu potrebni SIM kartica, internetski paket ni vanjski WiFi usmjerivač. Osim paketa WIFIGATE Manager, kojem je potreban Wi-Fi.",
       },
       {
         question: "Zahtijeva li WIFIGATE mjesečnu pretplatu?",
-        answer: "Ne. Uređaj WIFIGATE i instalaciju plaćate samo jednom, bez mjesečne pretplate, periodičnih obnova ili stalnih naknada za platformu. Jedina iznimka je WIFIGATE Host za komercijalnu upotrebu, za koji je potrebna pretplata.",
+        answer: "Ne. Uređaj WIFIGATE i instalaciju plaćate samo jednom, bez mjesečne pretplate, periodičnih obnova ili stalnih naknada za platformu. Jedina iznimka su paketi WIFIGATE For Business, za koje je potrebna pretplata.",
       },
       {
         question: "Može li WIFIGATE omogućiti privremeni pristup za goste?",

@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Geen simkaart, geen router",
-        text: "WIFIGATE communiceert rechtstreeks met het geïnstalleerde apparaat. Bij de ingang zijn dus geen simkaart, internetabonnement of externe WiFi-router nodig.",
+        text: "WIFIGATE communiceert rechtstreeks met het geïnstalleerde apparaat. Bij de ingang zijn dus geen simkaart, internetabonnement of externe WiFi-router nodig. Behalve het WIFIGATE Manager-plan, dat wifi nodig heeft.",
       },
       {
         title: "Stabiliteit",
@@ -67,7 +67,7 @@ const copy = {
         text: "Je betaalt eenmalig voor het WIFIGATE-apparaat en de installatie, zonder maandabonnement, periodieke verlengingen of doorlopende platformkosten.",
       },
     ],
-    subscriptionNote: "* Voor commercieel gebruik van WIFIGATE Host is een abonnement vereist.",
+    subscriptionNote: "* Behalve de WIFIGATE For Business-plannen.",
   },
   privateAccess: {
     imageAlt: "Een koerier volgt een blauwe stippellijnroute naar de ingang van een appartementencomplex terwijl een bewoner de WIFIGATE-app vasthoudt met tijdgebonden gasttoegang.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Heeft WIFIGATE een simkaart of externe WiFi-router nodig?",
-        answer: "Nee. WIFIGATE communiceert rechtstreeks met het geïnstalleerde apparaat. Bij de ingang zijn dus geen simkaart, internetabonnement of externe WiFi-router nodig.",
+        answer: "Nee. WIFIGATE communiceert rechtstreeks met het geïnstalleerde apparaat. Bij de ingang zijn dus geen simkaart, internetabonnement of externe WiFi-router nodig. Behalve het WIFIGATE Manager-plan, dat wifi nodig heeft.",
       },
       {
         question: "Vereist WIFIGATE een maandabonnement?",
-        answer: "Nee. Je betaalt eenmalig voor het WIFIGATE-apparaat en de installatie, zonder maandabonnement, periodieke verlengingen of doorlopende platformkosten. WIFIGATE Host voor commercieel gebruik is de enige uitzondering en vereist een abonnement.",
+        answer: "Nee. Je betaalt eenmalig voor het WIFIGATE-apparaat en de installatie, zonder maandabonnement, periodieke verlengingen of doorlopende platformkosten. De WIFIGATE For Business-plannen zijn de enige uitzondering en vereisen een abonnement.",
       },
       {
         question: "Kan WIFIGATE tijdelijke gasttoegang bieden?",

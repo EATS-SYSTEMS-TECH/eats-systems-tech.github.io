@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Fără SIM, fără router",
-        text: "WIFIGATE comunică direct cu dispozitivul instalat, astfel că la punctul de acces nu este nevoie de cartelă SIM, abonament de internet sau router WiFi extern.",
+        text: "WIFIGATE comunică direct cu dispozitivul instalat, astfel că la punctul de acces nu este nevoie de cartelă SIM, abonament de internet sau router WiFi extern. Cu excepția planului WIFIGATE Manager, care are nevoie de Wi-Fi.",
       },
       {
         title: "Stabilitate",
@@ -67,7 +67,7 @@ const copy = {
         text: "Plătiți o singură dată pentru dispozitivul WIFIGATE și instalare, fără abonament lunar, reînnoiri periodice sau taxe recurente de platformă.",
       },
     ],
-    subscriptionNote: "* Utilizarea comercială a WIFIGATE Host necesită abonament.",
+    subscriptionNote: "* Cu excepția planurilor WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Un curier urmează un traseu albastru punctat spre intrarea unui bloc de locuințe, în timp ce un locatar ține în mână aplicația WIFIGATE, care afișează o permisiune de acces pentru oaspeți limitată în timp.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE are nevoie de cartelă SIM sau de router WiFi extern?",
-        answer: "Nu. WIFIGATE comunică direct cu dispozitivul instalat, astfel că la punctul de acces nu este nevoie de cartelă SIM, abonament de internet sau router WiFi extern.",
+        answer: "Nu. WIFIGATE comunică direct cu dispozitivul instalat, astfel că la punctul de acces nu este nevoie de cartelă SIM, abonament de internet sau router WiFi extern. Cu excepția planului WIFIGATE Manager, care are nevoie de Wi-Fi.",
       },
       {
         question: "WIFIGATE necesită abonament lunar?",
-        answer: "Nu. Plătiți o singură dată pentru dispozitivul WIFIGATE și instalare, fără abonament lunar, reînnoiri periodice sau taxe recurente de platformă. WIFIGATE Host pentru utilizare comercială este singura excepție și necesită abonament.",
+        answer: "Nu. Plătiți o singură dată pentru dispozitivul WIFIGATE și instalare, fără abonament lunar, reînnoiri periodice sau taxe recurente de platformă. Singura excepție sunt planurile WIFIGATE For Business, care necesită abonament.",
       },
       {
         question: "WIFIGATE poate oferi acces temporar oaspeților?",

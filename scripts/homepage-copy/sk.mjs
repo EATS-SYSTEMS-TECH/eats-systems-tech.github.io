@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Bez SIM karty a externého routera",
-        text: "WIFIGATE komunikuje priamo s nainštalovaným zariadením, takže pri vstupe netreba SIM kartu, internetový paušál ani externý WiFi router.",
+        text: "WIFIGATE komunikuje priamo s nainštalovaným zariadením, takže pri vstupe netreba SIM kartu, internetový paušál ani externý WiFi router. Okrem balíka WIFIGATE Manager, ktorý vyžaduje Wi-Fi.",
       },
       {
         title: "Stabilita",
@@ -67,7 +67,7 @@ const copy = {
         text: "Za zariadenie WIFIGATE a inštaláciu zaplatíte iba raz, bez mesačného predplatného, pravidelného obnovovania či priebežných poplatkov za platformu.",
       },
     ],
-    subscriptionNote: "* Komerčné používanie WIFIGATE Host vyžaduje predplatné.",
+    subscriptionNote: "* Okrem balíkov WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Kuriér ide po modrej bodkovanej trase k vchodu do bytového domu, zatiaľ čo obyvateľ drží aplikáciu WIFIGATE s časovo obmedzeným prístupom pre hosťa.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Potrebuje WIFIGATE SIM kartu alebo externý WiFi router?",
-        answer: "Nie. WIFIGATE komunikuje priamo s nainštalovaným zariadením, takže pri vstupe netreba SIM kartu, internetový paušál ani externý WiFi router.",
+        answer: "Nie. WIFIGATE komunikuje priamo s nainštalovaným zariadením, takže pri vstupe netreba SIM kartu, internetový paušál ani externý WiFi router. Okrem balíka WIFIGATE Manager, ktorý vyžaduje Wi-Fi.",
       },
       {
         question: "Vyžaduje WIFIGATE mesačné predplatné?",
-        answer: "Nie. Za zariadenie WIFIGATE a inštaláciu zaplatíte iba raz, bez mesačného predplatného, pravidelného obnovovania či priebežných poplatkov za platformu. Jedinou výnimkou je WIFIGATE Host na komerčné použitie, ktorý vyžaduje predplatné.",
+        answer: "Nie. Za zariadenie WIFIGATE a inštaláciu zaplatíte iba raz, bez mesačného predplatného, pravidelného obnovovania či priebežných poplatkov za platformu. Jedinou výnimkou sú balíky WIFIGATE For Business, ktoré vyžadujú predplatné.",
       },
       {
         question: "Dokáže WIFIGATE poskytnúť dočasný prístup pre hostí?",

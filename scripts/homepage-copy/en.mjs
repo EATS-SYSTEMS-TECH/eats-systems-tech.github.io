@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "No SIM, No Router",
-        text: "WIFIGATE talks directly to the installed device, so the entrance needs no SIM card, data plan, or external Wi-Fi router.",
+        text: "WIFIGATE talks directly to the installed device, so the entrance needs no SIM card, data plan, or external Wi-Fi router. Except the WIFIGATE Manager plan, which needs Wi-Fi.",
       },
       {
         title: "Stability",
@@ -67,7 +67,7 @@ const copy = {
         text: "Pay once for the WIFIGATE device and installation, with no monthly subscription, renewals, or ongoing platform fees.",
       },
     ],
-    subscriptionNote: "* Commercial use of WIFIGATE Host requires a subscription.",
+    subscriptionNote: "* Except WIFIGATE For Business plans.",
   },
   privateAccess: {
     imageAlt: "A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Does WIFIGATE need a SIM card or external Wi-Fi router?",
-        answer: "No. WIFIGATE communicates directly with the installed device, so the entrance needs no SIM card, data plan, or external Wi-Fi router.",
+        answer: "No. WIFIGATE communicates directly with the installed device, so the entrance needs no SIM card, data plan, or external Wi-Fi router. Except the WIFIGATE Manager plan, which needs Wi-Fi.",
       },
       {
         question: "Does WIFIGATE require a monthly subscription?",
-        answer: "No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewals, or ongoing platform fees. WIFIGATE Host for commercial use is the only exception and requires a subscription.",
+        answer: "No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewals, or ongoing platform fees. WIFIGATE For Business plans are the only exception and require a subscription.",
       },
       {
         question: "Can WIFIGATE provide temporary guest access?",

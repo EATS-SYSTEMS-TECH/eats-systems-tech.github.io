@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Ei SIM-korttia eikä ulkoista reititintä",
-        text: "WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä.",
+        text: "WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä. Paitsi WIFIGATE Manager -paketti, joka tarvitsee Wi-Fi-yhteyden.",
       },
       {
         title: "Vakaus",
@@ -67,7 +67,7 @@ const copy = {
         text: "Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausimaksuja, uusimismaksuja eikä jatkuvia alustamaksuja.",
       },
     ],
-    subscriptionNote: "* WIFIGATE Hostin kaupallinen käyttö edellyttää tilausta.",
+    subscriptionNote: "* Paitsi WIFIGATE For Business -paketit.",
   },
   privateAccess: {
     imageAlt: "Lähetti kulkee sinistä pisteviivareittiä kerrostalon sisäänkäynnille, kun asukas pitää kädessään WIFIGATE-sovellusta, jossa näkyy aikarajattu vieraskulkuoikeus.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Tarvitseeko WIFIGATE SIM-kortin tai ulkoisen WiFi-reitittimen?",
-        answer: "Ei. WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä.",
+        answer: "Ei. WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä. Paitsi WIFIGATE Manager -paketti, joka tarvitsee Wi-Fi-yhteyden.",
       },
       {
         question: "Vaatiiko WIFIGATE kuukausitilauksen?",
-        answer: "Ei. Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausimaksuja, uusimismaksuja eikä jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Hostin kaupallinen käyttö, joka edellyttää tilausta.",
+        answer: "Ei. Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausimaksuja, uusimismaksuja eikä jatkuvia alustamaksuja. Ainoa poikkeus ovat WIFIGATE For Business -paketit, jotka vaativat tilauksen.",
       },
       {
         question: "Voiko WIFIGATElla antaa vieraille tilapäisen kulkuoikeuden?",

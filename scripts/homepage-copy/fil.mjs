@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Walang SIM Card at Walang External Router",
-        text: "Direktang nakikipag-ugnayan ang WIFIGATE sa naka-install na device, kaya hindi na kailangan ng SIM card, internet plan, o external WiFi router sa pasukan.",
+        text: "Direktang nakikipag-ugnayan ang WIFIGATE sa naka-install na device, kaya hindi na kailangan ng SIM card, internet plan, o external WiFi router sa pasukan. Maliban sa WIFIGATE Manager plan, na nangangailangan ng Wi-Fi.",
       },
       {
         title: "Katatagan",
@@ -67,7 +67,7 @@ const copy = {
         text: "Isang beses lang ang bayad para sa WIFIGATE device at installation, walang buwanang subscription, pana-panahong renewal, o tuloy-tuloy na platform fee.",
       },
     ],
-    subscriptionNote: "* Kailangan ng subscription para sa komersyal na paggamit ng WIFIGATE Host.",
+    subscriptionNote: "* Maliban sa mga WIFIGATE For Business plan.",
   },
   privateAccess: {
     imageAlt: "Naglalakad ang isang courier sa may tuldok na asul na ruta papunta sa pasukan ng isang residential building, habang hawak ng isang residente ang WIFIGATE app na nagpapakita ng pahintulot para sa bisita na may takdang oras.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Kailangan ba ng WIFIGATE ng SIM card o external WiFi router?",
-        answer: "Hindi. Direktang nakikipag-ugnayan ang WIFIGATE sa naka-install na device, kaya hindi na kailangan ng SIM card, internet plan, o external WiFi router sa pasukan.",
+        answer: "Hindi. Direktang nakikipag-ugnayan ang WIFIGATE sa naka-install na device, kaya hindi na kailangan ng SIM card, internet plan, o external WiFi router sa pasukan. Maliban sa WIFIGATE Manager plan, na nangangailangan ng Wi-Fi.",
       },
       {
         question: "Kailangan ba ng WIFIGATE ng buwanang subscription?",
-        answer: "Hindi. Isang beses lang ang bayad para sa WIFIGATE device at installation, walang buwanang subscription, pana-panahong renewal, o tuloy-tuloy na platform fee. Ang WIFIGATE Host para sa komersyal na paggamit ang tanging eksepsiyon, at kailangan nito ng subscription.",
+        answer: "Hindi. Isang beses lang ang bayad para sa WIFIGATE device at installation, walang buwanang subscription, pana-panahong renewal, o tuloy-tuloy na platform fee. Ang tanging eksepsiyon ay ang mga WIFIGATE For Business plan, na nangangailangan ng subscription.",
       },
       {
         question: "Puwede bang magbigay ang WIFIGATE ng pansamantalang access sa bisita?",

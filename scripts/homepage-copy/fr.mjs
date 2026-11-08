@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Sans carte SIM ni routeur externe",
-        text: "WIFIGATE communique directement avec le boîtier installé : le point d'accès n'a besoin ni de carte SIM, ni de forfait internet, ni de routeur WiFi externe.",
+        text: "WIFIGATE communique directement avec le boîtier installé : le point d'accès n'a besoin ni de carte SIM, ni de forfait internet, ni de routeur WiFi externe. Sauf l’offre WIFIGATE Manager, qui nécessite le Wi-Fi.",
       },
       {
         title: "Stabilité",
@@ -67,7 +67,7 @@ const copy = {
         text: "Vous payez une seule fois le boîtier WIFIGATE et son installation, sans abonnement mensuel, renouvellement périodique ni frais de plateforme récurrents.",
       },
     ],
-    subscriptionNote: "* L'utilisation commerciale de WIFIGATE Host nécessite un abonnement.",
+    subscriptionNote: "* Sauf les offres WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Un livreur suit un itinéraire bleu en pointillés jusqu'à l'entrée d'un immeuble résidentiel, tandis qu'un résident tient l'application WIFIGATE affichant un accès invité limité dans le temps.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE a-t-il besoin d'une carte SIM ou d'un routeur WiFi externe ?",
-        answer: "Non. WIFIGATE communique directement avec le boîtier installé : le point d'accès n'a besoin ni de carte SIM, ni de forfait internet, ni de routeur WiFi externe.",
+        answer: "Non. WIFIGATE communique directement avec le boîtier installé : le point d'accès n'a besoin ni de carte SIM, ni de forfait internet, ni de routeur WiFi externe. Sauf l’offre WIFIGATE Manager, qui nécessite le Wi-Fi.",
       },
       {
         question: "WIFIGATE nécessite-t-il un abonnement mensuel ?",
-        answer: "Non. Vous payez une seule fois le boîtier WIFIGATE et son installation, sans abonnement mensuel, renouvellement périodique ni frais de plateforme récurrents. WIFIGATE Host à usage commercial est la seule exception et nécessite un abonnement.",
+        answer: "Non. Vous payez une seule fois le boîtier WIFIGATE et son installation, sans abonnement mensuel, renouvellement périodique ni frais de plateforme récurrents. Les offres WIFIGATE For Business sont la seule exception et nécessitent un abonnement.",
       },
       {
         question: "WIFIGATE permet-il de donner un accès temporaire à des invités ?",

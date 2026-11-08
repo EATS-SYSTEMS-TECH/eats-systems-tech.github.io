@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "不需 SIM 卡，也不需外接路由器",
-        text: "WIFIGATE 直接與已安裝的裝置通訊，出入口不需要 SIM 卡、行動數據方案或外接 Wi-Fi 路由器。",
+        text: "WIFIGATE 直接與已安裝的裝置通訊，出入口不需要 SIM 卡、行動數據方案或外接 Wi-Fi 路由器。WIFIGATE Manager 方案除外，該方案需要 Wi-Fi。",
       },
       {
         title: "穩定可靠",
@@ -67,7 +67,7 @@ const copy = {
         text: "WIFIGATE 裝置與安裝一次付清，沒有月費、沒有續約費，也沒有持續收取的平台費用。",
       },
     ],
-    subscriptionNote: "* WIFIGATE Host 用於商業用途時需要訂閱。",
+    subscriptionNote: "* WIFIGATE For Business 方案除外。",
   },
   privateAccess: {
     imageAlt: "外送員沿著藍色虛線路線走向住宅大樓入口，一位住戶手持顯示限時訪客權限的 WIFIGATE App。",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE 需要 SIM 卡或外接 Wi-Fi 路由器嗎？",
-        answer: "不需要。WIFIGATE 直接與已安裝的裝置通訊，出入口不需要 SIM 卡、行動數據方案或外接 Wi-Fi 路由器。",
+        answer: "不需要。WIFIGATE 直接與已安裝的裝置通訊，出入口不需要 SIM 卡、行動數據方案或外接 Wi-Fi 路由器。WIFIGATE Manager 方案除外，該方案需要 Wi-Fi。",
       },
       {
         question: "WIFIGATE 需要按月訂閱嗎？",
-        answer: "不需要。WIFIGATE 裝置與安裝一次付清，沒有月費、沒有續約費，也沒有持續收取的平台費用。唯一的例外是用於商業用途的 WIFIGATE Host，需要訂閱。",
+        answer: "不需要。WIFIGATE 裝置與安裝一次付清，沒有月費、沒有續約費，也沒有持續收取的平台費用。唯一的例外是 WIFIGATE For Business 方案，需要訂閱。",
       },
       {
         question: "WIFIGATE 可以提供臨時訪客通行嗎？",

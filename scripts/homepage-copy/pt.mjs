@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Sem cartão SIM nem router externo",
-        text: "A WIFIGATE comunica diretamente com o dispositivo instalado, pelo que o ponto de acesso não precisa de cartão SIM, plano de internet nem router WiFi externo.",
+        text: "A WIFIGATE comunica diretamente com o dispositivo instalado, pelo que o ponto de acesso não precisa de cartão SIM, plano de internet nem router WiFi externo. Exceto o plano WIFIGATE Manager, que precisa de Wi-Fi.",
       },
       {
         title: "Estabilidade",
@@ -67,7 +67,7 @@ const copy = {
         text: "Paga uma única vez pelo dispositivo WIFIGATE e pela instalação, sem subscrição mensal, renovações periódicas nem taxas recorrentes da plataforma.",
       },
     ],
-    subscriptionNote: "* A utilização comercial do WIFIGATE Host requer subscrição.",
+    subscriptionNote: "* Exceto os planos WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Um estafeta segue um percurso azul tracejado até à entrada de um prédio de apartamentos, enquanto um morador segura a aplicação WIFIGATE com uma permissão de visita limitada no tempo.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "A WIFIGATE precisa de cartão SIM ou de um router WiFi externo?",
-        answer: "Não. A WIFIGATE comunica diretamente com o dispositivo instalado, pelo que o ponto de acesso não precisa de cartão SIM, plano de internet nem router WiFi externo.",
+        answer: "Não. A WIFIGATE comunica diretamente com o dispositivo instalado, pelo que o ponto de acesso não precisa de cartão SIM, plano de internet nem router WiFi externo. Exceto o plano WIFIGATE Manager, que precisa de Wi-Fi.",
       },
       {
         question: "A WIFIGATE exige uma subscrição mensal?",
-        answer: "Não. Paga uma única vez pelo dispositivo WIFIGATE e pela instalação, sem subscrição mensal, renovações periódicas nem taxas recorrentes da plataforma. O WIFIGATE Host para utilização comercial é a única exceção e requer subscrição.",
+        answer: "Não. Paga uma única vez pelo dispositivo WIFIGATE e pela instalação, sem subscrição mensal, renovações periódicas nem taxas recorrentes da plataforma. Os planos WIFIGATE For Business são a única exceção e exigem assinatura.",
       },
       {
         question: "A WIFIGATE pode dar acesso temporário a visitas?",

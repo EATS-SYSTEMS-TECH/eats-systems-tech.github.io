@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "SIM-kártya és külső router nélkül",
-        text: "A WIFIGATE közvetlenül a telepített eszközzel kommunikál, így a bejáratnál nincs szükség SIM-kártyára, internetcsomagra vagy külső Wi-Fi-routerre.",
+        text: "A WIFIGATE közvetlenül a telepített eszközzel kommunikál, így a bejáratnál nincs szükség SIM-kártyára, internetcsomagra vagy külső Wi-Fi-routerre. Kivéve a WIFIGATE Manager csomagot, amelyhez Wi-Fi szükséges.",
       },
       {
         title: "Stabilitás",
@@ -67,7 +67,7 @@ const copy = {
         text: "Egyszer fizet a WIFIGATE eszközért és a telepítésért, havi előfizetés, időszakos megújítás és folyamatos platformdíj nélkül.",
       },
     ],
-    subscriptionNote: "* A WIFIGATE Host kereskedelmi célú használata előfizetéshez kötött.",
+    subscriptionNote: "* Kivéve a WIFIGATE For Business csomagokat.",
   },
   privateAccess: {
     imageAlt: "Egy futár kék pontozott útvonalon halad egy lakóépület bejárata felé, miközben egy lakó a WIFIGATE alkalmazást tartja, amely időkorlátos vendéghozzáférést mutat.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Kell a WIFIGATE-hez SIM-kártya vagy külső Wi-Fi-router?",
-        answer: "Nem. A WIFIGATE közvetlenül a telepített eszközzel kommunikál, így a bejáratnál nincs szükség SIM-kártyára, internetcsomagra vagy külső Wi-Fi-routerre.",
+        answer: "Nem. A WIFIGATE közvetlenül a telepített eszközzel kommunikál, így a bejáratnál nincs szükség SIM-kártyára, internetcsomagra vagy külső Wi-Fi-routerre. Kivéve a WIFIGATE Manager csomagot, amelyhez Wi-Fi szükséges.",
       },
       {
         question: "Kell havi előfizetés a WIFIGATE-hez?",
-        answer: "Nem. Egyszer fizet a WIFIGATE eszközért és a telepítésért, havi előfizetés, időszakos megújítás és folyamatos platformdíj nélkül. Az egyetlen kivétel a kereskedelmi célú WIFIGATE Host, amely előfizetéshez kötött.",
+        answer: "Nem. Egyszer fizet a WIFIGATE eszközért és a telepítésért, havi előfizetés, időszakos megújítás és folyamatos platformdíj nélkül. Az egyetlen kivétel a WIFIGATE For Business csomagok, amelyekhez előfizetés szükséges.",
       },
       {
         question: "Adhat a WIFIGATE ideiglenes vendéghozzáférést?",

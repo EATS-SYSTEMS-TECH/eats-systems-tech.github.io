@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "SIM 카드·외부 공유기 없이",
-        text: "WIFIGATE는 설치된 기기와 직접 통신하므로 출입구에 SIM 카드, 인터넷 요금제, 외부 Wi-Fi 공유기가 필요하지 않습니다.",
+        text: "WIFIGATE는 설치된 기기와 직접 통신하므로 출입구에 SIM 카드, 인터넷 요금제, 외부 Wi-Fi 공유기가 필요하지 않습니다. 단, WIFIGATE Manager 요금제는 Wi-Fi가 필요합니다.",
       },
       {
         title: "안정적인 연결",
@@ -67,7 +67,7 @@ const copy = {
         text: "WIFIGATE 기기와 설치 비용은 한 번만 결제하면 끝. 월 구독료도, 갱신 비용도, 별도의 플랫폼 이용료도 없습니다.",
       },
     ],
-    subscriptionNote: "※ WIFIGATE Host를 상업적으로 이용하려면 구독이 필요합니다.",
+    subscriptionNote: "* WIFIGATE For Business 요금제는 제외됩니다.",
   },
   privateAccess: {
     imageAlt: "택배 기사가 파란 점선 경로를 따라 아파트 공동현관으로 걸어가고, 입주민이 기간 제한 게스트 권한이 표시된 WIFIGATE 앱을 들고 있습니다.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE에 SIM 카드나 외부 Wi-Fi 공유기가 필요한가요?",
-        answer: "아니요. WIFIGATE는 설치된 기기와 직접 통신하므로 출입구에 SIM 카드, 인터넷 요금제, 외부 Wi-Fi 공유기가 필요하지 않습니다.",
+        answer: "아니요. WIFIGATE는 설치된 기기와 직접 통신하므로 출입구에 SIM 카드, 인터넷 요금제, 외부 Wi-Fi 공유기가 필요하지 않습니다. 단, WIFIGATE Manager 요금제는 Wi-Fi가 필요합니다.",
       },
       {
         question: "WIFIGATE는 월 구독이 필요한가요?",
-        answer: "아니요. WIFIGATE 기기와 설치 비용을 한 번만 결제하면 되며, 월 구독료도, 갱신 비용도, 별도의 플랫폼 이용료도 없습니다. 유일한 예외는 상업용 WIFIGATE Host로, 구독이 필요합니다.",
+        answer: "아니요. WIFIGATE 기기와 설치 비용을 한 번만 결제하면 되며, 월 구독료도, 갱신 비용도, 별도의 플랫폼 이용료도 없습니다. 유일한 예외는 WIFIGATE For Business 요금제로, 구독이 필요합니다.",
       },
       {
         question: "WIFIGATE로 임시 게스트 출입을 제공할 수 있나요?",

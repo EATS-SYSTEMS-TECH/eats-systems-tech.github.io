@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Không cần SIM hay router ngoài",
-        text: "WIFIGATE giao tiếp trực tiếp với thiết bị đã lắp đặt, nên tại điểm ra vào không cần thẻ SIM, gói cước internet hay router WiFi bên ngoài.",
+        text: "WIFIGATE giao tiếp trực tiếp với thiết bị đã lắp đặt, nên tại điểm ra vào không cần thẻ SIM, gói cước internet hay router WiFi bên ngoài. Ngoại trừ gói WIFIGATE Manager, gói này cần Wi-Fi.",
       },
       {
         title: "Ổn định",
@@ -67,7 +67,7 @@ const copy = {
         text: "Chỉ thanh toán một lần cho thiết bị WIFIGATE và chi phí lắp đặt, không có phí thuê bao hằng tháng, phí gia hạn định kỳ hay phí nền tảng duy trì.",
       },
     ],
-    subscriptionNote: "* Sử dụng WIFIGATE Host cho mục đích thương mại cần đăng ký thuê bao.",
+    subscriptionNote: "* Ngoại trừ các gói WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Một người giao hàng đi theo lộ trình chấm xanh đến lối vào tòa chung cư, trong khi một cư dân cầm ứng dụng WIFIGATE hiển thị quyền ra vào cho khách có thời hạn.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "WIFIGATE có cần thẻ SIM hoặc router WiFi bên ngoài không?",
-        answer: "Không. WIFIGATE giao tiếp trực tiếp với thiết bị đã lắp đặt, nên tại điểm ra vào không cần thẻ SIM, gói cước internet hay router WiFi bên ngoài.",
+        answer: "Không. WIFIGATE giao tiếp trực tiếp với thiết bị đã lắp đặt, nên tại điểm ra vào không cần thẻ SIM, gói cước internet hay router WiFi bên ngoài. Ngoại trừ gói WIFIGATE Manager, gói này cần Wi-Fi.",
       },
       {
         question: "WIFIGATE có yêu cầu thuê bao hằng tháng không?",
-        answer: "Không. Bạn chỉ thanh toán một lần cho thiết bị WIFIGATE và chi phí lắp đặt, không có phí thuê bao hằng tháng, phí gia hạn định kỳ hay phí nền tảng duy trì. WIFIGATE Host dùng cho mục đích thương mại là ngoại lệ duy nhất và cần đăng ký thuê bao.",
+        answer: "Không. Bạn chỉ thanh toán một lần cho thiết bị WIFIGATE và chi phí lắp đặt, không có phí thuê bao hằng tháng, phí gia hạn định kỳ hay phí nền tảng duy trì. Ngoại lệ duy nhất là các gói WIFIGATE For Business, cần đăng ký thuê bao.",
       },
       {
         question: "WIFIGATE có thể cấp quyền ra vào tạm thời cho khách không?",

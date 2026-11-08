@@ -32,7 +32,7 @@ const copy = {
     features: [
       {
         title: "Keine SIM-Karte, kein Router",
-        text: "WIFIGATE kommuniziert direkt mit dem installierten Gerät. Am Eingang sind daher keine SIM-Karte, kein Internettarif und kein externer WiFi-Router erforderlich.",
+        text: "WIFIGATE kommuniziert direkt mit dem installierten Gerät. Am Eingang sind daher keine SIM-Karte, kein Internettarif und kein externer WiFi-Router erforderlich. Ausgenommen ist der Tarif WIFIGATE Manager, der WLAN benötigt.",
       },
       {
         title: "Stabilität",
@@ -67,7 +67,7 @@ const copy = {
         text: "Sie zahlen einmalig für das WIFIGATE-Gerät und die Installation, ohne Monatsabo, ohne regelmäßige Verlängerungen und ohne laufende Plattformgebühren.",
       },
     ],
-    subscriptionNote: "* Die kommerzielle Nutzung von WIFIGATE Host erfordert ein Abonnement.",
+    subscriptionNote: "* Ausgenommen sind die Tarife von WIFIGATE For Business.",
   },
   privateAccess: {
     imageAlt: "Ein Kurier folgt einer blau gepunkteten Route zum Eingang eines Wohnhauses, während ein Bewohner die WIFIGATE-App mit einem zeitlich begrenzten Gastzugang in der Hand hält.",
@@ -140,11 +140,11 @@ const copy = {
       },
       {
         question: "Benötigt WIFIGATE eine SIM-Karte oder einen externen WiFi-Router?",
-        answer: "Nein. WIFIGATE kommuniziert direkt mit dem installierten Gerät. Daher sind am Eingang keine SIM-Karte, kein Internettarif und kein externer WiFi-Router erforderlich.",
+        answer: "Nein. WIFIGATE kommuniziert direkt mit dem installierten Gerät. Daher sind am Eingang keine SIM-Karte, kein Internettarif und kein externer WiFi-Router erforderlich. Ausgenommen ist der Tarif WIFIGATE Manager, der WLAN benötigt.",
       },
       {
         question: "Erfordert WIFIGATE ein monatliches Abonnement?",
-        answer: "Nein. Sie zahlen einmalig für das WIFIGATE-Gerät und die Installation, ohne Monatsabo, ohne regelmäßige Verlängerungen und ohne laufende Plattformgebühren. Einzige Ausnahme ist WIFIGATE Host für die kommerzielle Nutzung, das ein Abonnement erfordert.",
+        answer: "Nein. Sie zahlen einmalig für das WIFIGATE-Gerät und die Installation, ohne Monatsabo, ohne regelmäßige Verlängerungen und ohne laufende Plattformgebühren. Einzige Ausnahme sind die Tarife von WIFIGATE For Business, die ein Abonnement erfordern.",
       },
       {
         question: "Kann WIFIGATE zeitlich begrenzten Gastzugang bieten?",
