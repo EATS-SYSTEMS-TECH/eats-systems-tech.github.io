@@ -54,6 +54,15 @@ function assertUnavailable($, main, locale, product) {
     if (!product) assert.equal($(element).closest(".shop-actions").find(".shop-actions__details[href]").length, 1, "Add to cart sits beside a details link");
   });
   assert.equal(main.find("img[src*='assets/img/manager/']").length, 0, "Manager is illustrated without a dashboard screenshot");
+  if (!product) {
+    assert.equal(main.find(".shop-product-card__facts").length, 2, "Each controller card lists its short facts");
+    main.find(".shop-business-card").each((_, element) => {
+      assert.equal($(element).find(".shop-business-card__media .shop-business-card__name").length, 1, "The subscription name sits on its photo");
+      assert.ok($(element).find(".shop-business-card__segments span").length >= 4, "Each subscription says who it is for");
+    });
+    assert.match(main.find("[data-business='manager'] .shop-business-card__segments span").last().text(), locale === "he" ? /ועוד/ : /And more/);
+    main.find(".shop-actions").each((_, element) => assert.ok($(element).children().first().is(".shop-actions__cart"), "Add to cart leads each card's actions"));
+  }
   assert.equal(main.find(".shop-related, .shop-contact").length, 0, "The removed related and contact sections stay removed");
   assert.equal(main.find("form, [data-add-to-cart], [data-buy-now]").length, 0,
     "The unavailable catalog exposes no order submission or purchase handler");
