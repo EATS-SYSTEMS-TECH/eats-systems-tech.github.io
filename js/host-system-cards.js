@@ -4,6 +4,8 @@ import { authErrorMessage } from "./host-auth-errors.js";
 import { roleLabel } from "./host-role-badge.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
+import { managerUiIcon } from "./manager-ui-icons.js";
+import { attachManagerGuideNavigation } from "./manager-guide-navigation.js";
 import { systemIconSrc } from "./wifigate-system-icons.js";
 import {
   isRollerShutter,
@@ -128,11 +130,13 @@ export function systemCard(
     "button",
     workspaceText("פתיחת סביבת ניהול", "Open workspace"),
     {
-      class: "manager-button primary",
+      class: "manager-button primary manager-system-open",
       type: "button",
       "data-action": "workspace",
     },
   );
+  // Manager's own card action: label first, chevron at the end.
+  open.append(managerUiIcon("next"));
   footer.append(open);
   const card = createManagerSystemCard({
     system: {
@@ -175,7 +179,7 @@ function openSystemWorkspace(card, system, { trigger, actions, badges }) {
     "aria-labelledby": `${trigger.closest("article").getAttribute("aria-labelledby")}-workspace`,
   });
   dialog.workspaceTrigger = trigger;
-  const heading = nameBlock("h3", system.name, {
+  const heading = nameBlock("h2", system.name, {
     id: dialog.getAttribute("aria-labelledby"),
   });
   const details = node("div", undefined, { class: "manager-note" });
@@ -185,8 +189,10 @@ function openSystemWorkspace(card, system, { trigger, actions, badges }) {
     row.append(...badges);
     details.append(row);
   }
+  // One end-aligned action row, as in Manager: the system's actions, then
+  // End and return.
   const controls = node("div", undefined, {
-    class: "manager-confirm-actions system-workspace-actions",
+    class: "system-workspace-actions",
   });
   controls.append(...actions);
   for (const button of controls.querySelectorAll("button"))
@@ -205,9 +211,11 @@ function openSystemWorkspace(card, system, { trigger, actions, badges }) {
     "data-action": "close-workspace",
   });
   close.addEventListener("click", () => dialog.close());
-  const footer = node("div", undefined, { class: "manager-confirm-actions" });
-  footer.append(close);
-  dialog.append(heading, details, controls, footer);
+  const footer = node("div", undefined, {
+    class: "manager-confirm-actions system-workspace-footer",
+  });
+  footer.append(controls, close);
+  dialog.append(heading, details, footer);
   dialog.addEventListener("close", () => {
     dialog.remove();
     queueMicrotask(() => {
@@ -267,6 +275,9 @@ export function appSteps(organization) {
   return list;
 }
 
+// "How do I add a system?": Manager's setup guide (progress, step markers,
+// one step card at a time, Previous and Next) with Host's three app steps.
+// Reading it never adds a system.
 export function systemSetupGuide(organization) {
   const guide = node("details", undefined, {
     class: "manager-setup-guide dashboard-examples",
@@ -282,8 +293,27 @@ export function systemSetupGuide(organization) {
         "Systems you add from the WIFIGATE app. Link one to an organization to use it there.",
       ),
     ),
-    appSteps(organization),
   );
+  const steps = appSteps(organization);
+  [...steps.children].forEach((step, index) => {
+    const sentence = step.textContent;
+    step.dataset.step = String(index + 1);
+    const copy = node("div", undefined, { class: "manager-setup-step-copy" });
+    const icon = node("span", undefined, { class: "manager-setup-step-icon" });
+    icon.append(managerUiIcon(["account", "app", "systems"][index]));
+    copy.append(icon, node("strong", sentence, { dir: "auto" }));
+    step.replaceChildren(copy);
+  });
+  attachManagerGuideNavigation({
+    guide,
+    steps,
+    language: hostLanguage,
+    labels: [workspaceText("החשבון", "Account"), "Host", workspaceText("המערכת", "System")],
+    completionText: workspaceText(
+      "עברתם את שלושת שלבי ההדרכה. כעת רעננו את ״המערכות שלי״ ובדקו שהמערכת שהוספתם מופיעה ברשימה.",
+      "You've reached the end of the three-step guide. Now refresh My systems and check that the system you added appears in the list.",
+    ),
+  });
   return guide;
 }
 
@@ -302,15 +332,26 @@ export function emptyState(text, { tip, steps, action: button } = {}) {
   return empty;
 }
 
-// The line above a list: how many systems, and an ⓘ.
-export function systemsToolbar(text, tip) {
-  const bar = node("div", undefined, {
-    class: "manager-toolbar systems-toolbar",
-  });
-  const line = node("p", undefined, { class: "systems-toolbar__text" });
-  line.append(node("span", text));
-  if (tip) line.append(infoTip(tip));
-  bar.append(line);
+// The heading above a list: Manager's toolbar (the list's title as an h3,
+// with its ⓘ beside it, and Refresh at the end above the divider).
+export function systemsToolbar(tip, refresh, title = hostText("Organization systems")) {
+  const bar = node("div", undefined, { class: "manager-toolbar systems-toolbar" });
+  const heading = node("h3", title);
+  if (tip) heading.append(infoTip(tip));
+  bar.append(heading);
+  if (refresh)
+    bar.append(
+      action("Refresh", async (button) => {
+        button.disabled = true;
+        button.setAttribute("aria-busy", "true");
+        try {
+          await refresh();
+        } finally {
+          button.disabled = false;
+          button.removeAttribute("aria-busy");
+        }
+      }, { name: "refresh" }),
+    );
   return bar;
 }
 
@@ -495,7 +536,7 @@ export function openSystemDialog({
   const form = node("form", undefined, {
     class: "manager-form system-dialog__form",
   });
-  const heading = node("h3", title, { id: `${id}-title`, dir: "auto" });
+  const heading = node("h2", title, { id: `${id}-title`, dir: "auto" });
   const description = text
     ? node("p", text, {
         id: `${id}-text`,

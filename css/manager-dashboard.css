@@ -1753,7 +1753,7 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
 @media(max-width:600px) { .manager-organization-people { grid-template-columns:1fr; } }
 
 /* System cards: a calm identity area and one clearly preferred action. */
-.platform-page[data-product="manager"] .manager-grid:has(> .manager-system) { grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr)); grid-auto-rows:1fr; gap:18px; }
+.platform-page:is([data-product="manager"], [data-product="host"]) .manager-grid:has(> .manager-system) { grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr)); grid-auto-rows:1fr; gap:18px; }
 .manager-card.manager-system { --system-kind-ink:#38658d; --system-kind-soft:#f0f5fa; --system-kind-line:#dce6ef; min-width:0; padding:22px; gap:20px; border:1px solid #e0e6ed; border-radius:16px; background:#fff; box-shadow:0 3px 12px #172b4605; transition:border-color 160ms ease,box-shadow 160ms ease; }
 .manager-card.manager-system[data-object-kind="dual-control"] { --system-kind-ink:#896132; --system-kind-soft:#faf5ed; --system-kind-line:#ecdfcb; }
 .manager-card.manager-system[data-object-kind="roller-shutter"] { --system-kind-ink:#2b746b; --system-kind-soft:#eef7f4; --system-kind-line:#d5e9e2; }
@@ -1769,8 +1769,10 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
 .manager-system .manager-system-gate-count { padding-inline-start:10px; border-inline-start:1px solid #e2e8ef; color:#66778b; font-size:12px; }
 .manager-card.manager-system > .manager-system-actions { display:flex; flex-direction:column; gap:6px; margin-top:auto; padding-top:18px; border-color:#edf0f4; }
 .manager-card.manager-system > .manager-system-actions > .manager-button { flex:none; min-height:44px; width:100%; box-sizing:border-box; }
-.platform-page[data-product="manager"] .portal-panel .manager-shell .manager-system-actions > button.manager-system-open.primary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 14px; border:1px solid #203b57; border-radius:9px; background:#203b57; color:#fff; font-size:12px; font-weight:600; box-shadow:0 2px 4px #172b460b; }
-.platform-page[data-product="manager"] .portal-panel .manager-shell .manager-system-actions > button.manager-system-open.primary:hover:not(:disabled) { background:#2c4c6c; border-color:#2c4c6c; }
+.platform-page[data-product="manager"] .portal-panel .manager-shell .manager-system-actions > button.manager-system-open.primary,
+.platform-page[data-product="host"] .manager-shell .manager-system-actions > button.manager-system-open.primary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 14px; border:1px solid #203b57; border-radius:9px; background:#203b57; color:#fff; font-size:12px; font-weight:600; box-shadow:0 2px 4px #172b460b; }
+.platform-page[data-product="manager"] .portal-panel .manager-shell .manager-system-actions > button.manager-system-open.primary:hover:not(:disabled),
+.platform-page[data-product="host"] .manager-shell .manager-system-actions > button.manager-system-open.primary:hover:not(:disabled) { background:#2c4c6c; border-color:#2c4c6c; }
 .manager-system-open svg { width:17px; height:17px; flex:none; opacity:.8; }
 [dir="rtl"] .manager-system-open svg { transform:scaleX(-1); }
 .platform-page[data-product="manager"] .manager-card.manager-system .manager-system-actions > .manager-system-remove { display:flex; align-items:center; justify-content:center; gap:7px; min-height:44px; border:1px solid #d3deea; border-radius:8px; background:#fff; color:#66778b; font-size:11px; font-weight:500; }

@@ -5,6 +5,89 @@ import { can, organizationRole, servicePaused } from "./host-permissions.js";
 import { settingsTab, workspaceLocation } from "./host-workspace-model.js";
 import { initial } from "./host-org-selector.js";
 import { zoneOf } from "./host-booking-model.js";
+import { createManagerSectionHeading } from "./manager-section-heading.js";
+import { managerUiIcon } from "./manager-ui-icons.js";
+
+// Each tab in Manager's settings language: a heading card (icon tile, the
+// organization's name above the title, Refresh at the end) and its parts as
+// separate settings cards with an icon-tile heading.
+const tabIcons = {
+  organization: "settings",
+  team: "people",
+  billing: "history",
+  connections: "signal",
+  activity: "history",
+  support: "admin",
+  account: "account",
+};
+function presentTab(content, tab, { organizationName, refresh }) {
+  const icon = tabIcons[tab.id] ?? "settings";
+  const first = content.firstElementChild;
+  const ownTitle = first?.tagName === "H2" ? first : undefined;
+  const heading = createManagerSectionHeading({
+    title: ownTitle?.textContent ?? hostText(tab.label),
+    icon,
+    level: "h2",
+    className: "manager-toolbar manager-people-page-heading host-settings-heading",
+  });
+  if (organizationName)
+    heading
+      .querySelector(".manager-section-identity > div")
+      .prepend(node("span", organizationName, { class: "manager-people-eyebrow", dir: "auto" }));
+  const again = node("button", hostText("Refresh"), {
+    type: "button",
+    class: "manager-button",
+    "data-action": "refresh-settings",
+  });
+  again.prepend(managerUiIcon("refresh"));
+  again.addEventListener("click", () => void refresh());
+  heading.append(again);
+  ownTitle?.remove();
+  const cards = [];
+  let loose;
+  for (const child of [...content.children]) {
+    // A disclosure keeps Manager's own disclosure surface.
+    if (child.matches("details.dashboard-examples")) {
+      loose = undefined;
+      continue;
+    }
+    if (child.tagName === "SECTION") {
+      loose = undefined;
+      const blocks = [...child.children].filter((part) => part.classList.contains("settings-block"));
+      // People columns sit on the canvas, as on Manager's people page; the
+      // tab's heading card already names them.
+      if (child.querySelector(":scope > .manager-organization-people")) {
+        child.classList.add("host-settings-group");
+        const lead = child.firstElementChild;
+        if (/^H[23]$/.test(lead?.tagName) && lead.textContent === heading.querySelector("h2").textContent)
+          lead.remove();
+        continue;
+      }
+      if (blocks.length) {
+        child.classList.add("host-settings-group");
+        cards.push(...blocks);
+      } else cards.push(child);
+      continue;
+    }
+    if (!loose) {
+      loose = node("section", undefined, {});
+      child.before(loose);
+      cards.push(loose);
+    }
+    loose.append(child);
+  }
+  for (const card of cards) {
+    card.classList.add("manager-settings-card", "host-settings-card");
+    const title = [...card.children].find(
+      (part) => part.classList.contains("view-heading") || /^H[23]$/.test(part.tagName),
+    );
+    if (title && title === card.firstElementChild) {
+      title.classList.add("manager-settings-card-heading");
+      title.prepend(managerUiIcon(icon));
+    }
+  }
+  content.prepend(heading);
+}
 
 // Settings: one view with tabs (Organization, Team, Plan & statements,
 // Support access, Account & security). Each tab loads when it is first
@@ -83,7 +166,16 @@ export async function renderSettings(panel, viewCurrent, options) {
       entry.content.replaceChildren();
       try {
         await loaders[chosen](entry.content);
-        if (viewCurrent()) entry.content.dataset.loaded = "true";
+        if (viewCurrent()) {
+          presentTab(entry.content, tabs.find((tab) => tab.id === chosen), {
+            organizationName: options.organizationName,
+            refresh: () => {
+              delete entry.content.dataset.loaded;
+              return select(chosen);
+            },
+          });
+          entry.content.dataset.loaded = "true";
+        }
       } catch (error) {
         if (!viewCurrent()) return;
         const retry = node("button", hostText("Try again"), { type: "button" });

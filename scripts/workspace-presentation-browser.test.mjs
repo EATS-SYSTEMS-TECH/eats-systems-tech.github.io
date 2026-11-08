@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, mkdir } from "node:fs/promises";
 import path from "node:path";
+import { staticDashboardHtml } from "./lib/static-dashboard-html.mjs";
 import {
   startHostSite,
   openWorkspace,
@@ -52,12 +53,12 @@ async function openProduct(t, site, product, language, width) {
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  const html = (
+  const html = staticDashboardHtml(
     await readFile(
       new URL(`../dashboard/${product}/index.html`, import.meta.url),
       "utf8",
-    )
-  ).replace(/<script[\s\S]*?<\/script>/g, "");
+    ),
+  );
   await page.route("**/*", (route) => {
     const url = new URL(route.request().url());
     if (url.origin !== site.origin) return route.abort();

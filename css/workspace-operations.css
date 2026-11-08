@@ -409,72 +409,7 @@ body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
   background-color: #f1f5f9;
 }
 
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .portal-panel {
-  border-color: var(--workspace-line);
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: none;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .calendar-heading
-  h2 {
-  color: var(--workspace-ink);
-  font-size: clamp(19px, 2vw, 24px);
-  line-height: 1.4;
-  font-variant-numeric: tabular-nums;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .calendar-toolbar {
-  padding: 12px;
-  border-radius: 8px 8px 0 0;
-  background: #f3f6fa;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .calendar-scroll {
-  border-radius: 0 0 8px 8px;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .calendar-grid
-  thead
-  th {
-  background: #f8fafc;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .calendar-grid
-  thead
-  th
-  small {
-  text-transform: none;
-  font-weight: 500;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .calendar-grid
-  tbody
-  th {
-  background: #f8fafc;
-}
-
-body.host-manager-workspace[data-product="host"]
-  #host-management
-  .host-calendar
-  .reservation-chip {
-  border-radius: 5px;
-  border-inline-start: 3px solid #3574c3;
-}
+/* Host's calendar, bookings and settings surfaces live in host-dashboard.css. */
 
 body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
   .manager-organization-picker-panel,
@@ -586,34 +521,6 @@ body.host-manager-workspace[data-product="host"]
     .manager-personal-navigation
     > :is(.manager-nav-title, .manager-sidebar-roles) {
     grid-column: 1 / -1;
-  }
-
-  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
-    :is(.manager-nav, #host-sidebar)
-    .manager-organization-navigation {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 4px;
-    overflow-x: auto;
-    padding: 3px;
-    scrollbar-width: thin;
-    scrollbar-color: #8da8bf transparent;
-  }
-
-  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
-    :is(.manager-nav, #host-sidebar)
-    .manager-organization-navigation
-    button.manager-button {
-    flex: 0 0 auto;
-    width: auto;
-    white-space: nowrap;
-  }
-
-  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
-    :is(.manager-nav, #host-sidebar)
-    .manager-organization-navigation
-    button.manager-button:focus-visible {
-    outline-offset: 0;
   }
 }
 

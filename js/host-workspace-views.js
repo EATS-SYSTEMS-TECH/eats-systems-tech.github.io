@@ -172,16 +172,25 @@ export function workspaceLoaders(context) {
   };
 
   const renderOrganizations = (panel) => {
-    panel.append(
+    // Manager's view: the toolbar heading, then the organization cards.
+    const view = node("section", undefined, {
+      class: "manager-view host-organizations",
+    });
+    const toolbar = node("div", undefined, { class: "manager-toolbar" });
+    toolbar.append(
       node(
-        "h2",
+        "h3",
         hostText(plan ? "My organizations" : "Choose an organization"),
       ),
     );
+    view.append(toolbar);
     if (!plan)
-      panel.append(
-        node("p", hostText("Select an organization to open its workspace.")),
+      view.append(
+        node("p", hostText("Select an organization to open its workspace."), {
+          class: "manager-view-description",
+        }),
       );
+    panel.append(view);
     const list = node("div", undefined, { class: "manager-org-columns" });
     for (const organization of context.organizations) {
       const card = node("article", undefined, {
@@ -193,8 +202,14 @@ export function workspaceLoaders(context) {
       });
       const name = node("div", undefined, { class: "manager-org-name" });
       name.append(
+        node("small", hostLanguage === "he" ? "ארגון" : "Organization"),
         node("h4", organization.name),
-        node("p", roleLabel(organizationRole(organization))),
+      );
+      // The person's role sits in Manager's labelled block under the name.
+      const role = node("section", undefined, { class: "manager-org-owner" });
+      role.append(
+        node("small", hostText("Your role")),
+        node("strong", roleLabel(organizationRole(organization))),
       );
       identity.append(
         createOrganizationLogo(
@@ -211,13 +226,19 @@ export function workspaceLoaders(context) {
       open.addEventListener("click", () =>
         context.chooseOrganization(organization.id),
       );
-      card.append(identity, open);
+      const actions = node("div", undefined, { class: "manager-org-actions" });
+      actions.append(open);
+      card.append(identity, role, actions);
       list.append(card);
     }
-    panel.append(list);
-    if (!context.organizations.length) {
+    if (context.organizations.length) view.append(list);
+    else {
       const copy = organizationsEmptyCopy(document.documentElement.lang);
-      panel.append(node("h3", copy.title), node("p", copy.description));
+      const empty = node("section", undefined, {
+        class: "manager-empty manager-empty-systems",
+      });
+      empty.append(node("h4", copy.title), node("p", copy.description));
+      view.append(empty);
     }
   };
   return {
@@ -246,6 +267,7 @@ export function workspaceLoaders(context) {
             isCurrent: viewCurrent,
             onChanged: (systemId) =>
               context.systemsChanged("systems", systemId),
+            retry: () => context.systemsChanged("systems"),
             openBookings: context.openBookings,
             canOpenBookings: context.canOpenBookings,
             createLink: (system, trigger, systems) =>
@@ -269,6 +291,7 @@ export function workspaceLoaders(context) {
           platformAdmin: identity.role === "admin",
         }).filter((tab) => org || ["account", "support"].includes(tab.id)),
         loaders: tabLoaders,
+        organizationName: org?.name,
         message: context.message,
         refreshPending: context.refreshPending,
         refresh: context.refresh,
@@ -293,8 +316,9 @@ async function renderNoOrganization(panel, { user, plan, isCurrent }) {
   );
   const copy = organizationsEmptyCopy(document.documentElement.lang);
   const empty = node("section", undefined, {
-    class: "empty-state systems-empty",
+    class: "manager-empty manager-empty-systems",
   });
+  join.classList.add("manager-button", "primary");
   empty.append(node("h4", copy.title), node("p", copy.description), join);
   section.append(empty);
   panel.append(section);

@@ -6,12 +6,6 @@
   max-width: 72ch;
   color: #526378;
 }
-.host-api-keys .view-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
 .host-api-pricing {
   display: flex;
   flex-wrap: wrap;
@@ -19,7 +13,10 @@
   gap: 12px 28px;
   padding: 16px 0;
   margin-bottom: 8px;
-  border-block: 1px solid #d6e1ed;
+  border-block: 1px solid #e5ebf1;
+}
+.host-api-pricing:empty {
+  display: none;
 }
 .host-api-pricing strong {
   font-size: 17px;
@@ -28,24 +25,6 @@
 .host-api-pricing span {
   color: #526378;
   font-size: 14px;
-}
-.host-api-keys details > summary {
-  cursor: pointer;
-  color: #174678;
-  font-weight: 600;
-  padding-block: 9px;
-}
-.host-api-keys details > summary:hover {
-  color: #0a3971;
-}
-.host-api-examples,
-.host-api-create {
-  border-bottom: 1px solid #d6e1ed;
-  padding: 8px 0 16px;
-}
-.host-api-examples > summary,
-.host-api-create > summary {
-  width: fit-content;
 }
 .host-api-examples > p,
 .host-api-example-guide p {
@@ -103,7 +82,6 @@
 }
 .host-api-create > form {
   max-width: 780px;
-  padding-top: 8px;
 }
 .host-api-permissions {
   display: grid;
@@ -158,6 +136,7 @@
   align-items: center;
   gap: 8px;
   font-size: 14px;
+  white-space: nowrap;
 }
 .host-api-toolbar select {
   max-width: 250px;
@@ -169,6 +148,8 @@
   overflow-x: auto;
   max-width: 100%;
   margin-bottom: 12px;
+  border: 1px solid #d8e1eb;
+  border-radius: 8px;
 }
 .host-api-table {
   width: 100%;
@@ -319,7 +300,7 @@
   border-bottom: 1px solid #d6e1ed;
 }
 .host-api-keys
-  :is(button, summary, select, input, textarea, [tabindex]):focus-visible {
+  :is(button, select, input, textarea, [tabindex]):focus-visible {
   outline: 2px solid #0b63ff;
   outline-offset: 3px;
 }

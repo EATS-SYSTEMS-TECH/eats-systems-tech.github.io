@@ -646,6 +646,7 @@ export async function renderHostCalendar(context) {
       hiddenNotice.hidden = showUnselected || !allBookings.some(excluded);
       truncated = Boolean(cursor);
       status.textContent = "";
+      delete status.dataset.state;
       loaded = request;
       draw();
     } catch (error) {
@@ -653,7 +654,11 @@ export async function renderHostCalendar(context) {
       loaded = request;
       section.classList.remove("host-calendar--empty");
       status.textContent = bookingMessage(error);
-      const retry = node("button", hostText("Try again"), { type: "button" });
+      status.dataset.state = "error";
+      const retry = node("button", hostText("Try again"), {
+        type: "button",
+        class: "manager-button manager-retry",
+      });
       retry.addEventListener("click", () => void load());
       grid.replaceChildren(retry);
     }

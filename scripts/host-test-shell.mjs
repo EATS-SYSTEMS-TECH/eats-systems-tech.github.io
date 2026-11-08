@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { staticDashboardHtml } from "./lib/static-dashboard-html.mjs";
 
 // Shared fixtures for the Host dashboard browser tests: the dashboard shell
 // (the same landmarks and styles as dashboard/host/index.html, without the
@@ -37,7 +38,7 @@ export function workspaceFor(role, service = { state: "legacy-active", available
 // isolated fixture script; all layout styles, landmarks and IDs are real.
 export function hostShell(script, { head = "" } = {}) {
   let html = readFileSync(new URL("../dashboard/host/index.html", import.meta.url), "utf8");
-  html = html.replace(/<script[\s\S]*?<\/script>/g, "");
+  html = staticDashboardHtml(html);
   html = html.replace("</head>", `${head}</head>`);
   return html.replace("</body>", `<script type="module">document.querySelector('#host-sidebar').hidden=false;document.querySelector('#dashboard-content').hidden=false;document.querySelector('#access-panel').hidden=true;document.body.classList.add('host-ready');</script>${script ? `<script type="module" src="${script}"></script>` : ""}</body>`);
 }

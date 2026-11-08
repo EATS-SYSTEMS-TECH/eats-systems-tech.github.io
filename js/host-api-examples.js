@@ -72,7 +72,9 @@ export function reservationCode(language, body) {
 }
 
 export function renderApiExamples(container, systems = []) {
-  const details = node("details", undefined, { class: "host-api-examples" });
+  const details = node("details", undefined, {
+    class: "host-api-examples dashboard-examples",
+  });
   details.append(node("summary", hostText("Integration examples")));
   const controls = node("div", undefined, {
     class: "host-api-example-controls",

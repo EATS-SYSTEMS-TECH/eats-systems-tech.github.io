@@ -267,8 +267,10 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
       );
       await page.evaluate(() => window.finishVerification());
       await page.waitForFunction(() => window.requests.length === 2);
+      // The setup guide's Previous stays disabled on its first step (Manager's
+      // guide); every action the change locked opens again.
       await page.waitForFunction(
-        () => document.querySelectorAll("button:disabled").length === 0,
+        () => document.querySelectorAll("button:disabled:not(.manager-setup-previous)").length === 0,
       );
       const result = await page.evaluate(() => ({
         requests: window.requests,

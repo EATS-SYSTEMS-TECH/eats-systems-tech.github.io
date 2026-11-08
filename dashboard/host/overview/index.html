@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-host-loading>
   <head>
     <meta charset="utf-8" />
     <script src="/js/legacy-platform-redirect.js?v=20261029orgmanage1" data-product="host"></script>
@@ -7,18 +7,37 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta name="referrer" content="no-referrer" />
     <title>WIFIGATE Host</title>
+    <style>
+      html[data-host-loading] { overflow: hidden; }
+      html[data-host-loading] .platform-shell { visibility: hidden !important; }
+      #host-loading { box-sizing: border-box; position: fixed; inset: 0; z-index: 10000; display: grid; place-content: center; justify-items: center; gap: 22px; padding: 28px; background: #f5f7fa; color: #172b45; font: 16px/1.7 system-ui, sans-serif; text-align: center; }
+      #host-loading[hidden] { display: none !important; }
+      #host-loading strong { font-size: clamp(23px, 5vw, 32px); letter-spacing: .03em; }
+      #host-loading p { max-width: 38ch; margin: 0; }
+      #host-loading progress { display: block; width: min(280px, 75vw); height: 8px; overflow: hidden; border: 0; border-radius: 8px; background: #e2e8f0; accent-color: #0b63ff; }
+      #host-loading progress::-webkit-progress-bar { background: #e2e8f0; border-radius: 8px; }
+      #host-loading progress::-webkit-progress-value { background: #0b63ff; border-radius: 8px; }
+      #host-loading progress::-moz-progress-bar { background: #0b63ff; border-radius: 8px; }
+      #host-loading a { color: #0a55d9; font-size: 13px; text-underline-offset: 4px; }
+      #host-loading [lang="he"] { display: none; }
+      html[lang="he"] #host-loading [lang="en"] { display: none; }
+      html[lang="he"] #host-loading [lang="he"] { display: inline; }
+    </style>
+    <script src="/js/host-loading.js?v=20261108hostparity1"></script>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
-    <link rel="stylesheet" href="/css/platform.css?v=20261106platformux1" />
-    <link rel="stylesheet" href="/css/host-dashboard.css?v=20261101hover1" />
-    <link rel="stylesheet" href="/css/host-admin.css?v=20261014w6" />
-    <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
-    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261105verified1" />
-    <link rel="stylesheet" href="/css/role-guide.css?v=20261106platformux1" />
-    <link rel="stylesheet" href="/css/host-manager-theme.css?v=20261101workspace1" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/platform.css?v=20261106platformux1" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/host-dashboard.css?v=20261109hostparity2" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/host-admin.css?v=20261014w6" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/manager-dashboard.css?v=20261108hostparity1" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261109hostparity2" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/role-guide.css?v=20261106platformux1" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/host-api-keys.css?v=20261109hostparity2" media="print" data-host-style />
+    <link rel="stylesheet" href="/css/host-manager-theme.css?v=20261109hostparity2" media="print" data-host-style />
     <script
       type="module"
-      src="/js/host-dashboard.bundle.js?v=20261106simulation1"
+      src="/js/host-dashboard.bundle.js?v=20261109hostparity2"
     ></script>
   </head>
   <body class="host-app portal-dashboard platform-page host-manager-workspace" data-product="host">
@@ -29,7 +48,14 @@
       >Skip to workspace</a
     >
 
-    <div class="platform-shell host-manager-page">
+    <section id="host-loading" role="status" aria-live="polite" aria-atomic="true">
+      <strong dir="ltr">WIFIGATE Host</strong>
+      <p id="host-loading-label"><span lang="en">Loading your workspace…</span><span lang="he">טוענים את סביבת העבודה…</span></p>
+      <progress id="host-loading-progress" max="4" value="0" aria-label="Workspace loading progress"></progress>
+      <a href=""><span lang="en">Reload page</span><span lang="he">טעינה מחדש</span></a>
+    </section>
+    <noscript><style>#host-loading { display: none; }</style><p lang="he" dir="rtl">יש להפעיל JavaScript כדי להיכנס ל־WIFIGATE Host.</p><p lang="en">Enable JavaScript to open WIFIGATE Host.</p></noscript>
+    <div class="platform-shell host-manager-page" inert aria-busy="true">
     <header class="host-topbar platform-header">
       <div class="host-topbar__start">
         <button
@@ -60,7 +86,7 @@
         </h1>
       </div>
       <div id="product-switcher" class="product-switcher"></div>
-      <div class="host-topbar__end">
+      <div class="host-topbar__end dashboard-header-actions">
           <a class="dashboard-website-link" href="/" aria-label="WIFIGATE Website" title="WIFIGATE Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a17 17 0 0 1 0 18 17 17 0 0 1 0-18Z"/></svg><span dir="ltr">WIFIGATE Website</span></a>
         <button
           id="join-organization"
@@ -119,6 +145,31 @@
         </div>
       </div>
     </header>
+    <section
+      id="access-panel"
+      class="host-access"
+      aria-labelledby="access-title"
+    >
+      <h2 id="access-title" data-host-copy="Opening WIFIGATE Host">
+        Opening WIFIGATE Host
+      </h2>
+      <p
+        id="dashboard-status"
+        role="status"
+        aria-live="polite"
+        data-host-copy="Checking your access…"
+      >
+        Checking your access…
+      </p>
+      <button
+        id="refresh-access"
+        type="button"
+        hidden=""
+        data-host-copy="Check again"
+      >
+        Check again
+      </button>
+    </section>
     <div class="host-scrim" hidden=""></div>
     <div id="host-workspace-shell" class="manager-shell host-manager-shell" data-mode="workspace">
     <aside
@@ -161,51 +212,16 @@
     </aside>
     <main id="workspace-main" class="portal-shell manager-main" tabindex="-1">
       <span class="staging-badge" data-staging="" hidden="">LOCAL STAGING</span>
-      <section
-        id="access-panel"
-        class="portal-panel host-access"
-        aria-labelledby="access-title"
-      >
-        <h2 id="access-title" data-host-copy="Opening WIFIGATE Host">
-          Opening WIFIGATE Host
-        </h2>
-        <p
-          id="dashboard-status"
-          role="status"
-          aria-live="polite"
-          data-host-copy="Checking your access…"
-        >
-          Checking your access…
-        </p>
-        <div
-          id="access-progress"
-          class="app-login__progress"
-          role="progressbar"
-          aria-label="Loading"
-          data-host-label="Loading"
-        >
-          <span></span>
-        </div>
-        <button
-          id="refresh-access"
-          type="button"
-          hidden=""
-          data-host-copy="Check again"
-        >
-          Check again
-        </button>
-      </section>
+
       <div id="dashboard-content" class="manager-view" hidden="">
         <section
           id="admin-overview"
-          class="portal-panel"
           aria-label="Administrator overview"
           hidden=""
           data-host-label="Administrator overview"
         ></section>
         <section
           id="host-management"
-          class="portal-panel"
           aria-label="Organization management"
           data-host-label="Organization management"
         ></section>

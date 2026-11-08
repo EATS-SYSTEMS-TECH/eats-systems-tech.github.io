@@ -1679,7 +1679,14 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         route.abort(),
       );
       await page.goto(origin + "/dashboard/host/");
-      await page.locator("#access-panel").waitFor({ state: "visible" });
+      // Manager's progress screen keeps the unfinished shell hidden and
+      // inert, and says the workspace could not finish loading.
+      await page
+        .getByText("The workspace could not finish loading. Please reload.", { exact: true })
+        .waitFor();
+      assert.equal(await page.locator("#host-loading").isVisible(), true);
+      assert.equal(await page.locator(".platform-shell").isVisible(), false);
+      assert.equal(await page.locator(".platform-shell").evaluate((node) => node.inert), true);
       assert.equal(await page.locator("#account-menu").isVisible(), false);
       assert.ok(await noSidewaysScroll(page));
     },

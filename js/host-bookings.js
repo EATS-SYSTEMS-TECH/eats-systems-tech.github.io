@@ -92,7 +92,7 @@ export async function renderHostBookings(context) {
   const { container, user, organization, systems } = context;
   const section = node("section", undefined, {
     "aria-label": "Bookings",
-    class: "host-bookings",
+    class: "host-bookings manager-view",
   });
   container.append(section);
   const current = () => context.isCurrent() && section.isConnected;
@@ -152,8 +152,11 @@ export async function renderHostBookings(context) {
   search.append(query);
   const actions = node("div", undefined, { class: "bookings-actions" });
   actions.append(search);
+  // Manager's toolbar: the view's title, and "+ Booking" at its end.
+  const toolbar = node("div", undefined, { class: "manager-toolbar" });
+  toolbar.append(node("h3", hostText("Bookings")));
   if (can(organization, "reservations:write") && systems.length)
-    actions.append(
+    toolbar.append(
       newBookingButton(organization, (button) =>
         context.newBooking({ trigger: button }),
       ),
@@ -191,7 +194,7 @@ export async function renderHostBookings(context) {
     hidden: "",
   });
   // No systems: the one sentence and its action, above the tabs' lists.
-  section.append(header, filter);
+  section.append(toolbar, header, filter);
   if (!systems.length) section.append(noSystemsState(organization));
   section.append(status, list, more);
 

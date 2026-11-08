@@ -10,7 +10,6 @@ import {
   systemGrid,
   organizationBadge,
   notLinkedBadge,
-  examplePill,
   action,
   openSystemDialog,
   organizationChoices,
@@ -80,8 +79,8 @@ export async function renderExampleGroup(
                 ),
           ];
           return systemCard(example, {
+            // The card's own Manager example badge says what it is.
             badges: [
-              examplePill(),
               linked ? organizationBadge(linked.name) : notLinkedBadge(),
             ],
             actions,
@@ -107,8 +106,7 @@ export async function renderExampleGroup(
               const badgeRow = node("p", undefined, {
                 class: "system-card__badges host-example-link",
               });
-              // The simulator already identifies itself as an example.
-              badgeRow.append(...badges.filter((badge) => !badge.classList.contains("system-badge--example")));
+              badgeRow.append(...badges);
               dialog.querySelector(".try-it__header").insertBefore(menu, dialog.querySelector(".try-it__close"));
               dialog.querySelector(".try-it__note").after(badgeRow);
             },

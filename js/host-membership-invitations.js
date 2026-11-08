@@ -1,4 +1,4 @@
-import { hostText, hostLocale } from "./host-locale.js";
+import { hostText, hostLocale, hostLanguage } from "./host-locale.js";
 import {
   portalRequest,
   pendingMembershipInvitations,
@@ -94,7 +94,7 @@ export async function renderPendingMembershipInvitations({
   // authenticator before joining.
   const section = node("section", undefined, {
       "aria-label": "Join an organization",
-      class: "join-view",
+      class: "join-view manager-view",
     }),
     heading = node("div", undefined, { class: "view-heading" }),
     status = node("p", hostText("Loading…"), {
@@ -103,7 +103,7 @@ export async function renderPendingMembershipInvitations({
     }),
     again = node("button", hostText("Check again"), {
       type: "button",
-      class: "button-secondary",
+      class: "manager-button",
       hidden: "",
     }),
     rows = node("div", undefined, { class: "join-view__rows" });
@@ -128,7 +128,7 @@ export async function renderPendingMembershipInvitations({
     for (const item of result.items) {
       const row = node("article", undefined, {
         "data-invitation-id": item.id,
-        class: "join-card",
+        class: "join-card manager-card manager-row",
       });
       const details = node("div", undefined, { class: "join-card__details" });
       details.append(
@@ -139,6 +139,7 @@ export async function renderPendingMembershipInvitations({
       row.append(details, roleBadge(item.role));
       const accept = node("button", hostText("Join"), {
         type: "button",
+        class: "manager-button primary",
         "aria-label": hostText("Join {p0}", { p0: item.organizationName }),
       });
       let intent;
@@ -280,8 +281,24 @@ export async function renderOwnerMembershipInvitations({
       ),
     ),
   );
-  section.append(heading, form, status, rows);
-  container.append(section);
+  // Pending invitations: Manager's disclosure with its count, open by
+  // default, shown once there is one.
+  const pending = node("details", undefined, {
+    class: "dashboard-examples manager-organization-pending team-pending",
+    open: "",
+    hidden: "",
+  });
+  const pendingCount = node("span", "", { class: "manager-organization-people-count" });
+  const pendingTitle = node("summary", hostLanguage === "he" ? "הצטרפויות ממתינות" : "Pending invitations");
+  pendingTitle.append(pendingCount);
+  pending.append(pendingTitle, rows);
+  const countPending = () => {
+    const count = rows.querySelectorAll("[data-invitation-id]").length;
+    pendingCount.textContent = String(count);
+    pending.hidden = !count;
+  };
+  section.append(heading, form, status);
+  container.append(section, pending);
   const current = () => isCurrent() && section.isConnected,
     root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/member-invitations`,
     attempts = new Map();
@@ -394,6 +411,7 @@ export async function renderOwnerMembershipInvitations({
       });
       rows.append(more);
     }
+    countPending();
     status.textContent = "";
   }
   form.addEventListener("submit", async (event) => {

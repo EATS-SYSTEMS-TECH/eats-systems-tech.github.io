@@ -138,10 +138,11 @@ test("Calendar and Bookings: systems as rows, the booking sheet and guest links"
     async () => {
       // [width, range, agenda]: two weeks only when they fit, one week on a
       // tablet or a small laptop, an agenda where one week does not fit.
+      // At 600px Manager's layout (no panel padding) leaves room for a week.
       for (const [width, range, agenda] of [
         [320, "week", true],
         [390, "week", true],
-        [600, "week", true],
+        [600, "week", false],
         [768, "week", false],
         [1024, "week", false],
         [1280, "week", false],

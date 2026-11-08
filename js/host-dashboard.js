@@ -32,7 +32,6 @@ import { isLocalStaging } from "./firebase-config.js";
 import { attachPopover, firstFocusable } from "./popover.js";
 import { loadHostManagement, clearHostManagement } from "./host-management.js";
 import { mountRoleGuideButton } from "./role-guide.js";
-import { planRoleName } from "./role-names.js";
 
 // The Host dashboard shell. Access comes from GET /api/v1/platform/me alone:
 //   active + plan role (admin/user): the workspace with My systems;
@@ -49,6 +48,9 @@ let generation = 0;
 let actionBusy = false;
 let session;
 let accessCheckInProgress = false;
+// The first-paint progress screen (js/host-loading.js) keeps the shell
+// hidden until the access check and the workspace's first load settle.
+const hostLoading = window.wifigateHostLoading;
 initializeHostLocale();
 installHostLanguageSelector();
 for (const link of document.querySelectorAll("[data-products-link]"))
@@ -94,9 +96,9 @@ function clearSession() {
   $("#account-avatar").textContent = "";
   $("#host-workspace-roles")?.replaceChildren();
 }
-function showStatus(title, message, retry = true, loading = false) {
+// Loading itself is shown by the first-paint progress screen.
+function showStatus(title, message, retry = true) {
   $("#access-panel").hidden = false;
-  $("#access-progress").hidden = !loading;
   $("#access-title").textContent = hostText(title);
   $("#dashboard-status").textContent = hostText(message);
   $("#refresh-access").hidden = !retry;
@@ -113,16 +115,12 @@ function renderAccount(user) {
   $("#account-name").textContent = name;
   $("#account-email").textContent = profile.email || "";
   renderProfileRoles($("#account-plan"), { platformRole: identity?.platformRole, product: "host", role: identity?.hasPlan ? identity.role : null, verified: identity?.user?.emailVerified === true });
+  // Manager's sidebar lists organization roles only, never the plan role;
+  // the plan role stays in the profile menu.
   const workspaceRoles = $("#host-workspace-roles");
   if (workspaceRoles) {
     workspaceRoles.replaceChildren();
-    workspaceRoles.hidden = !identity?.hasPlan;
-    if (identity?.hasPlan) {
-      const role = document.createElement("span");
-      role.dir = "ltr";
-      role.textContent = planRoleName(identity.role);
-      workspaceRoles.append(role);
-    }
+    workspaceRoles.hidden = true;
   }
   mountRoleGuideButton({
     product: "host",
@@ -145,6 +143,9 @@ function toPicker() {
 
 async function loadDashboard(user) {
   const requestGeneration = ++generation;
+  const loadingTicket = hostLoading?.begin();
+  let revealWorkspace = true;
+  let loadingFailed = false;
   currentUser = user;
   identity = undefined;
   hideProtected();
@@ -154,7 +155,6 @@ async function loadDashboard(user) {
     hostText("Opening WIFIGATE Host"),
     hostText("Checking your access…"),
     false,
-    true,
   );
   try {
     const platform = parsePlatformIdentity(
@@ -162,11 +162,13 @@ async function loadDashboard(user) {
       user.uid,
     );
     if (requestGeneration !== generation) return;
+    hostLoading?.advance(loadingTicket, 2);
     const fresh = hostIdentity(platform);
     const state = portalState(fresh);
     if (state !== PortalStates.APPROVED && state !== PortalStates.PENDING) {
       // No Host access here (no plan, blocked, authenticator to finish or
       // unavailable): the picker explains the state and offers the next step.
+      revealWorkspace = false;
       toPicker();
       return;
     }
@@ -194,29 +196,37 @@ async function loadDashboard(user) {
     // Settings (and its Account tab) open once the account is in Host; a
     // pending account reaches its account through All products.
     $("#account-security").hidden = state === PortalStates.PENDING;
-    void loadHostManagement(user, identity);
-    if (state !== PortalStates.APPROVED) return;
-    void loadAdminOverview(user, identity).then(() => {
-      if (
-        requestGeneration === generation &&
-        location.pathname === "/dashboard/host/overview/" &&
-        identity?.role === Roles.ADMIN
-      ) {
-        window.dispatchEvent(
-          new CustomEvent("host:workspace-view", { detail: "overview" }),
-        );
-      }
-    });
+    const management = loadHostManagement(user, identity);
+    if (state === PortalStates.APPROVED)
+      void loadAdminOverview(user, identity).then(() => {
+        if (
+          requestGeneration === generation &&
+          location.pathname === "/dashboard/host/overview/" &&
+          identity?.role === Roles.ADMIN
+        ) {
+          window.dispatchEvent(
+            new CustomEvent("host:workspace-view", { detail: "overview" }),
+          );
+        }
+      });
+    // The workspace reports its own read failures inside the shell.
+    await Promise.resolve(management).catch(() => {});
+    if (requestGeneration !== generation) return;
+    hostLoading?.advance(loadingTicket, 3);
   } catch (error) {
     if (requestGeneration !== generation) {
       return;
     }
+    loadingFailed = true;
     hideProtected(
       error.status === HttpStatus.FORBIDDEN ||
         error.status === HttpStatus.UNAUTHORIZED,
     );
     identity = undefined;
     showStatus(hostText("Unable to check access"), authErrorMessage(error));
+  } finally {
+    if (revealWorkspace && requestGeneration === generation)
+      await hostLoading?.finish(loadingTicket, loadingFailed);
   }
 }
 initializeSiteAuth((user) => {
@@ -235,9 +245,11 @@ initializeSiteAuth((user) => {
   session?.stop();
   session = watchSession({ clear: clearSession });
   void loadDashboard(user);
-}).catch((error) =>
-  showStatus(hostText("Unable to sign in"), authErrorMessage(error), false),
-);
+}).catch((error) => {
+  showStatus(hostText("Unable to sign in"), authErrorMessage(error), false);
+  // Reveal the shell with its specific message instead of the generic one.
+  void hostLoading?.finish(hostLoading.begin(), true);
+});
 $("#sign-out").addEventListener("click", async () => {
   ++generation;
   hideProtected();

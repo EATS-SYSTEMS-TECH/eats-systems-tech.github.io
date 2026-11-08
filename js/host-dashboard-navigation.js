@@ -6,6 +6,7 @@ import {
 } from "./host-workspace-model.js";
 import { hostText } from "./host-locale.js";
 import { confirmHostWorkspaceLeave } from "./host-workspace-drafts.js";
+import { hostUiIcon } from "./host-ui-icons.js";
 
 // Sidebar navigation, the phone tab bar, the join-organization bell and the
 // Platform item. A view's item is shown only while the workspace has built
@@ -33,6 +34,17 @@ const icons = {
   shield: "M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6z M9 12l2 2 4-4",
   more: "M4 7h16 M4 12h16 M4 17h16",
 };
+// The shared layout uses Manager's navigation icons.
+const managerIcons = {
+  "my-systems": "systems",
+  "my-organizations": "organizations",
+  "choose-organization": "organizations",
+  systems: "systems",
+  calendar: "calendar",
+  bookings: "list",
+  "api-keys": "key",
+  settings: "settings",
+};
 const svg = (icon) =>
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' +
   icons[icon] +
@@ -45,8 +57,9 @@ const personalNavigation = document.createElement("section");
 personalNavigation.className = "manager-personal-navigation";
 personalNavigation.setAttribute("aria-label", hostText("Personal workspace"));
 for (const element of sidebar?.querySelectorAll(".manager-nav-title, #host-workspace-roles") ?? []) personalNavigation.append(element);
-const organizationNavigation = document.createElement("div");
-organizationNavigation.className = "manager-organization-navigation";
+// Organization items sit directly in the organization area, as in Manager,
+// so they stack as full-width rows on every width.
+const organizationButtons = [];
 nav.append(personalNavigation);
 const organizationArea = document.createElement("section");
 organizationArea.className = "manager-organization-area";
@@ -59,7 +72,6 @@ organizationArea.append(organizationTitle);
 nav.append(organizationArea);
 const organizationPicker = document.getElementById("workspace-org-switcher");
 if (organizationPicker) organizationArea.append(organizationPicker);
-organizationArea.append(organizationNavigation);
 
 let toggle = document.querySelector(".workspace-menu-toggle");
 if (!toggle) {
@@ -128,6 +140,7 @@ function viewButton(view, className) {
   button.dataset.viewId = view.id;
   button.className = [className, sharedLayout ? "manager-button" : ""].filter(Boolean).join(" ");
   if (!sharedLayout || view.placement === "platform") button.innerHTML = svg(view.icon);
+  else if (managerIcons[view.id]) button.append(hostUiIcon(managerIcons[view.id]));
   const label = document.createElement("span");
   label.textContent = hostText(view.label);
   button.append(label);
@@ -173,7 +186,11 @@ for (const view of workspaceViews) {
   const button = viewButton(view);
   buttons.set(view.id, button);
   if (!["platform", "home"].includes(view.placement)) {
-    (["my-systems", "my-organizations"].includes(view.id) ? personalNavigation : organizationNavigation).append(button);
+    if (["my-systems", "my-organizations"].includes(view.id)) personalNavigation.append(button);
+    else {
+      organizationArea.append(button);
+      organizationButtons.push(button);
+    }
     const organizationLabel = { calendar: "Organization calendar", connect: "Guest invitation automation API" }[view.id];
     if (organizationLabel) {
       button.querySelector("span").textContent = hostText(organizationLabel);
@@ -333,7 +350,11 @@ function refresh() {
     if (id === selected) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   }
-  organizationNavigation.hidden = !root.dataset.organizationId;
+  if (!root.dataset.organizationId)
+    for (const button of organizationButtons) {
+      button.hidden = true;
+      button.disabled = true;
+    }
   personalNavigation.hidden = !["my-systems", "my-organizations"].some(id => available(id));
   organizationArea.hidden = Boolean(organizationPicker?.hidden) && !root.dataset.organizationId;
   if (tabbar) {

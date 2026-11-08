@@ -12,7 +12,6 @@ import {
   appSteps,
   emptyState,
   systemsToolbar,
-  countText,
   openSystemDialog,
   bookingsRefusal,
   changeTracker,
@@ -66,7 +65,7 @@ export async function renderOrganizationSystems(panel, context) {
   const base = `/api/v1/organizations/${encodeURIComponent(organization.id)}`;
   const section = node("section", undefined, {
     "aria-label": "WIFIGATE systems",
-    class: "systems-view organization-systems",
+    class: "systems-view organization-systems manager-view",
   });
   panel.append(section);
   const { items } = await readHostPages(
@@ -105,13 +104,13 @@ export async function renderOrganizationSystems(panel, context) {
       // above a list that is not empty still says how; others read the
       // rename rule only.
       systemsToolbar(
-        countText(systems.length),
         manager
           ? hostText(
               "Add systems from the WIFIGATE app: open your profile → WIFIGATE Host → “Add to {p0}”. Rename them there too.",
               { p0: organization.name },
             )
           : hostText("To rename a system, rename it in the WIFIGATE app."),
+        context.retry,
       ),
       systemGrid(
         systems.map((system) =>

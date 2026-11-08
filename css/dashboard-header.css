@@ -1,8 +1,7 @@
-@import url("./workspace-operations.css?v=20261101workspace1");
+@import url("./workspace-operations.css?v=20261109hostparity2");
 
 /* Shared dashboard chrome: logo, workspace, language and personal profile. */
-body[data-product] .dashboard-examples,
-.host-app #host-management details.dashboard-examples {
+body[data-product] .dashboard-examples {
   margin: 0 0 24px;
   padding: 0;
   border: 1px solid #e2e8f0;
@@ -545,64 +544,6 @@ body[data-product=""] .product-actions :is(a, button) {
 body[data-product=""] .profile-account-management {
   margin-top: 28px;
 }
-/* Host retains its drawer and invitation bell, with the same header controls. */
-body.host-app .host-topbar {
-  z-index: 50;
-}
-body.host-app .host-topbar__title {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
-body.host-app .host-topbar__start {
-  display: flex;
-  grid-area: auto;
-  grid-column: 1;
-  grid-row: 1;
-  padding-inline-start: 0;
-}
-body.host-app .host-topbar__end {
-  grid-area: auto;
-  grid-column: 3;
-  grid-row: 1;
-  gap: 8px;
-}
-body.host-app:not(.host-ready) .host-topbar .workspace-menu-toggle,
-body.host-app.host-menu-empty .host-topbar .workspace-menu-toggle {
-  display: none;
-}
-@media (min-width: 960px) {
-  body.host-app .host-topbar .workspace-menu-toggle {
-    display: none;
-  }
-  body.host-app.host-ready:not(.host-menu-empty):has(
-      .host-sidebar:not([hidden])
-    )
-    .host-topbar__start {
-    padding-inline-start: 0;
-    display: flex;
-  }
-  body.host-app.host-ready:not(.host-menu-empty):has(
-      .host-sidebar:not([hidden])
-    )
-    .host-topbar {
-    grid-template-areas: none;
-  }
-  body.host-app.host-ready:not(.host-menu-empty):has(
-      .host-sidebar:not([hidden])
-    )
-    .host-topbar::before {
-    inset-inline-start: 0;
-  }
-  body.host-app .host-sidebar {
-    padding-block-start: 100px;
-  }
-  body.host-app .host-sidebar__brand {
-    display: none;
-  }
-}
 @media (max-width: 650px) {
   body[data-product=""] #product-grid {
     grid-template-columns: 1fr;
@@ -638,27 +579,8 @@ body.host-app.host-menu-empty .host-topbar .workspace-menu-toggle {
     width: 100%;
     justify-content: center;
   }
-  body.host-app .host-topbar__end {
-    grid-column: 2;
-    grid-row: 1;
-    gap: 4px;
-  }
-  body.host-app .host-topbar__start .brand {
-    width: 96px;
-  }
-  body.host-app .host-topbar__start {
-    gap: 6px;
-  }
-  body.host-app .workspace-menu-toggle {
-    grid-area: auto;
-  }
   .profile-details {
     grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 360px) {
-  body.host-app .host-topbar__start .brand {
-    width: 76px;
   }
 }
 
@@ -704,23 +626,6 @@ body[data-product] :is(.platform-header, .host-topbar) { width: 100%; max-width:
 body[data-product] :is(.platform-header, .host-topbar) .product-switcher__button { border-color: #475569; background: #f8fafc; }
 body[data-product] .product-switcher__button:is(:hover, [aria-expanded="true"]) { border-color: #475569; background: #f8fafc; }
 
-body.host-app .host-topbar { width: min(1080px, calc(100vw - 2 * clamp(1rem, 3.5vw, 2.5rem))); }
-@media (min-width: 960px) {
-  body.host-app.host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden])) .host-topbar {
-    margin-inline-start: calc((100vw - min(1080px, calc(100vw - 2 * clamp(1rem, 3.5vw, 2.5rem)))) / 2 - var(--sidebar-width));
-    margin-inline-end: 0;
-  }
-}
-
-@media (min-width: 960px) {
-  body.host-app.host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden])) .host-topbar .product-switcher {
-    grid-area: auto; grid-column: 2; grid-row: 1;
-  }
-  body.host-app.host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden])) .host-topbar__end {
-    grid-area: auto; grid-column: 3; grid-row: 1;
-  }
-}
-
 /* Account identity, global authority and product authority have distinct weights. */
 body[data-product] .dashboard-profile-panel { padding: 20px; border-radius: 16px; }
 body[data-product] a.dashboard-profile-identity { border-radius: 10px; }
@@ -757,12 +662,9 @@ body[data-product] :is(.platform-header,.host-topbar) .brand:has(.dashboard-iden
 @media(max-width:1100px) {
  body[data-product] :is(.platform-header,.host-topbar):has(.dashboard-identity-tag) { grid-template-columns:minmax(0,1fr) auto; }
  body[data-product] :is(.platform-header,.host-topbar):has(.dashboard-identity-tag) #product-switcher { grid-column:1 / -1; grid-row:2; }
- body.host-app .host-topbar:has(.dashboard-identity-tag) .host-topbar__end { grid-column:2; }
 }
 @media(max-width:650px) {
- body[data-product] :is(.platform-header,.host-topbar) .brand:has(.dashboard-identity-tag),
- body.host-app .host-topbar:has(.dashboard-identity-tag) .host-topbar__start { grid-column:1 / -1; grid-row:1; }
- body[data-product] .platform-header:has(.dashboard-identity-tag) .dashboard-header-actions,
- body.host-app .host-topbar:has(.dashboard-identity-tag) .host-topbar__end { grid-column:1 / -1; grid-row:2; justify-self:end; }
+ body[data-product] :is(.platform-header,.host-topbar) .brand:has(.dashboard-identity-tag) { grid-column:1 / -1; grid-row:1; }
+ body[data-product] .platform-header:has(.dashboard-identity-tag) .dashboard-header-actions { grid-column:1 / -1; grid-row:2; justify-self:end; }
  body[data-product] :is(.platform-header,.host-topbar):has(.dashboard-identity-tag) #product-switcher { grid-column:1 / -1; grid-row:3; }
 }

@@ -4,6 +4,8 @@ import { field, node, hostDateTime } from "./host-ui.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
 import { can, ownerOnly } from "./host-permissions.js";
 import { renderApiExamples } from "./host-api-examples.js";
+import { createManagerSectionHeading } from "./manager-section-heading.js";
+import { hostUiIcon } from "./host-ui-icons.js";
 
 const errors = {
   RECENT_REAUTH_REQUIRED:
@@ -48,8 +50,14 @@ export async function renderHostApiKeys({
     "aria-label": "API keys",
     class: "host-api-keys",
   });
-  const heading = node("div", undefined, { class: "view-heading" });
-  heading.append(node("h2", hostText("API keys")));
+  // Manager's section heading; the title stays this region's h2.
+  const heading = createManagerSectionHeading({
+    title: hostText("API keys"),
+    icon: "key",
+    level: "h2",
+    className: "host-api-heading",
+  });
+  heading.querySelector(".manager-section-symbol").replaceChildren(hostUiIcon("key"));
   const status = node("p", hostText("Loading…"), {
     role: "status",
     "aria-live": "polite",
@@ -67,7 +75,9 @@ export async function renderHostApiKeys({
   );
   renderApiExamples(section, systems);
 
-  const creation = node("details", undefined, { class: "host-api-create" });
+  const creation = node("details", undefined, {
+    class: "host-api-create dashboard-examples",
+  });
   creation.append(node("summary", hostText("Create API key")));
   const form = node("form"),
     name = field(form, "API key name", "name");
@@ -467,11 +477,13 @@ export async function renderHostApiKeys({
     let tbody = list.querySelector("tbody");
     if (!append || !tbody) {
       const scroll = node("div", undefined, {
-        class: "host-api-table-scroll",
+        class: "host-api-table-scroll manager-table-wrap",
         tabindex: "0",
         "aria-label": "Organization API keys",
       });
-      const table = node("table", undefined, { class: "host-api-table" }),
+      const table = node("table", undefined, {
+          class: "host-api-table manager-table",
+        }),
         thead = node("thead"),
         row = node("tr");
       for (const label of [

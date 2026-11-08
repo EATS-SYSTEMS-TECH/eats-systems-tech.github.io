@@ -584,7 +584,14 @@ async function loadWorkspace(user, identity, preferredId) {
           }
         } catch (error) {
           if (!viewCurrent()) return;
-          panel.replaceChildren(node("p", message(error), { role: "status" }));
+          // Manager's read error: the sentence in error red, then its retry.
+          panel.replaceChildren(
+            node("p", message(error), {
+              role: "status",
+              class: "manager-status",
+              "data-state": "error",
+            }),
+          );
           if (error?.code === "TOTP_REQUIRED") {
             const verify = node("button", hostText("Verify authenticator"), {
               type: "button",
@@ -596,6 +603,7 @@ async function loadWorkspace(user, identity, preferredId) {
           }
           const retry = node("button", hostText("Retry this screen"), {
             type: "button",
+            class: "manager-button manager-retry",
           });
           retry.addEventListener("click", () => void navigateWorkspace?.(id));
           panel.append(retry);

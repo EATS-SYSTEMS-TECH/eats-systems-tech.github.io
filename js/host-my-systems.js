@@ -101,7 +101,7 @@ export function renderSidebarSystems(systems, onSelect) {
 export async function renderMySystems(panel, context) {
   const section = node("section", undefined, {
     "aria-label": "My systems",
-    class: "systems-view my-systems",
+    class: "systems-view my-systems manager-view",
   });
   panel.append(section);
   const toolbar = node("div", undefined, { class: "manager-toolbar" });
@@ -137,7 +137,7 @@ export async function renderMySystems(panel, context) {
   if (!context.isCurrent()) return;
   if (!systems.length) {
     const copy = systemsEmptyCopy(document.documentElement.lang);
-    const empty = node("section", undefined, { class: "manager-empty manager-empty-systems empty-state systems-empty" });
+    const empty = node("section", undefined, { class: "manager-empty manager-empty-systems" });
     empty.append(node("h4", copy.title), node("p", copy.description));
     section.append(empty);
   } else

@@ -8,6 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 import { hostShell, rolePermissions } from "../host-test-shell.mjs";
+import { staticDashboardHtml } from "./static-dashboard-html.mjs";
 
 export const root = fileURLToPath(new URL("../../", import.meta.url));
 
@@ -145,8 +146,7 @@ export async function openWorkspace(
         path.join(root, "dashboard/host/index.html"),
         "utf8",
       );
-      html = html
-        .replace(/<script[\s\S]*?<\/script>/g, "")
+      html = staticDashboardHtml(html)
         .replace(
           "</body>",
           `<script type="module">document.querySelector('#host-sidebar').hidden=false;document.querySelector('#dashboard-content').hidden=false;document.querySelector('#access-panel').hidden=true;document.body.classList.add('host-ready');const {installHostLanguageSelector}=await import('/js/host-locale.js');installHostLanguageSelector();</script><script type="module" src="/booking-fixture.js"></script></body>`,

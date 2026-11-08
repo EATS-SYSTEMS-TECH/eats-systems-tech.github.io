@@ -1,64 +1,31 @@
-/* WIFIGATE Host dashboard (/dashboard/host/ and /dashboard/host/overview/).
-   One stylesheet on the website's tokens (css/platform.css: ink, muted, line,
-   card, Host blue) and Manrope (css/fonts.css through host-portal.css): a
-   glass top bar with the product pill at the top centre, a glass sidebar,
-   opaque white cards on the Host network backdrop. Below 960px the sidebar
-   is a drawer and a tab bar sits at the bottom. Logical properties only, so
-   Hebrew mirrors everything except the product order. */
+/* WIFIGATE Host dashboard (/dashboard/host/): Host-only views.
+   The shell, header, navigation, cards, disclosures, menus and dialogs are
+   WIFIGATE Manager's own components (manager-dashboard.css,
+   dashboard-header.css, workspace-operations.css); css/host-manager-theme.css
+   only remaps their accent to Host blue. This file styles what Manager has no
+   component for (calendar, bookings, booking sheet, team, settings forms,
+   API keys, Try it) in Manager's design language: the same surfaces, lines,
+   radii, type and controls. Every rule is addressed to a Host-only class, or
+   wrapped in :where() so it can never outrank a Manager component.
+   Logical properties only, so Hebrew mirrors everything. */
 .host-app {
   --surface: #ffffff;
   --surface-soft: #f8fafc;
   --chip: #f1f5f9;
-  --border: #e2e8f0;
-  --field: #d7e0e8;
-  --label: #475569;
+  --border: #d8e1eb;
+  --border-soft: #e5ebf1;
+  --field: #bccbd9;
+  --label: #53677f;
+  --heading: #172b46;
   --danger: #b42318;
-  --danger-soft: #fef3f2;
-  --platform: #6d28d9;
-  --platform-soft: #f3e8ff;
-  --example: #7c3aed;
-  --radius-card: 20px;
-  --radius-control: 12px;
-  --sidebar-width: 288px;
-  --topbar-height: 64px;
-  --tabbar-height: 64px;
-  --host-blue: var(--host);
-  --host-ink: var(--ink);
-  --host-line: var(--border);
-  --host-muted: var(--muted);
-  --host-surface: var(--surface);
-  min-height: 100vh;
-  min-height: 100dvh;
+  --danger-soft: #fff6f4;
+  --example: #6b4fa0;
+  --radius-card: 10px;
+  --radius-control: 7px;
   margin: 0;
-  /* Its own stacking context, so the fixed backdrop paints above the page
-     background and below everything else. */
-  isolation: isolate;
-  background: #ffffff;
   color: var(--ink);
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
   accent-color: var(--host);
-}
-
-/* Backdrop: the picker's construction with Host wiring
-   (scripts/generate-host-backdrop.mjs), fixed behind everything and mirrored
-   in RTL so the globe stays opposite the sidebar. */
-.host-app::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: url("../assets/img/host-backdrop.svg") center / cover no-repeat;
-}
-html[dir="rtl"] .host-app::before {
-  transform: scaleX(-1);
-}
-@media print, (forced-colors: active) {
-  .host-app::before {
-    display: none;
-  }
 }
 
 .host-app [hidden],
@@ -102,667 +69,266 @@ html[dir="rtl"] .host-app::before {
   inset-block-start: 12px;
 }
 
-/* Top bar: title (start), product pill (centre), bell, language and account
-   (end). The blur sits on a pseudo-element so the bar never becomes the
-   containing block of its fixed popovers. */
-.host-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
-  min-height: var(--topbar-height);
-  padding: 10px 24px;
-  border-bottom: 1px solid var(--border);
-}
-.host-topbar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(14px);
-}
-.host-topbar__start {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-.host-topbar__title {
-  margin: 0;
-  min-width: 0;
-  overflow: hidden;
-  color: var(--ink);
-  font-size: 1.2rem;
-  font-weight: var(--weight-heavy, 800);
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.host-topbar__brand {
-  display: none;
-  align-items: center;
-  width: 132px;
-  min-height: 44px;
-}
-body:not(.host-ready) .host-topbar__brand {
-  display: inline-flex;
-}
-body:not(.host-ready) .host-topbar__title,
-body:not(.host-ready) .workspace-menu-toggle,
-body:not(.host-ready) #join-organization {
-  display: none;
-}
-.host-topbar .product-switcher {
-  justify-self: center;
-}
-/* Beside the sidebar (from 960px) the bar runs under it to the window's
-   edge, so the pill sits at the centre of the screen at every width, as on
-   the picker, Pay and Manager; the title still starts beside the sidebar.
-   Below 1280px the title has its own row under the pill's, so it never
-   squeezes under the pill. */
-@media (min-width: 960px) {
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar {
-    margin-inline-start: calc(-1 * var(--sidebar-width));
-    border-bottom: 0;
-  }
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar::before {
-    inset-inline-start: var(--sidebar-width);
-    border-bottom: 1px solid var(--border);
-  }
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar__start {
-    padding-inline-start: var(--sidebar-width);
-  }
-}
-@media (min-width: 960px) and (max-width: 1279px) {
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar {
-    grid-template-areas:
-      "start pill end"
-      "title title title";
-    row-gap: 2px;
-  }
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar__start {
-    display: contents;
-  }
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar__title {
-    grid-area: title;
-    margin-inline-start: var(--sidebar-width);
-  }
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar
-    .product-switcher {
-    grid-area: pill;
-  }
-  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
-    .host-topbar__end {
-    grid-area: end;
-  }
-}
-.host-topbar__end {
-  justify-self: end;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 8px;
-  max-width: none;
-  color: var(--ink);
-  font-size: 0.85rem;
-  overflow-wrap: normal;
-}
-.host-icon-button,
-.workspace-menu-toggle,
-.host-account__button {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid #d8e4ea;
-  border-radius: 50%;
-  background: #ffffff;
-  color: var(--ink);
-  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
-  cursor: pointer;
-}
-.host-icon-button svg,
-.workspace-menu-toggle svg {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.host-icon-button:hover,
-.workspace-menu-toggle:hover,
-.host-account__button:hover,
-.host-language:hover {
-  background: var(--surface-soft);
-}
-.workspace-menu-toggle {
-  display: none;
-}
-.host-bell__count:empty {
-  display: none;
-}
-.host-bell__count {
-  position: absolute;
-  inset-block-start: -4px;
-  inset-inline-end: -4px;
-  display: grid;
-  place-items: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
-  border: 2px solid #ffffff;
-  border-radius: 999px;
-  background: var(--host);
-  color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: var(--weight-heavy, 800);
-  line-height: 1;
-}
-.host-bell[aria-current="page"] {
-  border-color: var(--host);
-  background: var(--host-soft);
-  color: var(--host-strong);
-}
-.host-language {
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid #d8e4ea;
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--ink);
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 700;
-  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
-  cursor: pointer;
-}
-.host-account {
-  position: relative;
-}
-.host-account__button {
-  border-color: transparent;
-  background: #0a0a0a;
-  color: #ffffff;
-}
-.host-account__button:hover {
-  background: #0a0a0a;
-  filter: brightness(1.25);
-}
-.host-account__button .profile-avatar {
-  font-size: 0.95rem;
-  font-weight: var(--weight-heavy, 800);
-  line-height: 1;
-}
-.host-account__menu {
-  position: fixed;
-  z-index: 70;
-  display: grid;
-  width: min(300px, calc(100vw - 32px));
-  padding: 8px;
-  overflow: auto;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-}
-.host-account__who {
-  display: grid;
-  gap: 2px;
-  margin-bottom: 6px;
-  padding: 10px 12px 12px;
-  border-bottom: 1px solid #eef2f6;
-  overflow-wrap: anywhere;
-}
-.host-account__who strong {
-  font-size: 0.95rem;
-}
-.host-account__who span {
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-.host-account__who span:empty {
-  display: none;
-}
-.host-account__who .host-role-badge {
-  justify-self: start;
-  margin: 6px 0 0;
-}
-.host-account__item {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 12px;
-  background: transparent;
-  color: var(--ink);
-  font: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-align: start;
-  text-decoration: none;
-  cursor: pointer;
-}
-.host-account__item:hover {
-  background: var(--chip);
-}
-.host-account__language {
-  display: none;
-}
-.host-account__sign-out {
-  color: var(--danger);
-}
-
-/* Sidebar: brand, organization card, navigation, My systems, Platform. */
-.host-sidebar {
-  position: fixed;
-  inset-block: 0;
-  inset-inline-start: 0;
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: var(--sidebar-width);
-  padding: 20px 16px 24px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  border-inline-end: 1px solid var(--border);
-  scrollbar-width: thin;
-}
-.host-sidebar::before {
-  content: "";
-  position: fixed;
-  inset-block: 0;
-  inset-inline-start: 0;
-  z-index: -1;
-  width: var(--sidebar-width);
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(14px);
-}
-.host-sidebar__brand {
-  display: flex;
-  align-items: center;
-  width: 150px;
-  min-height: 44px;
-  margin: 0 8px;
-}
-.host-ready:has(.host-sidebar:not([hidden])) {
-  padding-inline-start: var(--sidebar-width);
-}
-.org-switcher__box {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--surface);
-  box-shadow: 0 3px 9px rgba(15, 23, 42, 0.06);
-}
-.org-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  min-height: 56px;
-  padding: 10px 12px 4px;
-  border: 0;
-  border-radius: 18px 18px 0 0;
-  background: transparent;
-  color: var(--ink);
-  font: inherit;
-  text-align: start;
-}
-button.org-card {
-  cursor: pointer;
-}
-button.org-card:hover {
-  background: var(--surface-soft);
-}
-.org-card__avatar {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: var(--host-soft);
-  color: var(--host-strong);
-  font-size: 0.95rem;
-  font-weight: var(--weight-heavy, 800);
-}
-.org-card__text {
-  display: grid;
-  flex: 1;
-  min-width: 0;
-}
-.org-card__label {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-/* A name keeps its own direction (dir="auto", an email dir="ltr") but lines
-   up with the page, not with itself: in Hebrew a Latin name sits on the
-   right like the labels next to it, in English a Hebrew name on the left. */
-html[dir="ltr"]
-  :is(
-    .org-card__name,
-    .org-switcher__label strong,
-    .join-card__details > *,
-    .host-account__who > *,
-    .account-card__who > *
-  ) {
-  text-align: left;
-}
-html[dir="rtl"]
-  :is(
-    .org-card__name,
-    .org-switcher__label strong,
-    .join-card__details > *,
-    .host-account__who > *,
-    .account-card__who > *
-  ) {
-  text-align: right;
-}
-.org-card__name {
-  overflow: hidden;
-  font-size: 0.95rem;
-  font-weight: var(--weight-heavy, 800);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.org-card__chevron {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.org-card[aria-expanded="true"] .org-card__chevron {
-  transform: rotate(180deg);
-}
-.org-card__role {
-  padding: 0 12px 10px 58px;
-}
-html[dir="rtl"] .org-card__role {
-  padding: 0 58px 10px 12px;
-}
-.org-card__role .host-role-badge {
-  margin: 0;
-}
-div.org-card {
-  padding-bottom: 4px;
-}
-.org-switcher__popover {
-  position: fixed;
-  z-index: 70;
-  width: min(256px, calc(100vw - 32px));
-  padding: 6px;
-  overflow: auto;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-}
-.org-switcher__list {
-  display: grid;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  outline: none;
-}
-.org-switcher__option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 6px 10px;
-  border-radius: 14px;
-  cursor: pointer;
-}
-.org-switcher__option:hover,
-.org-switcher__option.is-active {
-  background: var(--chip);
-}
-.org-switcher__option[aria-selected="true"] {
-  background: var(--host-soft);
-}
-.org-switcher__label {
-  display: grid;
-  min-width: 0;
-}
-.org-switcher__label strong {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.org-switcher__label small {
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-#host-section-navigation,
-.sidebar-platform {
-  display: grid;
-  gap: 4px;
-  align-content: start;
-}
-#host-section-navigation button,
-.sidebar-platform button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  min-height: 44px;
-  padding: 10px 14px;
-  border: 0;
-  border-radius: 12px;
-  background: transparent;
-  color: #334155;
-  font: inherit;
-  font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1.3;
-  text-align: start;
-  cursor: pointer;
-}
-#host-section-navigation button svg,
-.sidebar-platform button svg,
-.host-tabbar button svg {
-  flex: none;
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-#host-section-navigation button:hover:not(:disabled),
-.sidebar-platform button:hover:not(:disabled) {
-  background: var(--chip);
-  color: var(--ink);
-}
-#host-section-navigation button[aria-current],
-.sidebar-platform button[aria-current] {
-  background: var(--host-soft);
-  color: var(--host-strong);
-}
-#host-section-navigation button[aria-current]::before,
-.sidebar-platform button[aria-current]::before {
-  content: "";
-  position: absolute;
-  inset-block: 10px;
-  inset-inline-start: 0;
-  width: 3px;
-  border-radius: 999px;
-  background: var(--host);
-}
-.sidebar-platform:has(button:not([hidden])) {
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-.sidebar-platform button {
-  color: var(--platform);
-}
-.sidebar-platform button[aria-current] {
-  background: var(--platform-soft);
-  color: var(--platform);
-}
-.sidebar-platform button[aria-current]::before {
-  background: var(--platform);
-}
-.sidebar-systems h2 {
-  margin: 4px 14px 6px;
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: var(--weight-heavy, 800);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.sidebar-systems__list {
-  display: grid;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.sidebar-systems__list:empty,
-.sidebar-systems:has(.sidebar-systems__list:empty) {
-  display: none;
-}
-.empty-state__text {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Nothing to navigate (a pending account): no sidebar, menu or tab bar. */
+/* Nothing to navigate (a pending account) or no access: one column. */
 .host-menu-empty .host-sidebar,
-.host-menu-empty .workspace-menu-toggle,
-.host-menu-empty .host-tabbar {
+.host-menu-empty .workspace-menu-toggle {
   display: none !important;
 }
-.host-ready.host-menu-empty:has(.host-sidebar:not([hidden])) {
-  padding-inline-start: 0;
-  padding-bottom: 0;
-}
-.host-menu-empty .host-topbar__brand {
-  display: inline-flex;
-}
 
-/* Main column. */
-.host-app .portal-shell {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 24px 32px 32px;
-  color: var(--ink);
-}
-.host-access {
-  max-width: 480px;
-  margin: clamp(2rem, 10vh, 6rem) auto 0;
-  text-align: center;
-}
-.host-app .portal-panel.host-access {
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  background: var(--card);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
-}
-.host-access h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.35rem;
-  font-weight: var(--weight-heavy, 800);
-}
-.host-access .app-login__progress {
-  margin: 18px auto 0;
-  max-width: 260px;
-}
-.host-access button {
-  margin-top: 16px;
-}
+/* Main column: Manager's .manager-main sits beside the navigation. */
 .host-app #host-management,
 .host-app #admin-overview {
+  position: relative;
   min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
+  box-shadow: none;
   overflow-wrap: anywhere;
-}
-#host-management {
-  position: relative;
 }
 .host-app #host-management > [role="status"] {
   margin: 0 0 16px;
   color: var(--muted);
+  font-size: 14px;
 }
 .workspace-view-panel {
   min-width: 0;
   overflow-wrap: anywhere;
 }
-.host-app .workspace-view-panel > section,
-.host-app .workspace-view-panel > details,
+
+/* The base of every Host control, in Manager's control language. Zero
+   specificity: a Manager component or a Host component rule always wins. */
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(h2, h3, h4):where(:not(#host-management [class*="manager-"] *, dialog[class*="manager-"] *)) {
+  color: var(--heading);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(h2):where(:not(#host-management [class*="manager-"] *, dialog[class*="manager-"] *)) {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(h3):where(:not(#host-management [class*="manager-"] *, dialog[class*="manager-"] *)) {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(p):where(:not(#host-management [class*="manager-"] *, dialog[class*="manager-"] *)) {
+  color: var(--muted);
+  line-height: 1.7;
+}
+:where(.host-app #host-management) button:where(:not([class*="manager-"], .info-tip__button)),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(:not([class*="manager-"], .info-tip__button)),
+:where(.host-app) :where(.button-link),
+:where(.host-app) a:where(.button-link) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--host-strong);
+  border-radius: var(--radius-control);
+  background: var(--host-strong);
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+  white-space: normal;
+  box-shadow: none;
+  cursor: pointer;
+}
+/* The primary hover never reaches a secondary or danger button: each keeps
+   its own hover below. */
+:where(.host-app #host-management) button:where(:not([class*="manager-"], .info-tip__button, .button-secondary, .button-danger, .button-danger-solid)):hover:not(:disabled),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(:not([class*="manager-"], .info-tip__button, .button-secondary, .button-danger, .button-danger-solid)):hover:not(:disabled) {
+  border-color: #0848bb;
+  background: #0848bb;
+  color: #ffffff;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:where(.button-secondary), :where(.host-app) a:where(.button-link),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(.button-secondary) {
+  border-color: var(--line, #0f172a14);
+  background: #ffffff;
+  color: var(--ink);
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:where(.button-secondary):hover:not(:disabled),
+:where(.host-app) a:where(.button-link):hover,
+:where(.host-app) dialog:not(.mfa-dialog) button:where(.button-secondary):hover:not(:disabled) {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: var(--ink);
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:where(.button-danger),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(.button-danger) {
+  border-color: #efd3d6;
+  background: #ffffff;
+  color: var(--danger);
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:where(.button-danger):hover:not(:disabled),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(.button-danger):hover:not(:disabled) {
+  border-color: #f0d8d4;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:where(.button-danger-solid),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(.button-danger-solid) {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: #ffffff;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:where(.button-danger-solid):hover:not(:disabled),
+:where(.host-app) dialog:not(.mfa-dialog) button:where(.button-danger-solid):hover:not(:disabled) {
+  border-color: #8e2018;
+  background: #8e2018;
+  color: #ffffff;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) button:disabled {
+  opacity: 0.5;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :is(input, select, textarea):where(:not([type="checkbox"], [type="radio"])) {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--field);
+  border-radius: var(--radius-control);
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :is(input, select, textarea):where(:not([type="checkbox"], [type="radio"])):focus-visible {
+  border-color: #8fb5e2;
+  outline: 3px solid #8fb5e24d;
+  outline-offset: 0;
+}
+:where(.host-app) input:where([type="checkbox"], [type="radio"]) {
+  width: 18px;
+  min-height: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) label {
+  color: var(--label);
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+}
+:where(.host-app) label:where(:has(> input[type="checkbox"]), :has(> input[type="radio"])) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-block: 10px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+:where(.host-app) :where(label > input[type="checkbox"], label > input[type="radio"]) {
+  flex: none;
+  align-self: center;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(fieldset) {
+  min-width: 0;
+  margin: 16px 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: #ffffff;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(legend) {
+  padding-inline: 6px;
+  color: var(--heading);
+  font-size: 13px;
+  font-weight: 700;
+}
+/* A Host disclosure is Manager's disclosure row: a 44px summary with the
+   28px round chevron at its end. Manager's own .dashboard-examples and
+   menus keep their component styles. */
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(details:not(.dashboard-examples, [class*="manager-"])) {
+  margin-block: 16px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: #ffffff;
+}
+:where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :where(details:not(.dashboard-examples, [class*="manager-"])[open]) {
+  padding-bottom: 14px;
+}
+:where(.host-app) :where(details:not(.dashboard-examples, [class*="manager-"])) > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: #182d48;
+  font-size: 14px;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+:where(.host-app) :where(details:not(.dashboard-examples, [class*="manager-"])) > summary::-webkit-details-marker {
+  display: none;
+}
+:where(.host-app) :where(details:not(.dashboard-examples, [class*="manager-"])) > summary::after {
+  content: "";
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-inline: auto 0;
+  box-sizing: border-box;
+  border: 1px solid #e8edf4;
+  border-radius: 50%;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2353677f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / 14px no-repeat;
+  transition: transform 150ms ease;
+}
+:where(.host-app) :where(details:not(.dashboard-examples, [class*="manager-"])[open]) > summary::after {
+  transform: rotate(180deg);
+}
+:where(.host-app) :where(details:not(.dashboard-examples, [class*="manager-"])[open]) > summary {
+  margin-bottom: 12px;
+}
+.host-app input[type="email"],
+.host-app input[type="tel"],
+.host-app input[autocomplete="one-time-code"] {
+  direction: ltr;
+}
+
+/* A view's own sections: Manager settings cards on the canvas. */
+.host-app .workspace-view-panel > section:not(.systems-view, .host-calendar, .manager-view, .manager-control-workspace, .host-api-keys),
 .host-app .workspace-view-panel > .empty-state,
-.host-app .settings-body > [role="tabpanel"],
 .host-app #admin-overview {
   min-width: 0;
   margin: 0 0 20px;
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
+  padding: clamp(18px, 3vw, 24px);
+  border: 1px solid #dfe7f1;
+  border-radius: 16px;
   background: var(--surface);
-  box-shadow: var(--card-shadow);
+  box-shadow: none;
 }
-.host-app .workspace-view-panel > section > :is(h2, h3):first-child,
-.host-app #admin-overview > h1 {
+.host-app .workspace-view-panel > section > :is(h2, h3):first-child {
   margin-top: 0;
 }
-.host-app .portal-panel h1,
-.host-app .portal-panel h2,
-.host-app .portal-panel h3 {
-  color: var(--ink);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
+/* A view's title is Manager's toolbar heading. */
+.host-app .workspace-view-panel > h2,
+.host-app .workspace-view-panel > section > h2:first-child,
+.host-app .workspace-view-panel > .view-heading > h2 {
+  margin: 0 0 18px;
+  color: var(--heading);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
 }
-.host-app .portal-panel h2 {
-  margin: 0 0 12px;
-  font-size: 1.35rem;
-  font-weight: var(--weight-heavy, 800);
-}
-.host-app .portal-panel h3 {
-  margin: 0 0 10px;
-  font-size: 1.1rem;
-  font-weight: var(--weight-heavy, 800);
-}
-.host-app .portal-panel p,
-.host-app dialog p {
-  color: var(--muted);
-  line-height: 1.6;
-}
+
 /* A title and its ⓘ: the ⓘ follows the title's last word, also when a
    long title wraps on a phone. */
 .view-heading {
@@ -783,13 +349,19 @@ div.org-card {
   justify-items: start;
   gap: 12px;
 }
+.empty-state__text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
 .host-app .empty-state p {
   margin: 0;
   color: var(--ink);
-  font-size: 1rem;
+  font-size: 15px;
 }
 
-/* ⓘ: one plain line on hover, focus or tap, instead of hint text. */
+/* ⓘ: Manager's 28px neutral round control; the bubble is a quiet popover. */
 .info-tip {
   position: relative;
   display: inline-flex;
@@ -802,14 +374,16 @@ div.org-card {
   height: 28px;
   min-height: 28px;
   padding: 0;
-  border: 0;
+  border: 1px solid #e8edf4;
   border-radius: 50%;
-  background: transparent;
+  background: #ffffff;
   color: var(--muted);
-  font-size: 1rem;
+  font: inherit;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1;
   box-shadow: none;
+  cursor: pointer;
 }
 .host-app .info-tip .info-tip__button::after {
   content: "";
@@ -817,7 +391,8 @@ div.org-card {
   inset: -8px;
 }
 .host-app .info-tip .info-tip__button:hover:not(:disabled) {
-  background: var(--chip);
+  border-color: #d3deea;
+  background: #f8fafc;
   color: var(--ink);
 }
 /* The bubble is a floating panel: js/host-ui.js infoTip opens it (.is-open)
@@ -831,232 +406,197 @@ div.org-card {
   display: none;
   width: max-content;
   max-width: min(280px, calc(100vw - 32px));
-  padding: 8px 12px;
-  border-radius: 12px;
-  background: var(--ink);
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1.45;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
   text-align: start;
   white-space: normal;
+  box-shadow: 0 12px 32px #17324d1f;
 }
 .info-tip.is-open .info-tip__bubble {
   display: block;
 }
 
-/* Controls in panels and dialogs: Host blue primary, outlined secondary. */
-.host-app .portal-panel button,
-.host-app dialog:not(.mfa-dialog) button {
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid var(--host-strong);
-  border-radius: var(--radius-control);
-  background: var(--host-strong);
-  color: #ffffff;
-  font: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.2;
-  box-shadow: none;
-}
-.host-app .portal-panel button:hover:not(:disabled),
-.host-app dialog:not(.mfa-dialog) button:hover:not(:disabled) {
-  background: var(--host-strong);
-  filter: brightness(1.08);
-}
-.host-app .portal-panel .button-secondary,
-.host-app dialog .button-secondary {
-  border-color: var(--field);
-  background: #ffffff;
-  color: var(--ink);
-}
-.host-app .portal-panel .button-secondary:hover:not(:disabled),
-.host-app dialog .button-secondary:hover:not(:disabled) {
-  background: var(--surface-soft);
-  filter: none;
-}
-.host-app .portal-panel .button-danger,
-.host-app dialog .button-danger {
-  border-color: #f3b4ad;
-  background: #ffffff;
-  color: var(--danger);
-}
-.host-app .portal-panel .button-danger:hover:not(:disabled),
-.host-app dialog .button-danger:hover:not(:disabled) {
-  background: var(--danger-soft);
-  filter: none;
-}
-.host-app .button-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid var(--field);
-  border-radius: var(--radius-control);
-  background: #ffffff;
-  color: var(--ink);
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-.host-app .button-link:hover {
-  background: var(--surface-soft);
-}
-.host-app .portal-panel :where(input, select, textarea),
-.host-app dialog:not(.mfa-dialog) :where(input, select, textarea) {
-  min-width: 0;
-  max-width: 100%;
-  min-height: 44px;
-  padding: 9px 12px;
-  border: 1px solid var(--field);
-  border-radius: var(--radius-control);
-  background: var(--surface-soft);
-  color: var(--ink);
-  font: inherit;
-}
-.host-app :where(input[type="checkbox"], input[type="radio"]) {
-  width: 18px;
-  min-height: 18px;
-  height: 18px;
-  padding: 0;
-}
-.host-app .portal-panel label,
-.host-app dialog:not(.mfa-dialog) label {
-  color: var(--label);
-  font-size: 0.85rem;
-  font-weight: 700;
-  gap: 6px;
-}
-.host-app label:has(> input[type="checkbox"]),
-.host-app label:has(> input[type="radio"]) {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin-block: 10px;
-}
-.host-app label > input[type="checkbox"],
-.host-app label > input[type="radio"] {
-  flex: none;
-  align-self: center;
-}
-.host-app fieldset {
-  min-width: 0;
-  margin: 16px 0;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-  background: var(--surface-soft);
-}
-.host-app legend {
-  padding-inline: 6px;
-  color: var(--ink);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-.host-app summary {
-  color: var(--ink);
-  font-weight: 700;
-}
-/* Every collapsed section reads as one: a 44px row with a chevron at its
-   end that turns when it opens, never a box that looks like a field. */
-.host-app details > summary {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  list-style: none;
-  cursor: pointer;
-}
-.host-app details > summary::-webkit-details-marker {
-  display: none;
-}
-.host-app details > summary::after {
-  content: "";
-  flex: none;
-  width: 8px;
-  height: 8px;
-  margin-inline: auto 4px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform 150ms ease;
-}
-.host-app details[open] > summary::after {
-  transform: translateY(2px) rotate(-135deg);
-}
-.host-app details[open] > summary {
-  margin-bottom: 16px;
-}
-.host-app #host-management details {
-  margin-block: 16px;
-  padding: 0 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-  background: var(--surface-soft);
-}
-.host-app #host-management form {
-  max-width: 36rem;
-}
-.host-app .workspace-view-panel form > button {
-  margin-inline-end: 8px;
-  margin-block-end: 8px;
-}
-.host-app input[type="email"],
-.host-app input[type="tel"],
-.host-app input[autocomplete="one-time-code"] {
-  direction: ltr;
-}
-/* Tabs: Settings and Activity. */
+/* Segmented controls: Settings and Activity tabs, Bookings tabs and the
+   calendar's ranges use Manager's control-workspace tab bar. */
 .workspace-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-block: 0 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  margin-block: 0 22px;
+  padding: 8px;
+  border: 1px solid #e3e9f1;
+  border-radius: 14px;
+  background: #f2f5f9;
 }
-.host-app .portal-panel .workspace-tabs button {
+.host-app .workspace-tabs button,
+.host-app .calendar-toolbar :is(.calendar-navigation, .calendar-ranges) button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #5b6d83;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  box-shadow: none;
+}
+.host-app .workspace-tabs button:hover:not(:disabled),
+.host-app .calendar-toolbar :is(.calendar-navigation, .calendar-ranges) button:hover:not(:disabled) {
+  border-color: #dce4ed;
   background: #ffffff;
-  color: var(--label);
-  font-size: 0.88rem;
+  color: #172b46;
 }
-.host-app .portal-panel .workspace-tabs button:hover:not(:disabled) {
-  background: var(--surface-soft);
-  filter: none;
+.host-app .workspace-tabs button:is([aria-pressed="true"], [aria-selected="true"]),
+.host-app .workspace-tabs button:is([aria-pressed="true"], [aria-selected="true"]):hover:not(:disabled),
+.host-app .calendar-toolbar :is(.calendar-navigation, .calendar-ranges) button[aria-pressed="true"],
+.host-app .calendar-toolbar :is(.calendar-navigation, .calendar-ranges) button[aria-pressed="true"]:hover:not(:disabled) {
+  border-color: #d6e2f0;
+  background: #ffffff;
+  color: #205493;
+  box-shadow: 0 2px 6px #1c3e6a08;
 }
-.host-app .portal-panel .workspace-tabs button[aria-pressed="true"],
-.host-app .portal-panel .workspace-tabs button[aria-selected="true"] {
-  border-color: var(--host);
-  background: var(--host-soft);
-  color: var(--host-strong);
+.host-app .workspace-tabs button:focus-visible {
+  outline-offset: -3px;
 }
-.settings-tabs {
-  margin-top: 4px;
+.host-app .settings-tabs button {
+  flex: 1 1 auto;
+  min-height: 48px;
 }
 .host-app .settings-body > [role="tabpanel"] {
   margin: 0;
 }
-.host-app [data-workspace-view="settings"] > .view-heading {
-  margin-bottom: 12px;
+
+/* Settings tabs in Manager's organization-settings language: the heading
+   card, then one settings card per part, 20px apart. */
+.host-app #host-management .settings-body > [role="tabpanel"]:not([hidden]) {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
 }
-.host-app #host-management details[open] {
-  padding-bottom: 14px;
+.host-app #host-management .settings-body > [role="tabpanel"] > .host-settings-heading {
+  margin: 0 0 2px;
+  padding: 22px 24px;
+  border: 1px solid #dee7f1;
+  border-radius: 16px;
+  background: linear-gradient(115deg, #f3f7fd, #fff);
+}
+.host-app #host-management .host-settings-heading .manager-section-identity { align-items: center; }
+.host-app #host-management .host-settings-heading h2 {
+  margin: 0;
+  color: #1e344e;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: -0.025em;
+}
+.host-app #host-management .host-settings-heading .manager-people-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #6d86a1;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+}
+.host-app #host-management .host-settings-heading > button.manager-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  border-radius: 12px;
+}
+.host-app #host-management .host-settings-heading > button svg { width: 17px; height: 17px; }
+.host-app #host-management .host-settings-group {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.host-app #host-management .host-settings-group > p { margin: 0; color: #60718a; font-size: 14px; line-height: 1.7; }
+.host-app #host-management .host-settings-card.manager-settings-card {
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 0;
+  padding: 26px;
+  border: 1px solid #dfe7f1;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 3px 15px #17365303;
+}
+.host-app #host-management .host-settings-card > * + * { margin-top: 0; }
+.host-app #host-management .host-settings-card > :not(:last-child, .manager-settings-card-heading, [hidden], :empty) { margin-bottom: 16px; }
+.host-app #host-management .host-settings-card > .manager-settings-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: #3b526e;
+}
+.host-app #host-management .host-settings-card > .manager-settings-card-heading > svg {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  padding: 8px;
+  box-sizing: content-box;
+  border-radius: 9px;
+  background: #eff5fc;
+  color: #6e8eaf;
+}
+.host-app #host-management .host-settings-card > .manager-settings-card-heading > :is(h2, h3),
+.host-app #host-management .host-settings-card > :is(h2, h3).manager-settings-card-heading {
+  display: block;
+  margin: 0;
+  color: #243a54;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+.host-app #host-management .host-settings-card > .view-heading.manager-settings-card-heading > .info-tip { margin: 0; }
+.host-app #host-management .host-settings-card p { color: #60718a; font-size: 14px; line-height: 1.7; }
+.host-app #host-management .host-settings-card h3:not(.manager-settings-card-heading) {
+  margin: 0 0 10px;
+  color: #243a54;
+  font-size: 15px;
+  font-weight: 700;
+}
+/* Manager's form fields: full width, 46px, radius 10. */
+.host-app #host-management .host-settings-card form { max-width: none; }
+.host-app #host-management .host-settings-card :is(input, select, textarea):where(:not([type="checkbox"], [type="radio"])) {
+  width: 100%;
+  min-height: 46px;
+  border-color: #dce4ee;
+  border-radius: 10px;
+  background: #fbfcfe;
+  color: #182d48;
+}
+.host-app #host-management .host-settings-card label:where(:not(.choice, .connect-switch, :has(> input[type="checkbox"]), :has(> input[type="radio"]))) {
+  color: #53677f;
+  font-size: 14px;
+  font-weight: 400;
+}
+.host-app #host-management .host-settings-card :is(input, select, textarea):where(:not([type="checkbox"], [type="radio"])):focus-visible {
+  border-color: #6e95c1;
+  outline: 3px solid #8fb5e230;
+  outline-offset: 0;
+}
+.host-app [data-workspace-view="settings"] > .view-heading {
+  margin-bottom: 18px;
 }
 .operations-detail {
   margin-block: 12px;
-  padding: 0 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-}
-.operations-detail summary {
-  cursor: pointer;
-  font-weight: 700;
 }
 /* Alert events: a checkbox each; the legend's ⓘ says what none means. */
 .host-app .operations-events {
@@ -1066,67 +606,68 @@ div.org-card {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--label);
-  font-size: 0.85rem;
-  font-weight: 700;
 }
 
-/* Settings → Account. */
+/* Settings → Account: Manager's profile identity. */
 .account-card {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .account-card__avatar {
   display: grid;
   place-items: center;
   flex: none;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: #0a0a0a;
-  color: #ffffff;
-  font-size: 1.3rem;
-  font-weight: var(--weight-heavy, 800);
+  background: #f1f5f9;
+  color: #182d48;
+  font-size: 24px;
+  font-weight: 700;
 }
 .account-card__who {
   display: grid;
   min-width: 0;
+  color: #182d48;
   overflow-wrap: anywhere;
 }
 .account-card__who span {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 13px;
 }
 .host-app .account-card__security {
   margin: 16px 0;
   color: var(--ink);
 }
 
-/* Join an organization (the bell). */
+/* Join an organization: Manager's invitation rows. */
 .join-view__rows {
   display: grid;
-  gap: 10px;
-}
-.join-card {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface-soft);
+  gap: 12px;
 }
 .join-card__details {
   display: grid;
   flex: 1 1 12rem;
+  gap: 2px;
   min-width: 0;
+  color: #182d48;
 }
 .join-card__details small {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 13px;
+}
+.host-app .join-card.manager-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: #ffffff;
 }
 .host-app .join-view__status:empty {
   display: none;
@@ -1140,7 +681,8 @@ div.org-card {
 }
 
 /* Calendar: one row per system, days across (the columns mirror in RTL);
-   below 480px an agenda, one list per day. */
+   below 480px an agenda, one list per day. Manager surfaces: the toolbar
+   heading, segmented ranges, Manager inputs and a table frame. */
 .host-calendar {
   position: relative;
   min-width: 0;
@@ -1151,14 +693,20 @@ div.org-card {
   align-items: center;
   justify-content: space-between;
   gap: 12px 16px;
-  margin: 0 0 16px;
+  margin: 2px 0 20px;
+  padding: 0 0 18px;
+  border-bottom: 1px solid var(--border);
 }
 .calendar-heading-text {
   min-width: 0;
 }
-.host-app .portal-panel .calendar-heading h2 {
+.host-app .calendar-heading h2 {
   margin: 0;
-  font-size: 1.2rem;
+  color: var(--heading);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
 }
 /* A date never breaks inside itself: the range wraps at its dash. */
 .calendar-heading__date,
@@ -1167,7 +715,7 @@ div.org-card {
 }
 .host-app .calendar-heading__status {
   margin: 4px 0 0;
-  font-size: 0.85rem;
+  font-size: 13px;
 }
 .calendar-heading__status:empty {
   display: none;
@@ -1175,70 +723,42 @@ div.org-card {
 .calendar-toolbar {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-bottom: 0;
-  border-radius: 14px 14px 0 0;
-  background: var(--surface-soft);
+  align-items: end;
+  gap: 12px;
+  margin: 0 0 16px;
 }
 .calendar-navigation,
 .calendar-ranges {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-}
-.host-app .portal-panel .calendar-toolbar button {
-  min-height: 44px;
-  padding: 0 12px;
-  border: 1px solid var(--border);
-  background: #ffffff;
-  color: var(--ink);
-  font-size: 0.82rem;
-}
-.host-app .portal-panel .calendar-toolbar button:hover:not(:disabled) {
-  background: var(--chip);
-  filter: none;
-}
-.host-app .portal-panel .calendar-toolbar button[aria-pressed="true"] {
-  border-color: var(--host-strong);
-  background: var(--host-strong);
-  color: #ffffff;
-}
-.host-app
-  .portal-panel
-  .calendar-toolbar
-  button[aria-pressed="true"]:hover:not(:disabled) {
-  background: var(--host-strong);
-  color: #ffffff;
-  filter: brightness(0.96);
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid #e3e9f1;
+  border-radius: 14px;
+  background: #f2f5f9;
 }
 .calendar-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
   margin-inline-start: auto;
 }
-.host-app .portal-panel label.calendar-filter {
+.host-app label.calendar-filter {
   display: grid;
-  gap: 2px;
+  gap: 6px;
   min-width: 0;
   margin: 0;
-  font-size: 0.75rem;
 }
-.host-app .portal-panel .calendar-filter select {
+.host-app .calendar-filter select {
   max-width: 14rem;
-  padding-block: 6px;
-  font-size: 0.85rem;
 }
 .calendar-scroll {
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
   border: 1px solid var(--border);
-  border-radius: 0 0 14px 14px;
+  border-radius: 8px;
   background: #ffffff;
 }
 .calendar-grid {
@@ -1248,15 +768,17 @@ div.org-card {
 .calendar-grid th,
 .calendar-grid td {
   padding: 0;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
   vertical-align: top;
 }
 .calendar-grid thead th {
   min-width: 56px;
   height: 52px;
   padding: 6px 4px;
-  background: #ffffff;
-  font-size: 0.8rem;
+  background: #f3f6fa;
+  color: #526579;
+  font-size: 12px;
+  font-weight: 600;
   text-align: center;
   vertical-align: middle;
 }
@@ -1269,15 +791,15 @@ div.org-card {
   display: block;
   margin-bottom: 4px;
   color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
 }
 .calendar-grid thead th span {
   display: inline-grid;
   place-items: center;
   width: 26px;
   height: 26px;
+  color: #17324d;
 }
 .calendar-grid .calendar-today {
   background: #f5f9ff;
@@ -1299,8 +821,9 @@ div.org-card {
   max-width: 220px;
   padding: 8px 12px;
   background: #ffffff;
-  font-size: 0.85rem;
-  font-weight: 700;
+  color: #20364e;
+  font-size: 14px;
+  font-weight: 600;
   text-align: start;
   vertical-align: middle;
 }
@@ -1332,12 +855,12 @@ div.org-card {
     to right,
     transparent 0,
     transparent calc(100% / var(--calendar-days) - 1px),
-    var(--border) calc(100% / var(--calendar-days) - 1px),
-    var(--border) calc(100% / var(--calendar-days))
+    var(--border-soft) calc(100% / var(--calendar-days) - 1px),
+    var(--border-soft) calc(100% / var(--calendar-days))
   );
 }
 /* An empty day: a quiet target that opens a new booking there. */
-.host-app .portal-panel .calendar-timeline .calendar-cell {
+.host-app .calendar-timeline .calendar-cell {
   min-height: 56px;
   padding: 0;
   border: 0;
@@ -1345,11 +868,11 @@ div.org-card {
   background: transparent;
   cursor: pointer;
 }
-.host-app .portal-panel .calendar-timeline .calendar-cell:hover:not(:disabled) {
+.host-app .calendar-timeline .calendar-cell:hover:not(:disabled) {
+  border: 0;
   background: var(--host-soft);
-  filter: none;
 }
-.host-app .portal-panel .host-calendar .reservation-chip {
+.host-app .host-calendar .reservation-chip {
   --reservation-background: #d9eaff;
   position: relative;
   z-index: 1;
@@ -1360,10 +883,12 @@ div.org-card {
   padding: 6px 10px;
   overflow: hidden;
   border: 0;
-  border-radius: 10px;
+  border-inline-start: 3px solid #3574c3;
+  border-radius: 5px;
   background: var(--reservation-background);
   color: #15336e;
-  font-size: 0.8rem;
+  font-size: 13px;
+  font-weight: 500;
   line-height: 1.25;
   text-align: start;
 }
@@ -1374,24 +899,32 @@ div.org-card {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.reservation-chip strong {
+  font-weight: 650;
+}
 .reservation-chip small {
   margin-top: 2px;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
 }
-.host-app .portal-panel .host-calendar .reservation-chip:hover:not(:disabled) {
+.host-app .host-calendar .reservation-chip:hover:not(:disabled) {
+  border-color: #3574c3;
   background: var(--reservation-background);
+  color: #15336e;
   filter: brightness(0.96);
 }
-.host-app .portal-panel .host-calendar .reservation-chip.reservation-draft {
+.host-app .host-calendar .reservation-chip.reservation-draft,
+.host-app .host-calendar .reservation-chip.reservation-draft:hover:not(:disabled) {
   --reservation-background: #e8edf5;
   color: #263546;
 }
-.host-app .portal-panel .host-calendar .reservation-chip.reservation-changed {
+.host-app .host-calendar .reservation-chip.reservation-changed,
+.host-app .host-calendar .reservation-chip.reservation-changed:hover:not(:disabled) {
   --reservation-background: #fff0c6;
   color: #603c00;
 }
-.host-app .portal-panel .host-calendar .reservation-chip.reservation-cancelled {
+.host-app .host-calendar .reservation-chip.reservation-cancelled,
+.host-app .host-calendar .reservation-chip.reservation-cancelled:hover:not(:disabled) {
   --reservation-background: repeating-linear-gradient(
     135deg,
     #fce3e3 0,
@@ -1401,7 +934,8 @@ div.org-card {
   );
   color: #6b2222;
 }
-.host-app .portal-panel .host-calendar .reservation-chip.reservation-completed {
+.host-app .host-calendar .reservation-chip.reservation-completed,
+.host-app .host-calendar .reservation-chip.reservation-completed:hover:not(:disabled) {
   --reservation-background: #e3f6ea;
   color: #2a5a3c;
 }
@@ -1413,88 +947,94 @@ div.org-card {
   gap: 4px;
   padding: 4px 12px 12px;
 }
-.host-app .portal-panel .calendar-agenda__day h3 {
+.host-app .calendar-agenda__day h3 {
   margin: 12px 0 6px;
   color: var(--label);
-  font-size: 0.9rem;
+  font-size: 13px;
+  font-weight: 600;
 }
 .calendar-agenda ul {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.host-app .portal-panel .agenda-item {
+.host-app .agenda-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 2px 8px;
   width: 100%;
   min-height: 56px;
-  padding: 8px 12px;
-  border: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
   border-inline-start: 4px solid var(--host);
-  border-radius: 12px;
-  background: var(--surface-soft);
+  border-radius: var(--radius-card);
+  background: #ffffff;
   color: var(--ink);
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   text-align: start;
 }
-.host-app .portal-panel .agenda-item:hover:not(:disabled) {
-  background: var(--chip);
-  filter: none;
+.host-app .agenda-item:hover:not(:disabled) {
+  border-color: var(--border);
+  background: #f8fafc;
+  color: var(--ink);
 }
 .agenda-item strong {
   grid-column: 1;
+  font-weight: 650;
   overflow-wrap: anywhere;
 }
 .agenda-item__system {
   grid-column: 1;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 13px;
 }
 .agenda-item__time {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: center;
-  font-size: 0.8rem;
+  font-size: 13px;
 }
 .agenda-item .booking-status {
   grid-column: 1;
   justify-self: start;
   margin-top: 4px;
 }
-.host-app .portal-panel .agenda-item.reservation-draft {
+.host-app .agenda-item.reservation-draft,
+.host-app .agenda-item.reservation-draft:hover:not(:disabled) {
   border-inline-start-color: #94a3b8;
 }
-.host-app .portal-panel .agenda-item.reservation-changed {
+.host-app .agenda-item.reservation-changed,
+.host-app .agenda-item.reservation-changed:hover:not(:disabled) {
   border-inline-start-color: #d97706;
 }
-.host-app .portal-panel .agenda-item.reservation-cancelled {
+.host-app .agenda-item.reservation-cancelled,
+.host-app .agenda-item.reservation-cancelled:hover:not(:disabled) {
   border-inline-start-color: var(--danger);
 }
-.host-app .portal-panel .agenda-item.reservation-completed {
+.host-app .agenda-item.reservation-completed,
+.host-app .agenda-item.reservation-completed:hover:not(:disabled) {
   border-inline-start-color: #16a34a;
 }
 .host-app .calendar-agenda__empty,
 .host-app .calendar-truncated {
   margin: 12px;
-  font-size: 0.88rem;
+  font-size: 14px;
 }
 
-/* Bookings: four tabs, a search and one row per booking. */
+/* Bookings: Manager's toolbar, segmented tabs, search field and rows. */
 .bookings-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .host-app .bookings-tabs {
   margin: 0;
-  padding: 0;
-  border: 0;
 }
 .bookings-actions {
   display: flex;
@@ -1505,7 +1045,7 @@ div.org-card {
   flex: 1 1 18rem;
   justify-content: flex-end;
 }
-.host-app #host-management form.bookings-search {
+.host-app form.bookings-search {
   flex: 1 1 14rem;
   min-width: 0;
   max-width: 24rem;
@@ -1513,7 +1053,14 @@ div.org-card {
 }
 .host-app .bookings-search input {
   width: 100%;
-  box-sizing: border-box;
+  min-height: 48px;
+  padding-inline: 44px 14px;
+  border-color: #dce6f2;
+  border-radius: 9px;
+  background: #f8fbff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2366778b' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15a7.5 7.5 0 1 0 0-15'/%3E%3C/svg%3E") no-repeat 14px 50% / 18px;
+}
+html[dir="rtl"] .host-app .bookings-search input {
+  background-position: calc(100% - 14px) 50%;
 }
 /* One system's bookings (after a removal refused for them): its name and a
    way back to every system. */
@@ -1525,15 +1072,16 @@ div.org-card {
   margin: 0 0 12px;
   padding-block: 8px;
   padding-inline: 14px 8px;
-  border-radius: 14px;
-  background: var(--host-soft);
+  border: 1px solid #cfe0ff;
+  border-radius: var(--radius-card);
+  background: #f5f9ff;
 }
-.host-app .portal-panel .bookings-filter__text {
+.host-app .bookings-filter__text {
   flex: 1 1 10rem;
   min-width: 0;
   margin: 0;
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 .host-app .bookings-status {
@@ -1544,57 +1092,63 @@ div.org-card {
 }
 .booking-list {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin: 0 0 12px;
   padding: 0;
   list-style: none;
 }
-.host-app .portal-panel .booking-row {
+.host-app .booking-row {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
   align-items: center;
   gap: 6px 16px;
   width: 100%;
   min-height: 64px;
-  padding: 12px 16px;
+  padding: 14px 20px;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   background: #ffffff;
   color: var(--ink);
+  font-size: 14px;
   font-weight: 500;
   text-align: start;
 }
-.host-app .portal-panel .booking-row:hover:not(:disabled) {
-  background: var(--surface-soft);
-  filter: none;
+.host-app .booking-row:hover:not(:disabled) {
+  border-color: #c6d3e1;
+  background: #fbfcfe;
+  color: var(--ink);
 }
 .booking-row__who {
   display: grid;
   min-width: 0;
 }
 .booking-row__who strong {
+  color: #20364e;
+  font-weight: 650;
   overflow-wrap: anywhere;
 }
 .booking-row__system {
   color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 .booking-row__stay {
   min-width: 0;
   color: var(--label);
-  font-size: 0.85rem;
+  font-size: 13px;
 }
+/* Statuses keep their words and colours, in Manager's pill geometry. */
 .booking-status {
   display: inline-flex;
   align-items: center;
   min-height: 24px;
-  padding: 2px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
   background: var(--chip);
   color: var(--label);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.2;
   white-space: nowrap;
 }
 .booking-status--confirmed {
@@ -1615,7 +1169,8 @@ div.org-card {
 }
 
 /* The booking sheet and a booking's details: a side sheet (the start side
-   mirrors in RTL), full screen on a phone. The buttons never scroll away. */
+   mirrors in RTL), full screen on a phone. The buttons never scroll away.
+   Its surfaces are Manager's dialog family. */
 .host-app dialog.booking-sheet {
   position: fixed;
   inset: 0 0 0 auto;
@@ -1628,12 +1183,18 @@ div.org-card {
   overflow: hidden;
   border: 0;
   border-inline-start: 1px solid var(--border);
-  border-radius: 0;
-  box-shadow: -10px 0 40px rgba(15, 23, 42, 0.12);
+  border-radius: 12px 0 0 12px;
+  background: #ffffff;
+  color: #182d48;
+  box-shadow: 0 16px 48px #17324d26;
 }
 html[dir="rtl"] .host-app dialog.booking-sheet {
   inset: 0 auto 0 0;
-  box-shadow: 10px 0 40px rgba(15, 23, 42, 0.12);
+  border-radius: 0 12px 12px 0;
+}
+.host-app dialog.booking-sheet::backdrop {
+  background: #10243d99;
+  backdrop-filter: blur(4px);
 }
 .booking-sheet__frame {
   display: flex;
@@ -1645,29 +1206,37 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 24px 12px;
-  border-bottom: 1px solid var(--border);
+  padding: 20px 24px 14px;
+  border-bottom: 1px solid var(--border-soft);
 }
 .host-app dialog.booking-sheet h2 {
   flex: 1;
   min-width: 0;
   margin: 0;
-  color: var(--ink);
-  font-size: 1.2rem;
-  font-weight: var(--weight-heavy, 800);
+  color: #182d48;
+  font-size: 20px;
+  font-weight: 700;
   overflow-wrap: anywhere;
 }
 .host-app dialog .booking-sheet__close {
   flex: none;
   width: 44px;
   padding: 0;
-  font-size: 1.4rem;
+  border-color: var(--line, #0f172a14);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 22px;
+}
+.host-app dialog .booking-sheet__close:hover:not(:disabled) {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: var(--ink);
 }
 .booking-sheet__body {
   flex: 1;
   min-height: 0;
   overflow: auto;
-  padding: 16px 24px;
+  padding: 18px 24px;
 }
 .host-app dialog .booking-sheet__status {
   margin: 0;
@@ -1682,9 +1251,9 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
-  gap: 8px;
-  padding: 12px 24px calc(16px + env(safe-area-inset-bottom, 0px));
-  border-top: 1px solid var(--border);
+  gap: 12px;
+  padding: 14px 24px calc(18px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border-soft);
 }
 .booking-sheet__actions > * {
   flex: 1 1 auto;
@@ -1695,7 +1264,7 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .host-app dialog .booking-form label {
   display: grid;
-  gap: 4px;
+  gap: 6px;
   margin: 0;
 }
 .host-app dialog .booking-form :where(input, select) {
@@ -1710,12 +1279,12 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .phone-field {
   display: grid;
-  gap: 4px;
+  gap: 6px;
 }
 .host-app dialog .phone-field__label {
   color: var(--label);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
 }
 .phone-field__row {
   display: flex;
@@ -1738,7 +1307,8 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   border-radius: var(--radius-control);
   background: var(--surface);
   color: var(--ink);
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
 }
 .phone-field__picker::after {
   content: "";
@@ -1751,8 +1321,9 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   transform: translateY(-2px) rotate(45deg);
 }
 .phone-field__picker:focus-within {
-  outline: 3px solid var(--host);
-  outline-offset: 2px;
+  outline: 3px solid #8fb5e24d;
+  outline-offset: 0;
+  border-color: #8fb5e2;
 }
 .phone-field__code {
   unicode-bidi: isolate;
@@ -1776,17 +1347,11 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   gap: 12px;
   min-width: 0;
 }
-.host-app #host-management .booking-form__more {
+.host-app dialog .booking-form__more {
   margin: 0;
   padding: 0 14px;
 }
-.booking-form__more > summary {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  cursor: pointer;
-}
-.host-app #host-management .booking-form__more[open] {
+.host-app dialog .booking-form__more[open] {
   padding-bottom: 14px;
 }
 .booking-form__more > label + label {
@@ -1799,7 +1364,7 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .booking-sheet__summary {
   margin-bottom: 12px;
-  font-weight: 700;
+  font-weight: 650;
 }
 .booking-sheet__body > .booking-sheet__summary {
   margin-bottom: 12px;
@@ -1811,21 +1376,27 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   margin-bottom: 16px;
 }
 .host-app dialog .booking-facts__system {
-  font-weight: 700;
+  font-weight: 650;
 }
 .booking-details {
   display: grid;
   grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  gap: 6px 16px;
   margin: 0 0 16px;
 }
-.booking-details dt {
-  color: var(--label);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
+.booking-details dt,
 .booking-details dd {
   margin: 0;
+  padding-block: 11px;
+  border-bottom: 1px solid #e8edf3;
+}
+.booking-details dt {
+  padding-inline-end: 16px;
+  color: #60718a;
+  font-size: 13px;
+}
+.booking-details dd {
+  color: #182d48;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 .booking-links {
@@ -1834,7 +1405,7 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .host-app dialog .booking-links h3 {
   margin: 8px 0 0;
-  font-size: 1rem;
+  font-size: 16px;
 }
 .booking-links__list {
   display: grid;
@@ -1848,22 +1419,23 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 12px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
+  background: #ffffff;
 }
 .booking-privacy {
   display: grid;
   gap: 8px;
   margin-top: 16px;
-  padding: 12px;
-  border: 1px solid #fecaca;
-  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid #f0d8d4;
+  border-radius: var(--radius-card);
   background: var(--danger-soft);
 }
 .host-app dialog .link-card h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 /* A choice with its ⓘ beside it (outside its label). */
@@ -1880,35 +1452,33 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   min-width: 0;
 }
 
-/* Connect: automatic guest links, your booking system, API keys. */
+/* Connections & automation. */
 .host-app .connect-card .view-heading h2 {
   margin: 0;
 }
-.host-app #host-management form.connect-form,
-.host-app #host-management form.connect-room-form,
-.host-app #host-management form.settings-form {
+.host-app form.connect-form,
+.host-app form.connect-room-form,
+.host-app form.settings-form {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  max-width: 36rem;
 }
 .host-app .connect-form > label:not(.connect-switch),
 .host-app .connect-room-form > label,
 .host-app .connect-inline > label,
 .host-app .settings-form label {
   display: grid;
-  gap: 4px;
+  gap: 6px;
   margin: 0;
 }
-.host-app
-  #host-management
-  :is(.connect-form, .connect-room-form, .settings-form)
-  > button {
+.host-app :is(.connect-form, .connect-room-form, .settings-form) > button {
   justify-self: start;
 }
-.host-app .portal-panel label.connect-switch {
+.host-app label.connect-switch {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: 15px;
 }
-.host-app #host-management form.connect-inline {
+.host-app form.connect-inline {
   display: flex;
   flex-wrap: wrap;
   align-items: end;
@@ -1932,9 +1502,10 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .connect-room-list > li,
 .connect-event-list > li {
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
+  background: #ffffff;
   overflow-wrap: anywhere;
 }
 .host-app .connect-room-list__line,
@@ -1942,17 +1513,9 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   margin: 0;
   color: var(--ink);
 }
-.host-app #host-management .connect-room-change,
-.host-app #host-management .connect-developer {
-  margin-block: 8px 0;
-  padding-block: 0;
-}
-.connect-room-change > summary,
-.connect-developer > summary {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  cursor: pointer;
+.host-app .connect-room-change,
+.host-app .connect-developer {
+  margin-block: 12px 0;
 }
 .host-app .connect-events {
   margin-top: 24px;
@@ -1960,46 +1523,43 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 .host-app .connect-events > h3 {
   margin: 0 0 8px;
 }
-.host-app #host-management .connect-developer[open] {
-  padding-bottom: 14px;
-}
-.host-app #host-management .connect-key {
+.host-app .connect-key {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 10px;
   margin-top: 12px;
-  padding: 14px 16px;
+  padding: 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-card);
   background: var(--surface);
 }
-.host-app #host-management .connect-key > :is(h3, p, form) {
+.host-app .connect-key > :is(h3, p, form) {
   flex-basis: 100%;
   margin: 0;
 }
-.host-app #host-management .connect-key > h3 {
-  font-size: 1rem;
+.host-app .connect-key > h3 {
+  font-size: 16px;
 }
-.host-app #host-management .connect-key > form {
+.host-app .connect-key > form {
   display: flex;
   flex-wrap: wrap;
   align-items: end;
   gap: 8px;
   max-width: none;
 }
-.host-app #host-management .connect-key > form > label {
+.host-app .connect-key > form > label {
   display: grid;
-  gap: 4px;
+  gap: 6px;
   flex: 1 1 12rem;
   margin: 0;
 }
-.host-app #host-management .connect-key button {
+.host-app .connect-key button {
   margin: 0;
 }
 .host-app .connect-code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.78rem;
+  font-size: 12px;
   text-align: left;
   overflow-wrap: anywhere;
 }
@@ -2011,17 +1571,22 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 /* Settings → Organization and Team. */
 .settings-facts {
   display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  gap: 10px 16px;
-  margin: 0;
+  grid-template-columns: minmax(140px, auto) minmax(0, 1fr);
+  margin: 0 0 18px;
 }
-.settings-facts dt {
-  color: var(--label);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
+.settings-facts dt,
 .settings-facts dd {
   margin: 0;
+  padding-block: 13px;
+  border-bottom: 1px solid #e8edf3;
+}
+.settings-facts dt {
+  color: #60718a;
+  font-size: 14px;
+}
+.settings-facts dd {
+  color: #182d48;
+  font-weight: 650;
   overflow-wrap: anywhere;
 }
 .host-app .settings-form :where(input, select) {
@@ -2038,31 +1603,42 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .team-list {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin: 12px 0 20px;
   padding: 0;
   list-style: none;
 }
+/* A team member is Manager's organization person row. */
 .team-member {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 12px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  gap: 10px 14px;
+  padding: 14px;
+  border: 1px solid #e4eaf1;
+  border-radius: 12px;
+  background: #ffffff;
 }
 .team-member__who {
   display: flex;
   flex: 1 1 12rem;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
+  color: #20364e;
+  font-size: 14px;
 }
 .host-app .team-member__avatar {
-  width: 36px;
-  height: 36px;
-  font-size: 0.95rem;
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #eef4fb;
+  color: #3e6590;
+  font-size: 15px;
+  font-weight: 650;
 }
 .team-member__email {
   min-width: 0;
@@ -2073,16 +1649,32 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   flex-wrap: wrap;
   gap: 6px;
 }
+/* Team in Manager's people columns: a row is a tinted avatar, the email
+   with its role and access, and Change at the end. */
+.host-app #host-management .team-people { margin: 0; }
+.host-app #host-management .team-role-column .team-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.host-app #host-management .team-role-column .team-member {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+.host-app #host-management .team-role-column .team-member__who { display: grid; gap: 6px; min-width: 0; }
+.host-app #host-management .team-role-column .team-member__email { color: #36516d; font-size: 13px; font-weight: 600; }
+.host-app #host-management .team-role-column .team-member > :is(button, .info-tip) { margin: 0; }
+.host-app #host-management .team-pending > summary .manager-organization-people-count { margin-inline-start: 10px; }
+.host-app #host-management .team-pending .team-invitations { margin-top: 4px; }
+.host-app #host-management .team-pending p { line-height: 1.7; }
 /* Change and Cancel line up at the row's end, whatever the badges' width. */
-.host-app .portal-panel .team-member > button {
+.host-app .team-member > button {
   margin-inline-start: auto;
 }
 /* Settings → Plan & statements and Support: parts with a heading and its
    ⓘ, divided by a line; buttons in one row. */
-.host-app .settings-block + .settings-block {
+.host-app .settings-block:not(.host-settings-card) + .settings-block:not(.host-settings-card) {
   margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
+  padding-top: 22px;
+  border-top: 1px solid #e8edf3;
 }
 .host-app .settings-block > .view-heading h3 {
   margin: 0;
@@ -2100,436 +1692,40 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   align-items: center;
   gap: 8px;
 }
-.host-app #host-management .settings-actions > button {
+.host-app .settings-actions > button {
   margin: 0;
 }
 .support-approvals {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin-block: 12px;
 }
-.host-app .portal-panel .support-approval {
+.host-app .support-approval {
   display: grid;
   gap: 8px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-card);
+  background: #ffffff;
 }
-.host-app .portal-panel .support-approval > p,
-.host-app .portal-panel .support-approval details {
+.host-app .support-approval > p,
+.host-app .support-approval details {
   margin: 0;
 }
 .team-invitations {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin-top: 12px;
 }
-.host-app .portal-panel .team-invitation__state {
+.host-app .team-invitation__state {
   order: 1;
   flex-basis: 100%;
   margin: 0;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 13px;
 }
 
-@media (max-width: 600px) {
-  .host-app .portal-panel .booking-row {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-  .booking-row__stay {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-  .calendar-filters {
-    width: 100%;
-    margin-inline-start: 0;
-  }
-  .host-app .portal-panel label.calendar-filter {
-    flex: 1 1 8rem;
-  }
-  .host-app .portal-panel .calendar-filter select {
-    width: 100%;
-    max-width: none;
-  }
-  .bookings-actions {
-    justify-content: stretch;
-  }
-  .host-app #host-management form.bookings-search {
-    max-width: none;
-  }
-  .booking-sheet__header,
-  .booking-sheet__body,
-  .booking-sheet__actions {
-    padding-inline: 16px;
-  }
-  .host-app dialog .booking-sheet__status {
-    padding-inline: 16px;
-  }
-  .host-app dialog.booking-sheet {
-    width: 100vw;
-    border: 0;
-  }
-}
-@media (max-width: 400px) {
-  .booking-form__times {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .calendar-navigation,
-  .calendar-ranges {
-    flex: 1 1 100%;
-  }
-  .host-app .portal-panel .calendar-toolbar button {
-    flex: 1 1 auto;
-    padding-inline: 8px;
-  }
-}
-
-/* Service health (Activity). */
-.host-service-health {
-  overflow-wrap: anywhere;
-}
-.host-service-health .health-summary {
-  margin-block: 12px 16px;
-}
-.host-service-health .health-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-block: 1rem;
-}
-.host-service-health .health-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 1rem;
-  margin-block: 1.25rem;
-}
-.host-service-health .health-metrics article {
-  min-width: 0;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-  background: var(--surface-soft);
-}
-.host-service-health .health-metrics h4 {
-  margin: 0 0 0.75rem;
-}
-.host-service-health .health-history {
-  padding-inline-start: 1.25rem;
-}
-.host-service-health .health-history li {
-  margin-block: 0.8rem;
-}
-.host-service-health form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 1rem;
-}
-.host-service-health form label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0;
-}
-.host-service-health form input {
-  box-sizing: border-box;
-  max-width: 100%;
-}
-.host-service-health form input[type="checkbox"] {
-  width: auto;
-  align-self: start;
-}
-
-/* My systems and Organization systems: cards on the backdrop, like the
-   picker's tiles. An example has a dashed violet border and an Example pill;
-   a badge always carries words, never colour alone. */
-.host-app .workspace-view-panel > section.systems-view {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-.systems-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-.host-app .portal-panel .systems-toolbar__text {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  color: var(--label);
-  font-weight: 700;
-}
-.systems-view > .empty-state {
-  margin-bottom: 20px;
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  box-shadow: var(--card-shadow);
-}
-.app-steps {
-  display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: app-step;
-}
-.app-steps li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  color: var(--ink);
-  font-weight: 600;
-  counter-increment: app-step;
-}
-.app-steps li::before {
-  content: counter(app-step);
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--host-soft);
-  color: var(--host-strong);
-  font-weight: var(--weight-heavy, 800);
-}
-.system-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.system-grid > li {
-  display: flex;
-  min-width: 0;
-}
-.system-card {
-  display: grid;
-  flex: 1;
-  grid-template-columns: 56px minmax(0, 1fr);
-  align-content: start;
-  gap: 14px;
-  min-width: 0;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  box-shadow: var(--card-shadow);
-}
-.system-card[data-example] {
-  border: 2px dashed #c4b5fd;
-}
-.system-card__icon {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface-soft);
-}
-.system-card__icon--dual-control {
-  border-color: transparent;
-  border-radius: 16px;
-  background: var(--chip);
-}
-.system-card__icon--group {
-  border-color: #99f6e4;
-  background: #f0fdfa;
-}
-.system-card__icon img {
-  display: block;
-  width: 40px;
-  height: 40px;
-}
-.system-card__body {
-  min-width: 0;
-}
-.host-app .portal-panel .system-card__name {
-  margin: 2px 0 0;
-  font-size: 1.02rem;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-.host-app .portal-panel .system-card__kind {
-  margin: 2px 0 0;
-  font-size: 0.88rem;
-  line-height: 1.4;
-}
-.host-app .portal-panel .system-card__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 10px 0 0;
-}
-.system-card__actions {
-  display: flex;
-  flex-wrap: wrap;
-  grid-column: 1 / -1;
-  gap: 8px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-}
-.system-card__actions > * {
-  flex: 1 1 auto;
-}
-.system-action-blocked {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.system-action-blocked > button {
-  flex: 1;
-}
-.system-badge {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  min-height: 24px;
-  padding: 2px 10px;
-  /* A pill on one line; a long name that wraps keeps soft corners. */
-  border-radius: 12px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-.system-badge--org {
-  background: var(--host-soft);
-  color: var(--host-strong);
-}
-.system-badge--none {
-  border: 1px dashed var(--field);
-  color: var(--muted);
-}
-.system-badge--example {
-  background: #f5f3ff;
-  color: var(--example);
-}
-.system-badge--source {
-  background: var(--chip);
-  color: var(--label);
-}
-.systems-group {
-  margin-top: 28px;
-}
-.host-app .portal-panel .systems-group__title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 12px;
-  font-size: 1rem;
-}
-.host-app .portal-panel .button-danger-solid,
-.host-app dialog .button-danger-solid {
-  border-color: var(--danger);
-  background: var(--danger);
-  color: #ffffff;
-}
-
-/* The sidebar's compact My systems list. */
-.sidebar-system {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  min-height: 44px;
-  padding: 8px 12px;
-  border: 0;
-  border-radius: 12px;
-  background: transparent;
-  color: var(--ink);
-  font: inherit;
-  text-align: start;
-  cursor: pointer;
-}
-.sidebar-system:hover {
-  background: var(--chip);
-}
-.sidebar-system__icon {
-  flex: none;
-  width: 28px;
-  height: 28px;
-}
-.sidebar-system__text {
-  display: grid;
-  justify-items: start;
-  gap: 2px;
-  min-width: 0;
-}
-.sidebar-system__name {
-  max-width: 100%;
-  overflow: hidden;
-  font-size: 0.88rem;
-  font-weight: 700;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.sidebar-system .system-badge {
-  display: block;
-  min-height: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Link, unlink, remove and icon dialogs; a danger dialog is the red
-   confirmation card. */
-.host-app dialog.system-dialog {
-  width: min(30rem, calc(100vw - 2rem));
-}
-.system-dialog__form {
-  display: grid;
-  gap: 12px;
-}
-.host-app dialog.system-dialog h2 {
-  margin: 0;
-  color: var(--ink);
-  font-size: 1.2rem;
-  font-weight: var(--weight-heavy, 800);
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-.host-app dialog .system-dialog__text {
-  margin: 0;
-}
-.system-dialog__icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fee2e2;
-  color: #dc2626;
-  font-size: 1.3rem;
-  font-weight: var(--weight-heavy, 800);
-}
-.host-app dialog .system-dialog__status {
-  margin: 0;
-  color: var(--ink);
-  font-weight: 600;
-}
-.system-dialog__status:empty,
-.system-dialog__extra:empty {
-  display: none;
-}
-.system-dialog__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.system-dialog__actions button {
-  flex: 1 1 auto;
-}
+/* A choice card (radio or checkbox in a bordered row). */
 .host-app fieldset.choice-list {
   display: grid;
   gap: 8px;
@@ -2542,22 +1738,24 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   margin-bottom: 8px;
   padding: 0;
 }
-.host-app :is(dialog, .portal-panel) label.choice {
+.host-app label.choice {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   min-height: 44px;
   margin: 0;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-card);
   background: #ffffff;
   color: var(--ink);
-  font-size: 0.92rem;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
 }
-.host-app :is(dialog, .portal-panel) label.choice:has(input:checked) {
-  border-color: var(--host);
+.host-app label.choice:has(input:checked) {
+  border-color: #a9c7ff;
   background: var(--host-soft);
 }
 .choice__name {
@@ -2575,17 +1773,21 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   flex: 1;
   min-width: 0;
 }
-.host-app :is(dialog, .portal-panel) label.choice:has(input:disabled) {
+.host-app label.choice:has(input:disabled) {
   background: var(--surface-soft);
   color: var(--muted);
   cursor: not-allowed;
 }
 .choice__detail {
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 500;
 }
 .host-app fieldset.choice-list--icons {
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 112px), 1fr));
+}
+.choice-list--icons > *,
+.choice-list--icons label.choice--icon {
+  min-width: 0;
 }
 .choice-list--icons legend,
 .choice-list--icons [role="status"] {
@@ -2600,6 +1802,182 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   flex: none;
 }
 
+/* Service health (Activity): Manager overview metrics. */
+.host-service-health {
+  overflow-wrap: anywhere;
+}
+.host-service-health .health-summary {
+  margin-block: 12px 16px;
+}
+.host-service-health .health-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 16px;
+}
+.host-service-health .health-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 14px;
+  margin-block: 20px;
+}
+.host-service-health .health-metrics article {
+  min-width: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: #ffffff;
+}
+.host-service-health .health-metrics h4 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.host-service-health .health-history {
+  padding-inline-start: 20px;
+}
+.host-service-health .health-history li {
+  margin-block: 12px;
+}
+.host-service-health form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+}
+.host-service-health form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.host-service-health form input {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.host-service-health form input[type="checkbox"] {
+  width: auto;
+  align-self: start;
+}
+
+/* My systems and Organization systems: Manager's view, grid and cards. */
+.host-app .workspace-view-panel > section.systems-view {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.systems-view > .empty-state {
+  margin-bottom: 20px;
+}
+.empty-state .app-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: app-step;
+}
+.empty-state .app-steps li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--ink);
+  font-weight: 600;
+  counter-increment: app-step;
+}
+.system-action-blocked {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.system-action-blocked > button {
+  flex: 1;
+}
+/* Words, never colour alone: Manager's small tag geometry. */
+.system-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 24px;
+  padding: 4px 9px;
+  border: 1px solid #dce6ef;
+  border-radius: 5px;
+  background: #f0f5fa;
+  color: #38658d;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.system-badge--org {
+  border-color: #cfe0ff;
+  background: var(--host-soft);
+  color: var(--host-strong);
+}
+.system-badge--none {
+  border-style: dashed;
+  border-color: var(--field);
+  background: #ffffff;
+  color: var(--muted);
+}
+/* The simulator's Example pill: Manager's example badge. */
+.system-badge--example {
+  border-color: #e1dfe8;
+  background: #f7f6f9;
+  color: #746982;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+.system-badge--source {
+  background: var(--chip);
+  color: var(--label);
+}
+.systems-group {
+  margin-top: 28px;
+}
+.host-app .systems-group__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+.host-app .system-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+}
+
+/* Link, unlink, remove and icon dialogs use Manager's confirm dialog. */
+.system-dialog__form {
+  display: grid;
+  gap: 12px;
+}
+.host-app dialog .system-dialog__text {
+  margin: 0;
+}
+.system-dialog__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fee4e2;
+  color: var(--danger);
+  font-size: 20px;
+  font-weight: 700;
+}
+.host-app dialog .system-dialog__status {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+.system-dialog__status:empty,
+.system-dialog__extra:empty {
+  display: none;
+}
+
 /* Try it: the simulator of an example, a sheet on a phone. */
 .host-app dialog.try-it:not(.mfa-dialog) {
   width: min(760px, calc(100vw - 32px));
@@ -2607,12 +1985,21 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   max-height: calc(100dvh - 32px);
   padding: 0;
   overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #182d48;
+  box-shadow: 0 16px 48px #17324d26;
+}
+.host-app dialog.try-it::backdrop {
+  background: #10243d99;
+  backdrop-filter: blur(4px);
 }
 .try-it__frame {
   display: grid;
   gap: 16px;
   min-width: 0;
-  padding: 24px;
+  padding: 28px 24px;
 }
 .try-it__header {
   display: flex;
@@ -2624,17 +2011,23 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   min-width: 0;
 }
 .host-app dialog .try-it__eyebrow {
-  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 6px;
+  padding: 3px 8px;
+  border: 1px solid #e6dcf5;
+  border-radius: 999px;
+  background: #f7f3fd;
   color: var(--example);
-  font-size: 0.78rem;
-  font-weight: var(--weight-heavy, 800);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 .host-app dialog.try-it h2 {
   margin: 0;
-  color: var(--ink);
-  font-size: 1.15rem;
+  color: #182d48;
+  font-size: 20px;
+  font-weight: 700;
   line-height: 1.3;
   overflow-wrap: anywhere;
 }
@@ -2642,18 +2035,30 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   flex: none;
   width: 44px;
   padding: 0;
-  font-size: 1.4rem;
+  border-color: var(--line, #0f172a14);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 22px;
 }
+.host-app dialog .try-it__close:hover:not(:disabled) {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: var(--ink);
+}
+/* Manager's simulation note. */
 .host-app dialog .try-it__note {
   display: flex;
   align-items: center;
   gap: 6px;
   margin: 0;
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: #f5f3ff;
-  color: #5b21b6;
-  font-weight: 600;
+  padding: 14px 18px;
+  border: 1px solid #e3e9f1;
+  border-inline-start: 3px solid #9b86c4;
+  border-radius: 8px;
+  background: #fbfaff;
+  color: #4d3d70;
+  font-size: 13px;
+  font-weight: 500;
 }
 .host-app dialog .try-it__tracks {
   margin: 0;
@@ -2663,12 +2068,13 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   display: grid;
   gap: 12px;
 }
-.host-app #host-management form.try-it__form {
+.host-app form.try-it__form {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   max-width: none;
 }
 .try-it__form label {
   display: grid;
+  gap: 6px;
   min-width: 0;
   margin: 0;
 }
@@ -2691,10 +2097,10 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 .try-it__card {
   display: grid;
   gap: 4px;
-  padding: 16px;
+  padding: 20px;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface-soft);
+  border-radius: var(--radius-card);
+  background: #ffffff;
 }
 .host-app dialog .try-it__card p {
   margin: 0;
@@ -2702,16 +2108,17 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   overflow-wrap: anywhere;
 }
 .host-app dialog .try-it__card .try-it__card-title {
-  font-weight: var(--weight-heavy, 800);
+  color: #20364e;
+  font-weight: 650;
 }
 .host-app dialog .try-it__card .try-it__mapping,
 .host-app dialog .try-it__card .try-it__muted {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 13px;
 }
 .host-app dialog .try-it__card .try-it__price {
-  font-size: 1.1rem;
-  font-weight: var(--weight-heavy, 800);
+  font-size: 18px;
+  font-weight: 700;
 }
 .try-it__buttons {
   display: flex;
@@ -2721,11 +2128,12 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 .try-it__buttons > button {
   flex: 1 1 auto;
 }
-.host-app .portal-panel .try-it__buttons > .try-it__chip {
+.host-app .try-it__buttons > .try-it__chip {
   flex: 0 1 auto;
   border-style: dashed;
-  border-color: #f3b4ad;
+  border-color: #efd3d6;
   border-radius: 999px;
+  background: #ffffff;
   color: var(--danger);
 }
 .try-it__steps {
@@ -2743,7 +2151,7 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   align-items: center;
   gap: 8px;
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 .try-it__steps li::before {
   content: "✓";
@@ -2753,26 +2161,27 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #dcfce7;
-  color: #15803d;
-  font-weight: var(--weight-heavy, 800);
+  background: #edf8f1;
+  color: #23633e;
+  font-weight: 700;
 }
+/* A guest link: a Manager card. */
 .link-card {
   display: grid;
   gap: 10px;
   min-width: 0;
-  padding: 16px;
-  border: 1px solid #bfdbfe;
-  border-radius: 16px;
-  background: var(--host-soft);
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: #ffffff;
 }
 .link-card[data-failed] {
-  border-color: #fecaca;
+  border-color: #f0d8d4;
   background: var(--danger-soft);
 }
-.host-app .portal-panel .link-card h3 {
+.host-app .link-card h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 16px;
 }
 .host-app dialog .link-card__url,
 .host-app dialog .link-card__failed {
@@ -2781,10 +2190,11 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
 }
 .host-app dialog .link-card__url {
   padding: 10px 12px;
-  border-radius: 12px;
-  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  background: #f8fafc;
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.8rem;
+  font-size: 12px;
   line-height: 1.5;
   text-align: left;
   overflow-wrap: anywhere;
@@ -2803,37 +2213,30 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   width: 200px;
   height: 200px;
   padding: 8px;
-  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
   background: #ffffff;
   image-rendering: pixelated;
 }
-.host-app #host-management .try-it__developer {
+.host-app .try-it__developer {
   margin: 0;
-  padding-block: 0;
 }
 /* The one control that opens the developer section: a full 44px row. */
 .host-app .try-it__developer > summary {
   box-sizing: border-box;
   min-height: 44px;
-  padding-block: 11px;
-  cursor: pointer;
-}
-.host-app .try-it__developer[open] > summary {
-  margin-bottom: 4px;
-}
-.host-app #host-management .try-it__developer[open] {
-  padding-bottom: 14px;
+  padding-block: 8px;
 }
 .try-it__code {
   max-height: 360px;
   margin: 0;
   padding: 14px;
   overflow: auto;
-  border-radius: 12px;
-  background: var(--ink);
+  border-radius: 8px;
+  background: #17324d;
   color: #e2e8f0;
   font:
-    0.78rem/1.55 ui-monospace,
+    12px/1.55 ui-monospace,
     SFMono-Regular,
     Consolas,
     monospace;
@@ -2846,7 +2249,58 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
   font-family: inherit;
   text-align: start;
 }
+
+/* Legal links under the content, in Manager's neutral small type. */
+.host-app .portal-legal {
+  gap: 8px 16px;
+  margin-top: 24px;
+  padding: 8px 0 28px;
+  color: #66778b;
+  font-size: 12px;
+}
+.host-app .portal-legal a {
+  color: #66778b;
+}
+
 @media (max-width: 600px) {
+  .host-app .booking-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .booking-row__stay {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .calendar-filters {
+    width: 100%;
+    margin-inline-start: 0;
+  }
+  .host-app label.calendar-filter {
+    flex: 1 1 8rem;
+  }
+  .host-app .calendar-filter select {
+    width: 100%;
+    max-width: none;
+  }
+  .bookings-actions {
+    justify-content: stretch;
+  }
+  .host-app form.bookings-search {
+    max-width: none;
+  }
+  .booking-sheet__header,
+  .booking-sheet__body,
+  .booking-sheet__actions {
+    padding-inline: 16px;
+  }
+  .host-app dialog .booking-sheet__status {
+    padding-inline: 16px;
+  }
+  .host-app dialog.booking-sheet,
+  html[dir="rtl"] .host-app dialog.booking-sheet {
+    width: 100vw;
+    border: 0;
+    border-radius: 0;
+  }
   .host-app dialog.try-it:not(.mfa-dialog) {
     width: 100vw;
     max-width: 100vw;
@@ -2857,190 +2311,29 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
     border-radius: 0;
   }
   .try-it__frame {
-    padding: 16px;
+    padding: 18px 16px;
   }
-  .host-app #host-management form.try-it__form {
+  .host-app form.try-it__form {
     grid-template-columns: minmax(0, 1fr);
   }
-}
-
-/* Legal links under the content. */
-.host-app .portal-legal {
-  gap: 8px 16px;
-  padding: 8px 16px 28px;
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-
-/* Phone tab bar (below 960px). */
-.host-tabbar {
-  display: none;
-}
-
-@media (max-width: 1100px) {
-  .host-app .portal-shell {
-    padding-inline: 24px;
-  }
-}
-
-/* Below 960px: the sidebar becomes a drawer, a tab bar sits at the bottom,
-   and the page title moves under the top bar row. */
-@media (max-width: 959px) {
-  .host-ready:has(.host-sidebar:not([hidden])) {
-    padding-inline-start: 0;
-    padding-bottom: calc(
-      var(--tabbar-height) + env(safe-area-inset-bottom, 0px)
-    );
-  }
-  /* Equal side columns keep the pill at the centre of the screen, where
-     the picker, Pay and Manager have it too. */
-  .host-topbar {
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    grid-template-areas:
-      "start pill end"
-      "title title title";
-    gap: 4px 8px;
-    padding: 8px 12px 6px;
-  }
-  .host-topbar__start {
-    display: contents;
-  }
-  .workspace-menu-toggle {
-    grid-area: start;
-    justify-self: start;
-    display: inline-grid;
-  }
-  .host-topbar__brand {
-    grid-area: start;
-    justify-self: start;
-    max-width: 100%;
-  }
-  .host-topbar__title {
-    grid-area: title;
-    padding: 2px 4px 2px;
-    font-size: 1.1rem;
-  }
-  .host-topbar .product-switcher {
-    grid-area: pill;
-  }
-  .host-topbar__end {
-    grid-area: end;
-    gap: 6px;
-  }
-  .host-sidebar {
-    z-index: 60;
-    width: min(var(--sidebar-width), calc(100vw - 48px));
-    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-    visibility: hidden;
-    transform: translateX(-105%);
-    transition:
-      transform 180ms ease,
-      visibility 0s linear 180ms;
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-  }
-  html[dir="rtl"] .host-sidebar {
-    transform: translateX(105%);
-  }
-  .host-sidebar::before {
-    width: min(var(--sidebar-width), calc(100vw - 48px));
-    background: rgba(255, 255, 255, 0.97);
-  }
-  .host-sidebar.is-open,
-  html[dir="rtl"] .host-sidebar.is-open {
-    visibility: visible;
-    transform: none;
-    transition: transform 220ms ease;
-  }
-  .host-scrim {
-    position: fixed;
-    inset: 0;
-    z-index: 55;
-    background: rgba(15, 23, 42, 0.45);
-  }
-  .host-ready .host-tabbar:not([hidden]) {
-    position: fixed;
-    inset-inline: 0;
-    bottom: 0;
-    z-index: 35;
-    display: grid;
-    grid-auto-columns: minmax(0, 1fr);
-    grid-auto-flow: column;
-    padding: 4px 6px env(safe-area-inset-bottom, 0px);
-    border-top: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.06);
-  }
-  .host-tabbar button {
-    display: grid;
-    justify-items: center;
-    align-content: center;
-    gap: 2px;
-    min-width: 0;
-    min-height: 56px;
-    padding: 4px 2px;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    color: var(--muted);
-    font: inherit;
-    font-size: 0.72rem;
-    font-weight: 700;
-    line-height: 1.2;
-    cursor: pointer;
-  }
-  .host-tabbar button span {
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .host-tabbar button[aria-current="page"],
-  .host-tabbar button[aria-expanded="true"] {
-    color: var(--host-strong);
-    background: var(--host-soft);
-  }
-  .host-app .portal-shell {
-    padding: 16px 16px 24px;
-  }
-  .host-app .workspace-view-panel > section,
-  .host-app .workspace-view-panel > details,
-  .host-app .workspace-view-panel > .empty-state,
-  .host-app .settings-body > [role="tabpanel"],
-  .host-app #admin-overview {
-    padding: 16px;
-    border-radius: 18px;
-  }
-}
-@media (max-width: 600px) {
-  .host-topbar__end > .host-language {
-    display: none;
-  }
-  .host-account__language {
-    display: flex;
-  }
-  .product-switcher__brand {
-    display: none;
-  }
-  .host-topbar .product-switcher__button {
-    padding-inline: 12px 10px;
-  }
-  .host-app .portal-panel :where(input, select, textarea) {
+  :where(.host-app #host-management, .host-app dialog:not(.mfa-dialog)) :is(input, select, textarea):where(:not([type="checkbox"], [type="radio"])) {
     font-size: 16px;
   }
-  .host-app dialog:not(.mfa-dialog) {
-    padding: 20px;
-  }
-  .host-app .portal-panel button {
-    max-width: 100%;
-    white-space: normal;
+  .host-app .calendar-heading h2 {
+    font-size: 24px;
   }
 }
-@media (max-width: 360px) {
-  .host-topbar {
-    padding-inline: 12px;
+@media (max-width: 400px) {
+  .booking-form__times {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .host-topbar__end {
-    gap: 4px;
+  .calendar-navigation,
+  .calendar-ranges {
+    flex: 1 1 100%;
+  }
+  .host-app .calendar-toolbar :is(.calendar-navigation, .calendar-ranges) button {
+    flex: 1 1 auto;
+    padding-inline: 8px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3052,19 +2345,12 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
     transition: none !important;
   }
 }
-@media print {
-  .host-topbar,
-  .host-sidebar,
-  .host-tabbar,
-  .host-scrim {
-    display: none !important;
-  }
-  .host-ready:has(.host-sidebar:not([hidden])) {
-    padding: 0;
-  }
-}
 
-.host-app .systems-empty { display: grid; gap: 16px; padding: clamp(28px, 5vw, 56px) 24px; text-align: center; border: 1px solid #e2e8f0; border-radius: 18px; background: #fff; }
-.host-app .systems-empty h4 { margin: 0; color: #172b46; font-size: 22px; }
-.host-app .systems-empty p { margin: 0; color: #64748b; line-height: 1.8; font-size: 14px; }
-@media (max-width: 480px) { .host-app .systems-empty { padding: 28px 20px; } .host-app .systems-empty h4 { font-size: 20px; } }
+/* A read error is Manager's status line in error red. */
+.host-app .calendar-heading__status[data-state="error"] {
+  color: var(--danger);
+  font-size: 14px;
+}
+.host-app .calendar-scroll > .manager-retry {
+  margin: 16px;
+}

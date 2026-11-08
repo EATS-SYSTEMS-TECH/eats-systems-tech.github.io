@@ -1,243 +1,174 @@
-/* Host shares Manager's workspace components; only its product accents differ.
-   The scoped resets below detach the shared shell from Host's fixed drawer.
-   Calendar, reservations, team, access and settings keep their Host layouts. */
-@import url("./manager-dashboard.css?v=20261030workspace2");
-@import url("./host-api-keys.css?v=20261105");
-
+/* Host uses the real Manager components and geometry, with blue accents.
+   Loaded last, after manager-dashboard.css, dashboard-header.css and
+   role-guide.css (the same order as /dashboard/manager/). This layer only
+   remaps colour: where Manager paints its orange accent, Host paints its
+   blue. Semantic colours (owner amber, Dual Control, danger red, calendar
+   statuses) stay as they are. */
 body.host-app.host-manager-workspace[data-product="host"] {
   padding: 0;
   font-size: 16px;
-  line-height: normal;
-  --radius-card: 14px;
-  --radius-control: 10px;
+  --host-tint-line: #cfe0ff;
   --manager-accent: var(--host, #0b63ff);
   --manager-strong: var(--host-strong, #0a55d9);
   --manager-soft: var(--host-soft, #eaf2ff);
-  --manager-line: var(--line, #e2e8f0);
-  --host-tint-line: #cfe0ff;
   --dashboard-accent: var(--host, #0b63ff);
   --dashboard-soft: var(--host-soft, #eaf2ff);
-  background: var(--workspace-canvas, #f3f6fa);
+  --focus: #0b63ff;
 }
-.host-manager-workspace::before { display: none; }
 .host-manager-workspace .host-manager-shell { --manager-accent: var(--host); }
-.host-manager-workspace .host-manager-page { min-width: 0; }
 
-/* Header, page width and inline navigation follow the shared dashboard shell. */
-body.host-app.host-manager-workspace .host-manager-page:has(> #host-workspace-shell) > header.host-topbar {
-  position: relative;
-  top: auto;
-  z-index: 20;
-  width: 100%;
-  max-width: none;
-  margin: 0 auto 24px;
-  grid-template-areas: none;
-}
-body.host-app.host-manager-workspace[data-product="host"] .host-topbar::before {
-  inset: 0;
-  border: 0;
-  border-radius: inherit;
-}
+/* Host keeps its drawer markup for older pages; the shared layout never
+   shows it. The title stays for screen readers only. */
 .host-manager-workspace .host-topbar .workspace-menu-toggle,
 .host-manager-workspace .host-scrim,
 .host-manager-workspace #host-tabbar,
 .host-manager-workspace #host-sidebar > .host-sidebar__brand,
 .host-manager-workspace #host-my-systems { display: none !important; }
-.host-manager-workspace #workspace-main.manager-main {
-  width: auto;
-  max-width: none;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
+.host-manager-workspace .host-topbar__start { display: contents; }
+.host-manager-workspace .host-topbar__title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
-.host-manager-workspace #host-sidebar.manager-nav {
-  position: sticky;
-  inset: auto;
-  top: 20px;
-  z-index: auto;
-  width: auto;
-  min-width: 0;
-  height: max-content;
-  min-height: 0;
-  gap: normal;
-  padding: 18px;
-  overflow: visible;
-  visibility: visible;
-  transform: none;
-  transition: none;
-  border: 1px solid var(--manager-line);
-  border-radius: 16px;
-  background: linear-gradient(160deg, #fff, #f8fafc);
-  box-shadow: 0 3px 14px #17243a05;
-}
-.host-manager-workspace #host-sidebar::before { display: none; }
-.host-manager-workspace #host-sidebar .manager-nav-title { line-height: 1.7; }
-body.host-manager-workspace .host-topbar__start .brand { width: 152px; }
 .host-manager-workspace #host-section-navigation { display: contents; }
-.host-manager-workspace #host-section-navigation button.manager-button {
-  position: static;
-  gap: 10px;
-  padding: 10px 16px;
-  margin: 4px 0;
-  min-height: 46px;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  color: var(--muted, #64748b);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: normal;
-}
-.host-manager-workspace #host-section-navigation button.manager-button:hover:not(:disabled) {
-  background: #f8fafc;
-  color: #172b46;
-}
-.host-manager-workspace #host-section-navigation button.manager-button[aria-current="page"],
-.host-manager-workspace #host-section-navigation button.manager-button[aria-current="page"]:hover {
-  background: var(--host-soft);
-  color: #172b46;
-}
-.host-manager-workspace #host-section-navigation button::before { display: none; }
+.host-manager-workspace #workspace-main.manager-main { width: auto; max-width: none; min-width: 0; margin: 0; padding: 0; }
 
-/* The authorized shortcut uses the actual shared floating entry component. */
-.host-manager-workspace #host-platform-navigation { display: contents; }
-.host-manager-workspace #host-platform-navigation button.host-platform-entry {
-  background: var(--host-strong);
-  border-color: var(--host-strong);
-  color: #fff;
-  text-align: start;
-  box-shadow: 0 8px 24px #0a55d926;
-}
-.host-manager-workspace #host-platform-navigation button.host-platform-entry:hover:not(:disabled) {
-  background: #0848bb;
-  border-color: #0848bb;
-  color: #fff;
-  box-shadow: 0 10px 28px #15213b38;
-}
+/* With no navigation (a pending account, an access error) the workspace is
+   one column, as Manager's management mode. */
+.host-manager-workspace .manager-shell:has(> .manager-nav[hidden]),
+.host-manager-workspace.host-menu-empty .manager-shell { grid-template-columns: minmax(0, 1fr); }
 
-/* The same Manager controls can appear under Host's existing panel roots. */
-.host-manager-workspace #host-management .manager-button,
-.host-manager-workspace .manager-confirm-dialog button.manager-button {
-  min-height: 44px;
-  padding: 10px 16px;
-  border: 1px solid var(--manager-line);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--ink, #0f172a);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: normal;
-  filter: none;
-}
-.host-manager-workspace #host-management .manager-button:hover:not(:disabled),
-.host-manager-workspace .manager-confirm-dialog button.manager-button:hover:not(:disabled) {
-  background: #f8fafc;
-  border-color: #94a3b8;
-  filter: none;
-}
-.host-manager-workspace #host-management .manager-button.primary,
-.host-manager-workspace .manager-confirm-dialog button.manager-button.primary {
-  background: var(--host-strong);
-  border-color: var(--host-strong);
-  color: #fff;
-}
-.host-manager-workspace #host-management .manager-button.primary:hover:not(:disabled),
-.host-manager-workspace .manager-confirm-dialog button.manager-button.primary:hover:not(:disabled) {
-  background: #0848bb;
-  border-color: #0848bb;
-  color: #fff;
-}
-.host-manager-workspace #host-management .manager-button.danger,
-.host-manager-workspace .manager-confirm-dialog button.manager-button.danger { color: #b42318; border-color: #efd3d6; }
-.host-manager-workspace #host-management .manager-button:disabled,
-.host-manager-workspace .manager-confirm-dialog button.manager-button:disabled { opacity: 0.5; cursor: default; }
-.host-manager-workspace #host-management .manager-toolbar h3 {
+/* Access check: Manager's status line and retry under the header. The
+   title stays for screen readers; the status sentence says what happened. */
+.host-manager-workspace #access-panel { margin: 0 0 24px; padding: 0; border: 0; background: none; box-shadow: none; text-align: start; }
+.host-manager-workspace #access-panel > h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   margin: 0;
-  color: #172b46;
-  font-size: clamp(23px, 2.4vw, 30px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.host-manager-workspace #access-panel > #dashboard-status { margin: 0; color: #526579; font-size: 16px; line-height: normal; }
+.host-manager-workspace #access-panel > #refresh-access {
+  box-sizing: border-box;
+  min-height: 46px;
+  margin-top: 16px;
+  padding: 0.55rem 1rem;
+  border: 1px solid #d7e0e8;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #334155;
+  font: inherit;
+  font-size: 0.82rem;
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -.025em;
+  line-height: normal;
+  cursor: pointer;
 }
-.host-manager-workspace #host-management .manager-card.manager-system { grid-template-columns: none; background: linear-gradient(150deg, var(--host-soft), #fff 42%); }
-.host-manager-workspace #host-management .manager-system.system-card[data-example] { border: 1px solid var(--manager-line); }
-.host-manager-workspace #host-management .manager-system h4.system-card__name { margin: 0; font-size: 19px; line-height: 1.5; }
-.host-manager-workspace #host-management .manager-system .system-card__kind { margin: 0; font-size: 13px; line-height: inherit; }
-.host-manager-workspace .manager-shell .manager-system .manager-icon { background: var(--host-soft); border-color: var(--host-tint-line); color: var(--host-strong); }
-.host-manager-workspace .manager-note { border-inline-start-color: #9cbfff; }
-.host-manager-workspace .manager-eyebrow { color: var(--host-strong); }
-.host-manager-workspace .manager-empty-symbol { color: var(--host-strong); background: var(--host-soft); border-color: var(--host-tint-line); }
-.host-manager-workspace .manager-settings-card,
-.host-manager-workspace .manager-device-card { background: linear-gradient(130deg, #fff 55%, var(--host-soft)); }
-.host-manager-workspace .manager-hero { background: linear-gradient(150deg, var(--host-soft), #fff 48%); }
-.host-manager-workspace .manager-tabs button[aria-selected="true"] { background: var(--host-soft); color: var(--host-strong); border-color: var(--host-tint-line); }
+.host-manager-workspace #access-panel > #refresh-access:hover { background: #ffffff; border-color: #94a3b8; }
 
-/* Shared disclosures override only the older Host chevron and open padding. */
-.host-manager-workspace #host-management details.dashboard-examples,
-.host-manager-workspace #host-management details.dashboard-examples[open] {
-  margin: 0 0 24px;
-  padding: 0;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 3px 14px #182d4805;
-}
-.host-manager-workspace #host-management .dashboard-examples > summary { margin: 0; gap: 12px; font-size: 14px; }
-.host-manager-workspace #host-management .dashboard-examples > summary::after {
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
-  margin-inline: auto 0;
-  border: 1px solid #e8edf4;
-  transform: rotate(0);
-}
-.host-manager-workspace #host-management .dashboard-examples[open] > summary::after { transform: rotate(180deg); }
-.host-manager-workspace .manager-setup-steps > li::before { background: var(--host-soft); color: var(--host-strong); }
-.host-manager-workspace .manager-setup-guide > .manager-setup-update { background: #f5f9ff; border-color: var(--host-tint-line); }
+/* Accent: primary actions. */
+.host-manager-workspace .manager-shell button.manager-button.primary,
+.host-manager-workspace .manager-confirm-dialog button.manager-button.primary { background: #0a55d9; border-color: #0a55d9; color: #fff; }
+.host-manager-workspace .manager-shell button.manager-button.primary:hover:not(:disabled),
+.host-manager-workspace .manager-confirm-dialog button.manager-button.primary:hover:not(:disabled) { background: #0848bb; border-color: #0848bb; color: #fff; }
+.host-manager-workspace .manager-confirm-dialog button.manager-button-danger { background: #b42318; border-color: #b42318; color: #fff; }
+.host-manager-workspace .manager-confirm-dialog button.manager-button-danger:hover:not(:disabled) { background: #8e2018; border-color: #8e2018; color: #fff; }
+.host-manager-workspace #host-platform-navigation { display: contents; }
+.platform-page.host-manager-workspace .manager-platform-entry { background: #0a55d9; border-color: #0a55d9; color: #fff; box-shadow: 0 8px 24px #0a55d926; }
+.platform-page.host-manager-workspace .manager-platform-entry:hover:not(:disabled) { background: #0848bb; border-color: #0848bb; color: #fff; }
+
+/* Accent: navigation, icons, tints. */
+.host-manager-workspace .manager-shell .manager-system .manager-icon { color: #0a55d9; }
+.host-manager-workspace .manager-eyebrow { color: #0a55d9; }
+.host-manager-workspace .manager-empty-symbol { background: #eaf2ff; border-color: #cfe0ff; color: #0a55d9; }
+.host-manager-workspace .manager-shell .manager-nav .manager-organization-area > .manager-nav-title { color: inherit; }
+.host-manager-workspace .manager-tabs button[aria-selected="true"] { background: #eaf2ff; color: #0848bb; border-color: #cfe0ff; }
+.host-manager-workspace .manager-control-workspace .manager-tabs .manager-button[aria-selected="true"],
+.host-manager-workspace .manager-control-workspace .manager-tabs .manager-button[aria-selected="true"]:hover:not(:disabled) { color: #205493; border-color: #d6e2f0; background: #fff; box-shadow: 0 2px 6px #1c3e6a08; }
+.host-manager-workspace .manager-setup-steps > li::before { background: #eaf2ff; color: #0848bb; }
+.host-manager-workspace .manager-setup-guide > .manager-setup-update { background: #f5f9ff; border-color: #cfe0ff; }
+.host-manager-workspace .manager-setup-guide .manager-setup-steps > li { border-color: #dce6f2; background: linear-gradient(145deg, #f5f9ff, #fff 65%); }
+.host-manager-workspace .manager-setup-guide .manager-setup-steps > li::before { border-color: #cfe0ff; }
+.host-manager-workspace .manager-setup-step-icon { border-color: #cfe0ff; background: #eaf2ff; color: #0a55d9; }
+.host-manager-workspace .manager-shell .manager-setup-controls button:not(.manager-setup-next) { border-color: #cfe0ff; background: #f5f9ff; color: #0848bb; }
+.host-manager-workspace .manager-setup-screenshot-button:focus-visible { outline-color: #0b63ff; }
+/* Host's guide has three steps. */
+.host-manager-workspace .manager-setup-markers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 body.host-manager-workspace[data-product="host"] .manager-setup-guide > summary::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a55d9' stroke-width='1.7' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.6-2.5 2-2.5 3.5'/%3E%3Cpath d='M12 16h.01'/%3E%3C/svg%3E"); }
+.host-manager-workspace .manager-system-menu summary:hover,
+.host-manager-workspace .manager-system-menu[open] summary { color: #0a55d9; background: #eaf2ff; border-color: #cfe0ff; }
+.host-manager-workspace .manager-progress { background: #f5f9ff; border-color: #cfe0ff; color: #0a55d9; }
+.host-manager-workspace .manager-dialog-progress { color: #0a55d9; }
+.host-manager-workspace .manager-organization-people-count { background: #eaf2ff; color: #0848bb; }
+.host-manager-workspace .manager-organization-pending { background: #f5f9ff; border-color: #cfe0ff; }
+.host-manager-workspace .manager-shell button.manager-organization-metric:hover:not(:disabled) { border-color: #a9c7ff; background: #f5f9ff; }
+.host-manager-workspace .manager-count-info:hover,
+.host-manager-workspace .manager-count-info:focus { background: #eaf2ff; color: #0848bb; border-color: #a9c7ff; }
 
-/* Organization picker portals live outside the shell, with the same theme. */
+/* Organization identity: avatars, logos and the picker portal. */
 .host-manager-workspace .manager-org-avatar,
 .host-manager-workspace .manager-organization-logo,
-.host-manager-workspace .manager-organization-picker-logo { background: var(--host-soft); border-color: var(--host-tint-line); color: var(--host-strong); }
+.host-manager-workspace .manager-organization-picker-logo { background: #eaf2ff; border-color: #cfe0ff; color: #0a55d9; }
 .host-manager-workspace .manager-org-avatar.has-logo,
 .host-manager-workspace .manager-organization-picker-logo.has-logo { background: #fff; border-color: #e1e7ef; }
 .host-manager-workspace .manager-organization-header { background: linear-gradient(120deg, #f5f9ff, #fff 65%); }
 .host-manager-workspace .manager-organization-picker-heading > span,
-.host-manager-workspace .manager-organization-option[aria-current="true"] { background: var(--host-soft); border-color: var(--host-tint-line); color: var(--host-strong); }
-.host-manager-workspace .manager-organization-picker-check { color: var(--host); }
-.host-manager-workspace .manager-organization-picker-trigger:focus-visible,
-.host-manager-workspace .manager-organization-option:focus-visible,
-.host-manager-workspace .manager-organization-picker-search:focus-visible { outline-color: var(--host); }
+.host-manager-workspace .manager-organization-option[aria-current="true"] { background: #eaf2ff; border-color: #cfe0ff; color: #0a55d9; }
+.host-manager-workspace .manager-organization-picker-check { color: #0b63ff; }
 .host-manager-workspace .manager-shell .manager-nav .manager-organization-picker-trigger:hover,
 .host-manager-workspace .manager-shell .manager-nav .manager-organization-picker-trigger[aria-expanded="true"] { background: #f5f9ff; border-color: #a9c7ff; }
-.host-manager-workspace .manager-system-menu summary:hover,
-.host-manager-workspace .manager-system-menu[open] summary { color: var(--host-strong); background: var(--host-soft); border-color: var(--host-tint-line); }
-.host-manager-workspace .manager-progress { background: #f5f9ff; border-color: var(--host-tint-line); color: var(--host-strong); }
-.host-manager-workspace .manager-dialog-progress { color: var(--host-strong); }
-.host-manager-workspace .manager-confirm-actions .manager-button:focus-visible,
-.host-manager-workspace .manager-system-menu summary:focus-visible { outline-color: var(--host); }
-.host-manager-workspace dialog.manager-confirm-dialog { padding: 28px; }
-.host-manager-workspace .system-dialog__form.manager-form { display: block; margin: 0; }
-.host-manager-workspace dialog.manager-confirm-dialog p { line-height: 1.7; }
-.host-manager-workspace dialog.manager-confirm-dialog :is(h2, h3) { margin: 0 0 12px; color: #182d48; font-size: 1.25rem; font-weight: 700; line-height: normal; }
-.host-manager-workspace .manager-confirm-dialog button.manager-button-danger { background: #b42318; border-color: #b42318; color: #fff; }
-.host-manager-workspace .manager-confirm-dialog button.manager-button-danger:hover:not(:disabled) { background: #8e2018; border-color: #8e2018; color: #fff; }
-.host-manager-workspace .system-dialog__actions.manager-confirm-actions { gap: 12px; }
-.host-manager-workspace .system-dialog__actions.manager-confirm-actions .manager-button { flex: 0 1 auto; }
 
-@media (min-width: 851px) {
-  .host-manager-workspace #host-sidebar.manager-nav { display: flex; flex-direction: column; }
+/* Focus rings. */
+.host-manager-workspace .manager-organization-picker-trigger:focus-visible,
+.host-manager-workspace .manager-organization-option:focus-visible,
+.host-manager-workspace .manager-organization-picker-search:focus-visible,
+.host-manager-workspace .manager-confirm-dialog :focus-visible,
+.host-manager-workspace .manager-system-menu summary:focus-visible,
+.host-manager-workspace .manager-create-organization-form input:focus-visible { outline-color: #0b63ff; }
+
+/* The invitation count in the navigation: Manager's small count pill. */
+.host-manager-workspace #host-section-navigation [data-invitation-count]:not(:empty) {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  margin-inline-start: auto;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #0848bb;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
 }
-@media (max-width: 850px) {
-  .host-manager-workspace #host-sidebar.manager-nav { position: static; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 5px; }
-  .host-manager-workspace #host-section-navigation button.manager-button { width: auto; margin: 0; }
-}
-@media (max-width: 650px) {
-  body.host-app.host-manager-workspace .host-manager-page:has(> #host-workspace-shell) > header.host-topbar { grid-template-columns: minmax(0, 1fr) auto; gap: 12px 8px; padding: 12px; }
-  body.host-manager-workspace .host-topbar__start .brand { width: 136px; }
-}
-@media (max-width: 480px) {
-  .host-manager-workspace dialog.manager-confirm-dialog { padding: 24px; }
-  .host-manager-workspace .system-dialog__actions.manager-confirm-actions .manager-button { flex: 1; }
-}
+.host-manager-workspace #host-section-navigation [data-invitation-count]:empty { display: none; }
+
+
+/* Host's organization cards have no linked-systems tile, so they keep
+   Manager's card rows without the extra height that tile fills. */
+.host-manager-workspace .host-organizations .manager-card.manager-org-column { min-height: 0; grid-template-rows: auto auto auto; }
+
+/* host-portal.css gives every #host-management disclosure a 12px margin;
+   Manager's disclosures and menus keep their own. */
+body.host-manager-workspace #host-management details.dashboard-examples { margin: 0 0 20px; }
+body.host-manager-workspace #host-management details.manager-system-menu { margin-block: 0; }
+
+/* Host's confirmations put their actions inside a form; they keep the
+   geometry Manager gives the dialog's own action row. */
+.host-manager-workspace .manager-confirm-dialog .system-dialog__actions.manager-confirm-actions { min-height: 0; }
+.host-manager-workspace .manager-confirm-dialog .system-dialog__form.manager-form { display: block; margin: 0; }
+.host-manager-workspace .manager-confirm-dialog .system-workspace-actions { display: contents; }
+/* A choice in a dialog sits where Manager's form fields sit: 24px under the
+   text, its label in Manager's field-label type. */
+.host-manager-workspace .manager-confirm-dialog .system-dialog__form > fieldset.choice-list { margin-top: 24px; }
+.host-manager-workspace .manager-confirm-dialog .system-dialog__form > fieldset.choice-list > legend { margin-bottom: 8px; padding: 0; color: #53677f; font-size: 14px; font-weight: 400; }
+.host-manager-workspace .manager-confirm-dialog .system-dialog__form > :is(.system-dialog__status, .system-dialog__extra):not(:empty) { margin-top: 16px; }
+
+/* An ⓘ beside a toolbar title sits on its line, as on Invitations. */
+.host-manager-workspace .manager-toolbar h3 > .info-tip { margin-inline-start: 10px; vertical-align: middle; letter-spacing: 0; }

@@ -6,6 +6,7 @@ import { can } from "./host-permissions.js";
 import { renderOwnerMembershipInvitations } from "./host-membership-invitations.js";
 import { openSystemDialog, changeTracker } from "./host-system-cards.js";
 import { initial } from "./host-org-selector.js";
+import { managerUiIcon } from "./manager-ui-icons.js";
 
 // Settings → Team (the owner: members:write). The people in the
 // organization, each with a role and access the owner can change; new
@@ -42,24 +43,56 @@ export async function renderTeam(panel, context) {
   );
   if (!context.isCurrent()) return;
   const manage = can(organization, "members:write");
-  const list = node("ul", undefined, { class: "team-list" });
-  for (const member of items) {
-    if (typeof member?.email !== "string") continue;
+  // Manager's people columns: one per role that has people, each with its
+  // count and the people as rows (a tinted avatar, the email, the role and
+  // access, and Change).
+  const people = node("div", undefined, { class: "manager-organization-people team-people" });
+  const known = items.filter((member) => typeof member?.email === "string");
+  const columnRoles = [...roles, ...new Set(known.map((member) => member.role).filter((role) => !roles.includes(role)))];
+  for (const role of columnRoles) {
+    const members = known.filter((member) => member.role === role);
+    if (!members.length) continue;
+    const column = node("section", undefined, {
+      class: "manager-organization-person-column team-role-column",
+      "data-organization-role": role,
+    });
+    const head = node("div", undefined, { class: "manager-organization-people-head" });
+    const title = node("div", undefined, { class: "manager-organization-people-title" });
+    const icon = node("span", undefined, { class: "manager-people-role-icon", "aria-hidden": "true" });
+    icon.append(managerUiIcon({ owner: "founder", staff: "people" }[role] ?? (role === "admin" || role === "viewer" ? role : "people")));
+    title.append(
+      icon,
+      node("h3", roleLabel(role)),
+      node("span", String(members.length), { class: "manager-organization-people-count" }),
+    );
+    head.append(title);
+    const list = node("ul", undefined, { class: "team-list" });
+    for (const member of members) list.append(memberRow(member));
+    column.append(head, list);
+    people.append(column);
+  }
+  section.append(people);
+
+  function memberRow(member) {
     const item = node("li", undefined, {
-      class: "team-member",
+      class: "team-member manager-organization-person",
       "data-member-email": member.email,
     });
+    if (member.role === "owner") item.dataset.owner = "true";
     const who = node("span", undefined, { class: "team-member__who" });
     who.append(
-      node("span", initial(member.displayName || member.email), {
-        class: "account-card__avatar team-member__avatar",
-        "aria-hidden": "true",
-      }),
       node("span", member.email, { dir: "ltr", class: "team-member__email" }),
     );
     const badges = node("span", undefined, { class: "team-member__badges" });
     badges.append(roleBadge(member.role), accessBadge(member.status));
-    item.append(who, badges);
+    who.append(badges);
+    item.append(
+      node("span", initial(member.displayName || member.email), {
+        class: "account-card__avatar team-member__avatar manager-organization-person-avatar",
+        "aria-hidden": "true",
+      }),
+      who,
+    );
     if (manage && sameEmail(member.email, ownEmail)) {
       item.dataset.self = "true";
       item.append(
@@ -74,9 +107,8 @@ export async function renderTeam(panel, context) {
       change.addEventListener("click", () => edit(member, change));
       item.append(change);
     }
-    list.append(item);
+    return item;
   }
-  section.append(list);
 
   function edit(member, trigger) {
     const tracker = changeTracker({
