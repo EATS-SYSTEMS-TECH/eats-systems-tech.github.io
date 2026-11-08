@@ -24,6 +24,10 @@ import {
   WebGLRenderer,
   PCFShadowMap,
   Box3,
+  BufferGeometry,
+  Float32BufferAttribute,
+  LineBasicMaterial,
+  LineSegments,
   Sphere,
   Spherical,
   Vector3,
@@ -31,6 +35,7 @@ import {
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { CSS2DObject, CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 
 const loader = new TextureLoader();
 
@@ -83,7 +88,7 @@ async function buildEnclosure(assets) {
   sticker.position.z = depth / 2 + 0.08;
   group.add(sticker);
   group.rotation.set(0, -0.5, 0);
-  return { group, size: Math.max(width, height, depth) };
+  return { group, size: Math.max(width, height, depth), dimensions: { width, height, depth } };
 }
 
 // WIFIGATE Roller shutter: the 18-module surface panel, 370 x 155 x 70 mm,
@@ -100,15 +105,64 @@ async function buildRollerPanel(assets) {
   face.position.z = depth / 2 + 0.06;
   group.add(face);
   group.rotation.set(0, -0.42, 0);
-  return { group, size: width };
+  return { group, size: width, dimensions: { width, height, depth } };
 }
 
 const MODELS = { "wifigate": buildEnclosure, "wifigate-roller-shutter": buildRollerPanel };
 
+// Dimension lines for a centred box of the given size, in the model's own
+// frame so they turn with it: width along a bottom edge, height up a vertical
+// edge and depth along a bottom side edge, each with end ticks and an HTML
+// label. face(x, z) moves the runs to the edges that face the camera (x and z
+// are the camera's side of the box, +1 or -1), so a line and its label never
+// sit behind the product.
+function dimensionLines({ width, height, depth }, unit) {
+  const group = new Group();
+  group.name = "dimensions";
+  const gap = Math.max(width, height, depth) * 0.08;
+  const tick = gap * 0.45;
+  const w = width / 2, h = height / 2, d = depth / 2;
+  const markers = [width, height, depth].map((value) => {
+    const label = document.createElement("span");
+    label.className = "shop-3d__dimension";
+    label.dir = "ltr";
+    label.textContent = `${value} ${unit}`;
+    const marker = new CSS2DObject(label);
+    group.add(marker);
+    return marker;
+  });
+  const geometry = new BufferGeometry();
+  geometry.setAttribute("position", new Float32BufferAttribute(new Float32Array(3 * 6 * 3), 3));
+  group.add(new LineSegments(geometry, new LineBasicMaterial({ color: 0x151719, transparent: true, opacity: 0.85 })));
+  let side = "";
+  group.userData.face = (x, z) => {
+    if (side === `${x}${z}`) return;
+    side = `${x}${z}`;
+    const runs = [
+      { from: [-w, -h, z * (d + gap)], to: [w, -h, z * (d + gap)], tick: [0, 0, tick] },
+      { from: [-x * (w + gap), -h, z * d], to: [-x * (w + gap), h, z * d], tick: [tick, 0, 0] },
+      { from: [x * (w + gap), -h, d], to: [x * (w + gap), -h, -d], tick: [tick, 0, 0] },
+    ];
+    const points = [];
+    runs.forEach((run, index) => {
+      points.push(...run.from, ...run.to);
+      for (const end of [run.from, run.to]) {
+        points.push(end[0] - run.tick[0], end[1] - run.tick[1], end[2] - run.tick[2], end[0] + run.tick[0], end[1] + run.tick[1], end[2] + run.tick[2]);
+      }
+      markers[index].position.set(...run.from.map((value, axis) => (value + run.to[axis]) / 2));
+    });
+    geometry.attributes.position.array.set(points);
+    geometry.attributes.position.needsUpdate = true;
+    geometry.computeBoundingSphere();
+  };
+  group.userData.face(1, 1);
+  return group;
+}
+
 // Frees every mesh's geometry, material and texture in a scene or group.
 function release(root) {
   root.traverse((node) => {
-    if (!node.isMesh) return;
+    if (!node.isMesh && !node.isLineSegments) return;
     node.geometry.dispose();
     for (const material of [node.material].flat()) { material.map?.dispose(); material.dispose(); }
   });
@@ -119,10 +173,13 @@ function release(root) {
 // resource exists, so a failed download leaves nothing behind. Missing WebGL
 // throws an error whose code is "webgl-unavailable"; anything else is a load
 // failure the shopper can retry.
-export async function mountProduct3D(container, { product, assets, label, reducedMotion = false }) {
+export async function mountProduct3D(container, { product, assets, label, unit = "mm", showDimensions = true, reducedMotion = false }) {
   const build = MODELS[product];
   if (!build) throw new Error(`No 3D model for ${product}`);
-  const { group, size } = await build(assets);
+  const { group, size, dimensions } = await build(assets);
+  const measures = dimensionLines(dimensions, unit);
+  measures.visible = showDimensions;
+  group.add(measures);
   let renderer;
   try {
     renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: "low-power" });
@@ -149,11 +206,16 @@ export async function mountProduct3D(container, { product, assets, label, reduce
   const key = new DirectionalLight(0xffffff, 1.6);
   scene.add(key);
 
-  // Centre the model on the origin and rest it on a soft contact shadow.
+  // Centre the model on the origin and rest it on a soft contact shadow. The
+  // dimension lines stay out of the bounds so the framing fits the product.
+  measures.visible = false;
   const bounds = new Box3().setFromObject(group);
+  measures.visible = showDimensions;
   const centre = bounds.getCenter(new Vector3());
   group.position.sub(centre);
   group.traverse((node) => { if (node.isMesh) node.castShadow = true; });
+  const labels = new CSS2DRenderer();
+  labels.domElement.className = "shop-3d__labels";
   scene.add(group);
   const floorY = bounds.min.y - centre.y - 0.5;
   const floor = new Mesh(new PlaneGeometry(size * 6, size * 6), new ShadowMaterial({ opacity: 0.16 }));
@@ -211,7 +273,7 @@ export async function mountProduct3D(container, { product, assets, label, reduce
     keys[event.key]();
   });
 
-  container.append(canvas);
+  container.append(canvas, labels.domElement);
   // On every resize the framing distance is refitted; a camera now closer
   // than the fit for the new shape (a phone turned to portrait) moves back
   // along its current direction, so the model stays whole.
@@ -219,6 +281,7 @@ export async function mountProduct3D(container, { product, assets, label, reduce
     const { width, height } = container.getBoundingClientRect();
     if (!width || !height) return;
     renderer.setSize(width, height, false);
+    labels.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     const fresh = home.lengthSq() === 0;
@@ -233,14 +296,24 @@ export async function mountProduct3D(container, { product, assets, label, reduce
   resize();
 
   let frame = 0;
+  const eye = new Vector3();
   const render = () => {
     frame = requestAnimationFrame(render);
     controls.update();
+    // Keep the dimension runs on the edges facing the camera.
+    group.worldToLocal(eye.copy(camera.position));
+    measures.userData.face(eye.x < 0 ? -1 : 1, eye.z < 0 ? -1 : 1);
     renderer.render(scene, camera);
+    labels.render(scene, camera);
   };
   render();
 
   return {
+    setDimensions(visible) {
+      measures.visible = visible;
+      // CSS2DRenderer only hides labels of invisible objects on its next render.
+      labels.render(scene, camera);
+    },
     reset() {
       controls.autoRotate = false;
       camera.position.copy(home);
@@ -257,6 +330,7 @@ export async function mountProduct3D(container, { product, assets, label, reduce
       renderer.dispose();
       renderer.forceContextLoss();
       renderer.domElement.remove();
+      labels.domElement.remove();
     },
   };
 }

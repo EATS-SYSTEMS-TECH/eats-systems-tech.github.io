@@ -28,6 +28,18 @@ try {
     assert.equal(await canvas.getAttribute("tabindex"), "0");
     assert.match(await canvas.getAttribute("aria-label"), /WIFIGATE/);
     assert.equal(await page.locator(".shop-viewer__nav:visible").count(), 0, "photo arrows are hidden in 3D");
+    // Dimensions show by default, inside the view, and the toggle hides them.
+    const dimensions = await page.locator(".shop-3d__dimension").allTextContents();
+    assert.deepEqual(dimensions.map((text) => Number.parseInt(text, 10)), path.includes("roller") ? [370, 155, 70] : [83, 81, 56]);
+    assert.ok(await page.evaluate(() => { const view = document.querySelector(".shop-3d").getBoundingClientRect();
+      return [...document.querySelectorAll(".shop-3d__dimension")].every((label) => { const box = label.getBoundingClientRect(); return box.left >= view.left && box.right <= view.right && box.top >= view.top && box.bottom <= view.bottom; }); }),
+      `${path}: every dimension label sits inside the 3D view`);
+    await page.locator(".shop-viewer__dimensions").click();
+    assert.equal(await page.getAttribute(".shop-viewer__dimensions", "aria-pressed"), "false");
+    await page.waitForFunction(() => [...document.querySelectorAll(".shop-3d__dimension")].every((label) => label.style.display === "none"));
+    await page.locator(".shop-viewer__dimensions").click();
+    assert.match(await page.locator(".shop-viewer__note").innerText(), path.startsWith("/he/") ? /להמחשה בלבד/ : /illustration only/i);
+    assert.match(await page.locator(".shop-product-gallery__note").innerText(), path.startsWith("/he/") ? /להמחשה בלבד/ : /illustration only/i);
     await canvas.focus();
     const before = await canvas.screenshot();
     for (let turn = 0; turn < 4; turn += 1) await page.keyboard.press("ArrowRight");
@@ -36,6 +48,24 @@ try {
     await page.keyboard.press("Escape");
     await page.waitForFunction(() => !document.querySelector(".shop-3d__canvas"));
     assert.deepEqual(errors, []);
+    await page.close();
+  }
+
+  // Ten open/close rounds and a close while loading leave no live 3D view.
+  {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" });
+    await page.goto(origin + "/he/shop/wifigate-roller-shutter/", { waitUntil: "load" });
+    for (let round = 0; round < 10; round += 1) {
+      await page.locator("[data-shop-3d]").click();
+      await ready(page);
+      await page.keyboard.press("Escape");
+      await page.waitForFunction(() => !document.querySelector(".shop-3d, .shop-3d__canvas, .shop-3d__labels"));
+    }
+    await page.locator("[data-shop-3d]").click();
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(4000);
+    assert.equal(await page.locator(".shop-3d, .shop-3d__canvas").count(), 0, "a view closed while loading never appears");
+    assert.equal(await page.locator(".shop-viewer").evaluate((dialog) => dialog.open), false);
     await page.close();
   }
 
@@ -60,7 +90,7 @@ try {
   await page.locator("[data-shop-3d]").click();
   await ready(page);
   await page.close();
-  console.log("Shop 3D: on-demand three.js, both product models, keyboard turning, clean close, retry after a failed download.");
+  console.log("Shop 3D: on-demand three.js, both models with dimensions and toggle, illustration notes, keyboard turning, ten clean open/close rounds, close while loading, retry after a failed download.");
 } finally {
   await browser.close();
 }

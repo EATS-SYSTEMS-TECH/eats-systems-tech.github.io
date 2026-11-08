@@ -299,10 +299,87 @@
 .shop-viewer.is-3d .shop-viewer__count-wrap {
   display: none;
 }
-.shop-viewer__reset {
+/* "For illustration only" under the gallery and inside the viewer. */
+.shop-product-gallery__note {
+  margin: 10px 0 0;
+  color: #7a8287;
+  font-size: 12px;
+}
+.shop-viewer__note {
+  position: absolute;
+  inset-block-end: 20px;
+  inset-inline-start: 20px;
+  margin: 0;
+  color: #8a9195;
+  font-size: 11.5px;
+  pointer-events: none;
+}
+/* Below desktop width the note moves under the toolbar, clear of the hint. */
+@media (max-width: 1100px) {
+  .shop-viewer__note {
+    inset-block-start: 66px;
+    inset-block-end: auto;
+    inset-inline-start: 16px;
+  }
+}
+
+/* 3D tools: the dimensions toggle and reset sit together on the start corner. */
+.shop-viewer__tools {
   position: absolute;
   inset-block-start: 16px;
   inset-inline-start: 16px;
+  display: flex;
+  gap: 8px;
+}
+.shop-viewer__dimensions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: 1px solid #e3e6e8;
+  border-radius: 999px;
+  background: #fff;
+  color: #151719;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.shop-viewer__dimensions[aria-pressed="true"] {
+  border-color: #151719;
+  background: #151719;
+  color: #fff;
+}
+.shop-viewer__dimensions[hidden] {
+  display: none;
+}
+.shop-viewer__dimensions:focus-visible {
+  outline: 2px solid #1265e8;
+  outline-offset: 3px;
+}
+/* CSS2DRenderer places labels from the top left; keep that in RTL pages too. */
+.shop-3d__labels {
+  position: absolute;
+  inset: 0;
+  direction: ltr;
+  pointer-events: none;
+}
+.shop-3d__labels > * {
+  top: 0;
+  left: 0;
+}
+.shop-3d__dimension {
+  padding: 3px 8px;
+  border: 1px solid #d9dde0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 94%);
+  color: #151719;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px -8px rgb(0 0 0 / 45%);
+}
+.shop-viewer__reset {
   padding: 10px 16px;
   border: 1px solid #e3e6e8;
   border-radius: 999px;
@@ -416,7 +493,8 @@
   cursor: pointer;
 }
 .shop-viewer__close:hover,
-.shop-viewer__nav:hover {
+.shop-viewer__nav:hover,
+.shop-viewer__dimensions:hover {
   border-color: #151719;
 }
 .shop-viewer__close:focus-visible,

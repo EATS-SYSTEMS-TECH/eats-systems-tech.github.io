@@ -15,7 +15,7 @@ document.addEventListener("click", (event) => {
 });
 
 // The 3D view's bundle sits next to this script; it loads only on demand.
-const shop3dModule = new URL("shop-3d.bundle.js?v=20261108b", document.currentScript?.src || location.href);
+const shop3dModule = new URL("shop-3d.bundle.js?v=20261109b", document.currentScript?.src || location.href);
 
 // Product photos open in a full-screen viewer. Clicking the photo zooms in at
 // that point and moving the pointer pans across it; arrows and swipes switch
@@ -30,6 +30,7 @@ if (viewer) {
   const count = viewer.querySelector(".shop-viewer__count");
   const hint = viewer.querySelector(".shop-viewer__hint-text");
   const reset = viewer.querySelector(".shop-viewer__reset");
+  const measure = viewer.querySelector(".shop-viewer__dimensions");
   const photoHint = hint.textContent;
   const forward = document.documentElement.dir === "rtl" ? "ArrowLeft" : "ArrowRight";
   let index = 0, frame = null, swipeStart = null, view3d = null, session = 0;
@@ -43,6 +44,7 @@ if (viewer) {
     stage.querySelector(".shop-3d")?.remove();
     viewer.classList.remove("is-3d");
     reset.hidden = true;
+    measure.hidden = true;
     hint.textContent = photoHint;
   };
   const open3d = async (button) => {
@@ -63,12 +65,15 @@ if (viewer) {
         product: button.getAttribute("data-shop-3d"),
         assets: JSON.parse(button.getAttribute("data-shop-3d-assets")),
         label: viewer.getAttribute("data-3d-label"),
+        unit: viewer.getAttribute("data-3d-unit"),
+        showDimensions: measure.getAttribute("aria-pressed") === "true",
         reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
       });
       if (current !== session) { mounted.dispose(); return; }
       view3d = mounted;
       hint.textContent = viewer.getAttribute("data-3d-hint");
       reset.hidden = false;
+      measure.hidden = false;
     } catch (error) {
       if (current !== session) return;
       // Only missing WebGL means "not supported"; a failed download can be retried.
@@ -107,6 +112,12 @@ if (viewer) {
   viewer.querySelectorAll("[data-shop-viewer-step]").forEach((button) =>
     button.addEventListener("click", () => show(index + Number(button.dataset.shopViewerStep))));
   reset.addEventListener("click", () => view3d?.reset());
+  // Dimensions show by default; the choice holds while the page stays open.
+  measure.addEventListener("click", () => {
+    const visible = measure.getAttribute("aria-pressed") !== "true";
+    measure.setAttribute("aria-pressed", String(visible));
+    view3d?.setDimensions(visible);
+  });
   viewer.addEventListener("close", () => { leave3d(); unzoom(); document.body.classList.remove("shop-viewer-open"); });
   image.addEventListener("click", (event) => {
     if (frame) { unzoom(); return; }
