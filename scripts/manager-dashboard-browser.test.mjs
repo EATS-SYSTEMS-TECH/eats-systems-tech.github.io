@@ -292,8 +292,10 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
         assert.equal(await realSystem.locator(".manager-system-actions button.primary").count(), 1, "one primary workspace action");
         assert.equal(await realSystem.locator(".manager-system-remove").count(), 1, "removal remains a separate authorized action");
         await realSystem.getByRole("button", { name: he ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
-        await page.locator(".manager-system-menu summary").click();
-        await page.getByRole("button", { name: he ? "פרטי גישה" : "Access Note", exact: true }).click();
+        const accessNote = page.locator(".manager-workspace-status + button.manager-workspace-access-note");
+        assert.equal(await accessNote.innerText(), he ? "פרטי גישה" : "Access Note", "the note sits under the connection badge");
+        assert.equal(await page.locator(".manager-system-menu").getByRole("button", { name: he ? "פרטי גישה" : "Access Note", exact: true, includeHidden: true }).count(), 0, "the actions menu no longer repeats the note");
+        await accessNote.click();
         const noteDialog = page.getByRole("dialog");
         assert.match(await noteDialog.innerText(), /Acme/);
         assert.match(await noteDialog.innerText(), /12B/);

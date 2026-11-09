@@ -1120,6 +1120,14 @@ export function createManagerDashboard({
     }
     say("");
   }
+  function accessNoteButton(s) {
+    return button(t("פרטי גישה", "Access Note"), () =>
+      dialogs.info({
+        title: t("פרטי גישה", "Access Note") + " · " + s.name,
+        content: accessNoteContent(s.accessNote, language),
+      }),
+    );
+  }
   function systemActions(s, operatorAccount = null, workspace = false, onOpen = openSystem) {
     const actions = node("div", undefined, "manager-system-actions");
     const secondary = node("div", undefined, "manager-system-options");
@@ -1144,15 +1152,9 @@ export function createManagerDashboard({
       return actions;
     }
 
-    if (s.accessNote)
-      secondary.append(
-        button(t("פרטי גישה", "Access Note"), () =>
-          dialogs.info({
-            title: t("פרטי גישה", "Access Note") + " · " + s.name,
-            content: accessNoteContent(s.accessNote, language),
-          }),
-        ),
-      );
+    // In the workspace the note sits under the connection badge instead.
+    if (s.accessNote && !workspace)
+      secondary.append(accessNoteButton(s));
 
     if (!operatorAccount && !workspace) {
       const open = button(t("פתיחת סביבת ניהול", "Open workspace"), () => onOpen(s), true);
@@ -1676,6 +1678,11 @@ export function createManagerDashboard({
       returnButton: button(t("סיום וחזרה", "End and return"), returnToOrigin),
       actions: systemActions(system, null, true),
     });
+    if (system.accessNote) {
+      const note = accessNoteButton(system);
+      note.classList.add("manager-workspace-access-note");
+      head.querySelector(".manager-workspace-status").after(note);
+    }
     head.querySelector(".manager-workspace-heading").append(status);
     const workspaceTitle = createManagerSectionHeading({ title: t("סביבת ניהול", "Management workspace"), description: t("השליטה, האנשים וההגדרות של המערכת — במקום אחד.", "Control, people and system settings, together in one place."), level: "h2", className: "manager-workspace-title" });
     const hero = node("section", undefined, "manager-workspace-hero");
@@ -2362,14 +2369,8 @@ export function createManagerDashboard({
               f.elements[key].value =
                 r[key] ??
                 (key.endsWith("Number") && key !== "localNumber" ? 0 : "");
-            const details = f.closest(".manager-people-editor");
-            if (details) {
-              details.open = true;
-              details.querySelector("summary").textContent = currentTab === "users"
-                ? t("עריכת משתמש", "Edit user") : t("עריכת מנהל", "Edit administrator");
-            }
-            f.elements.name.focus({ preventScroll: true });
-            f.scrollIntoView({ block: "nearest" });
+            f.closest(".manager-people-editor")?.openEditor(currentTab === "users"
+              ? t("עריכת משתמש", "Edit user") : t("עריכת מנהל", "Edit administrator"), true);
           }),
           button(t("מחיקה", "Delete"), async () => {
             if (
@@ -2588,7 +2589,7 @@ export function createManagerDashboard({
     editor.elements.countryCode.placeholder = "972";
     editor.elements.localNumber.placeholder = "501234567";
     editor.elements.email.dir = "ltr";
-    organizeManagerPeople(content, { language, tab, rows: currentRows, editor });
+    organizeManagerPeople(content, { language, tab, rows: currentRows, editor, status });
   }
   function renderSettings(content) {
     const context = { source: connection, epoch: generation, panel: tabGeneration };

@@ -1,6 +1,6 @@
 // Presentation only: existing row actions, CSV flows and gate writes are reused.
 import { createManagerSectionHeading } from "./manager-section-heading.js";
-export function organizeManagerPeople(content, { language, tab, rows, editor }) {
+export function organizeManagerPeople(content, { language, tab, rows, editor, status }) {
   const he = language === "he", t = (h, e) => he ? h : e;
   const el = (tag, text, cls) => {
     const element = document.createElement(tag);
@@ -21,8 +21,27 @@ export function organizeManagerPeople(content, { language, tab, rows, editor }) 
   const tools = el("div", undefined, "manager-people-tools");
   const add = el("button", tab === "users" ? t("הוספת משתמש", "Add user") : t("הוספת מנהל", "Add administrator"), "manager-button primary");
   add.type = "button";
-  const details = el("details", undefined, "manager-people-editor");
-  const summary = el("summary", add.textContent);
+  // Add and edit open the same gate form in a modal dialog.
+  const dialog = el("dialog", undefined, "manager-people-editor manager-people-dialog");
+  dialog.dir = he ? "rtl" : "ltr";
+  dialog.id = `manager-people-dialog-${tab}`;
+  dialog.setAttribute("aria-labelledby", `${dialog.id}-title`);
+  dialog.setAttribute("aria-describedby", `${dialog.id}-note`);
+  const dialogHead = el("header", undefined, "manager-people-dialog-head");
+  const badge = el("span", undefined, "manager-people-dialog-icon");
+  badge.setAttribute("aria-hidden", "true");
+  badge.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M19 8v6M16 11h6"/></svg>';
+  const titles = el("div");
+  const title = el("h2", add.textContent);
+  title.id = `${dialog.id}-title`;
+  const note = el("p", t("בדקו את הפרטים. השמירה בשער דורשת אישור נוסף.", "Review the details. Saving to the gate requires a separate confirmation."));
+  note.id = `${dialog.id}-note`;
+  titles.append(title, note);
+  const close = el("button", undefined, "manager-people-dialog-close");
+  close.type = "button";
+  close.setAttribute("aria-label", t("סגירה", "Close"));
+  close.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  dialogHead.append(badge, titles, close);
   for (const [keys, label, cls] of [
     [["name", "email", "countryCode", "localNumber"], t("פרטי קשר", "Contact details"), "manager-people-contact-fields"],
     [["floorNumber", "apartmentNumber", "parkingNumber"], t("פרטי מיקום", "Location details"), "manager-people-location-fields"],
@@ -32,18 +51,41 @@ export function organizeManagerPeople(content, { language, tab, rows, editor }) 
     for (const key of keys) group.append(editor.elements[key].closest("label"));
     editor.insertBefore(group, editor.querySelector('button[type="submit"]'));
   }
-  details.append(summary, el("p", t("בדקו את הפרטים. השמירה במערכת דורשת אישור נוסף.", "Review the details. Saving to the system requires a separate confirmation.")), editor);
-  add.addEventListener("click", () => {
-    editor.reset();
-    summary.textContent = add.textContent;
-    details.open = true;
-    editor.elements.name.focus({ preventScroll: true });
-    details.scrollIntoView({ block: "nearest" });
-  });
+  // Gate errors are reported in the workspace status, which the modal covers.
+  const failure = el("p", "", "manager-people-dialog-error");
+  failure.setAttribute("role", "alert");
+  failure.hidden = true;
+  const showFailure = () => {
+    const error = dialog.open && status?.dataset.state === "error" ? status.textContent : "";
+    failure.textContent = error;
+    failure.hidden = !error;
+  };
+  if (status) new MutationObserver(showFailure).observe(status, { childList: true, characterData: true, subtree: true, attributes: true, attributeFilter: ["data-state"] });
+  const submit = editor.querySelector('button[type="submit"]');
+  const actions = el("div", undefined, "manager-people-dialog-actions");
   const cancel = el("button", t("ביטול", "Cancel"), "manager-button");
   cancel.type = "button";
-  cancel.addEventListener("click", () => { details.open = false; add.focus(); });
-  editor.append(cancel);
+  cancel.addEventListener("click", () => dialog.close());
+  close.addEventListener("click", () => dialog.close());
+  actions.append(cancel, submit);
+  editor.append(failure, actions);
+  dialog.append(dialogHead, editor);
+  let returnFocus = add;
+  dialog.openEditor = (heading, editing = false) => {
+    returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : add;
+    title.textContent = heading;
+    submit.textContent = editing ? t("שמירת שינויים", "Save changes") : heading;
+    failure.hidden = true;
+    if (!dialog.open) dialog.showModal();
+    editor.elements.name.focus();
+  };
+  dialog.addEventListener("close", () => {
+    if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
+  });
+  add.addEventListener("click", () => {
+    editor.reset();
+    dialog.openEditor(add.textContent);
+  });
   const exports = el("details", undefined, "manager-people-exports");
   const exportLabel = el("summary", t("ייצוא CSV", "Export CSV"), "manager-button");
   exports.append(exportLabel);
@@ -116,7 +158,7 @@ export function organizeManagerPeople(content, { language, tab, rows, editor }) 
   };
   search.addEventListener("input", update);
   update();
-  workspace.append(header, details, filter);
+  workspace.append(header, dialog, filter);
   if (wrap) workspace.append(wrap);
   else workspace.append(el("p", t("אין עדיין רשומות. הוסיפו אדם ראשון או ייבאו קובץ CSV.", "No records yet. Add the first person or import a CSV file."), "manager-people-empty"));
   workspace.append(noMatches);
