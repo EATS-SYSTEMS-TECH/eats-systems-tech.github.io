@@ -245,7 +245,14 @@ export function createManagerDashboard({
     const explanation = managerConnectionError(error, language);
     if (explanation) return [explanation.message, ...explanation.steps].join(" ");
     return ({
-      STORAGE_IO: t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry."),
+      // The gate reports any storage failure this way; only History reads the SD card.
+      STORAGE_IO: currentTab === "history"
+        ? t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry.")
+        : ["users", "admins"].includes(currentTab)
+          ? t("השער לא הצליח לשמור את הרשומה ולכן לא נשמר דבר. בדקו שקידומת המדינה ומספר הטלפון תקינים ונסו שוב.", "The gate could not store the record, so nothing was saved. Check the country code and phone number, then try again.")
+          : t("השער לא הצליח לשמור את השינוי באחסון שלו. נסו שוב; אם זה חוזר, בדקו את מצב האחסון בלשונית מערכת.", "The gate could not store the change. Try again; if this continues, check storage on the System tab."),
+      STORAGE_FULL: t("הרשימה בשער מלאה. מחקו רשומה קיימת לפני הוספת רשומה חדשה.", "The gate's list is full. Delete an existing record before adding a new one."),
+      INVALID_ARGUMENT: t("השער דחה את הפרטים שנשלחו. בדקו את השדות ונסו שוב.", "The gate rejected the submitted details. Check the fields and try again."),
       STORAGE_RECOVERY_REQUIRED: t("ההיסטוריה מושהית כדי לשמור על נתוני התאוששות קיימים. נדרש שחזור מאומת לפני המשך הקריאה.", "History is paused to preserve existing recovery data. Verified recovery is required before reading can resume."),
       ORGANIZATION_HAS_SYSTEMS: t(
         "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
