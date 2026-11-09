@@ -1,5 +1,6 @@
 import { AuthErrors, AuthProviders } from "./host-constants.js";
 import { firebaseConfig, isLocalStaging } from "./firebase-config.js";
+import { initializeSiteAppCheck } from "./site-app-check.js";
 let auth;
 let authApi;
 let initialization;
@@ -11,12 +12,16 @@ async function ready() {
       if (!hasFirebaseConfig) {
         throw new Error(AuthErrors.UNCONFIGURED);
       }
-      const [{ initializeApp }, api] = await Promise.all([
+      const [{ initializeApp, getApp, getApps }, api] = await Promise.all([
         import("https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js"),
         import("https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js")
       ]);
+      // A retry after a failed App Check start reuses the app created before it.
+      const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+      // App Check before Auth, so every Authentication request is attested.
+      await initializeSiteAppCheck();
       authApi = api;
-      auth = api.getAuth(initializeApp(firebaseConfig));
+      auth = api.getAuth(app);
       if (isLocalStaging) {
         api.connectAuthEmulator(auth, "http://127.0.0.1:9099", {
           disableWarnings: true
