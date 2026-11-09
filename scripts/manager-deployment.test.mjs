@@ -6,7 +6,7 @@ import { startSite } from "./platform-test-fixtures.mjs";
 test("Manager uses its dedicated deployment and preserves local API overrides", async (t) => {
   const { browser } = await startSite(t);
   const source = await readFile(new URL("../js/manager-api-config.js", import.meta.url), "utf8");
-  const manager = "https://wifigate-manager-api-759449834452.us-central1.run.app";
+  const manager = "https://manager.wifigate.io";
   for (const [origin, localStaging, host, expected] of [
     ["https://wifigate.io", false, "https://api.wifigate.io", manager],
     ["https://www.wifigate.io", false, "https://api.wifigate.io", manager],

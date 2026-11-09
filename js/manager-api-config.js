@@ -8,8 +8,9 @@ const isLocalSite =
 
 // Manager has its own API deployment and metadata database. Host and shared
 // account identity continue to use host-api-config.js. Local fixtures keep
-// their existing API; the deployed Manager service enforces App Check and MFA.
+// their existing API; the deployed Manager service enforces App Check and MFA
+// and is reached through the Cloud Armor load balancer (manager.wifigate.io).
 export const managerApiBaseUrl =
   isLocalStaging || isLocalSite
     ? hostApiBaseUrl
-    : "https://wifigate-manager-api-759449834452.us-central1.run.app";
+    : "https://manager.wifigate.io";
