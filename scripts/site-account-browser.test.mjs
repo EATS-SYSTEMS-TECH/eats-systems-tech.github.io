@@ -82,7 +82,7 @@ async function scenario(browser, origin, options = {}) {
     const url = route.request().url();
     return route.fulfill({
       contentType: "application/javascript",
-      body: url.endsWith("firebase-app.js") ? "export const initializeApp = (value) => value;" : authStub(live),
+      body: url.endsWith("firebase-app.js") ? "export const initializeApp = (value) => value; export const getApps = () => [];" : authStub(live),
     });
   });
   // The dashboard behind the menu entry stays offline.

@@ -2,7 +2,7 @@
 export async function installAppCheckFixture(context, token = "browser-app-check") {
   await context.route("https://www.gstatic.com/firebasejs/**/firebase-app.js", (route) => route.fulfill({
     contentType: "application/javascript",
-    body: "export const initializeApp = value => value; export const getApp = () => ({});",
+    body: "export const initializeApp = value => value; export const getApp = () => ({}); export const getApps = () => [];",
   }));
   await context.route("https://www.gstatic.com/firebasejs/**/firebase-app-check.js", (route) => route.fulfill({
     contentType: "application/javascript",

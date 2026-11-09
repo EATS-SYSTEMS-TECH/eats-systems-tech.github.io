@@ -39,7 +39,7 @@ async function scenario(browser, origin, options = {}) {
   await context.exposeBinding("authFixtureEvent", (_, event) => events.push(event));
   await installAppCheckFixture(context);
   await context.route("https://www.gstatic.com/firebasejs/**/firebase-app.js", (route) =>
-    route.fulfill({ contentType: "application/javascript", body: "export const initializeApp = value => value; export const getApp = () => ({});" }));
+    route.fulfill({ contentType: "application/javascript", body: "export const initializeApp = value => value; export const getApp = () => ({}); export const getApps = () => [];" }));
   await context.route("https://www.gstatic.com/firebasejs/**/firebase-auth.js", (route) =>
     route.fulfill({ contentType: "application/javascript", body: authModule }));
   await context.route("**/api/v1/**", (route) => {

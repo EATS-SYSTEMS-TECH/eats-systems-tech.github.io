@@ -69,7 +69,7 @@ async function scenario(options = {}) {
     (route) =>
       route.fulfill({
         contentType: "application/javascript",
-        body: "export const initializeApp = (config) => ({config}); export const getApp = () => ({});",
+        body: "export const initializeApp = (config) => ({config}); export const getApp = () => ({}); export const getApps = () => [];",
       }),
   );
   await context.route(

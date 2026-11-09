@@ -806,7 +806,7 @@ async function openContext(browser, origin, state, viewport) {
     )
       return route.fulfill({
         contentType: "application/javascript",
-        body: "export const initializeApp = value => value;",
+        body: "export const initializeApp = value => value; export const getApps = () => [];",
       });
     if (
       url.hostname === "www.gstatic.com" &&

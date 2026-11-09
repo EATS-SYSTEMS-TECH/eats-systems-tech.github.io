@@ -1,14 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite } from "./platform-test-fixtures.mjs";
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 
 test("TOTP initializes its own auth module when sign-in used a versioned module", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await browser.newPage();
   t.after(() => page.close());
+  // site-auth.js starts App Check first; keep its SDK out of this test.
+  await installAppCheckFixture(page);
   await page.route("**/firebase-app.js", (route) => route.fulfill({
     contentType: "application/javascript",
-    body: "export const initializeApp = () => ({});",
+    body: "export const initializeApp = () => ({}); export const getApp = () => ({}); export const getApps = () => [];",
   }));
   await page.route("**/firebase-auth.js", (route) => route.fulfill({
     contentType: "application/javascript",
