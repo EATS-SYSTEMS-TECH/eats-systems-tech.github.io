@@ -1,6 +1,10 @@
 # GitHub Pages (Jekyll) publishes the repository root. Only the website
 # itself goes out: sources and tooling are excluded from wifigate.io.
 # Internal documentation belongs outside this public repository.
+# Jekyll skips dot-folders unless named here: Android App Links read
+# /.well-known/assetlinks.json from the app's own domain.
+include:
+  - .well-known
 exclude:
   - docs/
   - maintenance/

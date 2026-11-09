@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.wifigate.app",
+      "sha256_cert_fingerprints": [
+        "B7:C6:B1:00:95:19:4B:63:9F:ED:1B:63:94:25:AA:D6:83:0A:70:1F:E6:FF:54:1D:A5:CF:3D:44:1C:E6:81:1B",
+        "EB:50:78:5F:08:28:11:3D:7A:0F:8B:6D:02:76:F8:A6:8F:16:3B:84:14:56:85:CE:0D:B9:E3:7A:C2:D6:4C:69"
+      ]
+    }
+  }
+]
