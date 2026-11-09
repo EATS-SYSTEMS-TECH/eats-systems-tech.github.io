@@ -3,6 +3,7 @@ import { readFile, stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { LOCAL_SITE_PORTS, withLocalSources } from "./lib/content-security-policy.mjs";
 
 const root = path.resolve(fileURLToPath(new URL("../", import.meta.url)));
 const port = Number.parseInt(process.env.PORT ?? "8000", 10);
@@ -11,6 +12,9 @@ const appCheckDebug = process.env.WIFIGATE_APP_CHECK_DEBUG === "1";
 // GitHub Pages answers "max-age=600"; set CACHE_CONTROL to test caching like production.
 const cacheControl = process.env.CACHE_CONTROL ?? "no-store";
 const loopbackHosts = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
+// js/host-api-config.js switches to the local APIs only on these ports.
+const localApis = LOCAL_SITE_PORTS.includes(port);
+const withLocalApis = (html) => localApis ? withLocalSources(html) : html;
 
 if (appCheckDebug && !loopbackHosts.has(host)) {
     throw new Error("App Check debug mode requires a loopback HOST (127.0.0.1, localhost or ::1)");
@@ -88,16 +92,20 @@ const server = createServer(async (request, response) => {
 
         // Firebase generates and stores the debug token in this browser. Only
         // the explicit opt-in flag is injected, never a token or a saved file.
-        const debugHtml = appCheckDebug && path.extname(filePath).toLowerCase() === ".html"
-            ? Buffer.from((await readFile(filePath, "utf8")).replace(
+        // It precedes the page's Content-Security-Policy meta, which therefore
+        // does not apply to it. On 8000/8100 the pages call the local APIs and
+        // Auth Emulator, so their policy admits those loopback origins too.
+        const isHtml = path.extname(filePath).toLowerCase() === ".html";
+        const servedHtml = isHtml && (appCheckDebug || localApis)
+            ? Buffer.from(withLocalApis((await readFile(filePath, "utf8")).replace(
                 /<head\b[^>]*>/i,
-                (head) => `${head}\n<script>self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;</script>`,
-            ))
+                (head) => appCheckDebug ? `${head}\n<script>self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;</script>` : head,
+            )))
             : null;
 
         response.writeHead(200, {
             "Cache-Control": cacheControl,
-            "Content-Length": debugHtml?.length ?? fileStats.size,
+            "Content-Length": servedHtml?.length ?? fileStats.size,
             "Content-Type": contentTypes.get(path.extname(filePath).toLowerCase()) ?? "application/octet-stream",
         });
 
@@ -106,7 +114,7 @@ const server = createServer(async (request, response) => {
             return;
         }
 
-        if (debugHtml) response.end(debugHtml);
+        if (servedHtml) response.end(servedHtml);
         else createReadStream(filePath).pipe(response);
     } catch (error) {
         if (error instanceof URIError) {

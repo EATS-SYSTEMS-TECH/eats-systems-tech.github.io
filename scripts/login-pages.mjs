@@ -10,6 +10,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { COOKIE_CONSENT_VERSION, readWindowGlobal } from "./localized-builder-document.mjs";
+import { INLINE_SCRIPT, dashboardContentSecurityPolicy, inlineScriptHash } from "./lib/content-security-policy.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const templatePath = path.join(repoRoot, "templates", "login.template.html");
@@ -142,11 +143,16 @@ export function renderLoginPage(template, locale, copy) {
     cookieConsentVersion: COOKIE_CONSENT_VERSION,
     cookieCopy: JSON.stringify({ [locale]: COOKIE_COPY[locale] }).replace(/</g, "\\u003c"),
   };
-  return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+  const page = template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+    if (key === "contentSecurityPolicy") return match;
     if (key in values) return values[key];
     if (typeof copy[key] === "string") return escapeHtml(copy[key]);
     throw new Error(`login.template.html: no value for ${match}`);
   });
+  // The policy admits the page's own inline scripts (the cookie banner copy)
+  // by hash, never 'unsafe-inline'. JSON data blocks do not run.
+  const scriptHashes = [...page.matchAll(INLINE_SCRIPT)].map((match) => inlineScriptHash(match[1]));
+  return page.replace("{{contentSecurityPolicy}}", dashboardContentSecurityPolicy({ scriptHashes }));
 }
 
 export async function buildLoginPages(writeFile = defaultWrite) {

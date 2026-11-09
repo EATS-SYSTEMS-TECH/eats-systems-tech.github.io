@@ -4,9 +4,12 @@
 // loader script the shell would stay hidden and unstyled. This returns the
 // same page with every script removed, the loader surfaces deleted and each
 // stylesheet applied at once, exactly as the loader leaves it when ready.
+// Fixtures add their own inline bootstrap, so the page's Content Security
+// Policy (checked by scripts/content-security-policy.test.mjs) is removed too.
 export function staticDashboardHtml(html) {
   return html
     .replace(/<script[\s\S]*?<\/script>/g, "")
+    .replace(/\s*<meta http-equiv="Content-Security-Policy"[^>]*>/, "")
     .replace(/<html([^>]*?)\s+data-(?:manager|host)-loading(?:="")?/, "<html$1")
     .replace(/<section id="(?:manager|host)-loading"[\s\S]*?<\/section>/g, "")
     .replace(/<noscript>[\s\S]*?<\/noscript>/g, "")
