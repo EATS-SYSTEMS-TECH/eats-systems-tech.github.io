@@ -16,6 +16,8 @@ import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
 import { SHOP_PAGE_KEYS, getShopPageContent } from './shop-pages.mjs';
 import { BRAND_ID, ORGANIZATION_ID, SHARE_IMAGE, setPageMeta, webPageNode, breadcrumbNode, faqNode } from './seo.mjs';
 import { readSceneManifest, applyHomeSceneMedia, applyNicheSceneMedia } from './scene-media.mjs';
+import { readLineHeroFrames } from './line-hero-frames.mjs';
+import { applyLineHero } from './line-hero.mjs';
 import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
 import { circularNiches, setNichePager, installUseCasePagerShells } from "./niche-navigation.mjs";
 import { publishNicheVariant } from "./niche-publication.mjs";
@@ -279,7 +281,8 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle });
     $('#niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
     setUseCaseNavigation($, { chrome, content });
-    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, pageKey), copy: homeData.homepageCopies[locale].hero.media });
+    // The hero shows the product's line animation; the accepted scene poster stays the structured-data image.
+    applyLineHero($, { scene: product, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, pageKey), copy: homeData.homepageCopies[locale].hero.media });
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy });
@@ -319,7 +322,7 @@ async function buildShopPages(homeData) {
 // Validate the entire input collection before the first generated document write.
 async function main() {
   const legalCollections = Object.fromEntries(LEGAL_PAGES.map(key => [key, Object.fromEntries(Object.entries(legalBundles(key)).map(([locale, legal]) => [locale, { legal }]))]));
-  const homeData = { sceneMedia: await readSceneManifest(repoRoot), localeOptions: SITE_LANGUAGES,
+  const homeData = { sceneMedia: await readSceneManifest(repoRoot), lineHeroFrames: await readLineHeroFrames(repoRoot), localeOptions: SITE_LANGUAGES,
     accessibilityCopy: await readWindowGlobal('accessibility-copy.js', 'accessibilityCopy'), homepageCopies: await loadHomeCopy(SITE_LANGUAGES), cookieCopy: await readWindowGlobal('cookie-consent-copy.js', 'WIFIGATE_COOKIE_COPY') };
   for (const { code } of homeData.localeOptions) if (!homeData.cookieCopy?.[code]?.reopen) throw Error(`Missing cookie settings translation for ${code}`);
   const codes = homeData.localeOptions.map(item => item.code), problems = [...validateNichePageLocales(codes), ...validateLandingPageLocales(codes), ...validateAutoOpenPageLocales(codes, homeData.homepageCopies)];

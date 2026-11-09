@@ -1,0 +1,106 @@
+/* WIFIGATE Host and WIFIGATE Manager heroes: the white line animation in the
+   shared full-width hero. Same layers and copy as every use-case hero (media,
+   overlay, top bar, text at the bottom start); only these two pages carry
+   .niche-hero--line, and the light theme below is scoped to it. The text sits
+   over the media layer, as it does over the video, on a white scrim. */
+.niche-page .niche-hero.niche-hero--line { color: var(--home-ink); background: #fff; }
+.niche-hero--line .niche-hero__media { container-type: size; background: #fff; }
+
+/* The 16:9 art stage fills the media layer the way the video did: as wide as
+   the hero allows and never cropped. From 769 px the hero is at least 16:9
+   tall, so there the art spans the hero edge to edge. Where the hero is much
+   taller than the art (phones, portrait tablets) the art rises to just below
+   the top bar row instead of floating in the middle. This is pure CSS, so the
+   first paint, the live animation and pages without JavaScript share one box. */
+.niche-hero--line .line-hero__stage {
+  --line-hero-w: min(100cqw, 100cqh * 16 / 9);
+  --line-hero-h: calc(var(--line-hero-w) * 9 / 16);
+  --line-hero-band: calc(clamp(1.5rem,4vh,2.75rem) + 44px + .75rem);
+  position: absolute; z-index: 0;
+  left: calc((100cqw - var(--line-hero-w)) / 2);
+  top: min(calc((100cqh - var(--line-hero-h)) / 2), var(--line-hero-band));
+  width: var(--line-hero-w);
+  aspect-ratio: 16 / 9; margin: 0; overflow: hidden; background: #fff;
+  /* Lines that run to the frame edge fade out instead of ending in a cut. */
+  -webkit-mask-image: linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent), linear-gradient(180deg,transparent,#000 4%,#000 96%,transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent), linear-gradient(180deg,transparent,#000 4%,#000 96%,transparent);
+  mask-composite: intersect;
+}
+.niche-hero--line .line-hero__stage picture { display: contents; }
+.niche-hero--line .line-hero__frame,
+.niche-hero--line .line-hero__art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.niche-hero--line .line-hero__art { z-index: 1; background: #fff; }
+
+/* The shared overlay in white: the bottom and inline-start gradients of the
+   video heroes' dark scrim, so the text block reads over the art. */
+.niche-page .niche-hero--line .niche-hero__overlay {
+  --niche-overlay-paint: linear-gradient(0deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.62) 34%,rgba(255,255,255,.1) 62%,rgba(255,255,255,0) 82%,rgba(255,255,255,.3) 100%),
+    linear-gradient(var(--niche-overlay-angle),rgba(255,255,255,.62) 0%,rgba(255,255,255,.24) 46%,rgba(255,255,255,0) 78%);
+  background: var(--niche-overlay-paint);
+}
+/* A white halo around the dark glyphs keeps every letter clear of the thin
+   lines it may cross; on white it is invisible. */
+.niche-hero--line :is(.niche-breadcrumb__list,.niche-hero__eyebrow,.niche-hero__title,.niche-hero__lead) {
+  text-shadow: 0 0 1px #fff, 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff;
+}
+/* White meets the next white section: the header's own hairline marks the edge. */
+.niche-hero--line::after {
+  position: absolute; inset: auto 0 0; z-index: 4; height: 1px; content: "";
+  background: rgba(10,10,10,.1); pointer-events: none;
+}
+
+/* Dark ink on white; the grey labels keep 5:1 over the art under the scrim. */
+.niche-hero--line .niche-breadcrumb__list { color: #4a4a4a; }
+.niche-hero--line .niche-breadcrumb__item+.niche-breadcrumb__item::before { color: rgba(10,10,10,.45); }
+.niche-hero--line .niche-breadcrumb__link { color: var(--home-ink); }
+.niche-hero--line .niche-breadcrumb__link:is(:hover,:focus-visible) { color: var(--home-black); }
+.niche-hero--line .niche-hero__text { color: var(--home-ink); }
+.niche-hero--line .niche-hero__title { color: var(--home-black); }
+.niche-hero--line .niche-hero__lead { color: #2b2b2b; }
+.niche-hero--line .niche-hero__eyebrow { color: #4a4a4a; }
+.niche-hero--line .niche-hero__nav-button { color: var(--home-black); border-color: rgba(10,10,10,.55); background: rgba(255,255,255,.9); }
+.niche-hero--line .niche-hero__nav-button:is(:hover,:focus-visible) { border-color: var(--home-black); background: #f1f4f9; }
+
+/* The single primary action (replay) becomes the dark button. */
+.niche-page .niche-hero.niche-hero--line .btn--primary { color: #fff; border: 1px solid var(--home-black); background: var(--home-black); }
+.niche-page .niche-hero.niche-hero--line .btn--primary:is(:hover,:focus-visible) { color: #fff; border-color: #2b2b2b; background: #2b2b2b; transform: none; }
+.niche-page .niche-hero.niche-hero--line .btn--ghost { color: var(--home-black); border: 1px solid rgba(10,10,10,.55); background: rgba(255,255,255,.7); }
+.niche-page .niche-hero.niche-hero--line .btn--ghost:is(:hover,:focus-visible) { color: var(--home-black); border-color: var(--home-black); background: #f1f4f9; transform: none; }
+.niche-hero--line .niche-hero__actions [data-scene-replay] { min-height: 44px; cursor: pointer; font: inherit; }
+.niche-hero--line :is(.btn,[data-scene-pause],.niche-breadcrumb__link):focus-visible { outline: 3px solid var(--home-blue); outline-offset: 3px; }
+
+/* Pause/resume sits in the top bar's pager, as on the video heroes. */
+.niche-hero--line .scene-video-controls { display: flex; gap: .5rem; }
+.niche-hero--line [data-scene-pause] {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 44px; height: 44px; padding: 0; border-radius: 4px; font-size: 0; cursor: pointer;
+  color: var(--home-black); border: 1px solid rgba(10,10,10,.55); background: rgba(255,255,255,.92);
+}
+.niche-hero--line [data-scene-pause]:hover { border-color: var(--home-black); background: #f1f4f9; }
+.niche-hero--line [data-scene-pause][hidden] { display: none; }
+.niche-hero--line [data-scene-pause][aria-pressed="true"]::before {
+  content: ""; width: 0; height: 0; margin-inline-start: 2px;
+  border-style: solid; border-width: 7px 0 7px 10px; border-color: transparent transparent transparent currentColor;
+}
+.niche-hero--line [data-scene-pause]:not([aria-pressed="true"])::before {
+  content: ""; width: 10px; height: 14px; box-sizing: border-box;
+  border-inline: 3px solid currentColor;
+}
+
+@media (max-width:768px) {
+  /* Phones: the art sits in the upper band. The scrim belongs to the text
+     block itself, so it starts just above the eyebrow in every language and
+     on short screens too, and leaves the art above it at full strength. */
+  .niche-page .niche-hero--line .niche-hero__overlay,
+  html[dir="rtl"] .niche-page .niche-hero--line .niche-hero__overlay { background: none; }
+  .niche-hero--line .niche-hero__text { position: relative; }
+  .niche-hero--line .niche-hero__text::before {
+    position: absolute; inset: -2.5rem -100vw -100vh; z-index: -1; content: ""; pointer-events: none;
+    background: linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,.9) 2.5rem,rgba(255,255,255,.94) 100%);
+  }
+}
+
+@media print {
+  .niche-hero--line .line-hero__art { display: none; }
+}

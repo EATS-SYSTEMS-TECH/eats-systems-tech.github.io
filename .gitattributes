@@ -1,2 +1,4 @@
 # Shared synthetic timing fixtures retain the same bytes on Windows and CI.
 scripts/fixtures/manager_timing_v2_vectors.json text eol=lf
+# The line-hero frames are content-hashed into the pages' ?v= and stay LF.
+assets/img/line-hero/*.svg text eol=lf

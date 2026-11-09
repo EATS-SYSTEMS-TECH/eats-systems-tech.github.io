@@ -33,7 +33,7 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a">
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261109lh1">
 
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
@@ -45,7 +45,7 @@
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
 
-<script src="../../js/media-runtime.js?v=20261109p1" defer=""></script><link rel="stylesheet" href="../../css/scene-video.css?v=20261109a"><script src="../../js/scene-video.js?v=20261019d" defer=""></script>
+<link rel="modulepreload" href="../../js/line-hero-host.js?v=20261109lh1"><script type="module" src="../../js/line-hero.js?v=20261109lh1"></script>
   <meta name="description" content="Időkorlátos, biztonságos vendéghozzáférés, automatikusan minden foglaláshoz. Szállodáknak, apartmanoknak, vendégházaknak, bérelt parkolóknak és garázsoknak, kulcsátadás nélkül.">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
@@ -272,7 +272,7 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261022a"><link rel="stylesheet" href="../../css/site-cart.css?v=20261108d"><link rel="stylesheet" href="../../css/media-watermark.css?v=20261109w1" data-media-watermark-style=""><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261022a"><link rel="stylesheet" href="../../css/site-cart.css?v=20261108d"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
 <body class="niche-page wifigate-host-page">
   <!-- Keyboard users enter main directly; shared navigation is injected at build time. -->
   <a href="#main-content" class="skip-link">Ugrás a fő tartalomhoz</a>
@@ -344,11 +344,11 @@
 
   <main id="main-content" class="niche-main">
     <!-- The hero retains one eager image, its overlay and the content layer. -->
-    <section aria-labelledby="niche-title" class="niche-hero" data-scene-video="" data-scene-state="image">
-      <div class="niche-hero__media" data-media-watermark-frame="">
-        <picture data-scene-picture=""><source type="image/avif" media="(min-width: 769px)" srcset="../../assets/img/derived-posters/hotels-airbnb-desktop.avif?v=319d0a8c00c6"><source media="(min-width: 769px)" srcset="../../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=253b04f28d04"><source media="(max-width: 480px) and (max-aspect-ratio: 2/3)" srcset="../../assets/img/derived-posters/hotels-airbnb-portrait.webp?v=d2744aefa75f"><source media="(max-width: 768px)" srcset="../../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=b7aa47380dc1"><img id="niche-image" class="niche-hero__bg" alt="Vendégek telefonnal lépnek be a szállásukra" width="1280" height="720" loading="eager" fetchpriority="high" decoding="async" src="../../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=b7aa47380dc1" data-scene-image=""></picture><video data-video-src="../../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000&quot;,&quot;poster&quot;:&quot;../../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=b7aa47380dc1&quot;,&quot;width&quot;:1280,&quot;height&quot;:720},&quot;desktop&quot;:{&quot;src&quot;:&quot;../../assets/vid/use-cases/desktop/hotels-airbnb-1080p.mp4?v=14718e811a93&quot;,&quot;poster&quot;:&quot;../../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=253b04f28d04&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video>
+    <section aria-labelledby="niche-title" class="niche-hero niche-hero--line" data-line-hero="host" data-line-hero-state="poster">
+      <div class="niche-hero__media">
+        <div class="line-hero__stage" data-line-hero-stage=""><picture><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/img/line-hero/host-still.svg?v=29ad94a0bb6c" type="image/svg+xml"><img id="niche-image" class="line-hero__frame" alt="Vendégek telefonnal lépnek be a szállásukra" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" src="../../assets/img/line-hero/host-start.svg?v=fe41b6368d4c"></picture></div>
         <div class="niche-hero__overlay"></div>
-      <span class="media-watermark" data-media-watermark="" aria-hidden="true"></span></div>
+      </div>
       <div class="niche-hero__content container">
         <!-- Breadcrumb and circular use-case navigation occupy the original top bar. -->
         <div class="niche-hero__topbar">

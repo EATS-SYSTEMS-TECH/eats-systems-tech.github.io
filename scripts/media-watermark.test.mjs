@@ -55,15 +55,18 @@ test("static marketing and utility pages add no watermark elements, wrappers or 
   }
 });
 
-test("all 546 localized consumer pages contain exactly 507 video-only layers; every static Shabbat page has none", async () => {
+test("all 585 localized consumer pages contain exactly 468 video-only layers; every static Shabbat page and line-animation hero has none", async () => {
   let pages = 0, frames = 0, staticPages = 0;
-  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), "wifigate-host", AUTO_OPEN_PAGE_KEY];
+  // WIFIGATE Host and Manager show a drawn line animation, not a video, so they carry no video mark.
+  const lineHeroKeys = ["wifigate-host", "wifigate-manager"];
+  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), ...lineHeroKeys, AUTO_OPEN_PAGE_KEY];
   for (const { code } of SITE_LANGUAGES) for (const key of keys) {
     const relative = path.posix.join(code === "en" ? "" : code.toLowerCase(), key, "index.html");
     const $ = cheerio.load(await fs.readFile(new URL(relative, root), "utf8"));
     const videos = $("main video");
     const expected = videos.length;
-    assert.equal(expected, LANDING_PAGES.some(item => item.key === key) ? 0 : 1, `${relative}: current video inventory is explicit`);
+    assert.equal(expected, LANDING_PAGES.some(item => item.key === key) || lineHeroKeys.includes(key) ? 0 : 1, `${relative}: current video inventory is explicit`);
+    if (lineHeroKeys.includes(key)) assert.equal($(".niche-hero--line [data-line-hero-stage]").length, 1, `${relative}: the line animation replaces the video`);
     assert.equal($("[data-media-watermark-frame]").length, expected, `${relative}: only video frames own a layer`);
     assert.equal($("[data-media-watermark]").length, expected, `${relative}: no static-photo or duplicate poster layer`);
     for (const element of videos.toArray()) {
@@ -86,7 +89,7 @@ test("all 546 localized consumer pages contain exactly 507 video-only layers; ev
     frames += $("[data-media-watermark]").length;
     pages++;
   }
-  assert.equal(pages, 546);
-  assert.equal(staticPages, 39);
-  assert.equal(frames, 507);
+  assert.equal(pages, 585);
+  assert.equal(staticPages, 117);
+  assert.equal(frames, 468);
 });

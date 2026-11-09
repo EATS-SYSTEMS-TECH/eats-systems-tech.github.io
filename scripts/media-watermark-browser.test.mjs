@@ -8,7 +8,9 @@ const origin = (process.env.SITE_URL || "http://127.0.0.1:8000").replace(/\/$/, 
 const screenshots = process.env.SCREENSHOT_DIR;
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || "chrome", headless: true });
 const overlaps = (a, b) => a.x < b.right && a.right > b.x && a.y < b.bottom && a.bottom > b.y;
-const routes = ["", "roller-shutters/", "hotels-airbnb/", "shabbat-clock-electric-gate/", "wifigate-host/", "auto-open/"];
+const routes = ["", "roller-shutters/", "hotels-airbnb/", "shabbat-clock-electric-gate/", "wifigate-host/", "wifigate-manager/", "auto-open/"];
+// Routes without a video: the Shabbat page's photo and the Host/Manager line animations.
+const staticRoutes = new Set(["shabbat-clock-electric-gate/", "wifigate-host/", "wifigate-manager/"]);
 const report = { schema: "wifigate.video-watermark.browser.v1", kind: "host_browser", status: "RUNNING", cases: [], policyCases: [], failureCases: [], noJavaScriptCases: [], captures: [] };
 const denyAnalytics = () => localStorage.setItem("wifigate-cookie-consent-v1", JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() }));
 const frameSelector = "[data-media-watermark-frame]";
@@ -88,7 +90,7 @@ async function staticPhotosHaveNoLayer(page, route) {
   assert.equal(checks.photoOnlyFrames, 0);
   assert.equal(checks.gridImagesRetained, true);
   assert.equal(checks.staticHostMarks, 0);
-  if (route === "shabbat-clock-electric-gate/") {
+  if (staticRoutes.has(route)) {
     assert.equal(await page.locator("[data-media-watermark],link[data-media-watermark-style]").count(), 0);
     assert.equal(await page.locator("main video").count(), 0);
   }
@@ -108,11 +110,11 @@ try {
       await page.goto(`${origin}/${locale}${route}`, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
       await staticPhotosHaveNoLayer(page, route);
-      const hasVideo = route !== "shabbat-clock-electric-gate/";
+      const hasVideo = !staticRoutes.has(route);
       assert.equal(await page.locator(frameSelector).count(), hasVideo ? 1 : 0);
       if (!hasVideo) {
         result.staticPhotoUnmarked = true;
-        await capture(page, `video-watermark-${locale ? "he" : "en"}-shabbat-${width}-static`);
+        await capture(page, `video-watermark-${locale ? "he" : "en"}-${route.replace(/\/$/, "")}-${width}-static`);
       } else {
         result.poster = await assertUnmarkedPoster(page, route);
         await capture(page, `video-watermark-${locale ? "he" : "en"}-${route.replace(/\/$/, "") || "home"}-${width}-poster`);
@@ -160,7 +162,7 @@ try {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
     try {
       const page = await context.newPage(); await page.goto(`${origin}/${locale}${route}`, { waitUntil: "load" });
-      if (route === "shabbat-clock-electric-gate/") assert.equal(await page.locator("[data-media-watermark]").count(), 0);
+      if (staticRoutes.has(route)) assert.equal(await page.locator("[data-media-watermark]").count(), 0);
       else await assertUnmarkedPoster(page, route);
       report.noJavaScriptCases.push({ locale: locale || "en", route: route || "home", posterUnmarked: true, status: "PASS" });
     } finally { await context.close(); }
