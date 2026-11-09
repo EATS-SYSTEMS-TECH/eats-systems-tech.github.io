@@ -59,13 +59,18 @@ try {
         contactBackground: getComputedStyle(links.at(-1)).backgroundColor,
         contactColor: getComputedStyle(links.at(-1)).color,
         links: links.map((link) => ({ text: link.textContent.trim(), box: rect(link), color: getComputedStyle(link).color })),
+        products: [...menu.querySelectorAll(".nav__sublink")].map((link) => ({ text: link.textContent.trim(), box: rect(link) })),
       };
     });
     assert.equal(result.links.length, 6);
+    assert.deepEqual(result.products.map((link) => link.text), ["WIFIGATE Manager", "WIFIGATE Host"], `${path}: For Business lists its products`);
+    result.products.forEach((link) => assert.ok(link.box.y >= result.menu.y && link.box.y + link.box.height <= result.menu.y + result.menu.height, `${path}: ${link.text} remains inside menu`));
     assert.equal(result.background, "rgb(255, 255, 255)", `${path}: collapsed menu matches the white homepage menu`);
     assert.equal(result.contactBackground, "rgb(10, 10, 10)", `${path}: contact button is black at rest`);
     assert.equal(result.contactColor, "rgb(255, 255, 255)", `${path}: contact button text stays readable`);
-    assert.ok(result.menu.height < 330, `${path}: menu is compact`);
+    // Six rows were below 330px; the two product rows under For Business add
+    // 72px (measured 364px on 2026-11-10).
+    assert.ok(result.menu.height < 400, `${path}: menu is compact`);
     result.links.slice(0, -1).forEach((link) => assert.equal(link.color, "rgb(36, 36, 36)", `${path}: ${link.text} is readable`));
     result.links.forEach((link) => assert.ok(link.box.y >= result.menu.y && link.box.y + link.box.height <= result.menu.y + result.menu.height, `${path}: ${link.text} remains inside menu`));
     if (path === "/" && width === 940) {

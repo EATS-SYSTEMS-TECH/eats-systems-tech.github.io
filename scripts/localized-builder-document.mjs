@@ -209,7 +209,18 @@ export function updateSharedHeader($, data, locale, key) {
     if (item.key === 'contact') link.addClass('nav__contact-link');
     setLocalizedText($, link, item.key === 'shop' ? locale === 'he' ? 'חנות' : 'Shop' : copy[item.key], locale);
     if (item.key === 'shop' && locale !== 'he') link.attr('lang', 'en');
-    menu.append(link);
+    if (!item.children) { menu.append(link); continue; }
+    // A disclosure group, not an ARIA menu: the product links follow the
+    // section link in the tab order and the panel opens while the group is
+    // hovered or holds focus (css/site-header.css, js/navigation.js).
+    const list = $('<ul>').addClass('nav__submenu-list').attr({ 'aria-label': copy[item.key], dir: isRtl(locale) ? 'rtl' : 'ltr' });
+    for (const child of item.children) {
+      const sublink = $('<a>').addClass('nav__sublink').attr({ href: buildPagePath(locale, child.pageKey), translate: 'no' }).text(child.label);
+      if (locale !== 'en') sublink.attr('lang', 'en');
+      if (child.pageKey === key) sublink.attr('aria-current', 'page');
+      list.append($('<li>').append(sublink));
+    }
+    menu.append($('<div>').addClass('nav__group').attr('data-nav-group', item.key).append(link.addClass('nav__group-link'), $('<div>').addClass('nav__submenu').append(list)));
   }
   $('.nav').attr('aria-label', copy.ariaLabel);
   $('.nav__logo-link').attr({ href: home + '#home', 'aria-label': 'WIFIGATE' });
@@ -233,9 +244,9 @@ export function updateSharedHeader($, data, locale, key) {
   ['.site-cart__empty', '.site-cart__subtotal span', '.site-cart__checkout', '.site-cart__note'].forEach((selector, index) => $(selector).text(cart[index + 3])); $('.site-cart__subtotal strong').text(cart[7]);
   $('.site-cart__drawer').attr('data-cart-copy', JSON.stringify({ trigger: cart[0], remove: hebrew ? 'הסרת פריט' : 'Remove item', decrease: hebrew ? 'הפחתת כמות' : 'Decrease quantity', increase: hebrew ? 'הגדלת כמות' : 'Increase quantity' }));
   if (!hebrew) $('.site-cart__drawer').attr('lang', 'en');
-  $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261022a"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261108d">`);
+  $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261110nav1"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261108d">`);
   $("script[src*='js/site-account.js']").remove();
-  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261022outside1').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
+  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261110nav1').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
   $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261108e"></script>`);
 }
 

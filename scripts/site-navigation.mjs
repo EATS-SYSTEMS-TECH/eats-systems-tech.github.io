@@ -2,7 +2,13 @@
 export const SITE_NAVIGATION = [
   { key: "platform", hash: "how-it-works" },
   { key: "solutions", hash: "use-cases" },
-  { key: "automation", hash: "wifigate-for-business" },
+  // On hover or keyboard focus, "For Business" also opens its two product
+  // pages; in the collapsed menu they are listed under it. Product names are
+  // not translated. The owner asked for Manager first, then Host.
+  { key: "automation", hash: "wifigate-for-business", children: [
+    { label: "WIFIGATE Manager", pageKey: "wifigate-manager" },
+    { label: "WIFIGATE Host", pageKey: "wifigate-host" },
+  ] },
   { key: "productGuide", hash: "tutorial-videos" },
   { key: "shop", pageKey: "shop" },
   { key: "contact", hash: "get-in-touch" },

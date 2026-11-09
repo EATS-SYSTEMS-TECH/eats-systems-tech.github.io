@@ -35,7 +35,9 @@ try {
       assert.ok(Math.abs(menuBounds.right - width) <= 1, `${locale} at ${width}px: menu reaches right edge`);
       assert.ok(Math.abs(menuBounds.top - 68) <= 1, `${locale} at ${width}px: menu begins below the header`);
       assert.ok(menuBounds.bottom < 914, `${locale} at ${width}px: menu ends at content height, above the viewport bottom`);
-      assert.ok(Math.abs(menuBounds.bottom - menuBounds.top - 292) <= 4, `${locale} at ${width}px: menu matches the reference height`);
+      // 292px for the six rows plus 72px for the two product rows listed
+      // under For Business (WIFIGATE Manager, WIFIGATE Host).
+      assert.ok(Math.abs(menuBounds.bottom - menuBounds.top - 364) <= 4, `${locale} at ${width}px: menu matches the reference height`);
       const toggle = page.locator(".nav__toggle");
       const openIcon = await toggle.evaluate((button) => [...button.querySelectorAll(".nav__toggle-bar")].map((bar) => {
         const style = getComputedStyle(bar);

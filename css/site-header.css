@@ -591,3 +591,102 @@ html.a11y-text-scaled .site-header .nav {
   .site-header .nav .topbar-nav { align-items: stretch; text-align: start; }
   .site-header .topbar-nav .nav__link { width: 100%; box-sizing: border-box; }
 }
+
+/* "For Business" product links (scripts/site-navigation.mjs). In the full
+   header they open in a panel below the link while the group is hovered, holds
+   keyboard focus or is held open by js/navigation.js for a short moment after
+   the pointer leaves. The links stay in the tab order, so focusing one opens
+   the panel; Escape closes it until focus or the pointer leaves the group. */
+.site-header .nav__submenu-list { margin: 0; padding: 0; list-style: none; }
+.site-header .nav__sublink {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  color: #242424;
+  font: 600 0.9rem "Manrope", system-ui, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-header .nav__sublink:hover,
+.site-header .nav__sublink:focus-visible,
+.site-header .nav__sublink[aria-current="page"] { color: #0b63ff; }
+.site-header .nav__sublink:focus-visible { outline: 2px solid #0b63ff; outline-offset: -2px; }
+@media (min-width: 1440px) {
+  /* The group fills the header height, so the pointer stays inside it on the
+     way from the link down to the panel, which starts at the header's edge. */
+  .site-header .nav__group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: var(--nav-height);
+  }
+  .site-header .nav__submenu {
+    position: absolute;
+    top: 100%;
+    inset-inline-start: -0.75rem;
+    z-index: 110;
+    padding-top: 0.35rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .site-header .nav__group:focus-within .nav__submenu,
+  .site-header .nav__group.is-open .nav__submenu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .site-header .nav__group:focus-within .nav__group-link,
+  .site-header .nav__group.is-open .nav__group-link { color: #0b63ff; }
+  .site-header .nav__submenu-list {
+    min-width: 14rem;
+    padding-block: 0.35rem;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
+    text-align: start;
+  }
+  .site-header .nav__sublink {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+  }
+  .site-header .nav__sublink:hover,
+  .site-header .nav__sublink:focus-visible { background: #f5f5f5; }
+}
+/* Without scripts, hovering still opens the panel on a mouse or trackpad. */
+@media (min-width: 1440px) and (hover: hover) {
+  .site-header .nav__group:hover .nav__submenu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .site-header .nav__group:hover .nav__group-link { color: #0b63ff; }
+}
+@media (min-width: 1440px) {
+  .site-header .nav__group.is-dismissed .nav__submenu {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+  }
+}
+@media (min-width: 1440px) and (prefers-reduced-motion: reduce) {
+  .site-header .nav__submenu { transition: none; transform: none; }
+  .site-header .nav__group.is-dismissed .nav__submenu { transform: none; }
+}
+/* Collapsed menu: the product links are listed, indented, under For Business. */
+@media (max-width: 1439px) {
+  .site-header .nav__group { display: block; width: 100%; }
+  .site-header .topbar-nav .nav__sublink {
+    width: 100%;
+    padding-block: 0.5rem;
+    padding-inline: 1rem 0;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+    font-size: 0.88rem;
+    color: #4a4a4a;
+  }
+  .site-header .topbar-nav .nav__sublink:hover,
+  .site-header .topbar-nav .nav__sublink:focus-visible,
+  .site-header .topbar-nav .nav__sublink[aria-current="page"] { color: #0b63ff; }
+}

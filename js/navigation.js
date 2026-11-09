@@ -1,5 +1,5 @@
 // /js/navigation.js
-// Version: 1.2.1
+// Version: 1.3.0
 
 function setupNav() {
   // Published content pages predate localized login links. Keep their header
@@ -42,8 +42,49 @@ function setupNav() {
     }
   });
 
-  $$(".nav__link", navWrapper).forEach((link) => {
+  $$(".nav__link, .nav__sublink", navWrapper).forEach((link) => {
     link.addEventListener("click", closeMenu);
+  });
+
+  $$(".nav__group", navWrapper).forEach(setupNavGroup);
+}
+
+// "For Business" product panel in the full header (css/site-header.css). A
+// mouse opens it on hover and it stays for a moment after the pointer leaves,
+// so a diagonal move into the panel does not close it. Touch taps keep the
+// link's normal navigation; the collapsed menu lists the product links.
+function setupNavGroup(group) {
+  const link = group.querySelector(".nav__group-link");
+  let closeTimer = 0;
+  const cancelClose = () => { clearTimeout(closeTimer); closeTimer = 0; };
+  const close = () => { cancelClose(); group.classList.remove("is-open"); };
+
+  group.addEventListener("pointerenter", (event) => {
+    if (event.pointerType === "touch") return;
+    cancelClose();
+    if (!group.classList.contains("is-dismissed")) group.classList.add("is-open");
+  });
+  group.addEventListener("pointerleave", (event) => {
+    if (event.pointerType === "touch") return;
+    group.classList.remove("is-dismissed");
+    cancelClose();
+    closeTimer = setTimeout(close, 250);
+  });
+  group.addEventListener("focusin", (event) => {
+    if (event.target !== link) group.classList.remove("is-dismissed");
+  });
+  group.addEventListener("focusout", (event) => {
+    if (!group.contains(event.relatedTarget)) group.classList.remove("is-dismissed");
+  });
+  // Escape closes a panel opened by focus or by hover alike.
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || group.classList.contains("is-dismissed")) return;
+    if (!window.matchMedia("(min-width: 1440px)").matches) return;
+    const focused = group.contains(document.activeElement);
+    if (!focused && !group.classList.contains("is-open") && !group.matches(":hover")) return;
+    close();
+    group.classList.add("is-dismissed");
+    if (focused && link && document.activeElement !== link) link.focus();
   });
 }
 
