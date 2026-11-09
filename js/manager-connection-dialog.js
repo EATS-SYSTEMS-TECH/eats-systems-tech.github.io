@@ -1,3 +1,4 @@
+import { managerUiIcon } from "./manager-ui-icons.js";
 const CONNECTION_SOFT_WAIT_MS = 120000;
 
 const el = (tag, text, className) => {
@@ -363,7 +364,9 @@ export function createManagerConnectionDialog({
       "Connection did not complete",
     );
     const explanation = typeof message === "object" && message !== null ? message : null;
-    title.textContent = explanation?.title ?? t("פרטי החיבור", "Connection details");
+    title.replaceChildren(managerUiIcon("warning"), document.createTextNode(explanation?.title ?? t("פרטי החיבור", "Connection details")));
+    // A renewal that fails at once has no meaningful elapsed time.
+    elapsed.hidden = /^(חלפו 0 |0s )/.test(elapsed.textContent);
     detail.textContent = explanation?.message ?? String(message ?? "");
     dialog.querySelector("[data-connection-error-actions]")?.remove();
     if (explanation?.steps?.length) {

@@ -104,8 +104,9 @@ export function managerConnectionError(error, language = "en", fallback = false)
   return entry ? { title: entry[0], message: entry[1], steps: [...entry[2]], code }
     : {
       title: t("החיבור לא הושלם", "Connection did not complete"),
-      message: t("לא ניתן להשלים את החיבור למערכת כרגע.", "The system connection could not be completed right now."),
+      message: t("לא ניתן להשלים את החיבור למערכת כרגע. החיבור המאובטח לשער נקטע לפני שסביבת הניהול הספיקה להיטען, בדרך כלל בגלל תקשורת לא יציבה לאינטרנט או לשער.", "The system connection could not be completed right now. The secure connection to the gate stopped before the workspace finished loading, usually because the internet or gate connection is unstable."),
       steps: [t("בדקו את החיבור לאינטרנט ונסו להתחבר שוב.", "Check your internet connection and try connecting again."), t("אם הבעיה נמשכת, פנו למנהל הפלטפורמה וציינו את מזהה המערכת והזמן שבו ניסיתם להתחבר.", "If this continues, contact your platform administrator with the system ID and the time of the attempt.")],
-      code: null,
+      // An unrecognized code is still worth showing to support.
+      code: typeof code === "string" && /^[\w./ :-]{1,80}$/.test(code) ? code : null,
     };
 }

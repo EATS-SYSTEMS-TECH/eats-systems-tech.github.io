@@ -25,11 +25,14 @@ export function createManagerControlHeader({ system, language, returnButton, act
   kind.lang = "en";
   kind.dir = "ltr";
   context.append(kind, node("span", `${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`, "manager-system-gate-count"));
+  // One row under the name: what the system is, then its live connection
+  // state and any access details.
+  const meta = node("div", undefined, "manager-workspace-meta");
+  meta.append(context, node("span", "", "manager-workspace-status"));
   heading.append(
     node("span", "WIFIGATE MANAGER", "manager-workspace-eyebrow"),
     node("h3", system.name),
-    context,
-    node("span", "", "manager-workspace-status"),
+    meta,
   );
   const loading = node("div", undefined, "manager-workspace-progress");
   identity.append(icon, heading);

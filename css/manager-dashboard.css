@@ -1,5 +1,5 @@
 @import url("./manager-events.css?v=20261105now1");
-@import url("./manager-control-workspace.css?v=20261109peopledialog1");
+@import url("./manager-control-workspace.css?v=20261109header1");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -1956,3 +1956,8 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
  .manager-guide-image-dialog > h2 { font-size:15px; }
  .manager-guide-image-tools > span { font-size:11px; }
 }
+/* A failed connection reads as a warning: icon, title and explanation in one tinted box. */
+.manager-connection-dialog[data-state="error"] .manager-connection-dialog__live { min-height: 0; padding: 16px 18px; border: 1px solid #f0d3cd; border-inline-start: 4px solid #c2412d; border-radius: 14px; background: #fff6f4; }
+.manager-connection-dialog[data-state="error"] .manager-connection-dialog__live h3 { display: flex; align-items: center; gap: 10px; color: #a13329; }
+.manager-connection-dialog__live h3 > svg { flex: 0 0 26px; width: 26px; height: 26px; padding: 5px; box-sizing: border-box; border-radius: 9px; background: #fde4df; color: #c2412d; stroke-width: 2.2; }
+.manager-connection-dialog[data-state="error"] .manager-connection-dialog__live p { color: #6e3a33; }

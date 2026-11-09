@@ -248,7 +248,9 @@ export function createManagerDashboard({
       // The gate reports any storage failure this way; only History reads the SD card.
       STORAGE_IO: currentTab === "history"
         ? t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry.")
-        : ["users", "admins"].includes(currentTab)
+        : /^ADMIN_LIST_(USERS|ADMINS)$/.test(error.command ?? "")
+          ? t("השער לא הצליח לקרוא את הרשימה מהאחסון שלו. נסו לפתוח את הלשונית שוב; אם זה חוזר, יש לבדוק את השער.", "The gate could not read this list from its storage. Reopen the tab; if this continues, the gate needs checking.")
+          : ["users", "admins"].includes(currentTab)
           ? t("השער לא הצליח לשמור את הרשומה ולכן לא נשמר דבר. בדקו שקידומת המדינה ומספר הטלפון תקינים ונסו שוב.", "The gate could not store the record, so nothing was saved. Check the country code and phone number, then try again.")
           : t("השער לא הצליח לשמור את השינוי באחסון שלו. נסו שוב; אם זה חוזר, בדקו את מצב האחסון בלשונית מערכת.", "The gate could not store the change. Try again; if this continues, check storage on the System tab."),
       STORAGE_FULL: t("הרשימה בשער מלאה. מחקו רשומה קיימת לפני הוספת רשומה חדשה.", "The gate's list is full. Delete an existing record before adding a new one."),
@@ -1688,9 +1690,11 @@ export function createManagerDashboard({
     if (system.accessNote) {
       const note = accessNoteButton(system);
       note.classList.add("manager-workspace-access-note");
+      note.prepend(managerUiIcon("key"));
       head.querySelector(".manager-workspace-status").after(note);
     }
-    head.querySelector(".manager-workspace-heading").append(status);
+    // Action results span the header instead of crowding the system's name.
+    head.querySelector(".manager-workspace-progress").before(status);
     const workspaceTitle = createManagerSectionHeading({ title: t("סביבת ניהול", "Management workspace"), description: t("השליטה, האנשים וההגדרות של המערכת — במקום אחד.", "Control, people and system settings, together in one place."), level: "h2", className: "manager-workspace-title" });
     const hero = node("section", undefined, "manager-workspace-hero");
     hero.append(workspaceTitle, head);
@@ -2009,6 +2013,8 @@ export function createManagerDashboard({
     tabs.setAttribute("role", "tablist");
     for (const [id, label] of Object.entries(tabNames)) {
       const b = button(t(...label), async () => {
+        // A message belongs to the tab it came from.
+        if (id !== currentTab) say("");
         await showTab(id);
         const active = view.querySelector(`#manager-tab-${id}`);
         if (currentTab === id && active && !active.inert) {
@@ -2592,6 +2598,22 @@ export function createManagerDashboard({
       editor.elements[key].type = "tel";
       editor.elements[key].inputMode = "numeric";
       editor.elements[key].dir = "ltr";
+    }
+    // The gate stores names of 1..20 characters.
+    editor.elements.name.maxLength = 20;
+    // E.164: calling codes never start with 0, and the whole number has at most 15 digits.
+    editor.elements.countryCode.pattern = "[1-9][0-9]{0,2}";
+    editor.elements.countryCode.maxLength = 3;
+    editor.elements.localNumber.pattern = "[0-9]{4,15}";
+    editor.elements.localNumber.maxLength = 15;
+    for (const [key, message] of [
+      ["countryCode", t("קידומת מדינה: 1–3 ספרות שאינן מתחילות ב־0, למשל 972.", "Country code: 1–3 digits not starting with 0, for example 972.")],
+      ["localNumber", t("מספר מקומי: 4–15 ספרות, בלי קידומת המדינה.", "Local number: 4–15 digits, without the country code.")],
+    ]) {
+      const input = editor.elements[key];
+      input.title = message;
+      input.addEventListener("input", () => input.setCustomValidity(""));
+      input.addEventListener("invalid", () => input.setCustomValidity(input.validity.patternMismatch ? message : ""));
     }
     editor.elements.countryCode.placeholder = "972";
     editor.elements.localNumber.placeholder = "501234567";

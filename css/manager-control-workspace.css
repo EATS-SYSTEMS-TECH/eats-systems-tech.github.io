@@ -1195,3 +1195,20 @@ html[dir="rtl"] .manager-control-workspace #manager-content .manager-method-drop
 .manager-control-workspace .manager-event-heading > svg { grid-row:1/3; width:22px; height:22px; padding:10px; box-sizing:content-box; border-radius:11px; background:#edf4fc; color:#5d80aa; }
 .manager-control-workspace .manager-event-heading h3 { margin:3px 0 0; font-size:21px; color:#294865; }
 .manager-control-workspace .manager-event-eyebrow { color:#7c8fa5; font-size:11px; }
+/* Workspace header: name, one meta row (kind, gates, connection, access), then a full-width result line. */
+.manager-control-workspace .manager-workspace-meta { display:flex; align-items:center; flex-wrap:wrap; gap:8px 10px; min-width:0; margin-top:2px; }
+.manager-control-workspace .manager-workspace-meta .manager-workspace-context { gap:8px; }
+.manager-control-workspace .manager-workspace-meta .manager-system-gate-count { display:inline-flex; align-items:center; gap:10px; color:#5f7189; font-size:12px; }
+.manager-control-workspace .manager-workspace-meta .manager-system-gate-count::after { content:""; width:1px; height:16px; background:#dbe3ec; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-meta .manager-workspace-status { min-height:28px; box-sizing:border-box; border-radius:999px; padding:4px 11px; font-size:12px; }
+.manager-control-workspace .manager-workspace-meta .manager-workspace-access-note.manager-button { display:inline-flex; align-items:center; gap:6px; min-height:28px; padding:4px 11px; border:1px solid #dfe6ef; border-radius:999px; background:#fff; color:#2c4767; font-size:12px; font-weight:650; }
+.manager-control-workspace .manager-workspace-meta .manager-workspace-access-note > svg { width:15px; height:15px; color:#a85a2a; }
+.manager-control-workspace .manager-workspace-meta .manager-workspace-access-note:hover:not(:disabled) { border-color:#e9c5aa; background:#fff7f1; color:#87310d; filter:none; }
+.manager-control-workspace .manager-workspace-head > .manager-status { flex:1 0 100%; order:3; box-sizing:border-box; display:flex; align-items:center; gap:10px; width:100%; margin:0; padding:10px 14px; border:1px solid #e2e8f0; border-radius:12px; background:#f7f9fc; color:#3b5068; font-size:13px; line-height:1.6; }
+.manager-control-workspace .manager-workspace-head > .manager-status:empty { display:none; }
+.manager-control-workspace .manager-workspace-head > .manager-status::before { content:"i"; display:grid; place-items:center; flex:0 0 22px; width:22px; height:22px; border-radius:50%; background:#e4ebf4; color:#3d5a7c; font-size:12px; font-weight:800; }
+.manager-control-workspace .manager-workspace-head > .manager-status[data-state="success"] { border-color:#cfe8da; background:#f1faf5; color:#1f6b45; }
+.manager-control-workspace .manager-workspace-head > .manager-status[data-state="success"]::before { content:"\2713"; background:#d5f0e1; color:#1f7a4d; }
+.manager-control-workspace .manager-workspace-head > .manager-status[data-state="error"] { border-color:#efd1cb; background:#fff5f3; color:#9f2d25; }
+.manager-control-workspace .manager-workspace-head > .manager-status[data-state="error"]::before { content:"!"; background:#fde0da; color:#b4321f; }
+.manager-control-workspace .manager-workspace-head > .manager-workspace-progress { order:4; }

@@ -30,6 +30,8 @@ export function managerUiIcon(kind) {
     search:"M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15a7.5 7.5 0 1 0 0-15",
     next:"m9 5 7 7-7 7",
     previous:"m15 5-7 7 7 7",
+    key:"M15.5 7.5a3.5 3.5 0 1 1-1 2.45L4 20.5V17h2.5v-2.5H9l2.05-2.05A3.5 3.5 0 0 1 15.5 7.5ZM16.5 9.5h.01",
+    warning:"M12 3 2 20h20L12 3ZM12 10v4M12 17h.01",
   }[kind] ?? "M4 12h16");
   svg.append(path);
   return svg;
