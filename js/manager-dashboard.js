@@ -36,6 +36,7 @@ import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
 import { createManagerConnectionNotifications } from "./manager-connection-notifications.js";
 import { managerConnectionError } from "./manager-connection-errors.js";
 import { managerRequestedTiming } from "./manager-connection-timing.js";
+import { renderManagerGuestInvite } from "./manager-guest-invite.js";
 import { createManagerControlHeader, createManagerGatePicker, setManagerControlState, updateManagerSelectedGate, renderManagerControlOverview } from "./manager-control-workspace.js";
 
 const BASE = "/api/v1/manager";
@@ -255,6 +256,8 @@ export function createManagerDashboard({
           : t("השער לא הצליח לשמור את השינוי באחסון שלו. נסו שוב; אם זה חוזר, בדקו את מצב האחסון בלשונית מערכת.", "The gate could not store the change. Try again; if this continues, check storage on the System tab."),
       STORAGE_FULL: t("הרשימה בשער מלאה. מחקו רשומה קיימת לפני הוספת רשומה חדשה.", "The gate's list is full. Delete an existing record before adding a new one."),
       INVALID_ARGUMENT: t("השער דחה את הפרטים שנשלחו. בדקו את השדות ונסו שוב.", "The gate rejected the submitted details. Check the fields and try again."),
+      GUEST_PASS_ISSUER_MISMATCH: t("הקישור לא נחתם בשם המנהל שעליו נשענת הרשאת הניהול. חברו את המערכת מחדש ל־Manager מהאפליקציה ונסו שוב.", "The pass was not signed as the administrator behind management access. Reconnect the system to Manager from the app and try again."),
+      INVALID_ACCESS_WINDOW: t("טווח הזמן אינו תקין: הגישה צריכה להסתיים בעתיד ולהימשך עד 31 ימים.", "The time window is invalid: access must end in the future and last at most 31 days."),
       STORAGE_RECOVERY_REQUIRED: t("ההיסטוריה מושהית כדי לשמור על נתוני התאוששות קיימים. נדרש שחזור מאומת לפני המשך הקריאה.", "History is paused to preserve existing recovery data. Verified recovery is required before reading can resume."),
       ORGANIZATION_HAS_SYSTEMS: t(
         "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
@@ -2110,7 +2113,11 @@ export function createManagerDashboard({
       return;
     }
     if (tab === "guests") {
-      content.append(
+      renderGuestInvite(content);
+      // History replaces what it renders into; the invitation stays above it.
+      const activity = node("div", undefined, "manager-guest-activity");
+      content.append(activity);
+      activity.append(
         node(
           "p",
           t(
@@ -2121,7 +2128,7 @@ export function createManagerDashboard({
         ),
       );
       await showRead(
-        content,
+        activity,
         "ADMIN_LIST_HISTORY",
         { dayKey: null, page: { limit: 20, cursor: null } },
         "items",
@@ -2152,6 +2159,39 @@ export function createManagerDashboard({
       return;
     }
     placeManagerActions(content, language);
+  }
+  // The gate signs the pass for the administrator behind the Manager
+  // delegation; the Manager API seals it into the link the app opens. A sample
+  // workspace makes an example link that the app never opens.
+  function renderGuestInvite(content) {
+    const source = connection, epoch = generation, system = currentSystem, gate = currentGate;
+    const current = () => !closed && connection === source && generation === epoch && currentSystem === system && currentGate === gate;
+    const simulation = examples.isSystem(system);
+    renderManagerGuestInvite(content, {
+      language,
+      gateName: system?.name || gate,
+      supported: Boolean(source.capabilities?.data?.features?.includes("GUEST_PASS_ISSUE")),
+      issue: async ({ name, phone, nb, na }) => {
+        try {
+          const signed = await source.command("ADMIN_ISSUE_GUEST_PASS", { name, nb, na });
+          if (!current()) throw new Error("CANCELLED");
+          const issuerName = signed.data?.issuerName || undefined;
+          if (simulation)
+            return { url: `https://wifigate.io/wifigate-link/?ep=v1.demo_${encodeURIComponent(signed.data.gp)}`, name, notBefore: nb, notAfter: na, issuerName };
+          const link = await api(`/systems/${encodeURIComponent(gate)}/guest-links`, "POST", {
+            gp: signed.data.gp,
+            gateName: system.name,
+            ...(issuerName ? { inviterName: issuerName } : {}),
+            ...(phone ? { phone } : {}),
+          });
+          if (!current()) throw new Error("CANCELLED");
+          return { ...link, issuerName };
+        } catch (error) {
+          if (error?.message !== "CANCELLED" && error?.message !== "DISCONNECTED") error.guestMessage = errorText(error);
+          throw error;
+        }
+      },
+    });
   }
   async function showRead(content, cmd, payload, key, more) {
     const source = connection,

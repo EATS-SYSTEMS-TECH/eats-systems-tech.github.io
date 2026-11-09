@@ -63,7 +63,7 @@ export class ManagerExampleConnection {
     this.session = { simulation: true };
     const gate = this.data.gate(gateId);
     this.capabilities = { data: {
-      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH"],
+      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH", "GUEST_PASS_ISSUE"],
       limits: { maxUsers: gate.maxUsers, maxAdmins: gate.maxAdmins, maxEvents: gate.maxEvents, maxPageItems: 20 },
     } };
     this.onState("active");
@@ -212,6 +212,10 @@ export class ManagerExampleConnection {
         gate.swapContacts = payload.swapContacts;
         gate.revision++;
         value = this.events(gate);
+        break;
+      case "ADMIN_ISSUE_GUEST_PASS":
+        // An example pass: the link it goes into is one the app never opens.
+        value = { gp: `example-${payload.nb}-${payload.na}`, gen: 0, issuerName: gate.admins[0]?.name ?? "" };
         break;
       case "ADMIN_CLEAR_EVENTS":
         gate.events = [];
