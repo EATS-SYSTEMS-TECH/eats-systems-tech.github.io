@@ -6,6 +6,7 @@ import { managerUiIcon } from "./manager-ui-icons.js";
 import { createManagerSectionHeading } from "./manager-section-heading.js";
 import {
   createOrganizationRoleCard,
+  createOrganizationRoleMatrix,
   sharedOrganizationRole,
 } from "./role-guide.js";
 
@@ -712,6 +713,18 @@ export async function renderManagerOrganization({
     }
     pending.dataset.organizationSection = "people";
     section.append(pending);
+  }
+  // What each role can do, last in the organization's people.
+  if (permissions.openWorkspace !== false) {
+    const roleMatrix = createOrganizationRoleMatrix({
+      product: "manager",
+      language,
+      role: ownRole,
+    });
+    if (partitioned) {
+      roleMatrix.dataset.organizationSection = "people";
+      section.append(roleMatrix);
+    } else peopleBody.append(roleMatrix);
   }
   root.append(section);
   return detail;

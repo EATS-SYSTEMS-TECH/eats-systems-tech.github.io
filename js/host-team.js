@@ -1,12 +1,13 @@
-import { hostText } from "./host-locale.js";
+import { hostText, hostLanguage } from "./host-locale.js";
 import { node, infoTip } from "./host-ui.js";
 import { roleBadge, accessBadge, roleLabel } from "./host-role-badge.js";
 import { readHostPages } from "./host-pages.js";
-import { can } from "./host-permissions.js";
+import { can, organizationRole } from "./host-permissions.js";
 import { renderOwnerMembershipInvitations } from "./host-membership-invitations.js";
 import { openSystemDialog, changeTracker } from "./host-system-cards.js";
 import { initial } from "./host-org-selector.js";
 import { managerUiIcon } from "./manager-ui-icons.js";
+import { createOrganizationRoleMatrix } from "./role-guide.js";
 
 // Settings → Team (the owner: members:write). The people in the
 // organization, each with a role and access the owner can change; new
@@ -185,4 +186,13 @@ export async function renderTeam(panel, context) {
     organization,
     isCurrent: context.isCurrent,
   });
+  if (!context.isCurrent()) return;
+  // What each role can do, last in the team view.
+  panel.append(
+    createOrganizationRoleMatrix({
+      product: "host",
+      language: hostLanguage,
+      role: organizationRole(organization),
+    }),
+  );
 }

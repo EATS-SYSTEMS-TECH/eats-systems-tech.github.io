@@ -112,5 +112,17 @@ export function accessNoteContent(note = {}, language = "en") {
     arrival.querySelector(".manager-access-address")
   )
     content.append(arrival);
+  // The note is a read-only copy: it is edited in the app and reaches the
+  // dashboard with the next Sync.
+  content.append(
+    element(
+      "p",
+      t(
+        "* את פרטי הגישה אפשר לערוך רק באפליקציית WIFIGATE, ואז לבצע Sync כדי לעדכן אותם כאן.",
+        "* The Access Note can be edited only in the WIFIGATE app; then run Sync to update it here.",
+      ),
+      "manager-access-edit-hint",
+    ),
+  );
   return content;
 }

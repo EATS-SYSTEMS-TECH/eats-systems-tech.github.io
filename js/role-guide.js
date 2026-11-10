@@ -262,22 +262,23 @@ const products = {
     en: {
       roles: {
         owner:
-          "Owns the organization. Everything an admin can do, plus organization settings and time zone, members and roles, support access and API keys (create, rotate, revoke, reveal). Every organization keeps at least one active owner.",
+          "Owns the organization. Everything an admin can do, plus organization settings and time zone, members and roles, support access and revoking any API key. Every organization keeps at least one active owner.",
         admin:
-          "Runs operations: organization systems (add from the app, icon, remove), bookings, guest links, connections and activity. Sees the API key list without changing it.",
+          "Runs operations: organization systems (add from the app, icon, remove), bookings, guest links, connections and activity. Creates and manages their own API keys.",
         staff:
           "Daily team (reception, cleaning, maintenance): creates and updates bookings, creates guest links and handles activity. Does not add or remove systems.",
         viewer:
           "View only: the calendar, bookings and organization systems, without any change.",
       },
       rows: [
-        ["View systems, calendar, bookings and settings", 4, "eye"],
+        ["View organization systems, calendar and bookings", 4, "eye"],
         ["Bookings", 3, "calendar"],
         ["Guest links", 3, "link"],
         ["Activity", 3, "activity"],
         ["Organization systems: add from the app, icon, remove", 2, "wifi"],
-        ["Connections: booking system, automatic links, API key list", 2, "plug"],
-        ["API keys: create, rotate, revoke, reveal", 1, "key"],
+        ["Connections: booking system, automatic links", 2, "plug"],
+        ["API keys: create, and rotate, revoke and reveal the keys you created", 2, "key"],
+        ["Revoke another person's API key", 1, "key"],
         ["Organization settings, time zone, support access, delete guest details", 1, "cog"],
         ["Members and roles", 1, "people"],
       ],
@@ -285,22 +286,23 @@ const products = {
     he: {
       roles: {
         owner:
-          "הבעלים של הארגון. כל מה שיש ל־admin, ובנוסף: הגדרות הארגון ואזור הזמן, ניהול החברים והתפקידים שלהם, גישת תמיכה ומפתחות API (יצירה, סיבוב, ביטול וחשיפה). בכל ארגון יש לפחות owner פעיל אחד.",
+          "הבעלים של הארגון. כל מה שיש ל־admin, ובנוסף: הגדרות הארגון ואזור הזמן, ניהול החברים והתפקידים שלהם, גישת תמיכה וביטול של כל מפתח API. בכל ארגון יש לפחות owner פעיל אחד.",
         admin:
-          "מנהל את התפעול: מערכות הארגון (הוספה מהאפליקציה, החלפת סמל, הסרה), הזמנות, קישורי אורח, חיבורים ופעילות. רואה את רשימת מפתחות ה־API ואינו משנה אותה.",
+          "מנהל את התפעול: מערכות הארגון (הוספה מהאפליקציה, החלפת סמל, הסרה), הזמנות, קישורי אורח, חיבורים ופעילות. יוצר ומנהל את מפתחות ה־API שלו.",
         staff:
           "צוות יומיומי (קבלה, ניקיון, תחזוקה): יוצר ומעדכן הזמנות, יוצר קישורי אורח ומטפל בפעילות. אינו מוסיף ואינו מסיר מערכות.",
         viewer:
           "צפייה בלבד: רואה את לוח השנה, ההזמנות ומערכות הארגון, בלי שום שינוי.",
       },
       rows: [
-        ["צפייה: מערכות הארגון, לוח שנה, הזמנות, הגדרות", 4, "eye"],
+        ["צפייה: מערכות הארגון, לוח שנה והזמנות", 4, "eye"],
         ["הזמנות", 3, "calendar"],
         ["קישורי אורח", 3, "link"],
         ["פעילות", 3, "activity"],
         ["מערכות הארגון: הוספה מהאפליקציה, סמל, הסרה", 2, "wifi"],
-        ["חיבורים: מערכת ההזמנות, קישורים אוטומטיים, רשימת מפתחות API", 2, "plug"],
-        ["מפתחות API: יצירה, סיבוב, ביטול וחשיפה", 1, "key"],
+        ["חיבורים: מערכת ההזמנות, קישורים אוטומטיים", 2, "plug"],
+        ["מפתחות API: יצירה, וסיבוב, ביטול וחשיפה של מפתחות שיצרתם", 2, "key"],
+        ["ביטול מפתח API של אדם אחר", 1, "key"],
         ["הגדרות הארגון ואזור הזמן, גישת תמיכה, מחיקת פרטי אורח", 1, "cog"],
         ["חברים ותפקידים", 1, "people"],
       ],
@@ -349,15 +351,16 @@ const products = {
         owner:
           "Owns the organization through their Manager User account. Everything an Organization Admin can do, plus adding, assigning and removing the organization's systems and deleting the organization.",
         admin:
-          "Manages people and daily operations: invites and removes people, changes the organization's name and logo, and opens and operates its gates remotely, Wi-Fi setup included.",
+          "Manages people and daily operations: invites and removes people, changes the organization's name and logo, and opens and operates its gates remotely, Wi-Fi setup and guest links included.",
         staff:
-          "Opens and operates the organization's gates remotely, Wi-Fi setup included. Does not manage people or branding.",
+          "Opens and operates the organization's gates remotely, Wi-Fi setup and guest links included. Does not manage people or branding.",
         viewer:
           "View only: the organization, its people and its gates. Cannot open or configure a gate.",
       },
       rows: [
         ["View the organization, people and gates", 4, "eye"],
         ["Open and operate gates remotely, Wi-Fi setup", 3, "gate"],
+        ["Guest links", 3, "link"],
         ["Invite and remove people, name and logo", 2, "userPlus"],
         ["Add, assign and remove systems", 1, "wifi"],
         ["Delete the organization", 1, "trash"],
@@ -368,15 +371,16 @@ const products = {
         owner:
           "בעל הארגון דרך חשבון המשתמש שלו ב־Manager. כל הרשאות מנהל הארגון, ובנוסף: הוספה, שיוך והסרה של מערכות הארגון ומחיקת הארגון.",
         admin:
-          "מנהל אנשים ותפעול שוטף: מזמין ומסיר אנשים, משנה את שם הארגון והלוגו, ופותח ומפעיל את השערים שלו מרחוק, כולל הגדרת Wi-Fi.",
+          "מנהל אנשים ותפעול שוטף: מזמין ומסיר אנשים, משנה את שם הארגון והלוגו, ופותח ומפעיל את השערים שלו מרחוק, כולל הגדרת Wi-Fi וקישורי אורח.",
         staff:
-          "פותח ומפעיל את שערי הארגון מרחוק, כולל הגדרת Wi-Fi. אינו מנהל אנשים או מיתוג.",
+          "פותח ומפעיל את שערי הארגון מרחוק, כולל הגדרת Wi-Fi וקישורי אורח. אינו מנהל אנשים או מיתוג.",
         viewer:
           "צפייה בלבד: הארגון, האנשים והשערים שלו. אינו פותח ואינו מגדיר שער.",
       },
       rows: [
         ["צפייה: הארגון, האנשים והשערים", 4, "eye"],
         ["פתיחה והפעלה של שערים מרחוק, הגדרת Wi-Fi", 3, "gate"],
+        ["קישורי אורח", 3, "link"],
         ["הזמנה והסרה של אנשים, שם ולוגו", 2, "userPlus"],
         ["הוספה, שיוך והסרה של מערכות", 1, "wifi"],
         ["מחיקת הארגון", 1, "trash"],
@@ -488,6 +492,17 @@ function matrix(product, lang, currentRole) {
   table.append(thead, tbody);
   wrap.append(table);
   return wrap;
+}
+
+// The permission table on its own, for the bottom of an organization's people
+// view: one product's rows, with the signed-in person's own role highlighted.
+export function createOrganizationRoleMatrix({ product, language, role } = {}) {
+  const lang = languageOf(language);
+  const card = element("section", "role-guide-matrix-card");
+  card.dataset.product = product;
+  card.setAttribute("aria-label", copy[lang].matrix);
+  card.append(matrix(product, lang, sharedOrganizationRole(role)));
+  return card;
 }
 
 function productPanel(product, lang, current = {}, previewAsUser = false) {

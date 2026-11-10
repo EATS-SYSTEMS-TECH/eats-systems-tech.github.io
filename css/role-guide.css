@@ -3,6 +3,7 @@
 .role-guide,
 .role-guide-card,
 .role-guide-picker,
+.role-guide-matrix-card,
 .role-guide-management {
   --rg-ink: #0f172a;
   --rg-muted: #5b6475;
@@ -33,19 +34,22 @@
 }
 [data-product="pay"].role-guide,
 [data-product="pay"].role-guide-card,
-[data-product="pay"].role-guide-picker {
+[data-product="pay"].role-guide-picker,
+[data-product="pay"].role-guide-matrix-card {
   --rg-accent: #16a34a;
   --rg-soft: #e9f9ef;
 }
 [data-product="manager"].role-guide,
 [data-product="manager"].role-guide-card,
-[data-product="manager"].role-guide-picker {
+[data-product="manager"].role-guide-picker,
+[data-product="manager"].role-guide-matrix-card {
   --rg-accent: #ea6a0a;
   --rg-soft: #fff1e6;
 }
 .role-guide svg,
 .role-guide-card svg,
 .role-guide-picker svg,
+.role-guide-matrix-card svg,
 .role-guide-management svg {
   width: 20px;
   height: 20px;
@@ -725,10 +729,10 @@ dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] { bac
 .role-guide .role-guide-billing { border-radius:14px; border-color:#e6e2d8; background:#fdfbf6; padding:22px; margin-block:22px; gap:14px; }
 .role-guide .role-guide-billing p { line-height:1.9; font-size:12px; color:#7c796e; }
 .role-guide .role-guide-billing__payer { border:1px solid #e9e7e0; border-radius:10px; background:#fff; padding:14px; }
-.role-guide .role-guide-matrix { border-radius:14px; border-color:#dfe7f1; background:#fff; }
-.role-guide .role-guide-matrix caption { padding:20px; color:#2b4864; font-size:15px; font-weight:700; text-align:start; }
-.role-guide .role-guide-matrix th,.role-guide .role-guide-matrix td { padding:15px 13px; font-size:12px; border-color:#e8edf4; }
-.role-guide .role-guide-matrix thead th { background:#f6f9fd; font-weight:600; }
+:is(.role-guide,.role-guide-matrix-card) .role-guide-matrix { border-radius:14px; border-color:#dfe7f1; background:#fff; }
+:is(.role-guide,.role-guide-matrix-card) .role-guide-matrix caption { padding:20px; color:#2b4864; font-size:15px; font-weight:700; text-align:start; }
+:is(.role-guide,.role-guide-matrix-card) .role-guide-matrix :is(th,td) { padding:15px 13px; font-size:12px; border-color:#e8edf4; }
+:is(.role-guide,.role-guide-matrix-card) .role-guide-matrix thead th { background:#f6f9fd; font-weight:600; }
 .role-guide .role-guide-access { padding-top:10px; border-top:1px solid #edf1f6; }
 .role-guide .role-guide-access__state { border-radius:6px; }
 @media(max-width:800px) { .role-guide .role-guide-levels { grid-template-columns:minmax(0,1fr); } }
@@ -779,8 +783,8 @@ dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] { bac
 .role-guide .role-guide-billing { padding:24px; background:#fffdf8; border-radius:16px; }
 .role-guide .role-guide-billing strong { font-size:17px; color:#66583d; }
 .role-guide .role-guide-billing p { font-size:13px; line-height:1.95; }
-.role-guide .role-guide-matrix caption { padding:22px; font-size:17px; }
-.role-guide .role-guide-matrix td[data-allowed="true"] svg { width:19px; height:19px; padding:5px; box-sizing:content-box; background:#edf7f2; color:#4b876c; border-radius:8px; }
+:is(.role-guide,.role-guide-matrix-card) .role-guide-matrix caption { padding:22px; font-size:17px; }
+:is(.role-guide,.role-guide-matrix-card) .role-guide-matrix td[data-allowed="true"] svg { width:19px; height:19px; padding:5px; box-sizing:content-box; background:#edf7f2; color:#4b876c; border-radius:8px; }
 @media(max-width:850px) { .role-guide .role-guide-levels { grid-template-columns:minmax(0,1fr); } }
 @media(max-width:600px) {
  .role-guide .role-guide__identity { align-items:flex-start; gap:12px; }
@@ -816,3 +820,9 @@ dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] { bac
  .role-guide .role-guide__toolbar .role-guide__tabs { grid-column:1; justify-self:center; }
  .role-guide__preview { grid-column:1; justify-self:center; justify-items:center; }
 }
+
+/* The permission table on its own, last in an organization people view
+   (createOrganizationRoleMatrix): the same table as in the guide. */
+.role-guide-matrix-card { margin: 28px 0 0; color: var(--rg-ink); font-family: "Manrope", system-ui, sans-serif; }
+.role-guide-matrix-card .role-guide-matrix { margin-top: 0; }
+.role-guide-matrix-card .role-guide-avatar { border-radius: 11px; }
