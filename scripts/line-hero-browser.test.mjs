@@ -94,15 +94,19 @@ async function layout(page) {
   assert.deepEqual([media.left, media.top, media.width, media.height], [hero.left, hero.top, hero.width, hero.height], "The media layer fills the hero");
   assert.ok(stage.left >= hero.left - 0.5 && stage.right <= hero.right + 0.5 && stage.top >= hero.top - 0.5 && stage.bottom <= hero.bottom + 0.5, "Art stays inside the hero");
   assert.ok(Math.abs(stage.height - stage.width * 9 / 16) < 1, "Art keeps 16:9 (never cropped)");
-  // As large as the hero allows and centred, like the video it replaces.
-  assert.ok(Math.abs(stage.width - Math.min(hero.width, hero.height * 16 / 9)) < 1, "Art is as large as the hero allows");
   assert.ok(Math.abs(stage.left + stage.width / 2 - (hero.left + hero.width / 2)) < 1, "Art is centred");
-  // Wider screens: the hero is at least 16:9, so the art spans it edge to edge, vertically centred.
-  if (!result.phone) assert.ok(Math.abs(stage.width - hero.width) < 1 && Math.abs(stage.top + stage.height / 2 - (hero.top + hero.height / 2)) < 1, "Art fills the hero width, vertically centred");
-  // Taller heroes: the art rises to just below the top bar row, never above it.
-  else assert.ok(stage.top >= topbar.bottom - 0.5 && stage.top <= hero.top + (hero.height - stage.height) / 2 + 0.5, "Art sits in the upper band below the top bar");
-  // The text block overlays the media layer, as on every use-case hero.
-  assert.ok(result.title.left < media.right && result.title.right > media.left && result.title.top < media.bottom && result.title.bottom > media.top, "Text overlays the media layer");
+  // Every width: the art sits just below the top bar row, never above it.
+  assert.ok(stage.top >= topbar.bottom - 0.5, "Art sits below the top bar");
+  if (result.phone) {
+    // Phones: as large as the hero allows, in the upper band; the text overlays the media layer.
+    assert.ok(Math.abs(stage.width - Math.min(hero.width, hero.height * 16 / 9)) < 1, "Art is as large as the hero allows");
+    assert.ok(stage.top <= hero.top + (hero.height - stage.height) / 2 + 0.5, "Art sits in the upper band below the top bar");
+    assert.ok(result.title.left < media.right && result.title.right > media.left && result.title.top < media.bottom && result.title.bottom > media.top, "Text overlays the media layer");
+  } else {
+    // Wider screens stack: the art band, then the text below it, so the text never covers the art.
+    assert.ok(result.title.top >= stage.bottom - 0.5, "Text sits below the art");
+    assert.ok(stage.height >= 339, "Art keeps a usable height");
+  }
   assert.equal(result.image, true, "The static frame loaded"); assert.equal(result.decorative, "true");
   return result;
 }
@@ -180,7 +184,10 @@ async function textToggle(page, copy) {
   const open = await state();
   assert.deepEqual([open.attr, open.expanded, open.label, open.title, open.controls], ["expanded", "true", copy.hideText, copy.hideText, "niche-hero-text"]);
   assert.deepEqual([open.visibility, open.opacity, open.scrimVisibility, open.overlay], ["visible", 1, "visible", "none"]);
-  assert.notEqual(open.scrimContent, "none", "The white scrim sits behind the text");
+  // Phones keep the text over the art on a white scrim; wider screens stack the
+  // text on white below the art, so there is no scrim.
+  if (await page.evaluate(() => matchMedia("(max-width: 768px)").matches)) assert.notEqual(open.scrimContent, "none", "The white scrim sits behind the text");
+  else assert.equal(open.scrimContent, "none", "Stacked text needs no scrim");
   await toggle.click();
   await page.waitForFunction(() => getComputedStyle(document.querySelector("#niche-hero-text")).visibility === "hidden", {}, { timeout: 2000 });
   const closed = await state();

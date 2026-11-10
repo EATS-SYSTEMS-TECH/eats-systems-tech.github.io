@@ -22,7 +22,7 @@
 // hero once the live art is mounted).
 import { sceneAssetUrl } from "./scene-media.mjs";
 
-export const LINE_HERO_VERSION = "20261110lh2";
+export const LINE_HERO_VERSION = "20261110lh3";
 
 export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   if (!["play", "pause", "replay", "hideText", "showText"].every(key => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");

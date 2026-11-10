@@ -141,6 +141,26 @@ html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .nic
   }
 }
 
+@media (min-width:769px) {
+  /* Desktop and tablets stack like phones: the top bar row, then the art,
+     then the text on white below it, so the text never covers the animation.
+     The art band takes what the screen leaves after the text (never less
+     than 340 px, never more than 16:9 of the width) and the hero grows to
+     fit, instead of the art filling one screen under the text. */
+  .niche-page .niche-hero.niche-hero--line {
+    --line-hero-art-h: clamp(340px, calc(100svh - var(--nav-height) - 22rem), 56.25vw);
+    height: auto; min-height: 0; max-height: none;
+  }
+  .niche-hero--line .niche-hero__content { height: auto; justify-content: flex-start; }
+  .niche-hero--line .niche-hero__topbar { margin-block-end: calc(.75rem + var(--line-hero-art-h) + clamp(1.25rem,3vh,2rem)); }
+  .niche-hero--line .line-hero__stage {
+    --line-hero-w: min(100cqw, var(--line-hero-art-h) * 16 / 9);
+    top: var(--line-hero-band); left: calc((100cqw - var(--line-hero-w)) / 2);
+  }
+  /* The text sits on white, so it needs no scrim over the art. */
+  .niche-hero--line .niche-hero__text::before { content: none; }
+}
+
 @media print {
   .niche-hero--line .line-hero__art { display: none; }
 }
