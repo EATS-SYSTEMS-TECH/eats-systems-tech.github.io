@@ -108,6 +108,13 @@ for (const { code: locale } of SITE_LANGUAGES) {
       }
       assert.equal($("h1").length, 1);
       assert.ok(main.find("h1").text().trim());
+      // Products with a 3D model offer the photos / 3D switch inside the viewer.
+      if (product && $("[data-shop-3d]").length) {
+        const mode = $(".shop-viewer [data-shop-viewer-mode]");
+        assert.equal(mode.length, 1, "The viewer switches between photos and 3D");
+        assert.ok(mode.attr("data-label-3d") && mode.attr("data-label-photos"), "Both directions are labelled");
+        assert.equal(mode.find(".shop-viewer__mode-3d").length + mode.find(".shop-viewer__mode-photos").length, 2);
+      }
       assert.equal($("title").length, 1);
       assert.ok($("title").text().trim());
       assert.ok($("meta[name='description']").attr("content")?.trim());

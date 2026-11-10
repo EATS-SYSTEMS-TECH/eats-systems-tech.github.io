@@ -31,6 +31,10 @@ if (viewer) {
   const hint = viewer.querySelector(".shop-viewer__hint-text");
   const reset = viewer.querySelector(".shop-viewer__reset");
   const measure = viewer.querySelector(".shop-viewer__dimensions");
+  // The photos / 3D switch inside the viewer, on products that have a model.
+  const mode = viewer.querySelector("[data-shop-viewer-mode]");
+  const model = document.querySelector("[data-shop-3d]");
+  const syncMode = () => mode?.setAttribute("aria-label", mode.getAttribute(viewer.classList.contains("is-3d") ? "data-label-photos" : "data-label-3d"));
   const photoHint = hint.textContent;
   const forward = document.documentElement.dir === "rtl" ? "ArrowLeft" : "ArrowRight";
   let index = 0, frame = null, swipeStart = null, view3d = null, session = 0;
@@ -46,12 +50,14 @@ if (viewer) {
     reset.hidden = true;
     measure.hidden = true;
     hint.textContent = photoHint;
+    syncMode();
   };
   const open3d = async (button) => {
     leave3d();
     unzoom();
     image.remove();
     viewer.classList.add("is-3d");
+    syncMode();
     const holder = Object.assign(document.createElement("div"), { className: "shop-3d" });
     stage.append(holder);
     hint.textContent = viewer.getAttribute("data-3d-loading");
@@ -112,6 +118,11 @@ if (viewer) {
   viewer.querySelectorAll("[data-shop-viewer-step]").forEach((button) =>
     button.addEventListener("click", () => show(index + Number(button.dataset.shopViewerStep))));
   reset.addEventListener("click", () => view3d?.reset());
+  // From the model back to the photo last shown, or from a photo to the model.
+  mode?.addEventListener("click", () => {
+    if (viewer.classList.contains("is-3d")) show(index);
+    else if (model) open3d(model);
+  });
   // Dimensions show by default; the choice holds while the page stays open.
   measure.addEventListener("click", () => {
     const visible = measure.getAttribute("aria-pressed") !== "true";

@@ -345,6 +345,39 @@
   font-weight: 700;
   cursor: pointer;
 }
+/* Photos / 3D switch: shows the mode it leads to. */
+.shop-viewer__mode {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid #151719;
+  border-radius: 999px;
+  background: #fff;
+  color: #151719;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.shop-viewer__mode > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.shop-viewer__mode-photos,
+.shop-viewer.is-3d .shop-viewer__mode-3d {
+  display: none !important;
+}
+.shop-viewer.is-3d .shop-viewer__mode-photos {
+  display: inline-flex !important;
+}
+.shop-viewer__mode:hover {
+  background: #f1f4f9;
+}
+.shop-viewer__mode:focus-visible {
+  outline: 2px solid #1265e8;
+  outline-offset: 3px;
+}
 .shop-viewer__dimensions[aria-pressed="true"] {
   border-color: #151719;
   background: #151719;
