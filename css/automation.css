@@ -588,8 +588,9 @@ html[dir="rtl"] .wa-hero::after {
    Everything below the line hero on the WIFIGATE Host and WIFIGATE Manager
    pages speaks the hero's drawing language: white, one blue, thin lines,
    dashed guides and node dots. Pricing cards carry two nodes, the three steps
-   ride one wave, the benefits open into a dashed grid, the questions become a
-   centred accordion and a tinted panel closes the page with the shop. */
+   ride one wave, the benefits open into a dashed grid and a tinted panel closes the page
+   with the shop. The questions keep the site's shared FAQ design (faq.css),
+   the same one the homepage uses. */
 :is(.wifigate-host-page, .wifigate-manager-page) {
   --flow-blue: #146bff;
   --flow-tint: #eef4ff;
@@ -858,60 +859,6 @@ html[dir="rtl"] .wa-hero::after {
 :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card--lead .bento-card__title {
   font-size: clamp(1.2rem, 1.55vw, 1.45rem);
   line-height: 1.25;
-}
-
-/* ---------- Questions: a centred accordion ---------- */
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq {
-  background: #fff;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__layout {
-  display: block;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq .seo-faq__layout > :first-child {
-  position: static;
-  margin: 0 auto;
-  text-align: center;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq .niche-section__title {
-  max-width: 22ch;
-  margin-inline: auto;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__list {
-  max-width: 52rem;
-  margin: clamp(2.25rem, 5vw, 3.5rem) auto 0;
-  border-top-width: 1.5px;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item {
-  border-bottom-width: 1.5px;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item summary {
-  font-family: "Space Grotesk", system-ui, sans-serif;
-  font-size: 1.2rem;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item summary::after {
-  width: 2.15rem;
-  height: 2.15rem;
-  flex-basis: 2.15rem;
-  border: 1.5px solid var(--flow-hair);
-  border-radius: 50%;
-  color: var(--flow-blue);
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item[open]:not(.is-closing) summary::after {
-  border-color: var(--flow-blue);
-  background: var(--flow-blue);
-  color: #fff;
-}
-
-:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__answer {
-  max-width: 46rem;
 }
 
 /* ---------- Closing panel: to the shop ---------- */

@@ -289,7 +289,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261110flow1" />`);
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261110flow2" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { '@type': 'Service', '@id': `${siteOrigin}/${pageKey}/#service`, name: content.label, serviceType, provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, pageKey), description: hostCopy.metaDescription } });
