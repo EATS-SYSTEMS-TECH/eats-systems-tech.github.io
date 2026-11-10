@@ -12,7 +12,7 @@ import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
 
 const root = new URL("../", import.meta.url);
 
-test("the cropped watermark has a faint physical bottom-right layer shown only in a video state", async () => {
+test("the cropped watermark has a faint physical bottom-right layer shown only in a video or live line-hero state", async () => {
   const bytes = await fs.readFile(new URL(WATERMARK_ASSET, root));
   assert.equal(createHash("sha256").update(bytes).digest("hex"), WATERMARK_SHA256);
   const css = await fs.readFile(new URL("css/media-watermark.css", root), "utf8");
@@ -24,6 +24,11 @@ test("the cropped watermark has a faint physical bottom-right layer shown only i
   assert.match(css, /\.media-watermark\s*\{[^}]*display:\s*none;/s, "Posters and no-JavaScript fallbacks have no visible watermark");
   assert.match(css, /\[data-hero-media-state=["']video["']\][^{]*\.media-watermark/);
   assert.match(css, /\[data-scene-state=["']video["']\][^{]*\.media-watermark/);
+  // The white Host/Manager line heroes: shown once the live drawing is mounted
+  // (never on the static no-JavaScript frame), the same mark drawn in black.
+  assert.match(css, /\.niche-hero--line:is\(\[data-line-hero-state="playing"\],\[data-line-hero-state="paused"\],\[data-line-hero-state="still"\]\) > \.niche-hero__media > \.media-watermark/);
+  assert.doesNotMatch(css, /data-line-hero-state="poster"/);
+  assert.match(css, /\.niche-hero--line > \.niche-hero__media > \.media-watermark \{[^}]*filter:\s*brightness\(0\);/);
   assert.doesNotMatch(css, /inset-inline|direction:|html:not|a11y-fab|3\.75rem/, "The accessibility button must not move the physical corner");
   assert.match(css, /pointer-events:\s*none;/);
 });
@@ -46,6 +51,21 @@ test("only a video frame gets one decorative layer; static photos retain their o
   assert.equal($.html(), first, "Rendering is idempotent");
 });
 
+test("a line-animation hero gets the same single decorative layer in its media layer", () => {
+  const html = '<html><head></head><body class="niche-page"><main><section class="niche-hero niche-hero--line" data-line-hero="host" data-line-hero-state="poster"><div class="niche-hero__media"><div class="line-hero__stage" data-line-hero-stage=""><picture><img id="niche-image" src="host-start.svg"></picture></div><div class="niche-hero__overlay"></div></div></section></main></body></html>';
+  const $ = cheerio.load(html);
+  applyMediaWatermarks($, { assetPrefix: "../" });
+  assert.equal($(".niche-hero--line > .niche-hero__media[data-media-watermark-frame] > .media-watermark[data-media-watermark][aria-hidden='true']").length, 1);
+  assert.equal($("[data-line-hero-stage] [data-media-watermark]").length, 0, "The stage and its frame are untouched");
+  assert.equal($("link[data-media-watermark-style]").attr("href"), `../css/media-watermark.css?v=${WATERMARK_VERSION}`);
+  const first = $.html();
+  applyMediaWatermarks($, { assetPrefix: "../" });
+  assert.equal($.html(), first, "Rendering is idempotent");
+  // A stage outside a line hero is not a medium of its own.
+  const plain = cheerio.load('<html><head></head><body class="niche-page"><main><div class="niche-hero"><div class="niche-hero__media"><div data-line-hero-stage=""></div></div></div></main></body></html>');
+  const original = plain.html(); applyMediaWatermarks(plain, { assetPrefix: "../" }); assert.equal(plain.html(), original);
+});
+
 test("static marketing and utility pages add no watermark elements, wrappers or unused stylesheet", () => {
   for (const bodyClass of ["niche-page", "niche-page wa-page", "home-en", ""]) {
     const $ = cheerio.load(`<html><head></head><body class="${bodyClass}"><main><div class="niche-hero__media"><img src="suite.webp"></div><img class="security-statement__media-image" src="statement.webp"><img class="brand" src="logo.webp"></main></body></html>`);
@@ -55,9 +75,10 @@ test("static marketing and utility pages add no watermark elements, wrappers or 
   }
 });
 
-test("all 585 localized consumer pages contain exactly 468 video-only layers; every static Shabbat page and line-animation hero has none", async () => {
-  let pages = 0, frames = 0, staticPages = 0;
-  // WIFIGATE Host and Manager show a drawn line animation, not a video, so they carry no video mark.
+test("all 585 localized consumer pages contain exactly 468 video layers and 78 line-hero layers; every static Shabbat page has none", async () => {
+  let pages = 0, frames = 0, lineFrames = 0, staticPages = 0;
+  // WIFIGATE Host and Manager show a drawn line animation instead of a video;
+  // since 10 Nov 2026 (owner request) their media layer carries the same mark.
   const lineHeroKeys = ["wifigate-host", "wifigate-manager"];
   const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), ...lineHeroKeys, AUTO_OPEN_PAGE_KEY];
   for (const { code } of SITE_LANGUAGES) for (const key of keys) {
@@ -67,8 +88,13 @@ test("all 585 localized consumer pages contain exactly 468 video-only layers; ev
     const expected = videos.length;
     assert.equal(expected, LANDING_PAGES.some(item => item.key === key) || lineHeroKeys.includes(key) ? 0 : 1, `${relative}: current video inventory is explicit`);
     if (lineHeroKeys.includes(key)) assert.equal($(".niche-hero--line [data-line-hero-stage]").length, 1, `${relative}: the line animation replaces the video`);
-    assert.equal($("[data-media-watermark-frame]").length, expected, `${relative}: only video frames own a layer`);
-    assert.equal($("[data-media-watermark]").length, expected, `${relative}: no static-photo or duplicate poster layer`);
+    const marked = expected + (lineHeroKeys.includes(key) ? 1 : 0);
+    if (lineHeroKeys.includes(key)) {
+      assert.equal($(".niche-hero--line[data-line-hero-state='poster'] > .niche-hero__media[data-media-watermark-frame] > [data-media-watermark][aria-hidden='true']").length, 1, `${relative}: one layer in the line hero media`);
+      lineFrames++;
+    }
+    assert.equal($("[data-media-watermark-frame]").length, marked, `${relative}: only video and line-hero frames own a layer`);
+    assert.equal($("[data-media-watermark]").length, marked, `${relative}: no static-photo or duplicate poster layer`);
     for (const element of videos.toArray()) {
       const frame = $(element).closest("[data-media-watermark-frame]");
       assert.equal(frame.length, 1, `${relative}: video has one containing frame`);
@@ -83,13 +109,14 @@ test("all 585 localized consumer pages contain exactly 468 video-only layers; ev
       assert.equal($(".feature-card--auto-open [data-media-watermark], .feature-card--auto-open video, .automation-stay__media [data-media-watermark], .where-media [data-media-watermark], .product-overview__figure [data-media-watermark]").length, 0);
       assert.equal($("img.security-statement__media-image").length, 2, "Both static security photos keep their original elements");
     }
-    assert.equal($("link[data-media-watermark-style]").length, expected ? 1 : 0, `${relative}: static-only pages request no overlay CSS`);
+    assert.equal($("link[data-media-watermark-style]").length, marked ? 1 : 0, `${relative}: static-only pages request no overlay CSS`);
     assert.equal($("header [data-media-watermark], footer [data-media-watermark]").length, 0);
-    if (!expected) staticPages++;
+    if (!marked) staticPages++;
     frames += $("[data-media-watermark]").length;
     pages++;
   }
   assert.equal(pages, 585);
-  assert.equal(staticPages, 117);
-  assert.equal(frames, 468);
+  assert.equal(staticPages, 39);
+  assert.equal(lineFrames, 78);
+  assert.equal(frames, 468 + 78);
 });

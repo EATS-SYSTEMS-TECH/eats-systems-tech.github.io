@@ -57,7 +57,31 @@ test("scene modules keep the approved timing and carry no page driver, debug hoo
   }
 });
 
-test("the art fills the media layer like the video it replaces, in CSS only, with a white scrim", async () => {
+test("the blue reads strongly: lifted context strokes, heavier lines and tints, same geometry and timing", async () => {
+  // One tone curve per scene keeps opacity 0 and 1 (fades and keyframes are
+  // unchanged) and lifts the pale context strokes; weights are 1.2x, tints 1.6x.
+  for (const [name, scene] of Object.entries(LINE_HERO_SCENES)) {
+    const source = await read(scene.module);
+    assert.match(source, /var TONE = 2\.7, WEIGHT = 1\.2, TINT = 1\.6;/, `${name}: tone parameters`);
+    assert.match(source, /if \(k === 'stroke-opacity'\) return \w+\(1 - Math\.pow\(1 - /, `${name}: stroke opacity passes the tone curve`);
+    assert.match(source, /if \(k === 'stroke-width'\) return \w+\(\+v \* WEIGHT\)/, `${name}: stroke weight factor`);
+    for (const frame of LINE_HERO_FRAMES) {
+      const svg = await read(lineHeroFramePath(name, frame));
+      const values = attribute => [...svg.matchAll(new RegExp(` ${attribute}="([^"]+)"`, "g"))].map(match => Number(match[1]));
+      const opacities = values("stroke-opacity"), widths = values("stroke-width");
+      assert.ok(opacities.length > 0 && widths.length > 0, `${name}-${frame}: strokes present`);
+      assert.ok(opacities.every(value => value === 0 || value >= 0.6), `${name}-${frame}: no pale context stroke (${opacities.filter(value => value > 0 && value < 0.6)})`);
+      assert.ok(widths.every(value => value >= 1.8), `${name}-${frame}: no line thinner than 1.8 units`);
+      assert.ok(Math.max(...widths) >= 3.6, `${name}-${frame}: primary strokes are 3.6 units`);
+      assert.ok(/stroke="#146BFF"/.test(svg), `${name}-${frame}: brand blue`);
+    }
+  }
+  // No opacity or filter dims the art in CSS.
+  const css = await read("css/line-hero.css");
+  assert.doesNotMatch(css, /\.line-hero__(?:art|stage|frame)[^{]*\{[^}]*(?:opacity|filter)\s*:/, "no opacity or filter on the art");
+});
+
+test("the art fills the media layer like the video it replaces, in CSS only, with a white scrim behind the text only", async () => {
   const css = await read("css/line-hero.css"), runtime = await read("js/line-hero.js");
   // One 16:9 box, as large as the hero allows (never cropped), centred; on tall
   // heroes it rises to just below the top bar row. No script moves it.
@@ -67,9 +91,21 @@ test("the art fills the media layer like the video it replaces, in CSS only, wit
   assert.match(css, /\.niche-hero--line \.niche-hero__media \{ container-type: size;/);
   assert.doesNotMatch(css, /--line-hero-x|--line-hero-y/);
   assert.doesNotMatch(runtime, /ResizeObserver|getClientRects|createRange|placeArt|lineHeroLayout|style\.setProperty/);
-  // The overlay stays the shared layer, painted white instead of dark.
-  const overlay = css.match(/\.niche-page \.niche-hero--line \.niche-hero__overlay \{([^}]+)\}/)?.[1] || "";
-  assert.match(overlay, /rgba\(255,255,255,\.92\) 0%/); assert.doesNotMatch(overlay, /rgba\(5,5,5/);
+  // The overlay stays the shared layer but paints nothing over the art; the
+  // white scrim belongs to the text block (as wide as its text) with soft edges.
+  const overlay = css.match(/\.niche-page \.niche-hero--line \.niche-hero__overlay,\s*html\[dir="rtl"\] \.niche-page \.niche-hero--line \.niche-hero__overlay \{([^}]+)\}/)?.[1] || "";
+  assert.match(overlay, /background: none;/); assert.doesNotMatch(overlay, /rgba\(/);
+  assert.match(css, /\.niche-hero--line \.niche-hero__text \{ position: relative; width: fit-content; max-width: 100%; \}/);
+  const scrim = css.match(/\.niche-hero--line \.niche-hero__text::before \{([^}]+)\}/)?.[1] || "";
+  assert.match(scrim, /z-index: -1;/); assert.match(scrim, /background: rgba\(255,255,255,\.9\);/); assert.match(scrim, /mask-composite: intersect;/);
+  // Collapsed: the text and its scrim fade out in place (no layout change),
+  // without a transition under reduced motion (system or site setting).
+  const collapsed = css.match(/\.niche-hero--line\[data-line-hero-text="collapsed"\] \.niche-hero__text \{([^}]+)\}/)?.[1] || "";
+  assert.match(collapsed, /opacity: 0; visibility: hidden;/); assert.doesNotMatch(collapsed, /display|height|position|transform/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[^\n]*\[data-line-hero-text="collapsed"\] \.niche-hero__text \{ transition: none; \} \}/);
+  assert.match(css, /html\.a11y-reduced-motion \.niche-hero--line\[data-line-hero-text="collapsed"\] \.niche-hero__text \{ transition: none; \}/);
+  // The toggle shares the pause button's 44 px light style.
+  assert.match(css, /\.niche-hero--line :is\(\[data-scene-pause\],\[data-hero-text-toggle\]\) \{[^}]*width: 44px; height: 44px;/);
   // Content hashes ignore line endings, so a CRLF checkout keeps every ?v=.
   const frame = await fs.readFile(path.join(root, ...lineHeroFramePath("host", "start").split("/")));
   assert.equal(lineHeroFrameHash(Buffer.from(frame.toString("utf8").replace(/\r?\n/g, "\r\n"))), lineHeroFrameHash(frame));
@@ -112,13 +148,17 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
   for (const { code } of SITE_LANGUAGES) for (const [scene, key] of [["host", "wifigate-host"], ["manager", "wifigate-manager"]]) {
     const relative = path.posix.join(code === "en" ? "" : code.toLowerCase(), key, "index.html"), prefix = code === "en" ? "../" : "../../";
     const $ = cheerio.load(await read(relative));
-    const copy = (await import(new URL(`./homepage-copy/${code}.mjs`, import.meta.url))).default.hero.media;
+    const heroCopy = (await import(new URL(`./homepage-copy/${code}.mjs`, import.meta.url))).default.hero;
+    const copy = { ...heroCopy.media, hideText: heroCopy.textToggle.hide, showText: heroCopy.textToggle.show };
     const hero = $("main > section.niche-hero");
     assert.equal(hero.length, 1, relative);
     assert.ok(hero.hasClass("niche-hero--line"), `${relative}: light modifier`);
     assert.equal(hero.attr("data-line-hero"), scene); assert.equal(hero.attr("data-line-hero-state"), "poster");
     assert.equal(hero.is("[data-scene-video],[data-scene-state]"), false, `${relative}: no video scene controller`);
-    assert.equal($("main video, [data-media-watermark], [data-media-watermark-frame], link[data-media-watermark-style]").length, 0, `${relative}: no video or video mark`);
+    assert.equal($("main video").length, 0, `${relative}: no video`);
+    // The same decorative mark as the video heroes, in the media layer.
+    assert.equal(hero.find("> .niche-hero__media[data-media-watermark-frame] > .media-watermark[data-media-watermark][aria-hidden='true']").length, 1, `${relative}: one watermark`);
+    assert.equal($("[data-media-watermark]").length, 1); assert.equal($("link[data-media-watermark-style]").length, 1);
     assert.equal($("script[src*='scene-video.js'], script[src*='media-runtime.js'], link[href*='scene-video.css']").length, 0, `${relative}: video runtime not loaded`);
     // Media layer: one 16:9 stage with the static frames, decorative live SVG added at runtime.
     const stage = hero.find("> .niche-hero__media > .line-hero__stage[data-line-hero-stage]");
@@ -138,6 +178,19 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.equal(replay.text(), copy.replay); assert.equal(replay.attr("aria-label"), copy.replay);
     const pause = hero.find(".niche-hero__pager > .scene-video-controls > button[data-scene-pause][type=button]");
     assert.equal(pause.length, 1); assert.notEqual(pause.attr("hidden"), undefined); assert.equal(pause.text(), copy.pause);
+    // Text toggle beside pause: hidden until the runtime runs, expanded, controlling the text block.
+    const toggle = hero.find(".niche-hero__pager > .scene-video-controls > [data-scene-pause] + button[data-hero-text-toggle][type=button]");
+    assert.equal(toggle.length, 1, `${relative}: text toggle next to pause`);
+    assert.notEqual(toggle.attr("hidden"), undefined);
+    assert.deepEqual([toggle.attr("aria-controls"), toggle.attr("aria-expanded"), toggle.attr("aria-label"), toggle.attr("title")], ["niche-hero-text", "true", copy.hideText, copy.hideText]);
+    assert.equal(toggle.find("svg[aria-hidden='true'][focusable='false'] .line-hero__toggle-hide").length, 1);
+    assert.equal(toggle.find("svg .line-hero__toggle-show").length, 1);
+    // Double chevrons, no baseline (a chevron over a bar reads as download/eject).
+    assert.deepEqual(toggle.find("svg path").toArray().map(path => path.attribs.class || "").sort(), ["line-hero__toggle-hide", "line-hero__toggle-show"]);
+    const text = hero.find("> .niche-hero__content > .niche-hero__text#niche-hero-text");
+    assert.equal(text.length, 1, `${relative}: controlled text block`);
+    assert.ok(text.find("> h1#niche-title.niche-hero__title").text().trim().length > 0, `${relative}: the h1 stays in the HTML`);
+    assert.equal(text.find("> .niche-hero__actions > [data-scene-replay]").length, 1);
     assert.deepEqual(JSON.parse(hero.children("script[type='application/json'][data-scene-copy]").text()), copy);
     // Assets: the light stylesheet after niche.css, the scene preloaded, the runtime as a module.
     const sheets = $("link[rel=stylesheet]").map((_, element) => $(element).attr("href")).get();
@@ -150,4 +203,16 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
   // The preloaded scene URL is exactly the one the runtime imports.
   for (const scene of Object.keys(LINE_HERO_SCENES)) assert.ok(runtime.includes(`import("./line-hero-${scene}.js?v=${LINE_HERO_VERSION}")`), scene);
   for (const file of ["css/line-hero.css", "js/line-hero.js", "js/line-hero-host.js", "js/line-hero-manager.js"]) await fs.access(path.join(root, file));
+});
+
+test("every locale has its own hide/show text labels for the line hero toggle", async () => {
+  const english = (await import(new URL("./homepage-copy/en.mjs", import.meta.url))).default.hero.textToggle;
+  assert.deepEqual(english, { hide: "Hide text", show: "Show text" });
+  for (const { code } of SITE_LANGUAGES) {
+    const toggle = (await import(new URL(`./homepage-copy/${code}.mjs`, import.meta.url))).default.hero.textToggle;
+    assert.deepEqual(Object.keys(toggle).sort(), ["hide", "show"], code);
+    for (const key of ["hide", "show"]) assert.ok(typeof toggle[key] === "string" && toggle[key].trim() === toggle[key] && toggle[key].length > 1, `${code}.${key}`);
+    assert.notEqual(toggle.hide, toggle.show, code);
+    if (code !== "en") assert.notDeepEqual(toggle, english, `${code}: translated`);
+  }
 });

@@ -282,7 +282,8 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     $('#niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
     setUseCaseNavigation($, { chrome, content });
     // The hero shows the product's line animation; the accepted scene poster stays the structured-data image.
-    applyLineHero($, { scene: product, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, pageKey), copy: homeData.homepageCopies[locale].hero.media });
+    // Its controls: the shared media labels plus the hero text toggle.
+    applyLineHero($, { scene: product, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, pageKey), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy });

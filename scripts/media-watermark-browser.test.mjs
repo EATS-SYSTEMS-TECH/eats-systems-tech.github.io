@@ -9,8 +9,10 @@ const screenshots = process.env.SCREENSHOT_DIR;
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || "chrome", headless: true });
 const overlaps = (a, b) => a.x < b.right && a.right > b.x && a.y < b.bottom && a.bottom > b.y;
 const routes = ["", "roller-shutters/", "hotels-airbnb/", "shabbat-clock-electric-gate/", "wifigate-host/", "wifigate-manager/", "auto-open/"];
-// Routes without a video: the Shabbat page's photo and the Host/Manager line animations.
-const staticRoutes = new Set(["shabbat-clock-electric-gate/", "wifigate-host/", "wifigate-manager/"]);
+// Routes without a video: the Shabbat page's photo (unmarked) and the
+// Host/Manager line animations (the same mark, dark on their white hero).
+const staticRoutes = new Set(["shabbat-clock-electric-gate/"]);
+const lineRoutes = new Set(["wifigate-host/", "wifigate-manager/"]);
 const report = { schema: "wifigate.video-watermark.browser.v1", kind: "host_browser", status: "RUNNING", cases: [], policyCases: [], failureCases: [], noJavaScriptCases: [], captures: [] };
 const denyAnalytics = () => localStorage.setItem("wifigate-cookie-consent-v1", JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() }));
 const frameSelector = "[data-media-watermark-frame]";
@@ -61,9 +63,10 @@ async function inspectVideoLayer(page, route) {
     const text = [...hero.querySelectorAll("h1,h2,p,.hero__proof,.niche-hero__eyebrow,.niche-hero__breadcrumb")].filter(visible).map(box);
     const hit = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
     const a11y = document.getElementById("a11y-fab");
-    return { frame: box(element), mark: bounds, display: style.display, pointer: style.pointerEvents, opacity: Number(style.opacity), background: style.backgroundImage, ariaHidden: mark.getAttribute("aria-hidden"), markHit: hit === mark, controls, text, niche: element.matches(".niche-hero__media"), accessibility: a11y ? box(a11y) : null, scrollWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth };
+    return { frame: box(element), mark: bounds, display: style.display, filter: style.filter, pointer: style.pointerEvents, opacity: Number(style.opacity), background: style.backgroundImage, ariaHidden: mark.getAttribute("aria-hidden"), markHit: hit === mark, controls, text, niche: element.matches(".niche-hero__media"), accessibility: a11y ? box(a11y) : null, scrollWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth };
   });
   assert.equal(result.display, "block");
+  assert.equal(result.filter, lineRoutes.has(route) ? "brightness(0)" : "none", "Dark mark on the white line hero, the original white mark on video");
   assert.equal(result.opacity, .3, "Thirty percent opacity leaves the original artwork faint");
   assert.equal(result.pointer, "none");
   assert.equal(result.ariaHidden, "true");
@@ -82,7 +85,7 @@ async function inspectVideoLayer(page, route) {
 }
 async function staticPhotosHaveNoLayer(page, route) {
   const checks = await page.evaluate(() => {
-    const extra = [...document.querySelectorAll("main [data-media-watermark-frame]")].filter(frame => !frame.querySelector("video"));
+    const extra = [...document.querySelectorAll("main [data-media-watermark-frame]")].filter(frame => !frame.querySelector("video") && !frame.matches(".niche-hero--line > .niche-hero__media"));
     const grid = [...document.querySelectorAll(".security-statement__media-image")];
     const host = document.querySelector(".home-en .business-plan__media");
     return { photoOnlyFrames: extra.length, gridImagesRetained: grid.every(item => item.tagName === "IMG"), staticHostMarks: host?.querySelectorAll("[data-media-watermark]").length || 0 };
@@ -110,9 +113,23 @@ try {
       await page.goto(`${origin}/${locale}${route}`, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
       await staticPhotosHaveNoLayer(page, route);
-      const hasVideo = !staticRoutes.has(route);
-      assert.equal(await page.locator(frameSelector).count(), hasVideo ? 1 : 0);
-      if (!hasVideo) {
+      const hasVideo = !staticRoutes.has(route) && !lineRoutes.has(route);
+      assert.equal(await page.locator(frameSelector).count(), staticRoutes.has(route) ? 0 : 1);
+      if (lineRoutes.has(route)) {
+        // Live drawing: marked while playing, paused, collapsed or replayed.
+        await page.waitForFunction(() => document.querySelector(".niche-hero--line")?.dataset.lineHeroState === "playing", {}, { timeout: 15000 });
+        assert.equal(await page.locator("main video").count(), 0);
+        result.playing = await inspectVideoLayer(page, route);
+        await capture(page, `video-watermark-${locale ? "he" : "en"}-${route.replace(/\/$/, "")}-${width}-line`);
+        await pauseButton(page, route).click();
+        assert.equal(await page.locator(".niche-hero--line [data-media-watermark]").evaluate(mark => getComputedStyle(mark).display), "block", "A paused drawing retains its watermark");
+        await page.locator("[data-hero-text-toggle]").click();
+        await page.waitForFunction(() => getComputedStyle(document.querySelector(".niche-hero__text")).visibility === "hidden");
+        assert.equal(await page.locator(".niche-hero--line [data-media-watermark]").evaluate(mark => getComputedStyle(mark).display), "block", "Collapsed text keeps the mark");
+        await page.locator("[data-hero-text-toggle]").click();
+        await pauseButton(page, route).click();
+        result.lineHero = true;
+      } else if (!hasVideo) {
         result.staticPhotoUnmarked = true;
         await capture(page, `video-watermark-${locale ? "he" : "en"}-${route.replace(/\/$/, "")}-${width}-static`);
       } else {
@@ -163,12 +180,17 @@ try {
     try {
       const page = await context.newPage(); await page.goto(`${origin}/${locale}${route}`, { waitUntil: "load" });
       if (staticRoutes.has(route)) assert.equal(await page.locator("[data-media-watermark]").count(), 0);
+      else if (lineRoutes.has(route)) {
+        // The static frame is a poster: the layer exists but stays hidden.
+        const mark = await page.locator(".niche-hero--line[data-line-hero-state='poster'] [data-media-watermark]").evaluate(element => ({ display: getComputedStyle(element).display, opacity: Number(getComputedStyle(element).opacity) }));
+        assert.deepEqual(mark, { display: "none", opacity: .3 });
+      }
       else await assertUnmarkedPoster(page, route);
       report.noJavaScriptCases.push({ locale: locale || "en", route: route || "home", posterUnmarked: true, status: "PASS" });
     } finally { await context.close(); }
   }
   report.status = "PASS";
-  console.log(`Video-only watermark: ${report.cases.length} HE/EN 320/390/1280 route cases, ${report.policyCases.length} reduced-motion, ${report.failureCases.length} failure and ${report.noJavaScriptCases.length} no-JavaScript cases passed; unmarked photos/posters, opacity .3, physical bottom-right and existing playback states.`);
+  console.log(`Video and line-hero watermark: ${report.cases.length} HE/EN 320/390/1280 route cases, ${report.policyCases.length} reduced-motion, ${report.failureCases.length} failure and ${report.noJavaScriptCases.length} no-JavaScript cases passed; unmarked photos/posters, opacity .3, physical bottom-right and existing playback states.`);
 } catch (error) { report.status = "FAIL"; report.error = String(error.message || error); throw error; }
 finally {
   await browser.close();

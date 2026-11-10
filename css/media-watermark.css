@@ -19,8 +19,18 @@
 /* Follow the real displayed media state, including pause/end and error or
    preference fallback. A poster, failed video or disabled JS stays unbranded. */
 .hero[data-hero-media-state="video"] > .hero__media > .media-watermark,
-.niche-hero[data-scene-state="video"] > .niche-hero__media > .media-watermark {
+.niche-hero[data-scene-state="video"] > .niche-hero__media > .media-watermark,
+.niche-hero--line:is([data-line-hero-state="playing"],[data-line-hero-state="paused"],[data-line-hero-state="still"]) > .niche-hero__media > .media-watermark {
   display: block;
+}
+/* The Host and Manager line heroes are white: the same mark, placement and
+   opacity, drawn in black instead of white. It shows once the live drawing is
+   mounted; the static no-JavaScript frame stays unbranded, like a poster. */
+/* Its white scrim belongs to the text layer, so the mark is lifted above that
+   layer (it sits in the bottom padding, clear of the text and controls). */
+.niche-hero--line > .niche-hero__media > .media-watermark {
+  z-index: 4;
+  filter: brightness(0);
 }
 /* Use-case copy ends above at least 2rem of bottom padding. This compact mark
    fits beneath sibling replay/contact actions without changing their layout. */

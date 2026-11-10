@@ -4,8 +4,9 @@
 // (LTR) and Hebrew (RTL): the art fills the media layer as the video did and
 // the text block reads over it on the white scrim at every loop moment;
 // playback controls, motion and visibility policies, the no-JavaScript frame
-// in the same box, light-theme contrast and the untouched video heroes of the
-// other use-case pages. Run: npm run test:line-hero (with SITE_URL), or
+// in the same box, light-theme contrast, the text collapse toggle (labels,
+// aria-expanded, focus, no layout jump, scrim removed, session memory) and the
+// untouched video heroes of the other use-case pages. Run: npm run test:line-hero (with SITE_URL), or
 // node scripts/line-hero-browser.test.mjs
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
@@ -22,7 +23,7 @@ const pages = [["host", "wifigate-host/"], ["manager", "wifigate-manager/"]];
 const viewports = [[360, 640], [375, 667], [360, 780], [390, 844], [768, 1024], [1024, 768], [1280, 720], [1440, 900], [1920, 1080]];
 // Legibility is checked across the whole loop at these sizes (short phone, tablet, desktop).
 const legibilitySizes = new Set(["360x640", "1024x768", "1280x720", "1440x900"]);
-const counts = { layout: 0, legibility: 0, controls: 0, policy: 0, noScript: 0, other: 0 };
+const counts = { layout: 0, legibility: 0, controls: 0, toggle: 0, policy: 0, noScript: 0, other: 0 };
 
 async function open(context, url) {
   const page = await context.newPage(), requests = [];
@@ -146,14 +147,64 @@ async function inks(page) {
   const colours = await page.evaluate(() => {
     const rgb = value => value.match(/[\d.]+/g).slice(0, 3).map(Number);
     const read = selector => { const element = document.querySelector(selector); return element ? rgb(getComputedStyle(element).color) : null; };
-    const button = document.querySelector("[data-scene-replay]"), pause = document.querySelector("[data-scene-pause]");
+    const button = document.querySelector("[data-scene-replay]"), pause = document.querySelector("[data-scene-pause]"), toggle = document.querySelector("[data-hero-text-toggle]");
     return { title: read(".niche-hero__title"), lead: read(".niche-hero__lead"), eyebrow: read(".niche-hero__eyebrow"), crumb: read(".niche-breadcrumb__list"), link: read(".niche-breadcrumb__link"),
-      button: rgb(getComputedStyle(button).color), buttonBackground: rgb(getComputedStyle(button).backgroundColor), pause: rgb(getComputedStyle(pause).color), pauseBackground: rgb(getComputedStyle(pause).backgroundColor) };
+      button: rgb(getComputedStyle(button).color), buttonBackground: rgb(getComputedStyle(button).backgroundColor), pause: rgb(getComputedStyle(pause).color), pauseBackground: rgb(getComputedStyle(pause).backgroundColor),
+      toggle: rgb(getComputedStyle(toggle).color), toggleBackground: rgb(getComputedStyle(toggle).backgroundColor) };
   });
   const white = [255, 255, 255];
   for (const key of ["title", "lead", "eyebrow", "crumb", "link"]) assert.ok(contrast(colours[key], white) >= 4.5, `${key} text meets AA on white`);
   assert.ok(contrast(colours.button, colours.buttonBackground) >= 4.5, "Replay label meets AA on the dark button");
   assert.ok(contrast(colours.pause, colours.pauseBackground) >= 4.5, "Pause icon reads on its surface");
+  assert.ok(contrast(colours.toggle, colours.toggleBackground) >= 4.5, "Text toggle icon reads on its surface");
+}
+// The text toggle: expanded by default; collapsing hides the text block and
+// its scrim in place (nothing moves) and keeps focus on the toggle; keyboard
+// activation works; the choice is remembered for the session.
+async function textToggle(page, copy) {
+  const toggle = page.locator(".niche-hero__pager [data-hero-text-toggle]");
+  const state = () => page.evaluate(() => {
+    const hero = document.querySelector(".niche-hero"), text = document.querySelector("#niche-hero-text"), toggle = document.querySelector("[data-hero-text-toggle]");
+    const box = element => { const r = element.getBoundingClientRect(); return [r.left, r.top, r.width, r.height].map(value => Math.round(value * 10) / 10); };
+    const scrim = getComputedStyle(text, "::before");
+    return { scrolled: [scrollY, hero.scrollTop, hero.querySelector(".niche-hero__media").scrollTop], attr: hero.dataset.lineHeroText, expanded: toggle.getAttribute("aria-expanded"), label: toggle.getAttribute("aria-label"), title: toggle.title, controls: toggle.getAttribute("aria-controls"),
+      visibility: getComputedStyle(text).visibility, opacity: Number(getComputedStyle(text).opacity), scrimVisibility: scrim.visibility, scrimContent: scrim.content,
+      overlay: getComputedStyle(hero.querySelector(".niche-hero__overlay")).backgroundImage, h1: Boolean(text.querySelector("h1#niche-title")),
+      h1Exposed: getComputedStyle(text.querySelector("h1#niche-title")).visibility === "visible",
+      hero: box(hero), stage: box(hero.querySelector("[data-line-hero-stage]")), text: box(text), focused: document.activeElement === toggle,
+      replayFocusable: hero.querySelector("[data-scene-replay]").checkVisibility({ visibilityProperty: true }) };
+  });
+  assert.equal(await toggle.isVisible(), true, "The text toggle is offered");
+  const scene = await page.locator(".niche-hero").getAttribute("data-line-hero");
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const open = await state();
+  assert.deepEqual([open.attr, open.expanded, open.label, open.title, open.controls], ["expanded", "true", copy.hideText, copy.hideText, "niche-hero-text"]);
+  assert.deepEqual([open.visibility, open.opacity, open.scrimVisibility, open.overlay], ["visible", 1, "visible", "none"]);
+  assert.notEqual(open.scrimContent, "none", "The white scrim sits behind the text");
+  await toggle.click();
+  await page.waitForFunction(() => getComputedStyle(document.querySelector("#niche-hero-text")).visibility === "hidden", {}, { timeout: 2000 });
+  const closed = await state();
+  assert.deepEqual([closed.attr, closed.expanded, closed.label, closed.title], ["collapsed", "false", copy.showText, copy.showText]);
+  assert.deepEqual([closed.visibility, closed.opacity, closed.scrimVisibility, closed.h1, closed.replayFocusable], ["hidden", 0, "hidden", true, false], "Text and scrim hidden; the h1 stays in the DOM");
+  assert.equal(closed.h1Exposed, true, "The h1 stays in the accessibility tree while the block is faded out");
+  assert.equal(closed.focused, true, "Focus stays on the toggle");
+  assert.deepEqual([closed.hero, closed.stage, closed.text], [open.hero, open.stage, open.text], "Neither the hero nor the art moves");
+  assert.equal(await page.evaluate(key => sessionStorage.getItem(key), `wifigate-line-hero-text:${scene}`), "collapsed");
+  // The choice is kept per product: the other product's hero stays expanded.
+  assert.equal(await page.evaluate(key => sessionStorage.getItem(key), `wifigate-line-hero-text:${scene === "host" ? "manager" : "host"}`), null);
+  // The choice survives a reload in this session, applied without a fade.
+  await page.reload({ waitUntil: "load" }); await ready(page);
+  const restored = await state();
+  assert.deepEqual([restored.attr, restored.expanded, restored.visibility], ["collapsed", "false", "hidden"]);
+  // Keyboard: Enter and Space toggle it; focus stays.
+  await toggle.focus(); await page.keyboard.press("Enter");
+  await page.waitForFunction(() => getComputedStyle(document.querySelector("#niche-hero-text")).visibility === "visible", {}, { timeout: 2000 });
+  const reopened = await state();
+  assert.deepEqual([reopened.attr, reopened.expanded, reopened.label, reopened.focused], ["expanded", "true", copy.hideText, true]);
+  await page.keyboard.press("Space"); assert.equal(await toggle.getAttribute("aria-expanded"), "false");
+  await page.keyboard.press("Space"); assert.equal(await toggle.getAttribute("aria-expanded"), "true");
+  await page.waitForFunction(() => Number(getComputedStyle(document.querySelector("#niche-hero-text")).opacity) === 1, {}, { timeout: 2000 });
+  assert.equal(await page.evaluate(key => sessionStorage.getItem(key), `wifigate-line-hero-text:${scene}`), "expanded");
 }
 async function capture(page, name) { if (screenshots) await page.screenshot({ path: path.join(screenshots, name + ".png") }); }
 
@@ -221,6 +272,8 @@ try {
           assert.equal(await page.locator(".niche-hero").getAttribute("data-line-hero-state"), "playing");
           await moving(page, true);
           counts.controls++;
+          await textToggle(page, copy);
+          counts.toggle++;
         }
       } finally { await context.close(); }
     }
@@ -247,9 +300,9 @@ try {
     try {
       const page = await noScript.newPage(); await page.goto(`${origin}/${locale}${route}`, { waitUntil: "load" });
       const state = await page.evaluate(() => { const image = document.querySelector("#niche-image"), stage = document.querySelector("[data-line-hero-stage]").getBoundingClientRect();
-        return { src: image.currentSrc, loaded: image.complete && image.naturalWidth > 0, svg: document.querySelectorAll("svg.line-hero__art").length, pause: document.querySelector("[data-scene-pause]").hidden, width: stage.width, height: stage.height }; });
+        return { src: image.currentSrc, loaded: image.complete && image.naturalWidth > 0, svg: document.querySelectorAll("svg.line-hero__art").length, pause: document.querySelector("[data-scene-pause]").hidden, toggle: document.querySelector("[data-hero-text-toggle]").hidden, width: stage.width, height: stage.height }; });
       assert.match(state.src, new RegExp(`/assets/img/line-hero/${scene}-start\\.svg\\?v=[0-9a-f]{12}$`));
-      assert.deepEqual([state.loaded, state.svg, state.pause], [true, 0, true]);
+      assert.deepEqual([state.loaded, state.svg, state.pause, state.toggle], [true, 0, true, true], "Without script, no pause or text toggle is offered");
       assert.ok(state.width > 300 && Math.abs(state.height - state.width * 9 / 16) < 1);
       await capture(page, `line-hero-${scene}-${locale ? "he" : "en"}-no-javascript`);
       counts.noScript++;
@@ -266,5 +319,5 @@ try {
       counts.other++;
     } finally { await context.close(); }
   }
-  console.log(`PASS: line heroes ${counts.layout} layout cases (Host/Manager x EN/HE x ${viewports.length} viewports, each matching its no-JavaScript box), ${counts.legibility} whole-loop legibility cases, ${counts.controls} control/visibility/accessibility cases, ${counts.policy} reduced-motion and ${counts.noScript} no-JavaScript cases; ${counts.other} video heroes unchanged.`);
+  console.log(`PASS: line heroes ${counts.layout} layout cases (Host/Manager x EN/HE x ${viewports.length} viewports, each matching its no-JavaScript box), ${counts.legibility} whole-loop legibility cases, ${counts.controls} control/visibility/accessibility cases, ${counts.toggle} text-toggle cases, ${counts.policy} reduced-motion and ${counts.noScript} no-JavaScript cases; ${counts.other} video heroes unchanged.`);
 } finally { await browser.close(); }

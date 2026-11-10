@@ -33,7 +33,7 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261109lh1">
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh2">
 
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
@@ -45,7 +45,7 @@
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
 
-<link rel="modulepreload" href="../../js/line-hero-host.js?v=20261109lh1"><script type="module" src="../../js/line-hero.js?v=20261109lh1"></script>
+<link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh2"><script type="module" src="../../js/line-hero.js?v=20261110lh2"></script>
   <meta name="description" content="예약마다 자동으로 생성되는 안전한 기간 제한 게스트 출입. 호텔, 휴가용 숙소, 게스트하우스, 임대 주차장·차고에 적합하며, 열쇠를 주고받을 필요가 없습니다.">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
@@ -272,7 +272,7 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261110nav1"><link rel="stylesheet" href="../../css/site-cart.css?v=20261108d"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261110nav1"><link rel="stylesheet" href="../../css/site-cart.css?v=20261108d"><link rel="stylesheet" href="../../css/media-watermark.css?v=20261110w2" data-media-watermark-style=""><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
 <body class="niche-page wifigate-host-page">
   <!-- Keyboard users enter main directly; shared navigation is injected at build time. -->
   <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
@@ -345,10 +345,10 @@
   <main id="main-content" class="niche-main">
     <!-- The hero retains one eager image, its overlay and the content layer. -->
     <section aria-labelledby="niche-title" class="niche-hero niche-hero--line" data-line-hero="host" data-line-hero-state="poster">
-      <div class="niche-hero__media">
-        <div class="line-hero__stage" data-line-hero-stage=""><picture><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/img/line-hero/host-still.svg?v=29ad94a0bb6c" type="image/svg+xml"><img id="niche-image" class="line-hero__frame" alt="스마트폰으로 숙소에 들어가는 게스트" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" src="../../assets/img/line-hero/host-start.svg?v=fe41b6368d4c"></picture></div>
+      <div class="niche-hero__media" data-media-watermark-frame="">
+        <div class="line-hero__stage" data-line-hero-stage=""><picture><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/img/line-hero/host-still.svg?v=a4d02265f0ff" type="image/svg+xml"><img id="niche-image" class="line-hero__frame" alt="스마트폰으로 숙소에 들어가는 게스트" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" src="../../assets/img/line-hero/host-start.svg?v=d0307bda009f"></picture></div>
         <div class="niche-hero__overlay"></div>
-      </div>
+      <span class="media-watermark" data-media-watermark="" aria-hidden="true"></span></div>
       <div class="niche-hero__content container">
         <!-- Breadcrumb and circular use-case navigation occupy the original top bar. -->
         <div class="niche-hero__topbar">
@@ -362,14 +362,14 @@
               </li>
             </ol>
           </nav>
-          <div class="niche-hero__pager"><div class="scene-video-controls"><button type="button" data-scene-pause="" hidden="">영상 일시정지</button></div>
+          <div class="niche-hero__pager"><div class="scene-video-controls"><button type="button" data-scene-pause="" hidden="">영상 일시정지</button><button type="button" data-hero-text-toggle="" aria-controls="niche-hero-text" aria-expanded="true" aria-label="텍스트 숨기기" title="텍스트 숨기기" hidden=""><svg class="line-hero__toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="line-hero__toggle-hide" d="M5 4.5l5 5 5-5M5 10.5l5 5 5-5"></path><path class="line-hero__toggle-show" d="M5 9.5l5-5 5 5M5 15.5l5-5 5 5"></path></svg></button></div>
 
 
           </div>
         </div>
 
         <!-- The builder fills the optional lead and proof without changing the two actions. -->
-        <div class="niche-hero__text">
+        <div class="niche-hero__text" id="niche-hero-text">
           <p id="niche-eyebrow" class="niche-hero__eyebrow">WIFIGATE Host</p>
           <h1 id="niche-title" class="niche-hero__title">알아서 관리되는 게스트 출입</h1>
           <p id="niche-hero-lead" class="niche-hero__lead">예약이 확정되는 순간, WIFIGATE가 게이트, 출입문, 주차장의 안전한 기간 제한 출입 권한을 만들고 체크아웃 시 자동으로 종료합니다. 열쇠를 전달할 필요도, 비밀번호를 일일이 보낼 필요도, 누군가 입구에서 기다릴 필요도 없습니다.</p>
@@ -377,7 +377,7 @@
 
         </div>
       </div>
-    <script type="application/json" data-scene-copy="">{"replay":"영상 다시 재생","mute":"영상 음소거","unmute":"영상 음소거 해제","pause":"영상 일시정지","play":"영상 재생"}</script></section><div class="wa-page host-marketing-pricing"><section aria-labelledby="wa-pricing-title" id="wa-pricing" class="section wa-pricing">
+    <script type="application/json" data-scene-copy="">{"replay":"영상 다시 재생","mute":"영상 음소거","unmute":"영상 음소거 해제","pause":"영상 일시정지","play":"영상 재생","hideText":"텍스트 숨기기","showText":"텍스트 표시"}</script></section><div class="wa-page host-marketing-pricing"><section aria-labelledby="wa-pricing-title" id="wa-pricing" class="section wa-pricing">
   <div class="container">
     <div class="wa-head">
       <span data-i18n="guestInvites.marketing.pricing.eyebrow" class="wa-eyebrow" dir="ltr">요금</span>

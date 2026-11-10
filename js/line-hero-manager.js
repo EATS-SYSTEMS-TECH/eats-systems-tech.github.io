@@ -12,15 +12,27 @@ export function createManagerScene(svg) {
 
   var NS = 'http://www.w3.org/2000/svg';
   var BLUE = '#146BFF';
+  /* Line tone (owner request, 10 Nov 2026): the blue reads clearly on the white
+     hero. Every stroke opacity passes through one curve that keeps 0 and 1 (so
+     fades, keyframes and timing are unchanged) and lifts the pale context
+     strokes (0.3 -> 0.62, 0.4 -> 0.75); every stroke weight is 1.2x. Blue tints
+     are 1.6x. Geometry, choreography and timing are untouched. */
+  var TONE = 2.7, WEIGHT = 1.2, TINT = 1.6;
+  function r3(v) { return (Math.round(v * 1000) / 1000).toString(); }
+  function tone(k, v) {
+    if (k === 'stroke-opacity') return r3(1 - Math.pow(1 - Math.min(1, Math.max(0, +v)), TONE));
+    if (k === 'stroke-width') return r3(+v * WEIGHT);
+    return v;
+  }
   function el(tag, attrs, parent) {
     var e = svg.ownerDocument.createElementNS(NS, tag);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    for (var k in attrs) e.setAttribute(k, tone(k, attrs[k]));
     (parent || svg).appendChild(e);
     return e;
   }
   function sa(e, n, v) {
     var c = e._c || (e._c = {});
-    if (c[n] !== v) { e.setAttribute(n, v); c[n] = v; }
+    if (c[n] !== v) { e.setAttribute(n, tone(n, v)); c[n] = v; }
   }
   /* the approved page's static markup, in its original order; only the clip id is scoped */
   svg.setAttribute('viewBox', '0 0 1600 900');
@@ -570,7 +582,7 @@ export function createManagerScene(svg) {
 
   /* ---- DOM for M2 */
   var gM2 = shellM2;
-  var tintPath = el('path', { fill: BLUE, 'fill-opacity': 0.06, stroke: 'none', d: '' }, gM2);
+  var tintPath = el('path', { fill: BLUE, 'fill-opacity': r3(0.06 * TINT), stroke: 'none', d: '' }, gM2);
   var doorTint = el('path', { fill: BLUE, 'fill-opacity': 0, 'fill-rule': 'evenodd', stroke: 'none', d: '' }, gM2);
   var m2Paths = [
     el('path', { fill: 'none', stroke: BLUE, 'stroke-opacity': 0.3, 'stroke-width': 1.5, d: '' }, gM2),
@@ -781,7 +793,7 @@ export function createManagerScene(svg) {
   var sbOutline = el('path', { d: P2(rect(SB[0], SB[1], SB[2], SB[3]), true), fill: 'none', stroke: BLUE, 'stroke-width': 1.5, 'vector-effect': VE, 'stroke-linejoin': 'miter', opacity: 0 }, gM3);
 
   /* the letter */
-  var mTint = el('path', { d: P2(M_PTS, true), fill: BLUE, 'fill-opacity': 0.05, stroke: 'none', opacity: 0 }, gM3);
+  var mTint = el('path', { d: P2(M_PTS, true), fill: BLUE, 'fill-opacity': r3(0.05 * TINT), stroke: 'none', opacity: 0 }, gM3);
   var gLetter = el('g', { opacity: 0 }, gM3);
   var mOutline = el('path', { d: '', fill: 'none', stroke: BLUE, 'stroke-width': 3, 'vector-effect': VE, 'stroke-linejoin': 'miter', 'stroke-miterlimit': 12, 'stroke-linecap': 'butt' }, gM3);
   /* reveal: every corner of the outline grows its two arms at once (miter joins intact), so each partial
@@ -920,7 +932,7 @@ export function createManagerScene(svg) {
     return parts.map(function (c) { return P2(c); }).join('');
   }
   var gBody = el('g', { opacity: 0 }, gGlobe);
-  el('circle', { cx: GCt[0], cy: GCt[1], r: GR, fill: BLUE, 'fill-opacity': 0.04, stroke: 'none' }, gBody);
+  el('circle', { cx: GCt[0], cy: GCt[1], r: GR, fill: BLUE, 'fill-opacity': r3(0.04 * TINT), stroke: 'none' }, gBody);
   (function () {
     var d = [], lon, lat, s;
     [-45, -15, 15, 45].forEach(function (lo) { s = []; for (lat = -180; lat <= 180; lat++) s.push(gproj(lo, lat / 2)); d.push(gratPath(s)); });
@@ -1085,12 +1097,12 @@ export function createManagerScene(svg) {
       sa(m2Paths[SECV], 'stroke-opacity', f2(0.4 * fv));
       var td = TINTS.map(function (q) { return P2(q, true); }).join('');
       if (td !== lastTint) { tintPath.setAttribute('d', td); lastTint = td; }
-      sa(tintPath, 'fill-opacity', f2(0.06 * fv));
+      sa(tintPath, 'fill-opacity', f2(0.06 * TINT * fv));
       /* the lobby, seen through the open door */
       var dOpen = sm(stt.door / 45), dTd = '';
       if (DOOR_TINT && dOpen * fv > 0.003) dTd = [DOOR_TINT.q].concat(DOOR_TINT.holes).map(function (q) { return P2(q, true); }).join('');
       sa(doorTint, 'd', dTd);
-      sa(doorTint, 'fill-opacity', f2(0.06 * dOpen * fv));
+      sa(doorTint, 'fill-opacity', f2(0.06 * TINT * dOpen * fv));
       sa(m2Paths[PERS], 'stroke-opacity', f2(PERSON_OP));
       var ms = sm(mp);
       for (var i = 0; i < 3; i++) {

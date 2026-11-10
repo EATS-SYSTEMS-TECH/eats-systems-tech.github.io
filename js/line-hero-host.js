@@ -26,8 +26,19 @@ export function createHostScene(svg) {
   function sm(a, b, x) { var u = seg(x, a, b); return u * u * (3 - 2 * u); }
   function f1(v) { return (Math.round(v * 10) / 10).toString(); }
   function f3(v) { return (Math.round(v * 1000) / 1000).toString(); }
-  function el(tag, at, par) { var e = svg.ownerDocument.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); (par || svg).appendChild(e); return e; }
-  function set(e, k, v) { var c = e.__c || (e.__c = {}); if (c[k] !== v) { c[k] = v; e.setAttribute(k, v); } }
+  /* Line tone (owner request, 10 Nov 2026): the blue reads clearly on the white
+     hero. Every stroke opacity passes through one curve that keeps 0 and 1 (so
+     fades, keyframes and timing are unchanged) and lifts the pale context
+     strokes (0.4 -> 0.75, 0.45 -> 0.8); every stroke weight is 1.2x. Blue tints
+     are 1.6x. Geometry, choreography and timing are untouched. */
+  var TONE = 2.7, WEIGHT = 1.2, TINT = 1.6;
+  function tone(k, v) {
+    if (k === 'stroke-opacity') return f3(1 - Math.pow(1 - clamp(+v), TONE));
+    if (k === 'stroke-width') return f3(+v * WEIGHT);
+    return v;
+  }
+  function el(tag, at, par) { var e = svg.ownerDocument.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, tone(k, at[k])); (par || svg).appendChild(e); return e; }
+  function set(e, k, v) { var c = e.__c || (e.__c = {}); if (c[k] !== v) { c[k] = v; e.setAttribute(k, tone(k, v)); } }
   function op(e, v) { set(e, 'opacity', f3(clamp(v))); }
   function sty(e, on, offW, offO, onW, onO) { /* secondary <-> primary stroke */
     set(e, 'stroke-width', f3(lerp(offW || 1.5, onW || 3, on)));
@@ -586,7 +597,7 @@ export function createHostScene(svg) {
       op(doorLeaf, sm(0, 0.25, o));
       set(doorHandle, 'd', projD([sideW([[lerp(380, 350, o), lerp(546, 552, o)], [lerp(380, 350, o), lerp(560, 564, o)]], FV)]));
       set(doorTint, 'd', projD([sideW([[lx, 500 + 9 * o], [332, 500], [392, 500], [392, 600], [332, 600], [lx, 600 - 6 * o]], FV)], true));
-      set(doorTint, 'fill-opacity', f3(0.06 * o));
+      set(doorTint, 'fill-opacity', f3(0.06 * TINT * o));
     }
     /* entrance reader light: unlocks for guest 1, relocks once he has walked on into the lobby */
     at(t1Light, P(T1L[0], T1L[1], T1L[2]));
@@ -626,7 +637,7 @@ export function createHostScene(svg) {
         var A = ARCH[ai], pa = clamp((W - A.d0) / A.L);
         if (pa !== A.p) { A.p = pa; set(A.e, 'stroke-dashoffset', f3(1 - pa)); op(A.e, sm(0, 6, pa * A.L)); }
       }
-      set(tint, 'fill-opacity', f3(0.05 * sm(220, 520, W)));
+      set(tint, 'fill-opacity', f3(0.05 * TINT * sm(220, 520, W)));
       /* lit path: the walk so far follows the reveal front up to the entrance, then draws behind the dot */
       var d1 = Math.min(W, partA ? g1d : R1.len);
       pathOrHide(litG1, rSub(R1, 0, d1));

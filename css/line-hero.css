@@ -2,7 +2,9 @@
    shared full-width hero. Same layers and copy as every use-case hero (media,
    overlay, top bar, text at the bottom start); only these two pages carry
    .niche-hero--line, and the light theme below is scoped to it. The text sits
-   over the media layer, as it does over the video, on a white scrim. */
+   over the media layer, as it does over the video, on a white scrim that is
+   limited to the text block, so the blue art stays at full strength elsewhere.
+   A toggle in the pager collapses the text and its scrim. */
 .niche-page .niche-hero.niche-hero--line { color: var(--home-ink); background: #fff; }
 .niche-hero--line .niche-hero__media { container-type: size; background: #fff; }
 
@@ -32,13 +34,45 @@
 .niche-hero--line .line-hero__art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .niche-hero--line .line-hero__art { z-index: 1; background: #fff; }
 
-/* The shared overlay in white: the bottom and inline-start gradients of the
-   video heroes' dark scrim, so the text block reads over the art. */
-.niche-page .niche-hero--line .niche-hero__overlay {
-  --niche-overlay-paint: linear-gradient(0deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.62) 34%,rgba(255,255,255,.1) 62%,rgba(255,255,255,0) 82%,rgba(255,255,255,.3) 100%),
-    linear-gradient(var(--niche-overlay-angle),rgba(255,255,255,.62) 0%,rgba(255,255,255,.24) 46%,rgba(255,255,255,0) 78%);
-  background: var(--niche-overlay-paint);
+/* The shared overlay layer stays but paints nothing: no wash over the art.
+   The white scrim belongs to the text block itself (as wide as its text), so
+   it starts just above the eyebrow and ends just past the longest line, and
+   fades out at those two edges; the art around it keeps its full blue. */
+.niche-page .niche-hero--line .niche-hero__overlay,
+html[dir="rtl"] .niche-page .niche-hero--line .niche-hero__overlay { --niche-overlay-paint: none; background: none; }
+.niche-hero--line .niche-hero__text { position: relative; width: fit-content; max-width: 100%; }
+.niche-hero--line .niche-hero__text::before {
+  --line-hero-scrim-fade: linear-gradient(270deg,transparent 0,rgba(0,0,0,.12) 2rem,rgba(0,0,0,.45) 4rem,rgba(0,0,0,.82) 6rem,#000 8rem);
+  position: absolute; z-index: -1; content: ""; pointer-events: none;
+  inset-block: -4rem -100vh; inset-inline: -100vw -7rem;
+  background: rgba(255,255,255,.9);
+  -webkit-mask-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.15) 1rem,rgba(0,0,0,.55) 2rem,rgba(0,0,0,.88) 3rem,#000 4rem), var(--line-hero-scrim-fade);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.15) 1rem,rgba(0,0,0,.55) 2rem,rgba(0,0,0,.88) 3rem,#000 4rem), var(--line-hero-scrim-fade);
+  mask-composite: intersect;
 }
+html[dir="rtl"] .niche-hero--line .niche-hero__text::before { --line-hero-scrim-fade: linear-gradient(90deg,transparent 0,rgba(0,0,0,.12) 2rem,rgba(0,0,0,.45) 4rem,rgba(0,0,0,.82) 6rem,#000 8rem); }
+/* The breadcrumb row keeps a small soft white backing of its own. */
+.niche-hero--line .niche-breadcrumb { position: relative; }
+.niche-hero--line .niche-breadcrumb::before {
+  position: absolute; inset: -.6rem -1.25rem; z-index: -1; content: ""; pointer-events: none;
+  border-radius: 999px; background: rgba(255,255,255,.88); filter: blur(6px);
+}
+
+/* Collapsed text: the eyebrow, title, lead and replay action and their scrim
+   fade out but keep their place (no layout change, so the hero and the art do
+   not move); hidden, they leave the tab order and the accessibility tree,
+   except the h1: it stays in the document and, invisible under the faded
+   block, in the accessibility tree, so the page keeps its heading. */
+.niche-hero--line .niche-hero__text { transition: opacity .2s ease, visibility 0s linear 0s; }
+.niche-hero--line[data-line-hero-text="collapsed"] .niche-hero__text {
+  opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility 0s linear .2s;
+}
+.niche-hero--line[data-line-hero-text="collapsed"] .niche-hero__title { visibility: visible; }
+.niche-hero--line.line-hero--instant .niche-hero__text { transition: none; }
+@media (prefers-reduced-motion: reduce) { .niche-hero--line .niche-hero__text, .niche-hero--line[data-line-hero-text="collapsed"] .niche-hero__text { transition: none; } }
+html.a11y-reduced-motion .niche-hero--line .niche-hero__text,
+html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .niche-hero__text { transition: none; }
 /* A white halo around the dark glyphs keeps every letter clear of the thin
    lines it may cross; on white it is invisible. */
 .niche-hero--line :is(.niche-breadcrumb__list,.niche-hero__eyebrow,.niche-hero__title,.niche-hero__lead) {
@@ -68,17 +102,24 @@
 .niche-page .niche-hero.niche-hero--line .btn--ghost { color: var(--home-black); border: 1px solid rgba(10,10,10,.55); background: rgba(255,255,255,.7); }
 .niche-page .niche-hero.niche-hero--line .btn--ghost:is(:hover,:focus-visible) { color: var(--home-black); border-color: var(--home-black); background: #f1f4f9; transform: none; }
 .niche-hero--line .niche-hero__actions [data-scene-replay] { min-height: 44px; cursor: pointer; font: inherit; }
-.niche-hero--line :is(.btn,[data-scene-pause],.niche-breadcrumb__link):focus-visible { outline: 3px solid var(--home-blue); outline-offset: 3px; }
+.niche-hero--line :is(.btn,[data-scene-pause],[data-hero-text-toggle],.niche-breadcrumb__link):focus-visible { outline: 3px solid var(--home-blue); outline-offset: 3px; }
 
-/* Pause/resume sits in the top bar's pager, as on the video heroes. */
+/* Pause/resume sits in the top bar's pager, as on the video heroes, with the
+   text toggle beside it in the same 44 px light button style. */
 .niche-hero--line .scene-video-controls { display: flex; gap: .5rem; }
-.niche-hero--line [data-scene-pause] {
+.niche-hero--line :is([data-scene-pause],[data-hero-text-toggle]) {
   display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
   width: 44px; height: 44px; padding: 0; border-radius: 4px; font-size: 0; cursor: pointer;
   color: var(--home-black); border: 1px solid rgba(10,10,10,.55); background: rgba(255,255,255,.92);
 }
-.niche-hero--line [data-scene-pause]:hover { border-color: var(--home-black); background: #f1f4f9; }
-.niche-hero--line [data-scene-pause][hidden] { display: none; }
+.niche-hero--line :is([data-scene-pause],[data-hero-text-toggle]):hover { border-color: var(--home-black); background: #f1f4f9; }
+.niche-hero--line :is([data-scene-pause],[data-hero-text-toggle])[hidden] { display: none; }
+.niche-hero--line .line-hero__toggle-icon {
+  width: 18px; height: 18px; fill: none; stroke: currentColor;
+  stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+}
+.niche-hero--line [data-hero-text-toggle][aria-expanded="true"] .line-hero__toggle-show,
+.niche-hero--line [data-hero-text-toggle][aria-expanded="false"] .line-hero__toggle-hide { display: none; }
 .niche-hero--line [data-scene-pause][aria-pressed="true"]::before {
   content: ""; width: 0; height: 0; margin-inline-start: 2px;
   border-style: solid; border-width: 7px 0 7px 10px; border-color: transparent transparent transparent currentColor;
@@ -89,14 +130,13 @@
 }
 
 @media (max-width:768px) {
-  /* Phones: the art sits in the upper band. The scrim belongs to the text
-     block itself, so it starts just above the eyebrow in every language and
-     on short screens too, and leaves the art above it at full strength. */
-  .niche-page .niche-hero--line .niche-hero__overlay,
-  html[dir="rtl"] .niche-page .niche-hero--line .niche-hero__overlay { background: none; }
-  .niche-hero--line .niche-hero__text { position: relative; }
-  .niche-hero--line .niche-hero__text::before {
-    position: absolute; inset: -2.5rem -100vw -100vh; z-index: -1; content: ""; pointer-events: none;
+  /* Phones: the art sits in the upper band and the text block spans the
+     width, so its scrim runs edge to edge below a soft top edge and leaves
+     the art above it at full strength. */
+  .niche-hero--line .niche-hero__text { width: 100%; }
+  .niche-hero--line .niche-hero__text::before,
+  html[dir="rtl"] .niche-hero--line .niche-hero__text::before {
+    inset: -2.5rem -100vw -100vh; -webkit-mask-image: none; mask-image: none;
     background: linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,.9) 2.5rem,rgba(255,255,255,.94) 100%);
   }
 }

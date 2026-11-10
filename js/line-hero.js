@@ -4,13 +4,16 @@
 // frame, or the approved still under prefers-reduced-motion) as its eager
 // image, so the hero is complete without JavaScript; css/line-hero.css sizes
 // the art in the media layer and this module drives the live SVG over that
-// frame, in the same box.
+// frame, in the same box. A toggle next to pause collapses the hero text so
+// the whole drawing can be seen.
 const SCENES = {
-  host: () => import("./line-hero-host.js?v=20261109lh1").then(module => module.createHostScene),
-  manager: () => import("./line-hero-manager.js?v=20261109lh1").then(module => module.createManagerScene),
+  host: () => import("./line-hero-host.js?v=20261110lh2").then(module => module.createHostScene),
+  manager: () => import("./line-hero-manager.js?v=20261110lh2").then(module => module.createManagerScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
-const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video" };
+const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video", hideText: "Hide text", showText: "Show text" };
+// The visitor's last text choice, for this browser session only.
+const TEXT_STATE_KEY = "wifigate-line-hero-text";
 
 // --------------------------------------------------------------- playback
 function reducedMotion(query) {
@@ -47,6 +50,41 @@ export function createPlayer(scene, { onState } = {}) {
   };
 }
 
+// --------------------------------------------------------------- text toggle
+// Collapsing hides the eyebrow, title, lead and replay action and their white
+// scrim (css/line-hero.css); the text keeps its place, so the hero and the art
+// do not move, and the h1 stays in the document. Focus stays on the toggle.
+export function mountTextToggle(section, copy) {
+  const button = section?.querySelector("[data-hero-text-toggle]");
+  const text = button && section.querySelector(`#${button.getAttribute("aria-controls")}`);
+  if (!button || !text) return null;
+  const apply = collapsed => {
+    section.dataset.lineHeroText = collapsed ? "collapsed" : "expanded";
+    const label = collapsed ? copy.showText : copy.hideText;
+    button.setAttribute("aria-expanded", String(!collapsed));
+    button.setAttribute("aria-label", label);
+    button.title = label;
+  };
+  // One remembered choice per product (Host, Manager), so collapsing one hero
+  // never opens the other product's page without its headline.
+  const key = `${TEXT_STATE_KEY}:${section.dataset.lineHero || "scene"}`;
+  let remembered = false;
+  try { remembered = sessionStorage.getItem(key) === "collapsed"; } catch { /* Storage unavailable: start expanded. */ }
+  if (remembered) {
+    // A remembered choice applies at once, without the fade.
+    section.classList.add("line-hero--instant");
+    apply(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => section.classList.remove("line-hero--instant")));
+  } else apply(false);
+  button.hidden = false;
+  button.addEventListener("click", () => {
+    const collapsed = section.dataset.lineHeroText !== "collapsed";
+    apply(collapsed);
+    try { sessionStorage.setItem(key, collapsed ? "collapsed" : "expanded"); } catch { /* The choice lasts for this page only. */ }
+  });
+  return { get collapsed() { return section.dataset.lineHeroText === "collapsed"; }, set: apply };
+}
+
 export async function mountLineHero(section) {
   const stage = section?.querySelector("[data-line-hero-stage]");
   const load = SCENES[section?.dataset.lineHero];
@@ -56,6 +94,8 @@ export async function mountLineHero(section) {
   let copy = FALLBACK_COPY;
   try { copy = { ...FALLBACK_COPY, ...JSON.parse(section.querySelector("[data-scene-copy]")?.textContent || "{}") }; }
   catch { /* The static frame and the controls' built-in labels remain. */ }
+  // The text toggle works whether or not the scene loads.
+  mountTextToggle(section, copy);
 
   let createScene, scene;
   const svg = document.createElementNS(SVG_NS, "svg");
