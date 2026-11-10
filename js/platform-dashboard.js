@@ -775,7 +775,7 @@ function pricingExplanation(product, category) {
         organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
       },
       manager: {
-        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות. כשאין רכיבים פעילים, חיוב המערכות הוא אפס.",
+        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות. המינימום לחשבון הוא $1.90 לחודש, גם בלי מערכת מקושרת.",
         dualControls: "$1.90 לחודש לכל Dual Control, כולל זוגות בתוך קבוצות. זוג הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו זוג נספר פעם אחת.",
         rollerShutters: "$1.90 לחודש לכל תריס חשמלי, כמו Dual Control, כולל תריסים בתוך קבוצות. תריס הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו תריס נספר פעם אחת.",
         groups: "לקבוצה אין תעריף נפרד. הרכיבים שבתוכה מחושבים לפי $1.90 לחודש לכל Gate, Dual Control או תריס חשמלי.",
@@ -790,7 +790,7 @@ function pricingExplanation(product, category) {
         organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
       },
       manager: {
-        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost. With no active objects, system subscription charges are zero.",
+        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost. The account minimum is $1.90/month, even with no linked system.",
         dualControls: "$1.90/month per Dual Control, including pairs inside groups. A pair is one object despite its two physical gates; the same pair is counted once.",
         rollerShutters: "$1.90/month per Roller Shutter, like a Dual Control, including Roller Shutters inside groups. It is one object despite its two physical gates; the same Roller Shutter is counted once.",
         groups: "Groups have no separate fee. Their contents count at $1.90/month per Gate, Dual Control or Roller Shutter.",
