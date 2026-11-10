@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Cijene",
       "title": "Jednostavne cijene za WIFIGATE Manager",
-      "subtitle": "Plaćate samo sustave kojima upravljate. Sam WIFIGATE kontroler nikada ne treba pretplatu.",
+      "subtitle": "Plaćate sustave kojima upravljate, uz mjesečni minimum od jednog sustava. Sam WIFIGATE kontroler nikada ne treba pretplatu.",
       "badge": "Jedna jednostavna cijena",
       "systemsName": "Sustavi",
       "systemsPer": "/ sustav / mjesečno",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Svaki aktivni sustav na vašoj nadzornoj ploči, gdje god se nalazio.",
       "systemsF1": "Svaki se sustav broji jednom, čak i u više grupa",
       "systemsF2": "Grupe su besplatne: broje se samo njihovi sustavi",
-      "systemsF3": "Bez aktivnih sustava nema naplate za sustave",
+      "systemsF3": "Mjesečni minimum: $1.90, čak i bez povezanog sustava",
       "systemsF4": "Sustav dodan usred mjeseca naplaćuje se po danima",
       "organizationsName": "Organizacije",
       "organizationsPer": "/ dodatna organizacija / mjesečno",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 roleta: $1.90 / mjesečno",
       "exampleF4": "Mjesečna procjena bez poreza",
       "planCta": "Razgovarajte s nama",
-      "note": "Cijene su u američkim dolarima (USD), bez poreza. Jedna naplata na početku svakog mjeseca pokriva prethodni mjesec, po danima, zajedno s WIFIGATE Host ako ga koristite."
+      "note": "Cijene su u američkim dolarima (USD), bez poreza. Aktivna pretplata ima minimum od $1.90 mjesečno, čak i bez povezanog sustava. Jedna naplata na početku svakog mjeseca pokriva prethodni mjesec, po danima, zajedno s WIFIGATE Host ako ga koristite."
     },
     "audience": {
       "label": "Namijenjeno za:",
@@ -56,11 +56,11 @@ export default {
       "title": "Od jednog kontrolera do svih lokacija",
       "subtitle": "Tri koraka, i svime upravljate s jednog mjesta.",
       "s1t": "Povežite svoje sustave",
-      "s1x": "Izvezite svoje WIFIGATE sustave iz aplikacije na nadzornu ploču. Kontroleri se povezuju preko Wi‑Fi mreže.",
+      "s1x": "Izvezite svoje WIFIGATE sustave iz aplikacije na [[nadzornu ploču na WIFIGATE web-stranici]], koja je povezana s vašim korisničkim računom. Kontroleri se povezuju preko Wi‑Fi mreže.",
       "s2t": "Organizirajte ih po svome",
       "s2x": "Grupirajte dvorišna vrata, ulazna vrata i rolete po zgradi, lokaciji ili organizaciji.",
       "s3t": "Upravljajte s bilo kojeg mjesta",
-      "s3x": "Dodjeljujte i uklanjajte pristup, pregledavajte povijest i upravljajte svakim sustavom iz bilo kojeg preglednika."
+      "s3x": "Dodjeljujte i uklanjajte pristup, pregledavajte povijest i otvarajte dvorišna vrata na daljinu, iz bilo kojeg preglednika."
     },
     "benefits": {
       "eyebrow": "Zašto WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Korisnici i dozvole",
       "b2x": "Dodajte korisnike, odredite tko što smije otvarati i promijenite to u nekoliko sekundi, za jedan sustav ili cijelu lokaciju.",
       "b3t": "Potpuna povijest pristupa",
-      "b3x": "Pogledajte tko je i kada otvorio koji ulaz, na svim lokacijama.",
+      "b3x": "Pogledajte tko je i kada otvorio svaki ulaz.",
       "b4t": "Organizacije i grupe",
       "b4x": "Grupirajte sustave po zgradi ili klijentu i svakoj organizaciji dodijelite vlastite administratore.",
       "b5t": "S bilo kojeg mjesta na svijetu",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Administratori svake organizacije upravljaju samo sustavima za koje su odgovorni."
     },
     "faq": {
-      "q1": "Treba li sam WIFIGATE kontroler pretplatu?",
+      "q1": "Postoji li minimalna naplata?",
+      "a1": "Da. Aktivna pretplata ima minimum od $1.90 mjesečno, što je cijena jednog sustava, čak i bez povezanog sustava. Sam WIFIGATE kontroler nikada ne treba pretplatu.",
       "q2": "Kako povezati svoje sustave s nadzornom pločom?",
+      "a2": "Prijavite se istim korisničkim računom u aplikaciji i na WIFIGATE web-stranici. U aplikaciji izvezite svaki sustav u WIFIGATE Manager dok ste pokraj njega i povežite njegov kontroler na Wi‑Fi (2.4GHz). Sustav se zatim pojavljuje na vašoj nadzornoj ploči na web-stranici.",
       "q3": "Mogu li upravljati odvojenim zgradama ili klijentima?",
+      "a3": "Da. Svaka zgrada, klijent ili tvrtka dobiva vlastitu organizaciju pod vašim korisničkim računom, s vlastitim administratorima. Tri su organizacije uključene, a svaka dodatna stoji $1 mjesečno.",
       "q4": "Tko čime može upravljati?",
+      "a4": "Administratori organizacije upravljaju samo sustavima svoje organizacije i ne plaćaju. Ne vide druge organizacije, vaše privatne sustave ni podatke o naplati.",
       "q5": "Što se događa kad na ulazu nema interneta?",
-      "q6": "Jesu li naredbe i dozvole sigurne?",
+      "a5": "Otvaranje telefonom pokraj ulaza radi preko Bluetooth veze i ne ovisi o internetu, usluzi ni pretplati.",
+      "q6": "Jesu li naredbe sigurne?",
+      "a6": "Podaci i naredbe šifrirani su s kraja na kraj između nadzorne ploče i kontrolera. Na nadzornu ploču prijavljujete se Google ili Apple računom, uz kod za potvrdu.",
       "q7": "Kako se obračunava mjesečna naplata?",
-      "q8": "Kojim sustavima mogu upravljati?"
+      "a7": "$1.90 po sustavu mjesečno, po danima: sustav dodan ili uklonjen usred mjeseca naplaćuje se samo za dane u kojima je bio na vašoj nadzornoj ploči. Jedna naplata na početku svakog mjeseca pokriva prethodni mjesec. Cijene su u američkim dolarima, bez poreza.",
+      "q8": "Kojim sustavima mogu upravljati?",
+      "a8": "Sustavima Gate, Dual Control i roletama te njihovim grupama. Roletom se upravlja samo iz aplikacije, pokraj same rolete."
     },
     "shop": {
       "title": "Sve počinje od WIFIGATE kontrolera",

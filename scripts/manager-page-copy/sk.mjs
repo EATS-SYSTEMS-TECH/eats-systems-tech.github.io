@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Ceny",
       "title": "Jednoduché ceny pre WIFIGATE Manager",
-      "subtitle": "Platíte iba za systémy, ktoré spravujete. Samotné zariadenie WIFIGATE nikdy nepotrebuje predplatné.",
+      "subtitle": "Platíte za systémy, ktoré spravujete, mesačne najmenej za jeden systém. Samotné zariadenie WIFIGATE nikdy nepotrebuje predplatné.",
       "badge": "Jedna jednoduchá cena",
       "systemsName": "Systémy",
       "systemsPer": "/ systém / mesiac",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Každý aktívny systém vo vašom paneli, nech je kdekoľvek.",
       "systemsF1": "Každý systém sa počíta raz, aj keď je vo viacerých skupinách",
       "systemsF2": "Skupiny sú zadarmo: počítajú sa len ich systémy",
-      "systemsF3": "Žiadne aktívne systémy, žiadny poplatok za systémy",
+      "systemsF3": "Mesačné minimum: $1.90, aj bez pripojeného systému",
       "systemsF4": "Systém pridaný v polovici mesiaca sa účtuje podľa dní",
       "organizationsName": "Organizácie",
       "organizationsPer": "/ ďalšia organizácia / mesiac",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 roleta: $1.90 / mesiac",
       "exampleF4": "Mesačný odhad bez dane",
       "planCta": "Kontaktujte nás",
-      "note": "Ceny v amerických dolároch (USD), bez dane. Jedna platba na začiatku každého mesiaca pokryje predchádzajúci mesiac podľa dní, spolu s WIFIGATE Host, ak ho používate."
+      "note": "Ceny v amerických dolároch (USD), bez dane. Aktívne predplatné má minimum $1.90 mesačne, aj bez pripojeného systému. Jedna platba na začiatku každého mesiaca pokryje predchádzajúci mesiac podľa dní, spolu s WIFIGATE Host, ak ho používate."
     },
     "audience": {
       "label": "Určené pre:",
@@ -56,11 +56,11 @@ export default {
       "title": "Od jedného ovládača po všetky objekty",
       "subtitle": "Tri kroky a všetko spravujete z jedného miesta.",
       "s1t": "Pripojte svoje systémy",
-      "s1x": "Exportujte systémy WIFIGATE z aplikácie do ovládacieho panela. Ovládače sa pripájajú cez Wi‑Fi.",
+      "s1x": "Exportujte systémy WIFIGATE z aplikácie do [[ovládacieho panela na webe WIFIGATE]], ktorý je prepojený s vaším účtom. Zariadenia WIFIGATE sa pripájajú cez Wi‑Fi.",
       "s2t": "Usporiadajte si ich po svojom",
       "s2x": "Zoskupte brány, dvere a rolety podľa budovy, objektu alebo organizácie.",
       "s3t": "Spravujte odkiaľkoľvek",
-      "s3x": "Udeľujte a odoberajte prístup, sledujte históriu a ovládajte každý systém z akéhokoľvek prehliadača."
+      "s3x": "Udeľujte a odoberajte prístup, sledujte históriu a otvárajte brány na diaľku, z akéhokoľvek prehliadača."
     },
     "benefits": {
       "eyebrow": "Prečo WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Používatelia a oprávnenia",
       "b2x": "Pridávajte používateľov, rozhodujte, kto čo otvorí, a meňte to v priebehu sekúnd, pre jeden systém alebo celý objekt.",
       "b3t": "Úplná história prístupov",
-      "b3x": "Kto otvoril ktorý vchod a kedy, vo všetkých objektoch.",
+      "b3x": "Pozrite si, kto otvoril každý vchod a kedy.",
       "b4t": "Organizácie a skupiny",
       "b4x": "Zoskupte systémy podľa budovy alebo klienta a každej organizácii dajte vlastných správcov.",
       "b5t": "Odkiaľkoľvek na svete",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Správcovia každej organizácie spravujú len systémy, za ktoré zodpovedajú."
     },
     "faq": {
-      "q1": "Potrebuje samotné zariadenie WIFIGATE predplatné?",
+      "q1": "Existuje minimálna platba?",
+      "a1": "Áno. Aktívne predplatné má minimum $1.90 mesačne, teda cenu jedného systému, aj bez pripojeného systému. Samotné zariadenie WIFIGATE nikdy nepotrebuje predplatné.",
       "q2": "Ako pripojím svoje systémy k ovládaciemu panelu?",
+      "a2": "Prihláste sa rovnakým účtom v aplikácii aj na webe WIFIGATE. V aplikácii exportujte každý systém do WIFIGATE Manager, keď ste priamo pri ňom, a pripojte jeho zariadenie WIFIGATE k Wi‑Fi (2.4GHz). Systém sa potom zobrazí vo vašom ovládacom paneli na webe.",
       "q3": "Môžem spravovať samostatné budovy alebo klientov?",
+      "a3": "Áno. Každá budova, klient alebo firma dostane pod vaším účtom vlastnú organizáciu s vlastnými správcami. Tri organizácie sú v cene a každá ďalšia stojí $1 mesačne.",
       "q4": "Kto môže čo spravovať?",
+      "a4": "Správcovia organizácie spravujú len systémy svojej vlastnej organizácie a neplatia. Nevidia iné organizácie, vaše súkromné systémy ani fakturačné údaje.",
       "q5": "Čo sa stane, keď pri vchode nie je internet?",
-      "q6": "Sú príkazy a oprávnenia zabezpečené?",
+      "a5": "Otváranie z telefónu priamo pri vchode funguje cez Bluetooth a nezávisí od internetu, služby ani predplatného.",
+      "q6": "Sú príkazy zabezpečené?",
+      "a6": "Údaje a príkazy sú medzi ovládacím panelom a zariadením WIFIGATE šifrované od začiatku do konca. Do ovládacieho panela sa prihlasujete cez Google alebo Apple a navyše overovacím kódom.",
       "q7": "Ako sa počíta mesačná platba?",
-      "q8": "Ktoré systémy môžem spravovať?"
+      "a7": "$1.90 za systém mesačne, podľa dní: systém pridaný alebo odobraný v priebehu mesiaca sa účtuje len za dni, keď bol vo vašom ovládacom paneli. Jedna platba na začiatku každého mesiaca pokryje predchádzajúci mesiac. Ceny sú v amerických dolároch, bez dane.",
+      "q8": "Ktoré systémy môžem spravovať?",
+      "a8": "Systémy typu Gate, Dual Control a roleta, ako aj ich skupiny. Roleta sa ovláda len z aplikácie, priamo pri rolete."
     },
     "shop": {
       "title": "Všetko sa začína ovládačom WIFIGATE",

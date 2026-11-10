@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Fiyatlandırma",
       "title": "WIFIGATE Host eklentisi için basit planlar",
-      "subtitle": "Yalnızca otomasyon için, aktif sistem başına ödersiniz. WIFIGATE cihazının kendisi asla abonelik gerektirmez.",
+      "subtitle": "Aktif sistem başına, aylık en az bir sistem üzerinden ödersiniz. WIFIGATE kontrol ünitesinin kendisi asla abonelik gerektirmez.",
       "per": "/ sistem / ay",
       "badge": "En popüler",
       "startDesc": "Misafir erişimini otomatikleştirmeye başlayan küçük işletmeler için.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, özel roller ve genişletilmiş denetim kaydı",
       "scaleF4": "Kurumsal dağıtım desteği",
       "planCta": "Bizimle konuşun",
-      "note": "Aylık fiyatlar ABD doları (USD) cinsinden, aktif sistem başına ve kademe kademe: ilk 14 sistemin her biri $6, 15–49 arasındaki sistemlerin her biri $5 ve 50. sistemden itibaren her sistem $4. Hesap başına asgari ücret: aylık $6. Platform ücreti ve misafir daveti başına ücret yoktur. 250+ sistem için hacim teklifi alabilirsiniz."
+      "note": "Aylık fiyatlar ABD doları (USD) cinsinden, vergiler hariç, aktif sistem başına ve kademe kademe: ilk 14 sistemin her biri $6, 15–49 arasındaki sistemlerin her biri $5 ve 50. sistemden itibaren her sistem $4. Örneğin 20 sistem: 14 × $6 artı 6 × $5, aylık $114. Hesap başına asgari tutar: aylık $6, bağlı sistem olmasa bile. Platform ücreti ve misafir daveti başına ücret yoktur. 250+ sistem için hacim teklifi alabilirsiniz."
     },
     "audience": {
       "label": "Kimler için:",
@@ -51,28 +51,28 @@ export default {
       "title": "Rezervasyondan açık kapıya, otomatik olarak",
       "subtitle": "Üç adım, sonrası her rezervasyonda kendiliğinden işler.",
       "s1t": "Bir rezervasyon gelir",
-      "s1x": "Rezervasyon veya tesis yönetim sisteminiz, yeni onaylanan bir rezervasyonu WIFIGATE Host'a bildirir.",
+      "s1x": "Rezervasyon sisteminiz, onaylanan her rezervasyonu WIFIGATE Host'a bildirir. Rezervasyonu panelden elle de girebilirsiniz.",
       "s2t": "Erişim otomatik oluşturulur",
-      "s2x": "WIFIGATE Host, tam olarak doğru kapı, giriş veya otopark için, yalnızca o konaklama süresince geçerli, güvenli ve süreli bir davet oluşturur.",
+      "s2x": "WIFIGATE Host, tam olarak o rezervasyonun kapısı, giriş kapısı veya otoparkı için, yalnızca konaklama süresince geçerli güvenli bir erişim bağlantısı oluşturur. Bağlantıyı misafire siz veya rezervasyon sisteminiz gönderir.",
       "s3t": "Misafir rahatça içeri girer",
-      "s3x": "Misafir girişi telefonundan açar. Check-out zamanı geldiğinde erişim kendiliğinden sona erer; toplanacak veya iptal edilecek bir şey yoktur."
+      "s3x": "Misafir bağlantıyı WIFIGATE uygulamasında açar ve girişi telefonundan açar. Check-out'ta erişim kendiliğinden sona erer. Geri alınacak anahtar yok."
     },
     "benefits": {
       "eyebrow": "Neden WIFIGATE Host",
       "title": "Daha az resepsiyon işi. Daha zahmetsiz ağırlama.",
       "subtitle": "Bir rezervasyonun erişime dönüşmesi için gereken her şey sizin yerinize halledilir.",
       "b1t": "Teslim edilecek anahtar yok",
-      "b1x": "Anahtar teslimlerini, anahtar kutularını ve kopyalanan şifreleri unutun. Erişim, ihtiyaç duyulduğu anda misafirinizin telefonuna ulaşır.",
+      "b1x": "Anahtar teslimlerini, anahtar kutularını ve elden ele dolaşan şifreleri unutun. Misafir bir bağlantı alır ve telefonundan açar.",
       "b2t": "Tasarımı gereği süresi sınırlı",
-      "b2x": "Her davet check-in'de açılır ve check-out'ta sona erer; her konaklamada, otomatik olarak.",
+      "b2x": "Her erişim bağlantısı check-in'de başlar ve check-out'ta sona erer; her konaklamada, otomatik olarak.",
       "b3t": "Şifreli ve gizli",
-      "b3x": "Erişim şifrelenir ve yalnızca verilen yetkiyle sınırlıdır. Tesisiniz ve misafirleriniz korunur.",
+      "b3x": "Erişim bağlantısı şifrelidir ve yalnızca davet ettiğiniz misafirin telefonu içindir.",
       "b4t": "Girişlerinizle çalışır",
-      "b4x": "Bahçe kapıları, garaj kapıları, bariyerler ve giriş kapıları: WIFIGATE zaten sahip olduklarınızı kontrol eder.",
+      "b4x": "Bahçe kapıları, otopark kapıları, bariyerler ve giriş kapıları: WIFIGATE kontrol ünitesi olan her giriş.",
       "b5t": "Bütün binalar için de uygun",
-      "b5x": "Tek bir kapıdan bütün bir komplekse kadar: tek bir davet, misafirin ihtiyaç duyduğu tüm girişleri kapsayabilir.",
+      "b5x": "Tek bir kapıdan bütün bir komplekse kadar: tek bir rezervasyon, örneğin bir kapı, bir otopark ve bir giriş kapısından oluşan bir giriş grubunu açabilir.",
       "b6t": "Sistemlerinize bağlanır",
-      "b6x": "WIFIGATE Host'u rezervasyon akışınıza, PMS'inize veya kanal yöneticinize bağlayın ve bırakın kendi kendine işlesin."
+      "b6x": "Rezervasyon sisteminiz, PMS'iniz veya kanal yöneticiniz WIFIGATE Host'a bir API üzerinden bağlanır ve sonrası kendi kendine işler."
     },
     "secure": {
       "eyebrow": "Güvenlik",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Misafir erişimi nasıl alır?",
-      "q2": "Check-out'ta ne olur?",
-      "q3": "Konaklama sürerken erişimi kapatabilir miyim?",
-      "q4": "Misafir erişimi güvenli mi?",
-      "q5": "Misafirlerin hâlâ anahtara, karta veya kumandaya ihtiyacı var mı?",
-      "q6": "Hangi sistemlere bağlanır?",
-      "q7": "Bütün bir bina için de uygun mu?",
-      "q8": "Fiyat nasıl hesaplanır?"
+      "a1": "WIFIGATE Host her rezervasyon için özel bir erişim bağlantısı oluşturur. Bağlantıyı misafire siz veya rezervasyon sisteminiz SMS, e-posta veya WhatsApp ile gönderir; ayrıca QR kodu olarak da gösterebilirsiniz.",
+      "q2": "Misafirin uygulama yüklemesi gerekir mi?",
+      "a2": "Evet. Misafir bağlantıyı WIFIGATE uygulamasında açar ve Google veya Apple ile oturum açar. Uygulama yoksa bağlantı yükleme sayfasına götürür; yükledikten sonra misafir bağlantıyı yeniden açar.",
+      "q3": "Erişim ne zaman başlar ve ne zaman biter?",
+      "a3": "Rezervasyonun check-in ve check-out zamanlarını izler. Varsayılan olarak varış 15:00, ayrılış 12:00'dir; başka saatler de belirleyebilirsiniz.",
+      "q4": "Girişte internet gerekir mi?",
+      "a4": "Hayır. Giriş, misafirin telefonu ile kontrol ünitesi arasında Bluetooth üzerinden açılır; giriş anında buluta bağımlı değildir.",
+      "q5": "Hangi rezervasyon sistemlerine bağlanır?",
+      "a5": "Rezervasyonları bir API veya webhook üzerinden gönderebilen her sisteme: bir tesis yönetim sistemi (PMS), bir kanal yöneticisi veya kendi sisteminiz. Rezervasyonları panelden elle de girebilirsiniz.",
+      "q6": "Birden fazla girişi olan bir kompleks için uygun mu?",
+      "a6": "Evet. Tek bir rezervasyon, örneğin bir kapı, bir otopark ve bir giriş kapısından oluşan bir giriş grubunu açabilir; bir grupta en fazla 20 sistem bulunabilir.",
+      "q7": "Ne kurulması gerekir?",
+      "a7": "Her girişe bir WIFIGATE kontrol ünitesi. Kapı yöneticisi, kapının yanındayken onu uygulamadan WIFIGATE Host'a ekler. Girişte Wi‑Fi gerekmez.",
+      "q8": "Fiyat nasıl hesaplanır, asgari bir tutar var mı?",
+      "a8": "Aktif sistem sayısına göre, kademe kademe: 14 sisteme kadar sistem başına $6, 15–49 arasındaki sistemler için $5 ve 50. sistemden itibaren $4. Hesap başına asgari tutar aylık $6'dır, bağlı sistem olmasa bile. Ayın yalnızca bir bölümünde aktif olan sistem gün bazında ücretlendirilir."
     },
     "shop": {
       "title": "Her şey bir WIFIGATE kontrol ünitesiyle başlar",

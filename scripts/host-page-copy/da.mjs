@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Priser",
       "title": "Enkle pakker til WIFIGATE Host-tilføjelsen",
-      "subtitle": "Betal kun for automatiseringen, pr. aktivt system. Selve WIFIGATE-controlleren kræver aldrig et abonnement.",
+      "subtitle": "Betal pr. aktivt system, med et månedligt minimum på ét system. Selve WIFIGATE-controlleren kræver aldrig et abonnement.",
       "per": "/ system / måned",
       "badge": "Mest populær",
       "startDesc": "Til små virksomheder, der begynder at automatisere gæsteadgang.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, tilpassede roller og udvidet audit",
       "scaleF4": "Support til udrulning i store virksomheder",
       "planCta": "Kontakt os",
-      "note": "Månedlige priser i amerikanske dollar (USD) pr. aktivt system, trin for trin: de første 14 systemer koster $6 pr. stk., system 15–49 koster $5 pr. stk., og hvert system fra nr. 50 koster $4. Minimum pr. konto: $6 pr. måned. Intet platformsgebyr og ingen betaling pr. gæsteinvitation. Mængdetilbud fås ved 250+ systemer."
+      "note": "Månedlige priser i amerikanske dollar (USD) før skat, pr. aktivt system, trin for trin: de første 14 systemer koster $6 pr. stk., system 15–49 koster $5 pr. stk., og hvert system fra nr. 50 koster $4. For eksempel 20 systemer: 14 × $6 plus 6 × $5, $114 pr. måned. Minimum pr. konto: $6 pr. måned, også uden et tilknyttet system. Intet platformsgebyr og ingen betaling pr. gæsteinvitation. Mængdetilbud fås ved 250+ systemer."
     },
     "audience": {
       "label": "Skabt til:",
@@ -51,28 +51,28 @@ export default {
       "title": "Fra booking til åben port, automatisk",
       "subtitle": "Tre trin, og derefter kører det af sig selv for hver reservation.",
       "s1t": "En booking kommer ind",
-      "s1x": "Dit booking- eller ejendomsadministrationssystem giver WIFIGATE Host besked om en nyligt bekræftet reservation.",
+      "s1x": "Dit bookingsystem giver WIFIGATE Host besked om hver bekræftet booking. Du kan også indtaste en booking manuelt i dashboardet.",
       "s2t": "Adgangen oprettes automatisk",
-      "s2x": "WIFIGATE Host udsteder en sikker, tidsbegrænset invitation til præcis den rigtige port, dør eller parkering, kun gyldig under netop det ophold.",
+      "s2x": "WIFIGATE Host opretter et sikkert adgangslink til præcis den port, dør eller parkering, der hører til bookingen, kun gyldigt under opholdet. Du eller dit bookingsystem sender det til gæsten.",
       "s3t": "Din gæst går direkte ind",
-      "s3x": "Gæsten åbner indgangen fra telefonen. Når check-out kommer, udløber adgangen af sig selv, uden noget at indsamle eller annullere."
+      "s3x": "Gæsten åbner linket i WIFIGATE-appen og åbner indgangen fra sin telefon. Ved check-out ophører adgangen af sig selv. Ingen nøgle at samle ind."
     },
     "benefits": {
       "eyebrow": "Hvorfor WIFIGATE Host",
       "title": "Mindre reception. Nemmere værtskab.",
       "subtitle": "Alt, hvad en booking kræver for at blive til adgang, klaret for dig.",
       "b1t": "Ingen nøgler at udlevere",
-      "b1x": "Glem nøgleafhentning, nøglebokse og kopierede koder. Adgangen lander på gæstens telefon, i det øjeblik der er brug for den.",
+      "b1x": "Glem nøgleafhentning, nøglebokse og koder, der går fra hånd til hånd. Gæsten får et link og åbner fra sin telefon.",
       "b2t": "Tidsbegrænset fra start",
-      "b2x": "Hver invitation åbner ved check-in og udløber ved check-out, automatisk, ved hvert eneste ophold.",
+      "b2x": "Hvert adgangslink begynder ved check-in og slutter ved check-out, automatisk, ved hvert ophold.",
       "b3t": "Krypteret og privat",
-      "b3x": "Adgangen er krypteret og begrænset til den rettighed, der er udstedt. Din ejendom og dine gæster forbliver beskyttet.",
+      "b3x": "Adgangslinket er krypteret og kun beregnet til telefonen hos den gæst, du har inviteret.",
       "b4t": "Fungerer med dine indgange",
-      "b4x": "Porte, garageporte, bomme og indgangsdøre: WIFIGATE styrer det, du allerede har.",
+      "b4x": "Porte, parkeringsporte, bomme og indgangsdøre: enhver indgang med en WIFIGATE-controller.",
       "b5t": "Skalerer til hele bygninger",
-      "b5x": "Fra en enkelt port til et helt kompleks kan én invitation dække alle de indgange, en gæst har brug for.",
+      "b5x": "Fra en enkelt port til et helt kompleks: én booking kan åbne en gruppe indgange, for eksempel en port, parkering og en dør.",
       "b6t": "Forbindes med dine systemer",
-      "b6x": "Kobl WIFIGATE Host til dit bookingflow, PMS eller channel manager, og lad det køre af sig selv."
+      "b6x": "Dit bookingsystem, PMS eller din channel manager forbindes til WIFIGATE Host via et API, og derfra kører det af sig selv."
     },
     "secure": {
       "eyebrow": "Sikkerhed",
@@ -86,14 +86,22 @@ export default {
       "i3x": "Adgangen er knyttet til hvert ophold og hver gæst, og du kan lukke den, når du har brug for det."
     },
     "faq": {
-      "q1": "Hvordan får en gæst adgang?",
-      "q2": "Hvad sker der ved check-out?",
-      "q3": "Kan jeg lukke adgangen midt i et ophold?",
-      "q4": "Er gæsteadgangen sikker?",
-      "q5": "Har gæsterne stadig brug for nøgler, kort eller fjernbetjeninger?",
-      "q6": "Hvilke systemer kan WIFIGATE Host kobles til?",
-      "q7": "Fungerer det også til en hel bygning?",
-      "q8": "Hvordan beregnes prisen?"
+      "q1": "Hvordan får gæsten adgang?",
+      "a1": "WIFIGATE Host opretter et privat adgangslink til hver booking. Du eller dit bookingsystem sender det til gæsten via SMS, e-mail eller WhatsApp, og du kan også vise det som en QR-kode.",
+      "q2": "Skal gæsten installere en app?",
+      "a2": "Ja. Gæsten åbner linket i WIFIGATE-appen og logger ind med Google eller Apple. Uden appen fører linket til installationssiden; efter installationen åbner gæsten linket igen.",
+      "q3": "Hvornår begynder og slutter adgangen?",
+      "a3": "Den følger bookingens check-in og check-out. Standarden er ankomst kl. 15:00 og afrejse kl. 12:00, og du kan vælge andre tidspunkter.",
+      "q4": "Kræves der internet ved indgangen?",
+      "a4": "Nej. Indgangen åbnes via Bluetooth mellem gæstens telefon og controlleren, uden afhængighed af skyen i det øjeblik, gæsten går ind.",
+      "q5": "Hvilke bookingsystemer kan det kobles til?",
+      "a5": "Ethvert system, der kan sende bookinger via et API eller en webhook: et ejendomsadministrationssystem (PMS), en channel manager eller dit eget system. Du kan også indtaste bookinger manuelt i dashboardet.",
+      "q6": "Fungerer det til et kompleks med flere indgange?",
+      "a6": "Ja. Én booking kan åbne en gruppe indgange, for eksempel en port, parkering og en dør, med op til 20 systemer i en gruppe.",
+      "q7": "Hvad skal installeres?",
+      "a7": "En WIFIGATE-controller ved hver indgang. Portens administrator føjer den til WIFIGATE Host fra appen, ved siden af porten. Der kræves ikke Wi‑Fi ved indgangen.",
+      "q8": "Hvordan beregnes prisen, og er der et minimum?",
+      "a8": "Efter antallet af aktive systemer, trin for trin: $6 pr. system for op til 14 systemer, $5 for system 15–49 og $4 fra nr. 50. Minimum pr. konto er $6 pr. måned, også uden et tilknyttet system. Et system, der kun er aktivt en del af måneden, afregnes pr. dag."
     },
     "shop": {
       "title": "Alt starter med en WIFIGATE-controller",

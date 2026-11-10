@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Harga",
       "title": "Pelan ringkas untuk tambahan WIFIGATE Host",
-      "subtitle": "Bayar hanya untuk automasi, bagi setiap sistem aktif. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan.",
+      "subtitle": "Bayar bagi setiap sistem aktif, dengan minimum bulanan satu sistem. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan.",
       "per": "/ sistem / bulan",
       "badge": "Paling popular",
       "startDesc": "Untuk perniagaan kecil yang mula mengautomasikan akses tetamu.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, peranan tersuai dan audit lanjutan",
       "scaleF4": "Sokongan pelaksanaan peringkat perusahaan",
       "planCta": "Hubungi kami",
-      "note": "Harga bulanan dalam dolar AS (USD), bagi setiap sistem aktif, mengikut peringkat: 14 sistem pertama berharga $6 setiap satu, sistem ke-15–49 berharga $5 setiap satu, dan setiap sistem mulai yang ke-50 berharga $4. Minimum akaun: $6 sebulan. Tiada yuran platform dan tiada caj bagi setiap jemputan tetamu. Sebut harga volum tersedia untuk 250+ sistem."
+      "note": "Harga bulanan dalam dolar AS (USD), sebelum cukai, bagi setiap sistem aktif, mengikut peringkat: 14 sistem pertama berharga $6 setiap satu, sistem ke-15–49 berharga $5 setiap satu, dan setiap sistem mulai yang ke-50 berharga $4. Sebagai contoh, 20 sistem: 14 × $6 ditambah 6 × $5, $114 sebulan. Minimum akaun: $6 sebulan, walaupun tiada sistem yang dipautkan. Tiada yuran platform dan tiada caj bagi setiap jemputan tetamu. Sebut harga volum tersedia untuk 250+ sistem."
     },
     "audience": {
       "label": "Direka untuk:",
@@ -51,28 +51,28 @@ export default {
       "title": "Daripada tempahan hingga pintu pagar terbuka, secara automatik",
       "subtitle": "Tiga langkah, kemudian ia berjalan sendiri untuk setiap tempahan.",
       "s1t": "Tempahan diterima",
-      "s1x": "Sistem tempahan atau pengurusan anda memaklumkan WIFIGATE Host tentang tempahan baharu yang telah disahkan.",
+      "s1x": "Sistem tempahan anda memaklumkan WIFIGATE Host tentang setiap tempahan yang disahkan. Anda juga boleh memasukkan tempahan secara manual pada papan pemuka.",
       "s2t": "Akses dicipta secara automatik",
-      "s2x": "WIFIGATE Host mengeluarkan jemputan selamat yang terhad masa tepat untuk pintu pagar, pintu atau tempat letak kereta yang betul, sah hanya untuk penginapan itu.",
+      "s2x": "WIFIGATE Host mencipta pautan akses yang selamat tepat untuk pintu pagar, pintu atau tempat letak kereta bagi tempahan itu, sah hanya sepanjang penginapan. Anda atau sistem tempahan anda menghantarnya kepada tetamu.",
       "s3t": "Tetamu terus masuk",
-      "s3x": "Mereka membuka pintu masuk melalui telefon. Apabila tiba waktu daftar keluar, akses luput dengan sendirinya. Tiada apa-apa yang perlu dikutip atau dibatalkan."
+      "s3x": "Tetamu membuka pautan itu dalam aplikasi WIFIGATE dan membuka pintu masuk melalui telefon mereka. Semasa daftar keluar, akses tamat dengan sendirinya. Tiada kunci untuk dikutip."
     },
     "benefits": {
       "eyebrow": "Mengapa WIFIGATE Host",
       "title": "Kurang kerja di kaunter. Lebih banyak hospitaliti tanpa leceh.",
       "subtitle": "Semua yang diperlukan untuk menukar tempahan kepada akses, diuruskan untuk anda.",
       "b1t": "Tiada kunci untuk diserahkan",
-      "b1x": "Lupakan pengambilan kunci, peti kunci dan kod yang disalin. Akses tiba di telefon tetamu tepat apabila diperlukan.",
+      "b1x": "Lupakan pengambilan kunci, peti kunci dan kod yang bertukar dari tangan ke tangan. Tetamu menerima pautan dan membuka melalui telefon mereka.",
       "b2t": "Sentiasa terhad masa",
-      "b2x": "Setiap jemputan dibuka semasa daftar masuk dan luput semasa daftar keluar, secara automatik, untuk setiap penginapan.",
+      "b2x": "Setiap pautan akses bermula semasa daftar masuk dan tamat semasa daftar keluar, secara automatik, untuk setiap penginapan.",
       "b3t": "Disulitkan dan peribadi",
-      "b3x": "Akses disulitkan dan terhad kepada kebenaran yang dikeluarkan. Hartanah dan tetamu anda kekal dilindungi.",
+      "b3x": "Pautan akses disulitkan dan hanya untuk telefon tetamu yang anda jemput.",
       "b4t": "Berfungsi dengan pintu masuk anda",
-      "b4x": "Pintu pagar, pintu garaj, palang dan pintu masuk: WIFIGATE mengawal apa yang sudah anda miliki.",
+      "b4x": "Pintu pagar, pintu pagar tempat letak kereta, palang dan pintu masuk: mana-mana pintu masuk yang mempunyai pengawal WIFIGATE.",
       "b5t": "Sesuai juga untuk seluruh bangunan",
-      "b5x": "Daripada satu pintu pagar hingga seluruh kompleks, satu jemputan boleh merangkumi setiap pintu masuk yang diperlukan tetamu.",
+      "b5x": "Daripada satu pintu pagar hingga seluruh kompleks: satu tempahan boleh membuka sekumpulan pintu masuk, seperti pintu pagar, tempat letak kereta dan pintu.",
       "b6t": "Bersambung dengan sistem anda",
-      "b6x": "Sambungkan WIFIGATE Host kepada aliran tempahan, PMS atau Channel Manager anda dan biarkan ia berjalan."
+      "b6x": "Sistem tempahan, PMS atau Channel Manager anda bersambung dengan WIFIGATE Host melalui API, dan dari situ ia berjalan sendiri."
     },
     "secure": {
       "eyebrow": "Keselamatan",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Bagaimanakah tetamu mendapat akses?",
-      "q2": "Apa yang berlaku semasa daftar keluar?",
-      "q3": "Bolehkah saya menghentikan akses di tengah-tengah penginapan?",
-      "q4": "Adakah akses tetamu selamat?",
-      "q5": "Adakah tetamu masih memerlukan kunci, kad atau alat kawalan jauh?",
-      "q6": "Ia bersambung dengan sistem apa?",
-      "q7": "Adakah ia sesuai untuk seluruh bangunan?",
-      "q8": "Bagaimanakah harga dikira?"
+      "a1": "WIFIGATE Host mencipta pautan akses peribadi bagi setiap tempahan. Anda atau sistem tempahan anda menghantarnya kepada tetamu melalui SMS, e-mel atau WhatsApp, dan anda juga boleh memaparkannya sebagai kod QR.",
+      "q2": "Adakah tetamu perlu memasang aplikasi?",
+      "a2": "Ya. Tetamu membuka pautan itu dalam aplikasi WIFIGATE dan log masuk dengan Google atau Apple. Tanpa aplikasi, pautan itu membawa ke halaman pemasangan; selepas memasang, tetamu membuka pautan itu sekali lagi.",
+      "q3": "Bilakah akses bermula dan tamat?",
+      "a3": "Ia mengikut daftar masuk dan daftar keluar tempahan. Tetapan lalai ialah ketibaan pada 15:00 dan bertolak pada 12:00, dan anda boleh menetapkan waktu lain.",
+      "q4": "Adakah internet diperlukan di pintu masuk?",
+      "a4": "Tidak. Pintu masuk dibuka melalui Bluetooth antara telefon tetamu dengan pengawal, tanpa bergantung pada awan pada saat masuk.",
+      "q5": "Ia bersambung dengan sistem tempahan apa?",
+      "a5": "Mana-mana sistem yang boleh menghantar tempahan melalui API atau webhook: sistem pengurusan hartanah (PMS), Channel Manager atau sistem anda sendiri. Anda juga boleh memasukkan tempahan secara manual pada papan pemuka.",
+      "q6": "Adakah ia sesuai untuk kompleks dengan beberapa pintu masuk?",
+      "a6": "Ya. Satu tempahan boleh membuka sekumpulan pintu masuk, seperti pintu pagar, tempat letak kereta dan pintu, dengan sehingga 20 sistem dalam satu kumpulan.",
+      "q7": "Apa yang perlu dipasang?",
+      "a7": "Pengawal WIFIGATE di setiap pintu masuk. Pentadbir pintu pagar menambahkannya ke WIFIGATE Host daripada aplikasi, di sebelah pintu pagar. Wi‑Fi tidak diperlukan di pintu masuk.",
+      "q8": "Bagaimanakah harga dikira, dan adakah terdapat minimum?",
+      "a8": "Mengikut bilangan sistem aktif, mengikut peringkat: $6 bagi setiap sistem untuk sehingga 14 sistem, $5 untuk sistem ke-15–49 dan $4 mulai yang ke-50. Minimum akaun ialah $6 sebulan, walaupun tiada sistem yang dipautkan. Sistem yang aktif hanya sebahagian bulan dicaj mengikut hari."
     },
     "shop": {
       "title": "Semuanya bermula dengan pengawal WIFIGATE",

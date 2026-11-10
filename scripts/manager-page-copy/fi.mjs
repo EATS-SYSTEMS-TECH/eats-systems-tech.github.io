@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Hinnoittelu",
       "title": "Selkeä hinnoittelu WIFIGATE Managerille",
-      "subtitle": "Maksat vain hallitsemistasi järjestelmistä. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta.",
+      "subtitle": "Maksat hallitsemistasi järjestelmistä, kuukaudessa kuitenkin vähintään yhdestä järjestelmästä. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta.",
       "badge": "Yksi selkeä hinta",
       "systemsName": "Järjestelmät",
       "systemsPer": "/ järjestelmä / kk",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Jokainen hallintapaneelisi aktiivinen järjestelmä, missä tahansa se on.",
       "systemsF1": "Jokainen järjestelmä lasketaan kerran, vaikka se olisi useassa ryhmässä",
       "systemsF2": "Ryhmät ovat ilmaisia: vain niiden järjestelmät lasketaan",
-      "systemsF3": "Ei aktiivisia järjestelmiä, ei järjestelmämaksua",
+      "systemsF3": "Kuukauden vähimmäisveloitus: $1.90, vaikka yhtään järjestelmää ei olisi liitetty",
       "systemsF4": "Kesken kuukauden lisätty järjestelmä laskutetaan päivien mukaan",
       "organizationsName": "Organisaatiot",
       "organizationsPer": "/ lisäorganisaatio / kk",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 rullaovi: $1.90 / kk",
       "exampleF4": "Kuukausiarvio ennen veroja",
       "planCta": "Ota yhteyttä",
-      "note": "Hinnat Yhdysvaltain dollareina (USD) ennen veroja. Yksi veloitus kunkin kuukauden alussa kattaa edellisen kuukauden päivien mukaan, yhdessä WIFIGATE Hostin kanssa, jos käytät sitä."
+      "note": "Hinnat Yhdysvaltain dollareina (USD) ennen veroja. Aktiivisen tilauksen vähimmäisveloitus on $1.90 kuukaudessa, vaikka yhtään järjestelmää ei olisi liitetty. Yksi veloitus kunkin kuukauden alussa kattaa edellisen kuukauden päivien mukaan, yhdessä WIFIGATE Hostin kanssa, jos käytät sitä."
     },
     "audience": {
       "label": "Kenelle:",
@@ -56,11 +56,11 @@ export default {
       "title": "Yhdestä ohjaimesta kaikkiin kohteisiin",
       "subtitle": "Kolme vaihetta, ja kaikkea hallitaan yhdestä paikasta.",
       "s1t": "Yhdistä järjestelmäsi",
-      "s1x": "Vie WIFIGATE-järjestelmäsi sovelluksesta hallintapaneeliin. Ohjaimet yhdistyvät Wi‑Fi-verkon kautta.",
+      "s1x": "Vie WIFIGATE-järjestelmäsi sovelluksesta [[WIFIGATE-verkkosivuston hallintapaneeliin]], joka on liitetty tiliisi. Ohjaimet yhdistyvät Wi‑Fi-verkon kautta.",
       "s2t": "Järjestä ne haluamallasi tavalla",
       "s2x": "Ryhmittele portit, ovet ja rullaovet rakennuksen, kohteen tai organisaation mukaan.",
       "s3t": "Hallitse mistä tahansa",
-      "s3x": "Myönnä ja poista kulkuoikeuksia, katso historia ja ohjaa jokaista järjestelmää millä tahansa selaimella."
+      "s3x": "Myönnä ja poista kulkuoikeuksia, katso historia ja avaa portteja etänä millä tahansa selaimella."
     },
     "benefits": {
       "eyebrow": "Miksi WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Käyttäjät ja käyttöoikeudet",
       "b2x": "Lisää käyttäjiä, päätä kuka saa avata mitä ja muuta sitä sekunneissa, yhdelle järjestelmälle tai koko kohteelle.",
       "b3t": "Täydellinen kulkuhistoria",
-      "b3x": "Näe, kuka avasi minkäkin sisäänkäynnin ja milloin, kaikissa kohteissa.",
+      "b3x": "Näe, kuka avasi kunkin sisäänkäynnin ja milloin.",
       "b4t": "Organisaatiot ja ryhmät",
       "b4x": "Ryhmittele järjestelmät rakennuksen tai asiakkaan mukaan ja anna jokaiselle organisaatiolle omat ylläpitäjät.",
       "b5t": "Mistä päin maailmaa tahansa",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Kunkin organisaation ylläpitäjät hallitsevat vain niitä järjestelmiä, joista he vastaavat."
     },
     "faq": {
-      "q1": "Vaatiiko itse WIFIGATE-ohjain tilauksen?",
+      "q1": "Onko vähimmäisveloitusta?",
+      "a1": "Kyllä. Aktiivisen tilauksen vähimmäisveloitus on $1.90 kuukaudessa eli yhden järjestelmän hinta, vaikka yhtään järjestelmää ei olisi liitetty. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta.",
       "q2": "Miten yhdistän järjestelmäni hallintapaneeliin?",
+      "a2": "Kirjaudu samalla tilillä sovellukseen ja WIFIGATE-verkkosivustolle. Vie sovelluksessa jokainen järjestelmä WIFIGATE Manageriin, kun olet sen vieressä, ja yhdistä sen ohjain Wi‑Fi-verkkoon (2.4GHz). Sen jälkeen järjestelmä näkyy hallintapaneelissasi verkkosivustolla.",
       "q3": "Voinko hallita erillisiä rakennuksia tai asiakkaita?",
+      "a3": "Kyllä. Jokainen rakennus, asiakas tai yritys saa tilisi alle oman organisaation, jolla on omat ylläpitäjät. Kolme organisaatiota sisältyy hintaan, ja jokainen lisäorganisaatio maksaa $1 kuukaudessa.",
       "q4": "Kuka voi hallita mitäkin?",
+      "a4": "Organisaation ylläpitäjät hallitsevat vain oman organisaationsa järjestelmiä, eivätkä he maksa. He eivät näe muita organisaatioita, yksityisiä järjestelmiäsi tai laskutustietoja.",
       "q5": "Mitä tapahtuu, kun sisäänkäynnin luona ei ole internetyhteyttä?",
-      "q6": "Ovatko komennot ja käyttöoikeudet turvassa?",
+      "a5": "Avaaminen puhelimella sisäänkäynnin vieressä toimii Bluetooth-yhteydellä eikä ole riippuvainen internetistä, palvelusta tai tilauksesta.",
+      "q6": "Ovatko komennot turvassa?",
+      "a6": "Tiedot ja komennot on salattu päästä päähän hallintapaneelin ja ohjaimen välillä. Kirjaudut hallintapaneeliin Googlella tai Applella sekä vahvistuskoodilla.",
       "q7": "Miten kuukausiveloitus lasketaan?",
-      "q8": "Mitä järjestelmiä voin hallita?"
+      "a7": "$1.90 järjestelmältä kuukaudessa, päivien mukaan: kesken kuukauden lisätystä tai poistetusta järjestelmästä veloitetaan vain niiltä päiviltä, jolloin se oli hallintapaneelissasi. Yksi veloitus kunkin kuukauden alussa kattaa edellisen kuukauden. Hinnat ovat Yhdysvaltain dollareina ennen veroja.",
+      "q8": "Mitä järjestelmiä voin hallita?",
+      "a8": "Järjestelmätyyppejä Gate, Dual Control ja rullaovi sekä niistä muodostettuja ryhmiä. Rullaovea käytetään vain sovelluksesta, rullaoven vieressä."
     },
     "shop": {
       "title": "Kaikki alkaa WIFIGATE-ohjaimesta",

@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Presyo",
       "title": "Simpleng presyo para sa WIFIGATE Manager",
-      "subtitle": "Ang mga system lang na pinamamahalaan ninyo ang binabayaran. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo.",
+      "subtitle": "Ang mga system na pinamamahalaan ninyo ang binabayaran, na may buwanang minimum na isang system. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo.",
       "badge": "Iisang simpleng presyo",
       "systemsName": "Mga system",
       "systemsPer": "/ system / buwan",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Bawat aktibong system sa inyong dashboard, nasaan man ito.",
       "systemsF1": "Isang beses lang binibilang ang bawat system, kahit nasa ilang grupo",
       "systemsF2": "Libre ang mga grupo: ang mga system lang nila ang binibilang",
-      "systemsF3": "Walang aktibong system, walang singil sa system",
+      "systemsF3": "Buwanang minimum: $1.90, kahit walang naka-link na system",
       "systemsF4": "Ang system na idinagdag sa kalagitnaan ng buwan ay sinisingil ayon sa araw",
       "organizationsName": "Mga organisasyon",
       "organizationsPer": "/ dagdag na organisasyon / buwan",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 roller shutter: $1.90 / buwan",
       "exampleF4": "Buwanang tantiya bago ang buwis",
       "planCta": "Makipag-usap sa amin",
-      "note": "Mga presyo sa US dollar (USD), bago ang buwis. Isang singil sa simula ng bawat buwan ang sumasaklaw sa nakaraang buwan, ayon sa araw, kasama ang WIFIGATE Host kung ginagamit ninyo ito."
+      "note": "Mga presyo sa US dollar (USD), bago ang buwis. May minimum na $1.90 kada buwan ang aktibong subscription, kahit walang naka-link na system. Isang singil sa simula ng bawat buwan ang sumasaklaw sa nakaraang buwan, ayon sa araw, kasama ang WIFIGATE Host kung ginagamit ninyo ito."
     },
     "audience": {
       "label": "Ginawa para sa:",
@@ -56,11 +56,11 @@ export default {
       "title": "Mula sa isang controller hanggang sa bawat site",
       "subtitle": "Tatlong hakbang, at lahat ay pinamamahalaan mula sa iisang lugar.",
       "s1t": "Ikonekta ang inyong mga system",
-      "s1x": "I-export ang inyong mga WIFIGATE system mula sa app papunta sa dashboard. Kumokonekta ang mga controller sa Wi‑Fi.",
+      "s1x": "I-export ang inyong mga WIFIGATE system mula sa app papunta sa [[dashboard sa website ng WIFIGATE]], na naka-link sa inyong account. Kumokonekta ang mga controller sa Wi‑Fi.",
       "s2t": "Ayusin ayon sa gusto ninyo",
       "s2x": "Igrupo ang mga gate, pinto, at roller shutter ayon sa gusali, site, o organisasyon.",
       "s3t": "Pamahalaan kahit saan",
-      "s3x": "Magbigay at mag-alis ng access, tingnan ang history, at kontrolin ang bawat system mula sa anumang browser."
+      "s3x": "Magbigay at mag-alis ng access, tingnan ang history, at magbukas ng mga gate nang malayuan, mula sa anumang browser."
     },
     "benefits": {
       "eyebrow": "Bakit WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Mga user at pahintulot",
       "b2x": "Magdagdag ng user, magpasya kung sino ang makakapagbukas ng ano, at baguhin ito sa loob ng ilang segundo, para sa isang system o buong site.",
       "b3t": "Kumpletong history ng access",
-      "b3x": "Alamin kung sino ang nagbukas ng aling pasukan at kailan, sa bawat site.",
+      "b3x": "Tingnan kung sino ang nagbukas ng bawat pasukan at kailan.",
       "b4t": "Mga organisasyon at grupo",
       "b4x": "Igrupo ang mga system ayon sa gusali o kliyente at bigyan ang bawat organisasyon ng sarili nitong mga admin.",
       "b5t": "Saanman sa mundo",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Ang mga admin ng bawat organisasyon ay namamahala lamang ng mga system na sakop ng kanilang responsibilidad."
     },
     "faq": {
-      "q1": "Kailangan ba ng subscription ang WIFIGATE controller mismo?",
+      "q1": "May minimum na singil ba?",
+      "a1": "Oo. May minimum na $1.90 kada buwan ang aktibong subscription, ang presyo ng isang system, kahit walang naka-link na system. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo.",
       "q2": "Paano ko ikokonekta ang aking mga system sa dashboard?",
+      "a2": "Mag-sign in gamit ang iisang account sa app at sa website ng WIFIGATE. Sa app, i-export ang bawat system sa WIFIGATE Manager habang nasa tabi kayo nito, at ikonekta ang controller nito sa Wi‑Fi (2.4GHz). Pagkatapos, lalabas ang system sa inyong dashboard sa website.",
       "q3": "Maaari ba akong mamahala ng magkakahiwalay na gusali o kliyente?",
+      "a3": "Oo. Bawat gusali, kliyente, o kumpanya ay may sariling organisasyon sa ilalim ng inyong account, na may sarili nitong mga admin. Kasama ang tatlong organisasyon, at $1 kada buwan ang bawat dagdag.",
       "q4": "Sino ang maaaring mamahala ng ano?",
+      "a4": "Ang mga admin ng organisasyon ay namamahala lamang ng mga system ng sarili nilang organisasyon, at hindi sila nagbabayad. Hindi nila nakikita ang ibang organisasyon, ang inyong mga pribadong system, o ang mga detalye ng billing.",
       "q5": "Ano ang mangyayari kapag walang internet sa pasukan?",
-      "q6": "Ligtas ba ang mga utos at pahintulot?",
+      "a5": "Gumagana sa Bluetooth ang pagbukas gamit ang telepono sa tabi ng pasukan, at hindi ito nakadepende sa internet, sa serbisyo, o sa subscription.",
+      "q6": "Ligtas ba ang mga utos?",
+      "a6": "Naka-encrypt end-to-end ang data at mga utos sa pagitan ng dashboard at ng controller. Nagsa-sign in kayo sa dashboard gamit ang Google o Apple, dagdag ang isang verification code.",
       "q7": "Paano kinakalkula ang buwanang singil?",
-      "q8": "Aling mga system ang maaari kong pamahalaan?"
+      "a7": "$1.90 bawat system kada buwan, ayon sa araw: ang system na idinagdag o inalis sa kalagitnaan ng buwan ay sinisingil lamang para sa mga araw na nasa dashboard ninyo ito. Isang singil sa simula ng bawat buwan ang sumasaklaw sa nakaraang buwan. Nasa US dollar ang mga presyo, bago ang buwis.",
+      "q8": "Aling mga system ang maaari kong pamahalaan?",
+      "a8": "Mga Gate, Dual Control, at roller shutter system, at mga grupo ng mga ito. Ang roller shutter ay pinapagana lamang mula sa app, sa tabi ng shutter."
     },
     "shop": {
       "title": "Nagsisimula ang lahat sa WIFIGATE controller",

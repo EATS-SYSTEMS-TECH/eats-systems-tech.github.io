@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Cene",
       "title": "Preproste cene za WIFIGATE Manager",
-      "subtitle": "Plačate le sisteme, ki jih upravljate. Sama naprava WIFIGATE nikoli ne potrebuje naročnine.",
+      "subtitle": "Plačate sisteme, ki jih upravljate, z mesečnim minimumom enega sistema. Sam krmilnik WIFIGATE nikoli ne potrebuje naročnine.",
       "badge": "Ena preprosta cena",
       "systemsName": "Sistemi",
       "systemsPer": "/ sistem / mesec",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Vsak aktiven sistem na vaši nadzorni plošči, kjer koli je.",
       "systemsF1": "Vsak sistem se šteje enkrat, tudi če je v več skupinah",
       "systemsF2": "Skupine so brezplačne: štejejo le njihovi sistemi",
-      "systemsF3": "Brez aktivnih sistemov ni plačila za sisteme",
+      "systemsF3": "Mesečni minimum: $1.90, tudi brez povezanega sistema",
       "systemsF4": "Sistem, dodan sredi meseca, se obračuna po dnevih",
       "organizationsName": "Organizacije",
       "organizationsPer": "/ dodatna organizacija / mesec",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 roleta: $1.90 / mesec",
       "exampleF4": "Mesečna ocena brez davka",
       "planCta": "Pišite nam",
-      "note": "Cene v ameriških dolarjih (USD), brez davka. En obračun na začetku vsakega meseca pokrije prejšnji mesec po dnevih, skupaj z WIFIGATE Host, če ga uporabljate."
+      "note": "Cene v ameriških dolarjih (USD), brez davka. Aktivna naročnina ima minimum $1.90 na mesec, tudi brez povezanega sistema. En obračun na začetku vsakega meseca pokrije prejšnji mesec po dnevih, skupaj z WIFIGATE Host, če ga uporabljate."
     },
     "audience": {
       "label": "Namenjeno za:",
@@ -56,11 +56,11 @@ export default {
       "title": "Od enega krmilnika do vseh lokacij",
       "subtitle": "Trije koraki in vse upravljate z enega mesta.",
       "s1t": "Povežite svoje sisteme",
-      "s1x": "Izvozite sisteme WIFIGATE iz aplikacije na nadzorno ploščo. Krmilniki se povežejo prek Wi‑Fi.",
+      "s1x": "Izvozite sisteme WIFIGATE iz aplikacije na [[nadzorno ploščo na spletnem mestu WIFIGATE]], ki je povezana z vašim računom. Krmilniki se povežejo prek Wi‑Fi.",
       "s2t": "Uredite jih po svoje",
       "s2x": "Združite dvoriščna vrata, vhodna vrata in rolete po stavbah, lokacijah ali organizacijah.",
       "s3t": "Upravljajte od koder koli",
-      "s3x": "Dodeljujte in odvzemajte dostop, preglejte zgodovino in upravljajte vsak sistem iz katerega koli brskalnika."
+      "s3x": "Dodeljujte in odvzemajte dostop, preglejte zgodovino in odpirajte dvoriščna vrata na daljavo, iz katerega koli brskalnika."
     },
     "benefits": {
       "eyebrow": "Zakaj WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Uporabniki in dovoljenja",
       "b2x": "Dodajajte uporabnike, določite, kdo kaj odpira, in to spremenite v nekaj sekundah, za en sistem ali celo lokacijo.",
       "b3t": "Celotna zgodovina dostopov",
-      "b3x": "Kdo je odprl kateri vhod in kdaj, na vseh lokacijah.",
+      "b3x": "Oglejte si, kdo je odprl vsak vhod in kdaj.",
       "b4t": "Organizacije in skupine",
       "b4x": "Združite sisteme po stavbah ali strankah in vsaki organizaciji dodelite lastne skrbnike.",
       "b5t": "Od koder koli na svetu",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Skrbniki vsake organizacije upravljajo le sisteme, za katere so odgovorni."
     },
     "faq": {
-      "q1": "Ali sama naprava WIFIGATE potrebuje naročnino?",
+      "q1": "Ali obstaja minimalno plačilo?",
+      "a1": "Da. Aktivna naročnina ima minimum $1.90 na mesec, kar je cena enega sistema, tudi brez povezanega sistema. Sam krmilnik WIFIGATE nikoli ne potrebuje naročnine.",
       "q2": "Kako povežem svoje sisteme z nadzorno ploščo?",
+      "a2": "V aplikaciji in na spletnem mestu WIFIGATE se prijavite z istim računom. V aplikaciji izvozite vsak sistem v WIFIGATE Manager, ko ste ob njem, in njegov krmilnik povežite z Wi‑Fi (2.4GHz). Sistem se nato prikaže na vaši nadzorni plošči na spletnem mestu.",
       "q3": "Ali lahko upravljam ločene stavbe ali stranke?",
+      "a3": "Da. Vsaka stavba, stranka ali podjetje dobi svojo organizacijo v vašem računu, s svojimi skrbniki. Tri organizacije so vključene, vsaka dodatna pa stane $1 na mesec.",
       "q4": "Kdo lahko kaj upravlja?",
+      "a4": "Skrbniki organizacije upravljajo le sisteme svoje organizacije in ne plačajo. Ne vidijo drugih organizacij, vaših zasebnih sistemov niti podatkov o obračunu.",
       "q5": "Kaj se zgodi, ko pri vhodu ni interneta?",
-      "q6": "Ali so ukazi in dovoljenja varni?",
+      "a5": "Odpiranje s telefonom ob vhodu deluje prek povezave Bluetooth in ni odvisno od interneta, storitve ali naročnine.",
+      "q6": "Ali so ukazi varni?",
+      "a6": "Podatki in ukazi so šifrirani od konca do konca med nadzorno ploščo in krmilnikom. V nadzorno ploščo se prijavite z računom Google ali Apple ter s potrditveno kodo.",
       "q7": "Kako se izračuna mesečni znesek?",
-      "q8": "Katere sisteme lahko upravljam?"
+      "a7": "$1.90 na sistem na mesec, po dnevih: sistem, dodan ali odstranjen sredi meseca, se obračuna le za dni, ko je bil na vaši nadzorni plošči. En obračun na začetku vsakega meseca pokrije prejšnji mesec. Cene so v ameriških dolarjih, brez davka.",
+      "q8": "Katere sisteme lahko upravljam?",
+      "a8": "Sisteme Gate, Dual Control in rolete ter njihove skupine. Roleto je mogoče upravljati le iz aplikacije, ob sami roleti."
     },
     "shop": {
       "title": "Vse se začne s krmilnikom WIFIGATE",

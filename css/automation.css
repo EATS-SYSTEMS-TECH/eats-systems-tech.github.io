@@ -731,15 +731,86 @@ html[dir="rtl"] .wa-hero::after {
 
 /* ---------- Audience ---------- */
 .wa-audience {
-  padding: 2.1rem 0;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  border-block: 0;
+}
+
+.wa-audience__row {
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.wa-audience__label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--home-black);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.wa-audience__label::before,
+.wa-audience__label::after {
+  width: 1.8rem;
+  height: 2px;
+  content: "";
+  background: var(--flow-blue);
+}
+
+/* The customer types sit like points on one dashed line; the open ending is dashed itself. */
+.wa-audience__list {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem 1rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wa-audience__list::before {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  border-top: 1.5px dashed var(--flow-hair);
+  content: "";
 }
 
 .wa-chip {
-  padding: 0.5rem 1.1rem;
+  position: relative;
+  gap: 0.6rem;
+  padding: 0.7rem 1.35rem;
   border: 1.5px solid var(--flow-hair);
   border-radius: 999px;
   background: #fff;
   color: var(--flow-navy);
+  font-size: 1rem;
+}
+
+.wa-chip::before {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  content: "";
+  background: var(--flow-blue);
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4.5px var(--flow-hair);
+}
+
+.wa-chip--more {
+  border-style: dashed;
+  border-color: var(--flow-blue);
+  background: var(--flow-tint);
+  color: var(--flow-blue);
+}
+
+.wa-chip--more::before {
+  content: none;
 }
 
 /* ---------- Steps: three points on one wave ---------- */
@@ -805,6 +876,18 @@ html[dir="rtl"] .wa-hero::after {
   color: var(--home-muted);
   font-weight: 500;
   line-height: 1.7;
+}
+
+.wa-flow__link {
+  color: var(--flow-blue);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.wa-flow__link:hover,
+.wa-flow__link:focus-visible {
+  text-decoration-thickness: 2px;
 }
 
 /* ---------- Benefits: an open dashed grid ---------- */
@@ -932,6 +1015,10 @@ html[dir="rtl"] .wa-hero::after {
 /* ---------- Narrow screens ---------- */
 @media (max-width: 900px) {
   .wa-pricing::before {
+    display: none;
+  }
+
+  .wa-audience__list::before {
     display: none;
   }
 

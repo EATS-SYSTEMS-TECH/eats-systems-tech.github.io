@@ -2,14 +2,12 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells, installSubscriptionFlow } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells, installSubscriptionFlow, installAudienceList } from "./host-marketing-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
 
-// Each question is answered by copy the page already states.
-const hostAnswers = [["steps.s2x"], ["benefits.b2x"], ["secure.i3x"], ["secure.i1x"], ["secure.i2x"], ["benefits.b6x"], ["benefits.b5x"], ["pricing.note"]];
-const managerAnswers = [["pricing.subtitle"], ["steps.s1x"], ["pricing.organizationsDesc", "benefits.b4x"], ["secure.i3x"], ["secure.i2x"], ["secure.i1x"], ["pricing.note"], ["benefits.b6x"]];
-const existingCopy = (marketing, paths) => paths.map(path => path.split(".").reduce((value, key) => value[key], marketing)).join(" ");
+// A step may mark its sign-in link as [[words]]; questions and answers always read as plain text.
+const unmarked = text => text.replace(/\[\[(.+?)\]\]/g, "$1");
 
 const copies = await Promise.all(SITE_LANGUAGES.map(async ({ code }) => ({
   locale: code,
@@ -45,8 +43,12 @@ test("all 39 Host locales reuse existing hero, steps, benefits and SEO without n
     assert.equal(content.faq.length, 8);
     content.faq.forEach((item, index) => {
       assert.equal(item.question, host.marketing.faq[`q${index + 1}`], locale);
-      assert.equal(item.answer, existingCopy(host.marketing, hostAnswers[index]), `${locale}: answer ${index + 1} restates existing copy`);
+      assert.equal(item.answer, unmarked(host.marketing.faq[`a${index + 1}`]), `${locale}: answer ${index + 1}`);
+      assert.doesNotMatch(item.answer, /\[\[|\]\]/, `${locale}: no link markers in an answer`);
     });
+    assert.match(host.marketing.pricing.note, /\$6/, `${locale}: the documented account minimum`);
+    assert.deepEqual(content.audiences, home.automation.audiences, `${locale}: the localized customer types, ending open`);
+    assert.notEqual(content.audiences, home.automation.audiences, `${locale}: a copy, not the source array`);
     assert.deepEqual(content.stepsHeading, { eyebrow: host.marketing.steps.eyebrow, title: host.marketing.steps.title, subtitle: host.marketing.steps.subtitle }, locale);
     assert.equal(content.benefitsEyebrow, host.marketing.benefits.eyebrow, locale);
     for (const key of ["title", "text", "button"]) assert.ok(host.marketing.shop[key]?.trim(), `${locale}: shop.${key}`);
@@ -73,8 +75,14 @@ test("all 39 Manager locales supply the shared page layout with the Manager plan
     assert.equal(content.faq.length, 8);
     content.faq.forEach((item, index) => {
       assert.equal(item.question, manager.marketing.faq[`q${index + 1}`], locale);
-      assert.equal(item.answer, existingCopy(manager.marketing, managerAnswers[index]), `${locale}: answer ${index + 1} restates existing copy`);
+      assert.equal(item.answer, unmarked(manager.marketing.faq[`a${index + 1}`]), `${locale}: answer ${index + 1}`);
     });
+    // An activated Manager subscription has a monthly minimum of one system, even with no linked system.
+    for (const key of ["systemsF3", "note"]) assert.match(manager.marketing.pricing[key], /\$1\.90/, `${locale}: ${key} states the $1.90 minimum`);
+    assert.match(manager.marketing.faq.a1, /\$1\.90/, `${locale}: the minimum answer`);
+    assert.equal((manager.marketing.steps.s1x.match(/\[\[/g) || []).length, 1, `${locale}: one sign-in link in step 1`);
+    assert.equal((manager.marketing.steps.s1x.match(/\]\]/g) || []).length, 1, `${locale}: one sign-in link in step 1`);
+    assert.deepEqual(content.audiences, home.automation.manager.audiences, `${locale}: the localized customer types, ending open`);
     for (const key of ["title", "text", "button"]) assert.ok(manager.marketing.shop[key]?.trim(), `${locale}: shop.${key}`);
   }
   const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
@@ -85,13 +93,14 @@ test("all 39 Manager locales supply the shared page layout with the Manager plan
 
 test("missing localized copy fails instead of publishing a partial page or a fallback", () => {
   const { host, home } = copies.find(item => item.locale === "he");
-  const fields = ["marketing.hero.title", "marketing.steps.s2x", "marketing.steps.subtitle", "marketing.benefits.b6t", "marketing.benefits.eyebrow", "marketing.faq.q3", "marketing.secure.i1x", "metaDescription"];
+  const fields = ["marketing.hero.title", "marketing.steps.s2x", "marketing.steps.subtitle", "marketing.benefits.b6t", "marketing.benefits.eyebrow", "marketing.faq.q3", "marketing.faq.a8", "metaDescription"];
   for (const field of fields) {
     const incomplete = structuredClone(host), path = field.split("."), key = path.pop();
     path.reduce((object, segment) => object[segment], incomplete)[key] = " ";
     assert.throws(() => getHostPageContent(incomplete, home), /Missing localized WIFIGATE Host copy/);
   }
   assert.throws(() => getHostPageContent(host, {}), /homepage\.automation\.imageAlt/);
+  assert.throws(() => getHostPageContent(host, { automation: { imageAlt: "Alt", audiences: ["Hotels"] } }), /homepage\.automation\.audiences/, "a closed one-entry list is refused");
 });
 
 test("Host details preserve translated sections, plan prices and actions inside their own style scope", async () => {
@@ -255,6 +264,17 @@ test("the three steps ride one wave that follows the page direction, with locali
     assert.equal($(node).find("p.wa-flow__desc").text(), host.marketing.steps[`s${index + 1}x`]);
   });
   assert.equal($("#niche-benefits .niche-section__header > .wa-eyebrow").text(), host.marketing.benefits.eyebrow);
+  // A step's [[words]] become the sign-in link; without a path they read as plain text.
+  const linked = shell(), marked = { ...content, highlights: content.highlights.map((step, index) => index ? step : { ...step, text: "Export to [[the dashboard]], linked to your account." }) };
+  installSubscriptionFlow(linked, { content: marked, loginHref: "/he/login/" });
+  const first = linked(".wa-flow__desc").first();
+  assert.equal(first.text(), "Export to the dashboard, linked to your account.");
+  assert.deepEqual(first.find("a").map((_, node) => [linked(node).attr("href"), linked(node).text()]).get(), ["/he/login/", "the dashboard"]);
+  const unlinked = shell();
+  installSubscriptionFlow(unlinked, { content: marked });
+  assert.equal(unlinked(".wa-flow__desc").first().text(), "Export to the dashboard, linked to your account.");
+  assert.equal(unlinked(".wa-flow__desc a").length, 0);
+  assert.throws(() => installSubscriptionFlow(shell(), { content: marked, loginHref: " " }), /sign-in link must be a path/);
   const ltr = shell("ltr");
   installSubscriptionFlow(ltr, { content, productName: "manager" });
   assert.equal(ltr("img.wa-flow__wave").attr("src"), "assets/img/subscription-flow/wave-ltr.svg");
@@ -267,4 +287,22 @@ test("the three steps ride one wave that follows the page direction, with locali
   const page = shell(), original = page.html();
   assert.throws(() => installSubscriptionFlow(page, { content, direction: "up" }), /Unknown step flow direction/);
   assert.equal(page.html(), original);
+});
+
+test("the audience row lists the localized customer types and always ends open", () => {
+  const page = () => cheerio.load('<main><div class="wa-page host-marketing-details"><section class="wa-audience"><div class="container wa-audience__row"><span class="wa-audience__label">Built for:</span><span class="wa-chip">Old</span><span class="wa-chip">Chips</span></div></section></div></main>');
+  const $ = page();
+  installAudienceList($, { items: ["Hotels", "Storage services", "And more…"] });
+  assert.equal($(".wa-audience__row > .wa-chip").length, 0, "the fixed chips give way to the localized list");
+  assert.equal($(".wa-audience__row > .wa-audience__label").text(), "Built for:");
+  assert.deepEqual($("ul.wa-audience__list > li").map((_, node) => [[$(node).attr("class"), $(node).text()]]).get(),
+    [["wa-chip", "Hotels"], ["wa-chip", "Storage services"], ["wa-chip wa-chip--more", "And more…"]]);
+  for (const items of [undefined, [], ["Only one"], ["Hotels", " "], ["Hotels", 5]]) {
+    const broken = page(), original = broken.html();
+    assert.throws(() => installAudienceList(broken, { items }), /audience list requires/);
+    assert.equal(broken.html(), original, "no partial mutation");
+  }
+  const missing = cheerio.load("<main></main>"), original = missing.html();
+  assert.throws(() => installAudienceList(missing, { items: ["Hotels", "And more…"] }), /one audience row/);
+  assert.equal(missing.html(), original);
 });

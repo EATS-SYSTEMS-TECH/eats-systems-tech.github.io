@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Bảng giá",
       "title": "Các gói đơn giản cho tiện ích bổ sung WIFIGATE Host",
-      "subtitle": "Bạn chỉ trả phí cho phần tự động hóa, tính theo từng hệ thống đang hoạt động. Riêng thiết bị WIFIGATE thì không bao giờ cần thuê bao.",
+      "subtitle": "Bạn trả phí theo từng hệ thống đang hoạt động, với mức tối thiểu hằng tháng bằng một hệ thống. Riêng bộ điều khiển WIFIGATE thì không bao giờ cần thuê bao.",
       "per": "/ hệ thống / tháng",
       "badge": "Phổ biến nhất",
       "startDesc": "Cho doanh nghiệp nhỏ bắt đầu tự động hóa quyền ra vào của khách.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, vai trò tùy chỉnh và audit mở rộng",
       "scaleF4": "Hỗ trợ triển khai cấp doanh nghiệp",
       "planCta": "Liên hệ với chúng tôi",
-      "note": "Giá hằng tháng tính bằng đô la Mỹ (USD) cho mỗi hệ thống đang hoạt động, theo từng bậc: 14 hệ thống đầu tiên giá $6 mỗi hệ thống, hệ thống thứ 15–49 giá $5 mỗi hệ thống, và mỗi hệ thống từ thứ 50 trở đi giá $4. Mức tối thiểu cho mỗi tài khoản: $6 mỗi tháng. Không có phí nền tảng và không tính phí theo lời mời khách. Có báo giá theo số lượng cho 250+ hệ thống."
+      "note": "Giá hằng tháng tính bằng đô la Mỹ (USD), chưa gồm thuế, cho mỗi hệ thống đang hoạt động, theo từng bậc: 14 hệ thống đầu tiên giá $6 mỗi hệ thống, hệ thống thứ 15–49 giá $5 mỗi hệ thống, và mỗi hệ thống từ thứ 50 trở đi giá $4. Ví dụ, 20 hệ thống: 14 × $6 cộng 6 × $5, tức $114 mỗi tháng. Mức tối thiểu cho mỗi tài khoản: $6 mỗi tháng, kể cả khi không có hệ thống nào được liên kết. Không có phí nền tảng và không tính phí theo lời mời khách. Có báo giá theo số lượng cho 250+ hệ thống."
     },
     "audience": {
       "label": "Dành cho:",
@@ -51,28 +51,28 @@ export default {
       "title": "Từ đặt phòng đến cổng mở, hoàn toàn tự động",
       "subtitle": "Ba bước, sau đó mọi việc tự vận hành với từng lượt đặt phòng.",
       "s1t": "Có lượt đặt phòng mới",
-      "s1x": "Hệ thống đặt phòng hoặc quản lý của bạn thông báo cho WIFIGATE Host về một lượt đặt phòng mới vừa được xác nhận.",
+      "s1x": "Hệ thống đặt phòng của bạn thông báo cho WIFIGATE Host về mọi lượt đặt phòng đã được xác nhận. Bạn cũng có thể nhập lượt đặt phòng bằng tay trên bảng điều khiển.",
       "s2t": "Quyền ra vào được tạo tự động",
-      "s2x": "WIFIGATE Host cấp một lời mời bảo mật, có thời hạn cho đúng cổng, cửa hoặc bãi xe, chỉ có hiệu lực trong kỳ lưu trú đó.",
+      "s2x": "WIFIGATE Host tạo một liên kết ra vào bảo mật cho đúng cổng, cửa hoặc bãi xe của lượt đặt phòng đó, chỉ có hiệu lực trong kỳ lưu trú. Bạn hoặc hệ thống đặt phòng của bạn gửi liên kết này cho khách.",
       "s3t": "Khách chỉ việc bước vào",
-      "s3x": "Khách mở lối vào bằng điện thoại. Đến giờ trả phòng, quyền ra vào tự hết hạn, không có gì phải thu hồi hay hủy bỏ."
+      "s3x": "Khách mở liên kết trong ứng dụng WIFIGATE và mở lối vào bằng điện thoại của mình. Khi trả phòng, quyền ra vào tự kết thúc. Không có chìa khóa nào phải thu lại."
     },
     "benefits": {
       "eyebrow": "Vì sao chọn WIFIGATE Host",
       "title": "Bớt việc lễ tân. Đón khách nhàn hơn.",
       "subtitle": "Mọi thứ cần thiết để biến một lượt đặt phòng thành quyền ra vào, đều được xử lý thay bạn.",
       "b1t": "Không cần bàn giao chìa khóa",
-      "b1x": "Quên đi việc nhận chìa khóa, hộp đựng chìa khóa và mã số bị sao chép. Quyền ra vào đến điện thoại của khách đúng lúc cần.",
+      "b1x": "Quên đi việc nhận chìa khóa, hộp đựng chìa khóa và mã số chuyền tay nhau. Khách nhận một liên kết và mở bằng điện thoại của mình.",
       "b2t": "Luôn có thời hạn",
-      "b2x": "Mỗi lời mời tự động có hiệu lực khi nhận phòng và hết hạn khi trả phòng, với từng kỳ lưu trú.",
+      "b2x": "Mỗi liên kết ra vào bắt đầu khi nhận phòng và kết thúc khi trả phòng, một cách tự động, với từng kỳ lưu trú.",
       "b3t": "Mã hóa và riêng tư",
-      "b3x": "Quyền ra vào được mã hóa và chỉ giới hạn trong phạm vi đã cấp. Tài sản và khách của bạn luôn được bảo vệ.",
+      "b3x": "Liên kết ra vào được mã hóa và chỉ dành cho điện thoại của vị khách bạn đã mời.",
       "b4t": "Hoạt động với các lối vào hiện có",
-      "b4x": "Cổng, cửa gara, barie và cửa ra vào, WIFIGATE điều khiển chính những gì bạn đang có.",
+      "b4x": "Cổng, cổng bãi xe, barie và cửa ra vào: bất kỳ lối vào nào có bộ điều khiển WIFIGATE.",
       "b5t": "Phù hợp cả với toàn bộ tòa nhà",
-      "b5x": "Từ một cổng đơn lẻ đến cả một khu lưu trú, một lời mời có thể bao gồm mọi lối vào mà khách cần.",
+      "b5x": "Từ một cổng đơn lẻ đến cả một khu lưu trú: một lượt đặt phòng có thể mở một nhóm lối vào, chẳng hạn cổng, bãi xe và cửa.",
       "b6t": "Kết nối với hệ thống của bạn",
-      "b6x": "Kết nối WIFIGATE Host với quy trình đặt phòng, PMS hoặc Channel Manager của bạn và để mọi việc tự vận hành."
+      "b6x": "Hệ thống đặt phòng, PMS hoặc Channel Manager của bạn kết nối với WIFIGATE Host qua API, và từ đó mọi việc tự vận hành."
     },
     "secure": {
       "eyebrow": "Bảo mật",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Khách nhận quyền ra vào bằng cách nào?",
-      "q2": "Điều gì xảy ra khi trả phòng?",
-      "q3": "Tôi có thể thu hồi quyền ra vào giữa kỳ lưu trú không?",
-      "q4": "Quyền ra vào của khách có an toàn không?",
-      "q5": "Khách có còn cần chìa khóa, thẻ hay remote không?",
-      "q6": "WIFIGATE Host kết nối với những hệ thống nào?",
-      "q7": "Có phù hợp với cả một tòa nhà không?",
-      "q8": "Giá được tính như thế nào?"
+      "a1": "WIFIGATE Host tạo một liên kết ra vào riêng cho mỗi lượt đặt phòng. Bạn hoặc hệ thống đặt phòng của bạn gửi liên kết này cho khách qua SMS, email hoặc WhatsApp, và bạn cũng có thể hiển thị nó dưới dạng mã QR.",
+      "q2": "Khách có cần cài đặt ứng dụng không?",
+      "a2": "Có. Khách mở liên kết trong ứng dụng WIFIGATE và đăng nhập bằng Google hoặc Apple. Nếu không có ứng dụng, liên kết sẽ dẫn đến trang cài đặt; sau khi cài đặt, khách mở lại liên kết.",
+      "q3": "Quyền ra vào bắt đầu và kết thúc khi nào?",
+      "a3": "Theo giờ nhận phòng và trả phòng của lượt đặt phòng. Mặc định là đến lúc 15:00 và rời đi lúc 12:00, và bạn có thể đặt giờ khác.",
+      "q4": "Lối vào có cần internet không?",
+      "a4": "Không. Lối vào mở qua Bluetooth giữa điện thoại của khách và bộ điều khiển, không phụ thuộc vào đám mây tại thời điểm vào.",
+      "q5": "Dịch vụ kết nối với những hệ thống đặt phòng nào?",
+      "a5": "Bất kỳ hệ thống nào có thể gửi lượt đặt phòng qua API hoặc webhook: hệ thống quản lý cơ sở lưu trú (PMS), Channel Manager hoặc hệ thống riêng của bạn. Bạn cũng có thể nhập các lượt đặt phòng bằng tay trên bảng điều khiển.",
+      "q6": "Có dùng được cho khu lưu trú có nhiều lối vào không?",
+      "a6": "Có. Một lượt đặt phòng có thể mở một nhóm lối vào, chẳng hạn cổng, bãi xe và cửa, với tối đa 20 hệ thống trong một nhóm.",
+      "q7": "Cần lắp đặt những gì?",
+      "a7": "Một bộ điều khiển WIFIGATE tại mỗi lối vào. Quản trị viên của cổng thêm bộ điều khiển đó vào WIFIGATE Host từ ứng dụng, ngay cạnh cổng. Lối vào không cần Wi‑Fi.",
+      "q8": "Giá được tính như thế nào, và có mức tối thiểu không?",
+      "a8": "Theo số hệ thống đang hoạt động, theo từng bậc: $6 mỗi hệ thống cho tối đa 14 hệ thống, $5 cho hệ thống thứ 15–49 và $4 từ hệ thống thứ 50. Mức tối thiểu cho mỗi tài khoản là $6 mỗi tháng, kể cả khi không có hệ thống nào được liên kết. Hệ thống chỉ hoạt động một phần của tháng được tính phí theo ngày."
     },
     "shop": {
       "title": "Mọi thứ bắt đầu từ một bộ điều khiển WIFIGATE",

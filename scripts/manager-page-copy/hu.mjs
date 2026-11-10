@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Árak",
       "title": "Egyszerű árazás a WIFIGATE Managerhez",
-      "subtitle": "Csak a kezelt rendszerekért fizet. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés.",
+      "subtitle": "A kezelt rendszerekért fizet, havonta legalább egy rendszer díját. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés.",
       "badge": "Egy egyszerű ár",
       "systemsName": "Rendszerek",
       "systemsPer": "/ rendszer / hó",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Minden aktív rendszer az irányítópulton, bárhol is legyen.",
       "systemsF1": "Minden rendszer egyszer számít, több csoportban is",
       "systemsF2": "A csoportok ingyenesek: csak a rendszereik számítanak",
-      "systemsF3": "Aktív rendszer nélkül nincs rendszerdíj",
+      "systemsF3": "Havi minimum: $1.90, csatlakoztatott rendszer nélkül is",
       "systemsF4": "A hónap közben hozzáadott rendszer díja napokra arányos",
       "organizationsName": "Szervezetek",
       "organizationsPer": "/ további szervezet / hó",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 redőny: $1.90 / hó",
       "exampleF4": "Havi becslés adó nélkül",
       "planCta": "Beszéljünk",
-      "note": "Az árak amerikai dollárban (USD) értendők, adó nélkül. Minden hónap elején egyetlen terhelés fedezi az előző hónapot, napokra arányosan, a WIFIGATE Hosttal együtt, ha azt is használja."
+      "note": "Az árak amerikai dollárban (USD) értendők, adó nélkül. Az aktív előfizetés minimális díja havi $1.90, csatlakoztatott rendszer nélkül is. Minden hónap elején egyetlen terhelés fedezi az előző hónapot, napokra arányosan, a WIFIGATE Hosttal együtt, ha azt is használja."
     },
     "audience": {
       "label": "Kinek készült:",
@@ -56,11 +56,11 @@ export default {
       "title": "Egyetlen vezérlőtől az összes helyszínig",
       "subtitle": "Három lépés, és mindent egy helyről kezel.",
       "s1t": "Csatlakoztassa a rendszereit",
-      "s1x": "Exportálja WIFIGATE rendszereit az alkalmazásból az irányítópultra. A vezérlők Wi‑Fi-n csatlakoznak.",
+      "s1x": "Exportálja WIFIGATE rendszereit az alkalmazásból [[a WIFIGATE webhelyén található irányítópultra]], amely a fiókjához kapcsolódik. A vezérlők Wi‑Fi-n csatlakoznak.",
       "s2t": "Rendezze őket a saját módján",
       "s2x": "Csoportosítsa a kapukat, ajtókat és redőnyöket épület, helyszín vagy szervezet szerint.",
       "s3t": "Kezelje bárhonnan",
-      "s3x": "Adjon és vonjon vissza hozzáférést, nézze meg az előzményeket, és vezéreljen minden rendszert bármilyen böngészőből."
+      "s3x": "Adjon és vonjon vissza hozzáférést, nézze meg az előzményeket, és nyisson kapukat távolról, bármilyen böngészőből."
     },
     "benefits": {
       "eyebrow": "Miért a WIFIGATE Manager?",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Felhasználók és jogosultságok",
       "b2x": "Adjon hozzá felhasználókat, döntse el, ki mit nyithat, és módosítsa másodpercek alatt, egy rendszerre vagy egy teljes helyszínre.",
       "b3t": "Teljes hozzáférési előzmények",
-      "b3x": "Lássa, ki melyik bejáratot nyitotta és mikor, minden helyszínen.",
+      "b3x": "Lássa, ki nyitotta az egyes bejáratokat, és mikor.",
       "b4t": "Szervezetek és csoportok",
       "b4x": "Csoportosítsa a rendszereket épület vagy ügyfél szerint, és adjon minden szervezetnek saját adminisztrátorokat.",
       "b5t": "A világ bármely pontjáról",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Minden szervezet adminisztrátorai csak azokat a rendszereket kezelik, amelyekért felelősek."
     },
     "faq": {
-      "q1": "Kell előfizetés magához a WIFIGATE vezérlőhöz?",
+      "q1": "Van minimális díj?",
+      "a1": "Igen. Az aktív előfizetés minimális díja havi $1.90, vagyis egy rendszer ára, csatlakoztatott rendszer nélkül is. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés.",
       "q2": "Hogyan csatlakoztathatom a rendszereimet az irányítópulthoz?",
+      "a2": "Jelentkezzen be ugyanazzal a fiókkal az alkalmazásban és a WIFIGATE webhelyén. Az alkalmazásban exportáljon minden rendszert a WIFIGATE Managerbe, amikor éppen mellette áll, és csatlakoztassa a vezérlőjét a Wi‑Fi-hez (2.4GHz). Ezután a rendszer megjelenik az irányítópultján a webhelyen.",
       "q3": "Kezelhetek külön épületeket vagy ügyfeleket?",
+      "a3": "Igen. Minden épület, ügyfél vagy cég saját szervezetet kap az Ön fiókja alatt, saját adminisztrátorokkal. Három szervezet benne van az árban, minden további havi $1.",
       "q4": "Ki mit kezelhet?",
+      "a4": "A szervezeti adminisztrátorok csak a saját szervezetük rendszereit kezelik, és nem fizetnek. Nem látják a többi szervezetet, az Ön privát rendszereit és a számlázási adatokat.",
       "q5": "Mi történik, ha a bejáratnál nincs internet?",
-      "q6": "Biztonságban vannak a parancsok és a jogosultságok?",
+      "a5": "A bejárat mellől, telefonról történő nyitás Bluetoothon működik, és nem függ az internettől, a szolgáltatástól vagy az előfizetéstől.",
+      "q6": "Biztonságosak a parancsok?",
+      "a6": "Az adatok és a parancsok végponttól végpontig titkosítottak az irányítópult és a vezérlő között. Az irányítópultra a Google vagy az Apple segítségével, továbbá egy ellenőrző kóddal jelentkezik be.",
       "q7": "Hogyan számítjuk ki a havi díjat?",
-      "q8": "Milyen rendszereket kezelhetek?"
+      "a7": "Rendszerenként havi $1.90, napokra arányosan: a hónap közben hozzáadott vagy eltávolított rendszerért csak azokra a napokra számítunk fel díjat, amikor az irányítópultján volt. Minden hónap elején egyetlen terhelés fedezi az előző hónapot. Az árak amerikai dollárban értendők, adó nélkül.",
+      "q8": "Milyen rendszereket kezelhetek?",
+      "a8": "Gate, Dual Control és redőny típusú rendszereket, valamint ezek csoportjait. A redőny csak az alkalmazásból működtethető, a redőny mellől."
     },
     "shop": {
       "title": "Minden egy WIFIGATE vezérlővel kezdődik",

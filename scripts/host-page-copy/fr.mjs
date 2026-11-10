@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Tarifs",
       "title": "Des formules simples pour le module WIFIGATE Host",
-      "subtitle": "Vous ne payez que l'automatisation, par système actif. Le contrôleur WIFIGATE, lui, n'est jamais soumis à abonnement.",
+      "subtitle": "Vous payez par système actif, avec un minimum mensuel d'un système. Le contrôleur WIFIGATE, lui, n'est jamais soumis à abonnement.",
       "per": "/ système / mois",
       "badge": "Le plus populaire",
       "startDesc": "Pour les petites entreprises qui commencent à automatiser l'accès des voyageurs.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, rôles personnalisés et audit étendu",
       "scaleF4": "Accompagnement des déploiements en entreprise",
       "planCta": "Parlons-en",
-      "note": "Prix mensuels en dollars américains (USD), par système actif et par tranche : les 14 premiers systèmes coûtent $6 chacun, les systèmes 15–49 coûtent $5 chacun et chaque système à partir du 50e coûte $4. Minimum par compte : $6 par mois. Aucuns frais de plateforme ni facturation par invitation voyageur. Des devis sur volume sont disponibles pour 250+ systèmes."
+      "note": "Prix mensuels en dollars américains (USD), hors taxes, par système actif et par tranche : les 14 premiers systèmes coûtent $6 chacun, les systèmes 15–49 coûtent $5 chacun et chaque système à partir du 50e coûte $4. Par exemple, 20 systèmes : 14 × $6 plus 6 × $5, soit $114 par mois. Minimum par compte : $6 par mois, même sans système lié. Aucuns frais de plateforme ni facturation par invitation voyageur. Des devis sur volume sont disponibles pour 250+ systèmes."
     },
     "audience": {
       "label": "Conçu pour :",
@@ -51,28 +51,28 @@ export default {
       "title": "De la réservation au portail ouvert, automatiquement",
       "subtitle": "Trois étapes, puis tout tourne tout seul à chaque réservation.",
       "s1t": "Une réservation arrive",
-      "s1x": "Votre système de réservation ou de gestion locative informe WIFIGATE Host de chaque nouvelle réservation confirmée.",
+      "s1x": "Votre système de réservation informe WIFIGATE Host de chaque réservation confirmée. Vous pouvez aussi saisir une réservation à la main dans le tableau de bord.",
       "s2t": "L'accès est créé automatiquement",
-      "s2x": "WIFIGATE Host émet une invitation sécurisée et limitée dans le temps, précisément pour le bon portail, la bonne porte ou le bon parking, valable uniquement pour ce séjour.",
+      "s2x": "WIFIGATE Host crée un lien d'accès sécurisé, précisément pour le portail, la porte ou le parking de cette réservation, valable uniquement pendant le séjour. Vous ou votre système de réservation l'envoyez au voyageur.",
       "s3t": "Votre voyageur entre, tout simplement",
-      "s3x": "Il ouvre l'entrée depuis son téléphone. Au départ, l'accès expire de lui-même : rien à récupérer, rien à annuler."
+      "s3x": "Le voyageur ouvre le lien dans l'application WIFIGATE et ouvre l'entrée depuis son téléphone. Au départ, l'accès prend fin de lui-même. Aucune clé à récupérer."
     },
     "benefits": {
       "eyebrow": "Pourquoi WIFIGATE Host",
       "title": "Moins de temps à la réception. Plus d'accueil, en pilote automatique.",
       "subtitle": "Tout ce qu'il faut pour qu'une réservation devienne un accès, on s'en charge.",
       "b1t": "Aucune clé à remettre",
-      "b1x": "Oubliez la remise des clés, les boîtes à clés et les codes recopiés. L'accès arrive sur le téléphone de votre voyageur au moment précis où il en a besoin.",
+      "b1x": "Oubliez la remise des clés, les boîtes à clés et les codes qui passent de main en main. Le voyageur reçoit un lien et ouvre depuis son téléphone.",
       "b2t": "Temporaire par nature",
-      "b2x": "Chaque invitation s'ouvre à l'arrivée et expire au départ, automatiquement, pour chaque séjour.",
+      "b2x": "Chaque lien d'accès commence à l'arrivée et prend fin au départ, automatiquement, pour chaque séjour.",
       "b3t": "Chiffré et privé",
-      "b3x": "L'accès est chiffré et limité à l'autorisation délivrée. Votre établissement et vos voyageurs restent protégés.",
+      "b3x": "Le lien d'accès est chiffré et destiné uniquement au téléphone du voyageur que vous avez invité.",
       "b4t": "Compatible avec vos entrées",
-      "b4x": "Portails, portes de parking, barrières et portes d'entrée : WIFIGATE commande ce que vous avez déjà.",
+      "b4x": "Portails, portails de parking, barrières et portes d'entrée : toute entrée équipée d'un contrôleur WIFIGATE.",
       "b5t": "Même pour un bâtiment entier",
-      "b5x": "D'un seul portail à un complexe entier, une seule invitation peut couvrir toutes les entrées dont votre voyageur a besoin.",
+      "b5x": "D'un seul portail à un complexe entier : une seule réservation peut ouvrir un groupe d'entrées, par exemple un portail, un parking et une porte.",
       "b6t": "Connecté à vos systèmes",
-      "b6x": "Connectez WIFIGATE Host à votre processus de réservation, à votre PMS ou à votre channel manager, et laissez-le travailler pour vous."
+      "b6x": "Votre système de réservation, votre PMS ou votre channel manager se connecte à WIFIGATE Host via une API, et tout fonctionne ensuite tout seul."
     },
     "secure": {
       "eyebrow": "Sécurité",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Comment le voyageur obtient-il son accès ?",
-      "q2": "Que se passe-t-il au moment du départ ?",
-      "q3": "Puis-je interrompre l'accès en cours de séjour ?",
-      "q4": "L'accès des voyageurs est-il sécurisé ?",
-      "q5": "Les voyageurs ont-ils encore besoin de clés, de cartes ou de télécommandes ?",
-      "q6": "À quels systèmes WIFIGATE Host se connecte-t-il ?",
-      "q7": "Est-ce adapté à un bâtiment entier ?",
-      "q8": "Comment le prix est-il calculé ?"
+      "a1": "WIFIGATE Host crée un lien d'accès privé pour chaque réservation. Vous ou votre système de réservation l'envoyez au voyageur par SMS, par e-mail ou par WhatsApp, et vous pouvez aussi l'afficher sous forme de code QR.",
+      "q2": "Le voyageur doit-il installer une application ?",
+      "a2": "Oui. Le voyageur ouvre le lien dans l'application WIFIGATE et se connecte avec Google ou Apple. Sans l'application, le lien mène à la page d'installation ; après l'installation, le voyageur ouvre de nouveau le lien.",
+      "q3": "Quand l'accès commence-t-il et quand prend-il fin ?",
+      "a3": "Il suit l'arrivée et le départ de la réservation. Par défaut, l'arrivée est à 15:00 et le départ à 12:00, et vous pouvez définir d'autres horaires.",
+      "q4": "Faut-il une connexion internet à l'entrée ?",
+      "a4": "Non. L'entrée s'ouvre en Bluetooth entre le téléphone du voyageur et le contrôleur, sans dépendre du cloud au moment de l'entrée.",
+      "q5": "À quels systèmes de réservation se connecte-t-il ?",
+      "a5": "À tout système capable d'envoyer des réservations via une API ou un webhook : un système de gestion locative (PMS), un channel manager ou votre propre système. Vous pouvez aussi saisir des réservations à la main dans le tableau de bord.",
+      "q6": "Est-ce adapté à un complexe avec plusieurs entrées ?",
+      "a6": "Oui. Une seule réservation peut ouvrir un groupe d'entrées, par exemple un portail, un parking et une porte, avec jusqu'à 20 systèmes par groupe.",
+      "q7": "Que faut-il installer ?",
+      "a7": "Un contrôleur WIFIGATE à chaque entrée. L'administrateur du portail l'ajoute à WIFIGATE Host depuis l'application, à côté du portail. Aucun Wi‑Fi n'est nécessaire à l'entrée.",
+      "q8": "Comment le prix est-il calculé, et y a-t-il un minimum ?",
+      "a8": "Selon le nombre de systèmes actifs, par tranche : $6 par système jusqu'à 14 systèmes, $5 pour les systèmes 15–49 et $4 à partir du 50e. Le minimum par compte est de $6 par mois, même sans système lié. Un système actif pendant une partie du mois seulement est facturé au jour près."
     },
     "shop": {
       "title": "Tout commence par un contrôleur WIFIGATE",

@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Cennik",
       "title": "Prosty cennik WIFIGATE Manager",
-      "subtitle": "Płacisz tylko za systemy, którymi zarządzasz. Sam kontroler WIFIGATE nigdy nie wymaga abonamentu.",
+      "subtitle": "Płacisz za systemy, którymi zarządzasz, z miesięcznym minimum w wysokości jednego systemu. Sam kontroler WIFIGATE nigdy nie wymaga abonamentu.",
       "badge": "Jedna prosta cena",
       "systemsName": "Systemy",
       "systemsPer": "/ system / miesiąc",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Każdy aktywny system w Twoim panelu, gdziekolwiek się znajduje.",
       "systemsF1": "Każdy system liczy się raz, nawet w kilku grupach",
       "systemsF2": "Grupy są bezpłatne: liczą się tylko ich systemy",
-      "systemsF3": "Brak aktywnych systemów to brak opłat za systemy",
+      "systemsF3": "Miesięczne minimum: $1.90, nawet bez podłączonego systemu",
       "systemsF4": "System dodany w trakcie miesiąca jest rozliczany za dni",
       "organizationsName": "Organizacje",
       "organizationsPer": "/ dodatkowa organizacja / miesiąc",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 roleta: $1.90 / miesiąc",
       "exampleF4": "Szacunkowy koszt miesięczny netto",
       "planCta": "Porozmawiaj z nami",
-      "note": "Ceny w dolarach amerykańskich (USD), netto. Jedno obciążenie na początku każdego miesiąca obejmuje poprzedni miesiąc, za dni, razem z WIFIGATE Host, jeśli z niego korzystasz."
+      "note": "Ceny w dolarach amerykańskich (USD), netto. Aktywny abonament ma minimum $1.90 miesięcznie, nawet bez podłączonego systemu. Jedno obciążenie na początku każdego miesiąca obejmuje poprzedni miesiąc, za dni, razem z WIFIGATE Host, jeśli z niego korzystasz."
     },
     "audience": {
       "label": "Dla kogo:",
@@ -56,11 +56,11 @@ export default {
       "title": "Od jednego kontrolera do wszystkich obiektów",
       "subtitle": "Trzy kroki i zarządzasz wszystkim z jednego miejsca.",
       "s1t": "Połącz swoje systemy",
-      "s1x": "Wyeksportuj swoje systemy WIFIGATE z aplikacji do panelu. Kontrolery łączą się przez Wi‑Fi.",
+      "s1x": "Wyeksportuj swoje systemy WIFIGATE z aplikacji do [[panelu na stronie WIFIGATE]], który jest powiązany z Twoim kontem. Kontrolery łączą się przez Wi‑Fi.",
       "s2t": "Uporządkuj je po swojemu",
       "s2x": "Grupuj bramy, drzwi i rolety według budynku, obiektu lub organizacji.",
       "s3t": "Zarządzaj z dowolnego miejsca",
-      "s3x": "Nadawaj i odbieraj dostęp, przeglądaj historię i steruj każdym systemem z dowolnej przeglądarki."
+      "s3x": "Nadawaj i odbieraj dostęp, przeglądaj historię i otwieraj bramy zdalnie, z dowolnej przeglądarki."
     },
     "benefits": {
       "eyebrow": "Dlaczego WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Użytkownicy i uprawnienia",
       "b2x": "Dodawaj użytkowników, decyduj, kto może co otwierać, i zmieniaj to w kilka sekund, dla jednego systemu lub całego obiektu.",
       "b3t": "Pełna historia dostępu",
-      "b3x": "Sprawdzaj, kto i kiedy otworzył które wejście, we wszystkich obiektach.",
+      "b3x": "Sprawdzaj, kto i kiedy otworzył każde wejście.",
       "b4t": "Organizacje i grupy",
       "b4x": "Grupuj systemy według budynku lub klienta i nadaj każdej organizacji własnych administratorów.",
       "b5t": "Z dowolnego miejsca na świecie",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Administratorzy każdej organizacji zarządzają tylko systemami, za które odpowiadają."
     },
     "faq": {
-      "q1": "Czy sam kontroler WIFIGATE wymaga abonamentu?",
+      "q1": "Czy jest opłata minimalna?",
+      "a1": "Tak. Aktywny abonament ma minimum $1.90 miesięcznie, czyli cenę jednego systemu, nawet bez podłączonego systemu. Sam kontroler WIFIGATE nigdy nie wymaga abonamentu.",
       "q2": "Jak połączyć swoje systemy z panelem?",
+      "a2": "Zaloguj się na to samo konto w aplikacji i na stronie WIFIGATE. W aplikacji wyeksportuj każdy system do WIFIGATE Manager, gdy jesteś obok niego, i połącz jego kontroler z Wi‑Fi (2.4GHz). System pojawi się wtedy w Twoim panelu na stronie.",
       "q3": "Czy mogę zarządzać oddzielnymi budynkami lub klientami?",
+      "a3": "Tak. Każdy budynek, klient lub firma otrzymuje własną organizację w ramach Twojego konta, z własnymi administratorami. Trzy organizacje są w cenie, a każda dodatkowa kosztuje $1 miesięcznie.",
       "q4": "Kto może czym zarządzać?",
+      "a4": "Administratorzy organizacji zarządzają tylko systemami swojej organizacji i nie płacą. Nie widzą innych organizacji, Twoich prywatnych systemów ani danych rozliczeniowych.",
       "q5": "Co się dzieje, gdy przy wejściu nie ma internetu?",
-      "q6": "Czy polecenia i uprawnienia są zabezpieczone?",
+      "a5": "Otwieranie telefonem przy wejściu działa przez Bluetooth i nie zależy od internetu, usługi ani abonamentu.",
+      "q6": "Czy polecenia są zabezpieczone?",
+      "a6": "Dane i polecenia są szyfrowane end-to-end między panelem a kontrolerem. Do panelu logujesz się przez Google lub Apple, podając dodatkowo kod weryfikacyjny.",
       "q7": "Jak naliczana jest opłata miesięczna?",
-      "q8": "Jakimi systemami mogę zarządzać?"
+      "a7": "$1.90 za system miesięcznie, za dni: system dodany lub usunięty w trakcie miesiąca jest rozliczany tylko za dni, w których był w Twoim panelu. Jedno obciążenie na początku każdego miesiąca obejmuje poprzedni miesiąc. Ceny w dolarach amerykańskich, netto.",
+      "q8": "Jakimi systemami mogę zarządzać?",
+      "a8": "Systemami Gate, Dual Control i rolet oraz ich grupami. Roletą steruje się wyłącznie z aplikacji, przy rolecie."
     },
     "shop": {
       "title": "Wszystko zaczyna się od kontrolera WIFIGATE",

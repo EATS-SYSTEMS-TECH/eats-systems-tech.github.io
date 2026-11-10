@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Harga",
       "title": "Harga sederhana untuk WIFIGATE Manager",
-      "subtitle": "Bayar hanya untuk sistem yang Anda kelola. Pengontrol WIFIGATE itu sendiri tidak pernah memerlukan langganan.",
+      "subtitle": "Bayar untuk sistem yang Anda kelola, dengan minimum bulanan satu sistem. Pengontrol WIFIGATE itu sendiri tidak pernah memerlukan langganan.",
       "badge": "Satu harga sederhana",
       "systemsName": "Sistem",
       "systemsPer": "/ sistem / bulan",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Setiap sistem aktif di dasbor Anda, di mana pun lokasinya.",
       "systemsF1": "Setiap sistem dihitung sekali, meski ada di beberapa grup",
       "systemsF2": "Grup gratis: hanya sistemnya yang dihitung",
-      "systemsF3": "Tanpa sistem aktif, tanpa biaya sistem",
+      "systemsF3": "Minimum bulanan: $1.90, meski tidak ada sistem yang tertaut",
       "systemsF4": "Sistem yang ditambahkan di tengah bulan ditagih per hari",
       "organizationsName": "Organisasi",
       "organizationsPer": "/ organisasi tambahan / bulan",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 rolling door: $1.90 / bulan",
       "exampleF4": "Perkiraan bulanan sebelum pajak",
       "planCta": "Hubungi kami",
-      "note": "Harga dalam dolar AS (USD), sebelum pajak. Satu tagihan di awal setiap bulan mencakup bulan sebelumnya, dihitung per hari, bersama WIFIGATE Host jika Anda menggunakannya."
+      "note": "Harga dalam dolar AS (USD), sebelum pajak. Langganan aktif memiliki minimum $1.90 per bulan, meski tidak ada sistem yang tertaut. Satu tagihan di awal setiap bulan mencakup bulan sebelumnya, dihitung per hari, bersama WIFIGATE Host jika Anda menggunakannya."
     },
     "audience": {
       "label": "Ditujukan untuk:",
@@ -56,11 +56,11 @@ export default {
       "title": "Dari satu pengontrol hingga semua lokasi",
       "subtitle": "Tiga langkah, dan semuanya dikelola dari satu tempat.",
       "s1t": "Hubungkan sistem Anda",
-      "s1x": "Ekspor sistem WIFIGATE Anda dari aplikasi ke dasbor. Pengontrol terhubung melalui Wi‑Fi.",
+      "s1x": "Ekspor sistem WIFIGATE Anda dari aplikasi ke [[dasbor di situs web WIFIGATE]], yang tertaut ke akun Anda. Pengontrol terhubung melalui Wi‑Fi.",
       "s2t": "Atur sesuai keinginan Anda",
       "s2x": "Kelompokkan gerbang, pintu, dan rolling door berdasarkan gedung, lokasi, atau organisasi.",
       "s3t": "Kelola dari mana saja",
-      "s3x": "Berikan dan cabut akses, lihat riwayat, dan kendalikan setiap sistem dari browser apa pun."
+      "s3x": "Berikan dan cabut akses, lihat riwayat, dan buka gerbang dari jarak jauh, dari browser apa pun."
     },
     "benefits": {
       "eyebrow": "Mengapa WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Pengguna dan izin",
       "b2x": "Tambahkan pengguna, tentukan siapa yang boleh membuka apa, dan ubah dalam hitungan detik, untuk satu sistem atau seluruh lokasi.",
       "b3t": "Riwayat akses lengkap",
-      "b3x": "Lihat siapa membuka pintu masuk mana dan kapan, di semua lokasi.",
+      "b3x": "Lihat siapa yang membuka setiap pintu masuk dan kapan.",
       "b4t": "Organisasi dan grup",
       "b4x": "Kelompokkan sistem berdasarkan gedung atau klien, dan berikan setiap organisasi admin sendiri.",
       "b5t": "Dari mana saja di dunia",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Admin setiap organisasi hanya mengelola sistem yang menjadi tanggung jawab mereka."
     },
     "faq": {
-      "q1": "Apakah pengontrol WIFIGATE itu sendiri memerlukan langganan?",
+      "q1": "Apakah ada tagihan minimum?",
+      "a1": "Ya. Langganan aktif memiliki minimum $1.90 per bulan, yaitu harga satu sistem, meski tidak ada sistem yang tertaut. Pengontrol WIFIGATE itu sendiri tidak pernah memerlukan langganan.",
       "q2": "Bagaimana cara menghubungkan sistem saya ke dasbor?",
+      "a2": "Masuk dengan akun yang sama di aplikasi dan di situs web WIFIGATE. Di aplikasi, ekspor setiap sistem ke WIFIGATE Manager saat Anda berada di dekatnya, lalu hubungkan pengontrolnya ke Wi‑Fi (2.4GHz). Setelah itu, sistem muncul di dasbor Anda di situs web.",
       "q3": "Bisakah saya mengelola gedung atau klien yang terpisah?",
+      "a3": "Ya. Setiap gedung, klien, atau perusahaan mendapat organisasinya sendiri di bawah akun Anda, dengan adminnya sendiri. Tiga organisasi sudah termasuk, dan setiap organisasi tambahan dikenai biaya $1 per bulan.",
       "q4": "Siapa yang bisa mengelola apa?",
-      "q5": "Apa yang terjadi jika tidak ada internet di pintu masuk?",
-      "q6": "Apakah perintah dan izin aman?",
+      "a4": "Admin organisasi hanya mengelola sistem milik organisasinya sendiri, dan mereka tidak membayar. Mereka tidak dapat melihat organisasi lain, sistem pribadi Anda, atau detail penagihan.",
+      "q5": "Apa yang terjadi saat tidak ada internet di pintu masuk?",
+      "a5": "Membuka dari ponsel di dekat pintu masuk bekerja melalui Bluetooth dan tidak bergantung pada internet, layanan, atau langganan.",
+      "q6": "Apakah perintah aman?",
+      "a6": "Data dan perintah dienkripsi dari ujung ke ujung antara dasbor dan pengontrol. Anda masuk ke dasbor dengan Google atau Apple, ditambah kode verifikasi.",
       "q7": "Bagaimana tagihan bulanan dihitung?",
-      "q8": "Sistem apa saja yang bisa saya kelola?"
+      "a7": "$1.90 per sistem per bulan, dihitung per hari: sistem yang ditambahkan atau dihapus di tengah bulan hanya ditagih untuk hari-hari saat sistem itu ada di dasbor Anda. Satu tagihan di awal setiap bulan mencakup bulan sebelumnya. Harga dalam dolar AS, sebelum pajak.",
+      "q8": "Sistem apa saja yang bisa saya kelola?",
+      "a8": "Sistem Gate, Dual Control, dan rolling door, serta grup dari sistem-sistem tersebut. Rolling door hanya dioperasikan dari aplikasi, di dekat rolling door tersebut."
     },
     "shop": {
       "title": "Semuanya berawal dari pengontrol WIFIGATE",

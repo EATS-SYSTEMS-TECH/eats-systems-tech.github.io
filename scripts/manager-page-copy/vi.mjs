@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Bảng giá",
       "title": "Bảng giá đơn giản cho WIFIGATE Manager",
-      "subtitle": "Bạn chỉ trả phí cho các hệ thống mình quản lý. Riêng thiết bị WIFIGATE thì không bao giờ cần thuê bao.",
+      "subtitle": "Bạn trả phí cho các hệ thống mình quản lý, với mức tối thiểu hằng tháng bằng một hệ thống. Riêng bộ điều khiển WIFIGATE thì không bao giờ cần thuê bao.",
       "badge": "Một mức giá đơn giản",
       "systemsName": "Hệ thống",
       "systemsPer": "/ hệ thống / tháng",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Mỗi hệ thống đang hoạt động trên bảng điều khiển của bạn, dù ở bất cứ đâu.",
       "systemsF1": "Mỗi hệ thống chỉ tính một lần, kể cả khi thuộc nhiều nhóm",
       "systemsF2": "Nhóm miễn phí: chỉ tính các hệ thống trong nhóm",
-      "systemsF3": "Không có hệ thống hoạt động thì không tính phí hệ thống",
+      "systemsF3": "Mức tối thiểu hằng tháng: $1.90, kể cả khi không có hệ thống nào được liên kết",
       "systemsF4": "Hệ thống thêm vào giữa tháng được tính phí theo ngày",
       "organizationsName": "Tổ chức",
       "organizationsPer": "/ tổ chức bổ sung / tháng",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 cửa cuốn: $1.90 / tháng",
       "exampleF4": "Ước tính hằng tháng chưa gồm thuế",
       "planCta": "Liên hệ với chúng tôi",
-      "note": "Giá tính bằng đô la Mỹ (USD), chưa gồm thuế. Một lần thu phí vào đầu mỗi tháng cho tháng trước, tính theo ngày, cùng với WIFIGATE Host nếu bạn sử dụng."
+      "note": "Giá tính bằng đô la Mỹ (USD), chưa gồm thuế. Thuê bao đang hoạt động có mức tối thiểu $1.90 mỗi tháng, kể cả khi không có hệ thống nào được liên kết. Một lần thu phí vào đầu mỗi tháng cho tháng trước, tính theo ngày, cùng với WIFIGATE Host nếu bạn sử dụng."
     },
     "audience": {
       "label": "Dành cho:",
@@ -56,11 +56,11 @@ export default {
       "title": "Từ một bộ điều khiển đến mọi địa điểm",
       "subtitle": "Ba bước, và mọi thứ được quản lý từ một nơi.",
       "s1t": "Kết nối hệ thống của bạn",
-      "s1x": "Xuất các hệ thống WIFIGATE từ ứng dụng sang bảng điều khiển. Các bộ điều khiển kết nối qua Wi‑Fi.",
+      "s1x": "Xuất các hệ thống WIFIGATE từ ứng dụng sang [[bảng điều khiển trên trang web WIFIGATE]], vốn được liên kết với tài khoản của bạn. Các bộ điều khiển kết nối qua Wi‑Fi.",
       "s2t": "Sắp xếp theo cách của bạn",
       "s2x": "Nhóm cổng, cửa và cửa cuốn theo tòa nhà, địa điểm hoặc tổ chức.",
       "s3t": "Quản lý từ bất cứ đâu",
-      "s3x": "Cấp và thu hồi quyền ra vào, xem lịch sử và điều khiển mọi hệ thống từ bất kỳ trình duyệt nào."
+      "s3x": "Cấp và thu hồi quyền ra vào, xem lịch sử và mở cổng từ xa, từ bất kỳ trình duyệt nào."
     },
     "benefits": {
       "eyebrow": "Vì sao chọn WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Người dùng và phân quyền",
       "b2x": "Thêm người dùng, quyết định ai được mở gì và thay đổi chỉ trong vài giây, cho một hệ thống hay cả một địa điểm.",
       "b3t": "Lịch sử ra vào đầy đủ",
-      "b3x": "Xem ai đã mở lối vào nào và khi nào, tại mọi địa điểm.",
+      "b3x": "Xem ai đã mở từng lối vào và khi nào.",
       "b4t": "Tổ chức và nhóm",
       "b4x": "Nhóm hệ thống theo tòa nhà hoặc khách hàng và giao cho mỗi tổ chức quản trị viên riêng.",
       "b5t": "Từ bất cứ đâu trên thế giới",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Quản trị viên của mỗi tổ chức chỉ quản lý các hệ thống thuộc trách nhiệm của mình."
     },
     "faq": {
-      "q1": "Bản thân thiết bị WIFIGATE có cần thuê bao không?",
+      "q1": "Có mức phí tối thiểu không?",
+      "a1": "Có. Thuê bao đang hoạt động có mức tối thiểu $1.90 mỗi tháng, bằng giá của một hệ thống, kể cả khi không có hệ thống nào được liên kết. Riêng bộ điều khiển WIFIGATE thì không bao giờ cần thuê bao.",
       "q2": "Làm thế nào để kết nối hệ thống của tôi với bảng điều khiển?",
+      "a2": "Đăng nhập bằng cùng một tài khoản trong ứng dụng và trên trang web WIFIGATE. Trong ứng dụng, hãy xuất từng hệ thống sang WIFIGATE Manager khi bạn đang ở cạnh hệ thống đó, và kết nối bộ điều khiển của nó với Wi‑Fi (2.4GHz). Sau đó hệ thống xuất hiện trên bảng điều khiển của bạn trên trang web.",
       "q3": "Tôi có thể quản lý các tòa nhà hoặc khách hàng riêng biệt không?",
+      "a3": "Có. Mỗi tòa nhà, khách hàng hoặc công ty có một tổ chức riêng trong tài khoản của bạn, với quản trị viên riêng. Đã gồm ba tổ chức, và mỗi tổ chức bổ sung có giá $1 mỗi tháng.",
       "q4": "Ai được quản lý những gì?",
+      "a4": "Quản trị viên tổ chức chỉ quản lý các hệ thống thuộc tổ chức của mình và không phải trả phí. Họ không thể xem các tổ chức khác, các hệ thống riêng của bạn hay thông tin thanh toán.",
       "q5": "Điều gì xảy ra khi lối vào không có internet?",
-      "q6": "Lệnh điều khiển và quyền ra vào có được bảo mật không?",
+      "a5": "Mở bằng điện thoại ngay cạnh lối vào hoạt động qua Bluetooth và không phụ thuộc vào internet, dịch vụ hay thuê bao.",
+      "q6": "Lệnh điều khiển có được bảo mật không?",
+      "a6": "Dữ liệu và lệnh điều khiển được mã hóa đầu cuối giữa bảng điều khiển và bộ điều khiển. Bạn đăng nhập vào bảng điều khiển bằng Google hoặc Apple, kèm một mã xác minh.",
       "q7": "Phí hằng tháng được tính như thế nào?",
-      "q8": "Tôi có thể quản lý những hệ thống nào?"
+      "a7": "$1.90 mỗi hệ thống mỗi tháng, tính theo ngày: hệ thống được thêm hoặc gỡ giữa tháng chỉ bị tính phí cho những ngày có trên bảng điều khiển của bạn. Một lần thu phí vào đầu mỗi tháng cho tháng trước. Giá tính bằng đô la Mỹ, chưa gồm thuế.",
+      "q8": "Tôi có thể quản lý những hệ thống nào?",
+      "a8": "Các hệ thống Gate, Dual Control và cửa cuốn, cùng các nhóm gồm những hệ thống này. Cửa cuốn chỉ được vận hành từ ứng dụng, ngay cạnh cửa cuốn."
     },
     "shop": {
       "title": "Mọi thứ bắt đầu từ một bộ điều khiển WIFIGATE",

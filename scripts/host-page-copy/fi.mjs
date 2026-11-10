@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Hinnoittelu",
       "title": "Selkeät paketit WIFIGATE Host -lisäosaan",
-      "subtitle": "Maksat vain automaatiosta, aktiivista järjestelmää kohden. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta.",
+      "subtitle": "Maksat aktiivista järjestelmää kohden, kuukaudessa kuitenkin vähintään yhdestä järjestelmästä. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta.",
       "per": "/ järjestelmä / kk",
       "badge": "Suosituin",
       "startDesc": "Pienille yrityksille, jotka aloittavat vieraiden kulun automatisoinnin.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, mukautetut roolit ja laajennettu auditointiloki",
       "scaleF4": "Tuki yrityslaajuiseen käyttöönottoon",
       "planCta": "Ota yhteyttä",
-      "note": "Kuukausihinnat Yhdysvaltain dollareina (USD) aktiivista järjestelmää kohden, porrastetusti: ensimmäiset 14 järjestelmää maksavat $6 kappaleelta, järjestelmät 15–49 maksavat $5 kappaleelta ja jokainen järjestelmä 50. järjestelmästä alkaen maksaa $4. Tilin vähimmäisveloitus: $6 kuukaudessa. Ei alustamaksua eikä maksua vieraskutsuista. Volyymitarjouksia on saatavilla 250+ järjestelmälle."
+      "note": "Kuukausihinnat Yhdysvaltain dollareina (USD) ennen veroja, aktiivista järjestelmää kohden, porrastetusti: ensimmäiset 14 järjestelmää maksavat $6 kappaleelta, järjestelmät 15–49 maksavat $5 kappaleelta ja jokainen järjestelmä 50. järjestelmästä alkaen maksaa $4. Esimerkiksi 20 järjestelmää: 14 × $6 ja 6 × $5 eli $114 kuukaudessa. Tilin vähimmäisveloitus: $6 kuukaudessa, vaikka yhtään järjestelmää ei olisi liitetty. Ei alustamaksua eikä maksua vieraskutsuista. Volyymitarjouksia on saatavilla 250+ järjestelmälle."
     },
     "audience": {
       "label": "Kenelle:",
@@ -51,28 +51,28 @@ export default {
       "title": "Varauksesta avoimeen porttiin, automaattisesti",
       "subtitle": "Kolme vaihetta, ja sen jälkeen kaikki hoituu itsestään jokaisessa varauksessa.",
       "s1t": "Varaus saapuu",
-      "s1x": "Varaus- tai kiinteistönhallintajärjestelmäsi ilmoittaa WIFIGATE Hostille uudesta vahvistetusta varauksesta.",
+      "s1x": "Varausjärjestelmäsi ilmoittaa WIFIGATE Hostille jokaisesta vahvistetusta varauksesta. Voit myös syöttää varauksen käsin hallintapaneelissa.",
       "s2t": "Kulkuoikeus luodaan automaattisesti",
-      "s2x": "WIFIGATE Host luo turvallisen, aikarajatun kutsun juuri oikeaan porttiin, oveen tai pysäköintiin, ja se on voimassa vain kyseisen majoituksen ajan.",
+      "s2x": "WIFIGATE Host luo turvallisen kulkulinkin juuri kyseisen varauksen porttiin, oveen tai pysäköintiin, ja se on voimassa vain majoituksen ajan. Sinä tai varausjärjestelmäsi lähettää sen vieraalle.",
       "s3t": "Vieras pääsee suoraan sisään",
-      "s3x": "Vieras avaa sisäänkäynnin puhelimellaan. Kun on uloskirjautumisen aika, kulkuoikeus päättyy itsestään, eikä mitään tarvitse noutaa takaisin tai perua."
+      "s3x": "Vieras avaa linkin WIFIGATE-sovelluksessa ja avaa sisäänkäynnin puhelimellaan. Uloskirjautuessa kulkuoikeus päättyy itsestään. Avainta ei tarvitse noutaa takaisin."
     },
     "benefits": {
       "eyebrow": "Miksi WIFIGATE Host",
       "title": "Vähemmän vastaanottotyötä. Enemmän vaivatonta majoittamista.",
       "subtitle": "Kaikki, mitä varauksen muuttaminen kulkuoikeudeksi vaatii, hoituu puolestasi.",
       "b1t": "Ei avainten luovutusta",
-      "b1x": "Unohda avainten nouto, avainlaatikot ja kopioidut koodit. Kulkuoikeus tulee vieraan puhelimeen juuri silloin, kun sitä tarvitaan.",
+      "b1x": "Unohda avainten nouto, avainlaatikot ja kädestä käteen kulkevat koodit. Vieras saa linkin ja avaa puhelimellaan.",
       "b2t": "Aina aikarajattu",
-      "b2x": "Jokainen kutsu aktivoituu sisäänkirjautuessa ja päättyy uloskirjautuessa automaattisesti, joka ikisellä majoituskerralla.",
+      "b2x": "Jokainen kulkulinkki alkaa sisäänkirjautuessa ja päättyy uloskirjautuessa automaattisesti, jokaisella majoituskerralla.",
       "b3t": "Salattu ja yksityinen",
-      "b3x": "Kulkuoikeus on salattu ja rajattu myönnettyyn oikeuteen. Kiinteistösi ja vieraasi pysyvät suojattuina.",
+      "b3x": "Kulkulinkki on salattu ja tarkoitettu vain kutsumasi vieraan puhelimeen.",
       "b4t": "Toimii sisäänkäyntiesi kanssa",
-      "b4x": "Portit, autotallin ovet, puomit ja ulko-ovet: WIFIGATE ohjaa sitä, mitä sinulla jo on.",
+      "b4x": "Portit, pysäköintialueen portit, puomit ja ulko-ovet: mikä tahansa sisäänkäynti, jossa on WIFIGATE-ohjain.",
       "b5t": "Sopii myös kokonaisiin rakennuksiin",
-      "b5x": "Yksittäisestä portista kokonaiseen kiinteistöön: yksi kutsu voi kattaa jokaisen sisäänkäynnin, jota vieras tarvitsee.",
+      "b5x": "Yksittäisestä portista kokonaiseen kiinteistöön: yksi varaus voi avata ryhmän sisäänkäyntejä, esimerkiksi portin, pysäköinnin ja oven.",
       "b6t": "Integroituu järjestelmiisi",
-      "b6x": "Kytke WIFIGATE Host varausprosessiisi, PMS-järjestelmääsi tai kanavanhallintaasi ja anna sen hoitaa loput."
+      "b6x": "Varausjärjestelmäsi, PMS-järjestelmäsi tai kanavanhallintasi yhdistyy WIFIGATE Hostiin API-rajapinnan kautta, ja siitä eteenpäin kaikki hoituu itsestään."
     },
     "secure": {
       "eyebrow": "Tietoturva",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Miten vieras saa kulkuoikeuden?",
-      "q2": "Mitä tapahtuu uloskirjautuessa?",
-      "q3": "Voinko perua kulkuoikeuden kesken majoituksen?",
-      "q4": "Onko vieraiden kulku turvallista?",
-      "q5": "Tarvitsevatko vieraat yhä avaimia, kortteja tai kaukosäätimiä?",
-      "q6": "Mihin järjestelmiin WIFIGATE Hostin voi kytkeä?",
-      "q7": "Sopiiko se myös kokonaiseen rakennukseen?",
-      "q8": "Miten hinta lasketaan?"
+      "a1": "WIFIGATE Host luo jokaiselle varaukselle yksityisen kulkulinkin. Sinä tai varausjärjestelmäsi lähettää sen vieraalle SMS-viestillä, sähköpostilla tai WhatsAppilla, ja voit myös näyttää sen QR-koodina.",
+      "q2": "Pitääkö vieraan asentaa sovellus?",
+      "a2": "Kyllä. Vieras avaa linkin WIFIGATE-sovelluksessa ja kirjautuu Googlella tai Applella. Ilman sovellusta linkki vie asennussivulle; asennuksen jälkeen vieras avaa linkin uudelleen.",
+      "q3": "Milloin kulkuoikeus alkaa ja päättyy?",
+      "a3": "Se noudattaa varauksen sisään- ja uloskirjautumista. Oletuksena saapuminen on klo 15:00 ja lähtö klo 12:00, ja voit asettaa muut kellonajat.",
+      "q4": "Tarvitaanko sisäänkäynnillä internetyhteyttä?",
+      "a4": "Ei. Sisäänkäynti avautuu Bluetooth-yhteydellä vieraan puhelimen ja ohjaimen välillä, eikä se ole sisääntulon hetkellä riippuvainen pilvestä.",
+      "q5": "Mihin varausjärjestelmiin sen voi kytkeä?",
+      "a5": "Mihin tahansa järjestelmään, joka voi lähettää varauksia API-rajapinnan tai webhook-kutsun kautta: kiinteistönhallintajärjestelmään (PMS), kanavanhallintaan tai omaan järjestelmääsi. Voit myös syöttää varauksia käsin hallintapaneelissa.",
+      "q6": "Sopiiko se kiinteistöön, jossa on useita sisäänkäyntejä?",
+      "a6": "Kyllä. Yksi varaus voi avata ryhmän sisäänkäyntejä, esimerkiksi portin, pysäköinnin ja oven, ja ryhmässä voi olla enintään 20 järjestelmää.",
+      "q7": "Mitä pitää asentaa?",
+      "a7": "WIFIGATE-ohjain jokaiselle sisäänkäynnille. Portin ylläpitäjä lisää sen WIFIGATE Hostiin sovelluksesta, portin vieressä. Sisäänkäynnillä ei tarvita Wi‑Fi-verkkoa.",
+      "q8": "Miten hinta lasketaan, ja onko vähimmäisveloitusta?",
+      "a8": "Aktiivisten järjestelmien määrän mukaan, porrastetusti: $6 järjestelmältä 14 järjestelmään asti, $5 järjestelmistä 15–49 ja 50. järjestelmästä alkaen $4. Tilin vähimmäisveloitus on $6 kuukaudessa, vaikka yhtään järjestelmää ei olisi liitetty. Vain osan kuukaudesta aktiivisena ollut järjestelmä laskutetaan päivien mukaan."
     },
     "shop": {
       "title": "Kaikki alkaa WIFIGATE-ohjaimesta",

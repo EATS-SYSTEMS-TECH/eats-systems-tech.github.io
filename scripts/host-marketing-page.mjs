@@ -16,26 +16,26 @@ const PRODUCTS = {
   host: {
     label: "WIFIGATE Host", featured: "growth", badge: "Most popular",
     offers: [
-      { key: "start", name: "START", amount: "$6", per: "/ system / month", description: "For small businesses starting to automate guest access.", range: "For 1–14 active systems",
-        features: ["Complete CRM/PMS reservation automation", "Up to 14 active systems", "A booking calendar per system", "Google/Apple Sign-In and admin MFA"] },
+      { key: "start", name: "START", amount: "$6", per: "/ system / month", description: "For a guesthouse, a vacation rental or a small business starting to host without keys.", range: "For 1–14 active systems",
+        features: ["An automatic access link for every booking, from your booking system", "Up to 14 active systems", "A booking calendar per system", "Google or Apple sign-in and two-step verification for admins"] },
       { key: "growth", name: "GROWTH", amount: "$5", per: "/ system / month", description: "For hotels and management companies running many systems from one place.", range: "For 15–49 active systems",
-        features: ["Everything in START", "Up to 49 active systems", "Multiple CRM/PMS connections and routing rules", "Team roles and priority support"] },
+        features: ["Everything in START", "Up to 49 active systems", "Several booking-system connections, with routing rules", "Team roles and priority support"] },
       { key: "scale", name: "SCALE", amount: "$4", per: "/ system / month", description: "For hotel groups, large portfolios and enterprise rollouts.", range: "For 50+ active systems",
-        features: ["Everything in GROWTH", "50+ active systems", "Sandbox, custom roles and extended audit", "Enterprise rollout support"] },
+        features: ["Everything in GROWTH", "50+ active systems", "A test environment, custom roles and an extended activity log", "Enterprise rollout support"] },
     ],
     audience: [["hotels", "Hotels"], ["rentals", "Airbnb & short-term rentals"], ["guesthouses", "Guesthouses"], ["parking", "Rental parking & garages"]],
     highlights: ["calendar", "invite", "phone"],
     benefits: ["key-off", "calendar-clock", "shield-check", "door-open", "building", "layers"],
-    // Each question is answered by copy the page already states; no new claims.
-    answers: [["steps.s2x"], ["benefits.b2x"], ["secure.i3x"], ["secure.i1x"], ["secure.i2x"], ["benefits.b6x"], ["benefits.b5x"], ["pricing.note"]],
     art: "host",
+    // The customer types shown on the page: the homepage's localized list, which ends with "And more…".
+    audienceList: "automation.audiences",
     imageAlt: "automation.imageAlt",
   },
   manager: {
     label: "WIFIGATE Manager", featured: "systems", badge: "One simple price",
     offers: [
       { key: "systems", name: "Systems", amount: "$1.90", per: "/ system / month", translated: true, description: "Every active system on your dashboard, wherever it is.", range: "Gate, Dual Control or roller shutter",
-        features: ["Each system counts once, even in several groups", "Groups are free: only their systems count", "No active systems, no system charge", "A system added mid-month is charged by days"] },
+        features: ["Each system counts once, even in several groups", "Groups are free: only their systems count", "Monthly minimum: $1.90, even with no linked system", "A system added mid-month is charged by days"] },
       { key: "organizations", name: "Organizations", amount: "$1", per: "/ extra organization / month", translated: true, description: "Run separate buildings, clients or companies under one account.", range: "First 3 organizations included",
         features: ["3 organizations included in every account", "$1 per month for each additional organization", "Organization admins do not pay", "One account, one monthly invoice"] },
       { key: "example", name: "Example", amount: "$21", per: "/ month", translated: true, description: "10 systems × $1.90, plus 2 extra organizations × $1.", range: "10 systems · 5 organizations",
@@ -44,11 +44,16 @@ const PRODUCTS = {
     audience: [["residential", "Residential buildings"], ["offices", "Offices"], ["sports", "Sports facilities"], ["parking", "Parking facilities"]],
     highlights: ["gate", "roster", "phone"],
     benefits: ["building", "users", "history", "layers", "smartphone", "gate"],
-    answers: [["pricing.subtitle"], ["steps.s1x"], ["pricing.organizationsDesc", "benefits.b4x"], ["secure.i3x"], ["secure.i2x"], ["secure.i1x"], ["pricing.note"], ["benefits.b6x"]],
     art: "manager",
+    audienceList: "automation.manager.audiences",
     imageAlt: "automation.manager.imageAlt",
   },
 };
+// Eight questions per page, each with its own answer in the page copy.
+const questionCount = 8;
+// A step may mark the words that link to the sign-in page as [[words]]; everywhere else they read as plain text.
+const linkMarker = /\[\[(.+?)\]\]/;
+const unmarked = text => text.replace(/\[\[(.+?)\]\]/g, "$1");
 const productOf = name => {
   if (!PRODUCTS[name]) throw new Error(`Unknown subscription page: ${name}`);
   return PRODUCTS[name];
@@ -121,6 +126,12 @@ function localized(source, path, diagnostic = path, label = "WIFIGATE Host") {
   if (typeof value !== "string" || !value.trim()) throw new Error(`Missing localized ${label} copy: ${diagnostic}`);
   return value;
 }
+// The audience list is never closed: it needs at least one customer type and the open ending.
+function localizedList(source, path, label) {
+  const value = path.split(".").reduce((value, key) => value?.[key], source);
+  if (!Array.isArray(value) || value.length < 2 || value.some(item => typeof item !== "string" || !item.trim())) throw new Error(`Missing localized ${label} copy: homepage.${path}`);
+  return [...value];
+}
 export function getHostPageContent(hostCopy, homepageCopy, productName = "host") {
   const product = productOf(productName);
   const read = path => localized(hostCopy, path, path, product.label);
@@ -129,21 +140,23 @@ export function getHostPageContent(hostCopy, homepageCopy, productName = "host")
   }));
   return { label: product.label, eyebrow: read("marketing.hero.eyebrow"), title: read("marketing.hero.title"),
     heroLead: read("marketing.hero.lead"), imageAlt: localized(homepageCopy, product.imageAlt, `homepage.${product.imageAlt}`, product.label),
+    audiences: localizedList(homepageCopy, product.audienceList, product.label),
     highlights: ordered(product.highlights, "steps", "s"), benefitsTitle: read("marketing.benefits.title"),
     benefits: ordered(product.benefits, "benefits", "b"),
     stepsHeading: { eyebrow: read("marketing.steps.eyebrow"), title: read("marketing.steps.title"), subtitle: read("marketing.steps.subtitle") },
     benefitsEyebrow: read("marketing.benefits.eyebrow"),
-    faq: product.answers.map((paths, index) => ({ question: read(`marketing.faq.q${index + 1}`),
-      answer: paths.map(path => read(`marketing.${path}`)).join(" ") })),
+    faq: Array.from({ length: questionCount }, (_, index) => ({ question: read(`marketing.faq.q${index + 1}`), answer: unmarked(read(`marketing.faq.a${index + 1}`)) })),
     seoTitle: read("metaTitle"), seoDescription: read("metaDescription") };
 }
 
 // The three steps ride one wave: an illustration above each numbered point,
 // the copy below. Step 1 sits at the inline start, so the wave follows the
 // page direction (the document's, unless one is given). The first question
-// starts open. Everything is validated before the shared sections change.
-export function installSubscriptionFlow($, { content, productName = "host", assetPrefix = "", direction = $("html").attr("dir") === "rtl" ? "rtl" : "ltr" }) {
+// starts open. A step's [[words]] link to the sign-in page when its path is
+// given. Everything is validated before the shared sections change.
+export function installSubscriptionFlow($, { content, productName = "host", assetPrefix = "", loginHref, direction = $("html").attr("dir") === "rtl" ? "rtl" : "ltr" }) {
   const product = productOf(productName);
+  if (loginHref !== undefined && (typeof loginHref !== "string" || !loginHref.trim())) throw new Error("The step flow sign-in link must be a path");
   const section = $("#niche-highlights"), list = $("#niche-highlights-list"), benefitsHeader = $("#niche-benefits .niche-section__header");
   if (section.length !== 1 || list.length !== 1 || benefitsHeader.length !== 1) throw new Error("The step flow requires one highlights section, one list and one benefits header");
   if (!["ltr", "rtl"].includes(direction)) throw new Error(`Unknown step flow direction: ${direction}`);
@@ -152,9 +165,15 @@ export function installSubscriptionFlow($, { content, productName = "host", asse
   if (!heading?.eyebrow || !heading?.title || !heading?.subtitle || !content.benefitsEyebrow) throw new Error("The step flow requires its localized headings");
   const picture = (file, className, width, height) => node($, "img", { class: className, src: `${assetPrefix}${flowArt}${file}`, alt: "",
     width: String(width), height: String(height), loading: "lazy", decoding: "async" });
+  const description = text => {
+    const match = linkMarker.exec(text);
+    if (!match || !loginHref) return node($, "p", { class: "wa-flow__desc" }, unmarked(text));
+    return node($, "p", { class: "wa-flow__desc" }, [node($, "span", {}, text.slice(0, match.index)),
+      node($, "a", { class: "wa-flow__link", href: loginHref }, match[1]), node($, "span", {}, unmarked(text.slice(match.index + match[0].length)))]);
+  };
   const items = steps.map((step, index) => node($, "li", { class: "wa-flow__step" }, [
     picture(`${product.art}-${index + 1}.svg`, "wa-flow__art", 320, 220),
-    node($, "div", { class: "wa-flow__text" }, [node($, "h3", { class: "wa-flow__title" }, step.title), node($, "p", { class: "wa-flow__desc" }, step.text)]),
+    node($, "div", { class: "wa-flow__text" }, [node($, "h3", { class: "wa-flow__title" }, step.title), description(step.text)]),
   ]));
   const head = node($, "div", { class: "wa-head wa-head--center" }, [node($, "span", { class: "wa-eyebrow" }, heading.eyebrow),
     node($, "h2", { class: "wa-h2", id: "wa-flow-title" }, heading.title), node($, "p", { class: "wa-lead" }, heading.subtitle)]);
@@ -164,6 +183,18 @@ export function installSubscriptionFlow($, { content, productName = "host", asse
   section.children(".container").first().empty().append(head, track);
   benefitsHeader.prepend(node($, "span", { class: "wa-eyebrow" }, content.benefitsEyebrow));
   $("#niche-faq-list details").first().attr("open", "");
+}
+
+// The audience row lists the localized customer types and always ends open:
+// the last entry ("And more…") is a dashed chip, so the list never reads as closed.
+export function installAudienceList($, { items }) {
+  const row = $(".host-marketing-details section.wa-audience .wa-audience__row");
+  if (row.length !== 1 || row.children(".wa-audience__label").length !== 1) throw new Error("The audience list requires one audience row with its label");
+  if (!Array.isArray(items) || items.length < 2 || items.some(item => typeof item !== "string" || !item.trim())) throw new Error("The audience list requires localized entries and an open ending");
+  const list = node($, "ul", { class: "wa-audience__list" }, items.map((text, index) =>
+    node($, "li", { class: `wa-chip${index === items.length - 1 ? " wa-chip--more" : ""}` }, text)));
+  row.children(".wa-chip").remove();
+  row.append(list);
 }
 
 // Clone the already localized detail nodes in their original document order.

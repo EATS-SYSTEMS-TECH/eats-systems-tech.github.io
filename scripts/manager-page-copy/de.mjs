@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Preise",
       "title": "Einfache Preise für WIFIGATE Manager",
-      "subtitle": "Sie zahlen nur für die Systeme, die Sie verwalten. Für den WIFIGATE-Controller selbst ist nie ein Abonnement nötig.",
+      "subtitle": "Sie zahlen für die Systeme, die Sie verwalten, mindestens aber für ein System pro Monat. Für den WIFIGATE-Controller selbst ist nie ein Abonnement nötig.",
       "badge": "Ein einfacher Preis",
       "systemsName": "Systeme",
       "systemsPer": "/ System / Monat",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Jedes aktive System in Ihrem Dashboard, egal wo es steht.",
       "systemsF1": "Jedes System zählt nur einmal, auch in mehreren Gruppen",
       "systemsF2": "Gruppen sind kostenlos: Es zählen nur ihre Systeme",
-      "systemsF3": "Keine aktiven Systeme, keine Systemgebühr",
+      "systemsF3": "Monatlicher Mindestbetrag: $1.90, auch ohne verknüpftes System",
       "systemsF4": "Ein im Laufe des Monats hinzugefügtes System wird tageweise berechnet",
       "organizationsName": "Organisationen",
       "organizationsPer": "/ zusätzliche Organisation / Monat",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 Rollladen: $1.90 / Monat",
       "exampleF4": "Monatliche Schätzung vor Steuern",
       "planCta": "Sprechen Sie mit uns",
-      "note": "Preise in US-Dollar (USD), vor Steuern. Eine Abbuchung zu Beginn jedes Monats deckt den Vormonat tageweise ab, zusammen mit WIFIGATE Host, falls Sie es nutzen."
+      "note": "Preise in US-Dollar (USD), vor Steuern. Für ein aktives Abonnement gilt ein Mindestbetrag von $1.90 pro Monat, auch ohne verknüpftes System. Eine Abbuchung zu Beginn jedes Monats deckt den Vormonat tageweise ab, zusammen mit WIFIGATE Host, falls Sie es nutzen."
     },
     "audience": {
       "label": "Entwickelt für:",
@@ -56,11 +56,11 @@ export default {
       "title": "Vom einzelnen Controller zu allen Standorten",
       "subtitle": "Drei Schritte, und alles wird an einem Ort verwaltet.",
       "s1t": "Systeme verbinden",
-      "s1x": "Exportieren Sie Ihre WIFIGATE-Systeme aus der App ins Dashboard. Die Controller verbinden sich über Wi‑Fi.",
+      "s1x": "Exportieren Sie Ihre WIFIGATE-Systeme aus der App in [[das Dashboard auf der WIFIGATE-Website]], das mit Ihrem Konto verknüpft ist. Die Controller verbinden sich über Wi‑Fi.",
       "s2t": "Nach Ihren Wünschen ordnen",
       "s2x": "Gruppieren Sie Tore, Türen und Rollläden nach Gebäude, Standort oder Organisation.",
       "s3t": "Von überall verwalten",
-      "s3x": "Vergeben und entziehen Sie Zutritt, sehen Sie den Verlauf ein und steuern Sie jedes System in jedem Browser."
+      "s3x": "Vergeben und entziehen Sie Zutritt, sehen Sie den Verlauf ein und öffnen Sie Tore aus der Ferne, in jedem Browser."
     },
     "benefits": {
       "eyebrow": "Warum WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Nutzer und Berechtigungen",
       "b2x": "Fügen Sie Nutzer hinzu, legen Sie fest, wer was öffnen darf, und ändern Sie es in Sekunden, für ein System oder einen ganzen Standort.",
       "b3t": "Lückenloser Zutrittsverlauf",
-      "b3x": "Sehen Sie, wer welchen Eingang wann geöffnet hat, über alle Standorte hinweg.",
+      "b3x": "Sehen Sie, wer welchen Eingang wann geöffnet hat.",
       "b4t": "Organisationen und Gruppen",
       "b4x": "Gruppieren Sie Systeme nach Gebäude oder Kunde und geben Sie jeder Organisation eigene Admins.",
       "b5t": "Von überall auf der Welt",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Die Admins jeder Organisation verwalten nur die Systeme, für die sie zuständig sind."
     },
     "faq": {
-      "q1": "Braucht der WIFIGATE-Controller selbst ein Abonnement?",
+      "q1": "Gibt es einen Mindestbetrag?",
+      "a1": "Ja. Für ein aktives Abonnement gilt ein Mindestbetrag von $1.90 pro Monat, der Preis eines Systems, auch ohne verknüpftes System. Für den WIFIGATE-Controller selbst ist nie ein Abonnement nötig.",
       "q2": "Wie verbinde ich meine Systeme mit dem Dashboard?",
+      "a2": "Melden Sie sich in der App und auf der WIFIGATE-Website mit demselben Konto an. Exportieren Sie in der App jedes System zu WIFIGATE Manager, während Sie sich direkt daneben befinden, und verbinden Sie seinen Controller mit Wi‑Fi (2.4GHz). Danach erscheint das System in Ihrem Dashboard auf der Website.",
       "q3": "Kann ich getrennte Gebäude oder Kunden verwalten?",
+      "a3": "Ja. Jedes Gebäude, jeder Kunde oder jede Firma erhält unter Ihrem Konto eine eigene Organisation mit eigenen Admins. Drei Organisationen sind inklusive, und jede weitere kostet $1 pro Monat.",
       "q4": "Wer darf was verwalten?",
+      "a4": "Organisations-Admins verwalten nur die Systeme ihrer eigenen Organisation und zahlen nichts. Andere Organisationen, Ihre privaten Systeme und die Abrechnungsdaten können sie nicht sehen.",
       "q5": "Was passiert, wenn es am Eingang kein Internet gibt?",
-      "q6": "Sind Befehle und Berechtigungen sicher?",
+      "a5": "Das Öffnen per Smartphone direkt am Eingang funktioniert über Bluetooth und hängt weder vom Internet noch vom Dienst oder vom Abonnement ab.",
+      "q6": "Sind Befehle sicher?",
+      "a6": "Daten und Befehle sind zwischen Dashboard und Controller Ende-zu-Ende verschlüsselt. Am Dashboard melden Sie sich mit Google oder Apple und zusätzlich mit einem Bestätigungscode an.",
       "q7": "Wie wird die monatliche Abbuchung berechnet?",
-      "q8": "Welche Systeme kann ich verwalten?"
+      "a7": "$1.90 pro System und Monat, tageweise: Ein System, das im Laufe des Monats hinzugefügt oder entfernt wird, wird nur für die Tage berechnet, an denen es in Ihrem Dashboard war. Eine Abbuchung zu Beginn jedes Monats deckt den Vormonat ab. Die Preise verstehen sich in US-Dollar, vor Steuern.",
+      "q8": "Welche Systeme kann ich verwalten?",
+      "a8": "Systeme vom Typ Gate, Dual Control und Rollladen sowie Gruppen daraus. Ein Rollladen wird nur über die App bedient, direkt am Rollladen."
     },
     "shop": {
       "title": "Alles beginnt mit einem WIFIGATE-Controller",

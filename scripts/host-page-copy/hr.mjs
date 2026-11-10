@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Cijene",
       "title": "Jednostavni paketi za dodatak WIFIGATE Host",
-      "subtitle": "Plaćate samo automatizaciju, po aktivnom sustavu. Sam WIFIGATE kontroler nikada ne treba pretplatu.",
+      "subtitle": "Plaćate po aktivnom sustavu, uz mjesečni minimum od jednog sustava. Sam WIFIGATE kontroler nikada ne treba pretplatu.",
       "per": "/ sustav / mjesečno",
       "badge": "Najpopularniji",
       "startDesc": "Za male tvrtke koje počinju automatizirati pristup za goste.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, prilagođene uloge i prošireni audit",
       "scaleF4": "Podrška pri uvođenju na razini poduzeća",
       "planCta": "Razgovarajte s nama",
-      "note": "Mjesečne cijene u američkim dolarima (USD), po aktivnom sustavu i po razredima: prvih 14 sustava stoji $6 po sustavu, sustavi 15–49 po $5, a svaki sustav od 50. nadalje $4. Najniži iznos po korisničkom računu: $6 mjesečno. Nema naknade za platformu ni naplate po pozivnici za gosta. Za 250+ sustava dostupne su ponude za veće količine."
+      "note": "Mjesečne cijene u američkim dolarima (USD), bez poreza, po aktivnom sustavu i po razredima: prvih 14 sustava stoji $6 po sustavu, sustavi 15–49 po $5, a svaki sustav od 50. nadalje $4. Na primjer, 20 sustava: 14 × $6 plus 6 × $5, ukupno $114 mjesečno. Najniži iznos po korisničkom računu: $6 mjesečno, čak i bez povezanog sustava. Nema naknade za platformu ni naplate po pozivnici za gosta. Za 250+ sustava dostupne su ponude za veće količine."
     },
     "audience": {
       "label": "Namijenjeno za:",
@@ -51,28 +51,28 @@ export default {
       "title": "Od rezervacije do otvorenih vrata, automatski",
       "subtitle": "Tri koraka, a nakon toga sve se odvija samo, za svaku rezervaciju.",
       "s1t": "Stiže rezervacija",
-      "s1x": "Vaš sustav za rezervacije ili upravljanje objektom obavještava WIFIGATE Host o novoj potvrđenoj rezervaciji.",
+      "s1x": "Vaš sustav za rezervacije obavještava WIFIGATE Host o svakoj potvrđenoj rezervaciji. Rezervaciju možete i ručno unijeti na nadzornoj ploči.",
       "s2t": "Pristup se stvara automatski",
-      "s2x": "WIFIGATE Host izdaje sigurnu, vremenski ograničenu pozivnicu točno za odgovarajuća dvorišna vrata, ulazna vrata ili parkiralište, koja vrijedi samo za taj boravak.",
+      "s2x": "WIFIGATE Host stvara sigurnu poveznicu za pristup točno za dvorišna vrata, ulazna vrata ili parkiralište iz te rezervacije, koja vrijedi samo tijekom boravka. Vi ili vaš sustav za rezervacije šaljete je gostu.",
       "s3t": "Gost jednostavno uđe",
-      "s3x": "Ulaz otvara telefonom. Kad dođe vrijeme odjave, pristup sam istječe i nema se što prikupljati ni otkazivati."
+      "s3x": "Gost otvara poveznicu u aplikaciji WIFIGATE i otvara ulaz telefonom. Pri odjavi pristup sam prestaje. Nema ključa koji treba preuzeti."
     },
     "benefits": {
       "eyebrow": "Zašto WIFIGATE Host",
       "title": "Manje posla na recepciji. Ugošćivanje bez muke.",
       "subtitle": "Sve što je potrebno da rezervacija postane pristup, obavljeno je umjesto vas.",
       "b1t": "Bez predaje ključeva",
-      "b1x": "Zaboravite preuzimanje ključeva, kutije za ključeve i kopirane kodove. Pristup stiže na gostov telefon točno kad je potreban.",
+      "b1x": "Zaboravite preuzimanje ključeva, kutije za ključeve i kodove koji idu iz ruke u ruku. Gost dobiva poveznicu i otvara telefonom.",
       "b2t": "Vremenski ograničeno, bez iznimke",
-      "b2x": "Svaka pozivnica počinje vrijediti pri prijavi i istječe pri odjavi, automatski, za svaki boravak.",
+      "b2x": "Svaka poveznica za pristup počinje vrijediti pri prijavi i prestaje vrijediti pri odjavi, automatski, za svaki boravak.",
       "b3t": "Šifrirano i privatno",
-      "b3x": "Pristup je šifriran i ograničen na izdanu dozvolu. Vaš objekt i vaši gosti ostaju zaštićeni.",
+      "b3x": "Poveznica za pristup šifrirana je i namijenjena samo telefonu gosta kojeg ste pozvali.",
       "b4t": "Radi s vašim ulazima",
-      "b4x": "Dvorišna vrata, garažna vrata, rampe i ulazna vrata: WIFIGATE upravlja onim što već imate.",
+      "b4x": "Dvorišna vrata, parkirališna vrata, rampe i ulazna vrata: svaki ulaz s WIFIGATE kontrolerom.",
       "b5t": "Prikladno i za cijele zgrade",
-      "b5x": "Od jednih dvorišnih vrata do cijelog kompleksa, jedna pozivnica može obuhvatiti svaki ulaz koji gostu treba.",
+      "b5x": "Od jednih dvorišnih vrata do cijelog kompleksa: jedna rezervacija može otvoriti grupu ulaza, primjerice dvorišna vrata, parkiralište i ulazna vrata.",
       "b6t": "Povezuje se s vašim sustavima",
-      "b6x": "Povežite WIFIGATE Host sa svojim procesom rezervacija, PMS-om ili channel managerom i pustite da radi samo."
+      "b6x": "Vaš sustav za rezervacije, PMS ili channel manager povezuje se s WIFIGATE Host putem API-ja i od tada sve radi samo."
     },
     "secure": {
       "eyebrow": "Sigurnost",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Kako gost dobiva pristup?",
-      "q2": "Što se događa pri odjavi?",
-      "q3": "Mogu li zaustaviti pristup usred boravka?",
-      "q4": "Je li pristup za goste siguran?",
-      "q5": "Trebaju li gostima i dalje ključevi, kartice ili daljinski upravljači?",
-      "q6": "S kojim se sustavima povezuje WIFIGATE Host?",
-      "q7": "Je li prikladno i za cijelu zgradu?",
-      "q8": "Kako se izračunava cijena?"
+      "a1": "WIFIGATE Host stvara privatnu poveznicu za pristup za svaku rezervaciju. Vi ili vaš sustav za rezervacije šaljete je gostu putem SMS-a, e-pošte ili WhatsAppa, a možete je prikazati i kao QR kod.",
+      "q2": "Mora li gost instalirati aplikaciju?",
+      "a2": "Da. Gost otvara poveznicu u aplikaciji WIFIGATE i prijavljuje se Google ili Apple računom. Bez aplikacije poveznica vodi na stranicu za instalaciju; nakon instalacije gost ponovno otvara poveznicu.",
+      "q3": "Kada pristup počinje, a kada prestaje?",
+      "a3": "Prati prijavu i odjavu iz rezervacije. Zadano je dolazak u 15:00 i odlazak u 12:00, a možete postaviti i druge sate.",
+      "q4": "Je li na ulazu potreban internet?",
+      "a4": "Ne. Ulaz se otvara preko Bluetooth veze između gostova telefona i kontrolera, bez ovisnosti o oblaku u trenutku ulaska.",
+      "q5": "S kojim se sustavima za rezervacije povezuje?",
+      "a5": "Sa svakim sustavom koji može slati rezervacije putem API-ja ili webhooka: sustavom za upravljanje objektima (PMS), channel managerom ili vašim vlastitim sustavom. Rezervacije možete i ručno unositi na nadzornoj ploči.",
+      "q6": "Radi li za kompleks s više ulaza?",
+      "a6": "Da. Jedna rezervacija može otvoriti grupu ulaza, primjerice dvorišna vrata, parkiralište i ulazna vrata, s najviše 20 sustava u grupi.",
+      "q7": "Što treba ugraditi?",
+      "a7": "WIFIGATE kontroler na svakom ulazu. Administrator dvorišnih vrata dodaje ga u WIFIGATE Host iz aplikacije, pokraj dvorišnih vrata. Na ulazu nije potreban Wi‑Fi.",
+      "q8": "Kako se izračunava cijena i postoji li minimum?",
+      "a8": "Prema broju aktivnih sustava, po razredima: $6 po sustavu za najviše 14 sustava, $5 za sustave 15–49 i $4 od 50. sustava. Najniži iznos po korisničkom računu je $6 mjesečno, čak i bez povezanog sustava. Sustav koji je aktivan dio mjeseca naplaćuje se po danima."
     },
     "shop": {
       "title": "Sve počinje od WIFIGATE kontrolera",

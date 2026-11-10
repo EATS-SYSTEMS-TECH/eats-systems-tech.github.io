@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Harga",
       "title": "Harga ringkas untuk WIFIGATE Manager",
-      "subtitle": "Bayar hanya untuk sistem yang anda urus. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan.",
+      "subtitle": "Bayar untuk sistem yang anda urus, dengan minimum bulanan satu sistem. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan.",
       "badge": "Satu harga ringkas",
       "systemsName": "Sistem",
       "systemsPer": "/ sistem / bulan",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Setiap sistem aktif pada papan pemuka anda, di mana-mana sahaja ia berada.",
       "systemsF1": "Setiap sistem dikira sekali, walaupun dalam beberapa kumpulan",
       "systemsF2": "Kumpulan percuma: hanya sistemnya yang dikira",
-      "systemsF3": "Tiada sistem aktif, tiada caj sistem",
+      "systemsF3": "Minimum bulanan: $1.90, walaupun tiada sistem yang dipautkan",
       "systemsF4": "Sistem yang ditambah pada pertengahan bulan dicaj mengikut hari",
       "organizationsName": "Organisasi",
       "organizationsPer": "/ organisasi tambahan / bulan",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 pintu gulung: $1.90 / bulan",
       "exampleF4": "Anggaran bulanan sebelum cukai",
       "planCta": "Hubungi kami",
-      "note": "Harga dalam dolar AS (USD), sebelum cukai. Satu caj pada awal setiap bulan meliputi bulan sebelumnya, mengikut hari, bersama WIFIGATE Host jika anda menggunakannya."
+      "note": "Harga dalam dolar AS (USD), sebelum cukai. Langganan aktif mempunyai minimum $1.90 sebulan, walaupun tiada sistem yang dipautkan. Satu caj pada awal setiap bulan meliputi bulan sebelumnya, mengikut hari, bersama WIFIGATE Host jika anda menggunakannya."
     },
     "audience": {
       "label": "Direka untuk:",
@@ -56,11 +56,11 @@ export default {
       "title": "Daripada satu pengawal hingga setiap lokasi",
       "subtitle": "Tiga langkah, dan semuanya diurus dari satu tempat.",
       "s1t": "Sambungkan sistem anda",
-      "s1x": "Eksport sistem WIFIGATE anda daripada aplikasi ke papan pemuka. Pengawal bersambung melalui Wi‑Fi.",
+      "s1x": "Eksport sistem WIFIGATE anda daripada aplikasi ke [[papan pemuka di laman web WIFIGATE]], yang dipautkan kepada akaun anda. Pengawal bersambung melalui Wi‑Fi.",
       "s2t": "Susun mengikut cara anda",
       "s2x": "Kumpulkan pintu pagar, pintu dan pintu gulung mengikut bangunan, lokasi atau organisasi.",
       "s3t": "Urus dari mana-mana sahaja",
-      "s3x": "Beri dan tarik balik akses, lihat sejarah dan kawal setiap sistem daripada mana-mana pelayar."
+      "s3x": "Beri dan tarik balik akses, lihat sejarah dan buka pintu pagar dari jauh, daripada mana-mana pelayar."
     },
     "benefits": {
       "eyebrow": "Mengapa WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Pengguna dan kebenaran",
       "b2x": "Tambah pengguna, tentukan siapa boleh membuka apa dan ubahnya dalam beberapa saat, untuk satu sistem atau seluruh lokasi.",
       "b3t": "Sejarah akses penuh",
-      "b3x": "Lihat siapa membuka pintu masuk yang mana dan bila, di setiap lokasi.",
+      "b3x": "Lihat siapa yang membuka setiap pintu masuk dan bila.",
       "b4t": "Organisasi dan kumpulan",
       "b4x": "Kumpulkan sistem mengikut bangunan atau pelanggan dan berikan setiap organisasi pentadbirnya sendiri.",
       "b5t": "Dari mana-mana sahaja di dunia",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Pentadbir setiap organisasi hanya mengurus sistem di bawah tanggungjawab mereka."
     },
     "faq": {
-      "q1": "Adakah pengawal WIFIGATE sendiri memerlukan langganan?",
+      "q1": "Adakah terdapat caj minimum?",
+      "a1": "Ya. Langganan aktif mempunyai minimum $1.90 sebulan, iaitu harga satu sistem, walaupun tiada sistem yang dipautkan. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan.",
       "q2": "Bagaimanakah cara menyambungkan sistem saya ke papan pemuka?",
+      "a2": "Log masuk dengan akaun yang sama dalam aplikasi dan di laman web WIFIGATE. Dalam aplikasi, eksport setiap sistem ke WIFIGATE Manager semasa anda berada di sebelahnya, dan sambungkan pengawalnya ke Wi‑Fi (2.4GHz). Sistem itu kemudian muncul pada papan pemuka anda di laman web.",
       "q3": "Bolehkah saya mengurus bangunan atau pelanggan yang berasingan?",
+      "a3": "Ya. Setiap bangunan, pelanggan atau syarikat mendapat organisasinya sendiri di bawah akaun anda, dengan pentadbirnya sendiri. Tiga organisasi termasuk, dan setiap organisasi tambahan berharga $1 sebulan.",
       "q4": "Siapa boleh mengurus apa?",
-      "q5": "Apa yang berlaku jika tiada internet di pintu masuk?",
-      "q6": "Adakah arahan dan kebenaran selamat?",
+      "a4": "Pentadbir organisasi hanya mengurus sistem organisasi mereka sendiri, dan mereka tidak perlu membayar. Mereka tidak boleh melihat organisasi lain, sistem peribadi anda atau butiran pengebilan.",
+      "q5": "Apa yang berlaku apabila tiada internet di pintu masuk?",
+      "a5": "Membuka melalui telefon di sebelah pintu masuk berfungsi melalui Bluetooth dan tidak bergantung pada internet, perkhidmatan atau langganan.",
+      "q6": "Adakah arahan selamat?",
+      "a6": "Data dan arahan disulitkan hujung ke hujung antara papan pemuka dengan pengawal. Anda log masuk ke papan pemuka dengan Google atau Apple, serta kod pengesahan.",
       "q7": "Bagaimanakah caj bulanan dikira?",
-      "q8": "Sistem manakah yang boleh saya urus?"
+      "a7": "$1.90 bagi setiap sistem sebulan, mengikut hari: sistem yang ditambah atau dialih keluar pada pertengahan bulan dicaj hanya untuk hari-hari ia berada pada papan pemuka anda. Satu caj pada awal setiap bulan meliputi bulan sebelumnya. Harga adalah dalam dolar AS, sebelum cukai.",
+      "q8": "Sistem manakah yang boleh saya urus?",
+      "a8": "Sistem Gate, Dual Control dan pintu gulung, serta kumpulan sistem tersebut. Pintu gulung hanya dikendalikan daripada aplikasi, di sebelah pintu gulung itu."
     },
     "shop": {
       "title": "Semuanya bermula dengan pengawal WIFIGATE",

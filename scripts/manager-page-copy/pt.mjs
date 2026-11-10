@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Preços",
       "title": "Preços simples para o WIFIGATE Manager",
-      "subtitle": "Paga apenas pelos sistemas que gere. O controlador WIFIGATE nunca precisa de subscrição.",
+      "subtitle": "Paga pelos sistemas que gere, com um mínimo mensal de um sistema. O próprio controlador WIFIGATE nunca precisa de subscrição.",
       "badge": "Um preço simples",
       "systemsName": "Sistemas",
       "systemsPer": "/ sistema / mês",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Cada sistema ativo no seu painel, esteja onde estiver.",
       "systemsF1": "Cada sistema conta uma vez, mesmo em vários grupos",
       "systemsF2": "Os grupos são gratuitos: só contam os seus sistemas",
-      "systemsF3": "Sem sistemas ativos, sem custo de sistemas",
+      "systemsF3": "Mínimo mensal: $1.90, mesmo sem nenhum sistema associado",
       "systemsF4": "Um sistema adicionado a meio do mês é cobrado por dias",
       "organizationsName": "Organizações",
       "organizationsPer": "/ organização extra / mês",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 estore: $1.90 / mês",
       "exampleF4": "Estimativa mensal sem impostos",
       "planCta": "Fale connosco",
-      "note": "Preços em dólares norte-americanos (USD), sem impostos. Uma única cobrança no início de cada mês cobre o mês anterior, por dias, juntamente com o WIFIGATE Host, se o utilizar."
+      "note": "Preços em dólares norte-americanos (USD), sem impostos. Uma subscrição ativa tem um mínimo de $1.90 por mês, mesmo sem nenhum sistema associado. Uma única cobrança no início de cada mês cobre o mês anterior, por dias, juntamente com o WIFIGATE Host, se o utilizar."
     },
     "audience": {
       "label": "Para:",
@@ -56,11 +56,11 @@ export default {
       "title": "De um controlador a todos os locais",
       "subtitle": "Três passos e gere tudo a partir de um só lugar.",
       "s1t": "Ligue os seus sistemas",
-      "s1x": "Exporte os seus sistemas WIFIGATE da aplicação para o painel. Os controladores ligam-se por Wi‑Fi.",
+      "s1x": "Exporte os seus sistemas WIFIGATE da aplicação para [[o painel no site da WIFIGATE]], que está associado à sua conta. Os controladores ligam-se por Wi‑Fi.",
       "s2t": "Organize-os à sua maneira",
       "s2x": "Agrupe portões, portas e estores por edifício, local ou organização.",
       "s3t": "Gira a partir de qualquer lugar",
-      "s3x": "Conceda e retire acessos, consulte o histórico e controle cada sistema a partir de qualquer navegador."
+      "s3x": "Conceda e retire acessos, consulte o histórico e abra portões à distância, a partir de qualquer navegador."
     },
     "benefits": {
       "eyebrow": "Porquê o WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Utilizadores e permissões",
       "b2x": "Adicione utilizadores, decida quem pode abrir o quê e altere-o em segundos, para um sistema ou um local inteiro.",
       "b3t": "Histórico de acessos completo",
-      "b3x": "Veja quem abriu cada entrada e quando, em todos os locais.",
+      "b3x": "Veja quem abriu cada entrada e quando.",
       "b4t": "Organizações e grupos",
       "b4x": "Agrupe sistemas por edifício ou cliente e dê a cada organização os seus próprios administradores.",
       "b5t": "A partir de qualquer parte do mundo",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Os administradores de cada organização gerem apenas os sistemas pelos quais são responsáveis."
     },
     "faq": {
-      "q1": "O próprio controlador WIFIGATE precisa de subscrição?",
+      "q1": "Existe uma cobrança mínima?",
+      "a1": "Sim. Uma subscrição ativa tem um mínimo de $1.90 por mês, o preço de um sistema, mesmo sem nenhum sistema associado. O próprio controlador WIFIGATE nunca precisa de subscrição.",
       "q2": "Como ligo os meus sistemas ao painel?",
+      "a2": "Inicie sessão com a mesma conta na aplicação e no site da WIFIGATE. Na aplicação, exporte cada sistema para o WIFIGATE Manager enquanto estiver junto dele e ligue o respetivo controlador ao Wi‑Fi (2.4GHz). O sistema aparece depois no seu painel no site.",
       "q3": "Posso gerir edifícios ou clientes separados?",
+      "a3": "Sim. Cada edifício, cliente ou empresa tem a sua própria organização na sua conta, com os seus próprios administradores. Estão incluídas três organizações e cada organização adicional custa $1 por mês.",
       "q4": "Quem pode gerir o quê?",
+      "a4": "Os administradores das organizações gerem apenas os sistemas da organização a que pertencem e não pagam. Não conseguem ver outras organizações, os seus sistemas privados nem os dados de faturação.",
       "q5": "O que acontece quando não há internet na entrada?",
-      "q6": "Os comandos e as permissões estão protegidos?",
+      "a5": "A abertura a partir do telemóvel junto à entrada funciona por Bluetooth e não depende da internet, do serviço nem da subscrição.",
+      "q6": "Os comandos são seguros?",
+      "a6": "Os dados e os comandos são encriptados ponta a ponta entre o painel e o controlador. Inicia sessão no painel com Google ou Apple, mais um código de verificação.",
       "q7": "Como é calculada a cobrança mensal?",
-      "q8": "Que sistemas posso gerir?"
+      "a7": "$1.90 por sistema por mês, por dias: um sistema adicionado ou removido a meio do mês é cobrado apenas pelos dias em que esteve no seu painel. Uma única cobrança no início de cada mês cobre o mês anterior. Os preços são em dólares norte-americanos, sem impostos.",
+      "q8": "Que sistemas posso gerir?",
+      "a8": "Sistemas Gate, Dual Control e de estore, e grupos destes sistemas. Um estore é operado apenas a partir da aplicação, junto ao estore."
     },
     "shop": {
       "title": "Tudo começa com um controlador WIFIGATE",

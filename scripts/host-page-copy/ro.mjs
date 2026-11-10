@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Prețuri",
       "title": "Planuri simple pentru extensia WIFIGATE Host",
-      "subtitle": "Plătiți doar pentru automatizare, per sistem activ. Controlerul WIFIGATE în sine nu necesită niciodată abonament.",
+      "subtitle": "Plătiți per sistem activ, cu un minim lunar de un sistem. Controlerul WIFIGATE în sine nu necesită niciodată abonament.",
       "per": "/ sistem / lună",
       "badge": "Cel mai popular",
       "startDesc": "Pentru afaceri mici care încep să automatizeze accesul oaspeților.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, roluri personalizate și audit extins",
       "scaleF4": "Asistență pentru implementări la nivel de companie",
       "planCta": "Discutați cu noi",
-      "note": "Prețuri lunare în dolari americani (USD), per sistem activ, pe tranșe: primele 14 sisteme costă $6 fiecare, sistemele 15–49 costă $5 fiecare, iar fiecare sistem începând cu al 50-lea costă $4. Minim per cont: $6 pe lună. Fără taxă de platformă și fără cost per invitație pentru oaspeți. Pentru 250+ sisteme sunt disponibile oferte de volum."
+      "note": "Prețuri lunare în dolari americani (USD), fără taxe, per sistem activ, pe tranșe: primele 14 sisteme costă $6 fiecare, sistemele 15–49 costă $5 fiecare, iar fiecare sistem începând cu al 50-lea costă $4. De exemplu, 20 de sisteme: 14 × $6 plus 6 × $5, $114 pe lună. Minim per cont: $6 pe lună, chiar și fără niciun sistem asociat. Fără taxă de platformă și fără cost per invitație pentru oaspeți. Pentru 250+ sisteme sunt disponibile oferte de volum."
     },
     "audience": {
       "label": "Creat pentru:",
@@ -51,28 +51,28 @@ export default {
       "title": "De la rezervare la poarta deschisă, automat",
       "subtitle": "Trei pași, apoi totul funcționează singur, la fiecare rezervare.",
       "s1t": "Sosește o rezervare",
-      "s1x": "Sistemul dumneavoastră de rezervări sau de administrare a proprietății transmite către WIFIGATE Host o rezervare nouă, confirmată.",
+      "s1x": "Sistemul dumneavoastră de rezervări anunță WIFIGATE Host despre fiecare rezervare confirmată. Puteți și să introduceți manual o rezervare în panoul de control.",
       "s2t": "Accesul este creat automat",
-      "s2x": "WIFIGATE Host emite o invitație securizată, limitată în timp, exact pentru poarta, ușa sau parcarea potrivită, valabilă doar pentru acel sejur.",
+      "s2x": "WIFIGATE Host creează un link de acces securizat exact pentru poarta, ușa sau parcarea din acea rezervare, valabil doar pe durata sejurului. Dumneavoastră sau sistemul dumneavoastră de rezervări îl trimiteți oaspetelui.",
       "s3t": "Oaspetele pur și simplu intră",
-      "s3x": "Deschide intrarea din telefon. La check-out, accesul expiră singur. Nu e nimic de recuperat sau de anulat."
+      "s3x": "Oaspetele deschide linkul în aplicația WIFIGATE și deschide intrarea din telefon. La check-out, accesul se încheie de la sine. Nicio cheie de recuperat."
     },
     "benefits": {
       "eyebrow": "De ce WIFIGATE Host",
       "title": "Mai puțin timp la recepție. Mai multă ospitalitate, fără efort.",
       "subtitle": "Tot ce transformă o rezervare în acces, făcut în locul dumneavoastră.",
       "b1t": "Fără chei de predat",
-      "b1x": "Uitați de ridicarea cheilor, cutiile pentru chei și codurile copiate. Accesul ajunge pe telefonul oaspetelui exact când este nevoie.",
+      "b1x": "Uitați de ridicarea cheilor, de cutiile pentru chei și de codurile trecute din mână în mână. Oaspetele primește un link și deschide din telefon.",
       "b2t": "Limitat în timp din start",
-      "b2x": "Fiecare invitație devine activă la check-in și expiră la check-out, automat, la fiecare sejur.",
+      "b2x": "Fiecare link de acces începe la check-in și se încheie la check-out, automat, la fiecare sejur.",
       "b3t": "Criptat și privat",
-      "b3x": "Accesul este criptat și limitat la permisiunea emisă. Proprietatea și oaspeții dumneavoastră rămân protejați.",
+      "b3x": "Linkul de acces este criptat și destinat doar telefonului oaspetelui pe care l-ați invitat.",
       "b4t": "Funcționează cu intrările dumneavoastră",
-      "b4x": "Porți, uși de garaj, bariere și uși de intrare: WIFIGATE controlează ce aveți deja.",
+      "b4x": "Porți, porți de parcare, bariere și uși de intrare: orice intrare cu un controler WIFIGATE.",
       "b5t": "Potrivit și pentru clădiri întregi",
-      "b5x": "De la o singură poartă la un complex întreg, o singură invitație poate acoperi fiecare intrare de care are nevoie oaspetele.",
+      "b5x": "De la o singură poartă la un complex întreg: o singură rezervare poate deschide un grup de intrări, de exemplu o poartă, o parcare și o ușă.",
       "b6t": "Se conectează la sistemele dumneavoastră",
-      "b6x": "Conectați WIFIGATE Host la fluxul de rezervări, la PMS sau la channel manager și lăsați-l să lucreze singur."
+      "b6x": "Sistemul dumneavoastră de rezervări, PMS-ul sau channel managerul se conectează la WIFIGATE Host printr-un API, iar de acolo totul funcționează singur."
     },
     "secure": {
       "eyebrow": "Securitate",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Cum primește oaspetele acces?",
-      "q2": "Ce se întâmplă la check-out?",
-      "q3": "Pot opri accesul în timpul unui sejur?",
-      "q4": "Accesul oaspeților este securizat?",
-      "q5": "Oaspeții mai au nevoie de chei, carduri sau telecomenzi?",
-      "q6": "La ce sisteme se conectează?",
-      "q7": "Funcționează și pentru o clădire întreagă?",
-      "q8": "Cum se calculează prețul?"
+      "a1": "WIFIGATE Host creează un link de acces privat pentru fiecare rezervare. Dumneavoastră sau sistemul dumneavoastră de rezervări îl trimiteți oaspetelui prin SMS, e-mail sau WhatsApp și îl puteți afișa și sub formă de cod QR.",
+      "q2": "Oaspetele trebuie să instaleze o aplicație?",
+      "a2": "Da. Oaspetele deschide linkul în aplicația WIFIGATE și se conectează cu Google sau Apple. Fără aplicație, linkul duce la pagina de instalare; după instalare, oaspetele deschide din nou linkul.",
+      "q3": "Când începe și când se încheie accesul?",
+      "a3": "Urmează check-in-ul și check-out-ul rezervării. Implicit, sosirea este la 15:00 și plecarea la 12:00, iar dumneavoastră puteți seta alte ore.",
+      "q4": "Este nevoie de internet la intrare?",
+      "a4": "Nu. Intrarea se deschide prin Bluetooth între telefonul oaspetelui și controler, fără a depinde de cloud în momentul intrării.",
+      "q5": "La ce sisteme de rezervări se conectează?",
+      "a5": "La orice sistem care poate trimite rezervări printr-un API sau un webhook: un sistem de administrare a proprietății (PMS), un channel manager sau propriul dumneavoastră sistem. Puteți și să introduceți manual rezervări în panoul de control.",
+      "q6": "Funcționează pentru un complex cu mai multe intrări?",
+      "a6": "Da. O singură rezervare poate deschide un grup de intrări, de exemplu o poartă, o parcare și o ușă, cu până la 20 de sisteme într-un grup.",
+      "q7": "Ce trebuie instalat?",
+      "a7": "Un controler WIFIGATE la fiecare intrare. Administratorul porții îl adaugă în WIFIGATE Host din aplicație, lângă poartă. Nu este nevoie de Wi‑Fi la intrare.",
+      "q8": "Cum se calculează prețul și există un minim?",
+      "a8": "După numărul de sisteme active, pe tranșe: $6 per sistem pentru cel mult 14 sisteme, $5 pentru sistemele 15–49 și $4 începând cu al 50-lea. Minimul per cont este de $6 pe lună, chiar și fără niciun sistem asociat. Un sistem activ doar o parte din lună se taxează pe zile."
     },
     "shop": {
       "title": "Totul începe cu un controler WIFIGATE",

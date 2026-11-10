@@ -40,6 +40,7 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
     // controlled DOM boundary; component checks cover the actual plan renderer.
     installHostDetailShells() { trace.push(["detail-shells"]); },
     installSubscriptionFlow() { trace.push(["flow"]); },
+    installAudienceList() { trace.push(["audience"]); },
     getHostPageContent: () => ({}), applyDataI18nTranslations() { trace.push(["translation"]); },
     appendHostMarketingDetails() { trace.push(["details"]); },
     buildOutputFilePath(locale, key) { trace.push(["output", locale, key]); return `${locale}/${key}.html`; },
@@ -123,8 +124,8 @@ test("render and write failures reject unchanged,retaining only already complete
 
 test("Host emits the two historical aliases directly to each localized canonical and excludes them from sitemap", async () => {
   const f = fixture({ locales: ["en", "he"] }), entries = await f.host();
-  assert.deepEqual(f.trace.filter(([kind]) => ["detail-shells", "flow", "translation", "details"].includes(kind)),
-    ["en", "he"].flatMap(() => [["detail-shells"], ["flow"], ["translation"], ["details"]]));
+  assert.deepEqual(f.trace.filter(([kind]) => ["detail-shells", "flow", "translation", "details", "audience"].includes(kind)),
+    ["en", "he"].flatMap(() => [["detail-shells"], ["flow"], ["translation"], ["details"], ["audience"]]));
   const expected = [];
   for (const locale of ["en", "he"]) {
     expected.push([`${locale}/${HOST_PAGE_KEY}.html`, `page:${locale}/${HOST_PAGE_KEY}`]);

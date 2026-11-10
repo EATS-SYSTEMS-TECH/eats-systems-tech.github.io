@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Presyo",
       "title": "Simpleng plano para sa WIFIGATE Host add-on",
-      "subtitle": "Ang automation lang ang binabayaran, bawat aktibong system. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo.",
+      "subtitle": "Bawat aktibong system ang binabayaran, na may buwanang minimum na isang system. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo.",
       "per": "/ system / buwan",
       "badge": "Pinakasikat",
       "startDesc": "Para sa maliliit na negosyong nagsisimulang i-automate ang access ng bisita.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, custom na role, at pinalawak na audit",
       "scaleF4": "Suporta sa enterprise rollout",
       "planCta": "Makipag-usap sa amin",
-      "note": "Buwanang presyo sa US dollar (USD), bawat aktibong system, ayon sa antas: ang unang 14 na system ay $6 bawat isa, ang mga system 15–49 ay $5 bawat isa, at bawat system mula sa ika-50 ay $4. Minimum bawat account: $6 kada buwan. Walang platform fee at walang singil bawat imbitasyon sa bisita. May volume quote para sa 250+ system."
+      "note": "Buwanang presyo sa US dollar (USD), bago ang buwis, bawat aktibong system, ayon sa antas: ang unang 14 na system ay $6 bawat isa, ang mga system 15–49 ay $5 bawat isa, at bawat system mula sa ika-50 ay $4. Halimbawa, 20 system: 14 × $6 at 6 × $5, $114 kada buwan. Minimum bawat account: $6 kada buwan, kahit walang naka-link na system. Walang platform fee at walang singil bawat imbitasyon sa bisita. May volume quote para sa 250+ system."
     },
     "audience": {
       "label": "Ginawa para sa:",
@@ -51,28 +51,28 @@ export default {
       "title": "Mula booking hanggang bukas na gate, awtomatiko",
       "subtitle": "Tatlong hakbang, at pagkatapos ay kusa na itong tumatakbo sa bawat booking.",
       "s1t": "May pumasok na booking",
-      "s1x": "Ipinapaalam ng inyong booking o property-management system sa WIFIGATE Host ang bagong kumpirmadong booking.",
+      "s1x": "Ipinapaalam ng inyong booking system sa WIFIGATE Host ang bawat kumpirmadong booking. Maaari rin kayong maglagay ng booking nang mano-mano sa dashboard.",
       "s2t": "Awtomatikong nalilikha ang access",
-      "s2x": "Naglalabas ang WIFIGATE Host ng ligtas na imbitasyon na may takdang oras para sa eksaktong gate, pinto, o paradahan, balido lamang sa pananatiling iyon.",
+      "s2x": "Gumagawa ang WIFIGATE Host ng ligtas na access link para sa mismong gate, pinto, o paradahan ng booking na iyon, balido lamang sa panahon ng pananatili. Kayo o ang inyong booking system ang nagpapadala nito sa bisita.",
       "s3t": "Diretsong nakakapasok ang bisita",
-      "s3x": "Binubuksan niya ang pasukan gamit ang telepono. Pagdating ng check-out, kusang nag-e-expire ang access, kaya walang babawiin o kakanselahin."
+      "s3x": "Binubuksan ng bisita ang link sa WIFIGATE app at binubuksan ang pasukan gamit ang kanyang telepono. Sa check-out, kusang nagtatapos ang access. Walang susing kukunin."
     },
     "benefits": {
       "eyebrow": "Bakit WIFIGATE Host",
       "title": "Mas kaunting front desk. Mas magaan na pag-host.",
       "subtitle": "Lahat ng kailangan para maging access ang isang booking, kami na ang bahala.",
       "b1t": "Walang susing iaabot",
-      "b1x": "Kalimutan na ang pagkuha ng susi, lockbox, at kinopyang code. Dumarating ang access sa telepono ng bisita sa mismong oras na kailangan ito.",
+      "b1x": "Kalimutan na ang pagkuha ng susi, lockbox, at mga code na ipinapasa-pasa. Tumatanggap ang bisita ng link at nagbubukas gamit ang kanyang telepono.",
       "b2t": "Laging may takdang oras",
-      "b2x": "Bawat imbitasyon ay nagbubukas sa check-in at nag-e-expire sa check-out, nang awtomatiko, sa bawat pananatili.",
+      "b2x": "Bawat access link ay nagsisimula sa check-in at nagtatapos sa check-out, nang awtomatiko, sa bawat pananatili.",
       "b3t": "Naka-encrypt at pribado",
-      "b3x": "Naka-encrypt ang access at limitado sa pahintulot na ibinigay. Protektado ang inyong ari-arian at ang inyong mga bisita.",
+      "b3x": "Naka-encrypt ang access link at para lamang sa telepono ng bisitang inimbitahan ninyo.",
       "b4t": "Gumagana sa inyong mga pasukan",
-      "b4x": "Gate, pinto ng garahe, harang, at pinto sa pasukan: kinokontrol ng WIFIGATE ang mga mayroon na kayo.",
+      "b4x": "Mga gate, gate ng paradahan, harang, at pinto sa pasukan: anumang pasukang may WIFIGATE controller.",
       "b5t": "Bagay rin sa buong gusali",
-      "b5x": "Mula sa iisang gate hanggang sa buong complex, kayang saklawin ng isang imbitasyon ang bawat pasukang kailangan ng bisita.",
+      "b5x": "Mula sa iisang gate hanggang sa buong complex: kayang buksan ng isang booking ang isang grupo ng mga pasukan, gaya ng gate, paradahan, at pinto.",
       "b6t": "Kumokonekta sa inyong mga system",
-      "b6x": "Ikonekta ang WIFIGATE Host sa inyong proseso ng booking, PMS, o channel manager, at hayaan itong tumakbo."
+      "b6x": "Kumokonekta ang inyong booking system, PMS, o channel manager sa WIFIGATE Host sa pamamagitan ng API, at mula roon ay kusa na itong tumatakbo."
     },
     "secure": {
       "eyebrow": "Seguridad",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Paano nakakakuha ng access ang bisita?",
-      "q2": "Ano ang nangyayari sa check-out?",
-      "q3": "Maaari ko bang ihinto ang access sa gitna ng pananatili?",
-      "q4": "Ligtas ba ang access ng bisita?",
-      "q5": "Kailangan pa ba ng mga bisita ng susi, card, o remote?",
-      "q6": "Sa aling mga system ito kumokonekta?",
-      "q7": "Bagay rin ba ito sa buong gusali?",
-      "q8": "Paano kinakalkula ang presyo?"
+      "a1": "Gumagawa ang WIFIGATE Host ng pribadong access link para sa bawat booking. Kayo o ang inyong booking system ang nagpapadala nito sa bisita sa pamamagitan ng SMS, email, o WhatsApp, at maaari rin ninyo itong ipakita bilang QR code.",
+      "q2": "Kailangan bang mag-install ng app ang bisita?",
+      "a2": "Oo. Binubuksan ng bisita ang link sa WIFIGATE app at nagsa-sign in gamit ang Google o Apple. Kung walang app, dinadala ng link sa install page; pagkatapos mag-install, binubuksan muli ng bisita ang link.",
+      "q3": "Kailan nagsisimula at nagtatapos ang access?",
+      "a3": "Sinusunod nito ang check-in at check-out ng booking. Ang default ay pagdating nang 15:00 at pag-alis nang 12:00, at maaari kayong magtakda ng ibang oras.",
+      "q4": "Kailangan ba ng internet sa pasukan?",
+      "a4": "Hindi. Bumubukas ang pasukan sa pamamagitan ng Bluetooth sa pagitan ng telepono ng bisita at ng controller, nang hindi nakadepende sa cloud sa sandali ng pagpasok.",
+      "q5": "Sa aling mga booking system ito kumokonekta?",
+      "a5": "Sa anumang system na kayang magpadala ng mga booking sa pamamagitan ng API o webhook: property management system (PMS), channel manager, o sarili ninyong system. Maaari rin kayong maglagay ng mga booking nang mano-mano sa dashboard.",
+      "q6": "Gumagana ba ito sa complex na may ilang pasukan?",
+      "a6": "Oo. Kayang buksan ng isang booking ang isang grupo ng mga pasukan, gaya ng gate, paradahan, at pinto, na may hanggang 20 system sa isang grupo.",
+      "q7": "Ano ang kailangang ikabit?",
+      "a7": "Isang WIFIGATE controller sa bawat pasukan. Idinaragdag ito ng admin ng gate sa WIFIGATE Host mula sa app, sa tabi ng gate. Hindi kailangan ng Wi‑Fi sa pasukan.",
+      "q8": "Paano kinakalkula ang presyo, at may minimum ba?",
+      "a8": "Ayon sa bilang ng aktibong system, ayon sa antas: $6 bawat system para sa hanggang 14 na system, $5 para sa mga system 15–49, at $4 mula sa ika-50. Ang minimum bawat account ay $6 kada buwan, kahit walang naka-link na system. Ang system na aktibo sa bahagi lamang ng buwan ay sinisingil ayon sa araw."
     },
     "shop": {
       "title": "Nagsisimula ang lahat sa WIFIGATE controller",

@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Prețuri",
       "title": "Prețuri simple pentru WIFIGATE Manager",
-      "subtitle": "Plătiți doar pentru sistemele pe care le gestionați. Controlerul WIFIGATE în sine nu necesită niciodată abonament.",
+      "subtitle": "Plătiți pentru sistemele pe care le gestionați, cu un minim lunar de un sistem. Controlerul WIFIGATE în sine nu necesită niciodată abonament.",
       "badge": "Un singur preț simplu",
       "systemsName": "Sisteme",
       "systemsPer": "/ sistem / lună",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Fiecare sistem activ din panoul de control, oriunde s-ar afla.",
       "systemsF1": "Fiecare sistem se socotește o singură dată, chiar și în mai multe grupuri",
       "systemsF2": "Grupurile sunt gratuite: se socotesc doar sistemele lor",
-      "systemsF3": "Fără sisteme active, fără cost pentru sisteme",
+      "systemsF3": "Minim lunar: $1.90, chiar și fără niciun sistem asociat",
       "systemsF4": "Un sistem adăugat la jumătatea lunii se taxează pe zile",
       "organizationsName": "Organizații",
       "organizationsPer": "/ organizație suplimentară / lună",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 rulou: $1.90 / lună",
       "exampleF4": "Estimare lunară fără taxe",
       "planCta": "Discutați cu noi",
-      "note": "Prețuri în dolari americani (USD), fără taxe. O singură plată la începutul fiecărei luni acoperă luna anterioară, pe zile, împreună cu WIFIGATE Host, dacă îl folosiți."
+      "note": "Prețuri în dolari americani (USD), fără taxe. Un abonament activ are un minim de $1.90 pe lună, chiar și fără niciun sistem asociat. O singură plată la începutul fiecărei luni acoperă luna anterioară, pe zile, împreună cu WIFIGATE Host, dacă îl folosiți."
     },
     "audience": {
       "label": "Creat pentru:",
@@ -56,11 +56,11 @@ export default {
       "title": "De la un controler la toate locațiile",
       "subtitle": "Trei pași și gestionați totul dintr-un singur loc.",
       "s1t": "Conectați-vă sistemele",
-      "s1x": "Exportați sistemele WIFIGATE din aplicație în panoul de control. Controlerele se conectează prin Wi‑Fi.",
+      "s1x": "Exportați sistemele WIFIGATE din aplicație în [[panoul de control de pe site-ul WIFIGATE]], care este asociat contului dumneavoastră. Controlerele se conectează prin Wi‑Fi.",
       "s2t": "Organizați-le cum doriți",
       "s2x": "Grupați porțile, ușile și rulourile pe clădiri, locații sau organizații.",
       "s3t": "Gestionați de oriunde",
-      "s3x": "Acordați și retrageți accesul, vedeți istoricul și controlați fiecare sistem din orice browser."
+      "s3x": "Acordați și retrageți accesul, vedeți istoricul și deschideți porțile de la distanță, din orice browser."
     },
     "benefits": {
       "eyebrow": "De ce WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Utilizatori și permisiuni",
       "b2x": "Adăugați utilizatori, decideți cine ce poate deschide și schimbați totul în câteva secunde, pentru un sistem sau o locație întreagă.",
       "b3t": "Istoric complet al accesului",
-      "b3x": "Vedeți cine a deschis fiecare intrare și când, în toate locațiile.",
+      "b3x": "Vedeți cine a deschis fiecare intrare și când.",
       "b4t": "Organizații și grupuri",
       "b4x": "Grupați sistemele pe clădiri sau clienți și oferiți fiecărei organizații propriii administratori.",
       "b5t": "De oriunde din lume",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Administratorii fiecărei organizații gestionează doar sistemele de care răspund."
     },
     "faq": {
-      "q1": "Controlerul WIFIGATE în sine necesită abonament?",
+      "q1": "Există o plată minimă?",
+      "a1": "Da. Un abonament activ are un minim de $1.90 pe lună, prețul unui sistem, chiar și fără niciun sistem asociat. Controlerul WIFIGATE în sine nu necesită niciodată abonament.",
       "q2": "Cum îmi conectez sistemele la panoul de control?",
+      "a2": "Conectați-vă cu același cont în aplicație și pe site-ul WIFIGATE. În aplicație, exportați fiecare sistem în WIFIGATE Manager cât timp vă aflați lângă el și conectați controlerul acestuia la Wi‑Fi (2.4GHz). Apoi sistemul apare în panoul dumneavoastră de control de pe site.",
       "q3": "Pot administra separat clădiri sau clienți?",
+      "a3": "Da. Fiecare clădire, client sau companie primește propria organizație în contul dumneavoastră, cu propriii administratori. Trei organizații sunt incluse, iar fiecare organizație suplimentară costă $1 pe lună.",
       "q4": "Cine ce poate gestiona?",
+      "a4": "Administratorii organizațiilor gestionează doar sistemele propriei organizații și nu plătesc. Ei nu pot vedea alte organizații, sistemele dumneavoastră private sau detaliile de facturare.",
       "q5": "Ce se întâmplă când nu există internet la intrare?",
-      "q6": "Comenzile și permisiunile sunt securizate?",
+      "a5": "Deschiderea din telefon, lângă intrare, funcționează prin Bluetooth și nu depinde de internet, de serviciu sau de abonament.",
+      "q6": "Comenzile sunt securizate?",
+      "a6": "Datele și comenzile sunt criptate end-to-end între panoul de control și controler. Vă conectați la panoul de control cu Google sau Apple, plus un cod de verificare.",
       "q7": "Cum se calculează plata lunară?",
-      "q8": "Ce sisteme pot gestiona?"
+      "a7": "$1.90 per sistem pe lună, pe zile: un sistem adăugat sau eliminat în cursul lunii se taxează doar pentru zilele în care a fost în panoul dumneavoastră de control. O singură plată la începutul fiecărei luni acoperă luna anterioară. Prețurile sunt în dolari americani, fără taxe.",
+      "q8": "Ce sisteme pot gestiona?",
+      "a8": "Sisteme Gate, Dual Control și rulou, precum și grupuri ale acestora. Un rulou se acționează doar din aplicație, lângă rulou."
     },
     "shop": {
       "title": "Totul începe cu un controler WIFIGATE",

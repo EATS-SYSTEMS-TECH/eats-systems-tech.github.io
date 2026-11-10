@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Fiyatlandırma",
       "title": "WIFIGATE Manager için basit fiyatlandırma",
-      "subtitle": "Yalnızca yönettiğiniz sistemler için ödersiniz. WIFIGATE cihazının kendisi asla abonelik gerektirmez.",
+      "subtitle": "Yönettiğiniz sistemler için, aylık en az bir sistem üzerinden ödersiniz. WIFIGATE kontrol ünitesinin kendisi asla abonelik gerektirmez.",
       "badge": "Tek ve basit fiyat",
       "systemsName": "Sistemler",
       "systemsPer": "/ sistem / ay",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Panelinizdeki her aktif sistem, nerede olursa olsun.",
       "systemsF1": "Her sistem, birden fazla grupta olsa bile bir kez sayılır",
       "systemsF2": "Gruplar ücretsizdir: yalnızca içindeki sistemler sayılır",
-      "systemsF3": "Aktif sistem yoksa sistem ücreti de yok",
+      "systemsF3": "Aylık asgari tutar: $1.90, bağlı sistem olmasa bile",
       "systemsF4": "Ay ortasında eklenen sistem gün bazında ücretlendirilir",
       "organizationsName": "Kuruluşlar",
       "organizationsPer": "/ ek kuruluş / ay",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 kepenk: $1.90 / ay",
       "exampleF4": "Vergiler hariç aylık tahmin",
       "planCta": "Bizimle konuşun",
-      "note": "Fiyatlar ABD doları (USD) cinsindendir ve vergiler hariçtir. Her ayın başında yapılan tek bir tahsilat, önceki ayı gün bazında kapsar; kullanıyorsanız WIFIGATE Host da buna dahildir."
+      "note": "Fiyatlar ABD doları (USD) cinsindendir ve vergiler hariçtir. Aktif bir abonelikten, bağlı sistem olmasa bile aylık en az $1.90 tahsil edilir. Her ayın başında yapılan tek bir tahsilat, önceki ayı gün bazında kapsar; kullanıyorsanız WIFIGATE Host da buna dahildir."
     },
     "audience": {
       "label": "Kimler için:",
@@ -56,11 +56,11 @@ export default {
       "title": "Tek bir kontrol ünitesinden tüm tesislere",
       "subtitle": "Üç adım, ardından her şey tek bir yerden yönetilir.",
       "s1t": "Sistemlerinizi bağlayın",
-      "s1x": "WIFIGATE sistemlerinizi uygulamadan panele aktarın. Kontrol üniteleri Wi‑Fi üzerinden bağlanır.",
+      "s1x": "WIFIGATE sistemlerinizi uygulamadan, hesabınıza bağlı olan [[WIFIGATE web sitesindeki panele]] aktarın. Kontrol üniteleri Wi‑Fi üzerinden bağlanır.",
       "s2t": "İstediğiniz gibi düzenleyin",
       "s2x": "Kapıları, giriş kapılarını ve kepenkleri binaya, tesise veya kuruluşa göre gruplayın.",
       "s3t": "Her yerden yönetin",
-      "s3x": "Erişim verin ve kaldırın, geçmişi görün ve her sistemi herhangi bir tarayıcıdan kontrol edin."
+      "s3x": "Erişim verin ve kaldırın, geçmişi görün ve kapıları uzaktan açın; hepsi herhangi bir tarayıcıdan."
     },
     "benefits": {
       "eyebrow": "Neden WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Kullanıcılar ve yetkiler",
       "b2x": "Kullanıcı ekleyin, kimin neyi açabileceğine karar verin ve bunu tek bir sistem ya da bütün bir tesis için saniyeler içinde değiştirin.",
       "b3t": "Eksiksiz erişim geçmişi",
-      "b3x": "Tüm tesislerde kimin hangi girişi ne zaman açtığını görün.",
+      "b3x": "Her girişi kimin, ne zaman açtığını görün.",
       "b4t": "Kuruluşlar ve gruplar",
       "b4x": "Sistemleri binaya veya müşteriye göre gruplayın ve her kuruluşa kendi yöneticilerini atayın.",
       "b5t": "Dünyanın her yerinden",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Her kuruluşun yöneticileri yalnızca sorumlu oldukları sistemleri yönetir."
     },
     "faq": {
-      "q1": "WIFIGATE cihazının kendisi abonelik gerektirir mi?",
+      "q1": "Asgari bir ücretlendirme var mı?",
+      "a1": "Evet. Aktif bir abonelikten, bağlı sistem olmasa bile aylık en az $1.90, yani bir sistemin fiyatı tahsil edilir. WIFIGATE kontrol ünitesinin kendisi asla abonelik gerektirmez.",
       "q2": "Sistemlerimi panele nasıl bağlarım?",
+      "a2": "Uygulamada ve WIFIGATE web sitesinde aynı hesapla oturum açın. Uygulamada, her sistemi yanındayken WIFIGATE Manager'a aktarın ve kontrol ünitesini Wi‑Fi'ye (2.4GHz) bağlayın. Sistem ardından web sitesindeki panelinizde görünür.",
       "q3": "Ayrı binaları veya müşterileri yönetebilir miyim?",
+      "a3": "Evet. Her bina, müşteri veya şirket, hesabınız altında kendi yöneticileriyle birlikte kendi kuruluşuna sahip olur. Üç kuruluş dahildir; her ek kuruluş aylık $1 tutar.",
       "q4": "Kim neyi yönetebilir?",
+      "a4": "Kuruluş yöneticileri yalnızca kendi kuruluşlarının sistemlerini yönetir ve ücret ödemez. Diğer kuruluşları, sizin özel sistemlerinizi veya fatura bilgilerini göremezler.",
       "q5": "Girişte internet olmadığında ne olur?",
-      "q6": "Komutlar ve yetkiler güvenli mi?",
+      "a5": "Girişin yanında telefondan açma Bluetooth üzerinden çalışır; internete, hizmete veya aboneliğe bağlı değildir.",
+      "q6": "Komutlar güvenli mi?",
+      "a6": "Veriler ve komutlar, panel ile kontrol ünitesi arasında uçtan uca şifrelenir. Panele Google veya Apple ile, ek olarak bir doğrulama koduyla oturum açarsınız.",
       "q7": "Aylık ücret nasıl hesaplanır?",
-      "q8": "Hangi sistemleri yönetebilirim?"
+      "a7": "Sistem başına aylık $1.90, gün bazında: ay ortasında eklenen veya kaldırılan bir sistem yalnızca panelinizde bulunduğu günler için ücretlendirilir. Her ayın başında yapılan tek bir tahsilat önceki ayı kapsar. Fiyatlar ABD doları cinsindendir ve vergiler hariçtir.",
+      "q8": "Hangi sistemleri yönetebilirim?",
+      "a8": "Gate, Dual Control ve kepenk sistemleri ile bunların grupları. Kepenk yalnızca uygulamadan, kepengin yanındayken çalıştırılır."
     },
     "shop": {
       "title": "Her şey bir WIFIGATE kontrol ünitesiyle başlar",

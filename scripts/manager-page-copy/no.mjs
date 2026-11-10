@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Priser",
       "title": "Enkle priser for WIFIGATE Manager",
-      "subtitle": "Du betaler bare for systemene du administrerer. Selve WIFIGATE-kontrolleren trenger aldri abonnement.",
+      "subtitle": "Du betaler for systemene du administrerer, med et månedlig minimum på ett system. Selve WIFIGATE-kontrolleren trenger aldri abonnement.",
       "badge": "Én enkel pris",
       "systemsName": "Systemer",
       "systemsPer": "/ system / måned",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Hvert aktive system på dashbordet ditt, uansett hvor det er.",
       "systemsF1": "Hvert system telles én gang, også i flere grupper",
       "systemsF2": "Grupper er gratis: bare systemene i dem telles",
-      "systemsF3": "Ingen aktive systemer, ingen systemkostnad",
+      "systemsF3": "Månedlig minstebeløp: $1.90, også uten tilknyttet system",
       "systemsF4": "Et system lagt til midt i måneden faktureres per dag",
       "organizationsName": "Organisasjoner",
       "organizationsPer": "/ ekstra organisasjon / måned",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 rullesjalusi: $1.90 / måned",
       "exampleF4": "Månedlig estimat ekskl. mva",
       "planCta": "Snakk med oss",
-      "note": "Priser i amerikanske dollar (USD), eksklusive mva. Én belastning i begynnelsen av hver måned dekker forrige måned, per dag, sammen med WIFIGATE Host hvis du bruker det."
+      "note": "Priser i amerikanske dollar (USD), eksklusive mva. Et aktivt abonnement har et minstebeløp på $1.90 per måned, også uten tilknyttet system. Én belastning i begynnelsen av hver måned dekker forrige måned, per dag, sammen med WIFIGATE Host hvis du bruker det."
     },
     "audience": {
       "label": "Laget for:",
@@ -56,11 +56,11 @@ export default {
       "title": "Fra én kontroller til alle lokasjoner",
       "subtitle": "Tre steg, og alt styres fra ett sted.",
       "s1t": "Koble til systemene dine",
-      "s1x": "Eksporter WIFIGATE-systemene dine fra appen til dashbordet. Kontrollerne kobles til via Wi‑Fi.",
+      "s1x": "Eksporter WIFIGATE-systemene dine fra appen til [[dashbordet på WIFIGATE-nettstedet]], som er knyttet til kontoen din. Kontrollerne kobles til via Wi‑Fi.",
       "s2t": "Organiser dem som du vil",
       "s2x": "Grupper porter, dører og rullesjalusier etter bygg, lokasjon eller organisasjon.",
       "s3t": "Administrer fra hvor som helst",
-      "s3x": "Gi og fjern tilgang, se historikk og styr alle systemer fra hvilken som helst nettleser."
+      "s3x": "Gi og fjern tilgang, se historikk og åpne porter på avstand, fra hvilken som helst nettleser."
     },
     "benefits": {
       "eyebrow": "Hvorfor WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Brukere og tillatelser",
       "b2x": "Legg til brukere, bestem hvem som kan åpne hva, og endre det på sekunder, for ett system eller en hel lokasjon.",
       "b3t": "Full tilgangshistorikk",
-      "b3x": "Se hvem som åpnet hvilken inngang og når, på alle lokasjoner.",
+      "b3x": "Se hvem som åpnet hver inngang og når.",
       "b4t": "Organisasjoner og grupper",
       "b4x": "Grupper systemer etter bygg eller kunde, og gi hver organisasjon sine egne administratorer.",
       "b5t": "Fra hvor som helst i verden",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Administratorene i hver organisasjon administrerer bare systemene de har ansvar for."
     },
     "faq": {
-      "q1": "Trenger selve WIFIGATE-kontrolleren abonnement?",
+      "q1": "Finnes det et minstebeløp?",
+      "a1": "Ja. Et aktivt abonnement har et minstebeløp på $1.90 per måned, prisen for ett system, også uten tilknyttet system. Selve WIFIGATE-kontrolleren trenger aldri abonnement.",
       "q2": "Hvordan kobler jeg systemene mine til dashbordet?",
+      "a2": "Logg inn med samme konto i appen og på WIFIGATE-nettstedet. I appen eksporterer du hvert system til WIFIGATE Manager mens du står ved siden av det, og kobler kontrolleren dets til Wi‑Fi (2.4GHz). Deretter vises systemet på dashbordet ditt på nettstedet.",
       "q3": "Kan jeg administrere separate bygg eller kunder?",
+      "a3": "Ja. Hvert bygg, hver kunde eller hvert selskap får sin egen organisasjon under kontoen din, med egne administratorer. Tre organisasjoner er inkludert, og hver ekstra koster $1 per måned.",
       "q4": "Hvem kan administrere hva?",
+      "a4": "Organisasjonsadministratorer administrerer bare systemene i sin egen organisasjon, og de betaler ikke. De kan ikke se andre organisasjoner, de private systemene dine eller faktureringsopplysninger.",
       "q5": "Hva skjer når det ikke er internett ved inngangen?",
-      "q6": "Er kommandoer og tillatelser sikre?",
+      "a5": "Åpning fra mobilen ved siden av inngangen fungerer via Bluetooth og er ikke avhengig av internett, tjenesten eller abonnementet.",
+      "q6": "Er kommandoer sikre?",
+      "a6": "Data og kommandoer er ende-til-ende-kryptert mellom dashbordet og kontrolleren. Du logger inn på dashbordet med Google eller Apple, pluss en bekreftelseskode.",
       "q7": "Hvordan beregnes den månedlige belastningen?",
-      "q8": "Hvilke systemer kan jeg administrere?"
+      "a7": "$1.90 per system per måned, beregnet per dag: et system som legges til eller fjernes midt i måneden, belastes bare for dagene det var på dashbordet ditt. Én belastning i begynnelsen av hver måned dekker forrige måned. Prisene er i amerikanske dollar, eksklusive mva.",
+      "q8": "Hvilke systemer kan jeg administrere?",
+      "a8": "Systemer av typen Gate, Dual Control og rullesjalusi, og grupper av dem. En rullesjalusi betjenes bare fra appen, ved siden av rullesjalusien."
     },
     "shop": {
       "title": "Alt starter med en WIFIGATE-kontroller",

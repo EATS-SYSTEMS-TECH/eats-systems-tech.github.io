@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Prezzi",
       "title": "Piani semplici per il modulo aggiuntivo WIFIGATE Host",
-      "subtitle": "Paghi solo l'automazione, per sistema attivo. Il controller WIFIGATE in sé non richiede mai un abbonamento.",
+      "subtitle": "Paghi per sistema attivo, con un minimo mensile di un sistema. Il controller WIFIGATE in sé non richiede mai un abbonamento.",
       "per": "/ sistema / mese",
       "badge": "Il più scelto",
       "startDesc": "Per piccole attività che iniziano ad automatizzare l'accesso degli ospiti.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, ruoli personalizzati e audit esteso",
       "scaleF4": "Assistenza per implementazioni aziendali",
       "planCta": "Contattaci",
-      "note": "Prezzi mensili in dollari USA (USD), per sistema attivo, a scaglioni: i primi 14 sistemi costano $6 ciascuno, i sistemi 15–49 costano $5 ciascuno e ogni sistema dal 50° in poi costa $4. Importo minimo per account: $6 al mese. Nessun costo di piattaforma e nessun addebito per invito ospite. Per 250+ sistemi sono disponibili preventivi a volume."
+      "note": "Prezzi mensili in dollari USA (USD), al netto delle imposte, per sistema attivo, a scaglioni: i primi 14 sistemi costano $6 ciascuno, i sistemi 15–49 costano $5 ciascuno e ogni sistema dal 50° in poi costa $4. Per esempio, 20 sistemi: 14 × $6 più 6 × $5, $114 al mese. Importo minimo per account: $6 al mese, anche senza alcun sistema collegato. Nessun costo di piattaforma e nessun addebito per invito ospite. Per 250+ sistemi sono disponibili preventivi a volume."
     },
     "audience": {
       "label": "Pensato per:",
@@ -51,28 +51,28 @@ export default {
       "title": "Dalla prenotazione al cancello aperto, in automatico",
       "subtitle": "Tre passaggi, poi fa tutto da solo a ogni prenotazione.",
       "s1t": "Arriva una prenotazione",
-      "s1x": "Il tuo sistema di prenotazione o di gestione comunica a WIFIGATE Host una nuova prenotazione confermata.",
+      "s1x": "Il tuo sistema di prenotazione comunica a WIFIGATE Host ogni prenotazione confermata. Puoi anche inserire una prenotazione a mano nella dashboard.",
       "s2t": "L'accesso viene creato automaticamente",
-      "s2x": "WIFIGATE Host emette un invito sicuro e a tempo limitato proprio per il cancello, la porta o il parcheggio giusti, valido solo per quel soggiorno.",
+      "s2x": "WIFIGATE Host crea un link di accesso sicuro proprio per il cancello, la porta o il parcheggio di quella prenotazione, valido solo per il soggiorno. Tu o il tuo sistema di prenotazione lo inviate all'ospite.",
       "s3t": "L'ospite entra e basta",
-      "s3x": "Apre l'ingresso dallo smartphone. Al check-out l'accesso scade da solo: niente da ritirare né da annullare."
+      "s3x": "L'ospite apre il link nell'app WIFIGATE e apre l'ingresso dallo smartphone. Al check-out l'accesso termina da solo. Nessuna chiave da ritirare."
     },
     "benefits": {
       "eyebrow": "Perché WIFIGATE Host",
       "title": "Meno reception. Più ospitalità senza pensieri.",
       "subtitle": "Tutto ciò che serve per trasformare una prenotazione in accesso, lo facciamo noi per te.",
       "b1t": "Nessuna chiave da consegnare",
-      "b1x": "Dimentica il ritiro delle chiavi, le cassette portachiavi e i codici copiati. L'accesso arriva sullo smartphone dell'ospite proprio quando serve.",
+      "b1x": "Dimentica il ritiro delle chiavi, le cassette portachiavi e i codici passati di mano in mano. L'ospite riceve un link e apre dallo smartphone.",
       "b2t": "Con scadenza integrata",
-      "b2x": "Ogni invito si attiva al check-in e scade al check-out, in automatico, a ogni soggiorno.",
+      "b2x": "Ogni link di accesso inizia al check-in e termina al check-out, in automatico, a ogni soggiorno.",
       "b3t": "Crittografato e privato",
-      "b3x": "L'accesso è crittografato e limitato all'autorizzazione emessa. La tua struttura e i tuoi ospiti restano protetti.",
+      "b3x": "Il link di accesso è crittografato e destinato solo allo smartphone dell'ospite che hai invitato.",
       "b4t": "Funziona con i tuoi ingressi",
-      "b4x": "Cancelli, porte da garage, barriere e porte d'ingresso: WIFIGATE comanda ciò che hai già.",
+      "b4x": "Cancelli, cancelli dei parcheggi, barriere e porte d'ingresso: qualsiasi ingresso con un controller WIFIGATE.",
       "b5t": "Adatto anche a interi edifici",
-      "b5x": "Da un solo cancello a un intero complesso, un unico invito può coprire tutti gli ingressi di cui l'ospite ha bisogno.",
+      "b5x": "Da un solo cancello a un intero complesso: una prenotazione può aprire un gruppo di ingressi, ad esempio un cancello, un parcheggio e una porta.",
       "b6t": "Si collega ai tuoi sistemi",
-      "b6x": "Collega WIFIGATE Host al tuo flusso di prenotazione, al PMS o al channel manager e lascia che lavori da solo."
+      "b6x": "Il tuo sistema di prenotazione, il PMS o il channel manager si collega a WIFIGATE Host tramite un'API, e da lì funziona da solo."
     },
     "secure": {
       "eyebrow": "Sicurezza",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Come riceve l'accesso l'ospite?",
-      "q2": "Cosa succede al check-out?",
-      "q3": "Posso revocare l'accesso durante un soggiorno?",
-      "q4": "L'accesso degli ospiti è sicuro?",
-      "q5": "Agli ospiti servono ancora chiavi, tessere o telecomandi?",
-      "q6": "A quali sistemi si collega?",
-      "q7": "Funziona anche per un intero edificio?",
-      "q8": "Come viene calcolato il prezzo?"
+      "a1": "WIFIGATE Host crea un link di accesso privato per ogni prenotazione. Tu o il tuo sistema di prenotazione lo inviate all'ospite via SMS, email o WhatsApp, e puoi anche mostrarlo come codice QR.",
+      "q2": "L'ospite deve installare un'app?",
+      "a2": "Sì. L'ospite apre il link nell'app WIFIGATE e accede con Google o Apple. Senza l'app, il link porta alla pagina di installazione; dopo l'installazione, l'ospite apre di nuovo il link.",
+      "q3": "Quando inizia e quando termina l'accesso?",
+      "a3": "Segue il check-in e il check-out della prenotazione. Per impostazione predefinita, l'arrivo è alle 15:00 e la partenza alle 12:00, e puoi impostare altri orari.",
+      "q4": "Serve internet all'ingresso?",
+      "a4": "No. L'ingresso si apre via Bluetooth tra lo smartphone dell'ospite e il controller, senza dipendere dal cloud al momento dell'ingresso.",
+      "q5": "A quali sistemi di prenotazione si collega?",
+      "a5": "A qualsiasi sistema in grado di inviare prenotazioni tramite un'API o un webhook: un gestionale per strutture ricettive (PMS), un channel manager o un tuo sistema. Puoi anche inserire le prenotazioni a mano nella dashboard.",
+      "q6": "Funziona per un complesso con più ingressi?",
+      "a6": "Sì. Una prenotazione può aprire un gruppo di ingressi, ad esempio un cancello, un parcheggio e una porta, con un massimo di 20 sistemi per gruppo.",
+      "q7": "Cosa bisogna installare?",
+      "a7": "Un controller WIFIGATE a ogni ingresso. L'amministratore del cancello lo aggiunge a WIFIGATE Host dall'app, accanto al cancello. All'ingresso non serve il Wi‑Fi.",
+      "q8": "Come viene calcolato il prezzo, e c'è un minimo?",
+      "a8": "In base al numero di sistemi attivi, a scaglioni: $6 per sistema fino a 14 sistemi, $5 per i sistemi 15–49 e $4 dal 50° in poi. Il minimo per account è di $6 al mese, anche senza alcun sistema collegato. Un sistema attivo solo per una parte del mese si paga a giorni."
     },
     "shop": {
       "title": "Tutto parte da un controller WIFIGATE",

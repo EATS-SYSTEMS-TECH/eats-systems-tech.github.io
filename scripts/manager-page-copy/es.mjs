@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Precios",
       "title": "Precios sencillos para WIFIGATE Manager",
-      "subtitle": "Solo pagas por los sistemas que gestionas. El controlador WIFIGATE en sí nunca requiere suscripción.",
+      "subtitle": "Pagas por los sistemas que gestionas, con un mínimo mensual de un sistema. El controlador WIFIGATE en sí nunca requiere suscripción.",
       "badge": "Un único precio sencillo",
       "systemsName": "Sistemas",
       "systemsPer": "/ sistema / mes",
@@ -23,7 +23,7 @@ export default {
       "systemsDesc": "Cada sistema activo en tu panel, esté donde esté.",
       "systemsF1": "Cada sistema cuenta una sola vez, aunque esté en varios grupos",
       "systemsF2": "Los grupos son gratis: solo cuentan sus sistemas",
-      "systemsF3": "Sin sistemas activos, no hay cargo por sistemas",
+      "systemsF3": "Mínimo mensual: $1.90, incluso sin ningún sistema vinculado",
       "systemsF4": "Un sistema añadido a mitad de mes se cobra por días",
       "organizationsName": "Organizaciones",
       "organizationsPer": "/ organización adicional / mes",
@@ -42,7 +42,7 @@ export default {
       "exampleF3": "1 persiana enrollable: $1.90 / mes",
       "exampleF4": "Estimación mensual antes de impuestos",
       "planCta": "Habla con nosotros",
-      "note": "Precios en dólares estadounidenses (USD), antes de impuestos. Un solo cargo a principio de cada mes cubre el mes anterior, por días, junto con WIFIGATE Host si lo usas."
+      "note": "Precios en dólares estadounidenses (USD), antes de impuestos. Una suscripción activa tiene un mínimo de $1.90 al mes, incluso sin ningún sistema vinculado. Un solo cargo a principio de cada mes cubre el mes anterior, por días, junto con WIFIGATE Host si lo usas."
     },
     "audience": {
       "label": "Pensado para:",
@@ -56,11 +56,11 @@ export default {
       "title": "De un controlador a todas tus sedes",
       "subtitle": "Tres pasos, y todo se gestiona desde un solo lugar.",
       "s1t": "Conecta tus sistemas",
-      "s1x": "Exporta tus sistemas WIFIGATE desde la app al panel. Los controladores se conectan por Wi‑Fi.",
+      "s1x": "Exporta tus sistemas WIFIGATE desde la app al [[panel del sitio web de WIFIGATE]], que está vinculado a tu cuenta. Los controladores se conectan por Wi‑Fi.",
       "s2t": "Organízalos a tu manera",
       "s2x": "Agrupa portones, puertas y persianas enrollables por edificio, sede u organización.",
       "s3t": "Gestiona desde cualquier lugar",
-      "s3x": "Da y quita accesos, consulta el historial y controla cada sistema desde cualquier navegador."
+      "s3x": "Da y quita accesos, consulta el historial y abre portones a distancia, desde cualquier navegador."
     },
     "benefits": {
       "eyebrow": "Por qué WIFIGATE Manager",
@@ -71,7 +71,7 @@ export default {
       "b2t": "Usuarios y permisos",
       "b2x": "Añade usuarios, decide quién puede abrir qué y cámbialo en segundos, para un sistema o una sede entera.",
       "b3t": "Historial de accesos completo",
-      "b3x": "Mira quién abrió qué entrada y cuándo, en todas tus sedes.",
+      "b3x": "Mira quién abrió cada entrada y cuándo.",
       "b4t": "Organizaciones y grupos",
       "b4x": "Agrupa sistemas por edificio o cliente y dale a cada organización sus propios administradores.",
       "b5t": "Desde cualquier lugar del mundo",
@@ -91,14 +91,22 @@ export default {
       "i3x": "Los administradores de cada organización gestionan solo los sistemas de los que son responsables."
     },
     "faq": {
-      "q1": "¿El controlador WIFIGATE en sí requiere suscripción?",
+      "q1": "¿Hay un cargo mínimo?",
+      "a1": "Sí. Una suscripción activa tiene un mínimo de $1.90 al mes, el precio de un sistema, incluso sin ningún sistema vinculado. El controlador WIFIGATE en sí nunca requiere suscripción.",
       "q2": "¿Cómo conecto mis sistemas al panel?",
+      "a2": "Inicia sesión con la misma cuenta en la app y en el sitio web de WIFIGATE. En la app, exporta cada sistema a WIFIGATE Manager mientras estás junto a él y conecta su controlador a Wi‑Fi (2.4GHz). Después, el sistema aparece en tu panel del sitio web.",
       "q3": "¿Puedo gestionar edificios o clientes por separado?",
+      "a3": "Sí. Cada edificio, cliente o empresa tiene su propia organización dentro de tu cuenta, con sus propios administradores. Se incluyen tres organizaciones, y cada organización adicional cuesta $1 al mes.",
       "q4": "¿Quién puede gestionar qué?",
-      "q5": "¿Qué pasa si no hay internet en la entrada?",
-      "q6": "¿Están protegidos los comandos y los permisos?",
+      "a4": "Los administradores de organización gestionan solo los sistemas de su propia organización y no pagan. No pueden ver otras organizaciones, tus sistemas privados ni los datos de facturación.",
+      "q5": "¿Qué pasa cuando no hay internet en la entrada?",
+      "a5": "Abrir desde el teléfono junto a la entrada funciona por Bluetooth y no depende de internet, del servicio ni de la suscripción.",
+      "q6": "¿Son seguros los comandos?",
+      "a6": "Los datos y los comandos se cifran de extremo a extremo entre el panel y el controlador. Inicias sesión en el panel con Google o Apple, más un código de verificación.",
       "q7": "¿Cómo se calcula el cargo mensual?",
-      "q8": "¿Qué sistemas puedo gestionar?"
+      "a7": "$1.90 por sistema al mes, por días: un sistema añadido o eliminado a mitad de mes se cobra solo por los días que estuvo en tu panel. Un solo cargo a principio de cada mes cubre el mes anterior. Los precios están en dólares estadounidenses, antes de impuestos.",
+      "q8": "¿Qué sistemas puedo gestionar?",
+      "a8": "Sistemas Gate, Dual Control y de persiana enrollable, y grupos de ellos. Una persiana enrollable se acciona solo desde la app, junto a la persiana."
     },
     "shop": {
       "title": "Todo empieza con un controlador WIFIGATE",

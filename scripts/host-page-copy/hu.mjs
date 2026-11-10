@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Árak",
       "title": "Egyszerű csomagok a WIFIGATE Host kiegészítőhöz",
-      "subtitle": "Csak az automatizálásért fizet, aktív rendszerenként. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés.",
+      "subtitle": "Aktív rendszerenként fizet, havonta legalább egy rendszer díját. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés.",
       "per": "/ rendszer / hó",
       "badge": "Legnépszerűbb",
       "startDesc": "Kisvállalkozásoknak, amelyek most kezdik automatizálni a vendégek beléptetését.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, egyedi szerepkörök és bővített auditnapló",
       "scaleF4": "Támogatás vállalati bevezetéshez",
       "planCta": "Beszéljünk",
-      "note": "Havi árak amerikai dollárban (USD), aktív rendszerenként, sávonként számolva: az első 14 rendszer egyenként $6, a 15–49. rendszer egyenként $5, az 50.-től pedig minden rendszer $4. Minimális díj fiókonként: havi $6. Nincs platformdíj és nincs vendégmeghívónkénti díj. 250+ rendszerre mennyiségi ajánlatot adunk."
+      "note": "Havi árak amerikai dollárban (USD), adó nélkül, aktív rendszerenként, sávonként számolva: az első 14 rendszer egyenként $6, a 15–49. rendszer egyenként $5, az 50.-től pedig minden rendszer $4. Például 20 rendszer esetén: 14 × $6 plusz 6 × $5, azaz havi $114. Minimális díj fiókonként: havi $6, csatlakoztatott rendszer nélkül is. Nincs platformdíj és nincs vendégmeghívónkénti díj. 250+ rendszerre mennyiségi ajánlatot adunk."
     },
     "audience": {
       "label": "Kinek készült:",
@@ -51,28 +51,28 @@ export default {
       "title": "A foglalástól a nyitott kapuig, automatikusan",
       "subtitle": "Három lépés, és onnantól minden foglalásnál magától működik.",
       "s1t": "Beérkezik egy foglalás",
-      "s1x": "Foglalási vagy ingatlankezelő rendszere értesíti a WIFIGATE Hostot az új, megerősített foglalásról.",
+      "s1x": "Foglalási rendszere minden megerősített foglalásról értesíti a WIFIGATE Hostot. A foglalást kézzel is rögzítheti az irányítópulton.",
       "s2t": "A hozzáférés automatikusan létrejön",
-      "s2x": "A WIFIGATE Host biztonságos, időkorlátos meghívót állít ki pontosan a megfelelő kapuhoz, ajtóhoz vagy parkolóhoz, amely csak az adott tartózkodásra érvényes.",
+      "s2x": "A WIFIGATE Host biztonságos hozzáférési linket hoz létre pontosan az adott foglaláshoz tartozó kapuhoz, ajtóhoz vagy parkolóhoz, amely csak a tartózkodás idejére érvényes. Ön vagy a foglalási rendszere küldi el a vendégnek.",
       "s3t": "A vendég egyszerűen belép",
-      "s3x": "A bejáratot a telefonjáról nyitja. Check-outkor a hozzáférés magától lejár, nincs mit visszaszedni vagy visszavonni."
+      "s3x": "A vendég megnyitja a linket a WIFIGATE alkalmazásban, és a telefonjáról nyitja a bejáratot. Check-outkor a hozzáférés magától megszűnik. Nincs kulcs, amelyet vissza kellene szedni."
     },
     "benefits": {
       "eyebrow": "Miért a WIFIGATE Host?",
       "title": "Kevesebb recepciós teendő. Gondtalanabb vendéglátás.",
       "subtitle": "Mindent elintézünk, ami ahhoz kell, hogy a foglalásból belépés legyen.",
       "b1t": "Nincs kulcsátadás",
-      "b1x": "Felejtse el a kulcsátvételt, a kulcsdobozokat és a továbbadott kódokat. A hozzáférés pontosan akkor érkezik a vendég telefonjára, amikor szükség van rá.",
+      "b1x": "Felejtse el a kulcsátvételt, a kulcsdobozokat és a kézről kézre adott kódokat. A vendég kap egy linket, és a telefonjáról nyit.",
       "b2t": "Eleve időkorlátos",
-      "b2x": "Minden meghívó check-inkor nyílik és check-outkor jár le, automatikusan, minden egyes tartózkodásnál.",
+      "b2x": "Minden hozzáférési link check-inkor kezdődik és check-outkor ér véget, automatikusan, minden tartózkodásnál.",
       "b3t": "Titkosított és privát",
-      "b3x": "A hozzáférés titkosított, és csak a kiadott jogosultság keretein belül érvényes. Ingatlana és vendégei védelemben maradnak.",
+      "b3x": "A hozzáférési link titkosított, és csak az Ön által meghívott vendég telefonjára szól.",
       "b4t": "A meglévő bejárataival működik",
-      "b4x": "Kapuk, garázskapuk, sorompók és bejárati ajtók: a WIFIGATE azt vezérli, ami már megvan.",
+      "b4x": "Kapuk, parkolókapuk, sorompók és bejárati ajtók: bármely bejárat, ahol van WIFIGATE vezérlő.",
       "b5t": "Teljes épületekhez is",
-      "b5x": "Egyetlen kaputól egy teljes komplexumig egyetlen meghívó lefedheti az összes bejáratot, amelyre a vendégnek szüksége van.",
+      "b5x": "Egyetlen kaputól egy teljes komplexumig: egy foglalás bejáratok egy csoportját is nyithatja, például egy kaput, egy parkolót és egy ajtót.",
       "b6t": "Összekapcsolható a rendszereivel",
-      "b6x": "Kapcsolja a WIFIGATE Hostot a foglalási folyamatához, a PMS-éhez vagy a channel manageréhez, és hagyja, hogy dolgozzon."
+      "b6x": "Foglalási rendszere, PMS-e vagy channel managere API-n keresztül kapcsolódik a WIFIGATE Hosthoz, és onnantól magától működik."
     },
     "secure": {
       "eyebrow": "Biztonság",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Hogyan kap hozzáférést a vendég?",
-      "q2": "Mi történik check-outkor?",
-      "q3": "Leállíthatom a hozzáférést tartózkodás közben?",
-      "q4": "Biztonságos a vendéghozzáférés?",
-      "q5": "Kell még a vendégeknek kulcs, kártya vagy távirányító?",
-      "q6": "Milyen rendszerekkel kapcsolható össze a WIFIGATE Host?",
-      "q7": "Egy teljes épülethez is használható?",
-      "q8": "Hogyan számítjuk ki az árat?"
+      "a1": "A WIFIGATE Host minden foglaláshoz privát hozzáférési linket hoz létre. Ön vagy a foglalási rendszere küldi el a vendégnek SMS-ben, e-mailben vagy WhatsAppon, és QR-kódként is megjelenítheti.",
+      "q2": "Kell a vendégnek alkalmazást telepítenie?",
+      "a2": "Igen. A vendég megnyitja a linket a WIFIGATE alkalmazásban, és bejelentkezik a Google vagy az Apple segítségével. Alkalmazás nélkül a link a telepítési oldalra vezet; a telepítés után a vendég újra megnyitja a linket.",
+      "q3": "Mikor kezdődik és mikor ér véget a hozzáférés?",
+      "a3": "A foglalás check-injét és check-outját követi. Alapértelmezés szerint az érkezés 15:00-kor, a távozás 12:00-kor van, és más időpontokat is beállíthat.",
+      "q4": "Kell internet a bejáratnál?",
+      "a4": "Nem. A bejárat Bluetoothon nyílik a vendég telefonja és a vezérlő között, a belépés pillanatában nem függ a felhőtől.",
+      "q5": "Milyen foglalási rendszerekkel kapcsolható össze?",
+      "a5": "Bármely rendszerrel, amely API-n vagy webhookon keresztül tud foglalásokat küldeni: ingatlankezelő rendszerrel (PMS), channel managerrel vagy az Ön saját rendszerével. A foglalásokat kézzel is rögzítheti az irányítópulton.",
+      "q6": "Több bejáratú komplexumhoz is használható?",
+      "a6": "Igen. Egy foglalás bejáratok egy csoportját is nyithatja, például egy kaput, egy parkolót és egy ajtót, csoportonként legfeljebb 20 rendszerrel.",
+      "q7": "Mit kell felszerelni?",
+      "a7": "Minden bejárathoz egy WIFIGATE vezérlőt. A kapu adminisztrátora az alkalmazásból adja hozzá a WIFIGATE Hosthoz, a kapu mellől. A bejáratnál nincs szükség Wi‑Fi-re.",
+      "q8": "Hogyan számítjuk ki az árat, és van-e minimum?",
+      "a8": "Az aktív rendszerek száma alapján, sávonként számolva: rendszerenként $6 legfeljebb 14 rendszerig, $5 a 15–49. rendszerre, az 50.-től pedig $4. A fiókonkénti minimum havi $6, csatlakoztatott rendszer nélkül is. A hónapnak csak egy részében aktív rendszer díja napokra arányos."
     },
     "shop": {
       "title": "Minden egy WIFIGATE vezérlővel kezdődik",

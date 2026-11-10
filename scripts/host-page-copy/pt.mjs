@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Preços",
       "title": "Planos simples para o complemento WIFIGATE Host",
-      "subtitle": "Paga apenas pela automatização, por sistema ativo. O controlador WIFIGATE nunca precisa de subscrição.",
+      "subtitle": "Paga por sistema ativo, com um mínimo mensal de um sistema. O próprio controlador WIFIGATE nunca precisa de subscrição.",
       "per": "/ sistema / mês",
       "badge": "O mais popular",
       "startDesc": "Para pequenas empresas que estão a começar a automatizar o acesso de hóspedes.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, funções personalizadas e auditoria alargada",
       "scaleF4": "Apoio a implementações empresariais",
       "planCta": "Fale connosco",
-      "note": "Preços mensais em dólares norte-americanos (USD), por sistema ativo, por escalões: os primeiros 14 sistemas custam $6 cada, os sistemas 15–49 custam $5 cada e cada sistema a partir do 50.º custa $4. Mínimo por conta: $6 por mês. Sem taxa de plataforma e sem custo por convite de hóspede. Para 250+ sistemas, estão disponíveis orçamentos por volume."
+      "note": "Preços mensais em dólares norte-americanos (USD), sem impostos, por sistema ativo, por escalões: os primeiros 14 sistemas custam $6 cada, os sistemas 15–49 custam $5 cada e cada sistema a partir do 50.º custa $4. Por exemplo, 20 sistemas: 14 × $6 mais 6 × $5, $114 por mês. Mínimo por conta: $6 por mês, mesmo sem nenhum sistema associado. Sem taxa de plataforma e sem custo por convite de hóspede. Para 250+ sistemas, estão disponíveis orçamentos por volume."
     },
     "audience": {
       "label": "Para:",
@@ -51,28 +51,28 @@ export default {
       "title": "Da reserva ao portão aberto, automaticamente",
       "subtitle": "Três passos e, a partir daí, funciona sozinho em cada reserva.",
       "s1t": "Chega uma reserva",
-      "s1x": "O seu sistema de reservas ou de gestão de propriedades informa o WIFIGATE Host de uma nova reserva confirmada.",
+      "s1x": "O seu sistema de reservas informa o WIFIGATE Host de cada reserva confirmada. Também pode introduzir uma reserva manualmente no painel.",
       "s2t": "O acesso é criado automaticamente",
-      "s2x": "O WIFIGATE Host emite um convite seguro e limitado no tempo exatamente para o portão, a porta ou o estacionamento certos, válido apenas para essa estadia.",
+      "s2x": "O WIFIGATE Host cria um link de acesso seguro exatamente para o portão, a porta ou o estacionamento dessa reserva, válido apenas durante a estadia. É enviado ao hóspede por si ou pelo seu sistema de reservas.",
       "s3t": "O hóspede simplesmente entra",
-      "s3x": "Abre a entrada a partir do telemóvel. Quando chega o check-out, o acesso expira sozinho: não há nada para recolher nem cancelar."
+      "s3x": "O hóspede abre o link na aplicação WIFIGATE e abre a entrada a partir do telemóvel. No check-out, o acesso termina sozinho. Não há chave para recolher."
     },
     "benefits": {
       "eyebrow": "Porquê o WIFIGATE Host",
       "title": "Menos receção. Mais hospitalidade, sem esforço.",
       "subtitle": "Nós tratamos de tudo o que é preciso para transformar uma reserva em acesso.",
       "b1t": "Sem chaves para entregar",
-      "b1x": "Esqueça a recolha de chaves, os cofres de chaves e os códigos copiados. O acesso chega ao telemóvel do hóspede exatamente quando é preciso.",
+      "b1x": "Esqueça a recolha de chaves, os cofres de chaves e os códigos passados de mão em mão. O hóspede recebe um link e abre a partir do telemóvel.",
       "b2t": "Temporário por definição",
-      "b2x": "Cada convite abre no check-in e expira no check-out, automaticamente, em cada estadia.",
+      "b2x": "Cada link de acesso começa no check-in e termina no check-out, automaticamente, em cada estadia.",
       "b3t": "Encriptado e privado",
-      "b3x": "O acesso é encriptado e limitado à permissão emitida. A sua propriedade e os seus hóspedes ficam protegidos.",
+      "b3x": "O link de acesso é encriptado e destina-se apenas ao telemóvel do hóspede que convidou.",
       "b4t": "Funciona com as suas entradas",
-      "b4x": "Portões, portões de garagem, barreiras e portas de entrada: a WIFIGATE controla o que já tem.",
+      "b4x": "Portões, portões de estacionamento, barreiras e portas de entrada: qualquer entrada com um controlador WIFIGATE.",
       "b5t": "Também para edifícios inteiros",
-      "b5x": "De um único portão a um complexo inteiro, um só convite pode abranger todas as entradas de que o hóspede precisa.",
+      "b5x": "De um único portão a um complexo inteiro: uma reserva pode abrir um grupo de entradas, como um portão, um estacionamento e uma porta.",
       "b6t": "Liga-se aos seus sistemas",
-      "b6x": "Ligue o WIFIGATE Host ao seu processo de reservas, ao PMS ou ao channel manager e deixe-o funcionar sozinho."
+      "b6x": "O seu sistema de reservas, PMS ou channel manager liga-se ao WIFIGATE Host através de uma API e, a partir daí, funciona sozinho."
     },
     "secure": {
       "eyebrow": "Segurança",
@@ -87,13 +87,21 @@ export default {
     },
     "faq": {
       "q1": "Como é que o hóspede recebe o acesso?",
-      "q2": "O que acontece no check-out?",
-      "q3": "Posso interromper o acesso a meio de uma estadia?",
-      "q4": "O acesso dos hóspedes é seguro?",
-      "q5": "Os hóspedes ainda precisam de chaves, cartões ou comandos?",
-      "q6": "A que sistemas se liga?",
-      "q7": "Também funciona para um edifício inteiro?",
-      "q8": "Como é calculado o preço?"
+      "a1": "O WIFIGATE Host cria um link de acesso privado para cada reserva. É enviado ao hóspede por si ou pelo seu sistema de reservas, por SMS, email ou WhatsApp, e também o pode mostrar como código QR.",
+      "q2": "O hóspede precisa de instalar uma aplicação?",
+      "a2": "Sim. O hóspede abre o link na aplicação WIFIGATE e inicia sessão com Google ou Apple. Sem a aplicação, o link leva à página de instalação; depois de instalar, o hóspede abre o link novamente.",
+      "q3": "Quando começa e quando termina o acesso?",
+      "a3": "Segue o check-in e o check-out da reserva. Por predefinição, a chegada é às 15:00 e a saída às 12:00, e pode definir outros horários.",
+      "q4": "É necessária internet na entrada?",
+      "a4": "Não. A entrada abre por Bluetooth entre o telemóvel do hóspede e o controlador, sem depender da cloud no momento da entrada.",
+      "q5": "A que sistemas de reservas se liga?",
+      "a5": "A qualquer sistema que consiga enviar reservas através de uma API ou de um webhook: um sistema de gestão de propriedades (PMS), um channel manager ou o seu próprio sistema. Também pode introduzir reservas manualmente no painel.",
+      "q6": "Funciona para um complexo com várias entradas?",
+      "a6": "Sim. Uma reserva pode abrir um grupo de entradas, como um portão, um estacionamento e uma porta, com até 20 sistemas por grupo.",
+      "q7": "O que é preciso instalar?",
+      "a7": "Um controlador WIFIGATE em cada entrada. O administrador do portão adiciona-o ao WIFIGATE Host a partir da aplicação, junto ao portão. Não é necessário Wi‑Fi na entrada.",
+      "q8": "Como é calculado o preço e existe um mínimo?",
+      "a8": "Pelo número de sistemas ativos, por escalões: $6 por sistema até 14 sistemas, $5 para os sistemas 15–49 e $4 a partir do 50.º. O mínimo por conta é de $6 por mês, mesmo sem nenhum sistema associado. Um sistema ativo apenas durante parte do mês é cobrado por dias."
     },
     "shop": {
       "title": "Tudo começa com um controlador WIFIGATE",

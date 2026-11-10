@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Prijzen",
       "title": "Eenvoudige abonnementen voor de WIFIGATE Host-uitbreiding",
-      "subtitle": "Je betaalt alleen voor de automatisering, per actief systeem. Voor de WIFIGATE-controller zelf heb je nooit een abonnement nodig.",
+      "subtitle": "Je betaalt per actief systeem, met een maandelijks minimum van één systeem. Voor de WIFIGATE-controller zelf heb je nooit een abonnement nodig.",
       "per": "/ systeem / maand",
       "badge": "Meest gekozen",
       "startDesc": "Voor kleine bedrijven die gasttoegang gaan automatiseren.",
@@ -37,7 +37,7 @@ export default {
       "scaleF3": "Sandbox, aangepaste rollen en uitgebreide auditlog",
       "scaleF4": "Begeleiding bij enterprise-uitrol",
       "planCta": "Neem contact op",
-      "note": "Maandprijzen in Amerikaanse dollars (USD), per actief systeem, per staffel: de eerste 14 systemen kosten elk $6, systemen 15–49 kosten elk $5 en elk systeem vanaf het 50e kost $4. Minimumbedrag per account: $6 per maand. Geen platformkosten en geen kosten per gastuitnodiging. Voor 250+ systemen is een volumeofferte mogelijk."
+      "note": "Maandprijzen in Amerikaanse dollars (USD), exclusief btw, per actief systeem, per staffel: de eerste 14 systemen kosten elk $6, systemen 15–49 kosten elk $5 en elk systeem vanaf het 50e kost $4. Bijvoorbeeld 20 systemen: 14 × $6 plus 6 × $5, $114 per maand. Minimumbedrag per account: $6 per maand, ook zonder gekoppeld systeem. Geen platformkosten en geen kosten per gastuitnodiging. Voor 250+ systemen is een volumeofferte mogelijk."
     },
     "audience": {
       "label": "Gemaakt voor:",
@@ -51,28 +51,28 @@ export default {
       "title": "Van boeking tot open poort, automatisch",
       "subtitle": "Drie stappen, daarna loopt het vanzelf voor elke reservering.",
       "s1t": "Er komt een boeking binnen",
-      "s1x": "Je boekings- of property-managementsysteem meldt een nieuw bevestigde reservering aan WIFIGATE Host.",
+      "s1x": "Je boekingssysteem meldt elke bevestigde boeking aan WIFIGATE Host. Je kunt een boeking ook handmatig invoeren op het dashboard.",
       "s2t": "Toegang wordt automatisch aangemaakt",
-      "s2x": "WIFIGATE Host geeft een veilige, tijdgebonden uitnodiging uit voor precies de juiste poort, deur of parkeerplaats, alleen geldig voor dat verblijf.",
+      "s2x": "WIFIGATE Host maakt een veilige toegangslink aan voor precies de poort, deur of parkeerplaats van die boeking, alleen geldig tijdens het verblijf. Jij of je boekingssysteem stuurt hem naar de gast.",
       "s3t": "Je gast loopt direct naar binnen",
-      "s3x": "Hij opent de ingang met zijn telefoon. Bij het uitchecken vervalt de toegang vanzelf, er hoeft niets te worden ingenomen of geannuleerd."
+      "s3x": "De gast opent de link in de WIFIGATE-app en opent de ingang met zijn telefoon. Bij het uitchecken stopt de toegang vanzelf. Geen sleutel om op te halen."
     },
     "benefits": {
       "eyebrow": "Waarom WIFIGATE Host",
       "title": "Minder balie. Zorgeloos gasten ontvangen.",
       "subtitle": "Alles wat nodig is om van een boeking toegang te maken, voor je geregeld.",
       "b1t": "Geen sleutels om over te dragen",
-      "b1x": "Vergeet sleutels ophalen, sleutelkluisjes en gekopieerde codes. De toegang staat op de telefoon van je gast op het moment dat die nodig is.",
+      "b1x": "Vergeet sleutels ophalen, sleutelkluisjes en codes die van hand tot hand gaan. De gast krijgt een link en opent met zijn telefoon.",
       "b2t": "Standaard tijdgebonden",
-      "b2x": "Elke uitnodiging gaat open bij het inchecken en vervalt bij het uitchecken, automatisch, bij elk verblijf.",
+      "b2x": "Elke toegangslink gaat in bij het inchecken en eindigt bij het uitchecken, automatisch, bij elk verblijf.",
       "b3t": "Versleuteld en privé",
-      "b3x": "Toegang is versleuteld en beperkt tot het toegangsrecht dat is uitgegeven. Je pand en je gasten blijven beschermd.",
+      "b3x": "De toegangslink is versleuteld en alleen bedoeld voor de telefoon van de gast die je hebt uitgenodigd.",
       "b4t": "Werkt met je ingangen",
-      "b4x": "Poorten, garagedeuren, slagbomen en entreedeuren: WIFIGATE bedient wat je al hebt.",
+      "b4x": "Poorten, parkeerpoorten, slagbomen en entreedeuren: elke ingang met een WIFIGATE-controller.",
       "b5t": "Schaalt mee tot hele gebouwen",
-      "b5x": "Van één poort tot een volledig complex: één uitnodiging kan elke ingang dekken die een gast nodig heeft.",
+      "b5x": "Van één poort tot een volledig complex: één boeking kan een groep ingangen openen, zoals een poort, parkeerplaats en deur.",
       "b6t": "Koppelt met je systemen",
-      "b6x": "Sluit WIFIGATE Host aan op je boekingsproces, PMS of channelmanager en laat het zijn werk doen."
+      "b6x": "Je boekingssysteem, PMS of channelmanager maakt via een API verbinding met WIFIGATE Host, en vanaf daar loopt het vanzelf."
     },
     "secure": {
       "eyebrow": "Beveiliging",
@@ -86,14 +86,22 @@ export default {
       "i3x": "Toegang is gekoppeld aan elk verblijf en elke gast, en je kunt hem uitschakelen wanneer dat nodig is."
     },
     "faq": {
-      "q1": "Hoe krijgt een gast toegang?",
-      "q2": "Wat gebeurt er bij het uitchecken?",
-      "q3": "Kan ik de toegang midden in een verblijf uitschakelen?",
-      "q4": "Is de gasttoegang veilig?",
-      "q5": "Hebben gasten nog sleutels, passen of afstandsbedieningen nodig?",
-      "q6": "Op welke systemen sluit WIFIGATE Host aan?",
-      "q7": "Werkt het ook voor een heel gebouw?",
-      "q8": "Hoe wordt de prijs berekend?"
+      "q1": "Hoe krijgt de gast toegang?",
+      "a1": "WIFIGATE Host maakt voor elke boeking een privétoegangslink aan. Jij of je boekingssysteem stuurt hem per SMS, e-mail of WhatsApp naar de gast, en je kunt hem ook als QR-code tonen.",
+      "q2": "Moet de gast een app installeren?",
+      "a2": "Ja. De gast opent de link in de WIFIGATE-app en logt in met Google of Apple. Zonder de app leidt de link naar de installatiepagina; na het installeren opent de gast de link opnieuw.",
+      "q3": "Wanneer begint en eindigt de toegang?",
+      "a3": "Die volgt het inchecken en uitchecken van de boeking. Standaard is aankomst om 15:00 en vertrek om 12:00, en je kunt andere tijden instellen.",
+      "q4": "Is er internet nodig bij de ingang?",
+      "a4": "Nee. De ingang gaat open via Bluetooth tussen de telefoon van de gast en de controller, zonder afhankelijk te zijn van de cloud op het moment van binnenkomst.",
+      "q5": "Op welke boekingssystemen sluit het aan?",
+      "a5": "Op elk systeem dat boekingen via een API of een webhook kan versturen: een property-managementsysteem (PMS), een channelmanager of je eigen systeem. Je kunt boekingen ook handmatig invoeren op het dashboard.",
+      "q6": "Werkt het voor een complex met meerdere ingangen?",
+      "a6": "Ja. Eén boeking kan een groep ingangen openen, zoals een poort, parkeerplaats en deur, met maximaal 20 systemen per groep.",
+      "q7": "Wat moet er worden geïnstalleerd?",
+      "a7": "Een WIFIGATE-controller bij elke ingang. De beheerder van de poort voegt hem vanuit de app toe aan WIFIGATE Host, naast de poort. Bij de ingang is geen Wi‑Fi nodig.",
+      "q8": "Hoe wordt de prijs berekend, en is er een minimum?",
+      "a8": "Op basis van het aantal actieve systemen, per staffel: $6 per systeem tot en met 14 systemen, $5 voor systemen 15–49 en $4 vanaf het 50e. Het minimum per account is $6 per maand, ook zonder gekoppeld systeem. Een systeem dat een deel van de maand actief was, wordt per dag berekend."
     },
     "shop": {
       "title": "Alles begint met een WIFIGATE-controller",
