@@ -85,6 +85,21 @@ export default {
       "i3t": "Sie behalten die Kontrolle",
       "i3x": "Der Zutritt ist an jeden Aufenthalt und jeden Gast gebunden, und Sie können ihn jederzeit sperren."
     },
+    "faq": {
+      "q1": "Wie erhält ein Gast Zutritt?",
+      "q2": "Was passiert beim Check-out?",
+      "q3": "Kann ich den Zutritt mitten im Aufenthalt sperren?",
+      "q4": "Ist der Gastzugang sicher?",
+      "q5": "Brauchen Gäste noch Schlüssel, Karten oder Handsender?",
+      "q6": "Mit welchen Systemen lässt sich WIFIGATE Host verbinden?",
+      "q7": "Funktioniert das auch für ein ganzes Gebäude?",
+      "q8": "Wie wird der Preis berechnet?"
+    },
+    "shop": {
+      "title": "Alles beginnt mit einem WIFIGATE-Controller",
+      "text": "Der Gastzugang läuft über einen WIFIGATE-Controller, der am Tor, an der Tür oder an der Parkplatzzufahrt installiert ist. Wählen Sie im Shop den passenden Controller für Ihre Eingänge.",
+      "button": "Zum Shop"
+    },
     "cta": {
       "title": "Bereit für den automatischen Gastzugang?",
       "text": "Erzählen Sie uns von Ihren Unterkünften, und wir richten WIFIGATE Host so ein, wie es zu Ihrem Betrieb passt.",

@@ -85,6 +85,21 @@ export default {
       "i3t": "Il controllo resta a te",
       "i3x": "L'accesso è legato a ogni soggiorno e a ogni ospite, e puoi revocarlo in qualsiasi momento."
     },
+    "faq": {
+      "q1": "Come riceve l'accesso l'ospite?",
+      "q2": "Cosa succede al check-out?",
+      "q3": "Posso revocare l'accesso durante un soggiorno?",
+      "q4": "L'accesso degli ospiti è sicuro?",
+      "q5": "Agli ospiti servono ancora chiavi, tessere o telecomandi?",
+      "q6": "A quali sistemi si collega?",
+      "q7": "Funziona anche per un intero edificio?",
+      "q8": "Come viene calcolato il prezzo?"
+    },
+    "shop": {
+      "title": "Tutto parte da un controller WIFIGATE",
+      "text": "L'accesso degli ospiti funziona con un controller WIFIGATE installato al cancello, alla porta o all'ingresso del parcheggio. Scegli nello shop il controller giusto per i tuoi ingressi.",
+      "button": "Vai allo shop"
+    },
     "cta": {
       "title": "Pronto ad automatizzare l'accesso degli ospiti?",
       "text": "Parlaci delle tue strutture e adatteremo WIFIGATE Host al tuo modo di ospitare.",

@@ -2,9 +2,14 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells, installSubscriptionFlow } from "./host-marketing-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
+
+// Each question is answered by copy the page already states.
+const hostAnswers = [["steps.s2x"], ["benefits.b2x"], ["secure.i3x"], ["secure.i1x"], ["secure.i2x"], ["benefits.b6x"], ["benefits.b5x"], ["pricing.note"]];
+const managerAnswers = [["pricing.subtitle"], ["steps.s1x"], ["pricing.organizationsDesc", "benefits.b4x"], ["secure.i3x"], ["secure.i2x"], ["secure.i1x"], ["pricing.note"], ["benefits.b6x"]];
+const existingCopy = (marketing, paths) => paths.map(path => path.split(".").reduce((value, key) => value[key], marketing)).join(" ");
 
 const copies = await Promise.all(SITE_LANGUAGES.map(async ({ code }) => ({
   locale: code,
@@ -37,7 +42,14 @@ test("all 39 Host locales reuse existing hero, steps, benefits and SEO without n
       assert.equal(item.title, host.marketing.benefits[`b${index + 1}t`], locale);
       assert.equal(item.text, host.marketing.benefits[`b${index + 1}x`], locale);
     });
-    assert.deepEqual(content.faq, []);
+    assert.equal(content.faq.length, 8);
+    content.faq.forEach((item, index) => {
+      assert.equal(item.question, host.marketing.faq[`q${index + 1}`], locale);
+      assert.equal(item.answer, existingCopy(host.marketing, hostAnswers[index]), `${locale}: answer ${index + 1} restates existing copy`);
+    });
+    assert.deepEqual(content.stepsHeading, { eyebrow: host.marketing.steps.eyebrow, title: host.marketing.steps.title, subtitle: host.marketing.steps.subtitle }, locale);
+    assert.equal(content.benefitsEyebrow, host.marketing.benefits.eyebrow, locale);
+    for (const key of ["title", "text", "button"]) assert.ok(host.marketing.shop[key]?.trim(), `${locale}: shop.${key}`);
     content.highlights[0].title = "changed";
     content.benefits[0].text = "changed";
     assert.deepEqual({ host, home }, before, `${locale}: source locale objects stay unchanged`);
@@ -58,6 +70,12 @@ test("all 39 Manager locales supply the shared page layout with the Manager plan
       for (const key of ["Name", "Per", "Range", "Desc", "F1", "F2", "F3", "F4"]) assert.ok(manager.marketing.pricing[`${plan}${key}`]?.trim(), `${locale}: ${plan}${key}`);
     }
     assert.match(manager.marketing.pricing.exampleDesc, /\$1\.90/, `${locale}: the documented USD price`);
+    assert.equal(content.faq.length, 8);
+    content.faq.forEach((item, index) => {
+      assert.equal(item.question, manager.marketing.faq[`q${index + 1}`], locale);
+      assert.equal(item.answer, existingCopy(manager.marketing, managerAnswers[index]), `${locale}: answer ${index + 1} restates existing copy`);
+    });
+    for (const key of ["title", "text", "button"]) assert.ok(manager.marketing.shop[key]?.trim(), `${locale}: shop.${key}`);
   }
   const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
   installHostDetailShells($, "manager");
@@ -67,7 +85,7 @@ test("all 39 Manager locales supply the shared page layout with the Manager plan
 
 test("missing localized copy fails instead of publishing a partial page or a fallback", () => {
   const { host, home } = copies.find(item => item.locale === "he");
-  const fields = ["marketing.hero.title", "marketing.steps.s2x", "marketing.benefits.b6t", "metaDescription"];
+  const fields = ["marketing.hero.title", "marketing.steps.s2x", "marketing.steps.subtitle", "marketing.benefits.b6t", "marketing.benefits.eyebrow", "marketing.faq.q3", "marketing.secure.i1x", "metaDescription"];
   for (const field of fields) {
     const incomplete = structuredClone(host), path = field.split("."), key = path.pop();
     path.reduce((object, segment) => object[segment], incomplete)[key] = " ";
@@ -80,22 +98,30 @@ test("Host details preserve translated sections, plan prices and actions inside 
   const legacy = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
   installHostDetailShells(legacy);
   // The caller supplies the translated document; preserve those exact nodes.
-  legacy(".wa-secure__text").first().text("פרטי האירוח המקומיים נשמרים בדיוק");
+  legacy(".wa-shop .wa-lead").text("פרטי האירוח המקומיים נשמרים בדיוק");
   legacy(".wa-pricing__note").text("Localized pricing note");
-  const selectors = "section.wa-audience, section.wa-secure, section.wa-cta";
-  const expected = legacy(selectors).toArray().map(node => legacy(node).toString());
+  const selectors = "section.wa-audience, section.wa-shop";
+  const expected = legacy("section.wa-audience").toArray().map(node => legacy(node).toString());
+  const expectedClosing = legacy("section.wa-shop").toArray().map(node => legacy(node).toString());
   const expectedPricing = legacy("section.wa-pricing").toString();
   const original = legacy.html();
-  const $ = cheerio.load('<html><body class="niche-page"><header id="shared-header"></header><main class="niche-main"><section class="niche-hero"><h1>Shared video hero</h1></section><section id="niche-highlights"></section><section id="niche-benefits"></section></main><footer></footer></body></html>');
-  appendHostMarketingDetails($, { legacyTemplate: legacy });
+  const $ = cheerio.load('<html><body class="niche-page"><header id="shared-header"></header><main class="niche-main"><section class="niche-hero"><h1>Shared video hero</h1></section><section id="niche-highlights"></section><section id="niche-benefits"></section><section id="niche-faq"></section></main><footer></footer></body></html>');
+  assert.throws(() => appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: " " }), /locale shop link/);
+  appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: "/he/shop/" });
   const wrapper = $("#niche-benefits + .wa-page.host-marketing-details");
   const pricing = $(".niche-hero + .wa-page.host-marketing-pricing");
+  const closing = $("#niche-faq + .wa-page.host-marketing-closing");
   assert.equal(wrapper.length, 1);
   assert.equal(pricing.length, 1, "the plans come first, right under the hero");
+  assert.equal(closing.length, 1, "the shop section closes the page after the questions");
   assert.deepEqual(wrapper.children("section").toArray().map(node => $(node).toString()), expected);
+  assert.deepEqual(closing.find("a").map((_, node) => $(node).attr("href")).get(), ["/he/shop/", "../index.html#contact"], "the shop link points at the locale shop");
+  closing.find(".wa-shop__link").attr("href", "../shop/index.html");
+  assert.deepEqual(closing.children("section").toArray().map(node => $(node).toString()), expectedClosing, "apart from that link the localized nodes are preserved exactly");
   assert.deepEqual(pricing.children("section").toArray().map(node => $(node).toString()), [expectedPricing]);
   assert.deepEqual(pricing.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["$6", "$5", "$4"]);
-  assert.deepEqual(wrapper.find("a").map((_, node) => $(node).attr("href")).get(), legacy(selectors).find("a").map((_, node) => legacy(node).attr("href")).get());
+  assert.deepEqual($(".host-marketing-details a, .host-marketing-closing a").map((_, node) => $(node).attr("href")).get(), legacy(selectors).find("a").map((_, node) => legacy(node).attr("href")).get());
+  closing.find(".wa-shop__link").attr("href", "/he/shop/");
   assert.equal($(".wa-page header, .wa-page .niche-hero, .wa-page .wa-how, .wa-page .wa-benefits, .wa-page footer").length, 0);
   assert.equal($("body").hasClass("wa-page"), false);
   assert.equal($("h1").length, 1);
@@ -106,11 +132,15 @@ test("Host details preserve translated sections, plan prices and actions inside 
 });
 
 test("missing detail sections fail before changing the shared page", () => {
-  const $ = cheerio.load('<main><section class="niche-hero"></section><section id="niche-benefits"></section></main>');
+  const $ = cheerio.load('<main><section class="niche-hero"></section><section id="niche-benefits"></section><section id="niche-faq"></section></main>');
   const legacy = cheerio.load('<main><section class="wa-audience"></section><section class="wa-pricing"></section><section class="wa-cta"></section></main>');
   const original = $.html();
-  assert.throws(() => appendHostMarketingDetails($, { legacyTemplate: legacy }), /\.wa-secure section/);
+  assert.throws(() => appendHostMarketingDetails($, { legacyTemplate: legacy }), /\.wa-shop section/);
   assert.equal($.html(), original);
+  const complete = cheerio.load('<main><section class="wa-audience"></section><section class="wa-pricing"></section><section class="wa-shop"></section></main>');
+  const withoutQuestions = cheerio.load('<main><section class="niche-hero"></section><section id="niche-benefits"></section></main>'), unchanged = withoutQuestions.html();
+  assert.throws(() => appendHostMarketingDetails(withoutQuestions, { legacyTemplate: complete }), /shared questions section/);
+  assert.equal(withoutQuestions.html(), unchanged);
 });
 
 test("homepage For Business section numbers each plan and keeps the Host destination", async () => {
@@ -170,28 +200,27 @@ test("missing or ambiguous pricing slots fail before mutating the fragment", () 
   }
 });
 
-test("Host detail composition retains ordered audience/security slots and the final contact section", async () => {
+test("Host detail composition retains the ordered audience slot and the closing shop section", async () => {
   const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
-  const contact = $(".wa-cta").toString(), headings = $(".wa-head").toString();
+  const contact = $(".wa-shop").toString(), headings = $(".wa-head").toString();
   installHostDetailShells($);
   assert.deepEqual($(".wa-chip").map((_, node) => $(node).attr("data-i18n")).get(),
     ["hotels", "rentals", "guesthouses", "parking"].map(key => `guestInvites.marketing.audience.${key}`));
   assert.deepEqual($(".wa-chip").map((_, node) => $(node).text()).get(),
     ["Hotels", "Airbnb & short-term rentals", "Guesthouses", "Rental parking & garages"]);
   assert.equal($(".wa-audience__label").attr("data-i18n"), "guestInvites.marketing.audience.label");
-  assert.equal($(".wa-secure__item").length, 3);
-  $(".wa-secure__item").each((index, node) => {
-    assert.equal($(node).find("h3").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}t`);
-    assert.equal($(node).find("p").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}x`);
-  });
+  assert.equal($(".wa-secure, .wa-cta").length, 0, "the questions replace the security band and the shop replaces the contact box");
   assert.equal($(".wa-plan").length, 3);
-  assert.equal($(".wa-cta").toString(), contact);
+  assert.equal($(".wa-shop").toString(), contact);
+  assert.deepEqual($(".wa-shop [data-i18n]").map((_, node) => $(node).attr("data-i18n")).get(),
+    ["shop.title", "shop.text", "shop.button", "cta.button"].map(key => `guestInvites.marketing.${key}`));
+  assert.deepEqual($(".wa-shop__actions a").map((_, node) => $(node).attr("href")).get(), ["../shop/index.html", "../index.html#contact"]);
   assert.equal($(".wa-head").toString(), headings);
 });
 
 test("all Host detail slots are checked before any list or pricing mutation", async () => {
   const markup = await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8");
-  for (const selector of [".wa-audience__row", ".wa-secure__grid", ".wa-pricing__grid"]) {
+  for (const selector of [".wa-audience__row", ".wa-pricing__grid"]) {
     for (const mode of ["missing", "duplicate"]) {
       const $ = cheerio.load(markup), slot = $(selector);
       if (mode === "missing") slot.remove(); else slot.after(slot.clone());
@@ -200,4 +229,42 @@ test("all Host detail slots are checked before any list or pricing mutation", as
       assert.equal($.html(), original, `${selector}/${mode}: no partial mutation`);
     }
   }
+});
+
+test("the three steps ride one wave that follows the page direction, with localized headings", () => {
+  const { host, home } = copies.find(item => item.locale === "he");
+  const content = getHostPageContent(host, home);
+  const shell = (direction = "rtl") => cheerio.load(`<html dir="${direction}"><body><main><section hidden id="niche-highlights" class="niche-highlights"><div class="container"><div id="niche-highlights-list"></div></div></section><section id="niche-benefits"><div class="niche-section__header"><h2>Benefits</h2></div></section><section id="niche-faq"><div id="niche-faq-list"><details></details><details></details></div></section></main></body></html>`);
+  const $ = shell();
+  installSubscriptionFlow($, { content, productName: "host", assetPrefix: "../../" });
+  assert.deepEqual($("#niche-faq-list details").map((_, node) => $(node).attr("open") !== undefined).get(), [true, false], "the first question starts open");
+  const section = $("#niche-highlights");
+  assert.equal(section.attr("hidden"), undefined);
+  assert.equal(section.attr("aria-labelledby"), "wa-flow-title");
+  assert.ok(section.hasClass("wa-flow") && section.hasClass("wa-page"));
+  assert.equal(section.find(".wa-head--center .wa-eyebrow").text(), host.marketing.steps.eyebrow);
+  assert.equal(section.find("#wa-flow-title").text(), host.marketing.steps.title);
+  assert.equal(section.find(".wa-head--center .wa-lead").text(), host.marketing.steps.subtitle);
+  assert.equal(section.find("img.wa-flow__wave").attr("src"), "../../assets/img/subscription-flow/wave-rtl.svg");
+  const steps = section.find("ol#niche-highlights-list > li.wa-flow__step");
+  assert.equal(steps.length, 3);
+  steps.each((index, node) => {
+    assert.equal($(node).find("img.wa-flow__art").attr("src"), `../../assets/img/subscription-flow/host-${index + 1}.svg`);
+    assert.equal($(node).find("img.wa-flow__art").attr("alt"), "", "decorative art stays out of the accessibility tree");
+    assert.equal($(node).find("h3.wa-flow__title").text(), host.marketing.steps[`s${index + 1}t`]);
+    assert.equal($(node).find("p.wa-flow__desc").text(), host.marketing.steps[`s${index + 1}x`]);
+  });
+  assert.equal($("#niche-benefits .niche-section__header > .wa-eyebrow").text(), host.marketing.benefits.eyebrow);
+  const ltr = shell("ltr");
+  installSubscriptionFlow(ltr, { content, productName: "manager" });
+  assert.equal(ltr("img.wa-flow__wave").attr("src"), "assets/img/subscription-flow/wave-ltr.svg");
+  assert.equal(ltr("img.wa-flow__art").first().attr("src"), "assets/img/subscription-flow/manager-1.svg");
+  for (const broken of [{ ...content, highlights: content.highlights.slice(0, 2) }, { ...content, stepsHeading: { ...content.stepsHeading, title: "" } }]) {
+    const page = shell(), original = page.html();
+    assert.throws(() => installSubscriptionFlow(page, { content: broken, direction: "rtl" }), /step flow requires/);
+    assert.equal(page.html(), original, "no partial mutation");
+  }
+  const page = shell(), original = page.html();
+  assert.throws(() => installSubscriptionFlow(page, { content, direction: "up" }), /Unknown step flow direction/);
+  assert.equal(page.html(), original);
 });

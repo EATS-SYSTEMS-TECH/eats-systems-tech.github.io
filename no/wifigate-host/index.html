@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="Sikker, tidsbegrenset tilgang for hver gjest, opprettet automatisk for hver bestilling. For hoteller, ferieboliger, gjestehus og utleieparkering eller garasjer. Ingen nøkkelutlevering.">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/no/wifigate-host/#faq",
+      "inLanguage": "no",
+      "isPartOf": {
+        "@id": "https://wifigate.io/no/wifigate-host/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hvordan får en gjest tilgang?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE Host utsteder en sikker, tidsbegrenset invitasjon til nøyaktig riktig port, dør eller parkering, gyldig bare for det oppholdet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hva skjer ved utsjekk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hver invitasjon åpner ved innsjekk og utløper ved utsjekk, automatisk, for hvert eneste opphold."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan jeg stenge tilgangen midt i et opphold?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tilgangen er knyttet til hvert opphold og hver gjest, og du kan stenge den når du trenger det."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Er gjestetilgangen sikker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hver invitasjon er kryptert, slik at tilgangsdetaljer ikke kan leses eller kopieres underveis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Trenger gjestene fortsatt nøkler, kort eller fjernkontroller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Digital tilgang reduserer behovet for nøkler, kort og fjernkontroller, slik at personalet kan konsentrere seg om gjestene og gjestfriheten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvilke systemer kan WIFIGATE Host kobles til?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Koble WIFIGATE Host til bookingflyten, PMS-en eller channel manageren din, og la det gå av seg selv."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Fungerer det også for et helt bygg?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fra én enkelt port til et helt kompleks: én invitasjon kan dekke alle innganger en gjest trenger."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvordan beregnes prisen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Månedspriser i amerikanske dollar (USD), per aktivt system, trinn for trinn: de første 14 systemene koster $6 hver, system 15–49 koster $5 hver, og hvert system fra og med nr. 50 koster $4. Minstebeløp per konto: $6 per måned. Ingen plattformavgift og ingen kostnad per gjesteinvitasjon. For 250+ systemer kan vi gi volumtilbud."
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-host/#service",
       "name": "WIFIGATE Host",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 2.8v4M16 2.8v4"></path><path d="M8.5 14h3"></path></svg></span><h2 class="niche-highlight__title">En bestilling kommer inn</h2><p class="niche-highlight__text">Booking- eller eiendomsforvaltningssystemet ditt varsler WIFIGATE Host om en nylig bekreftet reservasjon.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">Tilgangen opprettes automatisk</h2><p class="niche-highlight__text">WIFIGATE Host utsteder en sikker, tidsbegrenset invitasjon til nøyaktig riktig port, dør eller parkering, gyldig bare for det oppholdet.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">Gjesten går rett inn</h2><p class="niche-highlight__text">Gjesten åpner inngangen fra mobilen. Ved utsjekk utløper tilgangen av seg selv, uten noe å samle inn eller kansellere.</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">Slik fungerer det</span><h2 class="wa-h2" id="wa-flow-title">Fra bestilling til åpen port, automatisk</h2><p class="wa-lead">Tre steg, og deretter går det av seg selv for hver reservasjon.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">En bestilling kommer inn</h3><p class="wa-flow__desc">Booking- eller eiendomsforvaltningssystemet ditt varsler WIFIGATE Host om en nylig bekreftet reservasjon.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Tilgangen opprettes automatisk</h3><p class="wa-flow__desc">WIFIGATE Host utsteder en sikker, tidsbegrenset invitasjon til nøyaktig riktig port, dør eller parkering, gyldig bare for det oppholdet.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Gjesten går rett inn</h3><p class="wa-flow__desc">Gjesten åpner inngangen fra mobilen. Ved utsjekk utløper tilgangen av seg selv, uten noe å samle inn eller kansellere.</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">Hvorfor WIFIGATE Host</span>
           <h2 id="niche-benefits-title" class="niche-section__title">Mindre resepsjon. Mer utleie på autopilot.</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.7 12.3 6.3-6.3"></path><path d="m15 8 2 2"></path><path d="M2 2l20 20"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Ingen nøkler å levere ut</h3><p class="bento-card__text" dir="ltr">Glem nøkkelhenting, nøkkelbokser og kopierte koder. Tilgangen kommer på gjestens mobil akkurat når den trengs.</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h5"></path><path d="M17.5 17.5 16 16.3V14"></path><circle cx="16" cy="16" r="6"></circle></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Alltid tidsbegrenset</h3><p class="bento-card__text" dir="ltr">Hver invitasjon åpner ved innsjekk og utløper ved utsjekk, automatisk, for hvert eneste opphold.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Kryptert og privat</h3><p class="bento-card__text" dir="ltr">Tilgangen er kryptert og begrenset til tillatelsen som er utstedt. Eiendommen din og gjestene dine forblir beskyttet.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Fungerer med inngangene dine</h3><p class="bento-card__text" dir="ltr">Porter, garasjeporter, bommer og inngangsdører: WIFIGATE styrer det du allerede har.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Skalerer til hele bygg</h3><p class="bento-card__text" dir="ltr">Fra én enkelt port til et helt kompleks: én invitasjon kan dekke alle innganger en gjest trenger.</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Kobles til systemene dine</h3><p class="bento-card__text" dir="ltr">Koble WIFIGATE Host til bookingflyten, PMS-en eller channel manageren din, og la det gå av seg selv.</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">Laget for:</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="ltr">Hoteller</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="ltr">Airbnb og ferieboliger</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="ltr">Gjestehus</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">Utleieparkering og garasjer</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">Sikkerhet</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">Tilgang du trygt kan gi en fremmed</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">Utviklet for å beskytte det som er bak hver port.</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">Ende-til-ende-kryptert</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">Hver invitasjon er kryptert, slik at tilgangsdetaljer ikke kan leses eller kopieres underveis.</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">Færre fysiske adgangsmidler, mer gjestfrihet</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">Digital tilgang reduserer behovet for nøkler, kort og fjernkontroller, slik at personalet kan konsentrere seg om gjestene og gjestfriheten.</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">Du beholder kontrollen</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">Tilgangen er knyttet til hvert opphold og hver gjest, og du kan stenge den når du trenger det.</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">Klar til å automatisere gjestetilgangen?</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">Fortell oss om eiendommene dine, så setter vi opp WIFIGATE Host etter måten du tar imot gjester på.</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/no/#contact" class="btn btn--primary btn--hero" dir="ltr">Snakk med oss</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">Ofte stilte spørsmål</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">Hvordan får en gjest tilgang?</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host utsteder en sikker, tidsbegrenset invitasjon til nøyaktig riktig port, dør eller parkering, gyldig bare for det oppholdet.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Hva skjer ved utsjekk?</summary><div class="seo-faq__answer"><p dir="ltr">Hver invitasjon åpner ved innsjekk og utløper ved utsjekk, automatisk, for hvert eneste opphold.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Kan jeg stenge tilgangen midt i et opphold?</summary><div class="seo-faq__answer"><p dir="ltr">Tilgangen er knyttet til hvert opphold og hver gjest, og du kan stenge den når du trenger det.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Er gjestetilgangen sikker?</summary><div class="seo-faq__answer"><p dir="ltr">Hver invitasjon er kryptert, slik at tilgangsdetaljer ikke kan leses eller kopieres underveis.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Trenger gjestene fortsatt nøkler, kort eller fjernkontroller?</summary><div class="seo-faq__answer"><p dir="ltr">Digital tilgang reduserer behovet for nøkler, kort og fjernkontroller, slik at personalet kan konsentrere seg om gjestene og gjestfriheten.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Hvilke systemer kan WIFIGATE Host kobles til?</summary><div class="seo-faq__answer"><p dir="ltr">Koble WIFIGATE Host til bookingflyten, PMS-en eller channel manageren din, og la det gå av seg selv.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Fungerer det også for et helt bygg?</summary><div class="seo-faq__answer"><p dir="ltr">Fra én enkelt port til et helt kompleks: én invitasjon kan dekke alle innganger en gjest trenger.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Hvordan beregnes prisen?</summary><div class="seo-faq__answer"><p dir="ltr">Månedspriser i amerikanske dollar (USD), per aktivt system, trinn for trinn: de første 14 systemene koster $6 hver, system 15–49 koster $5 hver, og hvert system fra og med nr. 50 koster $4. Minstebeløp per konto: $6 per måned. Ingen plattformavgift og ingen kostnad per gjesteinvitasjon. For 250+ systemer kan vi gi volumtilbud.</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">Alt starter med en WIFIGATE-kontroller</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">Gjestetilgangen kjører på en WIFIGATE-kontroller som er installert ved porten, døren eller parkeringen. Velg riktig kontroller for inngangene dine i nettbutikken.</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/no/shop/" class="btn btn--primary wa-shop__link" dir="ltr">Gå til nettbutikken</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/no/#contact" class="btn btn--ghost" dir="ltr">Snakk med oss</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

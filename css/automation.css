@@ -325,49 +325,6 @@ html[dir="rtl"] .wa-hero::after {
   color: var(--home-muted);
 }
 
-/* ================= SECURITY BAND ================= */
-.wa-secure {
-  background: var(--home-black);
-  color: #f5f5f5;
-}
-
-.wa-secure .wa-eyebrow {
-  color: #fff;
-}
-
-.wa-secure .wa-h2 {
-  color: #fff;
-}
-
-.wa-secure .wa-lead {
-  color: #cfcfcf;
-}
-
-.wa-secure__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 2.5rem;
-}
-
-.wa-secure__item {
-  padding: 1.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.wa-secure__title {
-  margin: 0 0 0.4rem;
-  color: #fff;
-  font-size: 1.12rem;
-}
-
-.wa-secure__text {
-  margin: 0;
-  color: #cfcfcf;
-}
-
 /* ================= PRICING ================= */
 .wa-pricing__grid {
   display: grid;
@@ -485,38 +442,6 @@ html[dir="rtl"] .wa-hero::after {
   text-align: center;
 }
 
-/* ================= FINAL CTA ================= */
-.wa-cta__box {
-  padding: clamp(2rem, 4vw, 3.2rem);
-  border-radius: 4px;
-  background: var(--home-black);
-  box-shadow: none;
-  text-align: center;
-}
-
-.wa-cta__title {
-  margin: 0 0 0.6rem;
-  color: #fff;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-}
-
-.wa-cta__text {
-  max-width: 34rem;
-  margin: 0 auto 1.5rem;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.wa-cta__box .btn--primary {
-  background: #fff;
-  color: var(--home-black);
-  box-shadow: none;
-}
-
-.wa-cta__box .btn--primary:hover {
-  background: #f2f2f2;
-  transform: translateY(-1px);
-}
-
 /* ================= RESPONSIVE ================= */
 @media (min-width: 901px) {
   .wa-page .wa-hero.niche-hero {
@@ -626,8 +551,7 @@ html[dir="rtl"] .wa-hero::after {
   }
 
   .wa-steps__grid,
-  .wa-benefits__grid,
-  .wa-secure__grid {
+  .wa-benefits__grid {
     grid-template-columns: 1fr;
   }
 
@@ -657,5 +581,509 @@ html[dir="rtl"] .wa-hero::after {
 
   .wa-pricing__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ================= WAVE FLOW LAYOUT =================
+   Everything below the line hero on the WIFIGATE Host and WIFIGATE Manager
+   pages speaks the hero's drawing language: white, one blue, thin lines,
+   dashed guides and node dots. Pricing cards carry two nodes, the three steps
+   ride one wave, the benefits open into a dashed grid, the questions become a
+   centred accordion and a tinted panel closes the page with the shop. */
+:is(.wifigate-host-page, .wifigate-manager-page) {
+  --flow-blue: #146bff;
+  --flow-tint: #eef4ff;
+  --flow-hair: rgba(20, 107, 255, 0.3);
+  --flow-navy: #0b1a3a;
+}
+
+.wa-eyebrow::before {
+  background: var(--flow-blue, currentColor);
+}
+
+.wa-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.wa-head--center .wa-eyebrow {
+  justify-content: center;
+}
+
+.wa-head--center .wa-h2 {
+  max-width: 20ch;
+  margin-inline: auto;
+}
+
+/* ---------- Pricing: cards with two nodes ---------- */
+.wa-pricing {
+  position: relative;
+  overflow: clip;
+}
+
+.wa-pricing::before {
+  position: absolute;
+  inset-block-start: clamp(5rem, 9vw, 7.5rem);
+  inset-inline-end: 0;
+  width: min(46%, 40rem);
+  aspect-ratio: 1160 / 130;
+  content: "";
+  background: url("../assets/img/subscription-flow/wave-deco.svg") center / contain no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.wa-pricing .container {
+  position: relative;
+}
+
+.wa-pricing__grid {
+  gap: 1.6rem;
+  margin-top: 3.5rem;
+  border: 0;
+}
+
+.wa-plan {
+  position: relative;
+  padding: 2.1rem 1.9rem 1.9rem;
+  border: 1.5px solid var(--flow-hair);
+  border-radius: 22px;
+}
+
+.wa-plan::before,
+.wa-plan::after {
+  position: absolute;
+  inset-block-start: -7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  content: "";
+  background: var(--flow-blue);
+  box-shadow: 0 0 0 4px #fff, 0 0 0 5.5px var(--flow-hair);
+}
+
+.wa-plan::before {
+  inset-inline-start: 2.1rem;
+}
+
+.wa-plan::after {
+  inset-inline-end: 2.1rem;
+}
+
+.wa-plan--featured {
+  border: 1.5px solid var(--flow-blue);
+  background: var(--flow-tint);
+  box-shadow: 0 30px 60px -36px rgba(20, 107, 255, 0.55);
+}
+
+.wa-plan__badge {
+  inset-block-start: -0.95rem;
+  inset-inline: 0;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  background: var(--flow-blue);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.wa-plan__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.wa-plan__price {
+  gap: 0.6rem;
+  margin-top: 0.55rem;
+}
+
+.wa-plan__amount {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.wa-plan__range {
+  margin-top: 0.9rem;
+  color: var(--flow-navy);
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.wa-plan__feature svg {
+  color: var(--flow-blue);
+}
+
+.wa-plan__cta .btn {
+  border-radius: 3px;
+}
+
+.wa-plan__cta .btn--primary,
+.wa-plan__cta .btn--primary:hover {
+  border: 1.5px solid var(--flow-blue);
+  background: var(--flow-blue);
+  color: #fff;
+  box-shadow: none;
+}
+
+/* ---------- Audience ---------- */
+.wa-audience {
+  padding: 2.1rem 0;
+}
+
+.wa-chip {
+  padding: 0.5rem 1.1rem;
+  border: 1.5px solid var(--flow-hair);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--flow-navy);
+}
+
+/* ---------- Steps: three points on one wave ---------- */
+.wa-flow .wa-head {
+  max-width: 46rem;
+}
+
+.wa-flow__track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.wa-flow__list,
+.wa-flow__step {
+  display: contents;
+}
+
+.wa-flow__art {
+  grid-row: 1;
+  justify-self: center;
+  width: min(100%, 300px);
+  height: auto;
+}
+
+.wa-flow__wave {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+}
+
+.wa-flow__text {
+  grid-row: 3;
+  margin-top: -1.6rem;
+  text-align: center;
+}
+
+.wa-flow__step:nth-child(1) > * {
+  grid-column: 1;
+}
+
+.wa-flow__step:nth-child(2) > * {
+  grid-column: 2;
+}
+
+.wa-flow__step:nth-child(3) > * {
+  grid-column: 3;
+}
+
+.wa-flow__title {
+  margin: 0 0 0.6rem;
+  color: var(--home-black);
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.wa-flow__desc {
+  max-width: 30ch;
+  margin: 0 auto;
+  color: var(--home-muted);
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* ---------- Benefits: an open dashed grid ---------- */
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits {
+  background: #fff;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .niche-section__header::before {
+  content: none;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1.5px dashed var(--flow-hair);
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card {
+  grid-column: auto;
+  gap: 1.6rem;
+  padding: 2.5rem 2.1rem 2.75rem;
+  border: 0;
+  border-bottom: 1.5px dashed var(--flow-hair);
+  border-inline-start: 1.5px dashed var(--flow-hair);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card:nth-child(3n + 1) {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card__top {
+  align-items: center;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card__icon {
+  width: 3.75rem;
+  height: 3.75rem;
+  border: 1.5px solid var(--flow-blue);
+  border-radius: 50%;
+  background: var(--flow-tint);
+  color: var(--flow-blue);
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card__body {
+  margin-block-start: 0;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card--lead .bento-card__title {
+  font-size: clamp(1.2rem, 1.55vw, 1.45rem);
+  line-height: 1.25;
+}
+
+/* ---------- Questions: a centred accordion ---------- */
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq {
+  background: #fff;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__layout {
+  display: block;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq .seo-faq__layout > :first-child {
+  position: static;
+  margin: 0 auto;
+  text-align: center;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq .niche-section__title {
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__list {
+  max-width: 52rem;
+  margin: clamp(2.25rem, 5vw, 3.5rem) auto 0;
+  border-top-width: 1.5px;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item {
+  border-bottom-width: 1.5px;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item summary {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 1.2rem;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item summary::after {
+  width: 2.15rem;
+  height: 2.15rem;
+  flex-basis: 2.15rem;
+  border: 1.5px solid var(--flow-hair);
+  border-radius: 50%;
+  color: var(--flow-blue);
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__item[open]:not(.is-closing) summary::after {
+  border-color: var(--flow-blue);
+  background: var(--flow-blue);
+  color: #fff;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) .seo-faq__answer {
+  max-width: 46rem;
+}
+
+/* ---------- Closing panel: to the shop ---------- */
+.wa-shop__panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding: clamp(2.25rem, 5vw, 4.25rem);
+  overflow: hidden;
+  border-radius: 30px;
+  background: var(--flow-tint);
+}
+
+.wa-shop__panel::before {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: -2.75rem;
+  aspect-ratio: 1160 / 130;
+  content: "";
+  background: url("../assets/img/subscription-flow/wave-deco.svg") center / 100% 100% no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.wa-shop__copy,
+.wa-shop__art {
+  position: relative;
+}
+
+.wa-shop__panel .wa-h2 {
+  max-width: 18ch;
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+  line-height: 1.08;
+}
+
+.wa-shop__panel .wa-lead {
+  max-width: 40ch;
+}
+
+.wa-shop__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.9rem;
+}
+
+.wa-shop__actions .btn {
+  min-height: 3.25rem;
+  padding-inline: 1.75rem;
+  border: 1.5px solid var(--home-black);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--home-black);
+  box-shadow: none;
+}
+
+.wa-shop__actions .btn--primary,
+.wa-shop__actions .btn--primary:hover {
+  background: var(--home-black);
+  color: #fff;
+}
+
+.wa-shop__art {
+  justify-self: center;
+  width: min(100%, 340px);
+  height: auto;
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .wa-pricing::before {
+    display: none;
+  }
+
+  .wa-flow__track {
+    display: block;
+  }
+
+  .wa-flow__wave {
+    display: none;
+  }
+
+  .wa-flow__list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: flow-step;
+  }
+
+  .wa-flow__step {
+    display: block;
+    text-align: center;
+    counter-increment: flow-step;
+  }
+
+  .wa-flow__step + .wa-flow__step::before {
+    display: block;
+    width: 0;
+    height: 2.5rem;
+    margin: 1.75rem auto;
+    border-inline-start: 2px dashed var(--flow-hair);
+    content: "";
+  }
+
+  .wa-flow__art {
+    display: block;
+    width: min(100%, 280px);
+    margin-inline: auto;
+  }
+
+  .wa-flow__text {
+    margin-top: 0.75rem;
+  }
+
+  .wa-flow__title::before {
+    display: grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin: 0 auto 0.8rem;
+    place-items: center;
+    border: 2px solid var(--flow-blue);
+    border-radius: 50%;
+    color: var(--flow-blue);
+    content: counter(flow-step);
+    font-size: 1.05rem;
+  }
+
+  :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card:nth-child(3n + 1) {
+    padding-inline-start: 2.1rem;
+    border-inline-start: 1.5px dashed var(--flow-hair);
+  }
+
+  :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card:nth-child(2n + 1) {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+
+  .wa-shop__panel {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 22px;
+  }
+
+  .wa-shop__art {
+    order: -1;
+    width: min(100%, 260px);
+  }
+}
+
+@media (max-width: 600px) {
+  .wa-plan {
+    padding-inline: 1.5rem;
+  }
+
+  :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card,
+  :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card:nth-child(3n + 1) {
+    padding: 2rem 0 2.25rem;
+    border-inline-start: 0;
+  }
+
+  .wa-shop__actions .btn {
+    flex: 1 1 100%;
   }
 }

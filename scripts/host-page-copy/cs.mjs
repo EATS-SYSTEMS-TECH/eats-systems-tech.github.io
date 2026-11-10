@@ -85,6 +85,21 @@ export default {
       "i3t": "Kontrolu máte stále vy",
       "i3x": "Přístup je vázaný na každý pobyt a každého hosta a můžete ho kdykoli zastavit."
     },
+    "faq": {
+      "q1": "Jak host získá přístup?",
+      "q2": "Co se stane při check-outu?",
+      "q3": "Mohu přístup zastavit uprostřed pobytu?",
+      "q4": "Je přístup hostů zabezpečený?",
+      "q5": "Potřebují hosté ještě klíče, karty nebo ovladače?",
+      "q6": "Na jaké systémy lze WIFIGATE Host napojit?",
+      "q7": "Hodí se i pro celou budovu?",
+      "q8": "Jak se počítá cena?"
+    },
+    "shop": {
+      "title": "Všechno začíná řídicí jednotkou WIFIGATE",
+      "text": "Přístup hostů zajišťuje řídicí jednotka WIFIGATE nainstalovaná u brány, dveří nebo vjezdu na parkoviště. V e-shopu si vyberte správnou řídicí jednotku pro své vstupy.",
+      "button": "Přejít do e-shopu"
+    },
     "cta": {
       "title": "Chcete, aby se přístup hostů řídil sám?",
       "text": "Řekněte nám o svých nemovitostech a my WIFIGATE Host přizpůsobíme vašemu způsobu ubytování.",

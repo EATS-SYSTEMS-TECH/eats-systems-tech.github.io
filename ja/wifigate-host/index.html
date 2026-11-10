@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="予約ごとに自動で作成される、安全な有効期限付きゲストアクセス。ホテル、民泊、ゲストハウス、貸し駐車場・ガレージに対応。鍵の受け渡しは不要です。">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ja/wifigate-host/#faq",
+      "inLanguage": "ja",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ja/wifigate-host/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ゲストはどのようにアクセスを受け取りますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE Host が、該当するゲート、ドア、駐車場だけに使える、安全な有効期限付きの招待を発行します。有効なのはその滞在期間だけです。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "チェックアウト時はどうなりますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "すべての招待はチェックイン時に有効になり、チェックアウト時に失効します。どの滞在でも、すべて自動です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "滞在の途中でアクセスを停止できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "アクセスは滞在ごと、ゲストごとに紐づいており、いつでも停止できます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ゲストアクセスは安全ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "すべての招待は暗号化されるため、途中でアクセス情報を読み取られたり複製されたりすることはありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ゲストに鍵、カード、リモコンはまだ必要ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "デジタルアクセスなら鍵、カード、リモコンの必要が減り、スタッフはゲストとおもてなしに集中できます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "どのシステムと連携できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE Host を予約フロー、PMS、サイトコントローラーと連携すれば、あとは自動で動きます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "建物全体にも対応していますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "単独のゲートから施設全体まで、ひとつの招待でゲストに必要なすべての出入口をカバーできます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "料金はどのように計算されますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "月額料金は米ドル（USD）建てで、アクティブシステムごとに段階制で計算されます。最初の 14 システムは各 $6、15–49 番目のシステムは各 $5、50 番目以降のシステムはすべて各 $4 です。アカウントの最低料金は月額 $6 です。プラットフォーム料金やゲスト招待ごとの料金はかかりません。250+ システムの場合はボリューム見積もりをご用意しています。"
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-host/#service",
       "name": "WIFIGATE Host",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 2.8v4M16 2.8v4"></path><path d="M8.5 14h3"></path></svg></span><h2 class="niche-highlight__title">予約が入る</h2><p class="niche-highlight__text">予約システムや物件管理システムが、新たに確定した予約を WIFIGATE Host に通知します。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">アクセスを自動で作成</h2><p class="niche-highlight__text">WIFIGATE Host が、該当するゲート、ドア、駐車場だけに使える、安全な有効期限付きの招待を発行します。有効なのはその滞在期間だけです。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">ゲストはそのまま入場</h2><p class="niche-highlight__text">ゲストはスマートフォンで入口を開けます。チェックアウトを迎えるとアクセスは自動で失効するため、回収や取り消しの手間はありません。</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">仕組み</span><h2 class="wa-h2" id="wa-flow-title">予約からゲートの開門まで、すべて自動</h2><p class="wa-lead">3つのステップを設定すれば、あとは予約ごとに自動で動きます。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">予約が入る</h3><p class="wa-flow__desc">予約システムや物件管理システムが、新たに確定した予約を WIFIGATE Host に通知します。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">アクセスを自動で作成</h3><p class="wa-flow__desc">WIFIGATE Host が、該当するゲート、ドア、駐車場だけに使える、安全な有効期限付きの招待を発行します。有効なのはその滞在期間だけです。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">ゲストはそのまま入場</h3><p class="wa-flow__desc">ゲストはスマートフォンで入口を開けます。チェックアウトを迎えるとアクセスは自動で失効するため、回収や取り消しの手間はありません。</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">WIFIGATE Host が選ばれる理由</span>
           <h2 id="niche-benefits-title" class="niche-section__title">フロント業務は減らし、おもてなしは手間なく。</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.7 12.3 6.3-6.3"></path><path d="m15 8 2 2"></path><path d="M2 2l20 20"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">鍵の受け渡し不要</h3><p class="bento-card__text" dir="ltr">鍵の受け取り、キーボックス、使い回される暗証番号とはお別れです。アクセスは必要なタイミングでゲストのスマートフォンに届きます。</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h5"></path><path d="M17.5 17.5 16 16.3V14"></path><circle cx="16" cy="16" r="6"></circle></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">はじめから有効期限付き</h3><p class="bento-card__text" dir="ltr">すべての招待はチェックイン時に有効になり、チェックアウト時に失効します。どの滞在でも、すべて自動です。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">暗号化で安心</h3><p class="bento-card__text" dir="ltr">アクセスは暗号化され、発行された権限の範囲でしか使えません。物件もゲストもしっかり守られます。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">今ある出入口に対応</h3><p class="bento-card__text" dir="ltr">ゲート、駐車場の扉、ゲートバー、玄関ドアなど、すでにお持ちの設備を WIFIGATE で操作できます。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">建物全体にも対応</h3><p class="bento-card__text" dir="ltr">単独のゲートから施設全体まで、ひとつの招待でゲストに必要なすべての出入口をカバーできます。</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">既存システムと連携</h3><p class="bento-card__text" dir="ltr">WIFIGATE Host を予約フロー、PMS、サイトコントローラーと連携すれば、あとは自動で動きます。</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">対象：</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="ltr">ホテル</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="ltr">Airbnb・バケーションレンタル</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="ltr">ゲストハウス</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">貸し駐車場・ガレージ</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">セキュリティ</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">初めて会う相手にも、安心して渡せるアクセス</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">すべてのゲートの向こうにある物件を守るために設計されています。</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">エンドツーエンドで暗号化</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">すべての招待は暗号化されるため、途中でアクセス情報を読み取られたり複製されたりすることはありません。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">物理的な鍵を減らし、おもてなしに集中</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">デジタルアクセスなら鍵、カード、リモコンの必要が減り、スタッフはゲストとおもてなしに集中できます。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">主導権は常にあなたに</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">アクセスは滞在ごと、ゲストごとに紐づいており、いつでも停止できます。</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">ゲストアクセスを自動化しませんか？</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">物件についてお聞かせください。お客様のおもてなしのスタイルに合わせて WIFIGATE Host をご提案します。</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/ja/#contact" class="btn btn--primary btn--hero" dir="ltr">お問い合わせ</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">よくある質問</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">ゲストはどのようにアクセスを受け取りますか？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host が、該当するゲート、ドア、駐車場だけに使える、安全な有効期限付きの招待を発行します。有効なのはその滞在期間だけです。</p></div></details><details class="seo-faq__item"><summary dir="ltr">チェックアウト時はどうなりますか？</summary><div class="seo-faq__answer"><p dir="ltr">すべての招待はチェックイン時に有効になり、チェックアウト時に失効します。どの滞在でも、すべて自動です。</p></div></details><details class="seo-faq__item"><summary dir="ltr">滞在の途中でアクセスを停止できますか？</summary><div class="seo-faq__answer"><p dir="ltr">アクセスは滞在ごと、ゲストごとに紐づいており、いつでも停止できます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">ゲストアクセスは安全ですか？</summary><div class="seo-faq__answer"><p dir="ltr">すべての招待は暗号化されるため、途中でアクセス情報を読み取られたり複製されたりすることはありません。</p></div></details><details class="seo-faq__item"><summary dir="ltr">ゲストに鍵、カード、リモコンはまだ必要ですか？</summary><div class="seo-faq__answer"><p dir="ltr">デジタルアクセスなら鍵、カード、リモコンの必要が減り、スタッフはゲストとおもてなしに集中できます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">どのシステムと連携できますか？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host を予約フロー、PMS、サイトコントローラーと連携すれば、あとは自動で動きます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">建物全体にも対応していますか？</summary><div class="seo-faq__answer"><p dir="ltr">単独のゲートから施設全体まで、ひとつの招待でゲストに必要なすべての出入口をカバーできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">料金はどのように計算されますか？</summary><div class="seo-faq__answer"><p dir="ltr">月額料金は米ドル（USD）建てで、アクティブシステムごとに段階制で計算されます。最初の 14 システムは各 $6、15–49 番目のシステムは各 $5、50 番目以降のシステムはすべて各 $4 です。アカウントの最低料金は月額 $6 です。プラットフォーム料金やゲスト招待ごとの料金はかかりません。250+ システムの場合はボリューム見積もりをご用意しています。</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">すべては WIFIGATE コントローラーから</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">ゲストアクセスは、ゲート、ドア、駐車場の入口に設置された WIFIGATE コントローラーで動作します。お使いの出入口に合ったコントローラーをショップでお選びください。</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/ja/shop/" class="btn btn--primary wa-shop__link" dir="ltr">ショップを見る</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/ja/#contact" class="btn btn--ghost" dir="ltr">お問い合わせ</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

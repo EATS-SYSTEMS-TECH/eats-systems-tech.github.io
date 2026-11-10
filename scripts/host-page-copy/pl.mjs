@@ -85,6 +85,21 @@ export default {
       "i3t": "Kontrola pozostaje w Twoich rękach",
       "i3x": "Dostęp jest przypisany do każdego pobytu i każdego gościa, a Ty możesz go wstrzymać w każdej chwili."
     },
+    "faq": {
+      "q1": "Jak gość otrzymuje dostęp?",
+      "q2": "Co się dzieje przy wymeldowaniu?",
+      "q3": "Czy mogę wstrzymać dostęp w trakcie pobytu?",
+      "q4": "Czy dostęp dla gości jest bezpieczny?",
+      "q5": "Czy goście nadal potrzebują kluczy, kart lub pilotów?",
+      "q6": "Z jakimi systemami łączy się WIFIGATE Host?",
+      "q7": "Czy sprawdzi się też w całym budynku?",
+      "q8": "Jak obliczana jest cena?"
+    },
+    "shop": {
+      "title": "Wszystko zaczyna się od kontrolera WIFIGATE",
+      "text": "Dostęp dla gości działa dzięki kontrolerowi WIFIGATE zamontowanemu przy bramie, drzwiach lub wjeździe na parking. Wybierz w sklepie kontroler odpowiedni do swoich wejść.",
+      "button": "Przejdź do sklepu"
+    },
     "cta": {
       "title": "Chcesz zautomatyzować dostęp dla gości?",
       "text": "Opowiedz nam o swoich obiektach, a dopasujemy WIFIGATE Host do sposobu, w jaki przyjmujesz gości.",

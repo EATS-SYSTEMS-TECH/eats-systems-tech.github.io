@@ -90,6 +90,21 @@ export default {
       "i3t": "Vloge za vsako ekipo",
       "i3x": "Skrbniki vsake organizacije upravljajo le sisteme, za katere so odgovorni."
     },
+    "faq": {
+      "q1": "Ali sama naprava WIFIGATE potrebuje naročnino?",
+      "q2": "Kako povežem svoje sisteme z nadzorno ploščo?",
+      "q3": "Ali lahko upravljam ločene stavbe ali stranke?",
+      "q4": "Kdo lahko kaj upravlja?",
+      "q5": "Kaj se zgodi, ko pri vhodu ni interneta?",
+      "q6": "Ali so ukazi in dovoljenja varni?",
+      "q7": "Kako se izračuna mesečni znesek?",
+      "q8": "Katere sisteme lahko upravljam?"
+    },
+    "shop": {
+      "title": "Vse se začne s krmilnikom WIFIGATE",
+      "text": "Vsak sistem na vaši nadzorni plošči je krmilnik WIFIGATE, nameščen pri vhodu. V trgovini izberite pravi krmilnik za svoja dvoriščna vrata, vhodna vrata ali roleto.",
+      "button": "Pojdite v trgovino"
+    },
     "cta": {
       "title": "Ste pripravljeni upravljati vse lokacije z enega mesta?",
       "text": "Povejte nam o svojih stavbah in sistemih in WIFIGATE Manager bomo nastavili za vašo organizacijo.",

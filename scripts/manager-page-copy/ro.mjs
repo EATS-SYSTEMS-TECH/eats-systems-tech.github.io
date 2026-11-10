@@ -90,6 +90,21 @@ export default {
       "i3t": "Roluri pentru fiecare echipă",
       "i3x": "Administratorii fiecărei organizații gestionează doar sistemele de care răspund."
     },
+    "faq": {
+      "q1": "Controlerul WIFIGATE în sine necesită abonament?",
+      "q2": "Cum îmi conectez sistemele la panoul de control?",
+      "q3": "Pot administra separat clădiri sau clienți?",
+      "q4": "Cine ce poate gestiona?",
+      "q5": "Ce se întâmplă când nu există internet la intrare?",
+      "q6": "Comenzile și permisiunile sunt securizate?",
+      "q7": "Cum se calculează plata lunară?",
+      "q8": "Ce sisteme pot gestiona?"
+    },
+    "shop": {
+      "title": "Totul începe cu un controler WIFIGATE",
+      "text": "Fiecare sistem din panoul de control este un controler WIFIGATE instalat la intrare. Alegeți din magazin controlerul potrivit pentru poarta, ușa sau ruloul dumneavoastră.",
+      "button": "Accesați magazinul"
+    },
     "cta": {
       "title": "Sunteți gata să gestionați toate locațiile dintr-un singur loc?",
       "text": "Spuneți-ne despre clădirile și sistemele dumneavoastră și vom configura WIFIGATE Manager pentru organizația dumneavoastră.",

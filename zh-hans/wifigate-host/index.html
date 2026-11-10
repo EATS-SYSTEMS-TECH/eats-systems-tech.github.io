@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="为每位住客提供安全的限时通行权限，每笔预订自动生成。适用于酒店、度假公寓、民宿以及出租停车位和车库，无需交接钥匙。">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/zh-hans/wifigate-host/#faq",
+      "inLanguage": "zh-Hans",
+      "isPartOf": {
+        "@id": "https://wifigate.io/zh-hans/wifigate-host/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "住客如何获得通行权限？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE Host 为对应的大门、房门或停车场发放安全的限时邀请，仅在该次入住期间有效。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "退房时会怎样？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每份邀请在入住时生效、退房时失效，每次入住都自动完成。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "入住期间可以中途停用通行权限吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "通行权限与每次入住、每位住客绑定，您可以随时停用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "住客通行安全吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每份邀请都经过加密，通行信息在传输途中无法被读取或复制。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "住客还需要钥匙、门卡或遥控器吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "数字通行减少了对钥匙、门卡和遥控器的依赖，让团队把精力放在住客和接待上。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以对接哪些系统？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "将 WIFIGATE Host 接入您的预订流程、PMS 或渠道管理系统，一切自动运转。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "适用于整栋楼宇吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "从单个大门到整个园区，一份邀请即可覆盖住客需要的所有入口。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "价格如何计算？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "月度价格以美元（USD）计，按活跃系统分档累进计费：前 14 套系统每套 $6，第 15–49 套每套 $5，自第 50 套起每套 $4。每个账户最低消费：每月 $6。无平台费，也不按住客邀请次数收费。250+ 套系统可申请批量报价。"
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-host/#service",
       "name": "WIFIGATE Host",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 2.8v4M16 2.8v4"></path><path d="M8.5 14h3"></path></svg></span><h2 class="niche-highlight__title">收到预订</h2><p class="niche-highlight__text">您的预订系统或物业管理系统会把新确认的预订同步给 WIFIGATE Host。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">自动生成通行权限</h2><p class="niche-highlight__text">WIFIGATE Host 为对应的大门、房门或停车场发放安全的限时邀请，仅在该次入住期间有效。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">住客直接进门</h2><p class="niche-highlight__text">住客用手机开门。退房时间一到，权限自动失效，无需回收，也无需取消。</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">工作原理</span><h2 class="wa-h2" id="wa-flow-title">从预订到开门，全程自动</h2><p class="wa-lead">只需三步，此后每笔预订都自动处理。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">收到预订</h3><p class="wa-flow__desc">您的预订系统或物业管理系统会把新确认的预订同步给 WIFIGATE Host。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">自动生成通行权限</h3><p class="wa-flow__desc">WIFIGATE Host 为对应的大门、房门或停车场发放安全的限时邀请，仅在该次入住期间有效。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">住客直接进门</h3><p class="wa-flow__desc">住客用手机开门。退房时间一到，权限自动失效，无需回收，也无需取消。</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">为什么选择 WIFIGATE Host</span>
           <h2 id="niche-benefits-title" class="niche-section__title">前台更省事，待客更轻松。</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.7 12.3 6.3-6.3"></path><path d="m15 8 2 2"></path><path d="M2 2l20 20"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">无需交接钥匙</h3><p class="bento-card__text" dir="ltr">告别取钥匙、钥匙盒和四处转发的密码。通行权限会在需要时准时送达住客手机。</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h5"></path><path d="M17.5 17.5 16 16.3V14"></path><circle cx="16" cy="16" r="6"></circle></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">天生限时</h3><p class="bento-card__text" dir="ltr">每份邀请在入住时生效、退房时失效，每次入住都自动完成。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">加密且私密</h3><p class="bento-card__text" dir="ltr">通行全程加密，且仅限于所发放的权限范围，您的物业和住客都安全无忧。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">兼容您现有的入口</h3><p class="bento-card__text" dir="ltr">大门、车库门、道闸、入户门……WIFIGATE 直接控制您现有的设备。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">也适用于整栋楼宇</h3><p class="bento-card__text" dir="ltr">从单个大门到整个园区，一份邀请即可覆盖住客需要的所有入口。</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">对接您的系统</h3><p class="bento-card__text" dir="ltr">将 WIFIGATE Host 接入您的预订流程、PMS 或渠道管理系统，一切自动运转。</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">适用于：</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="ltr">酒店</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="ltr">Airbnb 与度假公寓</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="ltr">民宿</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">出租停车位与车库</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">安全</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">可以放心交给陌生人的通行权限</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">专为保护每道大门背后的物业而打造。</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">端到端加密</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">每份邀请都经过加密，通行信息在传输途中无法被读取或复制。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">更少实体凭证，更多用心待客</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">数字通行减少了对钥匙、门卡和遥控器的依赖，让团队把精力放在住客和接待上。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">掌控权始终在您手中</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">通行权限与每次入住、每位住客绑定，您可以随时停用。</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">准备好让住客通行自动化了吗？</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">告诉我们您的物业情况，我们将根据您的待客方式定制 WIFIGATE Host。</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/zh-hans/#contact" class="btn btn--primary btn--hero" dir="ltr">联系我们</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">常见问题</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">住客如何获得通行权限？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host 为对应的大门、房门或停车场发放安全的限时邀请，仅在该次入住期间有效。</p></div></details><details class="seo-faq__item"><summary dir="ltr">退房时会怎样？</summary><div class="seo-faq__answer"><p dir="ltr">每份邀请在入住时生效、退房时失效，每次入住都自动完成。</p></div></details><details class="seo-faq__item"><summary dir="ltr">入住期间可以中途停用通行权限吗？</summary><div class="seo-faq__answer"><p dir="ltr">通行权限与每次入住、每位住客绑定，您可以随时停用。</p></div></details><details class="seo-faq__item"><summary dir="ltr">住客通行安全吗？</summary><div class="seo-faq__answer"><p dir="ltr">每份邀请都经过加密，通行信息在传输途中无法被读取或复制。</p></div></details><details class="seo-faq__item"><summary dir="ltr">住客还需要钥匙、门卡或遥控器吗？</summary><div class="seo-faq__answer"><p dir="ltr">数字通行减少了对钥匙、门卡和遥控器的依赖，让团队把精力放在住客和接待上。</p></div></details><details class="seo-faq__item"><summary dir="ltr">可以对接哪些系统？</summary><div class="seo-faq__answer"><p dir="ltr">将 WIFIGATE Host 接入您的预订流程、PMS 或渠道管理系统，一切自动运转。</p></div></details><details class="seo-faq__item"><summary dir="ltr">适用于整栋楼宇吗？</summary><div class="seo-faq__answer"><p dir="ltr">从单个大门到整个园区，一份邀请即可覆盖住客需要的所有入口。</p></div></details><details class="seo-faq__item"><summary dir="ltr">价格如何计算？</summary><div class="seo-faq__answer"><p dir="ltr">月度价格以美元（USD）计，按活跃系统分档累进计费：前 14 套系统每套 $6，第 15–49 套每套 $5，自第 50 套起每套 $4。每个账户最低消费：每月 $6。无平台费，也不按住客邀请次数收费。250+ 套系统可申请批量报价。</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">一切从一台 WIFIGATE 控制器开始</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">住客通行依靠安装在大门、房门或停车场入口的 WIFIGATE 控制器运行。请在商店中为您的各个入口选择合适的控制器。</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/zh-hans/shop/" class="btn btn--primary wa-shop__link" dir="ltr">前往商店</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/zh-hans/#contact" class="btn btn--ghost" dir="ltr">联系我们</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

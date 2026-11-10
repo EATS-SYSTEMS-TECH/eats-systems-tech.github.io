@@ -90,6 +90,21 @@ export default {
       "i3t": "Rollen voor elk team",
       "i3x": "De beheerders van elke organisatie beheren alleen de systemen waarvoor ze verantwoordelijk zijn."
     },
+    "faq": {
+      "q1": "Heb ik voor de WIFIGATE-controller zelf een abonnement nodig?",
+      "q2": "Hoe koppel ik mijn systemen aan het dashboard?",
+      "q3": "Kan ik afzonderlijke gebouwen of klanten beheren?",
+      "q4": "Wie mag wat beheren?",
+      "q5": "Wat gebeurt er als er bij de ingang geen internet is?",
+      "q6": "Zijn opdrachten en rechten beveiligd?",
+      "q7": "Hoe wordt de maandelijkse afschrijving berekend?",
+      "q8": "Welke systemen kan ik beheren?"
+    },
+    "shop": {
+      "title": "Alles begint met een WIFIGATE-controller",
+      "text": "Elk systeem op je dashboard is een WIFIGATE-controller die bij de ingang is geïnstalleerd. Kies in de webshop de juiste controller voor je poort, deur of rolluik.",
+      "button": "Naar de webshop"
+    },
     "cta": {
       "title": "Klaar om al je locaties vanaf één plek te beheren?",
       "text": "Vertel ons over je gebouwen en systemen, dan richten wij WIFIGATE Manager in voor je organisatie.",

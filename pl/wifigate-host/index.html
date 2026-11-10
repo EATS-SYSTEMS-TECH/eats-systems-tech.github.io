@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="Bezpieczny, ograniczony czasowo dostęp dla każdego gościa, tworzony automatycznie dla każdej rezerwacji. Hotele, apartamenty, pensjonaty, parkingi i garaże. Bez przekazywania kluczy.">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/pl/wifigate-host/#faq",
+      "inLanguage": "pl",
+      "isPartOf": {
+        "@id": "https://wifigate.io/pl/wifigate-host/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Jak gość otrzymuje dostęp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE Host wystawia bezpieczne, ograniczone czasowo zaproszenie dokładnie do właściwej bramy, drzwi lub parkingu, ważne tylko na ten pobyt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Co się dzieje przy wymeldowaniu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Przy każdym pobycie zaproszenie samo zaczyna działać przy zameldowaniu i wygasa przy wymeldowaniu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy mogę wstrzymać dostęp w trakcie pobytu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dostęp jest przypisany do każdego pobytu i każdego gościa, a Ty możesz go wstrzymać w każdej chwili."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy dostęp dla gości jest bezpieczny?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Każde zaproszenie jest szyfrowane, więc danych dostępu nie da się odczytać ani skopiować podczas przesyłania."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy goście nadal potrzebują kluczy, kart lub pilotów?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dostęp cyfrowy zmniejsza potrzebę używania kluczy, kart i pilotów, dzięki czemu zespół może skupić się na gościach i ich obsłudze."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Z jakimi systemami łączy się WIFIGATE Host?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Połącz WIFIGATE Host z procesem rezerwacji, systemem PMS lub channel managerem, a resztę zrobi za Ciebie."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy sprawdzi się też w całym budynku?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Od jednej bramy po cały kompleks: jedno zaproszenie może obejmować każde wejście, którego potrzebuje gość."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak obliczana jest cena?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ceny miesięczne w dolarach amerykańskich (USD), za aktywny system, progowo: pierwsze 14 systemów kosztuje po $6, systemy 15–49 po $5, a każdy system od 50. wzwyż $4. Minimalna opłata za konto: $6 miesięcznie. Bez opłaty za platformę i bez opłat za zaproszenia dla gości. Dla 250+ systemów przygotujemy ofertę ilościową."
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-host/#service",
       "name": "WIFIGATE Host",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 2.8v4M16 2.8v4"></path><path d="M8.5 14h3"></path></svg></span><h2 class="niche-highlight__title">Wpływa rezerwacja</h2><p class="niche-highlight__text">Twój system rezerwacji lub zarządzania obiektem informuje WIFIGATE Host o nowej, potwierdzonej rezerwacji.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">Dostęp powstaje automatycznie</h2><p class="niche-highlight__text">WIFIGATE Host wystawia bezpieczne, ograniczone czasowo zaproszenie dokładnie do właściwej bramy, drzwi lub parkingu, ważne tylko na ten pobyt.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">Gość po prostu wchodzi</h2><p class="niche-highlight__text">Otwiera wejście telefonem. Przy wymeldowaniu dostęp sam wygasa, nie trzeba niczego odbierać ani anulować.</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">Jak to działa</span><h2 class="wa-h2" id="wa-flow-title">Od rezerwacji do otwartej bramy, automatycznie</h2><p class="wa-lead">Trzy kroki, a potem wszystko działa samo przy każdej rezerwacji.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Wpływa rezerwacja</h3><p class="wa-flow__desc">Twój system rezerwacji lub zarządzania obiektem informuje WIFIGATE Host o nowej, potwierdzonej rezerwacji.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Dostęp powstaje automatycznie</h3><p class="wa-flow__desc">WIFIGATE Host wystawia bezpieczne, ograniczone czasowo zaproszenie dokładnie do właściwej bramy, drzwi lub parkingu, ważne tylko na ten pobyt.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Gość po prostu wchodzi</h3><p class="wa-flow__desc">Otwiera wejście telefonem. Przy wymeldowaniu dostęp sam wygasa, nie trzeba niczego odbierać ani anulować.</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">Dlaczego WIFIGATE Host</span>
           <h2 id="niche-benefits-title" class="niche-section__title">Mniej pracy na recepcji. Więcej czasu dla gości.</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.7 12.3 6.3-6.3"></path><path d="m15 8 2 2"></path><path d="M2 2l20 20"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Bez przekazywania kluczy</h3><p class="bento-card__text" dir="ltr">Zapomnij o odbieraniu kluczy, sejfach na klucze i kopiowanych kodach. Dostęp trafia na telefon gościa dokładnie wtedy, gdy jest potrzebny.</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h5"></path><path d="M17.5 17.5 16 16.3V14"></path><circle cx="16" cy="16" r="6"></circle></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Z założenia ograniczony czasowo</h3><p class="bento-card__text" dir="ltr">Przy każdym pobycie zaproszenie samo zaczyna działać przy zameldowaniu i wygasa przy wymeldowaniu.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Szyfrowany i prywatny</h3><p class="bento-card__text" dir="ltr">Dostęp jest szyfrowany i ograniczony do wydanego uprawnienia. Twój obiekt i Twoi goście pozostają chronieni.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Działa z Twoimi wejściami</h3><p class="bento-card__text" dir="ltr">Bramy, bramy garażowe, szlabany i drzwi wejściowe: WIFIGATE steruje tym, co już masz.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Sprawdza się w całych budynkach</h3><p class="bento-card__text" dir="ltr">Od jednej bramy po cały kompleks: jedno zaproszenie może obejmować każde wejście, którego potrzebuje gość.</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Łączy się z Twoimi systemami</h3><p class="bento-card__text" dir="ltr">Połącz WIFIGATE Host z procesem rezerwacji, systemem PMS lub channel managerem, a resztę zrobi za Ciebie.</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">Dla kogo:</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="ltr">Hotele</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="ltr">Airbnb i apartamenty wakacyjne</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="ltr">Pensjonaty</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">Parkingi i garaże na wynajem</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">Bezpieczeństwo</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">Dostęp, który bezpiecznie dasz nawet nieznajomemu</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">Stworzony, by chronić obiekt za każdą bramą.</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">Szyfrowanie end-to-end</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">Każde zaproszenie jest szyfrowane, więc danych dostępu nie da się odczytać ani skopiować podczas przesyłania.</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">Mniej fizycznych identyfikatorów, więcej gościnności</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">Dostęp cyfrowy zmniejsza potrzebę używania kluczy, kart i pilotów, dzięki czemu zespół może skupić się na gościach i ich obsłudze.</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">Kontrola pozostaje w Twoich rękach</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">Dostęp jest przypisany do każdego pobytu i każdego gościa, a Ty możesz go wstrzymać w każdej chwili.</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">Chcesz zautomatyzować dostęp dla gości?</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">Opowiedz nam o swoich obiektach, a dopasujemy WIFIGATE Host do sposobu, w jaki przyjmujesz gości.</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/pl/#contact" class="btn btn--primary btn--hero" dir="ltr">Porozmawiaj z nami</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">Najczęściej zadawane pytania</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">Jak gość otrzymuje dostęp?</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host wystawia bezpieczne, ograniczone czasowo zaproszenie dokładnie do właściwej bramy, drzwi lub parkingu, ważne tylko na ten pobyt.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Co się dzieje przy wymeldowaniu?</summary><div class="seo-faq__answer"><p dir="ltr">Przy każdym pobycie zaproszenie samo zaczyna działać przy zameldowaniu i wygasa przy wymeldowaniu.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Czy mogę wstrzymać dostęp w trakcie pobytu?</summary><div class="seo-faq__answer"><p dir="ltr">Dostęp jest przypisany do każdego pobytu i każdego gościa, a Ty możesz go wstrzymać w każdej chwili.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Czy dostęp dla gości jest bezpieczny?</summary><div class="seo-faq__answer"><p dir="ltr">Każde zaproszenie jest szyfrowane, więc danych dostępu nie da się odczytać ani skopiować podczas przesyłania.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Czy goście nadal potrzebują kluczy, kart lub pilotów?</summary><div class="seo-faq__answer"><p dir="ltr">Dostęp cyfrowy zmniejsza potrzebę używania kluczy, kart i pilotów, dzięki czemu zespół może skupić się na gościach i ich obsłudze.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Z jakimi systemami łączy się WIFIGATE Host?</summary><div class="seo-faq__answer"><p dir="ltr">Połącz WIFIGATE Host z procesem rezerwacji, systemem PMS lub channel managerem, a resztę zrobi za Ciebie.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Czy sprawdzi się też w całym budynku?</summary><div class="seo-faq__answer"><p dir="ltr">Od jednej bramy po cały kompleks: jedno zaproszenie może obejmować każde wejście, którego potrzebuje gość.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Jak obliczana jest cena?</summary><div class="seo-faq__answer"><p dir="ltr">Ceny miesięczne w dolarach amerykańskich (USD), za aktywny system, progowo: pierwsze 14 systemów kosztuje po $6, systemy 15–49 po $5, a każdy system od 50. wzwyż $4. Minimalna opłata za konto: $6 miesięcznie. Bez opłaty za platformę i bez opłat za zaproszenia dla gości. Dla 250+ systemów przygotujemy ofertę ilościową.</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">Wszystko zaczyna się od kontrolera WIFIGATE</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">Dostęp dla gości działa dzięki kontrolerowi WIFIGATE zamontowanemu przy bramie, drzwiach lub wjeździe na parking. Wybierz w sklepie kontroler odpowiedni do swoich wejść.</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/pl/shop/" class="btn btn--primary wa-shop__link" dir="ltr">Przejdź do sklepu</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/pl/#contact" class="btn btn--ghost" dir="ltr">Porozmawiaj z nami</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

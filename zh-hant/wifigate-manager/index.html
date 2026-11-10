@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-manager.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="透過一個網頁控制台，在世界任何地方控制組織內所有 WIFIGATE 大門、門與鐵捲門。每套系統每月 $1.90。">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/zh-hant/wifigate-manager/#faq",
+      "inLanguage": "zh-Hant",
+      "isPartOf": {
+        "@id": "https://wifigate.io/zh-hant/wifigate-manager/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "WIFIGATE 裝置本身需要訂閱嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只為您管理的系統付費。WIFIGATE 裝置本身永遠免訂閱。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何將我的系統連接到控制台？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "從 App 將您的 WIFIGATE 系統匯出到控制台。控制器透過 Wi‑Fi 連線。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以管理不同的大樓或客戶嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在一個帳戶下管理不同的大樓、客戶或公司。 依大樓或客戶將系統分組，並為每個組織指定專屬管理員。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "誰能管理什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每個組織的管理員只管理自己負責的系統。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "入口沒有網路時會怎樣？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在入口用手機開門可在本機照常運作，即使沒有網路連線也一樣。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "指令與權限安全嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "指令與權限都經過加密，通行資訊在傳輸途中無法被讀取或複製。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "每月費用如何計算？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "價格以美元（USD）計價，未稅。每月月初統一扣款一次，按天結算上個月的費用；如有使用 WIFIGATE Host，將一併結算。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以管理哪些系統？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "大門、Dual Control 大門、入口門和鐵捲門都連接到同一個控制台。"
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-manager/#service",
       "name": "WIFIGATE Manager",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20.5V6M21 20.5V6"></path><path d="M2 20.5h20"></path><path d="M6 20.5V9.5h12v11"></path><path d="M12 9.5v11"></path><path d="M6 14.5h12"></path></svg></span><h2 class="niche-highlight__title">連接您的系統</h2><p class="niche-highlight__text">從 App 將您的 WIFIGATE 系統匯出到控制台。控制器透過 Wi‑Fi 連線。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"></circle><path d="M2.8 19c0-3 2.3-5 5.2-5s5.2 2 5.2 5"></path><path d="M16.5 8.5h4.7M16.5 12.5h4.7M16.5 16.5h4.7"></path></svg></span><h2 class="niche-highlight__title">依您的方式整理</h2><p class="niche-highlight__text">依大樓、場所或組織將大門、門和鐵捲門分組。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">隨時隨地管理</h2><p class="niche-highlight__text">在任何瀏覽器中授予和撤銷權限、查看歷史紀錄，並控制每套系統。</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">運作方式</span><h2 class="wa-h2" id="wa-flow-title">從一台控制器到所有場所</h2><p class="wa-lead">只要三個步驟，一切都在同一處管理。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/manager-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">連接您的系統</h3><p class="wa-flow__desc">從 App 將您的 WIFIGATE 系統匯出到控制台。控制器透過 Wi‑Fi 連線。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/manager-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">依您的方式整理</h3><p class="wa-flow__desc">依大樓、場所或組織將大門、門和鐵捲門分組。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/manager-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">隨時隨地管理</h3><p class="wa-flow__desc">在任何瀏覽器中授予和撤銷權限、查看歷史紀錄，並控制每套系統。</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">為什麼選擇 WIFIGATE Manager</span>
           <h2 id="niche-benefits-title" class="niche-section__title">所有入口，一個控制台。</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">所有場所，一覽無遺</h3><p class="bento-card__text" dir="ltr">所有大樓、大門和門盡在一個控制台，無論位在何處。</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">使用者與權限</h3><p class="bento-card__text" dir="ltr">新增使用者、決定誰能開哪道門，並在幾秒內完成變更，適用於單套系統或整個場所。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">完整的通行紀錄</h3><p class="bento-card__text" dir="ltr">查看所有場所中誰在何時開了哪個入口。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">組織與群組</h3><p class="bento-card__text" dir="ltr">依大樓或客戶將系統分組，並為每個組織指定專屬管理員。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">全球任何地方</h3><p class="bento-card__text" dir="ltr">在電腦、平板或手機的任何瀏覽器中管理。</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 20.5V6M21 20.5V6"></path><path d="M2 20.5h20"></path><path d="M6 20.5V9.5h12v11"></path><path d="M12 9.5v11"></path><path d="M6 14.5h12"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">相容您現有的設備</h3><p class="bento-card__text" dir="ltr">大門、Dual Control 大門、入口門和鐵捲門都連接到同一個控制台。</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">適用於：</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.residential" dir="ltr">住宅大樓</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.offices" dir="ltr">辦公室</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.sports" dir="ltr">運動場館</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">停車場</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">安全</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">大規模管控，安全可靠</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">專為管理眾多入口的組織打造。</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">端對端加密</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">指令與權限都經過加密，通行資訊在傳輸途中無法被讀取或複製。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">現場開門照常運作</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">在入口用手機開門可在本機照常運作，即使沒有網路連線也一樣。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">為每個團隊分配角色</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">每個組織的管理員只管理自己負責的系統。</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">準備好在一處管理所有場所了嗎？</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">告訴我們您的大樓和系統狀況，我們會為您的組織設定 WIFIGATE Manager。</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/zh-hant/#contact" class="btn btn--primary btn--hero" dir="ltr">聯絡我們</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">常見問題</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">WIFIGATE 裝置本身需要訂閱嗎？</summary><div class="seo-faq__answer"><p dir="ltr">只為您管理的系統付費。WIFIGATE 裝置本身永遠免訂閱。</p></div></details><details class="seo-faq__item"><summary dir="ltr">如何將我的系統連接到控制台？</summary><div class="seo-faq__answer"><p dir="ltr">從 App 將您的 WIFIGATE 系統匯出到控制台。控制器透過 Wi‑Fi 連線。</p></div></details><details class="seo-faq__item"><summary dir="ltr">可以管理不同的大樓或客戶嗎？</summary><div class="seo-faq__answer"><p dir="ltr">在一個帳戶下管理不同的大樓、客戶或公司。 依大樓或客戶將系統分組，並為每個組織指定專屬管理員。</p></div></details><details class="seo-faq__item"><summary dir="ltr">誰能管理什麼？</summary><div class="seo-faq__answer"><p dir="ltr">每個組織的管理員只管理自己負責的系統。</p></div></details><details class="seo-faq__item"><summary dir="ltr">入口沒有網路時會怎樣？</summary><div class="seo-faq__answer"><p dir="ltr">在入口用手機開門可在本機照常運作，即使沒有網路連線也一樣。</p></div></details><details class="seo-faq__item"><summary dir="ltr">指令與權限安全嗎？</summary><div class="seo-faq__answer"><p dir="ltr">指令與權限都經過加密，通行資訊在傳輸途中無法被讀取或複製。</p></div></details><details class="seo-faq__item"><summary dir="ltr">每月費用如何計算？</summary><div class="seo-faq__answer"><p dir="ltr">價格以美元（USD）計價，未稅。每月月初統一扣款一次，按天結算上個月的費用；如有使用 WIFIGATE Host，將一併結算。</p></div></details><details class="seo-faq__item"><summary dir="ltr">可以管理哪些系統？</summary><div class="seo-faq__answer"><p dir="ltr">大門、Dual Control 大門、入口門和鐵捲門都連接到同一個控制台。</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">一切從一台 WIFIGATE 控制器開始</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">控制台中的每套系統，都是一台安裝在入口的 WIFIGATE 控制器。請在商店中為您的大門、門或鐵捲門挑選合適的控制器。</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/zh-hant/shop/" class="btn btn--primary wa-shop__link" dir="ltr">前往商店</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/zh-hant/#contact" class="btn btn--ghost" dir="ltr">聯絡我們</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

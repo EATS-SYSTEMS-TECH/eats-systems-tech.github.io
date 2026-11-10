@@ -85,6 +85,21 @@ export default {
       "i3t": "O controlo é sempre seu",
       "i3x": "O acesso está associado a cada estadia e a cada hóspede, e pode interrompê-lo a qualquer momento."
     },
+    "faq": {
+      "q1": "Como é que o hóspede recebe o acesso?",
+      "q2": "O que acontece no check-out?",
+      "q3": "Posso interromper o acesso a meio de uma estadia?",
+      "q4": "O acesso dos hóspedes é seguro?",
+      "q5": "Os hóspedes ainda precisam de chaves, cartões ou comandos?",
+      "q6": "A que sistemas se liga?",
+      "q7": "Também funciona para um edifício inteiro?",
+      "q8": "Como é calculado o preço?"
+    },
+    "shop": {
+      "title": "Tudo começa com um controlador WIFIGATE",
+      "text": "O acesso dos hóspedes funciona com um controlador WIFIGATE instalado no portão, na porta ou na entrada do estacionamento. Escolha na loja o controlador certo para as suas entradas.",
+      "button": "Ir para a loja"
+    },
     "cta": {
       "title": "Pronto para automatizar o acesso dos seus hóspedes?",
       "text": "Fale-nos dos seus alojamentos e adaptamos o WIFIGATE Host à sua forma de receber.",

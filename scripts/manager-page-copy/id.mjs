@@ -90,6 +90,21 @@ export default {
       "i3t": "Peran untuk setiap tim",
       "i3x": "Admin setiap organisasi hanya mengelola sistem yang menjadi tanggung jawab mereka."
     },
+    "faq": {
+      "q1": "Apakah pengontrol WIFIGATE itu sendiri memerlukan langganan?",
+      "q2": "Bagaimana cara menghubungkan sistem saya ke dasbor?",
+      "q3": "Bisakah saya mengelola gedung atau klien yang terpisah?",
+      "q4": "Siapa yang bisa mengelola apa?",
+      "q5": "Apa yang terjadi jika tidak ada internet di pintu masuk?",
+      "q6": "Apakah perintah dan izin aman?",
+      "q7": "Bagaimana tagihan bulanan dihitung?",
+      "q8": "Sistem apa saja yang bisa saya kelola?"
+    },
+    "shop": {
+      "title": "Semuanya berawal dari pengontrol WIFIGATE",
+      "text": "Setiap sistem di dasbor Anda adalah pengontrol WIFIGATE yang terpasang di pintu masuk. Pilih pengontrol yang tepat untuk gerbang, pintu, atau rolling door Anda di toko.",
+      "button": "Kunjungi toko"
+    },
     "cta": {
       "title": "Siap mengelola semua lokasi dari satu tempat?",
       "text": "Ceritakan tentang gedung dan sistem Anda, dan kami akan menyiapkan WIFIGATE Manager untuk organisasi Anda.",

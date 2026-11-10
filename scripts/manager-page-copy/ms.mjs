@@ -90,6 +90,21 @@ export default {
       "i3t": "Peranan untuk setiap pasukan",
       "i3x": "Pentadbir setiap organisasi hanya mengurus sistem di bawah tanggungjawab mereka."
     },
+    "faq": {
+      "q1": "Adakah pengawal WIFIGATE sendiri memerlukan langganan?",
+      "q2": "Bagaimanakah cara menyambungkan sistem saya ke papan pemuka?",
+      "q3": "Bolehkah saya mengurus bangunan atau pelanggan yang berasingan?",
+      "q4": "Siapa boleh mengurus apa?",
+      "q5": "Apa yang berlaku jika tiada internet di pintu masuk?",
+      "q6": "Adakah arahan dan kebenaran selamat?",
+      "q7": "Bagaimanakah caj bulanan dikira?",
+      "q8": "Sistem manakah yang boleh saya urus?"
+    },
+    "shop": {
+      "title": "Semuanya bermula dengan pengawal WIFIGATE",
+      "text": "Setiap sistem pada papan pemuka anda ialah pengawal WIFIGATE yang dipasang di pintu masuk. Pilih pengawal yang sesuai untuk pintu pagar, pintu atau pintu gulung anda di kedai.",
+      "button": "Pergi ke kedai"
+    },
     "cta": {
       "title": "Bersedia untuk mengurus setiap lokasi dari satu tempat?",
       "text": "Ceritakan kepada kami tentang bangunan dan sistem anda, dan kami akan menyediakan WIFIGATE Manager untuk organisasi anda.",

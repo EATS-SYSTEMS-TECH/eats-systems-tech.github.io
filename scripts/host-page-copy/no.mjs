@@ -85,6 +85,21 @@ export default {
       "i3t": "Du beholder kontrollen",
       "i3x": "Tilgangen er knyttet til hvert opphold og hver gjest, og du kan stenge den når du trenger det."
     },
+    "faq": {
+      "q1": "Hvordan får en gjest tilgang?",
+      "q2": "Hva skjer ved utsjekk?",
+      "q3": "Kan jeg stenge tilgangen midt i et opphold?",
+      "q4": "Er gjestetilgangen sikker?",
+      "q5": "Trenger gjestene fortsatt nøkler, kort eller fjernkontroller?",
+      "q6": "Hvilke systemer kan WIFIGATE Host kobles til?",
+      "q7": "Fungerer det også for et helt bygg?",
+      "q8": "Hvordan beregnes prisen?"
+    },
+    "shop": {
+      "title": "Alt starter med en WIFIGATE-kontroller",
+      "text": "Gjestetilgangen kjører på en WIFIGATE-kontroller som er installert ved porten, døren eller parkeringen. Velg riktig kontroller for inngangene dine i nettbutikken.",
+      "button": "Gå til nettbutikken"
+    },
     "cta": {
       "title": "Klar til å automatisere gjestetilgangen?",
       "text": "Fortell oss om eiendommene dine, så setter vi opp WIFIGATE Host etter måten du tar imot gjester på.",

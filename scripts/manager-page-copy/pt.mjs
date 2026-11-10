@@ -90,6 +90,21 @@ export default {
       "i3t": "Funções para cada equipa",
       "i3x": "Os administradores de cada organização gerem apenas os sistemas pelos quais são responsáveis."
     },
+    "faq": {
+      "q1": "O próprio controlador WIFIGATE precisa de subscrição?",
+      "q2": "Como ligo os meus sistemas ao painel?",
+      "q3": "Posso gerir edifícios ou clientes separados?",
+      "q4": "Quem pode gerir o quê?",
+      "q5": "O que acontece quando não há internet na entrada?",
+      "q6": "Os comandos e as permissões estão protegidos?",
+      "q7": "Como é calculada a cobrança mensal?",
+      "q8": "Que sistemas posso gerir?"
+    },
+    "shop": {
+      "title": "Tudo começa com um controlador WIFIGATE",
+      "text": "Cada sistema no seu painel é um controlador WIFIGATE instalado na entrada. Escolha na loja o controlador certo para o seu portão, porta ou estore.",
+      "button": "Ir para a loja"
+    },
     "cta": {
       "title": "Pronto para gerir todos os locais a partir de um só lugar?",
       "text": "Fale-nos dos seus edifícios e sistemas e configuramos o WIFIGATE Manager para a sua organização.",

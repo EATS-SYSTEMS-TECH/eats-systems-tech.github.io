@@ -90,6 +90,21 @@ export default {
       "i3t": "Roles for every team",
       "i3x": "Each organization's admins manage only the systems they are responsible for."
     },
+    "faq": {
+      "q1": "Does the WIFIGATE controller itself need a subscription?",
+      "q2": "How do I connect my systems to the dashboard?",
+      "q3": "Can I manage separate buildings or clients?",
+      "q4": "Who can manage what?",
+      "q5": "What happens when there is no internet at the entrance?",
+      "q6": "Are commands and permissions secure?",
+      "q7": "How is the monthly charge calculated?",
+      "q8": "Which systems can I manage?"
+    },
+    "shop": {
+      "title": "Everything starts with a WIFIGATE controller",
+      "text": "Every system on your dashboard is a WIFIGATE controller installed at the entrance. Choose the right controller for your gate, door or roller shutter in the shop.",
+      "button": "Go to the shop"
+    },
     "cta": {
       "title": "Ready to manage every site from one place?",
       "text": "Tell us about your buildings and systems, and we'll set up WIFIGATE Manager for your organization.",

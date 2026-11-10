@@ -9,7 +9,7 @@ import { SITE_LANGUAGES } from './site-languages.mjs';
 import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index.mjs';
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
-import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, appendHostMarketingDetails } from './host-marketing-page.mjs';
+import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, installSubscriptionFlow, appendHostMarketingDetails } from './host-marketing-page.mjs';
 import { installHomeFeatureCards } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
 import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
@@ -279,15 +279,17 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale], product), chrome = getNicheChrome(locale);
     prepareUseCaseShell($, locale, pageKey, bodyClass);
     fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle });
-    $('#niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+    // The shared questions section stays: its answers restate the page's own copy.
+    $('#niche-prev-link, #niche-next-link').remove();
+    installSubscriptionFlow($, { content, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
     setUseCaseNavigation($, { chrome, content });
     // The hero shows the product's line animation; the accepted scene poster stays the structured-data image.
     // Its controls: the shared media labels plus the hero text toggle.
     applyLineHero($, { scene: product, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, pageKey), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
-    appendHostMarketingDetails($, { legacyTemplate: legacy });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261108a" />`);
+    appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261110flow1" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { '@type': 'Service', '@id': `${siteOrigin}/${pageKey}/#service`, name: content.label, serviceType, provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, pageKey), description: hostCopy.metaDescription } });

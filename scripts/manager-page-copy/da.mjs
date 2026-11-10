@@ -90,6 +90,21 @@ export default {
       "i3t": "Roller til hvert team",
       "i3x": "Hver organisations administratorer styrer kun de systemer, de har ansvaret for."
     },
+    "faq": {
+      "q1": "Kræver selve WIFIGATE-controlleren et abonnement?",
+      "q2": "Hvordan forbinder jeg mine systemer til dashboardet?",
+      "q3": "Kan jeg administrere separate bygninger eller kunder?",
+      "q4": "Hvem kan administrere hvad?",
+      "q5": "Hvad sker der, når der ikke er internet ved indgangen?",
+      "q6": "Er kommandoer og rettigheder sikre?",
+      "q7": "Hvordan beregnes den månedlige opkrævning?",
+      "q8": "Hvilke systemer kan jeg administrere?"
+    },
+    "shop": {
+      "title": "Alt starter med en WIFIGATE-controller",
+      "text": "Hvert system i dit dashboard er en WIFIGATE-controller, der er installeret ved indgangen. Vælg den rette controller til din port, dør eller rulleskodde i webshoppen.",
+      "button": "Gå til webshoppen"
+    },
     "cta": {
       "title": "Klar til at styre alle lokationer fra ét sted?",
       "text": "Fortæl os om dine bygninger og systemer, så sætter vi WIFIGATE Manager op til din organisation.",

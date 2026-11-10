@@ -90,6 +90,21 @@ export default {
       "i3t": "Roller för varje team",
       "i3x": "Varje organisations administratörer hanterar bara de system de ansvarar för."
     },
+    "faq": {
+      "q1": "Kräver själva WIFIGATE-enheten något abonnemang?",
+      "q2": "Hur ansluter jag mina system till kontrollpanelen?",
+      "q3": "Kan jag hantera separata byggnader eller kunder?",
+      "q4": "Vem kan hantera vad?",
+      "q5": "Vad händer när det inte finns internet vid entrén?",
+      "q6": "Är kommandon och behörigheter säkra?",
+      "q7": "Hur beräknas den månatliga debiteringen?",
+      "q8": "Vilka system kan jag hantera?"
+    },
+    "shop": {
+      "title": "Allt börjar med en WIFIGATE-styrenhet",
+      "text": "Varje system i din kontrollpanel är en WIFIGATE-styrenhet som är installerad vid entrén. Välj rätt styrenhet för din grind, dörr eller rulljalusi i butiken.",
+      "button": "Gå till butiken"
+    },
     "cta": {
       "title": "Redo att hantera alla platser från ett ställe?",
       "text": "Berätta om dina byggnader och system så sätter vi upp WIFIGATE Manager för din organisation.",

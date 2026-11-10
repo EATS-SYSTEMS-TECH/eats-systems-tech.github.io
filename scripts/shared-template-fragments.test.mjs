@@ -23,12 +23,12 @@ for (const row of frozen.files) test(`complete original fragment DOM contract: $
   const digest = createHash('sha256').update(JSON.stringify(model($.root()[0]))).digest('hex');
   assert.equal(digest, row.domSha256);
 });
-test('Host fragment supplies exactly the four ordered translated detail mounts', () => {
+test('Host fragment supplies exactly the three ordered translated detail sections', () => {
   const $ = fragments.get('templates/guest-invites-api.template.html');
-  assert.deepEqual($('body > section').map((_, node) => $(node).attr('class')).get(), ['wa-audience', 'section wa-secure', 'section wa-pricing', 'section wa-cta']);
-  for (const selector of ['.wa-audience__row', '.wa-secure__grid', '.wa-pricing__grid']) { assert.equal($(selector).length, 1); assert.equal($(selector).children().length, 0); }
-  for (const id of ['wa-secure-title', 'wa-pricing-title', 'wa-cta-title']) assert.equal($(`[aria-labelledby='${id}']`).length, 1);
-  assert.equal($('.wa-cta a').attr('href'), '../index.html#contact');
+  assert.deepEqual($('body > section').map((_, node) => $(node).attr('class')).get(), ['wa-audience', 'section wa-pricing', 'section wa-shop']);
+  for (const selector of ['.wa-audience__row', '.wa-pricing__grid']) { assert.equal($(selector).length, 1); assert.equal($(selector).children().length, 0); }
+  for (const id of ['wa-pricing-title', 'wa-shop-title']) assert.equal($(`[aria-labelledby='${id}']`).length, 1);
+  assert.deepEqual($('.wa-shop a').map((_, node) => $(node).attr('href')).get(), ['../shop/index.html', '../index.html#contact']);
 });
 test('footer translation positions and cookie action stay stable', () => {
   const $ = fragments.get('templates/partials/site-footer.template.html');

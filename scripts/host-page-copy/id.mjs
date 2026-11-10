@@ -85,6 +85,21 @@ export default {
       "i3t": "Kendali tetap di tangan Anda",
       "i3x": "Akses terikat pada setiap masa inap dan setiap tamu, dan Anda dapat menghentikannya kapan saja."
     },
+    "faq": {
+      "q1": "Bagaimana tamu mendapatkan akses?",
+      "q2": "Apa yang terjadi saat check-out?",
+      "q3": "Bisakah saya menghentikan akses di tengah masa inap?",
+      "q4": "Apakah akses tamu aman?",
+      "q5": "Apakah tamu masih memerlukan kunci, kartu, atau remote?",
+      "q6": "Terhubung dengan sistem apa saja?",
+      "q7": "Apakah cocok juga untuk seluruh gedung?",
+      "q8": "Bagaimana harganya dihitung?"
+    },
+    "shop": {
+      "title": "Semuanya berawal dari pengontrol WIFIGATE",
+      "text": "Akses tamu berjalan dengan pengontrol WIFIGATE yang terpasang di gerbang, pintu, atau pintu masuk parkir. Pilih pengontrol yang tepat untuk pintu masuk Anda di toko.",
+      "button": "Kunjungi toko"
+    },
     "cta": {
       "title": "Siap mengotomatiskan akses tamu?",
       "text": "Ceritakan tentang properti Anda, dan kami akan menyesuaikan WIFIGATE Host dengan cara Anda menerima tamu.",

@@ -90,6 +90,21 @@ export default {
       "i3t": "Roly pre každý tím",
       "i3x": "Správcovia každej organizácie spravujú len systémy, za ktoré zodpovedajú."
     },
+    "faq": {
+      "q1": "Potrebuje samotné zariadenie WIFIGATE predplatné?",
+      "q2": "Ako pripojím svoje systémy k ovládaciemu panelu?",
+      "q3": "Môžem spravovať samostatné budovy alebo klientov?",
+      "q4": "Kto môže čo spravovať?",
+      "q5": "Čo sa stane, keď pri vchode nie je internet?",
+      "q6": "Sú príkazy a oprávnenia zabezpečené?",
+      "q7": "Ako sa počíta mesačná platba?",
+      "q8": "Ktoré systémy môžem spravovať?"
+    },
+    "shop": {
+      "title": "Všetko sa začína ovládačom WIFIGATE",
+      "text": "Každý systém vo vašom ovládacom paneli je ovládač WIFIGATE nainštalovaný pri vchode. V e-shope si vyberte správny ovládač pre svoju bránu, dvere alebo roletu.",
+      "button": "Prejsť do e-shopu"
+    },
     "cta": {
       "title": "Pripravení spravovať všetky objekty z jedného miesta?",
       "text": "Povedzte nám o svojich budovách a systémoch a nastavíme WIFIGATE Manager pre vašu organizáciu.",

@@ -90,6 +90,21 @@ export default {
       "i3t": "Szerepkörök minden csapatnak",
       "i3x": "Minden szervezet adminisztrátorai csak azokat a rendszereket kezelik, amelyekért felelősek."
     },
+    "faq": {
+      "q1": "Kell előfizetés magához a WIFIGATE vezérlőhöz?",
+      "q2": "Hogyan csatlakoztathatom a rendszereimet az irányítópulthoz?",
+      "q3": "Kezelhetek külön épületeket vagy ügyfeleket?",
+      "q4": "Ki mit kezelhet?",
+      "q5": "Mi történik, ha a bejáratnál nincs internet?",
+      "q6": "Biztonságban vannak a parancsok és a jogosultságok?",
+      "q7": "Hogyan számítjuk ki a havi díjat?",
+      "q8": "Milyen rendszereket kezelhetek?"
+    },
+    "shop": {
+      "title": "Minden egy WIFIGATE vezérlővel kezdődik",
+      "text": "Az irányítópultján minden rendszer egy bejáratnál felszerelt WIFIGATE vezérlő. Válassza ki a webáruházban a kapujához, ajtajához vagy redőnyéhez illő vezérlőt.",
+      "button": "Tovább a webáruházba"
+    },
     "cta": {
       "title": "Minden helyszínt egy helyről kezelne?",
       "text": "Meséljen az épületeiről és rendszereiről, és beállítjuk a WIFIGATE Managert a szervezetének.",

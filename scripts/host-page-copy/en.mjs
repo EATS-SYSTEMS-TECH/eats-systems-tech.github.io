@@ -83,6 +83,21 @@ export default {
       "i3t": "You stay in control",
       "i3x": "Access is tied to each stay and each guest, and you can shut it down whenever you need to."
     },
+    "faq": {
+      "q1": "How does a guest get access?",
+      "q2": "What happens at check-out?",
+      "q3": "Can I stop access in the middle of a stay?",
+      "q4": "Is guest access secure?",
+      "q5": "Do guests still need keys, cards or remotes?",
+      "q6": "Which systems does it connect to?",
+      "q7": "Does it work for a whole building?",
+      "q8": "How is the price calculated?"
+    },
+    "shop": {
+      "title": "Everything starts with a WIFIGATE controller",
+      "text": "Guest access runs on a WIFIGATE controller installed at the gate, door or parking entrance. Choose the right controller for your entrances in the shop.",
+      "button": "Go to the shop"
+    },
     "cta": {
       "title": "Ready to automate guest access?",
       "text": "Tell us about your properties, and we'll set up WIFIGATE Host for the way you host.",

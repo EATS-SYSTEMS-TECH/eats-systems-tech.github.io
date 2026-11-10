@@ -85,6 +85,21 @@ export default {
       "i3t": "Kawalan kekal di tangan anda",
       "i3x": "Akses dikaitkan dengan setiap penginapan dan setiap tetamu, dan anda boleh menghentikannya pada bila-bila masa."
     },
+    "faq": {
+      "q1": "Bagaimanakah tetamu mendapat akses?",
+      "q2": "Apa yang berlaku semasa daftar keluar?",
+      "q3": "Bolehkah saya menghentikan akses di tengah-tengah penginapan?",
+      "q4": "Adakah akses tetamu selamat?",
+      "q5": "Adakah tetamu masih memerlukan kunci, kad atau alat kawalan jauh?",
+      "q6": "Ia bersambung dengan sistem apa?",
+      "q7": "Adakah ia sesuai untuk seluruh bangunan?",
+      "q8": "Bagaimanakah harga dikira?"
+    },
+    "shop": {
+      "title": "Semuanya bermula dengan pengawal WIFIGATE",
+      "text": "Akses tetamu berfungsi dengan pengawal WIFIGATE yang dipasang di pintu pagar, pintu atau pintu masuk tempat letak kereta. Pilih pengawal yang sesuai untuk pintu masuk anda di kedai.",
+      "button": "Pergi ke kedai"
+    },
     "cta": {
       "title": "Bersedia untuk mengautomasikan akses tetamu?",
       "text": "Ceritakan kepada kami tentang hartanah anda dan kami akan menyesuaikan WIFIGATE Host dengan cara anda melayan tetamu.",

@@ -90,6 +90,21 @@ export default {
       "i3t": "Role pro každý tým",
       "i3x": "Správci každé organizace spravují jen systémy, za které odpovídají."
     },
+    "faq": {
+      "q1": "Potřebuje samotná řídicí jednotka WIFIGATE předplatné?",
+      "q2": "Jak připojím své systémy k panelu?",
+      "q3": "Mohu spravovat samostatné budovy nebo klienty?",
+      "q4": "Kdo může co spravovat?",
+      "q5": "Co se stane, když u vchodu není internet?",
+      "q6": "Jsou příkazy a oprávnění zabezpečené?",
+      "q7": "Jak se počítá měsíční platba?",
+      "q8": "Které systémy mohu spravovat?"
+    },
+    "shop": {
+      "title": "Všechno začíná řídicí jednotkou WIFIGATE",
+      "text": "Každý systém ve vašem panelu je řídicí jednotka WIFIGATE nainstalovaná u vchodu. V e-shopu si vyberte správnou řídicí jednotku pro svou bránu, dveře nebo roletu.",
+      "button": "Přejít do e-shopu"
+    },
     "cta": {
       "title": "Chcete spravovat všechny lokality z jednoho místa?",
       "text": "Řekněte nám o svých budovách a systémech a my WIFIGATE Manager nastavíme pro vaši organizaci.",

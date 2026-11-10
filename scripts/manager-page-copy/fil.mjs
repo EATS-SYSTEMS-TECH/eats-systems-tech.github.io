@@ -90,6 +90,21 @@ export default {
       "i3t": "Mga role para sa bawat team",
       "i3x": "Ang mga admin ng bawat organisasyon ay namamahala lamang ng mga system na sakop ng kanilang responsibilidad."
     },
+    "faq": {
+      "q1": "Kailangan ba ng subscription ang WIFIGATE controller mismo?",
+      "q2": "Paano ko ikokonekta ang aking mga system sa dashboard?",
+      "q3": "Maaari ba akong mamahala ng magkakahiwalay na gusali o kliyente?",
+      "q4": "Sino ang maaaring mamahala ng ano?",
+      "q5": "Ano ang mangyayari kapag walang internet sa pasukan?",
+      "q6": "Ligtas ba ang mga utos at pahintulot?",
+      "q7": "Paano kinakalkula ang buwanang singil?",
+      "q8": "Aling mga system ang maaari kong pamahalaan?"
+    },
+    "shop": {
+      "title": "Nagsisimula ang lahat sa WIFIGATE controller",
+      "text": "Bawat system sa inyong dashboard ay isang WIFIGATE controller na nakakabit sa pasukan. Piliin sa shop ang tamang controller para sa inyong gate, pinto, o roller shutter.",
+      "button": "Pumunta sa shop"
+    },
     "cta": {
       "title": "Handa na ba kayong pamahalaan ang bawat site mula sa iisang lugar?",
       "text": "Ikuwento sa amin ang tungkol sa inyong mga gusali at system, at ise-set up namin ang WIFIGATE Manager para sa inyong organisasyon.",

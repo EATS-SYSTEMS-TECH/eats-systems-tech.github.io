@@ -5,8 +5,9 @@
 export const HOST_PAGE_KEY = "wifigate-host";
 export const MANAGER_PAGE_KEY = "wifigate-manager";
 const marketingKey = "guestInvites.marketing";
-const sectionNames = ["wa-audience", "wa-secure", "wa-pricing", "wa-cta"];
-const detailNames = sectionNames.filter(name => name !== "wa-pricing");
+const sectionNames = ["wa-audience", "wa-pricing", "wa-shop"];
+// Step illustrations and the wave that carries them (assets/img/subscription-flow/).
+const flowArt = "assets/img/subscription-flow/";
 
 // Plans describe the documented offer in USD, never a billing action.
 // Host: WIFIGATE_HOST.html, Pricing. Manager: WIFIGATE_MANAGER.html, Price.
@@ -25,6 +26,9 @@ const PRODUCTS = {
     audience: [["hotels", "Hotels"], ["rentals", "Airbnb & short-term rentals"], ["guesthouses", "Guesthouses"], ["parking", "Rental parking & garages"]],
     highlights: ["calendar", "invite", "phone"],
     benefits: ["key-off", "calendar-clock", "shield-check", "door-open", "building", "layers"],
+    // Each question is answered by copy the page already states; no new claims.
+    answers: [["steps.s2x"], ["benefits.b2x"], ["secure.i3x"], ["secure.i1x"], ["secure.i2x"], ["benefits.b6x"], ["benefits.b5x"], ["pricing.note"]],
+    art: "host",
     imageAlt: "automation.imageAlt",
   },
   manager: {
@@ -40,6 +44,8 @@ const PRODUCTS = {
     audience: [["residential", "Residential buildings"], ["offices", "Offices"], ["sports", "Sports facilities"], ["parking", "Parking facilities"]],
     highlights: ["gate", "roster", "phone"],
     benefits: ["building", "users", "history", "layers", "smartphone", "gate"],
+    answers: [["pricing.subtitle"], ["steps.s1x"], ["pricing.organizationsDesc", "benefits.b4x"], ["secure.i3x"], ["secure.i2x"], ["secure.i1x"], ["pricing.note"], ["benefits.b6x"]],
+    art: "manager",
     imageAlt: "automation.manager.imageAlt",
   },
 };
@@ -47,11 +53,6 @@ const productOf = name => {
   if (!PRODUCTS[name]) throw new Error(`Unknown subscription page: ${name}`);
   return PRODUCTS[name];
 };
-const securityFacts = [
-  ["Encrypted end to end", "Every invitation is encrypted, so access details cannot be read or copied in transit."],
-  ["Works at the gate, not the cloud", "The entrance verifies access locally, so it keeps working even without a connection."],
-  ["You stay in control", "Access is tied to each stay and each guest, and you can shut it down whenever you need to."],
-];
 
 // Text is always assigned with .text(); only constructed nodes enter .append().
 function node($, tag, attributes = {}, contents = []) {
@@ -102,20 +103,14 @@ export function installHostPricingShells($, productName = "host") {
 // sections cannot leave a partly updated public fragment.
 export function installHostDetailShells($, productName = "host") {
   const product = productOf(productName);
-  const [audience, security, pricing] = ["section.wa-audience .wa-audience__row", "section.wa-secure .wa-secure__grid",
-    "section.wa-pricing .wa-pricing__grid"].map(selector => $(selector));
-  if ([audience, security, pricing].some(selection => selection.length !== 1)) {
-    throw new Error("Host details require one audience row, security grid and plan grid");
+  const [audience, pricing] = ["section.wa-audience .wa-audience__row", "section.wa-pricing .wa-pricing__grid"].map(selector => $(selector));
+  if ([audience, pricing].some(selection => selection.length !== 1)) {
+    throw new Error("Host details require one audience row and plan grid");
   }
   const chips = [translated($, "span", "wa-audience__label", `${marketingKey}.audience.label`, "Built for:"),
     ...product.audience.map(([key, text]) => translated($, "span", "wa-chip", `${marketingKey}.audience.${key}`, text))];
-  const cards = securityFacts.map(([title, text], index) => node($, "article", { class: "wa-secure__item" }, [
-    translated($, "h3", "wa-secure__title", `${marketingKey}.secure.i${index + 1}t`, title),
-    translated($, "p", "wa-secure__text", `${marketingKey}.secure.i${index + 1}x`, text),
-  ]));
   const plans = product.offers.map(offer => offerCard($, offer, product));
   audience.empty().append(...chips);
-  security.empty().append(...cards);
   pricing.empty().append(...plans);
 }
 
@@ -136,26 +131,65 @@ export function getHostPageContent(hostCopy, homepageCopy, productName = "host")
     heroLead: read("marketing.hero.lead"), imageAlt: localized(homepageCopy, product.imageAlt, `homepage.${product.imageAlt}`, product.label),
     highlights: ordered(product.highlights, "steps", "s"), benefitsTitle: read("marketing.benefits.title"),
     benefits: ordered(product.benefits, "benefits", "b"),
-    faq: [], seoTitle: read("metaTitle"), seoDescription: read("metaDescription") };
+    stepsHeading: { eyebrow: read("marketing.steps.eyebrow"), title: read("marketing.steps.title"), subtitle: read("marketing.steps.subtitle") },
+    benefitsEyebrow: read("marketing.benefits.eyebrow"),
+    faq: product.answers.map((paths, index) => ({ question: read(`marketing.faq.q${index + 1}`),
+      answer: paths.map(path => read(`marketing.${path}`)).join(" ") })),
+    seoTitle: read("metaTitle"), seoDescription: read("metaDescription") };
+}
+
+// The three steps ride one wave: an illustration above each numbered point,
+// the copy below. Step 1 sits at the inline start, so the wave follows the
+// page direction (the document's, unless one is given). The first question
+// starts open. Everything is validated before the shared sections change.
+export function installSubscriptionFlow($, { content, productName = "host", assetPrefix = "", direction = $("html").attr("dir") === "rtl" ? "rtl" : "ltr" }) {
+  const product = productOf(productName);
+  const section = $("#niche-highlights"), list = $("#niche-highlights-list"), benefitsHeader = $("#niche-benefits .niche-section__header");
+  if (section.length !== 1 || list.length !== 1 || benefitsHeader.length !== 1) throw new Error("The step flow requires one highlights section, one list and one benefits header");
+  if (!["ltr", "rtl"].includes(direction)) throw new Error(`Unknown step flow direction: ${direction}`);
+  const steps = content?.highlights, heading = content?.stepsHeading;
+  if (!Array.isArray(steps) || steps.length !== 3 || steps.some(step => !step?.title || !step?.text)) throw new Error("The step flow requires three complete steps");
+  if (!heading?.eyebrow || !heading?.title || !heading?.subtitle || !content.benefitsEyebrow) throw new Error("The step flow requires its localized headings");
+  const picture = (file, className, width, height) => node($, "img", { class: className, src: `${assetPrefix}${flowArt}${file}`, alt: "",
+    width: String(width), height: String(height), loading: "lazy", decoding: "async" });
+  const items = steps.map((step, index) => node($, "li", { class: "wa-flow__step" }, [
+    picture(`${product.art}-${index + 1}.svg`, "wa-flow__art", 320, 220),
+    node($, "div", { class: "wa-flow__text" }, [node($, "h3", { class: "wa-flow__title" }, step.title), node($, "p", { class: "wa-flow__desc" }, step.text)]),
+  ]));
+  const head = node($, "div", { class: "wa-head wa-head--center" }, [node($, "span", { class: "wa-eyebrow" }, heading.eyebrow),
+    node($, "h2", { class: "wa-h2", id: "wa-flow-title" }, heading.title), node($, "p", { class: "wa-lead" }, heading.subtitle)]);
+  const track = node($, "div", { class: "wa-flow__track" }, [picture(`wave-${direction}.svg`, "wa-flow__wave", 1160, 200),
+    node($, "ol", { class: "wa-flow__list", id: "niche-highlights-list" }, items)]);
+  section.removeAttr("hidden").addClass("wa-page wa-flow").attr("aria-labelledby", "wa-flow-title");
+  section.children(".container").first().empty().append(head, track);
+  benefitsHeader.prepend(node($, "span", { class: "wa-eyebrow" }, content.benefitsEyebrow));
+  $("#niche-faq-list details").first().attr("open", "");
 }
 
 // Clone the already localized detail nodes in their original document order.
-// The plans come first, right under the hero; the other details follow the
-// shared benefits. Both wrappers attach only after every guard succeeds.
-export function appendHostMarketingDetails($, { legacyTemplate }) {
+// The plans come first, right under the hero; the audience follows the shared
+// benefits; the shop section closes the page after the questions. All three
+// wrappers attach only after every guard succeeds.
+export function appendHostMarketingDetails($, { legacyTemplate, shopHref }) {
   if (typeof legacyTemplate !== "function") throw new Error("A localized Host detail document is required");
+  if (shopHref !== undefined && (typeof shopHref !== "string" || !shopHref.trim())) throw new Error("The locale shop link must be a path");
   if ($(".host-marketing-details, .host-marketing-pricing").length) throw new Error("Host marketing details are already present");
-  const hero = $(".niche-hero"), target = $("#niche-benefits");
+  const hero = $(".niche-hero"), target = $("#niche-benefits"), questions = $("#niche-faq");
   if (hero.length !== 1) throw new Error("Host details require one shared hero section");
   if (target.length !== 1) throw new Error("Host details require one shared benefits section");
+  if (questions.length !== 1) throw new Error("Host details require one shared questions section");
   for (const name of sectionNames) {
     if (legacyTemplate(`section.${name}`).length !== 1) throw new Error(`Host details require one localized .${name} section`);
   }
   const clone = names => legacyTemplate(names.map(name => `section.${name}`).join(", ")).toArray()
     .map(section => legacyTemplate(section).clone());
   const pricing = node($, "div", { class: "wa-page host-marketing-pricing" }, clone(["wa-pricing"]));
-  const wrapper = node($, "div", { class: "wa-page host-marketing-details" }, clone(detailNames));
+  const wrapper = node($, "div", { class: "wa-page host-marketing-details" }, clone(["wa-audience"]));
+  const closing = node($, "div", { class: "wa-page host-marketing-closing" }, clone(["wa-shop"]));
+  // The link is set on the clone; the localized source document stays untouched.
+  if (shopHref) closing.find(".wa-shop__link").attr("href", shopHref);
   hero.after(pricing);
   target.after(wrapper);
+  questions.after(closing);
   return wrapper;
 }

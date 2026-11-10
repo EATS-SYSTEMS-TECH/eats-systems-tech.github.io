@@ -90,6 +90,21 @@ export default {
       "i3t": "Des rôles pour chaque équipe",
       "i3x": "Les administrateurs de chaque organisation ne gèrent que les systèmes dont ils sont responsables."
     },
+    "faq": {
+      "q1": "Faut-il un abonnement pour le contrôleur WIFIGATE lui-même ?",
+      "q2": "Comment connecter mes systèmes au tableau de bord ?",
+      "q3": "Puis-je gérer des bâtiments ou des clients distincts ?",
+      "q4": "Qui peut gérer quoi ?",
+      "q5": "Que se passe-t-il sans connexion internet à l'entrée ?",
+      "q6": "Les commandes et les autorisations sont-elles sécurisées ?",
+      "q7": "Comment le prélèvement mensuel est-il calculé ?",
+      "q8": "Quels systèmes puis-je gérer ?"
+    },
+    "shop": {
+      "title": "Tout commence par un contrôleur WIFIGATE",
+      "text": "Chaque système de votre tableau de bord est un contrôleur WIFIGATE installé à l'entrée. Choisissez dans la boutique le contrôleur adapté à votre portail, votre porte ou votre volet roulant.",
+      "button": "Accéder à la boutique"
+    },
     "cta": {
       "title": "Prêt à gérer tous vos sites depuis un seul endroit ?",
       "text": "Parlez-nous de vos bâtiments et de vos systèmes, et nous mettrons en place WIFIGATE Manager pour votre organisation.",

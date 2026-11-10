@@ -85,6 +85,21 @@ export default {
       "i3t": "Az irányítás Önnél marad",
       "i3x": "A hozzáférés minden tartózkodáshoz és minden vendéghez kötött, és bármikor leállíthatja."
     },
+    "faq": {
+      "q1": "Hogyan kap hozzáférést a vendég?",
+      "q2": "Mi történik check-outkor?",
+      "q3": "Leállíthatom a hozzáférést tartózkodás közben?",
+      "q4": "Biztonságos a vendéghozzáférés?",
+      "q5": "Kell még a vendégeknek kulcs, kártya vagy távirányító?",
+      "q6": "Milyen rendszerekkel kapcsolható össze a WIFIGATE Host?",
+      "q7": "Egy teljes épülethez is használható?",
+      "q8": "Hogyan számítjuk ki az árat?"
+    },
+    "shop": {
+      "title": "Minden egy WIFIGATE vezérlővel kezdődik",
+      "text": "A vendéghozzáférés a kapunál, az ajtónál vagy a parkoló bejáratánál felszerelt WIFIGATE vezérlővel működik. Válassza ki a webáruházban a bejárataihoz illő vezérlőt.",
+      "button": "Tovább a webáruházba"
+    },
     "cta": {
       "title": "Automatizálná a vendégek beléptetését?",
       "text": "Meséljen az ingatlanairól, és a WIFIGATE Hostot pontosan az Ön működéséhez igazítjuk.",

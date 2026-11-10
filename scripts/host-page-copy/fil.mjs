@@ -85,6 +85,21 @@ export default {
       "i3t": "Kayo pa rin ang may kontrol",
       "i3x": "Nakatali ang access sa bawat pananatili at sa bawat bisita, at maaari ninyo itong ihinto anumang oras."
     },
+    "faq": {
+      "q1": "Paano nakakakuha ng access ang bisita?",
+      "q2": "Ano ang nangyayari sa check-out?",
+      "q3": "Maaari ko bang ihinto ang access sa gitna ng pananatili?",
+      "q4": "Ligtas ba ang access ng bisita?",
+      "q5": "Kailangan pa ba ng mga bisita ng susi, card, o remote?",
+      "q6": "Sa aling mga system ito kumokonekta?",
+      "q7": "Bagay rin ba ito sa buong gusali?",
+      "q8": "Paano kinakalkula ang presyo?"
+    },
+    "shop": {
+      "title": "Nagsisimula ang lahat sa WIFIGATE controller",
+      "text": "Gumagana ang access ng bisita sa pamamagitan ng WIFIGATE controller na nakakabit sa gate, pinto, o pasukan ng paradahan. Piliin sa shop ang tamang controller para sa inyong mga pasukan.",
+      "button": "Pumunta sa shop"
+    },
     "cta": {
       "title": "Handa na ba kayong gawing awtomatiko ang access ng bisita?",
       "text": "Ikuwento sa amin ang tungkol sa inyong mga ari-arian at iaangkop namin ang WIFIGATE Host sa paraan ng inyong pag-host.",

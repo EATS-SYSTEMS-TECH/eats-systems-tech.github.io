@@ -85,6 +85,21 @@ export default {
       "i3t": "Kontrol sizde kalır",
       "i3x": "Erişim her konaklamaya ve her misafire bağlıdır; ihtiyaç duyduğunuz an kapatabilirsiniz."
     },
+    "faq": {
+      "q1": "Misafir erişimi nasıl alır?",
+      "q2": "Check-out'ta ne olur?",
+      "q3": "Konaklama sürerken erişimi kapatabilir miyim?",
+      "q4": "Misafir erişimi güvenli mi?",
+      "q5": "Misafirlerin hâlâ anahtara, karta veya kumandaya ihtiyacı var mı?",
+      "q6": "Hangi sistemlere bağlanır?",
+      "q7": "Bütün bir bina için de uygun mu?",
+      "q8": "Fiyat nasıl hesaplanır?"
+    },
+    "shop": {
+      "title": "Her şey bir WIFIGATE kontrol ünitesiyle başlar",
+      "text": "Misafir erişimi; kapıya, giriş kapısına veya otopark girişine kurulmuş bir WIFIGATE kontrol ünitesiyle çalışır. Girişleriniz için doğru kontrol ünitesini mağazadan seçin.",
+      "button": "Mağazaya gidin"
+    },
     "cta": {
       "title": "Misafir erişimini otomatikleştirmeye hazır mısınız?",
       "text": "Bize tesislerinizden bahsedin, WIFIGATE Host'u misafir ağırlama şeklinize göre uyarlayalım.",

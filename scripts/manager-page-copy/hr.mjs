@@ -90,6 +90,21 @@ export default {
       "i3t": "Uloge za svaki tim",
       "i3x": "Administratori svake organizacije upravljaju samo sustavima za koje su odgovorni."
     },
+    "faq": {
+      "q1": "Treba li sam WIFIGATE kontroler pretplatu?",
+      "q2": "Kako povezati svoje sustave s nadzornom pločom?",
+      "q3": "Mogu li upravljati odvojenim zgradama ili klijentima?",
+      "q4": "Tko čime može upravljati?",
+      "q5": "Što se događa kad na ulazu nema interneta?",
+      "q6": "Jesu li naredbe i dozvole sigurne?",
+      "q7": "Kako se obračunava mjesečna naplata?",
+      "q8": "Kojim sustavima mogu upravljati?"
+    },
+    "shop": {
+      "title": "Sve počinje od WIFIGATE kontrolera",
+      "text": "Svaki sustav na vašoj nadzornoj ploči jedan je WIFIGATE kontroler ugrađen na ulazu. U trgovini odaberite kontroler koji odgovara vašim dvorišnim vratima, ulaznim vratima ili roleti.",
+      "button": "Idite u trgovinu"
+    },
     "cta": {
       "title": "Spremni upravljati svim lokacijama s jednog mjesta?",
       "text": "Recite nam nešto o svojim zgradama i sustavima, a mi ćemo postaviti WIFIGATE Manager za vašu organizaciju.",

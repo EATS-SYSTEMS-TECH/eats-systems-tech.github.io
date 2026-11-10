@@ -85,6 +85,21 @@ export default {
       "i3t": "Nadzor ostaja v vaših rokah",
       "i3x": "Dostop je vezan na vsako bivanje in vsakega gosta, izklopite pa ga lahko kadar koli."
     },
+    "faq": {
+      "q1": "Kako gost dobi dostop?",
+      "q2": "Kaj se zgodi ob odjavi?",
+      "q3": "Ali lahko dostop izklopim sredi bivanja?",
+      "q4": "Ali je dostop za goste varen?",
+      "q5": "Ali gostje še vedno potrebujejo ključe, kartice ali daljince?",
+      "q6": "S katerimi sistemi se poveže WIFIGATE Host?",
+      "q7": "Ali je primerno tudi za celo stavbo?",
+      "q8": "Kako se izračuna cena?"
+    },
+    "shop": {
+      "title": "Vse se začne s krmilnikom WIFIGATE",
+      "text": "Dostop za goste deluje prek krmilnika WIFIGATE, nameščenega pri dvoriščnih vratih, vhodnih vratih ali uvozu na parkirišče. V trgovini izberite pravi krmilnik za svoje vhode.",
+      "button": "Pojdite v trgovino"
+    },
     "cta": {
       "title": "Ste pripravljeni avtomatizirati dostop za goste?",
       "text": "Povejte nam o svojih nepremičninah in WIFIGATE Host bomo prilagodili vašemu načinu sprejemanja gostov.",

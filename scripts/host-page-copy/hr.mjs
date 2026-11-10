@@ -85,6 +85,21 @@ export default {
       "i3t": "Kontrola ostaje kod vas",
       "i3x": "Pristup je vezan uz svaki boravak i svakog gosta, a možete ga zaustaviti u bilo kojem trenutku."
     },
+    "faq": {
+      "q1": "Kako gost dobiva pristup?",
+      "q2": "Što se događa pri odjavi?",
+      "q3": "Mogu li zaustaviti pristup usred boravka?",
+      "q4": "Je li pristup za goste siguran?",
+      "q5": "Trebaju li gostima i dalje ključevi, kartice ili daljinski upravljači?",
+      "q6": "S kojim se sustavima povezuje WIFIGATE Host?",
+      "q7": "Je li prikladno i za cijelu zgradu?",
+      "q8": "Kako se izračunava cijena?"
+    },
+    "shop": {
+      "title": "Sve počinje od WIFIGATE kontrolera",
+      "text": "Pristup za goste radi preko WIFIGATE kontrolera ugrađenog na dvorišnim vratima, ulaznim vratima ili ulazu na parkiralište. U trgovini odaberite kontroler koji odgovara vašim ulazima.",
+      "button": "Idite u trgovinu"
+    },
     "cta": {
       "title": "Spremni automatizirati pristup za goste?",
       "text": "Recite nam nešto o svojim objektima i prilagodit ćemo WIFIGATE Host načinu na koji ugošćujete.",

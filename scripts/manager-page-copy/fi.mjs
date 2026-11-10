@@ -90,6 +90,21 @@ export default {
       "i3t": "Roolit jokaiselle tiimille",
       "i3x": "Kunkin organisaation ylläpitäjät hallitsevat vain niitä järjestelmiä, joista he vastaavat."
     },
+    "faq": {
+      "q1": "Vaatiiko itse WIFIGATE-ohjain tilauksen?",
+      "q2": "Miten yhdistän järjestelmäni hallintapaneeliin?",
+      "q3": "Voinko hallita erillisiä rakennuksia tai asiakkaita?",
+      "q4": "Kuka voi hallita mitäkin?",
+      "q5": "Mitä tapahtuu, kun sisäänkäynnin luona ei ole internetyhteyttä?",
+      "q6": "Ovatko komennot ja käyttöoikeudet turvassa?",
+      "q7": "Miten kuukausiveloitus lasketaan?",
+      "q8": "Mitä järjestelmiä voin hallita?"
+    },
+    "shop": {
+      "title": "Kaikki alkaa WIFIGATE-ohjaimesta",
+      "text": "Jokainen hallintapaneelisi järjestelmä on sisäänkäynnille asennettu WIFIGATE-ohjain. Valitse verkkokaupasta porttiisi, oveesi tai rullaoveesi sopiva ohjain.",
+      "button": "Siirry verkkokauppaan"
+    },
     "cta": {
       "title": "Valmis hallitsemaan kaikkia kohteita yhdestä paikasta?",
       "text": "Kerro meille rakennuksistasi ja järjestelmistäsi, niin otamme WIFIGATE Managerin käyttöön organisaatiollesi.",

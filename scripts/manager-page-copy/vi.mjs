@@ -90,6 +90,21 @@ export default {
       "i3t": "Vai trò cho từng nhóm",
       "i3x": "Quản trị viên của mỗi tổ chức chỉ quản lý các hệ thống thuộc trách nhiệm của mình."
     },
+    "faq": {
+      "q1": "Bản thân thiết bị WIFIGATE có cần thuê bao không?",
+      "q2": "Làm thế nào để kết nối hệ thống của tôi với bảng điều khiển?",
+      "q3": "Tôi có thể quản lý các tòa nhà hoặc khách hàng riêng biệt không?",
+      "q4": "Ai được quản lý những gì?",
+      "q5": "Điều gì xảy ra khi lối vào không có internet?",
+      "q6": "Lệnh điều khiển và quyền ra vào có được bảo mật không?",
+      "q7": "Phí hằng tháng được tính như thế nào?",
+      "q8": "Tôi có thể quản lý những hệ thống nào?"
+    },
+    "shop": {
+      "title": "Mọi thứ bắt đầu từ một bộ điều khiển WIFIGATE",
+      "text": "Mỗi hệ thống trên bảng điều khiển của bạn là một bộ điều khiển WIFIGATE được lắp tại lối vào. Hãy chọn bộ điều khiển phù hợp với cổng, cửa hoặc cửa cuốn của bạn tại cửa hàng.",
+      "button": "Đến cửa hàng"
+    },
     "cta": {
       "title": "Sẵn sàng quản lý mọi địa điểm từ một nơi?",
       "text": "Hãy cho chúng tôi biết về các tòa nhà và hệ thống của bạn, chúng tôi sẽ thiết lập WIFIGATE Manager cho tổ chức của bạn.",

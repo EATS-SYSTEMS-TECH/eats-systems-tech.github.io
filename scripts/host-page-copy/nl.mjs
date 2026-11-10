@@ -85,6 +85,21 @@ export default {
       "i3t": "Je houdt de regie",
       "i3x": "Toegang is gekoppeld aan elk verblijf en elke gast, en je kunt hem uitschakelen wanneer dat nodig is."
     },
+    "faq": {
+      "q1": "Hoe krijgt een gast toegang?",
+      "q2": "Wat gebeurt er bij het uitchecken?",
+      "q3": "Kan ik de toegang midden in een verblijf uitschakelen?",
+      "q4": "Is de gasttoegang veilig?",
+      "q5": "Hebben gasten nog sleutels, passen of afstandsbedieningen nodig?",
+      "q6": "Op welke systemen sluit WIFIGATE Host aan?",
+      "q7": "Werkt het ook voor een heel gebouw?",
+      "q8": "Hoe wordt de prijs berekend?"
+    },
+    "shop": {
+      "title": "Alles begint met een WIFIGATE-controller",
+      "text": "Gasttoegang werkt met een WIFIGATE-controller die bij de poort, deur of parkeerplaats is geïnstalleerd. Kies in de webshop de juiste controller voor je ingangen.",
+      "button": "Naar de webshop"
+    },
     "cta": {
       "title": "Klaar om gasttoegang te automatiseren?",
       "text": "Vertel ons over je accommodaties, dan richten wij WIFIGATE Host in op de manier waarop je gasten ontvangt.",

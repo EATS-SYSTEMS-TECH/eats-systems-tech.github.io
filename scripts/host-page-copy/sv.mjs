@@ -85,6 +85,21 @@ export default {
       "i3t": "Du behåller kontrollen",
       "i3x": "Åtkomsten är kopplad till varje vistelse och varje gäst, och du kan stänga av den när du behöver."
     },
+    "faq": {
+      "q1": "Hur får en gäst åtkomst?",
+      "q2": "Vad händer vid utcheckning?",
+      "q3": "Kan jag stänga av åtkomsten mitt under en vistelse?",
+      "q4": "Är gäståtkomsten säker?",
+      "q5": "Behöver gästerna fortfarande nycklar, kort eller fjärrkontroller?",
+      "q6": "Vilka system kan WIFIGATE Host kopplas till?",
+      "q7": "Fungerar det även för en hel byggnad?",
+      "q8": "Hur beräknas priset?"
+    },
+    "shop": {
+      "title": "Allt börjar med en WIFIGATE-styrenhet",
+      "text": "Gäståtkomsten bygger på en WIFIGATE-styrenhet som är installerad vid grinden, dörren eller parkeringen. Välj rätt styrenhet för dina entréer i butiken.",
+      "button": "Gå till butiken"
+    },
     "cta": {
       "title": "Redo att automatisera gäståtkomsten?",
       "text": "Berätta om dina fastigheter så sätter vi upp WIFIGATE Host efter hur du arbetar som värd.",

@@ -85,6 +85,21 @@ export default {
       "i3t": "Kontrolu máte stále vy",
       "i3x": "Prístup je viazaný na každý pobyt a každého hosťa a môžete ho kedykoľvek zrušiť."
     },
+    "faq": {
+      "q1": "Ako hosť získa prístup?",
+      "q2": "Čo sa stane pri odchode?",
+      "q3": "Môžem prístup zrušiť uprostred pobytu?",
+      "q4": "Je prístup pre hostí bezpečný?",
+      "q5": "Potrebujú hostia ešte kľúče, karty alebo ovládače?",
+      "q6": "K akým systémom sa dá WIFIGATE Host pripojiť?",
+      "q7": "Funguje to aj pre celú budovu?",
+      "q8": "Ako sa počíta cena?"
+    },
+    "shop": {
+      "title": "Všetko sa začína zariadením WIFIGATE",
+      "text": "Prístup pre hostí zabezpečuje zariadenie WIFIGATE nainštalované pri bráne, dverách alebo vjazde na parkovisko. V e-shope si vyberte správne zariadenie pre svoje vchody.",
+      "button": "Prejsť do e-shopu"
+    },
     "cta": {
       "title": "Pripravení automatizovať prístup pre hostí?",
       "text": "Povedzte nám o svojich objektoch a nastavíme WIFIGATE Host presne podľa toho, ako prijímate hostí.",

@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-manager.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="組織内のすべての WIFIGATE ゲート、ドア、シャッターを、ひとつの Web ダッシュボードから世界中どこからでも操作。1 システムあたり月額 $1.90。">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ja/wifigate-manager/#faq",
+      "inLanguage": "ja",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ja/wifigate-manager/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "WIFIGATE コントローラー本体にサブスクリプションは必要ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "お支払いは管理するシステムの分だけ。WIFIGATE コントローラー本体にサブスクリプションは一切かかりません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "システムをダッシュボードに接続するにはどうすればよいですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "アプリから WIFIGATE システムをダッシュボードにエクスポートします。コントローラーは Wi‑Fi で接続します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "別々の建物や顧客を管理できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "別々の建物、顧客、会社をひとつのアカウントで運用できます。 システムを建物や顧客ごとにグループ化し、組織ごとに専任の管理者を設定できます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "誰が何を管理できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "各組織の管理者は、自分が担当するシステムだけを管理します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "入口でインターネットに接続できない場合はどうなりますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "入口でスマートフォンから開ける操作は、インターネットに接続していなくてもローカルで動作し続けます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "コマンドと権限は安全ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "コマンドと権限は暗号化されるため、途中でアクセス情報を読み取られたり複製されたりすることはありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "月額料金はどのように計算されますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "料金は米ドル（USD）建て、税抜きです。毎月初めに 1 回、前月分を日割りで請求します。WIFIGATE Host をご利用の場合は、あわせて請求されます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "どのシステムを管理できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ゲート、Dual Control ゲート、玄関ドア、シャッターのすべてが、同じダッシュボードにつながります。"
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-manager/#service",
       "name": "WIFIGATE Manager",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20.5V6M21 20.5V6"></path><path d="M2 20.5h20"></path><path d="M6 20.5V9.5h12v11"></path><path d="M12 9.5v11"></path><path d="M6 14.5h12"></path></svg></span><h2 class="niche-highlight__title">システムを接続</h2><p class="niche-highlight__text">アプリから WIFIGATE システムをダッシュボードにエクスポートします。コントローラーは Wi‑Fi で接続します。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"></circle><path d="M2.8 19c0-3 2.3-5 5.2-5s5.2 2 5.2 5"></path><path d="M16.5 8.5h4.7M16.5 12.5h4.7M16.5 16.5h4.7"></path></svg></span><h2 class="niche-highlight__title">自由に整理</h2><p class="niche-highlight__text">ゲート、ドア、シャッターを、建物、拠点、組織ごとにグループ化できます。</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">どこからでも管理</h2><p class="niche-highlight__text">アクセスの付与や削除、履歴の確認、各システムの操作を、どのブラウザからでも行えます。</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">仕組み</span><h2 class="wa-h2" id="wa-flow-title">1 台のコントローラーから、すべての拠点へ</h2><p class="wa-lead">3つのステップで、すべてをひとつの場所から管理できます。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/manager-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">システムを接続</h3><p class="wa-flow__desc">アプリから WIFIGATE システムをダッシュボードにエクスポートします。コントローラーは Wi‑Fi で接続します。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/manager-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">自由に整理</h3><p class="wa-flow__desc">ゲート、ドア、シャッターを、建物、拠点、組織ごとにグループ化できます。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/manager-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">どこからでも管理</h3><p class="wa-flow__desc">アクセスの付与や削除、履歴の確認、各システムの操作を、どのブラウザからでも行えます。</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">WIFIGATE Manager が選ばれる理由</span>
           <h2 id="niche-benefits-title" class="niche-section__title">すべての出入口を、ひとつのダッシュボードで。</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">すべての拠点をひと目で</h3><p class="bento-card__text" dir="ltr">すべての建物、ゲート、ドアを、場所を問わずひとつのダッシュボードで確認できます。</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">ユーザーと権限</h3><p class="bento-card__text" dir="ltr">ユーザーを追加し、誰がどこを開けられるかを決めて、数秒で変更できます。1 つのシステム単位でも、拠点全体でも可能です。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">アクセス履歴をすべて記録</h3><p class="bento-card__text" dir="ltr">すべての拠点で、誰がいつどの出入口を開けたかを確認できます。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">組織とグループ</h3><p class="bento-card__text" dir="ltr">システムを建物や顧客ごとにグループ化し、組織ごとに専任の管理者を設定できます。</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">世界中どこからでも</h3><p class="bento-card__text" dir="ltr">パソコン、タブレット、スマートフォンのどのブラウザからでも管理できます。</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 20.5V6M21 20.5V6"></path><path d="M2 20.5h20"></path><path d="M6 20.5V9.5h12v11"></path><path d="M12 9.5v11"></path><path d="M6 14.5h12"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">今ある設備で使える</h3><p class="bento-card__text" dir="ltr">ゲート、Dual Control ゲート、玄関ドア、シャッターのすべてが、同じダッシュボードにつながります。</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">対象：</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.residential" dir="ltr">集合住宅</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.offices" dir="ltr">オフィス</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.sports" dir="ltr">スポーツ施設</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">駐車場</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">セキュリティ</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">大規模な管理も、安全に</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">多くの出入口を管理する組織のために設計されています。</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">エンドツーエンドで暗号化</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">コマンドと権限は暗号化されるため、途中でアクセス情報を読み取られたり複製されたりすることはありません。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">現地での開閉はそのまま使える</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">入口でスマートフォンから開ける操作は、インターネットに接続していなくてもローカルで動作し続けます。</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">チームごとのロール</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">各組織の管理者は、自分が担当するシステムだけを管理します。</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">すべての拠点を、ひとつの場所から管理しませんか？</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">建物やシステムについてお聞かせください。貴社の組織に合わせて WIFIGATE Manager をセットアップします。</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/ja/#contact" class="btn btn--primary btn--hero" dir="ltr">お問い合わせ</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">よくある質問</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">WIFIGATE コントローラー本体にサブスクリプションは必要ですか？</summary><div class="seo-faq__answer"><p dir="ltr">お支払いは管理するシステムの分だけ。WIFIGATE コントローラー本体にサブスクリプションは一切かかりません。</p></div></details><details class="seo-faq__item"><summary dir="ltr">システムをダッシュボードに接続するにはどうすればよいですか？</summary><div class="seo-faq__answer"><p dir="ltr">アプリから WIFIGATE システムをダッシュボードにエクスポートします。コントローラーは Wi‑Fi で接続します。</p></div></details><details class="seo-faq__item"><summary dir="ltr">別々の建物や顧客を管理できますか？</summary><div class="seo-faq__answer"><p dir="ltr">別々の建物、顧客、会社をひとつのアカウントで運用できます。 システムを建物や顧客ごとにグループ化し、組織ごとに専任の管理者を設定できます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">誰が何を管理できますか？</summary><div class="seo-faq__answer"><p dir="ltr">各組織の管理者は、自分が担当するシステムだけを管理します。</p></div></details><details class="seo-faq__item"><summary dir="ltr">入口でインターネットに接続できない場合はどうなりますか？</summary><div class="seo-faq__answer"><p dir="ltr">入口でスマートフォンから開ける操作は、インターネットに接続していなくてもローカルで動作し続けます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">コマンドと権限は安全ですか？</summary><div class="seo-faq__answer"><p dir="ltr">コマンドと権限は暗号化されるため、途中でアクセス情報を読み取られたり複製されたりすることはありません。</p></div></details><details class="seo-faq__item"><summary dir="ltr">月額料金はどのように計算されますか？</summary><div class="seo-faq__answer"><p dir="ltr">料金は米ドル（USD）建て、税抜きです。毎月初めに 1 回、前月分を日割りで請求します。WIFIGATE Host をご利用の場合は、あわせて請求されます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">どのシステムを管理できますか？</summary><div class="seo-faq__answer"><p dir="ltr">ゲート、Dual Control ゲート、玄関ドア、シャッターのすべてが、同じダッシュボードにつながります。</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">すべては WIFIGATE コントローラーから</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">ダッシュボード上のシステムはすべて、入口に設置された WIFIGATE コントローラーです。ゲート、ドア、シャッターに合ったコントローラーをショップでお選びください。</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/ja/shop/" class="btn btn--primary wa-shop__link" dir="ltr">ショップを見る</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/ja/#contact" class="btn btn--ghost" dir="ltr">お問い合わせ</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

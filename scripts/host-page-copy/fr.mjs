@@ -85,6 +85,21 @@ export default {
       "i3t": "Vous gardez le contrôle",
       "i3x": "L'accès est lié à chaque séjour et à chaque voyageur, et vous pouvez l'interrompre à tout moment."
     },
+    "faq": {
+      "q1": "Comment le voyageur obtient-il son accès ?",
+      "q2": "Que se passe-t-il au moment du départ ?",
+      "q3": "Puis-je interrompre l'accès en cours de séjour ?",
+      "q4": "L'accès des voyageurs est-il sécurisé ?",
+      "q5": "Les voyageurs ont-ils encore besoin de clés, de cartes ou de télécommandes ?",
+      "q6": "À quels systèmes WIFIGATE Host se connecte-t-il ?",
+      "q7": "Est-ce adapté à un bâtiment entier ?",
+      "q8": "Comment le prix est-il calculé ?"
+    },
+    "shop": {
+      "title": "Tout commence par un contrôleur WIFIGATE",
+      "text": "L'accès des voyageurs repose sur un contrôleur WIFIGATE installé au portail, à la porte ou à l'entrée du parking. Choisissez dans la boutique le contrôleur adapté à vos entrées.",
+      "button": "Accéder à la boutique"
+    },
     "cta": {
       "title": "Prêt à automatiser l'accès de vos voyageurs ?",
       "text": "Parlez-nous de vos établissements et nous adapterons WIFIGATE Host à votre façon d'accueillir.",

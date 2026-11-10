@@ -85,6 +85,21 @@ export default {
       "i3t": "Hallinta pysyy sinulla",
       "i3x": "Kulkuoikeus on sidottu jokaiseen majoitukseen ja jokaiseen vieraaseen, ja voit perua sen milloin tahansa."
     },
+    "faq": {
+      "q1": "Miten vieras saa kulkuoikeuden?",
+      "q2": "Mitä tapahtuu uloskirjautuessa?",
+      "q3": "Voinko perua kulkuoikeuden kesken majoituksen?",
+      "q4": "Onko vieraiden kulku turvallista?",
+      "q5": "Tarvitsevatko vieraat yhä avaimia, kortteja tai kaukosäätimiä?",
+      "q6": "Mihin järjestelmiin WIFIGATE Hostin voi kytkeä?",
+      "q7": "Sopiiko se myös kokonaiseen rakennukseen?",
+      "q8": "Miten hinta lasketaan?"
+    },
+    "shop": {
+      "title": "Kaikki alkaa WIFIGATE-ohjaimesta",
+      "text": "Vieraiden kulku toimii portille, ovelle tai pysäköintialueen sisäänkäynnille asennetulla WIFIGATE-ohjaimella. Valitse verkkokaupasta sisäänkäynteihisi sopiva ohjain.",
+      "button": "Siirry verkkokauppaan"
+    },
     "cta": {
       "title": "Valmis automatisoimaan vieraiden kulun?",
       "text": "Kerro meille kohteistasi, niin sovitamme WIFIGATE Hostin juuri sinun tapaasi majoittaa.",

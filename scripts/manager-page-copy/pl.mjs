@@ -90,6 +90,21 @@ export default {
       "i3t": "Role dla każdego zespołu",
       "i3x": "Administratorzy każdej organizacji zarządzają tylko systemami, za które odpowiadają."
     },
+    "faq": {
+      "q1": "Czy sam kontroler WIFIGATE wymaga abonamentu?",
+      "q2": "Jak połączyć swoje systemy z panelem?",
+      "q3": "Czy mogę zarządzać oddzielnymi budynkami lub klientami?",
+      "q4": "Kto może czym zarządzać?",
+      "q5": "Co się dzieje, gdy przy wejściu nie ma internetu?",
+      "q6": "Czy polecenia i uprawnienia są zabezpieczone?",
+      "q7": "Jak naliczana jest opłata miesięczna?",
+      "q8": "Jakimi systemami mogę zarządzać?"
+    },
+    "shop": {
+      "title": "Wszystko zaczyna się od kontrolera WIFIGATE",
+      "text": "Każdy system w Twoim panelu to kontroler WIFIGATE zamontowany przy wejściu. Wybierz w sklepie kontroler odpowiedni do swojej bramy, drzwi lub rolety.",
+      "button": "Przejdź do sklepu"
+    },
     "cta": {
       "title": "Chcesz zarządzać wszystkimi obiektami z jednego miejsca?",
       "text": "Opowiedz nam o swoich budynkach i systemach, a skonfigurujemy WIFIGATE Manager dla Twojej organizacji.",

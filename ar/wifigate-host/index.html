@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="وصول آمن ومحدود المدة لكل ضيف، يُنشأ تلقائيًا مع كل حجز. للفنادق وشقق العطلات وبيوت الضيافة والمواقف والكراجات المؤجرة. من دون تسليم مفاتيح.">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ar/wifigate-host/#faq",
+      "inLanguage": "ar",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ar/wifigate-host/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "كيف يحصل الضيف على صلاحية الدخول؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "تُصدر WIFIGATE Host دعوة آمنة ومحدودة المدة للبوابة أو الباب أو الموقف الصحيح بالضبط، صالحة لتلك الإقامة فقط."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ماذا يحدث عند تسجيل المغادرة؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "كل دعوة تبدأ عند تسجيل الوصول وتنتهي عند تسجيل المغادرة، تلقائيًا، في كل إقامة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يمكنني إيقاف الدخول أثناء الإقامة؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "الدخول مرتبط بكل إقامة وبكل ضيف، ويمكنك إيقافه في أي لحظة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل دخول الضيوف آمن؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "كل دعوة مشفّرة، فلا يمكن قراءة تفاصيل الدخول أو نسخها أثناء النقل."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل ما زال الضيوف يحتاجون إلى مفاتيح أو بطاقات أو أجهزة ريموت؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "يقلّل الدخول الرقمي الحاجة إلى المفاتيح والبطاقات وأجهزة الريموت، ليتفرغ الفريق للضيوف والضيافة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ما الأنظمة التي تتصل بها WIFIGATE Host؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "اربط WIFIGATE Host بمسار الحجز لديك أو بنظام PMS أو بمدير القنوات، ودعها تعمل تلقائيًا."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل تناسب مبنى بأكمله؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "من بوابة واحدة إلى مجمع كامل، يمكن لدعوة واحدة أن تغطي كل مدخل يحتاجه الضيف."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "كيف يُحتسب السعر؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "الأسعار شهرية بالدولار الأمريكي (USD)، لكل نظام نشط وحسب الشريحة: أول 14 نظامًا بسعر $6 للنظام الواحد، والأنظمة 15–49 بسعر $5 للنظام الواحد، وكل نظام بدءًا من النظام رقم 50 بسعر $4. الحد الأدنى للحساب: $6 شهريًا. لا رسوم للمنصة ولا رسوم على دعوات الضيوف. تتوفر عروض أسعار خاصة بالكميات لـ 250+ نظامًا."
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-host/#service",
       "name": "WIFIGATE Host",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 2.8v4M16 2.8v4"></path><path d="M8.5 14h3"></path></svg></span><h2 class="niche-highlight__title">يصل حجز جديد</h2><p class="niche-highlight__text">يُبلغ نظام الحجوزات أو الإدارة لديك WIFIGATE Host بحجز جديد تم تأكيده.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">يُنشأ الدخول تلقائيًا</h2><p class="niche-highlight__text">تُصدر WIFIGATE Host دعوة آمنة ومحدودة المدة للبوابة أو الباب أو الموقف الصحيح بالضبط، صالحة لتلك الإقامة فقط.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">ضيفك يدخل ببساطة</h2><p class="niche-highlight__text">يفتح الضيف المدخل من هاتفه. وعند حلول موعد المغادرة تنتهي الصلاحية من تلقاء نفسها، فلا شيء لاسترجاعه أو إلغائه.</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">كيف يعمل</span><h2 class="wa-h2" id="wa-flow-title">من الحجز إلى البوابة المفتوحة، تلقائيًا</h2><p class="wa-lead">ثلاث خطوات، ثم يعمل كل شيء تلقائيًا مع كل حجز.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-rtl.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">يصل حجز جديد</h3><p class="wa-flow__desc">يُبلغ نظام الحجوزات أو الإدارة لديك WIFIGATE Host بحجز جديد تم تأكيده.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">يُنشأ الدخول تلقائيًا</h3><p class="wa-flow__desc">تُصدر WIFIGATE Host دعوة آمنة ومحدودة المدة للبوابة أو الباب أو الموقف الصحيح بالضبط، صالحة لتلك الإقامة فقط.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">ضيفك يدخل ببساطة</h3><p class="wa-flow__desc">يفتح الضيف المدخل من هاتفه. وعند حلول موعد المغادرة تنتهي الصلاحية من تلقاء نفسها، فلا شيء لاسترجاعه أو إلغائه.</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">لماذا WIFIGATE Host</span>
           <h2 id="niche-benefits-title" class="niche-section__title">استقبال أخف، وضيافة بلا عناء.</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.7 12.3 6.3-6.3"></path><path d="m15 8 2 2"></path><path d="M2 2l20 20"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="rtl">لا مفاتيح للتسليم</h3><p class="bento-card__text" dir="rtl">انسَ استلام المفاتيح وصناديق المفاتيح والرموز المنسوخة. تصل الصلاحية إلى هاتف ضيفك في اللحظة التي يحتاجها فيها.‏</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h5"></path><path d="M17.5 17.5 16 16.3V14"></path><circle cx="16" cy="16" r="6"></circle></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="rtl">محدودة المدة بطبيعتها</h3><p class="bento-card__text" dir="rtl">كل دعوة تبدأ عند تسجيل الوصول وتنتهي عند تسجيل المغادرة، تلقائيًا، في كل إقامة.‏</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="rtl">مشفّرة وخاصة</h3><p class="bento-card__text" dir="rtl">الدخول مشفّر ومقتصر على الصلاحية الصادرة. يبقى عقارك وضيوفك في أمان.‏</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="rtl">تعمل مع مداخلك</h3><p class="bento-card__text" dir="rtl">البوابات وأبواب الكراجات والحواجز وأبواب المداخل، تتحكم WIFIGATE بما لديك أصلًا.‏</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="rtl">تناسب المباني بأكملها أيضًا</h3><p class="bento-card__text" dir="rtl">من بوابة واحدة إلى مجمع كامل، يمكن لدعوة واحدة أن تغطي كل مدخل يحتاجه الضيف.‏</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="rtl">تتصل بأنظمتك</h3><p class="bento-card__text" dir="rtl">اربط WIFIGATE Host بمسار الحجز لديك أو بنظام PMS أو بمدير القنوات، ودعها تعمل تلقائيًا.‏</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="rtl">مخصصة لـ:‏</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="rtl">الفنادق</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="rtl">Airbnb وشقق العطلات</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="rtl">بيوت الضيافة</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="rtl">المواقف والكراجات المؤجرة</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="rtl">الأمان</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="rtl">دخول يمكنك منحه بثقة حتى للغرباء</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="rtl">صُممت لحماية العقار خلف كل بوابة.‏</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="rtl">تشفير من طرف إلى طرف</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="rtl">كل دعوة مشفّرة، فلا يمكن قراءة تفاصيل الدخول أو نسخها أثناء النقل.‏</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="rtl">وسائل مادية أقل، ضيافة أكثر</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="rtl">يقلّل الدخول الرقمي الحاجة إلى المفاتيح والبطاقات وأجهزة الريموت، ليتفرغ الفريق للضيوف والضيافة.‏</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="rtl">التحكم يبقى بيدك</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="rtl">الدخول مرتبط بكل إقامة وبكل ضيف، ويمكنك إيقافه في أي لحظة.‏</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="rtl">مستعد لأتمتة دخول ضيوفك؟</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="rtl">أخبرنا عن عقاراتك، وسنُعدّ WIFIGATE Host بما يناسب طريقتك في الاستضافة.‏</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/ar/#contact" class="btn btn--primary btn--hero" dir="rtl">تواصل معنا</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">الأسئلة الشائعة</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="rtl">كيف يحصل الضيف على صلاحية الدخول؟</summary><div class="seo-faq__answer"><p dir="rtl">تُصدر WIFIGATE Host دعوة آمنة ومحدودة المدة للبوابة أو الباب أو الموقف الصحيح بالضبط، صالحة لتلك الإقامة فقط.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">ماذا يحدث عند تسجيل المغادرة؟</summary><div class="seo-faq__answer"><p dir="rtl">كل دعوة تبدأ عند تسجيل الوصول وتنتهي عند تسجيل المغادرة، تلقائيًا، في كل إقامة.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل يمكنني إيقاف الدخول أثناء الإقامة؟</summary><div class="seo-faq__answer"><p dir="rtl">الدخول مرتبط بكل إقامة وبكل ضيف، ويمكنك إيقافه في أي لحظة.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل دخول الضيوف آمن؟</summary><div class="seo-faq__answer"><p dir="rtl">كل دعوة مشفّرة، فلا يمكن قراءة تفاصيل الدخول أو نسخها أثناء النقل.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل ما زال الضيوف يحتاجون إلى مفاتيح أو بطاقات أو أجهزة ريموت؟</summary><div class="seo-faq__answer"><p dir="rtl">يقلّل الدخول الرقمي الحاجة إلى المفاتيح والبطاقات وأجهزة الريموت، ليتفرغ الفريق للضيوف والضيافة.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">ما الأنظمة التي تتصل بها WIFIGATE Host؟</summary><div class="seo-faq__answer"><p dir="rtl">اربط WIFIGATE Host بمسار الحجز لديك أو بنظام PMS أو بمدير القنوات، ودعها تعمل تلقائيًا.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل تناسب مبنى بأكمله؟</summary><div class="seo-faq__answer"><p dir="rtl">من بوابة واحدة إلى مجمع كامل، يمكن لدعوة واحدة أن تغطي كل مدخل يحتاجه الضيف.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">كيف يُحتسب السعر؟</summary><div class="seo-faq__answer"><p dir="rtl">الأسعار شهرية بالدولار الأمريكي (USD)، لكل نظام نشط وحسب الشريحة: أول 14 نظامًا بسعر $6 للنظام الواحد، والأنظمة 15–49 بسعر $5 للنظام الواحد، وكل نظام بدءًا من النظام رقم 50 بسعر $4. الحد الأدنى للحساب: $6 شهريًا. لا رسوم للمنصة ولا رسوم على دعوات الضيوف. تتوفر عروض أسعار خاصة بالكميات لـ 250+ نظامًا.‏</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="rtl">كل شيء يبدأ بوحدة تحكم WIFIGATE</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="rtl">يعتمد دخول الضيوف على وحدة تحكم WIFIGATE مركّبة عند البوابة أو الباب أو مدخل موقف السيارات. اختر من المتجر وحدة التحكم المناسبة لمداخلك.‏</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/ar/shop/" class="btn btn--primary wa-shop__link" dir="rtl">انتقل إلى المتجر</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/ar/#contact" class="btn btn--ghost" dir="rtl">تواصل معنا</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

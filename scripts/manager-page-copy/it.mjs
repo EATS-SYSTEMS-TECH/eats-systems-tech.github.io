@@ -90,6 +90,21 @@ export default {
       "i3t": "Ruoli per ogni team",
       "i3x": "Gli amministratori di ogni organizzazione gestiscono solo i sistemi di cui sono responsabili."
     },
+    "faq": {
+      "q1": "Il controller WIFIGATE in sé richiede un abbonamento?",
+      "q2": "Come collego i miei sistemi alla dashboard?",
+      "q3": "Posso gestire edifici o clienti separati?",
+      "q4": "Chi può gestire cosa?",
+      "q5": "Cosa succede se all'ingresso non c'è internet?",
+      "q6": "Comandi e autorizzazioni sono sicuri?",
+      "q7": "Come viene calcolato l'addebito mensile?",
+      "q8": "Quali sistemi posso gestire?"
+    },
+    "shop": {
+      "title": "Tutto parte da un controller WIFIGATE",
+      "text": "Ogni sistema nella tua dashboard è un controller WIFIGATE installato all'ingresso. Scegli nello shop il controller giusto per il tuo cancello, la tua porta o la tua tapparella.",
+      "button": "Vai allo shop"
+    },
     "cta": {
       "title": "Pronto a gestire tutte le sedi da un unico punto?",
       "text": "Parlaci dei tuoi edifici e dei tuoi sistemi, e configureremo WIFIGATE Manager per la tua organizzazione.",

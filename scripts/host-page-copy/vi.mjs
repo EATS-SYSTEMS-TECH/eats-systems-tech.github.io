@@ -85,6 +85,21 @@ export default {
       "i3t": "Bạn luôn nắm quyền kiểm soát",
       "i3x": "Quyền ra vào gắn với từng kỳ lưu trú và từng khách, và bạn có thể thu hồi bất cứ lúc nào."
     },
+    "faq": {
+      "q1": "Khách nhận quyền ra vào bằng cách nào?",
+      "q2": "Điều gì xảy ra khi trả phòng?",
+      "q3": "Tôi có thể thu hồi quyền ra vào giữa kỳ lưu trú không?",
+      "q4": "Quyền ra vào của khách có an toàn không?",
+      "q5": "Khách có còn cần chìa khóa, thẻ hay remote không?",
+      "q6": "WIFIGATE Host kết nối với những hệ thống nào?",
+      "q7": "Có phù hợp với cả một tòa nhà không?",
+      "q8": "Giá được tính như thế nào?"
+    },
+    "shop": {
+      "title": "Mọi thứ bắt đầu từ một bộ điều khiển WIFIGATE",
+      "text": "Quyền ra vào cho khách hoạt động nhờ bộ điều khiển WIFIGATE được lắp tại cổng, cửa hoặc lối vào bãi xe. Hãy chọn bộ điều khiển phù hợp với các lối vào của bạn tại cửa hàng.",
+      "button": "Đến cửa hàng"
+    },
     "cta": {
       "title": "Sẵn sàng tự động hóa việc ra vào cho khách?",
       "text": "Hãy cho chúng tôi biết về các tài sản của bạn, chúng tôi sẽ điều chỉnh WIFIGATE Host theo cách bạn đón khách.",

@@ -85,6 +85,21 @@ export default {
       "i3t": "Controlul rămâne la dumneavoastră",
       "i3x": "Accesul este legat de fiecare sejur și de fiecare oaspete și îl puteți opri în orice moment."
     },
+    "faq": {
+      "q1": "Cum primește oaspetele acces?",
+      "q2": "Ce se întâmplă la check-out?",
+      "q3": "Pot opri accesul în timpul unui sejur?",
+      "q4": "Accesul oaspeților este securizat?",
+      "q5": "Oaspeții mai au nevoie de chei, carduri sau telecomenzi?",
+      "q6": "La ce sisteme se conectează?",
+      "q7": "Funcționează și pentru o clădire întreagă?",
+      "q8": "Cum se calculează prețul?"
+    },
+    "shop": {
+      "title": "Totul începe cu un controler WIFIGATE",
+      "text": "Accesul oaspeților funcționează cu un controler WIFIGATE instalat la poartă, la ușă sau la intrarea în parcare. Alegeți din magazin controlerul potrivit pentru intrările dumneavoastră.",
+      "button": "Accesați magazinul"
+    },
     "cta": {
       "title": "Sunteți gata să automatizați accesul oaspeților?",
       "text": "Spuneți-ne despre proprietățile dumneavoastră și vom adapta WIFIGATE Host la felul în care vă primiți oaspeții.",

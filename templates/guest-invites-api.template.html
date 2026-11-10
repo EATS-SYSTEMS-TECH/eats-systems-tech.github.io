@@ -1,18 +1,7 @@
-<!-- Four Host detail sections;the shared renderer supplies translated cards. -->
+<!-- Three Host detail sections;the shared renderer supplies translated cards. -->
 <!-- The audience renderer fills this single ordered chip mount. -->
 <section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"></div>
-</section>
-<!-- Security headings and the card mount use the existing locale-copy paths. -->
-<section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow">Security</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2">Access you can safely give a stranger</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead">Built to protect the property behind every gate.</p>
-    </div>
-    <div class="wa-secure__grid"></div>
-  </div>
 </section>
 <!-- Pricing data remains owned by the shared offer renderer,including its note. -->
 <section aria-labelledby="wa-pricing-title" id="wa-pricing" class="section wa-pricing">
@@ -26,13 +15,19 @@
     <p data-i18n="guestInvites.marketing.pricing.note" class="wa-pricing__note">Monthly prices in US dollars (USD), per active system, band by band: the first 14 systems cost $6 each, systems 15–49 cost $5 each, and every system from the 50th costs $4. Account minimum: $6 per month. No platform fee and no charge per guest invitation. Volume quotes are available for 250+ systems.</p>
   </div>
 </section>
-<!-- Contact keeps the literal source URL for the locale-aware link pass. -->
-<section aria-labelledby="wa-cta-title" class="section wa-cta">
+<!-- The closing section sends visitors to the shop; the builder sets the locale shop link. -->
+<section aria-labelledby="wa-shop-title" class="section wa-shop">
   <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title">Ready to automate guest access?</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text">Tell us about your properties and we will set up WIFIGATE Host for the way you host.</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="../index.html#contact" class="btn btn--primary btn--hero">Talk to us</a>
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2">Everything starts with a WIFIGATE controller</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead">Guest access runs on a WIFIGATE controller installed at the gate, door or parking entrance. Choose the right controller for your entrances in the shop.</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="../shop/index.html" class="btn btn--primary wa-shop__link">Go to the shop</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="../index.html#contact" class="btn btn--ghost">Talk to us</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
     </div>
   </div>
 </section>

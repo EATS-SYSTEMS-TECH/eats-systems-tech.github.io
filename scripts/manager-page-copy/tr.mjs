@@ -90,6 +90,21 @@ export default {
       "i3t": "Her ekip için roller",
       "i3x": "Her kuruluşun yöneticileri yalnızca sorumlu oldukları sistemleri yönetir."
     },
+    "faq": {
+      "q1": "WIFIGATE cihazının kendisi abonelik gerektirir mi?",
+      "q2": "Sistemlerimi panele nasıl bağlarım?",
+      "q3": "Ayrı binaları veya müşterileri yönetebilir miyim?",
+      "q4": "Kim neyi yönetebilir?",
+      "q5": "Girişte internet olmadığında ne olur?",
+      "q6": "Komutlar ve yetkiler güvenli mi?",
+      "q7": "Aylık ücret nasıl hesaplanır?",
+      "q8": "Hangi sistemleri yönetebilirim?"
+    },
+    "shop": {
+      "title": "Her şey bir WIFIGATE kontrol ünitesiyle başlar",
+      "text": "Panelinizdeki her sistem, girişe kurulmuş bir WIFIGATE kontrol ünitesidir. Kapınız, giriş kapınız veya kepenginiz için doğru kontrol ünitesini mağazadan seçin.",
+      "button": "Mağazaya gidin"
+    },
     "cta": {
       "title": "Tüm tesislerinizi tek bir yerden yönetmeye hazır mısınız?",
       "text": "Bize binalarınızdan ve sistemlerinizden bahsedin, WIFIGATE Manager'ı kuruluşunuz için kuralım.",

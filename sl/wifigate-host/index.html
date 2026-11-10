@@ -33,8 +33,8 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261108a"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
-
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/automation.css?v=20261110flow1"><link rel="stylesheet" href="../../css/line-hero.css?v=20261110lh3">
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-host.js?v=20261110lh3"><script type="module" src="../../js/line-hero.js?v=20261110lh3"></script>
   <meta name="description" content="Varen, časovno omejen dostop za vsakega gosta, samodejno ob vsaki rezervaciji. Za hotele, apartmaje, penzione, najemna parkirišča in garaže. Brez predaje ključev.">
   <meta name="robots" content="index, follow">
@@ -257,6 +257,80 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/sl/wifigate-host/#faq",
+      "inLanguage": "sl",
+      "isPartOf": {
+        "@id": "https://wifigate.io/sl/wifigate-host/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Kako gost dobi dostop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE Host izda varno, časovno omejeno povabilo natanko za ustrezna dvoriščna vrata, vhodna vrata ali parkirišče, ki velja samo za to bivanje."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kaj se zgodi ob odjavi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vsako povabilo začne veljati ob prijavi in poteče ob odjavi, samodejno, pri vsakem bivanju."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ali lahko dostop izklopim sredi bivanja?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dostop je vezan na vsako bivanje in vsakega gosta, izklopite pa ga lahko kadar koli."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ali je dostop za goste varen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vsako povabilo je šifrirano, zato podatkov o dostopu med prenosom ni mogoče prebrati ali kopirati."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ali gostje še vedno potrebujejo ključe, kartice ali daljince?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Digitalni dostop zmanjša potrebo po ključih, karticah in daljincih, da se osebje lahko v celoti posveti gostom."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "S katerimi sistemi se poveže WIFIGATE Host?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Povežite WIFIGATE Host s svojim rezervacijskim sistemom, sistemom PMS ali channel managerjem in pustite, da dela namesto vas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ali je primerno tudi za celo stavbo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Od enih vrat do celotnega kompleksa: eno povabilo lahko pokrije vsak vhod, ki ga gost potrebuje."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kako se izračuna cena?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mesečne cene v ameriških dolarjih (USD) za vsak aktiven sistem, po razredih: prvih 14 sistemov stane $6 na sistem, sistemi 15–49 stanejo $5 na sistem, vsak sistem od 50. naprej pa $4. Najnižji znesek za račun: $6 na mesec. Brez pristojbine za platformo in brez plačila za posamezno povabilo gostu. Za 250+ sistemov so na voljo količinske ponudbe."
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://wifigate.io/wifigate-host/#service",
       "name": "WIFIGATE Host",
@@ -390,43 +464,45 @@
 </section></div>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
-      <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 2.8v4M16 2.8v4"></path><path d="M8.5 14h3"></path></svg></span><h2 class="niche-highlight__title">Prispe rezervacija</h2><p class="niche-highlight__text">Vaš rezervacijski sistem ali sistem za upravljanje nastanitev obvesti WIFIGATE Host o novi potrjeni rezervaciji.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">Dostop se ustvari samodejno</h2><p class="niche-highlight__text">WIFIGATE Host izda varno, časovno omejeno povabilo natanko za ustrezna dvoriščna vrata, vhodna vrata ali parkirišče, ki velja samo za to bivanje.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"></rect><path d="M10.5 18.5h3"></path><path d="M18 8.5a5 5 0 0 1 0 7"></path><path d="M20.5 6a8.5 8.5 0 0 1 0 12"></path></svg></span><h2 class="niche-highlight__title">Gost preprosto vstopi</h2><p class="niche-highlight__text">Vhod odpre s telefonom. Ob odjavi dostop sam poteče, zato ni treba ničesar pobirati ali preklicevati.</p></article></div>
-      </div>
+    <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">Kako deluje</span><h2 class="wa-h2" id="wa-flow-title">Od rezervacije do odprtih vrat, samodejno</h2><p class="wa-lead">Trije koraki, potem pa vse steče samo, pri vsaki rezervaciji.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Prispe rezervacija</h3><p class="wa-flow__desc">Vaš rezervacijski sistem ali sistem za upravljanje nastanitev obvesti WIFIGATE Host o novi potrjeni rezervaciji.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Dostop se ustvari samodejno</h3><p class="wa-flow__desc">WIFIGATE Host izda varno, časovno omejeno povabilo natanko za ustrezna dvoriščna vrata, vhodna vrata ali parkirišče, ki velja samo za to bivanje.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">Gost preprosto vstopi</h3><p class="wa-flow__desc">Vhod odpre s telefonom. Ob odjavi dostop sam poteče, zato ni treba ničesar pobirati ali preklicevati.</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
     <section aria-labelledby="niche-benefits-title" id="niche-benefits" class="niche-section">
       <div class="container">
-        <div class="niche-section__header">
+        <div class="niche-section__header"><span class="wa-eyebrow">Zakaj WIFIGATE Host</span>
           <h2 id="niche-benefits-title" class="niche-section__title">Manj dela na recepciji. Več brezskrbnega gostiteljstva.</h2>
         </div>
         <ul id="niche-benefits-list" class="bento" data-count="6"><li class="bento-card bento-card--lead"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.7 12.3 6.3-6.3"></path><path d="m15 8 2 2"></path><path d="M2 2l20 20"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">01 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Brez predaje ključev</h3><p class="bento-card__text" dir="ltr">Pozabite na prevzemanje ključev, skrinjice za ključe in kopirane kode. Dostop prispe na telefon gosta točno takrat, ko je potreben.</p></div></li><li class="bento-card bento-card--feature"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h5"></path><path d="M17.5 17.5 16 16.3V14"></path><circle cx="16" cy="16" r="6"></circle></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">02 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Časovno omejen že po zasnovi</h3><p class="bento-card__text" dir="ltr">Vsako povabilo začne veljati ob prijavi in poteče ob odjavi, samodejno, pri vsakem bivanju.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">03 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Šifrirano in zasebno</h3><p class="bento-card__text" dir="ltr">Dostop je šifriran in omejen na izdano dovoljenje. Vaša nepremičnina in vaši gostje ostanejo zaščiteni.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">04 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Deluje z vašimi vhodi</h3><p class="bento-card__text" dir="ltr">Dvoriščna vrata, garažna vrata, zapornice in vhodna vrata: WIFIGATE upravlja to, kar že imate.</p></div></li><li class="bento-card bento-card--third"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M12 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">05 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Primerno tudi za cele stavbe</h3><p class="bento-card__text" dir="ltr">Od enih vrat do celotnega kompleksa: eno povabilo lahko pokrije vsak vhod, ki ga gost potrebuje.</p></div></li><li class="bento-card bento-card--full"><div class="bento-card__top"><span class="bento-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></span><span class="bento-card__count" aria-hidden="true" dir="ltr">06 / 06</span></div><div class="bento-card__body"><h3 class="bento-card__title" dir="ltr">Poveže se z vašimi sistemi</h3><p class="bento-card__text" dir="ltr">Povežite WIFIGATE Host s svojim rezervacijskim sistemom, sistemom PMS ali channel managerjem in pustite, da dela namesto vas.</p></div></li></ul>
       </div>
     </section><div class="wa-page host-marketing-details"><section aria-label="Who it is for" class="wa-audience">
   <div class="container wa-audience__row"><span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="ltr">Namenjeno za:</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="ltr">Hotele</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="ltr">Airbnb in počitniške apartmaje</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="ltr">Penzione</span><span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="ltr">Najemna parkirišča in garaže</span></div>
-</section><section aria-labelledby="wa-secure-title" class="section wa-secure">
-  <div class="container">
-    <div class="wa-head">
-      <span data-i18n="guestInvites.marketing.secure.eyebrow" class="wa-eyebrow" dir="ltr">Varnost</span>
-      <h2 data-i18n="guestInvites.marketing.secure.title" id="wa-secure-title" class="wa-h2" dir="ltr">Dostop, ki ga lahko varno zaupate tudi neznancu</h2>
-      <p data-i18n="guestInvites.marketing.secure.subtitle" class="wa-lead" dir="ltr">Zasnovano za zaščito nepremičnine za vsakimi vrati.</p>
-    </div>
-    <div class="wa-secure__grid"><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="ltr">Šifriranje od konca do konca</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="ltr">Vsako povabilo je šifrirano, zato podatkov o dostopu med prenosom ni mogoče prebrati ali kopirati.</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="ltr">Manj fizičnih sredstev, več gostoljubja</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="ltr">Digitalni dostop zmanjša potrebo po ključih, karticah in daljincih, da se osebje lahko v celoti posveti gostom.</p></article><article class="wa-secure__item"><h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="ltr">Nadzor ostaja v vaših rokah</h3><p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="ltr">Dostop je vezan na vsako bivanje in vsakega gosta, izklopite pa ga lahko kadar koli.</p></article></div>
-  </div>
-</section><section aria-labelledby="wa-cta-title" class="section wa-cta">
-  <div class="container">
-    <div class="wa-cta__box">
-      <h2 data-i18n="guestInvites.marketing.cta.title" id="wa-cta-title" class="wa-cta__title" dir="ltr">Ste pripravljeni avtomatizirati dostop za goste?</h2>
-      <p data-i18n="guestInvites.marketing.cta.text" class="wa-cta__text" dir="ltr">Povejte nam o svojih nepremičninah in WIFIGATE Host bomo prilagodili vašemu načinu sprejemanja gostov.</p>
-      <a data-i18n="guestInvites.marketing.cta.button" href="/sl/#contact" class="btn btn--primary btn--hero" dir="ltr">Pišite nam</a>
-    </div>
-  </div>
 </section></div>
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">Pogosta vprašanja</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">Kako gost dobi dostop?</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host izda varno, časovno omejeno povabilo natanko za ustrezna dvoriščna vrata, vhodna vrata ali parkirišče, ki velja samo za to bivanje.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Kaj se zgodi ob odjavi?</summary><div class="seo-faq__answer"><p dir="ltr">Vsako povabilo začne veljati ob prijavi in poteče ob odjavi, samodejno, pri vsakem bivanju.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Ali lahko dostop izklopim sredi bivanja?</summary><div class="seo-faq__answer"><p dir="ltr">Dostop je vezan na vsako bivanje in vsakega gosta, izklopite pa ga lahko kadar koli.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Ali je dostop za goste varen?</summary><div class="seo-faq__answer"><p dir="ltr">Vsako povabilo je šifrirano, zato podatkov o dostopu med prenosom ni mogoče prebrati ali kopirati.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Ali gostje še vedno potrebujejo ključe, kartice ali daljince?</summary><div class="seo-faq__answer"><p dir="ltr">Digitalni dostop zmanjša potrebo po ključih, karticah in daljincih, da se osebje lahko v celoti posveti gostom.</p></div></details><details class="seo-faq__item"><summary dir="ltr">S katerimi sistemi se poveže WIFIGATE Host?</summary><div class="seo-faq__answer"><p dir="ltr">Povežite WIFIGATE Host s svojim rezervacijskim sistemom, sistemom PMS ali channel managerjem in pustite, da dela namesto vas.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Ali je primerno tudi za celo stavbo?</summary><div class="seo-faq__answer"><p dir="ltr">Od enih vrat do celotnega kompleksa: eno povabilo lahko pokrije vsak vhod, ki ga gost potrebuje.</p></div></details><details class="seo-faq__item"><summary dir="ltr">Kako se izračuna cena?</summary><div class="seo-faq__answer"><p dir="ltr">Mesečne cene v ameriških dolarjih (USD) za vsak aktiven sistem, po razredih: prvih 14 sistemov stane $6 na sistem, sistemi 15–49 stanejo $5 na sistem, vsak sistem od 50. naprej pa $4. Najnižji znesek za račun: $6 na mesec. Brez pristojbine za platformo in brez plačila za posamezno povabilo gostu. Za 250+ sistemov so na voljo količinske ponudbe.</p></div></details></div>
+      </div>
+    </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
+  <div class="container">
+    <div class="wa-shop__panel">
+      <div class="wa-shop__copy">
+        <h2 data-i18n="guestInvites.marketing.shop.title" id="wa-shop-title" class="wa-h2" dir="ltr">Vse se začne s krmilnikom WIFIGATE</h2>
+        <p data-i18n="guestInvites.marketing.shop.text" class="wa-lead" dir="ltr">Dostop za goste deluje prek krmilnika WIFIGATE, nameščenega pri dvoriščnih vratih, vhodnih vratih ali uvozu na parkirišče. V trgovini izberite pravi krmilnik za svoje vhode.</p>
+        <div class="wa-shop__actions">
+          <a data-i18n="guestInvites.marketing.shop.button" href="/sl/shop/" class="btn btn--primary wa-shop__link" dir="ltr">Pojdite v trgovino</a>
+          <a data-i18n="guestInvites.marketing.cta.button" href="/sl/#contact" class="btn btn--ghost" dir="ltr">Pišite nam</a>
+        </div>
+      </div>
+      <img class="wa-shop__art" src="../../assets/img/subscription-flow/controller.svg" alt="" width="320" height="220" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section></div>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->
