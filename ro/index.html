@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"ro":{"skipLink":"Salt la conținutul principal","eyebrow":"Accesibilitate","openButton":"Deschide meniul de accesibilitate","closeButton":"Închide meniul de accesibilitate","title":"Meniu de accesibilitate","description":"Adaptați site-ul la felul în care citiți și navigați. Alegerile dumneavoastră se păstrează pe acest dispozitiv.","reset":"Resetează tot","statusDefault":"Afișare standard a site-ului","statusActive":"Ajustări active: {count}","hideButton":"Ascunde butonul de accesibilitate până la reîncărcarea paginii","statementLink":"Declarație de accesibilitate","textSize":{"label":"Dimensiunea textului","description":"Mărește textul pe tot site-ul.","decrease":"Text mai mic","increase":"Text mai mare","level":"Dimensiunea textului {percent}%"},"options":{"highContrast":{"label":"Contrast ridicat","description":"Text închis la culoare pe fundal deschis, cu margini puternice."},"grayscale":{"label":"Tonuri de gri","description":"Afișează site-ul fără culori."},"underlineLinks":{"label":"Evidențiază linkurile","description":"Subliniază și marchează fiecare link."},"readableFont":{"label":"Font lizibil","description":"Un font simplu, foarte lizibil."},"textSpacing":{"label":"Spațiere text","description":"Mai mult spațiu între rânduri, cuvinte și litere."},"highlightHeadings":{"label":"Evidențiază titlurile","description":"Marchează titlurile pentru a arăta structura paginii."},"bigCursor":{"label":"Cursor mare","description":"Un indicator de mouse mai mare."},"focusHighlight":{"label":"Focalizare vizibilă","description":"Un contur gros în jurul elementului focalizat de la tastatură."},"reducedMotion":{"label":"Oprește animațiile","description":"Oprește animațiile, tranzițiile și videoclipul de fundal."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/ro/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Gestionare automată a accesului oaspeților pentru fiecare rezervare.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/ro/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Toate sistemele dumneavoastră, de oriunde din lume.</p>

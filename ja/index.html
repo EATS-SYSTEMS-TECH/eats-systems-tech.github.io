@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"ja":{"skipLink":"メインコンテンツへスキップ","eyebrow":"アクセシビリティ","openButton":"アクセシビリティメニューを開く","closeButton":"アクセシビリティメニューを閉じる","title":"アクセシビリティメニュー","description":"読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。","reset":"すべてリセット","statusDefault":"標準のサイト表示","statusActive":"{count} 件の調整が有効","hideButton":"ページを再読み込みするまでアクセシビリティボタンを非表示にする","statementLink":"アクセシビリティ方針","textSize":{"label":"文字サイズ","description":"サイト全体の文字を拡大します。","decrease":"文字を小さく","increase":"文字を大きく","level":"文字サイズ {percent}%"},"options":{"highContrast":{"label":"ハイコントラスト","description":"明るい背景に濃い文字と、はっきりした枠線を表示します。"},"grayscale":{"label":"グレースケール","description":"サイトを色なしで表示します。"},"underlineLinks":{"label":"リンクを強調","description":"すべてのリンクに下線と目印を付けます。"},"readableFont":{"label":"読みやすいフォント","description":"シンプルで読みやすいフォントを使用します。"},"textSpacing":{"label":"文字間隔","description":"行・単語・文字の間隔を広げます。"},"highlightHeadings":{"label":"見出しを強調","description":"見出しに目印を付けてページの構造を示します。"},"bigCursor":{"label":"大きいカーソル","description":"マウスポインターを大きくします。"},"focusHighlight":{"label":"フォーカスを強調","description":"キーボードフォーカスのある要素を太い枠で囲みます。"},"reducedMotion":{"label":"アニメーションを停止","description":"アニメーション、トランジション、背景動画を停止します。"}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/ja/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">予約ごとに、ゲストの入場を自動で管理。</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/ja/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">すべてのシステムを、世界中どこからでも。</p>

@@ -132,8 +132,8 @@ async function buildHomePages(homeData) {
     card.find('.feature-card__media').wrap($('<a>').attr({ href: buildPagePath(locale, AUTO_OPEN_PAGE_KEY), 'aria-label': title.text() }));
     title.wrapInner($('<a>').attr('href', buildPagePath(locale, AUTO_OPEN_PAGE_KEY)));
     applyHomeSceneMedia($, { scene: homeData.sceneMedia.get('homepage-montage'), assetPrefix: buildAssetPrefix(locale, 'home'), copy: copy.hero.media });
-    $('.guest-invites__cta').attr('href', buildPagePath(locale, guestInvitesPageKey));
-    $('.business-plan__cta').attr('href', buildPagePath(locale, MANAGER_PAGE_KEY));
+    $('.guest-invites__cta, .business-plan--host .business-plan__media').attr('href', buildPagePath(locale, guestInvitesPageKey));
+    $('.business-plan__cta, .business-plan--manager .business-plan__media').attr('href', buildPagePath(locale, MANAGER_PAGE_KEY));
     const main = $('#main-content');
     for (const id of ['home', 'advantages', 'private-access', 'where', 'guest-invites-api', 'tutorials', 'one-tap-invite', 'wifi-gate-faq', 'why-wifigate', 'system-overview', 'contact']) {
       const section = main.children('#' + id); if (section.length) main.append(section);

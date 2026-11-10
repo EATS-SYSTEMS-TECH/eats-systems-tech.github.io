@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"es":{"skipLink":"Saltar al contenido principal","eyebrow":"Accesibilidad","openButton":"Abrir el menú de accesibilidad","closeButton":"Cerrar el menú de accesibilidad","title":"Menú de accesibilidad","description":"Adapta el sitio a tu forma de leer y navegar. Tus preferencias se guardan en este dispositivo.","reset":"Restablecer todo","statusDefault":"Vista estándar del sitio","statusActive":"{count} ajustes activos","hideButton":"Ocultar el botón de accesibilidad hasta recargar la página","statementLink":"Declaración de accesibilidad","textSize":{"label":"Tamaño del texto","description":"Amplía el texto en todo el sitio.","decrease":"Texto más pequeño","increase":"Texto más grande","level":"Tamaño del texto {percent}%"},"options":{"highContrast":{"label":"Alto contraste","description":"Texto oscuro sobre fondo claro con bordes marcados."},"grayscale":{"label":"Escala de grises","description":"Muestra el sitio sin colores."},"underlineLinks":{"label":"Resaltar enlaces","description":"Subraya y marca todos los enlaces."},"readableFont":{"label":"Fuente legible","description":"Una fuente sencilla y muy legible."},"textSpacing":{"label":"Espaciado del texto","description":"Más espacio entre líneas, palabras y letras."},"highlightHeadings":{"label":"Resaltar títulos","description":"Marca los títulos para mostrar la estructura de la página."},"bigCursor":{"label":"Cursor grande","description":"Un puntero más grande."},"focusHighlight":{"label":"Foco bien visible","description":"Un contorno grueso alrededor del elemento con el foco del teclado."},"reducedMotion":{"label":"Detener animaciones","description":"Detiene las animaciones, las transiciones y el video de fondo."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/es/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Gestión automática del acceso de huéspedes en cada reserva.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/es/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Todos tus sistemas, desde cualquier lugar del mundo.</p>

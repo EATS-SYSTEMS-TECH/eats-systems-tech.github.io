@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="css/styles.css?v=20261007d">
   <link rel="stylesheet" href="css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="css/faq.css?v=20261018a">
   <script src="js/utils.js?v=20260402a" defer=""></script>
-  <script src="js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="js/site-account.js?v=20261022day1" defer=""></script>
   <script src="js/media-runtime.js?v=20261109p1" defer=""></script><script src="js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"en":{"skipLink":"Skip to main content","eyebrow":"Accessibility","openButton":"Open accessibility menu","closeButton":"Close accessibility menu","title":"Accessibility menu","description":"Adjust the site to the way you read and navigate. Your choices are kept on this device.","reset":"Reset all","statusDefault":"Standard site view","statusActive":"{count} adjustments active","hideButton":"Hide the accessibility button until the page is reloaded","statementLink":"Accessibility statement","textSize":{"label":"Text size","description":"Enlarge the text across the site.","decrease":"Smaller text","increase":"Larger text","level":"Text size {percent}%"},"options":{"highContrast":{"label":"High contrast","description":"Dark text on a light background with strong borders."},"grayscale":{"label":"Grayscale","description":"Show the site without colors."},"underlineLinks":{"label":"Highlight links","description":"Underline and mark every link."},"readableFont":{"label":"Readable font","description":"A plain, highly legible font."},"textSpacing":{"label":"Text spacing","description":"More space between lines, words and letters."},"highlightHeadings":{"label":"Highlight headings","description":"Mark the headings to show the page structure."},"bigCursor":{"label":"Large cursor","description":"A larger mouse pointer."},"focusHighlight":{"label":"Strong focus indicator","description":"A thick outline around the element in keyboard focus."},"reducedMotion":{"label":"Stop animations","description":"Stop animations, transitions and the background video."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Automated guest access management for every booking.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">All your systems, from anywhere in the world.</p>

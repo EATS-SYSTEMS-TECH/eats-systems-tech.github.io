@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"ko":{"skipLink":"본문으로 건너뛰기","eyebrow":"접근성","openButton":"접근성 메뉴 열기","closeButton":"접근성 메뉴 닫기","title":"접근성 메뉴","description":"읽고 탐색하는 방식에 맞게 사이트를 조정하세요. 선택한 설정은 이 기기에 저장됩니다.","reset":"모두 초기화","statusDefault":"기본 사이트 보기","statusActive":"{count}개 항목 적용 중","hideButton":"페이지를 새로 고칠 때까지 접근성 버튼 숨기기","statementLink":"접근성 정책","textSize":{"label":"글자 크기","description":"사이트 전체의 글자를 확대합니다.","decrease":"글자 작게","increase":"글자 크게","level":"글자 크기 {percent}%"},"options":{"highContrast":{"label":"고대비","description":"밝은 배경에 어두운 글자와 뚜렷한 테두리를 표시합니다."},"grayscale":{"label":"회색조","description":"사이트를 색상 없이 표시합니다."},"underlineLinks":{"label":"링크 강조","description":"모든 링크에 밑줄과 표시를 추가합니다."},"readableFont":{"label":"읽기 쉬운 글꼴","description":"단순하고 읽기 쉬운 글꼴을 사용합니다."},"textSpacing":{"label":"텍스트 간격","description":"줄, 단어, 글자 사이 간격을 넓힙니다."},"highlightHeadings":{"label":"제목 강조","description":"제목을 표시해 페이지 구조를 보여 줍니다."},"bigCursor":{"label":"큰 커서","description":"마우스 포인터를 더 크게 표시합니다."},"focusHighlight":{"label":"포커스 강조","description":"키보드 포커스가 있는 요소 주위에 굵은 테두리를 표시합니다."},"reducedMotion":{"label":"애니메이션 중지","description":"애니메이션, 전환 효과, 배경 동영상을 중지합니다."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/ko/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">모든 예약에 맞춘 자동 게스트 출입 관리.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/ko/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">모든 시스템을 세계 어디서나.</p>

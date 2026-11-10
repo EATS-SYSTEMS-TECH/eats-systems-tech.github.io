@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"el":{"skipLink":"Μετάβαση στο κύριο περιεχόμενο","eyebrow":"Προσβασιμότητα","openButton":"Άνοιγμα μενού προσβασιμότητας","closeButton":"Κλείσιμο μενού προσβασιμότητας","title":"Μενού προσβασιμότητας","description":"Προσαρμόστε τον ιστότοπο στον τρόπο που διαβάζετε και περιηγείστε. Οι επιλογές σας αποθηκεύονται σε αυτή τη συσκευή.","reset":"Επαναφορά όλων","statusDefault":"Τυπική προβολή ιστότοπου","statusActive":"Ενεργές προσαρμογές: {count}","hideButton":"Απόκρυψη κουμπιού προσβασιμότητας έως την επαναφόρτωση της σελίδας","statementLink":"Δήλωση προσβασιμότητας","textSize":{"label":"Μέγεθος κειμένου","description":"Μεγέθυνση του κειμένου σε όλο τον ιστότοπο.","decrease":"Μικρότερο κείμενο","increase":"Μεγαλύτερο κείμενο","level":"Μέγεθος κειμένου {percent}%"},"options":{"highContrast":{"label":"Υψηλή αντίθεση","description":"Σκούρο κείμενο σε ανοιχτό φόντο με έντονα περιγράμματα."},"grayscale":{"label":"Κλίμακα του γκρι","description":"Προβολή του ιστότοπου χωρίς χρώματα."},"underlineLinks":{"label":"Επισήμανση συνδέσμων","description":"Υπογράμμιση και σήμανση κάθε συνδέσμου."},"readableFont":{"label":"Ευανάγνωστη γραμματοσειρά","description":"Απλή, πολύ ευανάγνωστη γραμματοσειρά."},"textSpacing":{"label":"Αποστάσεις κειμένου","description":"Περισσότερος χώρος ανάμεσα σε γραμμές, λέξεις και γράμματα."},"highlightHeadings":{"label":"Επισήμανση επικεφαλίδων","description":"Σήμανση των επικεφαλίδων ώστε να φαίνεται η δομή της σελίδας."},"bigCursor":{"label":"Μεγάλος δρομέας","description":"Μεγαλύτερος δείκτης ποντικιού."},"focusHighlight":{"label":"Έντονη ένδειξη εστίασης","description":"Παχύ περίγραμμα γύρω από το στοιχείο που έχει την εστίαση πληκτρολογίου."},"reducedMotion":{"label":"Διακοπή κινούμενων εικόνων","description":"Διακοπή κινούμενων εικόνων, μεταβάσεων και του βίντεο φόντου."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/el/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Αυτόματη διαχείριση της εισόδου επισκεπτών για κάθε κράτηση.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/el/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Όλα τα συστήματά σας, από οπουδήποτε στον κόσμο.</p>

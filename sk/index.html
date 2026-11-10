@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"sk":{"skipLink":"Preskočiť na hlavný obsah","eyebrow":"Prístupnosť","openButton":"Otvoriť ponuku prístupnosti","closeButton":"Zavrieť ponuku prístupnosti","title":"Ponuka prístupnosti","description":"Prispôsobte si web svojmu spôsobu čítania a ovládania. Vaše nastavenia sa uložia v tomto zariadení.","reset":"Obnoviť pôvodné","statusDefault":"Štandardné zobrazenie webu","statusActive":"Aktívne úpravy: {count}","hideButton":"Skryť tlačidlo prístupnosti do opätovného načítania stránky","statementLink":"Vyhlásenie o prístupnosti","textSize":{"label":"Veľkosť textu","description":"Zväčšiť text na celom webe.","decrease":"Menší text","increase":"Väčší text","level":"Veľkosť textu {percent} %"},"options":{"highContrast":{"label":"Vysoký kontrast","description":"Tmavý text na svetlom pozadí s výraznými okrajmi."},"grayscale":{"label":"Odtiene sivej","description":"Zobraziť web bez farieb."},"underlineLinks":{"label":"Zvýrazniť odkazy","description":"Podčiarknuť a označiť každý odkaz."},"readableFont":{"label":"Čitateľné písmo","description":"Jednoduché, dobre čitateľné písmo."},"textSpacing":{"label":"Rozostupy textu","description":"Viac miesta medzi riadkami, slovami a písmenami."},"highlightHeadings":{"label":"Zvýrazniť nadpisy","description":"Označiť nadpisy, aby bola viditeľná štruktúra stránky."},"bigCursor":{"label":"Veľký kurzor","description":"Väčší ukazovateľ myši."},"focusHighlight":{"label":"Výrazný indikátor fokusu","description":"Hrubý obrys okolo prvku, na ktorom je fokus klávesnice."},"reducedMotion":{"label":"Zastaviť animácie","description":"Zastaviť animácie, prechody a video na pozadí."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/sk/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Automatická správa vstupu hostí pre každú rezerváciu.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/sk/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Všetky vaše systémy z akéhokoľvek miesta na svete.</p>

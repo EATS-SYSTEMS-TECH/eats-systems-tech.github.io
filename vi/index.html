@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"vi":{"skipLink":"Chuyển đến nội dung chính","eyebrow":"Hỗ trợ tiếp cận","openButton":"Mở menu hỗ trợ tiếp cận","closeButton":"Đóng menu hỗ trợ tiếp cận","title":"Menu hỗ trợ tiếp cận","description":"Điều chỉnh trang web theo cách bạn đọc và điều hướng. Lựa chọn của bạn được lưu trên thiết bị này.","reset":"Đặt lại tất cả","statusDefault":"Chế độ xem chuẩn của trang","statusActive":"Đang bật {count} điều chỉnh","hideButton":"Ẩn nút hỗ trợ tiếp cận cho đến khi tải lại trang","statementLink":"Tuyên bố về hỗ trợ tiếp cận","textSize":{"label":"Cỡ chữ","description":"Phóng to chữ trên toàn bộ trang web.","decrease":"Chữ nhỏ hơn","increase":"Chữ lớn hơn","level":"Cỡ chữ {percent}%"},"options":{"highContrast":{"label":"Độ tương phản cao","description":"Chữ tối trên nền sáng với đường viền rõ nét."},"grayscale":{"label":"Thang độ xám","description":"Hiển thị trang web không có màu."},"underlineLinks":{"label":"Làm nổi bật liên kết","description":"Gạch chân và đánh dấu mọi liên kết."},"readableFont":{"label":"Phông chữ dễ đọc","description":"Phông chữ đơn giản, rất dễ đọc."},"textSpacing":{"label":"Giãn cách văn bản","description":"Thêm khoảng cách giữa các dòng, từ và chữ cái."},"highlightHeadings":{"label":"Làm nổi bật tiêu đề","description":"Đánh dấu tiêu đề để thể hiện cấu trúc trang."},"bigCursor":{"label":"Con trỏ lớn","description":"Con trỏ chuột lớn hơn."},"focusHighlight":{"label":"Tiêu điểm rõ ràng","description":"Đường viền dày quanh phần tử đang có tiêu điểm bàn phím."},"reducedMotion":{"label":"Dừng hoạt ảnh","description":"Dừng hoạt ảnh, hiệu ứng chuyển tiếp và video nền."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/vi/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Tự động quản lý quyền ra vào của khách cho mọi lượt đặt phòng.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/vi/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Mọi hệ thống của bạn, từ bất cứ đâu trên thế giới.</p>

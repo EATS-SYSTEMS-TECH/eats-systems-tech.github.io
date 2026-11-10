@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"th":{"skipLink":"ข้ามไปยังเนื้อหาหลัก","eyebrow":"การเข้าถึง","openButton":"เปิดเมนูการเข้าถึง","closeButton":"ปิดเมนูการเข้าถึง","title":"เมนูการเข้าถึง","description":"ปรับเว็บไซต์ให้เหมาะกับวิธีอ่านและการใช้งานของคุณ ตัวเลือกของคุณจะถูกบันทึกไว้ในอุปกรณ์นี้","reset":"รีเซ็ตทั้งหมด","statusDefault":"มุมมองเว็บไซต์มาตรฐาน","statusActive":"เปิดใช้การปรับ {count} รายการ","hideButton":"ซ่อนปุ่มการเข้าถึงจนกว่าจะโหลดหน้าใหม่","statementLink":"คำแถลงการเข้าถึง","textSize":{"label":"ขนาดข้อความ","description":"ขยายข้อความทั่วทั้งเว็บไซต์","decrease":"ข้อความเล็กลง","increase":"ข้อความใหญ่ขึ้น","level":"ขนาดข้อความ {percent}%"},"options":{"highContrast":{"label":"ความคมชัดสูง","description":"ข้อความสีเข้มบนพื้นหลังสีอ่อนพร้อมเส้นขอบชัดเจน"},"grayscale":{"label":"โทนสีเทา","description":"แสดงเว็บไซต์โดยไม่มีสี"},"underlineLinks":{"label":"เน้นลิงก์","description":"ขีดเส้นใต้และทำเครื่องหมายทุกลิงก์"},"readableFont":{"label":"แบบอักษรอ่านง่าย","description":"แบบอักษรเรียบง่ายที่อ่านง่ายมาก"},"textSpacing":{"label":"ระยะห่างข้อความ","description":"เพิ่มระยะห่างระหว่างบรรทัด คำ และตัวอักษร"},"highlightHeadings":{"label":"เน้นหัวข้อ","description":"ทำเครื่องหมายหัวข้อเพื่อแสดงโครงสร้างของหน้า"},"bigCursor":{"label":"เคอร์เซอร์ขนาดใหญ่","description":"ตัวชี้เมาส์ที่ใหญ่ขึ้น"},"focusHighlight":{"label":"โฟกัสที่เห็นชัด","description":"เส้นขอบหนารอบองค์ประกอบที่มีโฟกัสของแป้นพิมพ์"},"reducedMotion":{"label":"หยุดภาพเคลื่อนไหว","description":"หยุดภาพเคลื่อนไหว เอฟเฟกต์การเปลี่ยนหน้า และวิดีโอพื้นหลัง"}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/th/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">จัดการการเข้าออกของแขกโดยอัตโนมัติสำหรับทุกการจอง</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/th/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">ทุกระบบของคุณ จากทุกที่ทั่วโลก</p>

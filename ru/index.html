@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"ru":{"skipLink":"Перейти к основному содержимому","eyebrow":"Доступность","openButton":"Открыть меню доступности","closeButton":"Закрыть меню доступности","title":"Меню доступности","description":"Настройте сайт так, как вам удобно читать и перемещаться по нему. Ваш выбор сохраняется на этом устройстве.","reset":"Сбросить всё","statusDefault":"Стандартный вид сайта","statusActive":"Активных настроек: {count}","hideButton":"Скрыть кнопку доступности до перезагрузки страницы","statementLink":"Заявление о доступности","textSize":{"label":"Размер текста","description":"Увеличить текст на всём сайте.","decrease":"Уменьшить текст","increase":"Увеличить текст","level":"Размер текста {percent}%"},"options":{"highContrast":{"label":"Высокий контраст","description":"Тёмный текст на светлом фоне с чёткими рамками."},"grayscale":{"label":"Оттенки серого","description":"Показать сайт без цветов."},"underlineLinks":{"label":"Выделить ссылки","description":"Подчеркнуть и выделить каждую ссылку."},"readableFont":{"label":"Удобочитаемый шрифт","description":"Простой, хорошо читаемый шрифт."},"textSpacing":{"label":"Интервалы текста","description":"Больше места между строками, словами и буквами."},"highlightHeadings":{"label":"Выделить заголовки","description":"Отметить заголовки, чтобы показать структуру страницы."},"bigCursor":{"label":"Большой курсор","description":"Увеличенный указатель мыши."},"focusHighlight":{"label":"Заметный фокус","description":"Толстая рамка вокруг элемента в фокусе клавиатуры."},"reducedMotion":{"label":"Остановить анимацию","description":"Остановить анимацию, переходы и фоновое видео."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/ru/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Автоматическое управление доступом гостей для каждого бронирования.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/ru/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Все ваши системы – из любой точки мира.</p>

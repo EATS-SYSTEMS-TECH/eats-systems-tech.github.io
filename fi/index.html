@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"fi":{"skipLink":"Siirry pääsisältöön","eyebrow":"Saavutettavuus","openButton":"Avaa saavutettavuusvalikko","closeButton":"Sulje saavutettavuusvalikko","title":"Saavutettavuusvalikko","description":"Mukauta sivusto omaan tapaasi lukea ja liikkua. Valintasi tallennetaan tälle laitteelle.","reset":"Palauta kaikki","statusDefault":"Sivuston vakionäkymä","statusActive":"Käytössä olevat mukautukset: {count}","hideButton":"Piilota saavutettavuuspainike, kunnes sivu ladataan uudelleen","statementLink":"Saavutettavuusseloste","textSize":{"label":"Tekstin koko","description":"Suurenna tekstiä koko sivustolla.","decrease":"Pienempi teksti","increase":"Suurempi teksti","level":"Tekstin koko {percent} %"},"options":{"highContrast":{"label":"Suuri kontrasti","description":"Tumma teksti vaalealla taustalla ja selkeät reunat."},"grayscale":{"label":"Harmaasävy","description":"Näytä sivusto ilman värejä."},"underlineLinks":{"label":"Korosta linkit","description":"Alleviivaa ja merkitse jokainen linkki."},"readableFont":{"label":"Helppolukuinen fontti","description":"Yksinkertainen, erittäin selkeä fontti."},"textSpacing":{"label":"Tekstin välistys","description":"Enemmän tilaa rivien, sanojen ja kirjainten välillä."},"highlightHeadings":{"label":"Korosta otsikot","description":"Merkitse otsikot, jotta sivun rakenne näkyy."},"bigCursor":{"label":"Suuri osoitin","description":"Suurempi hiiren osoitin."},"focusHighlight":{"label":"Korostettu kohdistus","description":"Paksu reunus näppäimistön kohdistuksessa olevan elementin ympärillä."},"reducedMotion":{"label":"Pysäytä animaatiot","description":"Pysäytä animaatiot, siirtymät ja taustavideo."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/fi/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Vieraiden kulun automaattinen hallinta jokaiselle varaukselle.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/fi/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Kaikki järjestelmäsi mistä päin maailmaa tahansa.</p>

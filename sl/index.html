@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"sl":{"skipLink":"Preskoči na glavno vsebino","eyebrow":"Dostopnost","openButton":"Odpri meni za dostopnost","closeButton":"Zapri meni za dostopnost","title":"Meni za dostopnost","description":"Prilagodite spletno mesto načinu, kako berete in se premikate po njem. Vaše izbire se shranijo v tej napravi.","reset":"Ponastavi vse","statusDefault":"Standardni prikaz spletnega mesta","statusActive":"Aktivne prilagoditve: {count}","hideButton":"Skrij gumb za dostopnost do ponovnega nalaganja strani","statementLink":"Izjava o dostopnosti","textSize":{"label":"Velikost besedila","description":"Poveča besedilo na celotnem spletnem mestu.","decrease":"Manjše besedilo","increase":"Večje besedilo","level":"Velikost besedila {percent} %"},"options":{"highContrast":{"label":"Visok kontrast","description":"Temno besedilo na svetlem ozadju z izrazitimi obrobami."},"grayscale":{"label":"Sivine","description":"Prikaže spletno mesto brez barv."},"underlineLinks":{"label":"Poudarjene povezave","description":"Podčrta in označi vse povezave."},"readableFont":{"label":"Berljiva pisava","description":"Preprosta, zelo berljiva pisava."},"textSpacing":{"label":"Razmik besedila","description":"Več prostora med vrsticami, besedami in črkami."},"highlightHeadings":{"label":"Poudarjeni naslovi","description":"Označi naslove, da je razvidna zgradba strani."},"bigCursor":{"label":"Velik kazalec","description":"Večji kazalec miške."},"focusHighlight":{"label":"Izrazit fokus","description":"Debela obroba okoli elementa, ki je v fokusu tipkovnice."},"reducedMotion":{"label":"Brez animacij","description":"Ustavi animacije, prehode in videoposnetek v ozadju."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/sl/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Samodejno upravljanje vstopa gostov za vsako rezervacijo.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/sl/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Vsi vaši sistemi, od koderkoli na svetu.</p>

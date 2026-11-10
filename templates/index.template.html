@@ -75,7 +75,7 @@
   <link rel="stylesheet" href="css/styles.css?v=20261007d">
   <link rel="stylesheet" href="css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="css/faq.css?v=20261018a">
   <script src="js/utils.js?v=20260402a" defer=""></script>
   <script src="js/navigation.js?v=20260910a" defer=""></script>
@@ -323,10 +323,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise">Automated guest access management for every booking.</p>
@@ -343,10 +344,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline">All your systems, from anywhere in the world.</p>

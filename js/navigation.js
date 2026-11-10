@@ -1,5 +1,5 @@
 // /js/navigation.js
-// Version: 1.3.0
+// Version: 1.4.0
 
 function setupNav() {
   // Published content pages predate localized login links. Keep their header
@@ -119,28 +119,52 @@ function setupScrollSpy() {
   sections.forEach((section) => observer.observe(section));
 }
 
+// Header destinations open with their section label (eyebrow) right below the
+// sticky bar, on desktop and mobile alike. #wifigate-automation is the former
+// For Business anchor, kept for shared links.
+const SECTION_ANCHORS = new Set(["advantages", "how-it-works", "use-cases", "wifigate-for-business", "wifigate-automation", "tutorial-videos", "get-in-touch"]);
+const SECTION_LABEL_GAP = 12;
+
+function sectionScrollTop(el) {
+  const section = el.id === "wifigate-automation" ? el.parentElement : el;
+  const label = section.querySelector("[class*='eyebrow'], h2") || section;
+  const bar = document.querySelector(".nav");
+  const barBottom = bar ? Math.max(0, bar.getBoundingClientRect().bottom) : 0;
+  return Math.max(0, Math.round(layoutTop(label) - barBottom - SECTION_LABEL_GAP));
+}
+
+// Document position from layout, so a reveal animation's pending transform
+// (js-reveal starts slightly lower) does not shift the destination.
+function layoutTop(el) {
+  let top = 0;
+  for (let node = el; node; node = node.offsetParent) top += node.offsetTop;
+  return top;
+}
+
+function scrollToSectionStart(el, smooth) {
+  const top = sectionScrollTop(el);
+  window.scrollTo({ top, behavior: smooth ? "smooth" : "auto" });
+
+  // Lazy media above the section can still change height while scrolling;
+  // settle once on the final position.
+  let settled = false;
+  const settle = () => {
+    if (settled) return;
+    settled = true;
+    const corrected = sectionScrollTop(el);
+    if (Math.abs(corrected - window.scrollY) > 2) window.scrollTo({ top: corrected, behavior: "auto" });
+  };
+  if (smooth && "onscrollend" in window) window.addEventListener("scrollend", settle, { once: true });
+  setTimeout(settle, smooth ? 1500 : 250);
+}
+
 function centerScrollToElement(el, smooth = true) {
   if (!el) return;
 
   const shouldSmoothScroll = smooth && !(typeof isReducedMotionRequested === "function" && isReducedMotionRequested());
 
-  if (el.id === "advantages" || el.id === "how-it-works") {
-    try {
-      if ("scrollBehavior" in document.documentElement.style) {
-        el.scrollIntoView({ behavior: shouldSmoothScroll ? "smooth" : "auto", block: "start", inline: "nearest" });
-        return;
-      }
-    } catch (error) {
-      // Fall back to manual calculation.
-    }
-
-    const rect = el.getBoundingClientRect();
-    const elTop = rect.top + window.scrollY;
-    try {
-      window.scrollTo({ top: elTop, behavior: shouldSmoothScroll ? "smooth" : "auto" });
-    } catch (error) {
-      window.scrollTo(0, elTop);
-    }
+  if (SECTION_ANCHORS.has(el.id)) {
+    scrollToSectionStart(el, shouldSmoothScroll);
     return;
   }
 

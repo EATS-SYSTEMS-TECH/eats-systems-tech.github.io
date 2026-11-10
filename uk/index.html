@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"uk":{"skipLink":"Перейти до основного вмісту","eyebrow":"Доступність","openButton":"Відкрити меню доступності","closeButton":"Закрити меню доступності","title":"Меню доступності","description":"Налаштуйте сайт так, щоб вам було зручно читати й переміщуватися ним. Ваш вибір зберігається на цьому пристрої.","reset":"Скинути все","statusDefault":"Стандартний вигляд сайту","statusActive":"Активних налаштувань: {count}","hideButton":"Приховати кнопку доступності до перезавантаження сторінки","statementLink":"Заява про доступність","textSize":{"label":"Розмір тексту","description":"Збільшити текст на всьому сайті.","decrease":"Зменшити текст","increase":"Збільшити текст","level":"Розмір тексту {percent}%"},"options":{"highContrast":{"label":"Високий контраст","description":"Темний текст на світлому тлі з чіткими рамками."},"grayscale":{"label":"Відтінки сірого","description":"Показати сайт без кольорів."},"underlineLinks":{"label":"Виділити посилання","description":"Підкреслити та позначити кожне посилання."},"readableFont":{"label":"Зручний шрифт","description":"Простий шрифт, який легко читати."},"textSpacing":{"label":"Інтервали тексту","description":"Більше простору між рядками, словами та літерами."},"highlightHeadings":{"label":"Виділити заголовки","description":"Позначити заголовки, щоб показати структуру сторінки."},"bigCursor":{"label":"Великий курсор","description":"Збільшений вказівник миші."},"focusHighlight":{"label":"Помітний фокус","description":"Товста рамка навколо елемента у фокусі клавіатури."},"reducedMotion":{"label":"Зупинити анімацію","description":"Зупинити анімацію, переходи та фонове відео."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/uk/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Автоматичне керування доступом гостей для кожного бронювання.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/uk/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Усі ваші системи – з будь-якої точки світу.</p>

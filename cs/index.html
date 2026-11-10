@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="../css/styles.css?v=20261007d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20261027c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20261108b">
-  <link rel="stylesheet" href="../css/home-en.css?v=20261109a">
+  <link rel="stylesheet" href="../css/home-en.css?v=20261110a">
   <link rel="stylesheet" href="../css/faq.css?v=20261018a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../js/navigation.js?v=20261110nav1" defer=""></script>
+  <script src="../js/navigation.js?v=20261110nav2" defer=""></script>
   <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261109p1" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
   <script>window.accessibilityCopy = {"cs":{"skipLink":"Přeskočit na hlavní obsah","eyebrow":"Přístupnost","openButton":"Otevřít nabídku přístupnosti","closeButton":"Zavřít nabídku přístupnosti","title":"Nabídka přístupnosti","description":"Přizpůsobte si web tomu, jak čtete a procházíte. Vaše volby se uloží v tomto zařízení.","reset":"Obnovit vše","statusDefault":"Standardní zobrazení webu","statusActive":"Aktivní úpravy: {count}","hideButton":"Skrýt tlačítko přístupnosti do opětovného načtení stránky","statementLink":"Prohlášení o přístupnosti","textSize":{"label":"Velikost textu","description":"Zvětšit text na celém webu.","decrease":"Menší text","increase":"Větší text","level":"Velikost textu {percent} %"},"options":{"highContrast":{"label":"Vysoký kontrast","description":"Tmavý text na světlém pozadí s výraznými okraji."},"grayscale":{"label":"Odstíny šedi","description":"Zobrazit web bez barev."},"underlineLinks":{"label":"Zvýraznit odkazy","description":"Podtrhnout a označit každý odkaz."},"readableFont":{"label":"Čitelné písmo","description":"Jednoduché, dobře čitelné písmo."},"textSpacing":{"label":"Rozestupy textu","description":"Více místa mezi řádky, slovy a písmeny."},"highlightHeadings":{"label":"Zvýraznit nadpisy","description":"Označit nadpisy, aby byla vidět struktura stránky."},"bigCursor":{"label":"Velký kurzor","description":"Větší ukazatel myši."},"focusHighlight":{"label":"Výrazný fokus","description":"Silný obrys kolem prvku, na kterém je fokus klávesnice."},"reducedMotion":{"label":"Zastavit animace","description":"Zastavit animace, přechody a video na pozadí."}}}};</script>
@@ -627,10 +627,11 @@
         </header>
         <div class="business-plans js-reveal">
           <article class="business-plan business-plan--host">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <!-- The artwork opens the plan page too; the CTA stays the one accessible link. -->
+            <a href="/cs/wifigate-host/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">H</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">01</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Host</h3>
             <p class="automation-promise" dir="ltr">Automatická správa vstupu hostů pro každou rezervaci.</p>
@@ -647,10 +648,10 @@
             </a>
           </article>
           <article class="business-plan business-plan--manager">
-            <div class="business-plan__media business-plan__art" aria-hidden="true">
+            <a href="/cs/wifigate-manager/" class="business-plan__media business-plan__art" aria-hidden="true" tabindex="-1">
               <span class="business-plan__art-label" dir="ltr">WIFIGATE</span>
               <span class="business-plan__art-letter" dir="ltr">M</span>
-            </div>
+            </a>
             <span class="business-plan__number" aria-hidden="true">02</span>
             <h3 class="business-plan__name" dir="ltr">WIFIGATE Manager</h3>
             <p class="business-plan__tagline" dir="ltr">Všechny vaše systémy odkudkoli na světě.</p>

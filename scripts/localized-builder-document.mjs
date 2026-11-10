@@ -246,7 +246,7 @@ export function updateSharedHeader($, data, locale, key) {
   if (!hebrew) $('.site-cart__drawer').attr('lang', 'en');
   $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261110nav1"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261108d">`);
   $("script[src*='js/site-account.js']").remove();
-  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261110nav1').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
+  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261110nav2').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
   $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261108e"></script>`);
 }
 

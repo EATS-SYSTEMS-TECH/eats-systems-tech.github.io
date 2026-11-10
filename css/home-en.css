@@ -979,6 +979,14 @@ html[lang="he"] body.home-en #where .section__header {
   container-type: inline-size;
 }
 
+/* The artwork links to its plan page, like the CTA below it. */
+.home-en a.business-plan__media {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .home-en .business-plan__art-label {
   position: absolute;
   top: 26px;
