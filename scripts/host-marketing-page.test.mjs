@@ -79,7 +79,7 @@ test("all 39 Manager locales supply the shared page layout with the Manager plan
     });
     // An activated Manager subscription has a monthly minimum of one system, even with no linked system.
     for (const key of ["systemsF3", "note"]) assert.match(manager.marketing.pricing[key], /\$1\.90/, `${locale}: ${key} states the $1.90 minimum`);
-    assert.match(manager.marketing.faq.a1, /\$1\.90/, `${locale}: the minimum answer`);
+    assert.match(manager.marketing.faq.a8, /\$1\.90/, `${locale}: the minimum answer`);
     assert.equal((manager.marketing.steps.s1x.match(/\[\[/g) || []).length, 1, `${locale}: one sign-in link in step 1`);
     assert.equal((manager.marketing.steps.s1x.match(/\]\]/g) || []).length, 1, `${locale}: one sign-in link in step 1`);
     assert.deepEqual(content.audiences, home.automation.manager.audiences, `${locale}: the localized customer types, ending open`);

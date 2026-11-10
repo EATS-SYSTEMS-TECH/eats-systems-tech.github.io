@@ -91,8 +91,8 @@ export default {
       "i3x": "De beheerders van elke organisatie beheren alleen de systemen waarvoor ze verantwoordelijk zijn."
     },
     "faq": {
-      "q1": "Geldt er een minimumbedrag?",
-      "a1": "Ja. Voor een actief abonnement geldt een minimum van $1.90 per maand, de prijs van één systeem, ook zonder gekoppeld systeem. Voor de WIFIGATE-controller zelf heb je nooit een abonnement nodig.",
+      "q1": "Welke systemen kan ik beheren?",
+      "a1": "Systemen van het type Gate, Dual Control en rolluik, en groepen daarvan. Een rolluik bedien je alleen vanuit de app, naast het rolluik.",
       "q2": "Hoe koppel ik mijn systemen aan het dashboard?",
       "a2": "Log met hetzelfde account in bij de app en op de WIFIGATE-website. Exporteer in de app elk systeem naar WIFIGATE Manager terwijl je ernaast staat, en verbind de controller ervan met Wi‑Fi (2.4GHz). Daarna verschijnt het systeem op je dashboard op de website.",
       "q3": "Kan ik afzonderlijke gebouwen of klanten beheren?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Gegevens en opdrachten zijn end-to-end versleuteld tussen het dashboard en de controller. Je logt in op het dashboard met Google of Apple, plus een verificatiecode.",
       "q7": "Hoe wordt de maandelijkse afschrijving berekend?",
       "a7": "$1.90 per systeem per maand, per dag berekend: voor een systeem dat halverwege de maand is toegevoegd of verwijderd, betaal je alleen voor de dagen dat het op je dashboard stond. Eén afschrijving aan het begin van elke maand dekt de vorige maand. Prijzen zijn in Amerikaanse dollars, exclusief btw.",
-      "q8": "Welke systemen kan ik beheren?",
-      "a8": "Systemen van het type Gate, Dual Control en rolluik, en groepen daarvan. Een rolluik bedien je alleen vanuit de app, naast het rolluik."
+      "q8": "Geldt er een minimumbedrag?",
+      "a8": "Ja. Voor een actief abonnement geldt een minimum van $1.90 per maand, de prijs van één systeem, ook zonder gekoppeld systeem. Voor de WIFIGATE-controller zelf heb je nooit een abonnement nodig."
     },
     "shop": {
       "title": "Alles begint met een WIFIGATE-controller",

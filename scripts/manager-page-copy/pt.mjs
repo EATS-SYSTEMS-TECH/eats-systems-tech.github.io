@@ -91,8 +91,8 @@ export default {
       "i3x": "Os administradores de cada organização gerem apenas os sistemas pelos quais são responsáveis."
     },
     "faq": {
-      "q1": "Existe uma cobrança mínima?",
-      "a1": "Sim. Uma subscrição ativa tem um mínimo de $1.90 por mês, o preço de um sistema, mesmo sem nenhum sistema associado. O próprio controlador WIFIGATE nunca precisa de subscrição.",
+      "q1": "Que sistemas posso gerir?",
+      "a1": "Sistemas Gate, Dual Control e de estore, e grupos destes sistemas. Um estore é operado apenas a partir da aplicação, junto ao estore.",
       "q2": "Como ligo os meus sistemas ao painel?",
       "a2": "Inicie sessão com a mesma conta na aplicação e no site da WIFIGATE. Na aplicação, exporte cada sistema para o WIFIGATE Manager enquanto estiver junto dele e ligue o respetivo controlador ao Wi‑Fi (2.4GHz). O sistema aparece depois no seu painel no site.",
       "q3": "Posso gerir edifícios ou clientes separados?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Os dados e os comandos são encriptados ponta a ponta entre o painel e o controlador. Inicia sessão no painel com Google ou Apple, mais um código de verificação.",
       "q7": "Como é calculada a cobrança mensal?",
       "a7": "$1.90 por sistema por mês, por dias: um sistema adicionado ou removido a meio do mês é cobrado apenas pelos dias em que esteve no seu painel. Uma única cobrança no início de cada mês cobre o mês anterior. Os preços são em dólares norte-americanos, sem impostos.",
-      "q8": "Que sistemas posso gerir?",
-      "a8": "Sistemas Gate, Dual Control e de estore, e grupos destes sistemas. Um estore é operado apenas a partir da aplicação, junto ao estore."
+      "q8": "Existe uma cobrança mínima?",
+      "a8": "Sim. Uma subscrição ativa tem um mínimo de $1.90 por mês, o preço de um sistema, mesmo sem nenhum sistema associado. O próprio controlador WIFIGATE nunca precisa de subscrição."
     },
     "shop": {
       "title": "Tudo começa com um controlador WIFIGATE",

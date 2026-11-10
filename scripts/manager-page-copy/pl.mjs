@@ -91,8 +91,8 @@ export default {
       "i3x": "Administratorzy każdej organizacji zarządzają tylko systemami, za które odpowiadają."
     },
     "faq": {
-      "q1": "Czy jest opłata minimalna?",
-      "a1": "Tak. Aktywny abonament ma minimum $1.90 miesięcznie, czyli cenę jednego systemu, nawet bez podłączonego systemu. Sam kontroler WIFIGATE nigdy nie wymaga abonamentu.",
+      "q1": "Jakimi systemami mogę zarządzać?",
+      "a1": "Systemami Gate, Dual Control i rolet oraz ich grupami. Roletą steruje się wyłącznie z aplikacji, przy rolecie.",
       "q2": "Jak połączyć swoje systemy z panelem?",
       "a2": "Zaloguj się na to samo konto w aplikacji i na stronie WIFIGATE. W aplikacji wyeksportuj każdy system do WIFIGATE Manager, gdy jesteś obok niego, i połącz jego kontroler z Wi‑Fi (2.4GHz). System pojawi się wtedy w Twoim panelu na stronie.",
       "q3": "Czy mogę zarządzać oddzielnymi budynkami lub klientami?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Dane i polecenia są szyfrowane end-to-end między panelem a kontrolerem. Do panelu logujesz się przez Google lub Apple, podając dodatkowo kod weryfikacyjny.",
       "q7": "Jak naliczana jest opłata miesięczna?",
       "a7": "$1.90 za system miesięcznie, za dni: system dodany lub usunięty w trakcie miesiąca jest rozliczany tylko za dni, w których był w Twoim panelu. Jedno obciążenie na początku każdego miesiąca obejmuje poprzedni miesiąc. Ceny w dolarach amerykańskich, netto.",
-      "q8": "Jakimi systemami mogę zarządzać?",
-      "a8": "Systemami Gate, Dual Control i rolet oraz ich grupami. Roletą steruje się wyłącznie z aplikacji, przy rolecie."
+      "q8": "Czy jest opłata minimalna?",
+      "a8": "Tak. Aktywny abonament ma minimum $1.90 miesięcznie, czyli cenę jednego systemu, nawet bez podłączonego systemu. Sam kontroler WIFIGATE nigdy nie wymaga abonamentu."
     },
     "shop": {
       "title": "Wszystko zaczyna się od kontrolera WIFIGATE",

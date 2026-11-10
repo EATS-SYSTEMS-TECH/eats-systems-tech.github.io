@@ -91,8 +91,8 @@ export default {
       "i3x": "Quản trị viên của mỗi tổ chức chỉ quản lý các hệ thống thuộc trách nhiệm của mình."
     },
     "faq": {
-      "q1": "Có mức phí tối thiểu không?",
-      "a1": "Có. Thuê bao đang hoạt động có mức tối thiểu $1.90 mỗi tháng, bằng giá của một hệ thống, kể cả khi không có hệ thống nào được liên kết. Riêng bộ điều khiển WIFIGATE thì không bao giờ cần thuê bao.",
+      "q1": "Tôi có thể quản lý những hệ thống nào?",
+      "a1": "Các hệ thống Gate, Dual Control và cửa cuốn, cùng các nhóm gồm những hệ thống này. Cửa cuốn chỉ được vận hành từ ứng dụng, ngay cạnh cửa cuốn.",
       "q2": "Làm thế nào để kết nối hệ thống của tôi với bảng điều khiển?",
       "a2": "Đăng nhập bằng cùng một tài khoản trong ứng dụng và trên trang web WIFIGATE. Trong ứng dụng, hãy xuất từng hệ thống sang WIFIGATE Manager khi bạn đang ở cạnh hệ thống đó, và kết nối bộ điều khiển của nó với Wi‑Fi (2.4GHz). Sau đó hệ thống xuất hiện trên bảng điều khiển của bạn trên trang web.",
       "q3": "Tôi có thể quản lý các tòa nhà hoặc khách hàng riêng biệt không?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Dữ liệu và lệnh điều khiển được mã hóa đầu cuối giữa bảng điều khiển và bộ điều khiển. Bạn đăng nhập vào bảng điều khiển bằng Google hoặc Apple, kèm một mã xác minh.",
       "q7": "Phí hằng tháng được tính như thế nào?",
       "a7": "$1.90 mỗi hệ thống mỗi tháng, tính theo ngày: hệ thống được thêm hoặc gỡ giữa tháng chỉ bị tính phí cho những ngày có trên bảng điều khiển của bạn. Một lần thu phí vào đầu mỗi tháng cho tháng trước. Giá tính bằng đô la Mỹ, chưa gồm thuế.",
-      "q8": "Tôi có thể quản lý những hệ thống nào?",
-      "a8": "Các hệ thống Gate, Dual Control và cửa cuốn, cùng các nhóm gồm những hệ thống này. Cửa cuốn chỉ được vận hành từ ứng dụng, ngay cạnh cửa cuốn."
+      "q8": "Có mức phí tối thiểu không?",
+      "a8": "Có. Thuê bao đang hoạt động có mức tối thiểu $1.90 mỗi tháng, bằng giá của một hệ thống, kể cả khi không có hệ thống nào được liên kết. Riêng bộ điều khiển WIFIGATE thì không bao giờ cần thuê bao."
     },
     "shop": {
       "title": "Mọi thứ bắt đầu từ một bộ điều khiển WIFIGATE",

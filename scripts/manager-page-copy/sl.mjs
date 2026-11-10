@@ -91,8 +91,8 @@ export default {
       "i3x": "Skrbniki vsake organizacije upravljajo le sisteme, za katere so odgovorni."
     },
     "faq": {
-      "q1": "Ali obstaja minimalno plačilo?",
-      "a1": "Da. Aktivna naročnina ima minimum $1.90 na mesec, kar je cena enega sistema, tudi brez povezanega sistema. Sam krmilnik WIFIGATE nikoli ne potrebuje naročnine.",
+      "q1": "Katere sisteme lahko upravljam?",
+      "a1": "Sisteme Gate, Dual Control in rolete ter njihove skupine. Roleto je mogoče upravljati le iz aplikacije, ob sami roleti.",
       "q2": "Kako povežem svoje sisteme z nadzorno ploščo?",
       "a2": "V aplikaciji in na spletnem mestu WIFIGATE se prijavite z istim računom. V aplikaciji izvozite vsak sistem v WIFIGATE Manager, ko ste ob njem, in njegov krmilnik povežite z Wi‑Fi (2.4GHz). Sistem se nato prikaže na vaši nadzorni plošči na spletnem mestu.",
       "q3": "Ali lahko upravljam ločene stavbe ali stranke?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Podatki in ukazi so šifrirani od konca do konca med nadzorno ploščo in krmilnikom. V nadzorno ploščo se prijavite z računom Google ali Apple ter s potrditveno kodo.",
       "q7": "Kako se izračuna mesečni znesek?",
       "a7": "$1.90 na sistem na mesec, po dnevih: sistem, dodan ali odstranjen sredi meseca, se obračuna le za dni, ko je bil na vaši nadzorni plošči. En obračun na začetku vsakega meseca pokrije prejšnji mesec. Cene so v ameriških dolarjih, brez davka.",
-      "q8": "Katere sisteme lahko upravljam?",
-      "a8": "Sisteme Gate, Dual Control in rolete ter njihove skupine. Roleto je mogoče upravljati le iz aplikacije, ob sami roleti."
+      "q8": "Ali obstaja minimalno plačilo?",
+      "a8": "Da. Aktivna naročnina ima minimum $1.90 na mesec, kar je cena enega sistema, tudi brez povezanega sistema. Sam krmilnik WIFIGATE nikoli ne potrebuje naročnine."
     },
     "shop": {
       "title": "Vse se začne s krmilnikom WIFIGATE",

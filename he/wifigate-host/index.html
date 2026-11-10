@@ -277,7 +277,7 @@
           "name": "האורח צריך להתקין אפליקציה?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "כן. האורח פותח את הקישור באפליקציית WIFIGATE ונכנס עם Google או Apple. מי שעוד לא התקין מגיע מהקישור לדף ההתקנה, ואחרי ההתקנה פותח את הקישור שוב."
+            "text": "כן, את אפליקציית WIFIGATE. הקישור פותח אותה אוטומטית עם ההרשאה המתאימה להזמנה, והאורח נכנס עם Google או Apple. מי שעוד לא התקין את האפליקציה מגיע מהקישור לדף ההתקנה, ואחרי ההתקנה פותח את הקישור שוב."
           }
         },
         {
@@ -286,14 +286,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "לפי הצ׳ק־אין והצ׳ק־אאוט של ההזמנה. ברירת המחדל היא הגעה ב־15:00 ועזיבה ב־12:00, ואפשר להגדיר שעות אחרות."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "צריך אינטרנט בכניסה?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "לא. הכניסה נפתחת ב־Bluetooth בין הטלפון של האורח לבקר, בלי תלות בענן ברגע הכניסה."
           }
         },
         {
@@ -318,6 +310,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "בקר WIFIGATE בכל כניסה. מנהל השער מוסיף אותו ל־WIFIGATE Host מהאפליקציה, כשהוא ליד השער. אין צורך ב־Wi‑Fi בכניסה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מערכת WIFIGATE צריכה חיבור לאינטרנט?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא. בשביל WIFIGATE Host, מערכת WIFIGATE לא צריכה חיבור לאינטרנט או ל־Wi‑Fi. הכניסה נפתחת ב־Bluetooth בין הטלפון של האורח לבקר, בלי תלות בענן ברגע הכניסה. הטלפון של האורח צריך אינטרנט רק כדי לקבל את הקישור ולהיכנס לאפליקציה."
           }
         },
         {
@@ -465,7 +465,7 @@
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
     <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
-      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">איך זה עובד</span><h2 class="wa-h2" id="wa-flow-title">מהזמנה ועד שער פתוח, אוטומטית</h2><p class="wa-lead">שלושה צעדים, ומשם זה רץ לבד בכל הזמנה.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-rtl.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">מתקבלת הזמנה</h3><p class="wa-flow__desc">מערכת ההזמנות שלכם מעדכנת את WIFIGATE Host על כל הזמנה שאושרה. אפשר גם להזין הזמנה ידנית בלוח הבקרה.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">הגישה נוצרת אוטומטית</h3><p class="wa-flow__desc">WIFIGATE Host יוצרת קישור גישה מאובטח, בדיוק לשער, לדלת או לחניה של ההזמנה, שתקף רק לזמן השהות. אתם או מערכת ההזמנות שלכם שולחים אותו לאורח.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">האורח פשוט נכנס</h3><p class="wa-flow__desc">האורח פותח את הקישור באפליקציית WIFIGATE ופותח את הכניסה מהטלפון. בצ׳ק־אאוט הגישה מסתיימת מעצמה, ואין מפתח לאסוף.</p></div></li></ol></div></div>
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">איך זה עובד</span><h2 class="wa-h2" id="wa-flow-title">מהזמנה ועד שער פתוח, אוטומטית</h2><p class="wa-lead">שלושה צעדים, ומשם זה רץ לבד בכל הזמנה.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-rtl.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">מתקבלת הזמנה</h3><p class="wa-flow__desc">מערכת ההזמנות שלכם מעדכנת את WIFIGATE Host על כל הזמנה שאושרה. אפשר גם להזין הזמנה ידנית בלוח הבקרה.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">הגישה נוצרת אוטומטית</h3><p class="wa-flow__desc">WIFIGATE Host יוצרת קישור גישה מאובטח, בדיוק לשער, לדלת או לחניה של ההזמנה, שתקף רק לזמן השהות. אתם או מערכת ההזמנות שלכם שולחים אותו לאורח.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">האורח פשוט נכנס</h3><p class="wa-flow__desc">הקישור פותח אוטומטית את אפליקציית WIFIGATE עם ההרשאה המתאימה, והאורח פותח את הכניסה מהטלפון. בצ׳ק־אאוט הגישה מסתיימת מעצמה, ואין מפתח לאסוף.</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
@@ -486,7 +486,7 @@
         <div class="niche-section__header">
           <h2 id="niche-faq-title" class="niche-section__title">שאלות נפוצות</h2>
         </div>
-        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="rtl">איך האורח מקבל את הגישה?‏</summary><div class="seo-faq__answer"><p dir="rtl">WIFIGATE Host יוצרת קישור גישה פרטי לכל הזמנה. אתם או מערכת ההזמנות שלכם שולחים אותו לאורח ב־SMS, במייל או בוואטסאפ, ואפשר גם להציג אותו כקוד QR.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">האורח צריך להתקין אפליקציה?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. האורח פותח את הקישור באפליקציית WIFIGATE ונכנס עם Google או Apple. מי שעוד לא התקין מגיע מהקישור לדף ההתקנה, ואחרי ההתקנה פותח את הקישור שוב.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מתי הגישה מתחילה ומתי היא מסתיימת?‏</summary><div class="seo-faq__answer"><p dir="rtl">לפי הצ׳ק־אין והצ׳ק־אאוט של ההזמנה. ברירת המחדל היא הגעה ב־15:00 ועזיבה ב־12:00, ואפשר להגדיר שעות אחרות.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">צריך אינטרנט בכניסה?‏</summary><div class="seo-faq__answer"><p dir="rtl">לא. הכניסה נפתחת ב־Bluetooth בין הטלפון של האורח לבקר, בלי תלות בענן ברגע הכניסה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">לאילו מערכות הזמנות זה מתחבר?‏</summary><div class="seo-faq__answer"><p dir="rtl">לכל מערכת שיכולה לשלוח הזמנות דרך API או webhook: מערכת ניהול נכסים (PMS), Channel Manager או מערכת משלכם. אפשר גם להזין הזמנות ידנית בלוח הבקרה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">זה מתאים גם למתחם עם כמה כניסות?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. הזמנה אחת יכולה לפתוח קבוצה של כניסות, למשל שער, חניה ודלת, עד 20 מערכות בקבוצה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מה צריך להתקין?‏</summary><div class="seo-faq__answer"><p dir="rtl">בקר WIFIGATE בכל כניסה. מנהל השער מוסיף אותו ל־WIFIGATE Host מהאפליקציה, כשהוא ליד השער. אין צורך ב־Wi‑Fi בכניסה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">איך מחושב המחיר, ויש מינימום?‏</summary><div class="seo-faq__answer"><p dir="rtl">לפי מספר המערכות הפעילות, מדרגה על מדרגה: ‏$6 למערכת עד 14 מערכות, ‏$5 למערכות 15–49 ו־‏$4 מהמערכת ה־50. המינימום לחשבון הוא ‏$6 לחודש, גם בלי מערכת מקושרת. מערכת שפעלה רק חלק מהחודש מחויבת לפי ימים.‏</p></div></details></div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="rtl">איך האורח מקבל את הגישה?‏</summary><div class="seo-faq__answer"><p dir="rtl">WIFIGATE Host יוצרת קישור גישה פרטי לכל הזמנה. אתם או מערכת ההזמנות שלכם שולחים אותו לאורח ב־SMS, במייל או בוואטסאפ, ואפשר גם להציג אותו כקוד QR.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">האורח צריך להתקין אפליקציה?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן, את אפליקציית WIFIGATE. הקישור פותח אותה אוטומטית עם ההרשאה המתאימה להזמנה, והאורח נכנס עם Google או Apple. מי שעוד לא התקין את האפליקציה מגיע מהקישור לדף ההתקנה, ואחרי ההתקנה פותח את הקישור שוב.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מתי הגישה מתחילה ומתי היא מסתיימת?‏</summary><div class="seo-faq__answer"><p dir="rtl">לפי הצ׳ק־אין והצ׳ק־אאוט של ההזמנה. ברירת המחדל היא הגעה ב־15:00 ועזיבה ב־12:00, ואפשר להגדיר שעות אחרות.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">לאילו מערכות הזמנות זה מתחבר?‏</summary><div class="seo-faq__answer"><p dir="rtl">לכל מערכת שיכולה לשלוח הזמנות דרך API או webhook: מערכת ניהול נכסים (PMS), Channel Manager או מערכת משלכם. אפשר גם להזין הזמנות ידנית בלוח הבקרה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">זה מתאים גם למתחם עם כמה כניסות?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. הזמנה אחת יכולה לפתוח קבוצה של כניסות, למשל שער, חניה ודלת, עד 20 מערכות בקבוצה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מה צריך להתקין?‏</summary><div class="seo-faq__answer"><p dir="rtl">בקר WIFIGATE בכל כניסה. מנהל השער מוסיף אותו ל־WIFIGATE Host מהאפליקציה, כשהוא ליד השער. אין צורך ב־Wi‑Fi בכניסה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מערכת WIFIGATE צריכה חיבור לאינטרנט?‏</summary><div class="seo-faq__answer"><p dir="rtl">לא. בשביל WIFIGATE Host, מערכת WIFIGATE לא צריכה חיבור לאינטרנט או ל־Wi‑Fi. הכניסה נפתחת ב־Bluetooth בין הטלפון של האורח לבקר, בלי תלות בענן ברגע הכניסה. הטלפון של האורח צריך אינטרנט רק כדי לקבל את הקישור ולהיכנס לאפליקציה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">איך מחושב המחיר, ויש מינימום?‏</summary><div class="seo-faq__answer"><p dir="rtl">לפי מספר המערכות הפעילות, מדרגה על מדרגה: ‏$6 למערכת עד 14 מערכות, ‏$5 למערכות 15–49 ו־‏$4 מהמערכת ה־50. המינימום לחשבון הוא ‏$6 לחודש, גם בלי מערכת מקושרת. מערכת שפעלה רק חלק מהחודש מחויבת לפי ימים.‏</p></div></details></div>
       </div>
     </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
   <div class="container">

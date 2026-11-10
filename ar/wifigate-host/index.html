@@ -277,7 +277,7 @@
           "name": "هل يحتاج الضيف إلى تثبيت تطبيق؟",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "نعم. يفتح الضيف الرابط في تطبيق WIFIGATE ويسجّل الدخول عبر Google أو Apple. من دون التطبيق، يقود الرابط إلى صفحة التثبيت؛ وبعد التثبيت يفتح الضيف الرابط مرة أخرى."
+            "text": "نعم، تطبيق WIFIGATE. يفتحه الرابط تلقائيًا بصلاحية الدخول المناسبة للحجز، ويسجّل الضيف الدخول عبر Google أو Apple. من دون التطبيق، يقود الرابط إلى صفحة التثبيت؛ وبعد التثبيت يفتح الضيف الرابط مرة أخرى."
           }
         },
         {
@@ -286,14 +286,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "يتبع موعدَي تسجيل الوصول وتسجيل المغادرة في الحجز. الإعداد الافتراضي هو الوصول الساعة 15:00 والمغادرة الساعة 12:00، ويمكنك تحديد ساعات أخرى."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "هل يلزم اتصال بالإنترنت عند المدخل؟",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "لا. يُفتح المدخل عبر Bluetooth بين هاتف الضيف ووحدة التحكم، من دون أي اعتماد على السحابة لحظة الدخول."
           }
         },
         {
@@ -318,6 +310,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "وحدة تحكم WIFIGATE عند كل مدخل. يضيفها مسؤول البوابة إلى WIFIGATE Host من التطبيق، وهو بجوار البوابة. لا حاجة إلى Wi‑Fi عند المدخل."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يحتاج نظام WIFIGATE إلى اتصال بالإنترنت؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا. لاستخدام WIFIGATE Host، لا يحتاج نظام WIFIGATE إلى اتصال بالإنترنت ولا إلى Wi‑Fi. يُفتح المدخل عبر Bluetooth بين هاتف الضيف ووحدة التحكم، من دون أي اعتماد على السحابة لحظة الدخول. لا يحتاج هاتف الضيف إلى الإنترنت إلا لاستلام الرابط وتسجيل الدخول إلى التطبيق."
           }
         },
         {
@@ -465,7 +465,7 @@
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
     <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
-      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">كيف يعمل</span><h2 class="wa-h2" id="wa-flow-title">من الحجز إلى البوابة المفتوحة، تلقائيًا</h2><p class="wa-lead">ثلاث خطوات، ثم يعمل كل شيء تلقائيًا مع كل حجز.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-rtl.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">يصل حجز جديد</h3><p class="wa-flow__desc">يُبلغ نظام الحجوزات لديك WIFIGATE Host بكل حجز مؤكَّد. ويمكنك أيضًا إدخال حجز يدويًا في لوحة التحكم.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">يُنشأ الدخول تلقائيًا</h3><p class="wa-flow__desc">تُنشئ WIFIGATE Host رابط دخول آمنًا للبوابة أو الباب أو الموقف الخاص بذلك الحجز بالضبط، صالحًا لمدة الإقامة فقط. ترسله أنت أو نظام الحجوزات لديك إلى الضيف.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">ضيفك يدخل ببساطة</h3><p class="wa-flow__desc">يفتح الضيف الرابط في تطبيق WIFIGATE ويفتح المدخل من هاتفه. عند تسجيل المغادرة ينتهي الدخول من تلقاء نفسه. لا مفتاح لاسترجاعه.</p></div></li></ol></div></div>
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">كيف يعمل</span><h2 class="wa-h2" id="wa-flow-title">من الحجز إلى البوابة المفتوحة، تلقائيًا</h2><p class="wa-lead">ثلاث خطوات، ثم يعمل كل شيء تلقائيًا مع كل حجز.</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-rtl.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">يصل حجز جديد</h3><p class="wa-flow__desc">يُبلغ نظام الحجوزات لديك WIFIGATE Host بكل حجز مؤكَّد. ويمكنك أيضًا إدخال حجز يدويًا في لوحة التحكم.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">يُنشأ الدخول تلقائيًا</h3><p class="wa-flow__desc">تُنشئ WIFIGATE Host رابط دخول آمنًا للبوابة أو الباب أو الموقف الخاص بذلك الحجز بالضبط، صالحًا لمدة الإقامة فقط. ترسله أنت أو نظام الحجوزات لديك إلى الضيف.</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">ضيفك يدخل ببساطة</h3><p class="wa-flow__desc">يفتح الرابط تطبيق WIFIGATE تلقائيًا بصلاحية الدخول المناسبة، ويفتح الضيف المدخل من هاتفه. عند تسجيل المغادرة ينتهي الدخول من تلقاء نفسه. لا مفتاح لاسترجاعه.</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
@@ -486,7 +486,7 @@
         <div class="niche-section__header">
           <h2 id="niche-faq-title" class="niche-section__title">الأسئلة الشائعة</h2>
         </div>
-        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="rtl">كيف يحصل الضيف على صلاحية الدخول؟</summary><div class="seo-faq__answer"><p dir="rtl">تُنشئ WIFIGATE Host رابط دخول خاصًا لكل حجز. ترسله أنت أو نظام الحجوزات لديك إلى الضيف عبر SMS أو البريد الإلكتروني أو WhatsApp، ويمكنك أيضًا عرضه كرمز QR.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل يحتاج الضيف إلى تثبيت تطبيق؟</summary><div class="seo-faq__answer"><p dir="rtl">نعم. يفتح الضيف الرابط في تطبيق WIFIGATE ويسجّل الدخول عبر Google أو Apple. من دون التطبيق، يقود الرابط إلى صفحة التثبيت؛ وبعد التثبيت يفتح الضيف الرابط مرة أخرى.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">متى يبدأ الدخول ومتى ينتهي؟</summary><div class="seo-faq__answer"><p dir="rtl">يتبع موعدَي تسجيل الوصول وتسجيل المغادرة في الحجز. الإعداد الافتراضي هو الوصول الساعة 15:00 والمغادرة الساعة 12:00، ويمكنك تحديد ساعات أخرى.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل يلزم اتصال بالإنترنت عند المدخل؟</summary><div class="seo-faq__answer"><p dir="rtl">لا. يُفتح المدخل عبر Bluetooth بين هاتف الضيف ووحدة التحكم، من دون أي اعتماد على السحابة لحظة الدخول.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">ما أنظمة الحجوزات التي تتصل بها؟</summary><div class="seo-faq__answer"><p dir="rtl">أي نظام يستطيع إرسال الحجوزات عبر API أو webhook: نظام إدارة العقارات (PMS) أو مدير القنوات أو نظامك الخاص. ويمكنك أيضًا إدخال الحجوزات يدويًا في لوحة التحكم.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل تناسب مجمعًا بعدة مداخل؟</summary><div class="seo-faq__answer"><p dir="rtl">نعم. يمكن لحجز واحد أن يفتح مجموعة من المداخل، مثل بوابة وموقف وباب، بما يصل إلى 20 نظامًا في المجموعة.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">ما الذي يجب تركيبه؟</summary><div class="seo-faq__answer"><p dir="rtl">وحدة تحكم WIFIGATE عند كل مدخل. يضيفها مسؤول البوابة إلى WIFIGATE Host من التطبيق، وهو بجوار البوابة. لا حاجة إلى Wi‑Fi عند المدخل.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">كيف يُحتسب السعر، وهل يوجد حد أدنى؟</summary><div class="seo-faq__answer"><p dir="rtl">حسب عدد الأنظمة النشطة، شريحةً بشريحة: $6 للنظام حتى 14 نظامًا، و $5 للأنظمة 15–49، و $4 بدءًا من النظام رقم 50. الحد الأدنى للحساب $6 شهريًا، حتى من دون أي نظام مرتبط. النظام الذي يكون نشطًا لجزء من الشهر يُحتسب بالأيام.‏</p></div></details></div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="rtl">كيف يحصل الضيف على صلاحية الدخول؟</summary><div class="seo-faq__answer"><p dir="rtl">تُنشئ WIFIGATE Host رابط دخول خاصًا لكل حجز. ترسله أنت أو نظام الحجوزات لديك إلى الضيف عبر SMS أو البريد الإلكتروني أو WhatsApp، ويمكنك أيضًا عرضه كرمز QR.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل يحتاج الضيف إلى تثبيت تطبيق؟</summary><div class="seo-faq__answer"><p dir="rtl">نعم، تطبيق WIFIGATE. يفتحه الرابط تلقائيًا بصلاحية الدخول المناسبة للحجز، ويسجّل الضيف الدخول عبر Google أو Apple. من دون التطبيق، يقود الرابط إلى صفحة التثبيت؛ وبعد التثبيت يفتح الضيف الرابط مرة أخرى.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">متى يبدأ الدخول ومتى ينتهي؟</summary><div class="seo-faq__answer"><p dir="rtl">يتبع موعدَي تسجيل الوصول وتسجيل المغادرة في الحجز. الإعداد الافتراضي هو الوصول الساعة 15:00 والمغادرة الساعة 12:00، ويمكنك تحديد ساعات أخرى.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">ما أنظمة الحجوزات التي تتصل بها؟</summary><div class="seo-faq__answer"><p dir="rtl">أي نظام يستطيع إرسال الحجوزات عبر API أو webhook: نظام إدارة العقارات (PMS) أو مدير القنوات أو نظامك الخاص. ويمكنك أيضًا إدخال الحجوزات يدويًا في لوحة التحكم.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل تناسب مجمعًا بعدة مداخل؟</summary><div class="seo-faq__answer"><p dir="rtl">نعم. يمكن لحجز واحد أن يفتح مجموعة من المداخل، مثل بوابة وموقف وباب، بما يصل إلى 20 نظامًا في المجموعة.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">ما الذي يجب تركيبه؟</summary><div class="seo-faq__answer"><p dir="rtl">وحدة تحكم WIFIGATE عند كل مدخل. يضيفها مسؤول البوابة إلى WIFIGATE Host من التطبيق، وهو بجوار البوابة. لا حاجة إلى Wi‑Fi عند المدخل.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">هل يحتاج نظام WIFIGATE إلى اتصال بالإنترنت؟</summary><div class="seo-faq__answer"><p dir="rtl">لا. لاستخدام WIFIGATE Host، لا يحتاج نظام WIFIGATE إلى اتصال بالإنترنت ولا إلى Wi‑Fi. يُفتح المدخل عبر Bluetooth بين هاتف الضيف ووحدة التحكم، من دون أي اعتماد على السحابة لحظة الدخول. لا يحتاج هاتف الضيف إلى الإنترنت إلا لاستلام الرابط وتسجيل الدخول إلى التطبيق.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">كيف يُحتسب السعر، وهل يوجد حد أدنى؟</summary><div class="seo-faq__answer"><p dir="rtl">حسب عدد الأنظمة النشطة، شريحةً بشريحة: $6 للنظام حتى 14 نظامًا، و $5 للأنظمة 15–49، و $4 بدءًا من النظام رقم 50. الحد الأدنى للحساب $6 شهريًا، حتى من دون أي نظام مرتبط. النظام الذي يكون نشطًا لجزء من الشهر يُحتسب بالأيام.‏</p></div></details></div>
       </div>
     </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
   <div class="container">

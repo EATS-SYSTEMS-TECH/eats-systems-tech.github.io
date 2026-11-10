@@ -91,8 +91,8 @@ export default {
       "i3x": "Ang mga admin ng bawat organisasyon ay namamahala lamang ng mga system na sakop ng kanilang responsibilidad."
     },
     "faq": {
-      "q1": "May minimum na singil ba?",
-      "a1": "Oo. May minimum na $1.90 kada buwan ang aktibong subscription, ang presyo ng isang system, kahit walang naka-link na system. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo.",
+      "q1": "Aling mga system ang maaari kong pamahalaan?",
+      "a1": "Mga Gate, Dual Control, at roller shutter system, at mga grupo ng mga ito. Ang roller shutter ay pinapagana lamang mula sa app, sa tabi ng shutter.",
       "q2": "Paano ko ikokonekta ang aking mga system sa dashboard?",
       "a2": "Mag-sign in gamit ang iisang account sa app at sa website ng WIFIGATE. Sa app, i-export ang bawat system sa WIFIGATE Manager habang nasa tabi kayo nito, at ikonekta ang controller nito sa Wi‑Fi (2.4GHz). Pagkatapos, lalabas ang system sa inyong dashboard sa website.",
       "q3": "Maaari ba akong mamahala ng magkakahiwalay na gusali o kliyente?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Naka-encrypt end-to-end ang data at mga utos sa pagitan ng dashboard at ng controller. Nagsa-sign in kayo sa dashboard gamit ang Google o Apple, dagdag ang isang verification code.",
       "q7": "Paano kinakalkula ang buwanang singil?",
       "a7": "$1.90 bawat system kada buwan, ayon sa araw: ang system na idinagdag o inalis sa kalagitnaan ng buwan ay sinisingil lamang para sa mga araw na nasa dashboard ninyo ito. Isang singil sa simula ng bawat buwan ang sumasaklaw sa nakaraang buwan. Nasa US dollar ang mga presyo, bago ang buwis.",
-      "q8": "Aling mga system ang maaari kong pamahalaan?",
-      "a8": "Mga Gate, Dual Control, at roller shutter system, at mga grupo ng mga ito. Ang roller shutter ay pinapagana lamang mula sa app, sa tabi ng shutter."
+      "q8": "May minimum na singil ba?",
+      "a8": "Oo. May minimum na $1.90 kada buwan ang aktibong subscription, ang presyo ng isang system, kahit walang naka-link na system. Hindi kailanman kailangan ng subscription ang WIFIGATE controller mismo."
     },
     "shop": {
       "title": "Nagsisimula ang lahat sa WIFIGATE controller",

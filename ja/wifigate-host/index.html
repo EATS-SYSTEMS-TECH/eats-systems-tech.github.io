@@ -277,7 +277,7 @@
           "name": "ゲストはアプリをインストールする必要がありますか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "はい。ゲストは WIFIGATE アプリでリンクを開き、Google または Apple でサインインします。アプリがない場合、リンクはインストールページに移動します。インストール後、ゲストはもう一度リンクを開きます。"
+            "text": "はい、WIFIGATE アプリが必要です。リンクから、予約に合ったアクセスが設定された状態でアプリが自動で開き、ゲストは Google または Apple でサインインします。アプリがない場合、リンクはインストールページに移動します。インストール後、ゲストはもう一度リンクを開きます。"
           }
         },
         {
@@ -286,14 +286,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "予約のチェックインとチェックアウトに従います。初期設定は到着が 15:00、出発が 12:00 で、別の時刻に設定することもできます。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "入口にインターネットは必要ですか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "いいえ。入口はゲストのスマートフォンとコントローラーの間の Bluetooth で開き、入場の瞬間にクラウドには依存しません。"
           }
         },
         {
@@ -318,6 +310,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "各出入口に WIFIGATE コントローラーが必要です。ゲートの管理者が、ゲートのそばでアプリから WIFIGATE Host に追加します。入口に Wi‑Fi は必要ありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "WIFIGATE システムにインターネット接続は必要ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "いいえ。WIFIGATE Host では、WIFIGATE システムにインターネット接続も Wi‑Fi 接続も必要ありません。入口はゲストのスマートフォンとコントローラーの間の Bluetooth で開き、入場の瞬間にクラウドには依存しません。ゲストのスマートフォンにインターネットが必要なのは、リンクを受け取るときとアプリにサインインするときだけです。"
           }
         },
         {
@@ -465,7 +465,7 @@
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
     <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
-      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">仕組み</span><h2 class="wa-h2" id="wa-flow-title">予約からゲートの開門まで、すべて自動</h2><p class="wa-lead">3つのステップを設定すれば、あとは予約ごとに自動で動きます。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">予約が入る</h3><p class="wa-flow__desc">予約システムが、確定した予約をすべて WIFIGATE Host に通知します。ダッシュボードで予約を手入力することもできます。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">アクセスを自動で作成</h3><p class="wa-flow__desc">WIFIGATE Host が、その予約のゲート、ドア、駐車場だけに使える安全なアクセスリンクを作成します。有効なのは滞在期間だけです。リンクは、お客様または予約システムからゲストに送ります。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">ゲストはそのまま入場</h3><p class="wa-flow__desc">ゲストは WIFIGATE アプリでリンクを開き、自分のスマートフォンで入口を開けます。チェックアウト時にアクセスは自動で終了します。回収する鍵はありません。</p></div></li></ol></div></div>
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">仕組み</span><h2 class="wa-h2" id="wa-flow-title">予約からゲートの開門まで、すべて自動</h2><p class="wa-lead">3つのステップを設定すれば、あとは予約ごとに自動で動きます。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">予約が入る</h3><p class="wa-flow__desc">予約システムが、確定した予約をすべて WIFIGATE Host に通知します。ダッシュボードで予約を手入力することもできます。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">アクセスを自動で作成</h3><p class="wa-flow__desc">WIFIGATE Host が、その予約のゲート、ドア、駐車場だけに使える安全なアクセスリンクを作成します。有効なのは滞在期間だけです。リンクは、お客様または予約システムからゲストに送ります。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">ゲストはそのまま入場</h3><p class="wa-flow__desc">リンクから、適切なアクセスが設定された状態で WIFIGATE アプリが自動で開き、ゲストは自分のスマートフォンで入口を開けます。チェックアウト時にアクセスは自動で終了します。回収する鍵はありません。</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
@@ -486,7 +486,7 @@
         <div class="niche-section__header">
           <h2 id="niche-faq-title" class="niche-section__title">よくある質問</h2>
         </div>
-        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">ゲストはどのようにアクセスを受け取りますか？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host が予約ごとにプライベートなアクセスリンクを作成します。リンクは、お客様または予約システムから SMS、メール、WhatsApp でゲストに送ります。QR コードとして表示することもできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">ゲストはアプリをインストールする必要がありますか？</summary><div class="seo-faq__answer"><p dir="ltr">はい。ゲストは WIFIGATE アプリでリンクを開き、Google または Apple でサインインします。アプリがない場合、リンクはインストールページに移動します。インストール後、ゲストはもう一度リンクを開きます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">アクセスはいつ始まり、いつ終わりますか？</summary><div class="seo-faq__answer"><p dir="ltr">予約のチェックインとチェックアウトに従います。初期設定は到着が 15:00、出発が 12:00 で、別の時刻に設定することもできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">入口にインターネットは必要ですか？</summary><div class="seo-faq__answer"><p dir="ltr">いいえ。入口はゲストのスマートフォンとコントローラーの間の Bluetooth で開き、入場の瞬間にクラウドには依存しません。</p></div></details><details class="seo-faq__item"><summary dir="ltr">どの予約システムと連携できますか？</summary><div class="seo-faq__answer"><p dir="ltr">API または webhook で予約を送信できるシステムなら、どれでも連携できます。物件管理システム（PMS）、サイトコントローラー、または自社のシステムです。ダッシュボードで予約を手入力することもできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">複数の出入口がある施設にも対応していますか？</summary><div class="seo-faq__answer"><p dir="ltr">はい。ひとつの予約で、ゲート、駐車場、ドアといった出入口のグループを開けられます。1 グループには最大 20 システムまで含められます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">何を設置する必要がありますか？</summary><div class="seo-faq__answer"><p dir="ltr">各出入口に WIFIGATE コントローラーが必要です。ゲートの管理者が、ゲートのそばでアプリから WIFIGATE Host に追加します。入口に Wi‑Fi は必要ありません。</p></div></details><details class="seo-faq__item"><summary dir="ltr">料金はどのように計算されますか？最低料金はありますか？</summary><div class="seo-faq__answer"><p dir="ltr">アクティブなシステムの数に応じた段階制です。14 システムまでは 1 システムにつき $6、15–49 番目のシステムは $5、50 番目以降は $4 です。アカウントの最低料金は月額 $6 で、連携しているシステムがなくても発生します。月の一部だけアクティブだったシステムは日割りで請求されます。</p></div></details></div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">ゲストはどのようにアクセスを受け取りますか？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host が予約ごとにプライベートなアクセスリンクを作成します。リンクは、お客様または予約システムから SMS、メール、WhatsApp でゲストに送ります。QR コードとして表示することもできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">ゲストはアプリをインストールする必要がありますか？</summary><div class="seo-faq__answer"><p dir="ltr">はい、WIFIGATE アプリが必要です。リンクから、予約に合ったアクセスが設定された状態でアプリが自動で開き、ゲストは Google または Apple でサインインします。アプリがない場合、リンクはインストールページに移動します。インストール後、ゲストはもう一度リンクを開きます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">アクセスはいつ始まり、いつ終わりますか？</summary><div class="seo-faq__answer"><p dir="ltr">予約のチェックインとチェックアウトに従います。初期設定は到着が 15:00、出発が 12:00 で、別の時刻に設定することもできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">どの予約システムと連携できますか？</summary><div class="seo-faq__answer"><p dir="ltr">API または webhook で予約を送信できるシステムなら、どれでも連携できます。物件管理システム（PMS）、サイトコントローラー、または自社のシステムです。ダッシュボードで予約を手入力することもできます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">複数の出入口がある施設にも対応していますか？</summary><div class="seo-faq__answer"><p dir="ltr">はい。ひとつの予約で、ゲート、駐車場、ドアといった出入口のグループを開けられます。1 グループには最大 20 システムまで含められます。</p></div></details><details class="seo-faq__item"><summary dir="ltr">何を設置する必要がありますか？</summary><div class="seo-faq__answer"><p dir="ltr">各出入口に WIFIGATE コントローラーが必要です。ゲートの管理者が、ゲートのそばでアプリから WIFIGATE Host に追加します。入口に Wi‑Fi は必要ありません。</p></div></details><details class="seo-faq__item"><summary dir="ltr">WIFIGATE システムにインターネット接続は必要ですか？</summary><div class="seo-faq__answer"><p dir="ltr">いいえ。WIFIGATE Host では、WIFIGATE システムにインターネット接続も Wi‑Fi 接続も必要ありません。入口はゲストのスマートフォンとコントローラーの間の Bluetooth で開き、入場の瞬間にクラウドには依存しません。ゲストのスマートフォンにインターネットが必要なのは、リンクを受け取るときとアプリにサインインするときだけです。</p></div></details><details class="seo-faq__item"><summary dir="ltr">料金はどのように計算されますか？最低料金はありますか？</summary><div class="seo-faq__answer"><p dir="ltr">アクティブなシステムの数に応じた段階制です。14 システムまでは 1 システムにつき $6、15–49 番目のシステムは $5、50 番目以降は $4 です。アカウントの最低料金は月額 $6 で、連携しているシステムがなくても発生します。月の一部だけアクティブだったシステムは日割りで請求されます。</p></div></details></div>
       </div>
     </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
   <div class="container">

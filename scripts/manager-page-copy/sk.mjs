@@ -91,8 +91,8 @@ export default {
       "i3x": "Správcovia každej organizácie spravujú len systémy, za ktoré zodpovedajú."
     },
     "faq": {
-      "q1": "Existuje minimálna platba?",
-      "a1": "Áno. Aktívne predplatné má minimum $1.90 mesačne, teda cenu jedného systému, aj bez pripojeného systému. Samotné zariadenie WIFIGATE nikdy nepotrebuje predplatné.",
+      "q1": "Ktoré systémy môžem spravovať?",
+      "a1": "Systémy typu Gate, Dual Control a roleta, ako aj ich skupiny. Roleta sa ovláda len z aplikácie, priamo pri rolete.",
       "q2": "Ako pripojím svoje systémy k ovládaciemu panelu?",
       "a2": "Prihláste sa rovnakým účtom v aplikácii aj na webe WIFIGATE. V aplikácii exportujte každý systém do WIFIGATE Manager, keď ste priamo pri ňom, a pripojte jeho zariadenie WIFIGATE k Wi‑Fi (2.4GHz). Systém sa potom zobrazí vo vašom ovládacom paneli na webe.",
       "q3": "Môžem spravovať samostatné budovy alebo klientov?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Údaje a príkazy sú medzi ovládacím panelom a zariadením WIFIGATE šifrované od začiatku do konca. Do ovládacieho panela sa prihlasujete cez Google alebo Apple a navyše overovacím kódom.",
       "q7": "Ako sa počíta mesačná platba?",
       "a7": "$1.90 za systém mesačne, podľa dní: systém pridaný alebo odobraný v priebehu mesiaca sa účtuje len za dni, keď bol vo vašom ovládacom paneli. Jedna platba na začiatku každého mesiaca pokryje predchádzajúci mesiac. Ceny sú v amerických dolároch, bez dane.",
-      "q8": "Ktoré systémy môžem spravovať?",
-      "a8": "Systémy typu Gate, Dual Control a roleta, ako aj ich skupiny. Roleta sa ovláda len z aplikácie, priamo pri rolete."
+      "q8": "Existuje minimálna platba?",
+      "a8": "Áno. Aktívne predplatné má minimum $1.90 mesačne, teda cenu jedného systému, aj bez pripojeného systému. Samotné zariadenie WIFIGATE nikdy nepotrebuje predplatné."
     },
     "shop": {
       "title": "Všetko sa začína ovládačom WIFIGATE",

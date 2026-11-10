@@ -91,8 +91,8 @@ export default {
       "i3x": "Gli amministratori di ogni organizzazione gestiscono solo i sistemi di cui sono responsabili."
     },
     "faq": {
-      "q1": "C'è un addebito minimo?",
-      "a1": "Sì. Un abbonamento attivo ha un minimo di $1.90 al mese, il prezzo di un sistema, anche senza alcun sistema collegato. Il controller WIFIGATE in sé non richiede mai un abbonamento.",
+      "q1": "Quali sistemi posso gestire?",
+      "a1": "Sistemi Gate, Dual Control e tapparella, e i loro gruppi. Una tapparella si aziona solo dall'app, accanto alla tapparella.",
       "q2": "Come collego i miei sistemi alla dashboard?",
       "a2": "Accedi con lo stesso account nell'app e sul sito WIFIGATE. Nell'app, esporta ogni sistema in WIFIGATE Manager mentre ti trovi accanto ad esso e collega il suo controller al Wi‑Fi (2.4GHz). Il sistema compare poi nella tua dashboard sul sito.",
       "q3": "Posso gestire edifici o clienti separati?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Dati e comandi sono crittografati end-to-end tra la dashboard e il controller. Accedi alla dashboard con Google o Apple, più un codice di verifica.",
       "q7": "Come viene calcolato l'addebito mensile?",
       "a7": "$1.90 per sistema al mese, a giorni: un sistema aggiunto o rimosso a metà mese si paga solo per i giorni in cui è stato nella tua dashboard. Un unico addebito all'inizio di ogni mese copre il mese precedente. I prezzi sono in dollari USA, al netto delle imposte.",
-      "q8": "Quali sistemi posso gestire?",
-      "a8": "Sistemi Gate, Dual Control e tapparella, e i loro gruppi. Una tapparella si aziona solo dall'app, accanto alla tapparella."
+      "q8": "C'è un addebito minimo?",
+      "a8": "Sì. Un abbonamento attivo ha un minimo di $1.90 al mese, il prezzo di un sistema, anche senza alcun sistema collegato. Il controller WIFIGATE in sé non richiede mai un abbonamento."
     },
     "shop": {
       "title": "Tutto parte da un controller WIFIGATE",

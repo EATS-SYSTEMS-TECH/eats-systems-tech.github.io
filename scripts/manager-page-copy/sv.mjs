@@ -91,8 +91,8 @@ export default {
       "i3x": "Varje organisations administratörer hanterar bara de system de ansvarar för."
     },
     "faq": {
-      "q1": "Finns det en minimiavgift?",
-      "a1": "Ja. Ett aktivt abonnemang har ett minimum på $1.90 per månad, priset för ett system, även utan kopplat system. Själva WIFIGATE-styrenheten kräver aldrig något abonnemang.",
+      "q1": "Vilka system kan jag hantera?",
+      "a1": "System av typen Gate, Dual Control och rulljalusi, samt grupper av dem. En rulljalusi manövreras bara från appen, bredvid rulljalusin.",
       "q2": "Hur ansluter jag mina system till kontrollpanelen?",
       "a2": "Logga in med samma konto i appen och på WIFIGATE-webbplatsen. I appen exporterar du varje system till WIFIGATE Manager medan du står bredvid det, och ansluter dess styrenhet till Wi‑Fi (2.4GHz). Sedan visas systemet i din kontrollpanel på webbplatsen.",
       "q3": "Kan jag hantera separata byggnader eller kunder?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Data och kommandon är krypterade hela vägen mellan kontrollpanelen och styrenheten. Du loggar in i kontrollpanelen med Google eller Apple, plus en verifieringskod.",
       "q7": "Hur beräknas den månatliga debiteringen?",
       "a7": "$1.90 per system och månad, per dag: ett system som läggs till eller tas bort mitt i månaden debiteras bara för de dagar det fanns i din kontrollpanel. En debitering i början av varje månad täcker föregående månad. Priserna anges i amerikanska dollar, exklusive moms.",
-      "q8": "Vilka system kan jag hantera?",
-      "a8": "System av typen Gate, Dual Control och rulljalusi, samt grupper av dem. En rulljalusi manövreras bara från appen, bredvid rulljalusin."
+      "q8": "Finns det en minimiavgift?",
+      "a8": "Ja. Ett aktivt abonnemang har ett minimum på $1.90 per månad, priset för ett system, även utan kopplat system. Själva WIFIGATE-styrenheten kräver aldrig något abonnemang."
     },
     "shop": {
       "title": "Allt börjar med en WIFIGATE-styrenhet",

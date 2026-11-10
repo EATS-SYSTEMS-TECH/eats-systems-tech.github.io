@@ -91,8 +91,8 @@ export default {
       "i3x": "Hver organisations administratorer styrer kun de systemer, de har ansvaret for."
     },
     "faq": {
-      "q1": "Er der en minimumsbetaling?",
-      "a1": "Ja. Et aktivt abonnement har et minimum på $1.90 pr. måned, prisen for ét system, også uden et tilknyttet system. Selve WIFIGATE-controlleren kræver aldrig et abonnement.",
+      "q1": "Hvilke systemer kan jeg administrere?",
+      "a1": "Systemer af typen Gate, Dual Control og rulleskodde samt grupper af dem. En rulleskodde betjenes kun fra appen, ved siden af rulleskodden.",
       "q2": "Hvordan forbinder jeg mine systemer til dashboardet?",
       "a2": "Log ind med den samme konto i appen og på WIFIGATE-webstedet. I appen eksporterer du hvert system til WIFIGATE Manager, mens du står ved siden af det, og forbinder dets controller til Wi‑Fi (2.4GHz). Derefter vises systemet i dit dashboard på webstedet.",
       "q3": "Kan jeg administrere separate bygninger eller kunder?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Data og kommandoer er krypteret hele vejen mellem dashboardet og controlleren. Du logger ind på dashboardet med Google eller Apple plus en bekræftelseskode.",
       "q7": "Hvordan beregnes den månedlige opkrævning?",
       "a7": "$1.90 pr. system pr. måned, afregnet pr. dag: et system, der tilføjes eller fjernes midt i måneden, opkræves kun for de dage, det var i dit dashboard. Én opkrævning i starten af hver måned dækker den foregående måned. Priserne er i amerikanske dollar før skat.",
-      "q8": "Hvilke systemer kan jeg administrere?",
-      "a8": "Systemer af typen Gate, Dual Control og rulleskodde samt grupper af dem. En rulleskodde betjenes kun fra appen, ved siden af rulleskodden."
+      "q8": "Er der en minimumsbetaling?",
+      "a8": "Ja. Et aktivt abonnement har et minimum på $1.90 pr. måned, prisen for ét system, også uden et tilknyttet system. Selve WIFIGATE-controlleren kræver aldrig et abonnement."
     },
     "shop": {
       "title": "Alt starter med en WIFIGATE-controller",

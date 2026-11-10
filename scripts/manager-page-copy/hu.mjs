@@ -91,8 +91,8 @@ export default {
       "i3x": "Minden szervezet adminisztrátorai csak azokat a rendszereket kezelik, amelyekért felelősek."
     },
     "faq": {
-      "q1": "Van minimális díj?",
-      "a1": "Igen. Az aktív előfizetés minimális díja havi $1.90, vagyis egy rendszer ára, csatlakoztatott rendszer nélkül is. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés.",
+      "q1": "Milyen rendszereket kezelhetek?",
+      "a1": "Gate, Dual Control és redőny típusú rendszereket, valamint ezek csoportjait. A redőny csak az alkalmazásból működtethető, a redőny mellől.",
       "q2": "Hogyan csatlakoztathatom a rendszereimet az irányítópulthoz?",
       "a2": "Jelentkezzen be ugyanazzal a fiókkal az alkalmazásban és a WIFIGATE webhelyén. Az alkalmazásban exportáljon minden rendszert a WIFIGATE Managerbe, amikor éppen mellette áll, és csatlakoztassa a vezérlőjét a Wi‑Fi-hez (2.4GHz). Ezután a rendszer megjelenik az irányítópultján a webhelyen.",
       "q3": "Kezelhetek külön épületeket vagy ügyfeleket?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Az adatok és a parancsok végponttól végpontig titkosítottak az irányítópult és a vezérlő között. Az irányítópultra a Google vagy az Apple segítségével, továbbá egy ellenőrző kóddal jelentkezik be.",
       "q7": "Hogyan számítjuk ki a havi díjat?",
       "a7": "Rendszerenként havi $1.90, napokra arányosan: a hónap közben hozzáadott vagy eltávolított rendszerért csak azokra a napokra számítunk fel díjat, amikor az irányítópultján volt. Minden hónap elején egyetlen terhelés fedezi az előző hónapot. Az árak amerikai dollárban értendők, adó nélkül.",
-      "q8": "Milyen rendszereket kezelhetek?",
-      "a8": "Gate, Dual Control és redőny típusú rendszereket, valamint ezek csoportjait. A redőny csak az alkalmazásból működtethető, a redőny mellől."
+      "q8": "Van minimális díj?",
+      "a8": "Igen. Az aktív előfizetés minimális díja havi $1.90, vagyis egy rendszer ára, csatlakoztatott rendszer nélkül is. Magához a WIFIGATE vezérlőhöz soha nem kell előfizetés."
     },
     "shop": {
       "title": "Minden egy WIFIGATE vezérlővel kezdődik",

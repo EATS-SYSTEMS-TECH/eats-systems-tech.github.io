@@ -91,8 +91,8 @@ export default {
       "i3x": "Her kuruluşun yöneticileri yalnızca sorumlu oldukları sistemleri yönetir."
     },
     "faq": {
-      "q1": "Asgari bir ücretlendirme var mı?",
-      "a1": "Evet. Aktif bir abonelikten, bağlı sistem olmasa bile aylık en az $1.90, yani bir sistemin fiyatı tahsil edilir. WIFIGATE kontrol ünitesinin kendisi asla abonelik gerektirmez.",
+      "q1": "Hangi sistemleri yönetebilirim?",
+      "a1": "Gate, Dual Control ve kepenk sistemleri ile bunların grupları. Kepenk yalnızca uygulamadan, kepengin yanındayken çalıştırılır.",
       "q2": "Sistemlerimi panele nasıl bağlarım?",
       "a2": "Uygulamada ve WIFIGATE web sitesinde aynı hesapla oturum açın. Uygulamada, her sistemi yanındayken WIFIGATE Manager'a aktarın ve kontrol ünitesini Wi‑Fi'ye (2.4GHz) bağlayın. Sistem ardından web sitesindeki panelinizde görünür.",
       "q3": "Ayrı binaları veya müşterileri yönetebilir miyim?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Veriler ve komutlar, panel ile kontrol ünitesi arasında uçtan uca şifrelenir. Panele Google veya Apple ile, ek olarak bir doğrulama koduyla oturum açarsınız.",
       "q7": "Aylık ücret nasıl hesaplanır?",
       "a7": "Sistem başına aylık $1.90, gün bazında: ay ortasında eklenen veya kaldırılan bir sistem yalnızca panelinizde bulunduğu günler için ücretlendirilir. Her ayın başında yapılan tek bir tahsilat önceki ayı kapsar. Fiyatlar ABD doları cinsindendir ve vergiler hariçtir.",
-      "q8": "Hangi sistemleri yönetebilirim?",
-      "a8": "Gate, Dual Control ve kepenk sistemleri ile bunların grupları. Kepenk yalnızca uygulamadan, kepengin yanındayken çalıştırılır."
+      "q8": "Asgari bir ücretlendirme var mı?",
+      "a8": "Evet. Aktif bir abonelikten, bağlı sistem olmasa bile aylık en az $1.90, yani bir sistemin fiyatı tahsil edilir. WIFIGATE kontrol ünitesinin kendisi asla abonelik gerektirmez."
     },
     "shop": {
       "title": "Her şey bir WIFIGATE kontrol ünitesiyle başlar",

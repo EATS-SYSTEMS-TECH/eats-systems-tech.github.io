@@ -277,7 +277,7 @@
           "name": "住客需要安装应用吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "需要。住客在 WIFIGATE 应用中打开链接，并使用 Google 或 Apple 账户登录。如果没有安装应用，链接会跳转到安装页面；安装后，住客再次打开链接。"
+            "text": "需要安装 WIFIGATE 应用。链接会自动打开应用，并带上该预订对应的通行权限，住客使用 Google 或 Apple 账户登录。如果没有安装应用，链接会跳转到安装页面；安装后，住客再次打开链接。"
           }
         },
         {
@@ -286,14 +286,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "以预订的入住和退房时间为准。默认 15:00 到达、12:00 离开，您也可以设置其他时间。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "入口需要互联网吗？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "不需要。入口通过住客手机与控制器之间的 Bluetooth 打开，进入时不依赖云端。"
           }
         },
         {
@@ -318,6 +310,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "每个入口安装一台 WIFIGATE 控制器。由大门管理员在大门旁通过应用将其添加到 WIFIGATE Host。入口无需 Wi‑Fi。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "WIFIGATE 系统需要连接互联网吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不需要。使用 WIFIGATE Host 时，WIFIGATE 系统不需要连接互联网或 Wi‑Fi。入口通过住客手机与控制器之间的 Bluetooth 打开，进入时不依赖云端。住客的手机只在接收链接和登录应用时需要互联网。"
           }
         },
         {
@@ -465,7 +465,7 @@
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
     <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
-      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">工作原理</span><h2 class="wa-h2" id="wa-flow-title">从预订到开门，全程自动</h2><p class="wa-lead">只需三步，此后每笔预订都自动处理。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">收到预订</h3><p class="wa-flow__desc">您的预订系统会把每一笔已确认的预订通知给 WIFIGATE Host。您也可以在控制台中手动录入预订。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">自动生成通行权限</h3><p class="wa-flow__desc">WIFIGATE Host 会生成一条安全的通行链接，只对应该预订的大门、房门或停车场，且仅在入住期间有效。由您或您的预订系统发送给住客。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">住客直接进门</h3><p class="wa-flow__desc">住客在 WIFIGATE 应用中打开链接，用自己的手机打开入口。退房时，通行权限自动结束。无需回收钥匙。</p></div></li></ol></div></div>
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">工作原理</span><h2 class="wa-h2" id="wa-flow-title">从预订到开门，全程自动</h2><p class="wa-lead">只需三步，此后每笔预订都自动处理。</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">收到预订</h3><p class="wa-flow__desc">您的预订系统会把每一笔已确认的预订通知给 WIFIGATE Host。您也可以在控制台中手动录入预订。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">自动生成通行权限</h3><p class="wa-flow__desc">WIFIGATE Host 会生成一条安全的通行链接，只对应该预订的大门、房门或停车场，且仅在入住期间有效。由您或您的预订系统发送给住客。</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">住客直接进门</h3><p class="wa-flow__desc">链接会自动打开 WIFIGATE 应用并带上相应的通行权限，住客用自己的手机打开入口。退房时，通行权限自动结束。无需回收钥匙。</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
@@ -486,7 +486,7 @@
         <div class="niche-section__header">
           <h2 id="niche-faq-title" class="niche-section__title">常见问题</h2>
         </div>
-        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">住客如何获得通行权限？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host 会为每笔预订生成一条私密的通行链接。由您或您的预订系统通过 SMS、电子邮件或 WhatsApp 发送给住客，您也可以将其显示为 QR 码。</p></div></details><details class="seo-faq__item"><summary dir="ltr">住客需要安装应用吗？</summary><div class="seo-faq__answer"><p dir="ltr">需要。住客在 WIFIGATE 应用中打开链接，并使用 Google 或 Apple 账户登录。如果没有安装应用，链接会跳转到安装页面；安装后，住客再次打开链接。</p></div></details><details class="seo-faq__item"><summary dir="ltr">通行权限何时开始、何时结束？</summary><div class="seo-faq__answer"><p dir="ltr">以预订的入住和退房时间为准。默认 15:00 到达、12:00 离开，您也可以设置其他时间。</p></div></details><details class="seo-faq__item"><summary dir="ltr">入口需要互联网吗？</summary><div class="seo-faq__answer"><p dir="ltr">不需要。入口通过住客手机与控制器之间的 Bluetooth 打开，进入时不依赖云端。</p></div></details><details class="seo-faq__item"><summary dir="ltr">可以对接哪些预订系统？</summary><div class="seo-faq__answer"><p dir="ltr">任何能通过 API 或 webhook 发送预订的系统：物业管理系统（PMS）、渠道管理系统或您自己的系统。您也可以在控制台中手动录入预订。</p></div></details><details class="seo-faq__item"><summary dir="ltr">适用于有多个入口的园区吗？</summary><div class="seo-faq__answer"><p dir="ltr">适用。一笔预订可以打开一组入口，例如大门、停车场和房门，每组最多 20 套系统。</p></div></details><details class="seo-faq__item"><summary dir="ltr">需要安装什么？</summary><div class="seo-faq__answer"><p dir="ltr">每个入口安装一台 WIFIGATE 控制器。由大门管理员在大门旁通过应用将其添加到 WIFIGATE Host。入口无需 Wi‑Fi。</p></div></details><details class="seo-faq__item"><summary dir="ltr">价格如何计算？有最低消费吗？</summary><div class="seo-faq__answer"><p dir="ltr">按活跃系统数量分档累进计费：14 套以内每套 $6，第 15–49 套每套 $5，自第 50 套起每套 $4。每个账户最低消费为每月 $6，即使没有关联任何系统。当月只活跃了部分时间的系统按天计费。</p></div></details></div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">住客如何获得通行权限？</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host 会为每笔预订生成一条私密的通行链接。由您或您的预订系统通过 SMS、电子邮件或 WhatsApp 发送给住客，您也可以将其显示为 QR 码。</p></div></details><details class="seo-faq__item"><summary dir="ltr">住客需要安装应用吗？</summary><div class="seo-faq__answer"><p dir="ltr">需要安装 WIFIGATE 应用。链接会自动打开应用，并带上该预订对应的通行权限，住客使用 Google 或 Apple 账户登录。如果没有安装应用，链接会跳转到安装页面；安装后，住客再次打开链接。</p></div></details><details class="seo-faq__item"><summary dir="ltr">通行权限何时开始、何时结束？</summary><div class="seo-faq__answer"><p dir="ltr">以预订的入住和退房时间为准。默认 15:00 到达、12:00 离开，您也可以设置其他时间。</p></div></details><details class="seo-faq__item"><summary dir="ltr">可以对接哪些预订系统？</summary><div class="seo-faq__answer"><p dir="ltr">任何能通过 API 或 webhook 发送预订的系统：物业管理系统（PMS）、渠道管理系统或您自己的系统。您也可以在控制台中手动录入预订。</p></div></details><details class="seo-faq__item"><summary dir="ltr">适用于有多个入口的园区吗？</summary><div class="seo-faq__answer"><p dir="ltr">适用。一笔预订可以打开一组入口，例如大门、停车场和房门，每组最多 20 套系统。</p></div></details><details class="seo-faq__item"><summary dir="ltr">需要安装什么？</summary><div class="seo-faq__answer"><p dir="ltr">每个入口安装一台 WIFIGATE 控制器。由大门管理员在大门旁通过应用将其添加到 WIFIGATE Host。入口无需 Wi‑Fi。</p></div></details><details class="seo-faq__item"><summary dir="ltr">WIFIGATE 系统需要连接互联网吗？</summary><div class="seo-faq__answer"><p dir="ltr">不需要。使用 WIFIGATE Host 时，WIFIGATE 系统不需要连接互联网或 Wi‑Fi。入口通过住客手机与控制器之间的 Bluetooth 打开，进入时不依赖云端。住客的手机只在接收链接和登录应用时需要互联网。</p></div></details><details class="seo-faq__item"><summary dir="ltr">价格如何计算？有最低消费吗？</summary><div class="seo-faq__answer"><p dir="ltr">按活跃系统数量分档累进计费：14 套以内每套 $6，第 15–49 套每套 $5，自第 50 套起每套 $4。每个账户最低消费为每月 $6，即使没有关联任何系统。当月只活跃了部分时间的系统按天计费。</p></div></details></div>
       </div>
     </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
   <div class="container">

@@ -277,7 +277,7 @@
           "name": "แขกต้องติดตั้งแอปหรือไม่",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ต้อง แขกเปิดลิงก์ในแอป WIFIGATE และลงชื่อเข้าใช้ด้วย Google หรือ Apple หากไม่มีแอป ลิงก์จะนำไปยังหน้าติดตั้ง หลังติดตั้งแล้ว แขกเปิดลิงก์อีกครั้ง"
+            "text": "ต้องติดตั้งแอป WIFIGATE ลิงก์จะเปิดแอปให้โดยอัตโนมัติพร้อมสิทธิ์เข้าออกที่ถูกต้องของการจอง และแขกลงชื่อเข้าใช้ด้วย Google หรือ Apple หากไม่มีแอป ลิงก์จะนำไปยังหน้าติดตั้ง หลังติดตั้งแล้ว แขกเปิดลิงก์อีกครั้ง"
           }
         },
         {
@@ -286,14 +286,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "เป็นไปตามเช็กอินและเช็กเอาต์ของการจอง ค่าเริ่มต้นคือมาถึงเวลา 15:00 และออกเวลา 12:00 และคุณกำหนดเวลาอื่นได้"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "ที่ทางเข้าต้องมีอินเทอร์เน็ตหรือไม่",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ไม่ต้อง ทางเข้าเปิดผ่าน Bluetooth ระหว่างโทรศัพท์ของแขกกับคอนโทรลเลอร์ โดยไม่ต้องพึ่งคลาวด์ในขณะที่เข้า"
           }
         },
         {
@@ -318,6 +310,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "คอนโทรลเลอร์ WIFIGATE ที่แต่ละทางเข้า ผู้ดูแลประตูรั้วเพิ่มคอนโทรลเลอร์เข้าใน WIFIGATE Host จากแอป ขณะอยู่ข้างประตูรั้ว ไม่จำเป็นต้องมี Wi‑Fi ที่ทางเข้า"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ระบบ WIFIGATE ต้องใช้การเชื่อมต่ออินเทอร์เน็ตหรือไม่",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ไม่ต้อง สำหรับ WIFIGATE Host ระบบ WIFIGATE ไม่จำเป็นต้องใช้การเชื่อมต่ออินเทอร์เน็ตหรือ Wi‑Fi ทางเข้าเปิดผ่าน Bluetooth ระหว่างโทรศัพท์ของแขกกับคอนโทรลเลอร์ โดยไม่ต้องพึ่งคลาวด์ในขณะที่เข้า โทรศัพท์ของแขกต้องใช้อินเทอร์เน็ตเฉพาะตอนรับลิงก์และลงชื่อเข้าใช้แอปเท่านั้น"
           }
         },
         {
@@ -465,7 +465,7 @@
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
     <section id="niche-highlights" class="niche-highlights wa-page wa-flow" aria-labelledby="wa-flow-title">
-      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">วิธีการทำงาน</span><h2 class="wa-h2" id="wa-flow-title">จากการจองสู่ประตูที่เปิดให้ โดยอัตโนมัติ</h2><p class="wa-lead">เพียงสามขั้นตอน จากนั้นระบบจะทำงานเองทุกการจอง</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">มีการจองเข้ามา</h3><p class="wa-flow__desc">ระบบการจองของคุณแจ้ง WIFIGATE Host ทุกครั้งที่มีการจองที่ได้รับการยืนยัน คุณยังป้อนการจองด้วยตนเองบนแดชบอร์ดได้ด้วย</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">สร้างสิทธิ์เข้าออกโดยอัตโนมัติ</h3><p class="wa-flow__desc">WIFIGATE Host สร้างลิงก์เข้าออกที่ปลอดภัยสำหรับประตูรั้ว ประตู หรือที่จอดรถของการจองนั้นโดยเฉพาะ ใช้ได้เฉพาะช่วงการเข้าพักเท่านั้น คุณหรือระบบการจองของคุณเป็นผู้ส่งลิงก์ให้แขก</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">แขกเดินเข้าได้เลย</h3><p class="wa-flow__desc">แขกเปิดลิงก์ในแอป WIFIGATE แล้วเปิดทางเข้าจากโทรศัพท์ของตัวเอง เมื่อเช็กเอาต์ สิทธิ์เข้าออกจะสิ้นสุดเอง ไม่มีกุญแจต้องเก็บคืน</p></div></li></ol></div></div>
+      <div class="container"><div class="wa-head wa-head--center"><span class="wa-eyebrow">วิธีการทำงาน</span><h2 class="wa-h2" id="wa-flow-title">จากการจองสู่ประตูที่เปิดให้ โดยอัตโนมัติ</h2><p class="wa-lead">เพียงสามขั้นตอน จากนั้นระบบจะทำงานเองทุกการจอง</p></div><div class="wa-flow__track"><img class="wa-flow__wave" src="../../assets/img/subscription-flow/wave-ltr.svg" alt="" width="1160" height="200" loading="lazy" decoding="async"><ol class="wa-flow__list" id="niche-highlights-list"><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-1.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">มีการจองเข้ามา</h3><p class="wa-flow__desc">ระบบการจองของคุณแจ้ง WIFIGATE Host ทุกครั้งที่มีการจองที่ได้รับการยืนยัน คุณยังป้อนการจองด้วยตนเองบนแดชบอร์ดได้ด้วย</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-2.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">สร้างสิทธิ์เข้าออกโดยอัตโนมัติ</h3><p class="wa-flow__desc">WIFIGATE Host สร้างลิงก์เข้าออกที่ปลอดภัยสำหรับประตูรั้ว ประตู หรือที่จอดรถของการจองนั้นโดยเฉพาะ ใช้ได้เฉพาะช่วงการเข้าพักเท่านั้น คุณหรือระบบการจองของคุณเป็นผู้ส่งลิงก์ให้แขก</p></div></li><li class="wa-flow__step"><img class="wa-flow__art" src="../../assets/img/subscription-flow/host-3.svg" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="wa-flow__text"><h3 class="wa-flow__title">แขกเดินเข้าได้เลย</h3><p class="wa-flow__desc">ลิงก์จะเปิดแอป WIFIGATE โดยอัตโนมัติพร้อมสิทธิ์เข้าออกที่ถูกต้อง แล้วแขกเปิดทางเข้าจากโทรศัพท์ของตัวเอง เมื่อเช็กเอาต์ สิทธิ์เข้าออกจะสิ้นสุดเอง ไม่มีกุญแจต้องเก็บคืน</p></div></li></ol></div></div>
     </section>
 
     <!-- Keep the labelled benefits target and its ordered generated card list. -->
@@ -486,7 +486,7 @@
         <div class="niche-section__header">
           <h2 id="niche-faq-title" class="niche-section__title">คำถามที่พบบ่อย</h2>
         </div>
-        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">แขกได้รับสิทธิ์เข้าออกอย่างไร</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host สร้างลิงก์เข้าออกส่วนตัวสำหรับทุกการจอง คุณหรือระบบการจองของคุณเป็นผู้ส่งลิงก์ให้แขกทาง SMS อีเมล หรือ WhatsApp และคุณยังแสดงลิงก์เป็นรหัส QR ได้ด้วย</p></div></details><details class="seo-faq__item"><summary dir="ltr">แขกต้องติดตั้งแอปหรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">ต้อง แขกเปิดลิงก์ในแอป WIFIGATE และลงชื่อเข้าใช้ด้วย Google หรือ Apple หากไม่มีแอป ลิงก์จะนำไปยังหน้าติดตั้ง หลังติดตั้งแล้ว แขกเปิดลิงก์อีกครั้ง</p></div></details><details class="seo-faq__item"><summary dir="ltr">สิทธิ์เข้าออกเริ่มและสิ้นสุดเมื่อไร</summary><div class="seo-faq__answer"><p dir="ltr">เป็นไปตามเช็กอินและเช็กเอาต์ของการจอง ค่าเริ่มต้นคือมาถึงเวลา 15:00 และออกเวลา 12:00 และคุณกำหนดเวลาอื่นได้</p></div></details><details class="seo-faq__item"><summary dir="ltr">ที่ทางเข้าต้องมีอินเทอร์เน็ตหรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">ไม่ต้อง ทางเข้าเปิดผ่าน Bluetooth ระหว่างโทรศัพท์ของแขกกับคอนโทรลเลอร์ โดยไม่ต้องพึ่งคลาวด์ในขณะที่เข้า</p></div></details><details class="seo-faq__item"><summary dir="ltr">เชื่อมต่อกับระบบการจองใดได้บ้าง</summary><div class="seo-faq__answer"><p dir="ltr">ทุกระบบที่ส่งการจองผ่าน API หรือ webhook ได้: ระบบบริหารที่พัก (PMS), Channel Manager หรือระบบของคุณเอง คุณยังป้อนการจองด้วยตนเองบนแดชบอร์ดได้ด้วย</p></div></details><details class="seo-faq__item"><summary dir="ltr">รองรับโครงการที่มีหลายทางเข้าได้หรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">ได้ การจองเดียวเปิดกลุ่มทางเข้าได้ เช่น ประตูรั้ว ที่จอดรถ และประตู โดยมีได้สูงสุด 20 ระบบในหนึ่งกลุ่ม</p></div></details><details class="seo-faq__item"><summary dir="ltr">ต้องติดตั้งอะไรบ้าง</summary><div class="seo-faq__answer"><p dir="ltr">คอนโทรลเลอร์ WIFIGATE ที่แต่ละทางเข้า ผู้ดูแลประตูรั้วเพิ่มคอนโทรลเลอร์เข้าใน WIFIGATE Host จากแอป ขณะอยู่ข้างประตูรั้ว ไม่จำเป็นต้องมี Wi‑Fi ที่ทางเข้า</p></div></details><details class="seo-faq__item"><summary dir="ltr">ราคาคิดอย่างไร และมียอดขั้นต่ำหรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">คิดตามจำนวนระบบที่ใช้งานอยู่ แบบขั้นบันได: ระบบละ $6 สำหรับไม่เกิน 14 ระบบ, $5 สำหรับระบบที่ 15–49 และ $4 ตั้งแต่ระบบที่ 50 ยอดขั้นต่ำต่อบัญชีคือ $6 ต่อเดือน แม้ไม่มีระบบที่เชื่อมโยงอยู่ ระบบที่ใช้งานอยู่เพียงบางส่วนของเดือนจะถูกเรียกเก็บตามจำนวนวัน</p></div></details></div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item" open=""><summary dir="ltr">แขกได้รับสิทธิ์เข้าออกอย่างไร</summary><div class="seo-faq__answer"><p dir="ltr">WIFIGATE Host สร้างลิงก์เข้าออกส่วนตัวสำหรับทุกการจอง คุณหรือระบบการจองของคุณเป็นผู้ส่งลิงก์ให้แขกทาง SMS อีเมล หรือ WhatsApp และคุณยังแสดงลิงก์เป็นรหัส QR ได้ด้วย</p></div></details><details class="seo-faq__item"><summary dir="ltr">แขกต้องติดตั้งแอปหรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">ต้องติดตั้งแอป WIFIGATE ลิงก์จะเปิดแอปให้โดยอัตโนมัติพร้อมสิทธิ์เข้าออกที่ถูกต้องของการจอง และแขกลงชื่อเข้าใช้ด้วย Google หรือ Apple หากไม่มีแอป ลิงก์จะนำไปยังหน้าติดตั้ง หลังติดตั้งแล้ว แขกเปิดลิงก์อีกครั้ง</p></div></details><details class="seo-faq__item"><summary dir="ltr">สิทธิ์เข้าออกเริ่มและสิ้นสุดเมื่อไร</summary><div class="seo-faq__answer"><p dir="ltr">เป็นไปตามเช็กอินและเช็กเอาต์ของการจอง ค่าเริ่มต้นคือมาถึงเวลา 15:00 และออกเวลา 12:00 และคุณกำหนดเวลาอื่นได้</p></div></details><details class="seo-faq__item"><summary dir="ltr">เชื่อมต่อกับระบบการจองใดได้บ้าง</summary><div class="seo-faq__answer"><p dir="ltr">ทุกระบบที่ส่งการจองผ่าน API หรือ webhook ได้: ระบบบริหารที่พัก (PMS), Channel Manager หรือระบบของคุณเอง คุณยังป้อนการจองด้วยตนเองบนแดชบอร์ดได้ด้วย</p></div></details><details class="seo-faq__item"><summary dir="ltr">รองรับโครงการที่มีหลายทางเข้าได้หรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">ได้ การจองเดียวเปิดกลุ่มทางเข้าได้ เช่น ประตูรั้ว ที่จอดรถ และประตู โดยมีได้สูงสุด 20 ระบบในหนึ่งกลุ่ม</p></div></details><details class="seo-faq__item"><summary dir="ltr">ต้องติดตั้งอะไรบ้าง</summary><div class="seo-faq__answer"><p dir="ltr">คอนโทรลเลอร์ WIFIGATE ที่แต่ละทางเข้า ผู้ดูแลประตูรั้วเพิ่มคอนโทรลเลอร์เข้าใน WIFIGATE Host จากแอป ขณะอยู่ข้างประตูรั้ว ไม่จำเป็นต้องมี Wi‑Fi ที่ทางเข้า</p></div></details><details class="seo-faq__item"><summary dir="ltr">ระบบ WIFIGATE ต้องใช้การเชื่อมต่ออินเทอร์เน็ตหรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">ไม่ต้อง สำหรับ WIFIGATE Host ระบบ WIFIGATE ไม่จำเป็นต้องใช้การเชื่อมต่ออินเทอร์เน็ตหรือ Wi‑Fi ทางเข้าเปิดผ่าน Bluetooth ระหว่างโทรศัพท์ของแขกกับคอนโทรลเลอร์ โดยไม่ต้องพึ่งคลาวด์ในขณะที่เข้า โทรศัพท์ของแขกต้องใช้อินเทอร์เน็ตเฉพาะตอนรับลิงก์และลงชื่อเข้าใช้แอปเท่านั้น</p></div></details><details class="seo-faq__item"><summary dir="ltr">ราคาคิดอย่างไร และมียอดขั้นต่ำหรือไม่</summary><div class="seo-faq__answer"><p dir="ltr">คิดตามจำนวนระบบที่ใช้งานอยู่ แบบขั้นบันได: ระบบละ $6 สำหรับไม่เกิน 14 ระบบ, $5 สำหรับระบบที่ 15–49 และ $4 ตั้งแต่ระบบที่ 50 ยอดขั้นต่ำต่อบัญชีคือ $6 ต่อเดือน แม้ไม่มีระบบที่เชื่อมโยงอยู่ ระบบที่ใช้งานอยู่เพียงบางส่วนของเดือนจะถูกเรียกเก็บตามจำนวนวัน</p></div></details></div>
       </div>
     </section><div class="wa-page host-marketing-closing"><section aria-labelledby="wa-shop-title" class="section wa-shop">
   <div class="container">

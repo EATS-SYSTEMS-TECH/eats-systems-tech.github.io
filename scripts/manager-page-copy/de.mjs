@@ -91,8 +91,8 @@ export default {
       "i3x": "Die Admins jeder Organisation verwalten nur die Systeme, für die sie zuständig sind."
     },
     "faq": {
-      "q1": "Gibt es einen Mindestbetrag?",
-      "a1": "Ja. Für ein aktives Abonnement gilt ein Mindestbetrag von $1.90 pro Monat, der Preis eines Systems, auch ohne verknüpftes System. Für den WIFIGATE-Controller selbst ist nie ein Abonnement nötig.",
+      "q1": "Welche Systeme kann ich verwalten?",
+      "a1": "Systeme vom Typ Gate, Dual Control und Rollladen sowie Gruppen daraus. Ein Rollladen wird nur über die App bedient, direkt am Rollladen.",
       "q2": "Wie verbinde ich meine Systeme mit dem Dashboard?",
       "a2": "Melden Sie sich in der App und auf der WIFIGATE-Website mit demselben Konto an. Exportieren Sie in der App jedes System zu WIFIGATE Manager, während Sie sich direkt daneben befinden, und verbinden Sie seinen Controller mit Wi‑Fi (2.4GHz). Danach erscheint das System in Ihrem Dashboard auf der Website.",
       "q3": "Kann ich getrennte Gebäude oder Kunden verwalten?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Daten und Befehle sind zwischen Dashboard und Controller Ende-zu-Ende verschlüsselt. Am Dashboard melden Sie sich mit Google oder Apple und zusätzlich mit einem Bestätigungscode an.",
       "q7": "Wie wird die monatliche Abbuchung berechnet?",
       "a7": "$1.90 pro System und Monat, tageweise: Ein System, das im Laufe des Monats hinzugefügt oder entfernt wird, wird nur für die Tage berechnet, an denen es in Ihrem Dashboard war. Eine Abbuchung zu Beginn jedes Monats deckt den Vormonat ab. Die Preise verstehen sich in US-Dollar, vor Steuern.",
-      "q8": "Welche Systeme kann ich verwalten?",
-      "a8": "Systeme vom Typ Gate, Dual Control und Rollladen sowie Gruppen daraus. Ein Rollladen wird nur über die App bedient, direkt am Rollladen."
+      "q8": "Gibt es einen Mindestbetrag?",
+      "a8": "Ja. Für ein aktives Abonnement gilt ein Mindestbetrag von $1.90 pro Monat, der Preis eines Systems, auch ohne verknüpftes System. Für den WIFIGATE-Controller selbst ist nie ein Abonnement nötig."
     },
     "shop": {
       "title": "Alles beginnt mit einem WIFIGATE-Controller",

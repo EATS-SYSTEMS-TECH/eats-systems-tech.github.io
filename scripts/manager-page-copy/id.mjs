@@ -91,8 +91,8 @@ export default {
       "i3x": "Admin setiap organisasi hanya mengelola sistem yang menjadi tanggung jawab mereka."
     },
     "faq": {
-      "q1": "Apakah ada tagihan minimum?",
-      "a1": "Ya. Langganan aktif memiliki minimum $1.90 per bulan, yaitu harga satu sistem, meski tidak ada sistem yang tertaut. Pengontrol WIFIGATE itu sendiri tidak pernah memerlukan langganan.",
+      "q1": "Sistem apa saja yang bisa saya kelola?",
+      "a1": "Sistem Gate, Dual Control, dan rolling door, serta grup dari sistem-sistem tersebut. Rolling door hanya dioperasikan dari aplikasi, di dekat rolling door tersebut.",
       "q2": "Bagaimana cara menghubungkan sistem saya ke dasbor?",
       "a2": "Masuk dengan akun yang sama di aplikasi dan di situs web WIFIGATE. Di aplikasi, ekspor setiap sistem ke WIFIGATE Manager saat Anda berada di dekatnya, lalu hubungkan pengontrolnya ke Wi‑Fi (2.4GHz). Setelah itu, sistem muncul di dasbor Anda di situs web.",
       "q3": "Bisakah saya mengelola gedung atau klien yang terpisah?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Data dan perintah dienkripsi dari ujung ke ujung antara dasbor dan pengontrol. Anda masuk ke dasbor dengan Google atau Apple, ditambah kode verifikasi.",
       "q7": "Bagaimana tagihan bulanan dihitung?",
       "a7": "$1.90 per sistem per bulan, dihitung per hari: sistem yang ditambahkan atau dihapus di tengah bulan hanya ditagih untuk hari-hari saat sistem itu ada di dasbor Anda. Satu tagihan di awal setiap bulan mencakup bulan sebelumnya. Harga dalam dolar AS, sebelum pajak.",
-      "q8": "Sistem apa saja yang bisa saya kelola?",
-      "a8": "Sistem Gate, Dual Control, dan rolling door, serta grup dari sistem-sistem tersebut. Rolling door hanya dioperasikan dari aplikasi, di dekat rolling door tersebut."
+      "q8": "Apakah ada tagihan minimum?",
+      "a8": "Ya. Langganan aktif memiliki minimum $1.90 per bulan, yaitu harga satu sistem, meski tidak ada sistem yang tertaut. Pengontrol WIFIGATE itu sendiri tidak pernah memerlukan langganan."
     },
     "shop": {
       "title": "Semuanya berawal dari pengontrol WIFIGATE",

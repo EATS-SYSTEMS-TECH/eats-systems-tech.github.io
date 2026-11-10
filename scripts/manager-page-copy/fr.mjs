@@ -91,8 +91,8 @@ export default {
       "i3x": "Les administrateurs de chaque organisation ne gèrent que les systèmes dont ils sont responsables."
     },
     "faq": {
-      "q1": "Y a-t-il un minimum de facturation ?",
-      "a1": "Oui. Un abonnement actif est soumis à un minimum de $1.90 par mois, soit le prix d'un système, même sans système lié. Le contrôleur WIFIGATE, lui, n'est jamais soumis à abonnement.",
+      "q1": "Quels systèmes puis-je gérer ?",
+      "a1": "Les systèmes Gate, Dual Control et volet roulant, ainsi que leurs groupes. Un volet roulant se commande uniquement depuis l'application, à côté du volet.",
       "q2": "Comment connecter mes systèmes au tableau de bord ?",
       "a2": "Connectez-vous avec le même compte dans l'application et sur le site WIFIGATE. Dans l'application, exportez chaque système vers WIFIGATE Manager lorsque vous vous trouvez à côté de lui, et connectez son contrôleur au Wi‑Fi (2.4GHz). Le système apparaît ensuite dans votre tableau de bord sur le site.",
       "q3": "Puis-je gérer des bâtiments ou des clients distincts ?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Les données et les commandes sont chiffrées de bout en bout entre le tableau de bord et le contrôleur. Vous vous connectez au tableau de bord avec Google ou Apple, plus un code de vérification.",
       "q7": "Comment le prélèvement mensuel est-il calculé ?",
       "a7": "$1.90 par système et par mois, au jour près : un système ajouté ou retiré en cours de mois n'est facturé que pour les jours où il figurait dans votre tableau de bord. Un seul prélèvement en début de mois couvre le mois précédent. Les prix sont en dollars américains, hors taxes.",
-      "q8": "Quels systèmes puis-je gérer ?",
-      "a8": "Les systèmes Gate, Dual Control et volet roulant, ainsi que leurs groupes. Un volet roulant se commande uniquement depuis l'application, à côté du volet."
+      "q8": "Y a-t-il un minimum de facturation ?",
+      "a8": "Oui. Un abonnement actif est soumis à un minimum de $1.90 par mois, soit le prix d'un système, même sans système lié. Le contrôleur WIFIGATE, lui, n'est jamais soumis à abonnement."
     },
     "shop": {
       "title": "Tout commence par un contrôleur WIFIGATE",

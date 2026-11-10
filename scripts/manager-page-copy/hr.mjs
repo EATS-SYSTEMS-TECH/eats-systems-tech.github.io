@@ -91,8 +91,8 @@ export default {
       "i3x": "Administratori svake organizacije upravljaju samo sustavima za koje su odgovorni."
     },
     "faq": {
-      "q1": "Postoji li minimalna naplata?",
-      "a1": "Da. Aktivna pretplata ima minimum od $1.90 mjesečno, što je cijena jednog sustava, čak i bez povezanog sustava. Sam WIFIGATE kontroler nikada ne treba pretplatu.",
+      "q1": "Kojim sustavima mogu upravljati?",
+      "a1": "Sustavima Gate, Dual Control i roletama te njihovim grupama. Roletom se upravlja samo iz aplikacije, pokraj same rolete.",
       "q2": "Kako povezati svoje sustave s nadzornom pločom?",
       "a2": "Prijavite se istim korisničkim računom u aplikaciji i na WIFIGATE web-stranici. U aplikaciji izvezite svaki sustav u WIFIGATE Manager dok ste pokraj njega i povežite njegov kontroler na Wi‑Fi (2.4GHz). Sustav se zatim pojavljuje na vašoj nadzornoj ploči na web-stranici.",
       "q3": "Mogu li upravljati odvojenim zgradama ili klijentima?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Podaci i naredbe šifrirani su s kraja na kraj između nadzorne ploče i kontrolera. Na nadzornu ploču prijavljujete se Google ili Apple računom, uz kod za potvrdu.",
       "q7": "Kako se obračunava mjesečna naplata?",
       "a7": "$1.90 po sustavu mjesečno, po danima: sustav dodan ili uklonjen usred mjeseca naplaćuje se samo za dane u kojima je bio na vašoj nadzornoj ploči. Jedna naplata na početku svakog mjeseca pokriva prethodni mjesec. Cijene su u američkim dolarima, bez poreza.",
-      "q8": "Kojim sustavima mogu upravljati?",
-      "a8": "Sustavima Gate, Dual Control i roletama te njihovim grupama. Roletom se upravlja samo iz aplikacije, pokraj same rolete."
+      "q8": "Postoji li minimalna naplata?",
+      "a8": "Da. Aktivna pretplata ima minimum od $1.90 mjesečno, što je cijena jednog sustava, čak i bez povezanog sustava. Sam WIFIGATE kontroler nikada ne treba pretplatu."
     },
     "shop": {
       "title": "Sve počinje od WIFIGATE kontrolera",

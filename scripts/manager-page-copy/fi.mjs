@@ -91,8 +91,8 @@ export default {
       "i3x": "Kunkin organisaation ylläpitäjät hallitsevat vain niitä järjestelmiä, joista he vastaavat."
     },
     "faq": {
-      "q1": "Onko vähimmäisveloitusta?",
-      "a1": "Kyllä. Aktiivisen tilauksen vähimmäisveloitus on $1.90 kuukaudessa eli yhden järjestelmän hinta, vaikka yhtään järjestelmää ei olisi liitetty. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta.",
+      "q1": "Mitä järjestelmiä voin hallita?",
+      "a1": "Järjestelmätyyppejä Gate, Dual Control ja rullaovi sekä niistä muodostettuja ryhmiä. Rullaovea käytetään vain sovelluksesta, rullaoven vieressä.",
       "q2": "Miten yhdistän järjestelmäni hallintapaneeliin?",
       "a2": "Kirjaudu samalla tilillä sovellukseen ja WIFIGATE-verkkosivustolle. Vie sovelluksessa jokainen järjestelmä WIFIGATE Manageriin, kun olet sen vieressä, ja yhdistä sen ohjain Wi‑Fi-verkkoon (2.4GHz). Sen jälkeen järjestelmä näkyy hallintapaneelissasi verkkosivustolla.",
       "q3": "Voinko hallita erillisiä rakennuksia tai asiakkaita?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Tiedot ja komennot on salattu päästä päähän hallintapaneelin ja ohjaimen välillä. Kirjaudut hallintapaneeliin Googlella tai Applella sekä vahvistuskoodilla.",
       "q7": "Miten kuukausiveloitus lasketaan?",
       "a7": "$1.90 järjestelmältä kuukaudessa, päivien mukaan: kesken kuukauden lisätystä tai poistetusta järjestelmästä veloitetaan vain niiltä päiviltä, jolloin se oli hallintapaneelissasi. Yksi veloitus kunkin kuukauden alussa kattaa edellisen kuukauden. Hinnat ovat Yhdysvaltain dollareina ennen veroja.",
-      "q8": "Mitä järjestelmiä voin hallita?",
-      "a8": "Järjestelmätyyppejä Gate, Dual Control ja rullaovi sekä niistä muodostettuja ryhmiä. Rullaovea käytetään vain sovelluksesta, rullaoven vieressä."
+      "q8": "Onko vähimmäisveloitusta?",
+      "a8": "Kyllä. Aktiivisen tilauksen vähimmäisveloitus on $1.90 kuukaudessa eli yhden järjestelmän hinta, vaikka yhtään järjestelmää ei olisi liitetty. Itse WIFIGATE-ohjain ei koskaan vaadi tilausta."
     },
     "shop": {
       "title": "Kaikki alkaa WIFIGATE-ohjaimesta",

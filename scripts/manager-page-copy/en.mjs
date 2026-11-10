@@ -91,8 +91,8 @@ export default {
       "i3x": "Each organization's admins manage only the systems they are responsible for."
     },
     "faq": {
-      "q1": "Is there a minimum charge?",
-      "a1": "Yes. An active subscription has a minimum of $1.90 per month, the price of one system, even with no linked system. The WIFIGATE controller itself never needs a subscription.",
+      "q1": "Which systems can I manage?",
+      "a1": "Gate, Dual Control and roller shutter systems, and groups of them. A roller shutter is operated only from the app, next to the shutter.",
       "q2": "How do I connect my systems to the dashboard?",
       "a2": "Sign in with the same account in the app and on the WIFIGATE website. In the app, export each system to WIFIGATE Manager while you are next to it, and connect its controller to Wi‑Fi (2.4GHz). The system then appears on your dashboard on the website.",
       "q3": "Can I manage separate buildings or clients?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Data and commands are encrypted end to end between the dashboard and the controller. You sign in to the dashboard with Google or Apple, plus a verification code.",
       "q7": "How is the monthly charge calculated?",
       "a7": "$1.90 per system per month, by days: a system added or removed mid-month is charged only for the days it was on your dashboard. One charge at the start of each month covers the previous month. Prices are in US dollars, before tax.",
-      "q8": "Which systems can I manage?",
-      "a8": "Gate, Dual Control and roller shutter systems, and groups of them. A roller shutter is operated only from the app, next to the shutter."
+      "q8": "Is there a minimum charge?",
+      "a8": "Yes. An active subscription has a minimum of $1.90 per month, the price of one system, even with no linked system. The WIFIGATE controller itself never needs a subscription."
     },
     "shop": {
       "title": "Everything starts with a WIFIGATE controller",

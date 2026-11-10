@@ -91,8 +91,8 @@ export default {
       "i3x": "Los administradores de cada organización gestionan solo los sistemas de los que son responsables."
     },
     "faq": {
-      "q1": "¿Hay un cargo mínimo?",
-      "a1": "Sí. Una suscripción activa tiene un mínimo de $1.90 al mes, el precio de un sistema, incluso sin ningún sistema vinculado. El controlador WIFIGATE en sí nunca requiere suscripción.",
+      "q1": "¿Qué sistemas puedo gestionar?",
+      "a1": "Sistemas Gate, Dual Control y de persiana enrollable, y grupos de ellos. Una persiana enrollable se acciona solo desde la app, junto a la persiana.",
       "q2": "¿Cómo conecto mis sistemas al panel?",
       "a2": "Inicia sesión con la misma cuenta en la app y en el sitio web de WIFIGATE. En la app, exporta cada sistema a WIFIGATE Manager mientras estás junto a él y conecta su controlador a Wi‑Fi (2.4GHz). Después, el sistema aparece en tu panel del sitio web.",
       "q3": "¿Puedo gestionar edificios o clientes por separado?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Los datos y los comandos se cifran de extremo a extremo entre el panel y el controlador. Inicias sesión en el panel con Google o Apple, más un código de verificación.",
       "q7": "¿Cómo se calcula el cargo mensual?",
       "a7": "$1.90 por sistema al mes, por días: un sistema añadido o eliminado a mitad de mes se cobra solo por los días que estuvo en tu panel. Un solo cargo a principio de cada mes cubre el mes anterior. Los precios están en dólares estadounidenses, antes de impuestos.",
-      "q8": "¿Qué sistemas puedo gestionar?",
-      "a8": "Sistemas Gate, Dual Control y de persiana enrollable, y grupos de ellos. Una persiana enrollable se acciona solo desde la app, junto a la persiana."
+      "q8": "¿Hay un cargo mínimo?",
+      "a8": "Sí. Una suscripción activa tiene un mínimo de $1.90 al mes, el precio de un sistema, incluso sin ningún sistema vinculado. El controlador WIFIGATE en sí nunca requiere suscripción."
     },
     "shop": {
       "title": "Todo empieza con un controlador WIFIGATE",

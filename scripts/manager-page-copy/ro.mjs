@@ -91,8 +91,8 @@ export default {
       "i3x": "Administratorii fiecărei organizații gestionează doar sistemele de care răspund."
     },
     "faq": {
-      "q1": "Există o plată minimă?",
-      "a1": "Da. Un abonament activ are un minim de $1.90 pe lună, prețul unui sistem, chiar și fără niciun sistem asociat. Controlerul WIFIGATE în sine nu necesită niciodată abonament.",
+      "q1": "Ce sisteme pot gestiona?",
+      "a1": "Sisteme Gate, Dual Control și rulou, precum și grupuri ale acestora. Un rulou se acționează doar din aplicație, lângă rulou.",
       "q2": "Cum îmi conectez sistemele la panoul de control?",
       "a2": "Conectați-vă cu același cont în aplicație și pe site-ul WIFIGATE. În aplicație, exportați fiecare sistem în WIFIGATE Manager cât timp vă aflați lângă el și conectați controlerul acestuia la Wi‑Fi (2.4GHz). Apoi sistemul apare în panoul dumneavoastră de control de pe site.",
       "q3": "Pot administra separat clădiri sau clienți?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Datele și comenzile sunt criptate end-to-end între panoul de control și controler. Vă conectați la panoul de control cu Google sau Apple, plus un cod de verificare.",
       "q7": "Cum se calculează plata lunară?",
       "a7": "$1.90 per sistem pe lună, pe zile: un sistem adăugat sau eliminat în cursul lunii se taxează doar pentru zilele în care a fost în panoul dumneavoastră de control. O singură plată la începutul fiecărei luni acoperă luna anterioară. Prețurile sunt în dolari americani, fără taxe.",
-      "q8": "Ce sisteme pot gestiona?",
-      "a8": "Sisteme Gate, Dual Control și rulou, precum și grupuri ale acestora. Un rulou se acționează doar din aplicație, lângă rulou."
+      "q8": "Există o plată minimă?",
+      "a8": "Da. Un abonament activ are un minim de $1.90 pe lună, prețul unui sistem, chiar și fără niciun sistem asociat. Controlerul WIFIGATE în sine nu necesită niciodată abonament."
     },
     "shop": {
       "title": "Totul începe cu un controler WIFIGATE",

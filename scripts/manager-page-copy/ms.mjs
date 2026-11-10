@@ -91,8 +91,8 @@ export default {
       "i3x": "Pentadbir setiap organisasi hanya mengurus sistem di bawah tanggungjawab mereka."
     },
     "faq": {
-      "q1": "Adakah terdapat caj minimum?",
-      "a1": "Ya. Langganan aktif mempunyai minimum $1.90 sebulan, iaitu harga satu sistem, walaupun tiada sistem yang dipautkan. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan.",
+      "q1": "Sistem manakah yang boleh saya urus?",
+      "a1": "Sistem Gate, Dual Control dan pintu gulung, serta kumpulan sistem tersebut. Pintu gulung hanya dikendalikan daripada aplikasi, di sebelah pintu gulung itu.",
       "q2": "Bagaimanakah cara menyambungkan sistem saya ke papan pemuka?",
       "a2": "Log masuk dengan akaun yang sama dalam aplikasi dan di laman web WIFIGATE. Dalam aplikasi, eksport setiap sistem ke WIFIGATE Manager semasa anda berada di sebelahnya, dan sambungkan pengawalnya ke Wi‑Fi (2.4GHz). Sistem itu kemudian muncul pada papan pemuka anda di laman web.",
       "q3": "Bolehkah saya mengurus bangunan atau pelanggan yang berasingan?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Data dan arahan disulitkan hujung ke hujung antara papan pemuka dengan pengawal. Anda log masuk ke papan pemuka dengan Google atau Apple, serta kod pengesahan.",
       "q7": "Bagaimanakah caj bulanan dikira?",
       "a7": "$1.90 bagi setiap sistem sebulan, mengikut hari: sistem yang ditambah atau dialih keluar pada pertengahan bulan dicaj hanya untuk hari-hari ia berada pada papan pemuka anda. Satu caj pada awal setiap bulan meliputi bulan sebelumnya. Harga adalah dalam dolar AS, sebelum cukai.",
-      "q8": "Sistem manakah yang boleh saya urus?",
-      "a8": "Sistem Gate, Dual Control dan pintu gulung, serta kumpulan sistem tersebut. Pintu gulung hanya dikendalikan daripada aplikasi, di sebelah pintu gulung itu."
+      "q8": "Adakah terdapat caj minimum?",
+      "a8": "Ya. Langganan aktif mempunyai minimum $1.90 sebulan, iaitu harga satu sistem, walaupun tiada sistem yang dipautkan. Pengawal WIFIGATE sendiri tidak pernah memerlukan langganan."
     },
     "shop": {
       "title": "Semuanya bermula dengan pengawal WIFIGATE",

@@ -91,8 +91,8 @@ export default {
       "i3x": "Administratorene i hver organisasjon administrerer bare systemene de har ansvar for."
     },
     "faq": {
-      "q1": "Finnes det et minstebeløp?",
-      "a1": "Ja. Et aktivt abonnement har et minstebeløp på $1.90 per måned, prisen for ett system, også uten tilknyttet system. Selve WIFIGATE-kontrolleren trenger aldri abonnement.",
+      "q1": "Hvilke systemer kan jeg administrere?",
+      "a1": "Systemer av typen Gate, Dual Control og rullesjalusi, og grupper av dem. En rullesjalusi betjenes bare fra appen, ved siden av rullesjalusien.",
       "q2": "Hvordan kobler jeg systemene mine til dashbordet?",
       "a2": "Logg inn med samme konto i appen og på WIFIGATE-nettstedet. I appen eksporterer du hvert system til WIFIGATE Manager mens du står ved siden av det, og kobler kontrolleren dets til Wi‑Fi (2.4GHz). Deretter vises systemet på dashbordet ditt på nettstedet.",
       "q3": "Kan jeg administrere separate bygg eller kunder?",
@@ -105,8 +105,8 @@ export default {
       "a6": "Data og kommandoer er ende-til-ende-kryptert mellom dashbordet og kontrolleren. Du logger inn på dashbordet med Google eller Apple, pluss en bekreftelseskode.",
       "q7": "Hvordan beregnes den månedlige belastningen?",
       "a7": "$1.90 per system per måned, beregnet per dag: et system som legges til eller fjernes midt i måneden, belastes bare for dagene det var på dashbordet ditt. Én belastning i begynnelsen av hver måned dekker forrige måned. Prisene er i amerikanske dollar, eksklusive mva.",
-      "q8": "Hvilke systemer kan jeg administrere?",
-      "a8": "Systemer av typen Gate, Dual Control og rullesjalusi, og grupper av dem. En rullesjalusi betjenes bare fra appen, ved siden av rullesjalusien."
+      "q8": "Finnes det et minstebeløp?",
+      "a8": "Ja. Et aktivt abonnement har et minstebeløp på $1.90 per måned, prisen for ett system, også uten tilknyttet system. Selve WIFIGATE-kontrolleren trenger aldri abonnement."
     },
     "shop": {
       "title": "Alt starter med en WIFIGATE-kontroller",
