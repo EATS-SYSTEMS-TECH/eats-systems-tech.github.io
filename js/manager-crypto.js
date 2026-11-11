@@ -1,3 +1,4 @@
+import {beginBulkSendEpoch, carryBulkSendEpoch, reserveClientBulkSequence, assertBulkSendEpochOpen, retireBulkSendEpoch} from "./manager-bulk-sequence.js";
 // Browser implementation of the existing SECURE_V4 primitives plus the
 // explicitly versioned Manager W credential. No backend session-key access.
 const utf8 = new TextEncoder();
@@ -58,10 +59,11 @@ export async function hmac(key, value) {
 const base64 = (bytes) => btoa(String.fromCharCode(...bytes));
 const fromBase64 = (value) =>
   Uint8Array.from(atob(value), (c) => c.charCodeAt(0));
-async function aes(key, nonce, aad, value, decrypt = false) {
+async function aes(key, nonce, aad, value, decrypt = false, beforeSeal) {
   const k = await crypto.subtle.importKey("raw", key, "AES-GCM", false, [
     decrypt ? "decrypt" : "encrypt",
   ]);
+  beforeSeal?.();
   return new Uint8Array(
     await crypto.subtle[decrypt ? "decrypt" : "encrypt"](
       {
@@ -214,7 +216,7 @@ export async function managerHandshake({
     `client_cred|${identity.systemId}|${sessionId}`,
     blob,
   );
-  const state = {
+  const state = beginBulkSendEpoch({
     identity,
     sessionId,
     clientPub,
@@ -223,7 +225,7 @@ export async function managerHandshake({
     secret,
     credHash: bytesHex(await sha(blob)),
     info,
-  };
+  });
   return {
     state,
     hello: {
@@ -313,7 +315,7 @@ export async function completeManagerHandshake(state, envelope) {
     throw new Error("Device proof mismatch");
   const transcriptHash = await sha("wifigate-ble-secure-v4|" + fields);
   const salt = concat(nonce, hexBytes(payload.deviceNonce));
-  const session = {
+  const session = carryBulkSendEpoch(state, {
     systemId: identity.systemId,
     sessionId,
     keyId: identity.keyId,
@@ -325,7 +327,7 @@ export async function completeManagerHandshake(state, envelope) {
     authKey: await hkdf(secret, transcriptHash, info("command-auth-key")),
     seq: 1,
     started: performance.now(),
-  };
+  });
   shared.fill(0);
   secret.fill(0);
   return session;
@@ -392,13 +394,22 @@ export async function decryptManagerResponse(session, envelope) {
   return response;
 }
 export function eraseManagerSession(session) {
-  if (session)
+  if (session) {
+    retireBulkSendEpoch(session);
     for (const value of Object.values(session))
       if (value instanceof Uint8Array) value.fill(0);
+  }
 }
 
 /** The existing Admin Bulk v1 wire format, with independent direction keys. */
 export async function managerBulkFrame(session, direction, frame) {
+  return encodeManagerBulkFrame(session, direction, frame);
+}
+export async function managerClientBulkFrame(session, frame) {
+  const packetSeq = reserveClientBulkSequence(session);
+  return encodeManagerBulkFrame(session, "c2d", {...frame, packetSeq}, () => assertBulkSendEpochOpen(session));
+}
+async function encodeManagerBulkFrame(session, direction, frame, beforeSeal) {
   const {
     type,
     transferId,
@@ -435,15 +446,17 @@ export async function managerBulkFrame(session, direction, frame) {
     direction,
     transferId,
   );
-  return concat(
-    header,
-    await aes(
+  beforeSeal?.();
+  const ciphertext = await aes(
       key,
       concat(noncePrefix, be(packetSeq, 4)),
       concat(header, aadSuffix),
       plaintext,
-    ),
-  );
+      false,
+      beforeSeal,
+    );
+  beforeSeal?.();
+  return concat(header, ciphertext);
 }
 async function bulkMaterial(session, direction, transferId) {
   if (!["c2d", "d2c"].includes(direction)) throw new Error("INVALID_DIRECTION");

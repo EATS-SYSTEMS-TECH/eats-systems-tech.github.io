@@ -23,6 +23,7 @@ import {
   decryptManagerResponse,
   eraseManagerSession,
   managerBulkFrame,
+  managerClientBulkFrame,
   decryptManagerBulk,
 } from "../js/manager-crypto.js";
 import { managerConnectionError } from "../js/manager-connection-errors.js";
@@ -276,7 +277,18 @@ test("Manager W handshake proves the gate, encrypts traffic, rejects tampering a
       },
     ),
   };
+  // Completion already wipes pending shared/secret bytes. Model a legitimate
+  // pre-completion copy without weakening that existing cleanup behavior.
+  const copiedState = {...state, shared: state.shared.slice(), secret: state.secret.slice()};
+  const lateState = {...state, shared: state.shared.slice(), secret: state.secret.slice()};
   const session = await completeManagerHandshake(state, envelope);
+  const second = await completeManagerHandshake(copiedState, envelope);
+  assert.deepEqual(second.clientWriteKey, session.clientWriteKey);
+  const bulkFrame = {type: 2, transferId: 7, byteOffset: 0, flagsOrValue: 1};
+  const packets = await Promise.all([session, {...session}, second].map(s => managerClientBulkFrame(s, bulkFrame)));
+  assert.deepEqual(packets.map(p => new DataView(p.buffer, p.byteOffset).getUint32(8)), [1, 2, 3]);
+  await assert.rejects(managerClientBulkFrame(structuredClone(session), bulkFrame), /unavailable/);
+  assert.equal(JSON.stringify(session).includes("bulk sender epoch"), false);
   const response = {
     v: 4,
     type: "frame",
@@ -298,4 +310,6 @@ test("Manager W handshake proves the gate, encrypts traffic, rejects tampering a
   await assert.rejects(decryptManagerResponse(session, response));
   eraseManagerSession(session);
   assert.ok(session.authKey.every((n) => n === 0));
+  await assert.rejects(managerClientBulkFrame(second, bulkFrame), /closed/);
+  await assert.rejects(completeManagerHandshake(lateState, envelope), /closed/);
 });

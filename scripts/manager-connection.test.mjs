@@ -3,8 +3,9 @@ import assert from "node:assert/strict";
 import { createDecipheriv, hkdfSync } from "node:crypto";
 import { ManagerConnection } from "../js/manager-connection.js";
 import { managerBulkFrame, bytesHex, sha } from "../js/manager-crypto.js";
+import { beginBulkSendEpoch } from "../js/manager-bulk-sequence.js";
 
-const makeSession = () => ({
+const makeSession = () => beginBulkSendEpoch({
   systemId: "1234567890123456",
   sessionId: "0011223344556677",
   transcriptHash: new Uint8Array(32).fill(1),

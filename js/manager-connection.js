@@ -7,7 +7,7 @@ import {
   encryptManagerCommand,
   decryptManagerResponse,
   eraseManagerSession,
-  managerBulkFrame,
+  managerClientBulkFrame,
   decryptManagerBulk,
   sha,
 } from "./manager-crypto.js";
@@ -441,14 +441,12 @@ export class ManagerConnection {
         throw new Error("INVALID_EXPORT");
       const parts = [];
       let received = 0,
-        lastSeq = 0,
-        sendSeq = 1;
+        lastSeq = 0;
       const ack = async () =>
         this.socket.send(
-          await managerBulkFrame(this.session, "c2d", {
+          await managerClientBulkFrame(this.session, {
             type: 2,
             transferId: id,
-            packetSeq: sendSeq++,
             byteOffset: received,
             flagsOrValue: 1,
           }),
@@ -546,7 +544,6 @@ export class ManagerConnection {
       ).data;
       id = begin.transferId;
       let offset = begin.acceptedOffset,
-        seq = 1,
         receiveSeq = 0,
         credits = begin.credits;
       const size = Math.min(476, begin.maxPacketBytes);
@@ -568,10 +565,9 @@ export class ManagerConnection {
         while (inFlight.length < credits && sent < data.length) {
           const end = Math.min(data.length, sent + size);
           this.socket.send(
-            await managerBulkFrame(this.session, "c2d", {
+            await managerClientBulkFrame(this.session, {
               type: 1,
               transferId: id,
-              packetSeq: seq++,
               byteOffset: sent,
               flagsOrValue: end === data.length ? 1 : 0,
               plaintext: data.slice(sent, end),
