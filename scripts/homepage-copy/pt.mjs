@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Para",
     promise: "Gestão automática da entrada de hóspedes em cada reserva.",
     text: "O acesso entra em vigor no check-in e expira no check-out. Sem chaves, sem códigos e sem cofres de chaves.",
-    audiences: ["Hotéis", "Casas de férias", "Guest houses", "Estacionamento para arrendar", "Self storage", "E muito mais…"],
+    audiences: ["Hotéis", "Casas de férias", "Guest houses", "Estacionamento para arrendar", "Self storage", "Campos de padel", "E muito mais…"],
     cta: "Conheça o WIFIGATE Host",
     imageAlt: "Hóspedes a usar o telemóvel para entrar no alojamento",
     manager: {

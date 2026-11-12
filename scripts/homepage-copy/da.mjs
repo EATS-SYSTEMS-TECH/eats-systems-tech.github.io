@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Udviklet til",
     promise: "Automatisk styring af gæsteadgang til hver booking.",
     text: "Adgangen gælder fra check-in og udløber ved check-out. Ingen nøgler, ingen koder og ingen nøglebokse.",
-    audiences: ["Hoteller", "Ferieboliger", "Gæstehuse", "Parkeringsudlejning", "Depotrumsudlejning", "Og mere…"],
+    audiences: ["Hoteller", "Ferieboliger", "Gæstehuse", "Parkeringsudlejning", "Depotrumsudlejning", "Padelbaner", "Og mere…"],
     cta: "Udforsk WIFIGATE Host",
     imageAlt: "Gæster bruger en telefon til at komme ind på deres overnatningssted",
     manager: {

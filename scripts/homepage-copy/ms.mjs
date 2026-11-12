@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Untuk",
     promise: "Pengurusan akses tetamu automatik untuk setiap tempahan.",
     text: "Akses berkuat kuasa semasa daftar masuk dan tamat semasa daftar keluar. Tiada kunci, tiada kod dan tiada peti kunci.",
-    audiences: ["Hotel", "Rumah percutian", "Rumah tumpangan", "Parkir sewa", "Perkhidmatan storan", "Dan banyak lagi…"],
+    audiences: ["Hotel", "Rumah percutian", "Rumah tumpangan", "Parkir sewa", "Perkhidmatan storan", "Gelanggang padel", "Dan banyak lagi…"],
     cta: "Terokai WIFIGATE Host",
     imageAlt: "Tetamu menggunakan telefon untuk memasuki tempat penginapan",
     manager: {

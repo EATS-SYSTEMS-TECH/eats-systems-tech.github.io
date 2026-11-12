@@ -135,19 +135,30 @@ function tree(s, x, y, h = 16, r = 8) {
 const DRAWINGS = {
   // Manager ---------------------------------------------------------------
   "manager-residential": s => {
-    s.plate(96, 84);
-    s.box3(60, 12, 0, 28, 36, 62);                                  // the lower neighbour
-    [16, 30, 44].forEach(z => { s.front(64, 84, 48, z, z + 8); });
-    s.line([[22, 56, 0], [22, 84, 0]]); s.line([[42, 56, 0], [42, 84, 0]]);   // the walkway
-    s.box3(12, 14, 0, 40, 42, 104);                                 // the tower
-    s.face([[16, 18, 104], [48, 18, 104], [48, 52, 104], [16, 52, 104]]);
-    [32, 50, 68, 86].forEach(z => {
-      s.front(16, 30, 56, z, z + 9); s.side(52, 20, 50, z, z + 9);
-      s.box3(33, 56, z - 2, 15, 5, 5);                              // a balcony per floor
+    s.plate(106, 88);
+    // the apartment building: a window and a balcony on every floor, the entrance under its canopy
+    s.box3(10, 14, 0, 48, 40, 96);
+    s.face([[15, 19, 96], [53, 19, 96], [53, 49, 96], [15, 49, 96]]);
+    s.box3(20, 24, 96, 12, 10, 6);                                  // the stair head on the roof
+    [26, 43, 60, 77].forEach(z => {
+      s.front(14, 26, 54, z + 4, z + 13);                           // a window
+      s.front(35, 51, 54, z + 5, z + 14);                           // the balcony door, then the balcony in front of it
+      s.box3(32, 54, z, 22, 6, 6);
+      s.side(58, 20, 48, z + 4, z + 13);
     });
-    s.box3(19, 56, 22, 26, 7, 2.5);                                 // the canopy
-    doubleDoor(s, 24, 40, 56, 18);
-    s.light(47, 56, 12);
+    s.side(58, 20, 48, 8, 17);
+    s.box3(13, 54, 20, 22, 6, 2.5);                                 // the canopy
+    doubleDoor(s, 16, 32, 54, 18);
+    s.line([[16, 54, 0], [16, 88, 0]]); s.line([[32, 54, 0], [32, 88, 0]]);   // the walkway
+    // the lower neighbour, further along the street
+    s.box3(68, 8, 0, 30, 32, 60);
+    s.face([[72, 12, 60], [94, 12, 60], [94, 36, 60], [72, 36, 60]]);
+    [10, 27, 44].forEach(z => {
+      s.front(72, 81, 40, z, z + 10); s.front(85, 94, 40, z, z + 10);
+      s.side(98, 13, 35, z, z + 10);
+    });
+    tree(s, 84, 66, 14, 8);
+    s.light(44, 54, 11);
   },
   "manager-offices": s => {
     s.plate(104, 80);
@@ -289,6 +300,34 @@ const DRAWINGS = {
     s.box3(62, 66, 0, 9, 9, 8);
     s.light(96, 46, 29);
   },
+  "host-padel": s => {
+    s.plate(112, 80);
+    const glass = 17, mesh = 12;
+    // the far walls: glass behind each end, mesh along the side between the glass corners
+    s.side(12, 16, 60, 0, glass, "c", "tint");
+    [27, 38, 49].forEach(y => s.line([[12, y, 0], [12, y, glass]]));
+    [[12, 30], [82, 100]].forEach(([x0, x1]) => s.front(x0, x1, 16, 0, glass, "c", "tint"));
+    s.line([[30, 16, mesh], [82, 16, mesh]]);
+    [43, 56, 69].forEach(x => s.line([[x, 16, 0], [x, 16, mesh]]));
+    // the court: its lines and the net
+    s.face([[12, 16, 0], [100, 16, 0], [100, 60, 0], [12, 60, 0]], "c", "none");
+    [28, 84].forEach(x => s.line([[x, 16, 0], [x, 60, 0]]));
+    s.line([[28, 38, 0], [84, 38, 0]]);
+    s.side(56, 16, 60, 0, 6, "c", "white");
+    [24, 32, 40, 48, 56].forEach(y => s.line([[56, y, 0], [56, y, 6]]));
+    s.line([[56, 16, 0], [56, 16, 8]]); s.line([[56, 60, 0], [56, 60, 8]]);
+    // the near walls: the same glass, faint enough for the court to show through
+    s.side(100, 16, 60, 0, glass, "c", "tint");
+    [27, 38, 49].forEach(y => s.line([[100, y, 0], [100, y, glass]]));
+    [[12, 30], [82, 100]].forEach(([x0, x1]) => s.front(x0, x1, 60, 0, glass, "c", "tint"));
+    s.line([[30, 60, mesh], [46, 60, mesh]]); s.line([[66, 60, mesh], [82, 60, mesh]]);
+    s.line([[38, 60, 0], [38, 60, mesh]]); s.line([[74, 60, 0], [74, 60, mesh]]);
+    // the players' door beside the net
+    s.tint([[46, 60, 0], [66, 60, 0], [66, 60, 15], [46, 60, 15]]);
+    s.front(46, 66, 60, 0, 15, "p");
+    s.line([[56, 60, 0], [56, 60, 15]], "p");
+    s.light(74, 60, 22);
+  },
   // The open ending: sites still to come, in dashed outline, and a plus.
   more: s => {
     s.plate(100, 84, "d");
@@ -302,7 +341,7 @@ const DRAWINGS = {
 // The drawing for each entry of a product's audience list, in the list's order
 // (scripts/homepage-copy/*.mjs: automation.audiences, automation.manager.audiences).
 export const AUDIENCE_ART = Object.freeze({
-  host: Object.freeze(["host-hotels", "host-rentals", "host-guesthouses", "host-parking", "host-storage", "more"]),
+  host: Object.freeze(["host-hotels", "host-rentals", "host-guesthouses", "host-parking", "host-storage", "host-padel", "more"]),
   manager: Object.freeze(["manager-residential", "manager-offices", "manager-sports", "manager-parking", "more"]),
 });
 export const AUDIENCE_ART_NAMES = Object.freeze(Object.keys(DRAWINGS));

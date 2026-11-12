@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Made for",
     promise: "Automated guest access management for every booking.",
     text: "Access starts at check-in and expires at checkout. No keys, no codes and no key boxes.",
-    audiences: ["Hotels", "Vacation rentals", "Guesthouses", "Rental parking", "Storage services", "And more…"],
+    audiences: ["Hotels", "Vacation rentals", "Guesthouses", "Rental parking", "Storage services", "Padel courts", "And more…"],
     cta: "Explore WIFIGATE Host",
     imageAlt: "Guests using a phone to enter their accommodation",
     manager: {

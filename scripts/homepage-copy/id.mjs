@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Ditujukan untuk",
     promise: "Pengelolaan akses tamu otomatis untuk setiap pemesanan.",
     text: "Akses mulai berlaku saat check-in dan berakhir saat check-out. Tanpa kunci, tanpa kode, dan tanpa kotak kunci.",
-    audiences: ["Hotel", "Vila dan apartemen liburan", "Guest house", "Parkir sewa", "Layanan penyimpanan", "Dan lainnya…"],
+    audiences: ["Hotel", "Vila dan apartemen liburan", "Guest house", "Parkir sewa", "Layanan penyimpanan", "Lapangan padel", "Dan lainnya…"],
     cta: "Jelajahi WIFIGATE Host",
     imageAlt: "Tamu menggunakan ponsel untuk masuk ke tempat menginap",
     manager: {

@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Kenelle",
     promise: "Vieraiden kulun automaattinen hallinta jokaiselle varaukselle.",
     text: "Kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy uloskirjautumiseen. Ei avaimia, ei koodeja eikä avainlaatikoita.",
-    audiences: ["Hotellit", "Loma-asunnot", "Majatalot", "Vuokrapysäköinti", "Varastopalvelut", "Ja paljon muuta…"],
+    audiences: ["Hotellit", "Loma-asunnot", "Majatalot", "Vuokrapysäköinti", "Varastopalvelut", "Padelkentät", "Ja paljon muuta…"],
     cta: "Tutustu WIFIGATE Hostiin",
     imageAlt: "Vieraat käyttävät puhelinta päästäkseen majoituskohteeseen",
     manager: {

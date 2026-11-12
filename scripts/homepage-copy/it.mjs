@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Pensato per",
     promise: "Gestione automatica degli accessi degli ospiti per ogni prenotazione.",
     text: "L'accesso si attiva al check-in e scade al check-out. Niente chiavi, niente codici e niente cassette portachiavi.",
-    audiences: ["Hotel", "Case vacanza", "B&B e affittacamere", "Parcheggi in affitto", "Self storage", "E molto altro…"],
+    audiences: ["Hotel", "Case vacanza", "B&B e affittacamere", "Parcheggi in affitto", "Self storage", "Campi da padel", "E molto altro…"],
     cta: "Scopri WIFIGATE Host",
     imageAlt: "Ospiti che usano lo smartphone per entrare nel loro alloggio",
     manager: {

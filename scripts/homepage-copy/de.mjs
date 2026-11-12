@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Entwickelt für",
     promise: "Automatische Verwaltung des Gästezutritts für jede Buchung.",
     text: "Die Berechtigung gilt ab dem Check-in und endet beim Check-out. Keine Schlüssel, keine Codes und keine Schlüsselboxen.",
-    audiences: ["Hotels", "Ferienwohnungen", "Gästehäuser", "Mietparkplätze", "Lagerraumvermietung", "Und mehr…"],
+    audiences: ["Hotels", "Ferienwohnungen", "Gästehäuser", "Mietparkplätze", "Lagerraumvermietung", "Padelplätze", "Und mehr…"],
     cta: "WIFIGATE Host entdecken",
     imageAlt: "Gäste betreten ihre Unterkunft mit dem Smartphone",
     manager: {

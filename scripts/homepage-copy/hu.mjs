@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Kinek készült?",
     promise: "Automatikus vendégbeléptetés minden foglaláshoz.",
     text: "A jogosultság check-inkor lép életbe, és check-outkor lejár. Nincs kulcs, nincs kód és nincs kulcsdoboz.",
-    audiences: ["Szállodák", "Üdülőapartmanok", "Vendégházak", "Bérelhető parkolók", "Tárolóbérlés", "És még sok más…"],
+    audiences: ["Szállodák", "Üdülőapartmanok", "Vendégházak", "Bérelhető parkolók", "Tárolóbérlés", "Padelpályák", "És még sok más…"],
     cta: "Ismerje meg a WIFIGATE Hostot",
     imageAlt: "Vendégek telefonnal lépnek be a szállásukra",
     manager: {

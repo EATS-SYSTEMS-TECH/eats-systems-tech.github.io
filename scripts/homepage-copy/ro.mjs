@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Pentru",
     promise: "Gestionare automată a accesului oaspeților pentru fiecare rezervare.",
     text: "Accesul devine activ la check-in și expiră la check-out. Fără chei, fără coduri și fără cutii pentru chei.",
-    audiences: ["Hoteluri", "Case de vacanță", "Pensiuni", "Parcări de închiriat", "Servicii de depozitare", "Și multe altele…"],
+    audiences: ["Hoteluri", "Case de vacanță", "Pensiuni", "Parcări de închiriat", "Servicii de depozitare", "Terenuri de padel", "Și multe altele…"],
     cta: "Descoperiți WIFIGATE Host",
     imageAlt: "Oaspeți care folosesc telefonul pentru a intra în spațiul de cazare",
     manager: {

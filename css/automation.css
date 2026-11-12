@@ -824,10 +824,20 @@ html[dir="rtl"] .wa-hero::after {
   }
 }
 
+/* Seven cards: four and three on medium-wide screens, one row once it fits. */
+@media (min-width: 900px) {
+  .wa-audience__list[data-count="7"] { --audience-cols: 4; }
+}
+
 @media (min-width: 1100px) {
   .wa-audience__list[data-count="4"] { --audience-cols: 4; }
   .wa-audience__list[data-count="5"] { --audience-cols: 5; }
   .wa-audience__list[data-count="6"] { --audience-cols: 6; }
+}
+
+@media (min-width: 1200px) {
+  .wa-audience__list[data-count="7"] { --audience-cols: 7; }
+  .wa-audience__list[data-count="7"] .wa-chip { padding-inline: 0.6rem; font-size: 0.95rem; }
 }
 
 /* ---------- Steps: three points on one wave ---------- */

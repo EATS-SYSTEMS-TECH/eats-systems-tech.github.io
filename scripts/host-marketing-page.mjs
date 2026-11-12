@@ -11,7 +11,7 @@ const sectionNames = ["wa-audience", "wa-pricing", "wa-shop"];
 // Step illustrations and the wave that carries them (assets/img/subscription-flow/).
 const flowArt = "assets/img/subscription-flow/";
 // Version of the audience drawings (assets/img/audience/); change it with them.
-export const AUDIENCE_ART_VERSION = "20261112a";
+export const AUDIENCE_ART_VERSION = "20261112b";
 
 // Plans describe the documented offer in USD, never a billing action.
 // Host: WIFIGATE_HOST.html, Pricing. Manager: WIFIGATE_MANAGER.html, Price.

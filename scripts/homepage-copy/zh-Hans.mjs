@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "适用于",
     promise: "每笔预订的住客通行，全自动管理。",
     text: "权限在入住时生效，退房时失效。无需钥匙、密码或钥匙盒。",
-    audiences: ["酒店", "度假公寓", "民宿", "车位出租", "自助仓储", "更多…"],
+    audiences: ["酒店", "度假公寓", "民宿", "车位出租", "自助仓储", "板式网球场", "更多…"],
     cta: "了解 WIFIGATE Host",
     imageAlt: "住客用手机进入住宿场所",
     manager: {

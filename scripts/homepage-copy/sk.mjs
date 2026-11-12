@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Určené pre",
     promise: "Automatická správa vstupu hostí pre každú rezerváciu.",
     text: "Oprávnenie začne platiť pri príchode a vyprší pri odchode. Bez kľúčov, kódov a schránok na kľúče.",
-    audiences: ["Hotely", "Rekreačné apartmány", "Penzióny", "Prenájom parkovania", "Prenájom skladov", "A ďalšie…"],
+    audiences: ["Hotely", "Rekreačné apartmány", "Penzióny", "Prenájom parkovania", "Prenájom skladov", "Padelové kurty", "A ďalšie…"],
     cta: "Objavte WIFIGATE Host",
     imageAlt: "Hostia vstupujú do ubytovania pomocou telefónu",
     manager: {

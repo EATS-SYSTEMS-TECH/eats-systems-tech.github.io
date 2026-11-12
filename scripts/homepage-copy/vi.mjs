@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Dành cho",
     promise: "Tự động quản lý quyền ra vào của khách cho mọi lượt đặt phòng.",
     text: "Quyền ra vào có hiệu lực khi nhận phòng và hết hạn khi trả phòng. Không chìa khóa, không mã và không hộp đựng chìa khóa.",
-    audiences: ["Khách sạn", "Căn hộ nghỉ dưỡng", "Nhà khách", "Bãi đỗ xe cho thuê", "Kho chứa đồ cho thuê", "Và nhiều hơn nữa…"],
+    audiences: ["Khách sạn", "Căn hộ nghỉ dưỡng", "Nhà khách", "Bãi đỗ xe cho thuê", "Kho chứa đồ cho thuê", "Sân padel", "Và nhiều hơn nữa…"],
     cta: "Khám phá WIFIGATE Host",
     imageAlt: "Khách dùng điện thoại để vào nơi lưu trú",
     manager: {

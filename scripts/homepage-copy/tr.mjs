@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Kimler için",
     promise: "Her rezervasyon için otomatik misafir giriş yönetimi.",
     text: "Yetki check-in'de başlar ve check-out'ta sona erer. Anahtar, şifre veya anahtar kutusu gerekmez.",
-    audiences: ["Oteller", "Tatil evleri", "Pansiyonlar", "Kiralık otoparklar", "Depolama hizmetleri", "Ve daha fazlası…"],
+    audiences: ["Oteller", "Tatil evleri", "Pansiyonlar", "Kiralık otoparklar", "Depolama hizmetleri", "Padel kortları", "Ve daha fazlası…"],
     cta: "WIFIGATE Host'u keşfedin",
     imageAlt: "Konaklama yerine girmek için telefonlarını kullanan misafirler",
     manager: {

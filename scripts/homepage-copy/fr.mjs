@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Pour",
     promise: "La gestion automatique de l'accès des voyageurs, pour chaque réservation.",
     text: "L'accès s'active à l'arrivée et expire au départ. Ni clés, ni codes, ni boîtes à clés.",
-    audiences: ["Hôtels", "Locations saisonnières", "Maisons d'hôtes", "Parkings en location", "Garde-meubles", "Et plus encore…"],
+    audiences: ["Hôtels", "Locations saisonnières", "Maisons d'hôtes", "Parkings en location", "Garde-meubles", "Terrains de padel", "Et plus encore…"],
     cta: "Découvrir WIFIGATE Host",
     imageAlt: "Des voyageurs utilisent leur téléphone pour entrer dans leur hébergement",
     manager: {

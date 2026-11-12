@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Ontworpen voor",
     promise: "Automatisch gasttoegangsbeheer voor elke boeking.",
     text: "De toegang gaat in bij het inchecken en vervalt bij het uitchecken. Geen sleutels, geen codes en geen sleutelkluisjes.",
-    audiences: ["Hotels", "Vakantiewoningen", "Gastenverblijven", "Huurparkeerplaatsen", "Opslagdiensten", "En meer…"],
+    audiences: ["Hotels", "Vakantiewoningen", "Gastenverblijven", "Huurparkeerplaatsen", "Opslagdiensten", "Padelbanen", "En meer…"],
     cta: "Ontdek WIFIGATE Host",
     imageAlt: "Gasten gebruiken hun telefoon om hun accommodatie binnen te gaan",
     manager: {

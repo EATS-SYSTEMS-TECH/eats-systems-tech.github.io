@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Dla",
     promise: "Automatyczne zarządzanie wejściem gości przy każdej rezerwacji.",
     text: "Dostęp aktywuje się przy zameldowaniu i wygasa przy wymeldowaniu. Bez kluczy, bez kodów i bez sejfów na klucze.",
-    audiences: ["Hotele", "Apartamenty wakacyjne", "Pensjonaty", "Parkingi na wynajem", "Self storage", "I wiele więcej…"],
+    audiences: ["Hotele", "Apartamenty wakacyjne", "Pensjonaty", "Parkingi na wynajem", "Self storage", "Korty do padla", "I wiele więcej…"],
     cta: "Poznaj WIFIGATE Host",
     imageAlt: "Goście wchodzą do miejsca zakwaterowania za pomocą telefonu",
     manager: {

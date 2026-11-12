@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Para sa",
     promise: "Awtomatikong pamamahala ng pagpasok ng mga bisita sa bawat booking.",
     text: "Nagsisimula ang pahintulot sa check-in at nag-e-expire sa check-out. Walang susi, walang code, at walang lockbox.",
-    audiences: ["Mga hotel", "Mga bakasyunang paupahan", "Mga guesthouse", "Paupahang paradahan", "Mga storage service", "At marami pang iba…"],
+    audiences: ["Mga hotel", "Mga bakasyunang paupahan", "Mga guesthouse", "Paupahang paradahan", "Mga storage service", "Mga padel court", "At marami pang iba…"],
     cta: "Tuklasin ang WIFIGATE Host",
     imageAlt: "Mga bisitang gumagamit ng telepono para makapasok sa kanilang tutuluyan",
     manager: {

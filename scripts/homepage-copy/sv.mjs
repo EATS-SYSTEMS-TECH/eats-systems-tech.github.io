@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "För",
     promise: "Automatisk hantering av gästernas åtkomst för varje bokning.",
     text: "Behörigheten börjar gälla vid incheckning och upphör vid utcheckning. Inga nycklar, inga koder och inga nyckelboxar.",
-    audiences: ["Hotell", "Semesterboenden", "Gästhus", "Parkeringsuthyrning", "Förrådsuthyrning", "Och mer…"],
+    audiences: ["Hotell", "Semesterboenden", "Gästhus", "Parkeringsuthyrning", "Förrådsuthyrning", "Padelbanor", "Och mer…"],
     cta: "Utforska WIFIGATE Host",
     imageAlt: "Gäster använder mobilen för att komma in i sitt boende",
     manager: {

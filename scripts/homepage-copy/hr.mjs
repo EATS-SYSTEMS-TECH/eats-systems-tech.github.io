@@ -90,7 +90,7 @@ const copy = {
     audienceLabel: "Namijenjeno za",
     promise: "Automatsko upravljanje ulaskom gostiju za svaku rezervaciju.",
     text: "Pristup počinje vrijediti pri prijavi i istječe pri odjavi. Bez ključeva, bez kodova i bez kutija za ključeve.",
-    audiences: ["Hoteli", "Apartmani za odmor", "Kuće za goste", "Parkirališta za najam", "Usluge skladištenja", "I još mnogo toga…"],
+    audiences: ["Hoteli", "Apartmani za odmor", "Kuće za goste", "Parkirališta za najam", "Usluge skladištenja", "Padel tereni", "I još mnogo toga…"],
     cta: "Upoznajte WIFIGATE Host",
     imageAlt: "Gosti telefonom ulaze u svoj smještaj",
     manager: {
