@@ -51,7 +51,7 @@ export default {
       "title": "Van boeking tot open poort, automatisch",
       "subtitle": "Drie stappen, daarna loopt het vanzelf voor elke reservering.",
       "s1t": "Er komt een boeking binnen",
-      "s1x": "Je boekingssysteem meldt elke bevestigde boeking aan WIFIGATE Host. Je kunt een boeking ook handmatig invoeren op het dashboard.",
+      "s1x": "Koppel je boekingssysteem via [[het dashboard op de WIFIGATE-website]]. Je boekingssysteem meldt elke bevestigde boeking aan WIFIGATE Host. Je kunt een boeking ook handmatig invoeren op het dashboard.",
       "s2t": "Toegang wordt automatisch aangemaakt",
       "s2x": "WIFIGATE Host maakt een veilige toegangslink aan voor precies de poort, deur of parkeerplaats van die boeking, alleen geldig tijdens het verblijf. Jij of je boekingssysteem stuurt hem naar de gast.",
       "s3t": "Je gast loopt direct naar binnen",

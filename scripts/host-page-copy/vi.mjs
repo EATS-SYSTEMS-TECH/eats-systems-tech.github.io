@@ -51,7 +51,7 @@ export default {
       "title": "Từ đặt phòng đến cổng mở, hoàn toàn tự động",
       "subtitle": "Ba bước, sau đó mọi việc tự vận hành với từng lượt đặt phòng.",
       "s1t": "Có lượt đặt phòng mới",
-      "s1x": "Hệ thống đặt phòng của bạn thông báo cho WIFIGATE Host về mọi lượt đặt phòng đã được xác nhận. Bạn cũng có thể nhập lượt đặt phòng bằng tay trên bảng điều khiển.",
+      "s1x": "Kết nối hệ thống đặt phòng của bạn qua [[bảng điều khiển trên trang web WIFIGATE]]. Hệ thống đặt phòng của bạn thông báo cho WIFIGATE Host về mọi lượt đặt phòng đã được xác nhận. Bạn cũng có thể nhập lượt đặt phòng bằng tay trên bảng điều khiển.",
       "s2t": "Quyền ra vào được tạo tự động",
       "s2x": "WIFIGATE Host tạo một liên kết ra vào bảo mật cho đúng cổng, cửa hoặc bãi xe của lượt đặt phòng đó, chỉ có hiệu lực trong kỳ lưu trú. Bạn hoặc hệ thống đặt phòng của bạn gửi liên kết này cho khách.",
       "s3t": "Khách chỉ việc bước vào",

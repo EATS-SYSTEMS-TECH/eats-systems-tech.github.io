@@ -51,7 +51,7 @@ export default {
       "title": "Von der Buchung zum offenen Tor, automatisch",
       "subtitle": "Drei Schritte, danach läuft es bei jeder Reservierung von selbst.",
       "s1t": "Eine Buchung geht ein",
-      "s1x": "Ihr Buchungssystem meldet WIFIGATE Host jede bestätigte Buchung. Sie können eine Buchung auch von Hand im Dashboard eingeben.",
+      "s1x": "Verbinden Sie Ihr Buchungssystem über [[das Dashboard auf der WIFIGATE-Website]]. Ihr Buchungssystem meldet WIFIGATE Host jede bestätigte Buchung. Sie können eine Buchung auch von Hand im Dashboard eingeben.",
       "s2t": "Der Zutritt wird automatisch erstellt",
       "s2x": "WIFIGATE Host erstellt einen sicheren Zugangslink für genau das Tor, die Tür oder den Parkplatz dieser Buchung, gültig nur für den Aufenthalt. Sie oder Ihr Buchungssystem senden ihn an den Gast.",
       "s3t": "Ihr Gast kommt direkt hinein",

@@ -49,7 +49,7 @@ export default {
       "title": "From booking to open gate, automatically",
       "subtitle": "Three steps, and then it runs on its own for every reservation.",
       "s1t": "A booking comes in",
-      "s1x": "Your booking system notifies WIFIGATE Host of every confirmed booking. You can also enter a booking by hand on the dashboard.",
+      "s1x": "Connect your booking system on [[the dashboard on the WIFIGATE website]]. From then on it notifies WIFIGATE Host of every confirmed booking. You can also enter a booking by hand on the dashboard.",
       "s2t": "Access is created automatically",
       "s2x": "WIFIGATE Host creates a secure access link for exactly the gate, door or parking of that booking, valid only for the stay. You or your booking system send it to the guest.",
       "s3t": "Your guest walks straight in",

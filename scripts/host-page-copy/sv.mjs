@@ -51,7 +51,7 @@ export default {
       "title": "Från bokning till öppen grind, automatiskt",
       "subtitle": "Tre steg, och sedan sköter det sig självt för varje bokning.",
       "s1t": "En bokning kommer in",
-      "s1x": "Ditt bokningssystem meddelar WIFIGATE Host om varje bekräftad bokning. Du kan också lägga in en bokning manuellt i kontrollpanelen.",
+      "s1x": "Anslut ditt bokningssystem i [[kontrollpanelen på WIFIGATE-webbplatsen]]. Ditt bokningssystem meddelar WIFIGATE Host om varje bekräftad bokning. Du kan också lägga in en bokning manuellt i kontrollpanelen.",
       "s2t": "Åtkomsten skapas automatiskt",
       "s2x": "WIFIGATE Host skapar en säker åtkomstlänk till exakt den grind, dörr eller parkering som hör till bokningen, giltig endast under vistelsen. Du eller ditt bokningssystem skickar den till gästen.",
       "s3t": "Gästen går rakt in",

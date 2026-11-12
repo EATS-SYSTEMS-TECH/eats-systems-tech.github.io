@@ -51,7 +51,7 @@ export default {
       "title": "Fra bestilling til åpen port, automatisk",
       "subtitle": "Tre steg, og deretter går det av seg selv for hver reservasjon.",
       "s1t": "En bestilling kommer inn",
-      "s1x": "Bookingsystemet ditt varsler WIFIGATE Host om hver bekreftet bestilling. Du kan også legge inn en bestilling manuelt på dashbordet.",
+      "s1x": "Koble til bookingsystemet ditt i [[dashbordet på WIFIGATE-nettstedet]]. Bookingsystemet ditt varsler WIFIGATE Host om hver bekreftet bestilling. Du kan også legge inn en bestilling manuelt på dashbordet.",
       "s2t": "Tilgangen opprettes automatisk",
       "s2x": "WIFIGATE Host oppretter en sikker tilgangslenke til nøyaktig den porten, døren eller parkeringen som hører til bestillingen, gyldig bare under oppholdet. Du eller bookingsystemet ditt sender den til gjesten.",
       "s3t": "Gjesten går rett inn",

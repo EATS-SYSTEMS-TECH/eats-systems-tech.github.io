@@ -51,7 +51,7 @@ export default {
       "title": "Od rezerwacji do otwartej bramy, automatycznie",
       "subtitle": "Trzy kroki, a potem wszystko działa samo przy każdej rezerwacji.",
       "s1t": "Wpływa rezerwacja",
-      "s1x": "Twój system rezerwacji informuje WIFIGATE Host o każdej potwierdzonej rezerwacji. Rezerwację możesz też wprowadzić ręcznie w panelu.",
+      "s1x": "Połącz swój system rezerwacji w [[panelu na stronie WIFIGATE]]. Twój system rezerwacji informuje WIFIGATE Host o każdej potwierdzonej rezerwacji. Rezerwację możesz też wprowadzić ręcznie w panelu.",
       "s2t": "Dostęp powstaje automatycznie",
       "s2x": "WIFIGATE Host tworzy bezpieczny link dostępu dokładnie do bramy, drzwi lub parkingu z tej rezerwacji, ważny tylko na czas pobytu. Ty lub Twój system rezerwacji wysyłacie go gościowi.",
       "s3t": "Gość po prostu wchodzi",

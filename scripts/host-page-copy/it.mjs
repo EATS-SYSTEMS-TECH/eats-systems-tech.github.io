@@ -51,7 +51,7 @@ export default {
       "title": "Dalla prenotazione al cancello aperto, in automatico",
       "subtitle": "Tre passaggi, poi fa tutto da solo a ogni prenotazione.",
       "s1t": "Arriva una prenotazione",
-      "s1x": "Il tuo sistema di prenotazione comunica a WIFIGATE Host ogni prenotazione confermata. Puoi anche inserire una prenotazione a mano nella dashboard.",
+      "s1x": "Collega il tuo sistema di prenotazione dalla [[dashboard sul sito WIFIGATE]]. Il tuo sistema di prenotazione comunica a WIFIGATE Host ogni prenotazione confermata. Puoi anche inserire una prenotazione a mano nella dashboard.",
       "s2t": "L'accesso viene creato automaticamente",
       "s2x": "WIFIGATE Host crea un link di accesso sicuro proprio per il cancello, la porta o il parcheggio di quella prenotazione, valido solo per il soggiorno. Tu o il tuo sistema di prenotazione lo inviate all'ospite.",
       "s3t": "L'ospite entra e basta",

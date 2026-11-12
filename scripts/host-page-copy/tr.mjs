@@ -51,7 +51,7 @@ export default {
       "title": "Rezervasyondan açık kapıya, otomatik olarak",
       "subtitle": "Üç adım, sonrası her rezervasyonda kendiliğinden işler.",
       "s1t": "Bir rezervasyon gelir",
-      "s1x": "Rezervasyon sisteminiz, onaylanan her rezervasyonu WIFIGATE Host'a bildirir. Rezervasyonu panelden elle de girebilirsiniz.",
+      "s1x": "Rezervasyon sisteminizi [[WIFIGATE web sitesindeki panelden]] bağlayın. Rezervasyon sisteminiz, onaylanan her rezervasyonu WIFIGATE Host'a bildirir. Rezervasyonu panelden elle de girebilirsiniz.",
       "s2t": "Erişim otomatik oluşturulur",
       "s2x": "WIFIGATE Host, tam olarak o rezervasyonun kapısı, giriş kapısı veya otoparkı için, yalnızca konaklama süresince geçerli güvenli bir erişim bağlantısı oluşturur. Bağlantıyı misafire siz veya rezervasyon sisteminiz gönderir.",
       "s3t": "Misafir rahatça içeri girer",

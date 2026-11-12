@@ -51,7 +51,7 @@ export default {
       "title": "A foglalástól a nyitott kapuig, automatikusan",
       "subtitle": "Három lépés, és onnantól minden foglalásnál magától működik.",
       "s1t": "Beérkezik egy foglalás",
-      "s1x": "Foglalási rendszere minden megerősített foglalásról értesíti a WIFIGATE Hostot. A foglalást kézzel is rögzítheti az irányítópulton.",
+      "s1x": "Foglalási rendszerét [[a WIFIGATE webhelyén található irányítópulton]] csatlakoztathatja. Foglalási rendszere minden megerősített foglalásról értesíti a WIFIGATE Hostot. A foglalást kézzel is rögzítheti az irányítópulton.",
       "s2t": "A hozzáférés automatikusan létrejön",
       "s2x": "A WIFIGATE Host biztonságos hozzáférési linket hoz létre pontosan az adott foglaláshoz tartozó kapuhoz, ajtóhoz vagy parkolóhoz, amely csak a tartózkodás idejére érvényes. Ön vagy a foglalási rendszere küldi el a vendégnek.",
       "s3t": "A vendég egyszerűen belép",

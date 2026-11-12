@@ -51,7 +51,7 @@ export default {
       "title": "Varauksesta avoimeen porttiin, automaattisesti",
       "subtitle": "Kolme vaihetta, ja sen jälkeen kaikki hoituu itsestään jokaisessa varauksessa.",
       "s1t": "Varaus saapuu",
-      "s1x": "Varausjärjestelmäsi ilmoittaa WIFIGATE Hostille jokaisesta vahvistetusta varauksesta. Voit myös syöttää varauksen käsin hallintapaneelissa.",
+      "s1x": "Yhdistä varausjärjestelmäsi [[WIFIGATE-verkkosivuston hallintapaneelissa]]. Varausjärjestelmäsi ilmoittaa WIFIGATE Hostille jokaisesta vahvistetusta varauksesta. Voit myös syöttää varauksen käsin hallintapaneelissa.",
       "s2t": "Kulkuoikeus luodaan automaattisesti",
       "s2x": "WIFIGATE Host luo turvallisen kulkulinkin juuri kyseisen varauksen porttiin, oveen tai pysäköintiin, ja se on voimassa vain majoituksen ajan. Sinä tai varausjärjestelmäsi lähettää sen vieraalle.",
       "s3t": "Vieras pääsee suoraan sisään",

@@ -51,7 +51,7 @@ export default {
       "title": "Fra booking til åben port, automatisk",
       "subtitle": "Tre trin, og derefter kører det af sig selv for hver reservation.",
       "s1t": "En booking kommer ind",
-      "s1x": "Dit bookingsystem giver WIFIGATE Host besked om hver bekræftet booking. Du kan også indtaste en booking manuelt i dashboardet.",
+      "s1x": "Tilslut dit bookingsystem i [[dashboardet på WIFIGATE-webstedet]]. Dit bookingsystem giver WIFIGATE Host besked om hver bekræftet booking. Du kan også indtaste en booking manuelt i dashboardet.",
       "s2t": "Adgangen oprettes automatisk",
       "s2x": "WIFIGATE Host opretter et sikkert adgangslink til præcis den port, dør eller parkering, der hører til bookingen, kun gyldigt under opholdet. Du eller dit bookingsystem sender det til gæsten.",
       "s3t": "Din gæst går direkte ind",

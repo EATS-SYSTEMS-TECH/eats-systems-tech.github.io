@@ -51,7 +51,7 @@ export default {
       "title": "Od rezervacije do otvorenih vrata, automatski",
       "subtitle": "Tri koraka, a nakon toga sve se odvija samo, za svaku rezervaciju.",
       "s1t": "Stiže rezervacija",
-      "s1x": "Vaš sustav za rezervacije obavještava WIFIGATE Host o svakoj potvrđenoj rezervaciji. Rezervaciju možete i ručno unijeti na nadzornoj ploči.",
+      "s1x": "Povežite svoj sustav za rezervacije na [[nadzornoj ploči na WIFIGATE web-stranici]]. Vaš sustav za rezervacije obavještava WIFIGATE Host o svakoj potvrđenoj rezervaciji. Rezervaciju možete i ručno unijeti na nadzornoj ploči.",
       "s2t": "Pristup se stvara automatski",
       "s2x": "WIFIGATE Host stvara sigurnu poveznicu za pristup točno za dvorišna vrata, ulazna vrata ili parkiralište iz te rezervacije, koja vrijedi samo tijekom boravka. Vi ili vaš sustav za rezervacije šaljete je gostu.",
       "s3t": "Gost jednostavno uđe",

@@ -51,7 +51,7 @@ export default {
       "title": "De la réservation au portail ouvert, automatiquement",
       "subtitle": "Trois étapes, puis tout tourne tout seul à chaque réservation.",
       "s1t": "Une réservation arrive",
-      "s1x": "Votre système de réservation informe WIFIGATE Host de chaque réservation confirmée. Vous pouvez aussi saisir une réservation à la main dans le tableau de bord.",
+      "s1x": "Connectez votre système de réservation depuis [[le tableau de bord du site WIFIGATE]]. Votre système de réservation informe WIFIGATE Host de chaque réservation confirmée. Vous pouvez aussi saisir une réservation à la main dans le tableau de bord.",
       "s2t": "L'accès est créé automatiquement",
       "s2x": "WIFIGATE Host crée un lien d'accès sécurisé, précisément pour le portail, la porte ou le parking de cette réservation, valable uniquement pendant le séjour. Vous ou votre système de réservation l'envoyez au voyageur.",
       "s3t": "Votre voyageur entre, tout simplement",

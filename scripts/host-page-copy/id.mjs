@@ -51,7 +51,7 @@ export default {
       "title": "Dari pemesanan hingga gerbang terbuka, otomatis",
       "subtitle": "Tiga langkah, lalu semuanya berjalan sendiri untuk setiap pemesanan.",
       "s1t": "Pemesanan masuk",
-      "s1x": "Sistem pemesanan Anda memberi tahu WIFIGATE Host tentang setiap pemesanan yang sudah dikonfirmasi. Anda juga dapat memasukkan pemesanan secara manual di dasbor.",
+      "s1x": "Hubungkan sistem pemesanan Anda melalui [[dasbor di situs web WIFIGATE]]. Sistem pemesanan Anda memberi tahu WIFIGATE Host tentang setiap pemesanan yang sudah dikonfirmasi. Anda juga dapat memasukkan pemesanan secara manual di dasbor.",
       "s2t": "Akses dibuat otomatis",
       "s2x": "WIFIGATE Host membuat tautan akses yang aman tepat untuk gerbang, pintu, atau parkir pada pemesanan tersebut, dan hanya berlaku selama masa inap. Anda atau sistem pemesanan Anda mengirimkannya kepada tamu.",
       "s3t": "Tamu langsung masuk",

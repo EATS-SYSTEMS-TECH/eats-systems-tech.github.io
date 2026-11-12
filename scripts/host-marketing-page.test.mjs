@@ -262,7 +262,8 @@ test("the three steps ride one wave that follows the page direction, with locali
     assert.equal($(node).find("img.wa-flow__art").attr("src"), `../../assets/img/subscription-flow/host-${index + 1}.svg`);
     assert.equal($(node).find("img.wa-flow__art").attr("alt"), "", "decorative art stays out of the accessibility tree");
     assert.equal($(node).find("h3.wa-flow__title").text(), host.marketing.steps[`s${index + 1}t`]);
-    assert.equal($(node).find("p.wa-flow__desc").text(), host.marketing.steps[`s${index + 1}x`]);
+    // The words a step marks as [[its sign-in link]] read as plain text here: this page was given no sign-in path.
+    assert.equal($(node).find("p.wa-flow__desc").text(), unmarked(host.marketing.steps[`s${index + 1}x`]));
   });
   assert.equal($("#niche-benefits .niche-section__header > .wa-eyebrow").text(), host.marketing.benefits.eyebrow);
   // A step's [[words]] become the sign-in link; without a path they read as plain text.

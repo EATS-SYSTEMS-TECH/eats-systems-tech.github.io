@@ -51,7 +51,7 @@ export default {
       "title": "Od rezervácie po otvorenú bránu, automaticky",
       "subtitle": "Tri kroky a potom to funguje samo pri každej rezervácii.",
       "s1t": "Príde rezervácia",
-      "s1x": "Váš rezervačný systém oznámi WIFIGATE Host každú potvrdenú rezerváciu. Rezerváciu môžete zadať aj ručne v ovládacom paneli.",
+      "s1x": "Rezervačný systém pripojíte v [[ovládacom paneli na webe WIFIGATE]]. Váš rezervačný systém oznámi WIFIGATE Host každú potvrdenú rezerváciu. Rezerváciu môžete zadať aj ručne v ovládacom paneli.",
       "s2t": "Prístup sa vytvorí automaticky",
       "s2x": "WIFIGATE Host vytvorí bezpečný prístupový odkaz presne pre bránu, dvere alebo parkovanie danej rezervácie, platný len počas pobytu. Hosťovi ho pošlete vy alebo váš rezervačný systém.",
       "s3t": "Hosť vojde rovno dnu",

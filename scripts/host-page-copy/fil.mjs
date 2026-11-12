@@ -51,7 +51,7 @@ export default {
       "title": "Mula booking hanggang bukas na gate, awtomatiko",
       "subtitle": "Tatlong hakbang, at pagkatapos ay kusa na itong tumatakbo sa bawat booking.",
       "s1t": "May pumasok na booking",
-      "s1x": "Ipinapaalam ng inyong booking system sa WIFIGATE Host ang bawat kumpirmadong booking. Maaari rin kayong maglagay ng booking nang mano-mano sa dashboard.",
+      "s1x": "Ikonekta ang inyong booking system sa [[dashboard sa website ng WIFIGATE]]. Ipinapaalam ng inyong booking system sa WIFIGATE Host ang bawat kumpirmadong booking. Maaari rin kayong maglagay ng booking nang mano-mano sa dashboard.",
       "s2t": "Awtomatikong nalilikha ang access",
       "s2x": "Gumagawa ang WIFIGATE Host ng ligtas na access link para sa mismong gate, pinto, o paradahan ng booking na iyon, balido lamang sa panahon ng pananatili. Kayo o ang inyong booking system ang nagpapadala nito sa bisita.",
       "s3t": "Diretsong nakakapasok ang bisita",

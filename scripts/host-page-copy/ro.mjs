@@ -51,7 +51,7 @@ export default {
       "title": "De la rezervare la poarta deschisă, automat",
       "subtitle": "Trei pași, apoi totul funcționează singur, la fiecare rezervare.",
       "s1t": "Sosește o rezervare",
-      "s1x": "Sistemul dumneavoastră de rezervări anunță WIFIGATE Host despre fiecare rezervare confirmată. Puteți și să introduceți manual o rezervare în panoul de control.",
+      "s1x": "Conectați sistemul de rezervări din [[panoul de control de pe site-ul WIFIGATE]]. Sistemul dumneavoastră de rezervări anunță WIFIGATE Host despre fiecare rezervare confirmată. Puteți și să introduceți manual o rezervare în panoul de control.",
       "s2t": "Accesul este creat automat",
       "s2x": "WIFIGATE Host creează un link de acces securizat exact pentru poarta, ușa sau parcarea din acea rezervare, valabil doar pe durata sejurului. Dumneavoastră sau sistemul dumneavoastră de rezervări îl trimiteți oaspetelui.",
       "s3t": "Oaspetele pur și simplu intră",

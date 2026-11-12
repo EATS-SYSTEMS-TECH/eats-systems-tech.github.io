@@ -51,7 +51,7 @@ export default {
       "title": "Da reserva ao portão aberto, automaticamente",
       "subtitle": "Três passos e, a partir daí, funciona sozinho em cada reserva.",
       "s1t": "Chega uma reserva",
-      "s1x": "O seu sistema de reservas informa o WIFIGATE Host de cada reserva confirmada. Também pode introduzir uma reserva manualmente no painel.",
+      "s1x": "Ligue o seu sistema de reservas através do [[painel no site da WIFIGATE]]. O seu sistema de reservas informa o WIFIGATE Host de cada reserva confirmada. Também pode introduzir uma reserva manualmente no painel.",
       "s2t": "O acesso é criado automaticamente",
       "s2x": "O WIFIGATE Host cria um link de acesso seguro exatamente para o portão, a porta ou o estacionamento dessa reserva, válido apenas durante a estadia. É enviado ao hóspede por si ou pelo seu sistema de reservas.",
       "s3t": "O hóspede simplesmente entra",

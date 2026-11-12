@@ -51,7 +51,7 @@ export default {
       "title": "Daripada tempahan hingga pintu pagar terbuka, secara automatik",
       "subtitle": "Tiga langkah, kemudian ia berjalan sendiri untuk setiap tempahan.",
       "s1t": "Tempahan diterima",
-      "s1x": "Sistem tempahan anda memaklumkan WIFIGATE Host tentang setiap tempahan yang disahkan. Anda juga boleh memasukkan tempahan secara manual pada papan pemuka.",
+      "s1x": "Sambungkan sistem tempahan anda melalui [[papan pemuka di laman web WIFIGATE]]. Sistem tempahan anda memaklumkan WIFIGATE Host tentang setiap tempahan yang disahkan. Anda juga boleh memasukkan tempahan secara manual pada papan pemuka.",
       "s2t": "Akses dicipta secara automatik",
       "s2x": "WIFIGATE Host mencipta pautan akses yang selamat tepat untuk pintu pagar, pintu atau tempat letak kereta bagi tempahan itu, sah hanya sepanjang penginapan. Anda atau sistem tempahan anda menghantarnya kepada tetamu.",
       "s3t": "Tetamu terus masuk",
