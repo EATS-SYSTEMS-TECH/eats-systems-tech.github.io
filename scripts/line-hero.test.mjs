@@ -41,8 +41,8 @@ test("committed start and still frames are exactly what the shipped scene module
 });
 
 test("scene modules keep the approved timing and carry no page driver, debug hook or global", async () => {
-  // The feature page scene (No SIM, No Router) needs no clip path, so it has no id at all.
-  const expected = { host: { duration: 42, still: 27.0, clip: "wgh-door-clip" }, manager: { duration: 38.9, still: 27.65, clip: "wgm-lens" }, nosim: { duration: 14, still: 6.3, clip: null } };
+  // The feature page scenes (No SIM, No Router; Stability) need no clip path, so they have no id at all.
+  const expected = { host: { duration: 42, still: 27.0, clip: "wgh-door-clip" }, manager: { duration: 38.9, still: 27.65, clip: "wgm-lens" }, nosim: { duration: 14, still: 6.3, clip: null }, stability: { duration: 16, still: 9.2, clip: null } };
   for (const [name, scene] of Object.entries(LINE_HERO_SCENES)) {
     const source = await read(scene.module);
     for (const forbidden of [/\bwindow\./, /\bdocument\./, /\blocation\b/, /URLSearchParams/, /requestAnimationFrame/, /IntersectionObserver/, /matchMedia/, /WG_/, /geomtest|selftest|data-geom|data-frames|data-selftest/i, /document\.title|onerror/])

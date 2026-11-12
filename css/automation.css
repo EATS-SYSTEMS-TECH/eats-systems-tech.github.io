@@ -791,6 +791,47 @@ html[dir="rtl"] .wa-hero::after {
   text-align: center;
 }
 
+/* Under the pointer a card springs up a little and its drawing grows with it;
+   the overshoot of the curve is the bounce. Still for reduced motion. */
+.wa-audience__list .wa-chip {
+  transition: transform 420ms cubic-bezier(0.34, 1.8, 0.64, 1), border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.wa-audience__list .wa-chip__art {
+  transition: transform 420ms cubic-bezier(0.34, 1.8, 0.64, 1);
+}
+
+@media (hover: hover) {
+  .wa-audience__list .wa-chip:hover {
+    border-color: var(--flow-blue);
+    box-shadow: 0 14px 28px -18px rgba(20, 107, 255, 0.55);
+    transform: translateY(-8px);
+  }
+
+  .wa-audience__list .wa-chip:hover .wa-chip__art {
+    transform: scale(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-audience__list .wa-chip,
+  .wa-audience__list .wa-chip__art {
+    transition: none;
+  }
+
+  .wa-audience__list .wa-chip:hover,
+  .wa-audience__list .wa-chip:hover .wa-chip__art {
+    transform: none;
+  }
+}
+
+html.a11y-reduced-motion .wa-audience__list .wa-chip,
+html.a11y-reduced-motion .wa-audience__list .wa-chip__art,
+html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
+  transition: none;
+  transform: none;
+}
+
 .wa-chip__art {
   display: block;
   width: 100%;

@@ -21,6 +21,7 @@ export const LINE_HERO_SCENES = Object.freeze({
   host: { module: "js/line-hero-host.js", factory: "createHostScene" },
   manager: { module: "js/line-hero-manager.js", factory: "createManagerScene" },
   nosim: { module: "js/line-hero-nosim.js", factory: "createNoSimScene" },
+  stability: { module: "js/line-hero-stability.js", factory: "createStabilityScene" },
 });
 export const LINE_HERO_FRAMES = Object.freeze(["start", "still"]);
 

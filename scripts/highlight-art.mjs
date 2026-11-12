@@ -179,6 +179,35 @@ const DRAWINGS = {
     thin([94, 116, 138].map(y => [224, 246, 268].map(x => `<rect x="${x}" y="${y}" width="14" height="14" rx="4"/>`).join("")).join("")),
     light(296, 164),
   ],
+  // the phone reaches the device itself: no cloud in between
+  offline: () => [
+    thin(`<path d="M132 78a22 22 0 0 1 43 -6a17 17 0 0 1 21 17a15 15 0 0 1 -6 29h-55a19 19 0 0 1 -3 -40Z"/>`),
+    `<path d="M118 128L206 46"/>`,
+    phone(34, 60, 70, 132),
+    tint(`<circle cx="69" cy="126" r="19"/>`), `<circle cx="69" cy="126" r="19"/>`, dot(69, 126, 7),
+    dashed("M110 150h92"), tip(208, 150),
+    tint(`<rect x="232" y="104" width="44" height="76" rx="7"/>`), `<rect x="232" y="104" width="44" height="76" rx="7"/>`, thin(`<path d="M244 162h20"/>`), dot(254, 128, 4.5),
+    ground(214, 300, 190), light(254, 80),
+  ],
+  // three networks in order: one drops and the next takes over
+  failover: () => [
+    thin([44, 98, 152].map(y => `<rect x="28" y="${y}" width="84" height="30" rx="7"/><path d="M40 ${y}v-14M100 ${y}v-14M42 ${y + 15}h0.1M54 ${y + 15}h0.1M76 ${y + 15}h22"/>`).join("")),
+    `<path d="M22 84L118 34"/>`,
+    dashed("M112 59c58 0 70 40 124 44"),
+    `<path d="M112 113h118"/>`, dot(172, 113, 4.5), tip(236, 113),
+    dashed("M112 167c58 0 70 -32 124 -40"),
+    tint(`<rect x="244" y="74" width="46" height="80" rx="7"/>`), `<rect x="244" y="74" width="46" height="80" rx="7"/>`, thin(`<path d="M257 136h20"/>`), dot(267, 100, 4.5),
+    light(267, 50),
+  ],
+  // the direct connection answers at once, every time
+  instant: () => [
+    phone(34, 28, 80, 164),
+    tint(`<circle cx="74" cy="112" r="23"/>`), `<circle cx="74" cy="112" r="23"/>`, dot(74, 112, 8),
+    `<path d="M168 62l-30 52h24l-8 44l32 -56h-24Z" fill="#fff"/>`,
+    tint(`<rect x="216" y="62" width="80" height="114"/>`), `<path d="M216 176V62h80v114"/>`,
+    `<path d="M216 62l-26 12v112l26 -10Z" fill="#fff"/><path d="M197 122v13"/>`,
+    ground(206, 308, 176), light(256, 42),
+  ],
   // any other highlight: access that is protected
   default: () => [
     `<path d="M112 28l-60 24v46c0 38 24 66 60 78c36 -12 60 -40 60 -78V52Z"/>`,
