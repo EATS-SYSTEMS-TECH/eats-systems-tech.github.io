@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells, installSubscriptionFlow, installAudienceList } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells, installSubscriptionFlow, installAudienceList, AUDIENCE_ART_VERSION } from "./host-marketing-page.mjs";
+import { AUDIENCE_ART, AUDIENCE_ART_NAMES, AUDIENCE_ART_SIZE, audienceArtPath, renderAudienceArt } from "./audience-art.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
 
@@ -292,11 +293,22 @@ test("the three steps ride one wave that follows the page direction, with locali
 test("the audience row lists the localized customer types and always ends open", () => {
   const page = () => cheerio.load('<main><div class="wa-page host-marketing-details"><section class="wa-audience"><div class="container wa-audience__row"><span class="wa-audience__label">Built for:</span><span class="wa-chip">Old</span><span class="wa-chip">Chips</span></div></section></div></main>');
   const $ = page();
-  installAudienceList($, { items: ["Hotels", "Storage services", "And more…"] });
+  installAudienceList($, { items: ["Homes", "Offices", "Sports", "Parking", "And more…"], productName: "manager", assetPrefix: "../" });
   assert.equal($(".wa-audience__row > .wa-chip").length, 0, "the fixed chips give way to the localized list");
   assert.equal($(".wa-audience__row > .wa-audience__label").text(), "Built for:");
   assert.deepEqual($("ul.wa-audience__list > li").map((_, node) => [[$(node).attr("class"), $(node).text()]]).get(),
-    [["wa-chip", "Hotels"], ["wa-chip", "Storage services"], ["wa-chip wa-chip--more", "And more…"]]);
+    [["wa-chip", "Homes"], ["wa-chip", "Offices"], ["wa-chip", "Sports"], ["wa-chip", "Parking"], ["wa-chip wa-chip--more", "And more…"]]);
+  // Every entry carries its own decorative drawing above its name; the row knows how many cards it holds.
+  assert.equal($("ul.wa-audience__list").attr("data-count"), "5");
+  assert.deepEqual($("ul.wa-audience__list > li > img.wa-chip__art + span.wa-chip__text").map((_, node) => $(node).prev().attr("src")).get(),
+    AUDIENCE_ART.manager.map(name => `../${audienceArtPath(name)}?v=${AUDIENCE_ART_VERSION}`));
+  for (const image of $("ul.wa-audience__list img").toArray()) {
+    assert.deepEqual([$(image).attr("alt"), $(image).attr("loading"), $(image).attr("width"), $(image).attr("height")], ["", "lazy", String(AUDIENCE_ART_SIZE.width), String(AUDIENCE_ART_SIZE.height)]);
+  }
+  // A list that does not match the product's drawings leaves the page untouched.
+  const uneven = page(), before = uneven.html();
+  assert.throws(() => installAudienceList(uneven, { items: ["Hotels", "And more…"] }), /one drawing per entry/);
+  assert.equal(uneven.html(), before);
   for (const items of [undefined, [], ["Only one"], ["Hotels", " "], ["Hotels", 5]]) {
     const broken = page(), original = broken.html();
     assert.throws(() => installAudienceList(broken, { items }), /audience list requires/);
@@ -305,4 +317,20 @@ test("the audience row lists the localized customer types and always ends open",
   const missing = cheerio.load("<main></main>"), original = missing.html();
   assert.throws(() => installAudienceList(missing, { items: ["Hotels", "And more…"] }), /one audience row/);
   assert.equal(missing.html(), original);
+});
+
+test("committed audience drawings are exactly what scripts/audience-art.mjs draws, one per localized entry", async () => {
+  for (const name of AUDIENCE_ART_NAMES) {
+    const committed = await fs.readFile(new URL(`../${audienceArtPath(name)}`, import.meta.url), "utf8");
+    assert.equal(committed.replace(/\r\n/g, "\n"), renderAudienceArt(name), name);
+  }
+  for (const [product, list] of [["host", "audiences"], ["manager", "manager.audiences"]]) {
+    assert.ok(AUDIENCE_ART[product].every(name => AUDIENCE_ART_NAMES.includes(name)), product);
+    assert.equal(AUDIENCE_ART[product].at(-1), "more", "the open ending keeps its dashed drawing");
+    // Every locale lists the same customer types in the same order as the drawings.
+    for (const { locale, home } of copies) {
+      const entries = list.split(".").reduce((value, key) => value?.[key], home.automation);
+      assert.equal(entries?.length, AUDIENCE_ART[product].length, `${locale} ${product}`);
+    }
+  }
 });

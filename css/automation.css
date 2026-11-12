@@ -759,58 +759,75 @@ html[dir="rtl"] .wa-hero::after {
   background: var(--flow-blue);
 }
 
-/* The customer types sit like points on one dashed line; the open ending is dashed itself. */
+/* The customer types are cards: a drawing in the language of the hero animation
+   above each name. They share one row on wide screens, three across on medium
+   ones and two on phones; a short last row is centred. The open ending is dashed. */
 .wa-audience__list {
-  position: relative;
+  --audience-cols: 2;
+  --audience-gap: 0.75rem;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 0.8rem 1rem;
+  gap: var(--audience-gap);
   width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.wa-audience__list::before {
-  position: absolute;
-  inset-inline: 0;
-  inset-block-start: 50%;
-  border-top: 1.5px dashed var(--flow-hair);
-  content: "";
-}
-
 .wa-chip {
-  position: relative;
-  gap: 0.6rem;
-  padding: 0.7rem 1.35rem;
+  flex: 0 0 calc((100% - (var(--audience-cols) - 1) * var(--audience-gap)) / var(--audience-cols));
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.75rem 0.6rem 0.9rem;
   border: 1.5px solid var(--flow-hair);
-  border-radius: 999px;
+  border-radius: 18px;
   background: #fff;
   color: var(--flow-navy);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  text-align: center;
 }
 
-.wa-chip::before {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  content: "";
-  background: var(--flow-blue);
-  box-shadow: 0 0 0 3px #fff, 0 0 0 4.5px var(--flow-hair);
+.wa-chip__art {
+  display: block;
+  width: 100%;
+  max-width: 13rem;
+  height: auto;
+  aspect-ratio: 220 / 170;
+}
+
+/* A long single word breaks at a syllable where the language has hyphenation. */
+.wa-chip__text {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .wa-chip--more {
   border-style: dashed;
   border-color: var(--flow-blue);
-  background: var(--flow-tint);
   color: var(--flow-blue);
 }
 
-.wa-chip--more::before {
-  content: none;
+@media (min-width: 700px) {
+  .wa-audience__list {
+    --audience-cols: 3;
+    --audience-gap: 1rem;
+  }
+
+  .wa-chip {
+    padding: 1rem 0.9rem 1.15rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .wa-audience__list[data-count="4"] { --audience-cols: 4; }
+  .wa-audience__list[data-count="5"] { --audience-cols: 5; }
+  .wa-audience__list[data-count="6"] { --audience-cols: 6; }
 }
 
 /* ---------- Steps: three points on one wave ---------- */
@@ -1015,10 +1032,6 @@ html[dir="rtl"] .wa-hero::after {
 /* ---------- Narrow screens ---------- */
 @media (max-width: 900px) {
   .wa-pricing::before {
-    display: none;
-  }
-
-  .wa-audience__list::before {
     display: none;
   }
 

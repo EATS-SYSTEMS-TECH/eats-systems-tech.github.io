@@ -2,12 +2,16 @@
 // nodes and assigning text keeps copy separate from markup and access logic.
 // The WIFIGATE Host and WIFIGATE Manager pages share one layout; each product
 // supplies its own plans, audience and icons.
+import { AUDIENCE_ART, AUDIENCE_ART_SIZE, audienceArtPath } from "./audience-art.mjs";
+
 export const HOST_PAGE_KEY = "wifigate-host";
 export const MANAGER_PAGE_KEY = "wifigate-manager";
 const marketingKey = "guestInvites.marketing";
 const sectionNames = ["wa-audience", "wa-pricing", "wa-shop"];
 // Step illustrations and the wave that carries them (assets/img/subscription-flow/).
 const flowArt = "assets/img/subscription-flow/";
+// Version of the audience drawings (assets/img/audience/); change it with them.
+export const AUDIENCE_ART_VERSION = "20261112a";
 
 // Plans describe the documented offer in USD, never a billing action.
 // Host: WIFIGATE_HOST.html, Pricing. Manager: WIFIGATE_MANAGER.html, Price.
@@ -186,13 +190,21 @@ export function installSubscriptionFlow($, { content, productName = "host", asse
 }
 
 // The audience row lists the localized customer types and always ends open:
-// the last entry ("And more…") is a dashed chip, so the list never reads as closed.
-export function installAudienceList($, { items }) {
+// the last entry ("And more…") is dashed, so the list never reads as closed.
+// Every entry is a card: its drawing in the language of the hero animation
+// (scripts/audience-art.mjs, decorative) above its name.
+export function installAudienceList($, { items, productName = "host", assetPrefix = "" }) {
   const row = $(".host-marketing-details section.wa-audience .wa-audience__row");
   if (row.length !== 1 || row.children(".wa-audience__label").length !== 1) throw new Error("The audience list requires one audience row with its label");
   if (!Array.isArray(items) || items.length < 2 || items.some(item => typeof item !== "string" || !item.trim())) throw new Error("The audience list requires localized entries and an open ending");
-  const list = node($, "ul", { class: "wa-audience__list" }, items.map((text, index) =>
-    node($, "li", { class: `wa-chip${index === items.length - 1 ? " wa-chip--more" : ""}` }, text)));
+  const art = AUDIENCE_ART[productName];
+  if (!art || art.length !== items.length) throw new Error(`The audience list requires one drawing per entry: ${productName}`);
+  const list = node($, "ul", { class: "wa-audience__list", "data-count": String(items.length) }, items.map((text, index) =>
+    node($, "li", { class: `wa-chip${index === items.length - 1 ? " wa-chip--more" : ""}` }, [
+      node($, "img", { class: "wa-chip__art", src: `${assetPrefix}${audienceArtPath(art[index])}?v=${AUDIENCE_ART_VERSION}`, alt: "",
+        width: String(AUDIENCE_ART_SIZE.width), height: String(AUDIENCE_ART_SIZE.height), loading: "lazy", decoding: "async" }),
+      node($, "span", { class: "wa-chip__text" }, text),
+    ])));
   row.children(".wa-chip").remove();
   row.append(list);
 }
