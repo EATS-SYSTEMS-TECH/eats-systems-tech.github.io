@@ -323,7 +323,7 @@
   }
 }
 
-/* 3D tools: the dimensions toggle and reset sit together on the start corner. */
+/* 3D tools: the mode switch and the dimensions toggle sit on the start corner. */
 .shop-viewer__tools {
   position: absolute;
   inset-block-start: 16px;
@@ -412,8 +412,17 @@
   white-space: nowrap;
   box-shadow: 0 4px 12px -8px rgb(0 0 0 / 45%);
 }
+/* Reset view: centred under the 3D model, just above the hint line. */
 .shop-viewer__reset {
-  padding: 10px 16px;
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 10px 18px;
   border: 1px solid #e3e6e8;
   border-radius: 999px;
   background: #fff;
@@ -421,10 +430,17 @@
   font: inherit;
   font-size: 13px;
   font-weight: 700;
+  line-height: 1;
   cursor: pointer;
+  box-shadow: 0 6px 16px -10px rgb(0 0 0 / 40%);
+  transition: border-color 160ms ease-out, transform 160ms ease-out;
+}
+.shop-viewer__reset[hidden] {
+  display: none;
 }
 .shop-viewer__reset:hover {
   border-color: #151719;
+  transform: translateY(-1px);
 }
 .shop-viewer__reset:focus-visible {
   outline: 2px solid #1265e8;
@@ -585,6 +601,10 @@
   .shop-viewer__hint {
     inset-block-end: 22px;
     font-size: 12px;
+  }
+  /* Room for a hint that wraps to two lines on narrow phones. */
+  .shop-viewer__reset {
+    inset-block-end: 64px;
   }
 }
 body.shop-viewer-open {
