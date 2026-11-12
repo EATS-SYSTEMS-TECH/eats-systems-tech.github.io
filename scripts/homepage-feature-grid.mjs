@@ -64,8 +64,8 @@ export function installHomeFeatureCards($) {
 // to the card's own page. Where that page does not exist yet the arrow is
 // shown pale and is not a link, so the grid stays even while pages are added.
 // `pages` maps a card's class suffix (feature-card--<suffix>) to its page path.
-// The arrow speaks the site's line language: a node dot, a thin line and an open head; no ring around it.
-const ARROW = '<svg viewBox="0 0 38 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="3.5" cy="8" r="2.6" fill="currentColor" stroke="none"></circle><path d="M10 8h25"></path><path d="m29 2.5 6 5.5-6 5.5"></path></svg>';
+// A short, heavy arrow and nothing else: no ring and no dot.
+const ARROW = '<svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h17"></path><path d="m14.5 2.5 5.5 5.5-5.5 5.5"></path></svg>';
 export function installFeatureArrows($, { pages }) {
   const cards = $("#how-it-works > .features-grid > .feature-card");
   if (cards.length !== HOME_FEATURES.length) throw new Error("Feature arrows require every homepage feature card");

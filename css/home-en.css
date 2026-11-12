@@ -441,23 +441,23 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
 }
 
 /* The small arrow in a card's corner, opposite its number: the card's only link,
-   to the page that says more. It is drawn bare, in the site's line language (a
-   node dot, a thin line, an open head), and steps forward under the pointer.
+   to the page that says more. It is a short, heavy arrow with nothing around
+   it, and it steps forward under the pointer.
    A pale arrow would mark a page that is not there yet. */
 .home-en .feature-card__more {
   position: absolute;
   top: 0.45rem;
-  left: 0.85rem;
+  left: 0.7rem;
   display: grid;
-  width: 3.25rem;
+  width: 2.75rem;
   height: 2.75rem;
   place-items: center;
   color: #146bff;
 }
 
 .home-en .feature-card__more svg {
-  width: 2.4rem;
-  height: 1rem;
+  width: 1.6rem;
+  height: 1.07rem;
   overflow: visible;
   transition: translate 260ms cubic-bezier(0.34, 1.6, 0.64, 1);
 }
