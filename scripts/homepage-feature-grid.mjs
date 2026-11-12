@@ -59,3 +59,22 @@ export function installHomeFeatureCards($) {
   if (slot.length !== 1) throw new Error("Homepage features require one grid");
   slot.html(`\n${HOME_FEATURES.map(featureCard).join("\n\n")}\n        `);
 }
+
+// Every card carries one small arrow in its corner, and the arrow alone leads
+// to the card's own page. Where that page does not exist yet the arrow is
+// shown pale and is not a link, so the grid stays even while pages are added.
+// `pages` maps a card's class suffix (feature-card--<suffix>) to its page path.
+const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>';
+export function installFeatureArrows($, { pages }) {
+  const cards = $("#how-it-works > .features-grid > .feature-card");
+  if (cards.length !== HOME_FEATURES.length) throw new Error("Feature arrows require every homepage feature card");
+  if ($(".feature-card__more").length) throw new Error("Feature arrows are already present");
+  cards.each((_, node) => {
+    const card = $(node), suffix = (card.attr("class") || "").match(/feature-card--([a-z0-9-]+)/)?.[1], href = pages?.[suffix];
+    const label = card.find(".feature-card__title").text().trim();
+    if (!suffix || !label) throw new Error("A feature card requires its class and title");
+    const arrow = href ? $("<a>").attr({ class: "feature-card__more", href, "aria-label": label })
+      : $("<span>").attr({ class: "feature-card__more feature-card__more--pending", "aria-hidden": "true" });
+    card.append(arrow.html(ARROW));
+  });
+}

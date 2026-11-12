@@ -147,6 +147,38 @@ const DRAWINGS = {
     dashed("M190 110h20"),
     `<path d="M214 110a40 40 0 1 0 12.2 -28.7"/><path d="M214 75v25.5h26"/><path d="M254 91v21l14 8.5"/>`,
   ],
+  // nothing extra at the entrance: no SIM card and no router, only the device
+  nosim: () => [
+    thin(`<path d="M34 64h36l22 22v70h-58Z"/><rect x="46" y="104" width="34" height="28" rx="5"/><path d="M46 118h34M63 104v28"/>`),
+    `<path d="M22 164L104 58"/>`,
+    thin(`<rect x="118" y="116" width="92" height="36" rx="7"/><path d="M132 116l-8 -40M196 116l8 -40M132 134h0.1M146 134h0.1M176 134h20"/><path d="M150 96a20 20 0 0 1 28 0"/>`),
+    `<path d="M114 164L214 64"/>`,
+    dashed("M218 134h14"), tip(238, 134),
+    tint(`<rect x="250" y="96" width="38" height="68" rx="6"/>`), `<rect x="250" y="96" width="38" height="68" rx="6"/>`, thin(`<path d="M260 148h18"/>`), dot(269, 118, 4),
+    ground(24, 300, 176), light(269, 72),
+  ],
+  // the phone reaches the device itself, so weak reception does not matter
+  nosignal: () => [
+    phone(34, 28, 84, 164),
+    `<path d="M56 96v-10"/>`,
+    thin(`<path d="M68 96v-18M80 96v-26M92 96v-34" stroke-dasharray="3 4"/>`),
+    `<path d="M50 104L100 56"/>`,
+    tint(`<circle cx="76" cy="142" r="20"/>`), `<circle cx="76" cy="142" r="20"/>`, dot(76, 142, 7),
+    waves(128, 126),
+    tint(`<rect x="204" y="62" width="88" height="114"/>`), `<path d="M204 176V62h88v114"/>`,
+    `<path d="M204 62l-28 13v112l28 -11Z" fill="#fff"/><path d="M184 122v13"/>`,
+    ground(196, 308, 176), light(248, 42),
+  ],
+  // no monthly line to pay for at the entrance
+  nobill: () => [
+    `<circle cx="100" cy="110" r="62" stroke-width="1.4" stroke-dasharray="5 6" opacity=".8"/>`,
+    thin(`<path d="M68 66h64v84l-10.7 8l-10.7 -8l-10.6 8l-10.7 -8l-10.6 8l-10.7 -8Z"/><path d="M80 84h40M80 98h40M80 112h24M80 130h40"/>`),
+    `<path d="M56 154L144 66"/>`,
+    dashed("M166 110h30"), tip(202, 110),
+    `<rect x="212" y="56" width="84" height="108" rx="9"/><path d="M212 82h84M232 48v16M276 48v16"/>`,
+    thin([94, 116, 138].map(y => [224, 246, 268].map(x => `<rect x="${x}" y="${y}" width="14" height="14" rx="4"/>`).join("")).join("")),
+    light(296, 164),
+  ],
   // any other highlight: access that is protected
   default: () => [
     `<path d="M112 28l-60 24v46c0 38 24 66 60 78c36 -12 60 -40 60 -78V52Z"/>`,

@@ -110,7 +110,15 @@ export function applyHomepageCopy($, copy, locale) {
 }
 
 // Version of the highlight drawings, their wave and css/niche-flow.css; change it with them.
-export const HIGHLIGHT_ART_VERSION = '20261112a';
+export const HIGHLIGHT_ART_VERSION = '20261112b';
+// Small print under the three highlights: the starred exception to what they claim.
+export function installHighlightNote($, note, locale) {
+  if (!note) return;
+  const track = $('#niche-highlights .niche-flow__track');
+  if (track.length !== 1) throw Error('A highlight note requires the highlights');
+  const line = $('<p>').addClass('niche-flow__note'); setLocalizedText($, line, note, locale);
+  track.after(line);
+}
 // A use-case hero offers the shop beside its replay action, as a quiet second button.
 export function installUseCaseShopLink($, { locale, pageKey, label }) {
   const actions = $('.niche-hero__actions');

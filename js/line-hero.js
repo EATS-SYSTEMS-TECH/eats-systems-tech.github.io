@@ -1,4 +1,4 @@
-// WIFIGATE Host and WIFIGATE Manager heroes: the approved white line
+// WIFIGATE Host, WIFIGATE Manager and feature page heroes: the white line
 // animations in the full-width hero media layer, with the existing replay and
 // pause controls. The page ships a static frame of the same scene (start
 // frame, or the approved still under prefers-reduced-motion) as its eager
@@ -7,8 +7,9 @@
 // frame, in the same box. A toggle next to pause collapses the hero text so
 // the whole drawing can be seen.
 const SCENES = {
-  host: () => import("./line-hero-host.js?v=20261112lh4").then(module => module.createHostScene),
-  manager: () => import("./line-hero-manager.js?v=20261112lh4").then(module => module.createManagerScene),
+  host: () => import("./line-hero-host.js?v=20261112lh5").then(module => module.createHostScene),
+  manager: () => import("./line-hero-manager.js?v=20261112lh5").then(module => module.createManagerScene),
+  nosim: () => import("./line-hero-nosim.js?v=20261112lh5").then(module => module.createNoSimScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video", hideText: "Hide text", showText: "Show text" };

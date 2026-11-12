@@ -41,7 +41,8 @@ test("committed start and still frames are exactly what the shipped scene module
 });
 
 test("scene modules keep the approved timing and carry no page driver, debug hook or global", async () => {
-  const expected = { host: { duration: 42, still: 27.0, clip: "wgh-door-clip" }, manager: { duration: 38.9, still: 27.65, clip: "wgm-lens" } };
+  // The feature page scene (No SIM, No Router) needs no clip path, so it has no id at all.
+  const expected = { host: { duration: 42, still: 27.0, clip: "wgh-door-clip" }, manager: { duration: 38.9, still: 27.65, clip: "wgm-lens" }, nosim: { duration: 14, still: 6.3, clip: null } };
   for (const [name, scene] of Object.entries(LINE_HERO_SCENES)) {
     const source = await read(scene.module);
     for (const forbidden of [/\bwindow\./, /\bdocument\./, /\blocation\b/, /URLSearchParams/, /requestAnimationFrame/, /IntersectionObserver/, /matchMedia/, /WG_/, /geomtest|selftest|data-geom|data-frames|data-selftest/i, /document\.title|onerror/])
@@ -52,8 +53,9 @@ test("scene modules keep the approved timing and carry no page driver, debug hoo
     assert.equal(instance.still, expected[name].still);
     assert.equal(typeof instance.render, "function");
     // The only ids are the scoped clip paths, referenced by the same name.
-    assert.deepEqual([...source.matchAll(/id: '([^']+)'/g)].map(match => match[1]), [expected[name].clip]);
-    assert.ok(source.includes(`url(#${expected[name].clip})`));
+    assert.deepEqual([...source.matchAll(/id: '([^']+)'/g)].map(match => match[1]), expected[name].clip ? [expected[name].clip] : []);
+    if (expected[name].clip) assert.ok(source.includes(`url(#${expected[name].clip})`));
+    else assert.doesNotMatch(source, /url\(#/);
   }
 });
 

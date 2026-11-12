@@ -71,6 +71,15 @@
   margin-top: 1.1rem;
 }
 
+/* Small print that qualifies a claim of the highlights. */
+.niche-flow__note {
+  margin: 2rem auto 0;
+  color: #7c7c7c;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
 /* Narrow screens: the wave gives way to one column; a dashed line links the
    highlights and each title sits under its own status light. */
 @media (max-width: 900px) {

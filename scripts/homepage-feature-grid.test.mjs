@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { load } from "cheerio";
-import { installHomeFeatureCards } from "./homepage-feature-grid.mjs";
+import { installHomeFeatureCards, installFeatureArrows } from "./homepage-feature-grid.mjs";
 
 test("homepage feature positions retain public identities, artwork revisions and translation slots", async () => {
   const $ = load(await readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
@@ -47,4 +47,20 @@ test("invalid feature slots fail without changing any document content", () => {
     assert.throws(() => installHomeFeatureCards($), /Homepage features require one grid/);
     assert.equal($.html(), before);
   }
+});
+
+test("every card carries one small arrow; only cards with a page of their own link, through the arrow alone", async () => {
+  const $ = load(await readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
+  installHomeFeatureCards($);
+  installFeatureArrows($, { pages: { "no-sim-router": "/no-sim-no-router/", "auto-open": "/auto-open/" } });
+  const cards = $("#how-it-works > .features-grid > .feature-card");
+  assert.equal(cards.find("> .feature-card__more").length, cards.length, "one arrow per card");
+  assert.deepEqual($("a.feature-card__more").map((_, node) => $(node).attr("href")).get(), ["/no-sim-no-router/", "/auto-open/"]);
+  assert.equal(cards.find("a").length, 2, "the arrow is the only link of a card");
+  for (const link of $("a.feature-card__more").toArray()) assert.equal($(link).attr("aria-label"), $(link).closest(".feature-card").find(".feature-card__title").text().trim());
+  // A card without a page shows the arrow, but it is not a link and stays out of the accessibility tree.
+  const pending = $("span.feature-card__more--pending");
+  assert.equal(pending.length, cards.length - 2);
+  assert.ok(pending.toArray().every(node => $(node).attr("aria-hidden") === "true" && !$(node).attr("href")));
+  assert.throws(() => installFeatureArrows($, { pages: {} }), /already present/);
 });

@@ -20,6 +20,7 @@ export const LINE_HERO_FRAME_DIR = "assets/img/line-hero";
 export const LINE_HERO_SCENES = Object.freeze({
   host: { module: "js/line-hero-host.js", factory: "createHostScene" },
   manager: { module: "js/line-hero-manager.js", factory: "createManagerScene" },
+  nosim: { module: "js/line-hero-nosim.js", factory: "createNoSimScene" },
 });
 export const LINE_HERO_FRAMES = Object.freeze(["start", "still"]);
 

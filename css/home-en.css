@@ -440,6 +440,54 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   font-size: 0.72rem;
 }
 
+/* The small arrow in a card's corner, opposite its number: the card's only link,
+   to the page that says more. A pale arrow marks a page that is not there yet. */
+.home-en .feature-card__more {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.7rem;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  color: #146bff;
+}
+
+.home-en .feature-card__more svg {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.42rem;
+  border: 1.5px solid rgba(20, 107, 255, 0.35);
+  border-radius: 50%;
+  background: #fff;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+html[dir="rtl"] .home-en .feature-card__more svg {
+  transform: scaleX(-1);
+}
+
+.home-en a.feature-card__more:hover svg,
+.home-en a.feature-card__more:focus-visible svg {
+  border-color: #146bff;
+  background: #eef4ff;
+}
+
+.home-en a.feature-card__more:focus-visible {
+  outline: 2px solid #146bff;
+  outline-offset: -4px;
+  border-radius: 50%;
+}
+
+.home-en .feature-card__more--pending {
+  color: #c2c8d2;
+}
+
+.home-en .feature-card__more--pending svg {
+  border-color: #dfe3ea;
+  border-style: dashed;
+}
+
 .home-en .feature-card:hover {
   background: #f7f7f5;
   box-shadow: none;

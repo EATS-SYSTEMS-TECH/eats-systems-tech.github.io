@@ -18,6 +18,7 @@ import { runInNewContext } from "node:vm";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
+import { FEATURE_PAGES, featureCardPages } from "./feature-pages.mjs";
 import { HOST_PAGE_KEY, MANAGER_PAGE_KEY } from "./host-marketing-page.mjs";
 import { SHOP_PAGE_KEYS } from "./shop-pages.mjs";
 
@@ -37,12 +38,14 @@ const hreflangPattern = /^(x-default|[a-z]{2}(-[A-Z][a-z]{3})?(-[A-Z]{2})?)$/;
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
 const landingKeys = LANDING_PAGES.map((page) => page.key);
-const indexablePages = ["home", HOST_PAGE_KEY, MANAGER_PAGE_KEY, AUTO_OPEN_PAGE_KEY, ...nicheKeys, ...landingKeys];
+const featureKeys = FEATURE_PAGES.map((page) => page.key);
+const indexablePages = ["home", HOST_PAGE_KEY, MANAGER_PAGE_KEY, AUTO_OPEN_PAGE_KEY, ...featureKeys, ...nicheKeys, ...landingKeys];
 const interactivePages = [
   "home",
   HOST_PAGE_KEY,
   MANAGER_PAGE_KEY,
   AUTO_OPEN_PAGE_KEY,
+  ...featureKeys,
   ...nicheKeys,
   ...landingKeys,
   "cookies",
@@ -283,10 +286,22 @@ async function main() {
         if (benefits.length !== 3 || benefits.find(".bento-card__icon svg").length !== 3 || !$("#niche-benefits-title").text().trim()) problems.push(`${rel}: Auto Open needs a localized Key benefits section with three shared benefit cards`);
         if ($(".niche-highlight, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: Auto Open has duplicate highlights, unrelated sections or navigation`);
         if ($(".niche-hero video[data-media-variants]").length !== 1 || $(".niche-hero [data-scene-replay]").length !== 1) problems.push(`${rel}: Auto Open video and replay are missing`);
+      } else if (featureKeys.includes(pageKey)) {
+        if ($(".niche-highlight > img.niche-flow__art").length !== 3 || $(".niche-highlight__title").toArray().some(element => !$(element).text().trim())) problems.push(`${rel}: a feature page needs three highlights with their drawings`);
+        if ($("main video").length || $(".niche-hero--line [data-line-hero-stage]").length !== 1) problems.push(`${rel}: a feature page shows a line animation, not a video`);
+        if ($("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: a feature page has unrelated sections or navigation`);
+        if ($("#niche-hero-shop").attr("href") !== pagePath(locale, "shop")) problems.push(`${rel}: the hero must offer the localized shop`);
       } else if (pageKey === "home") {
         const autoOpenCard = $(".feature-card--auto-open");
         if (autoOpenCard.find("video, picture, [data-scene-video], [data-media-watermark]").length || !autoOpenCard.find("img[src*='wifigate_features/auto_open.svg']").length) problems.push(`${rel}: Auto Open feature must display its original icon`);
-        if (autoOpenCard.find("a").length !== 2 || autoOpenCard.find("a").toArray().some(element => $(element).attr("href") !== pagePath(locale, AUTO_OPEN_PAGE_KEY))) problems.push(`${rel}: Auto Open feature links must use the localized page`);
+        // Every feature card carries one small arrow; it is the card's only link, and only where the card has a page.
+        const cardPages = featureCardPages(AUTO_OPEN_PAGE_KEY), featureCards = $("#how-it-works .feature-card");
+        if (featureCards.find("> .feature-card__more").length !== featureCards.length) problems.push(`${rel}: every feature card needs its arrow`);
+        featureCards.each((_, card) => {
+          const suffix = ($(card).attr("class") || "").match(/feature-card--([a-z0-9-]+)/)?.[1], links = $(card).find("a").toArray().map(element => $(element).attr("href"));
+          const expected = cardPages[suffix] ? [pagePath(locale, cardPages[suffix])] : [];
+          if (JSON.stringify(links) !== JSON.stringify(expected) || $(card).find("a").not(".feature-card__more").length) problems.push(`${rel}: the ${suffix} card must link only through its arrow, to its own page`);
+        });
         const links = $(".where-list__link[data-niche-key]").length;
         if (links !== nicheKeys.length) {
           problems.push(`${rel}: ${links} where-list links, expected ${nicheKeys.length}`);

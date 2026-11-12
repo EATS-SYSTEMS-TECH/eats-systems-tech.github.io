@@ -4,13 +4,14 @@ import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import * as cheerio from 'cheerio';
 import { repoRoot, defaultLocale, siteOrigin, nowDate, changedFiles, COOKIE_CONSENT_VERSION, getBundle, getNestedValue, loadHomeCopy, readWindowGlobal, readHtmlTemplate, buildPagePath, buildPageUrl, buildOutputFilePath, buildAssetPrefix, rewriteStaticAssets, removeScripts, appendScripts, alternatesFor, applyDataI18nTranslations, setBodyDirection, updateFooterStaticUi, rewriteFooterLegalLinks, updateAccessibilityMarkup, insertPageDataScript, serialize } from './localized-builder-document.mjs';
-import { getNichePageContent, getNicheChrome, buildNicheContext, applyHomepageCopy, updateHomeStaticUi, updateHomeWhereLinks, fillUseCaseBody, fillLandingSections, installUseCaseShopLink } from './localized-builder-content.mjs';
+import { getNichePageContent, getNicheChrome, buildNicheContext, applyHomepageCopy, updateHomeStaticUi, updateHomeWhereLinks, fillUseCaseBody, fillLandingSections, installUseCaseShopLink, installHighlightNote } from './localized-builder-content.mjs';
 import { SITE_LANGUAGES } from './site-languages.mjs';
 import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index.mjs';
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
+import { FEATURE_PAGES, featureCardPages, getFeaturePageContent, validateFeaturePageLocales } from './feature-pages.mjs';
 import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, installSubscriptionFlow, installAudienceList, appendHostMarketingDetails } from './host-marketing-page.mjs';
-import { installHomeFeatureCards } from './homepage-feature-grid.mjs';
+import { installHomeFeatureCards, installFeatureArrows } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
 import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
 import { SHOP_PAGE_KEYS, getShopPageContent } from './shop-pages.mjs';
@@ -128,9 +129,8 @@ async function buildHomePages(homeData) {
     removeScripts($, ['js/language-selector.js']); appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, 'home');
     updateFooterStaticUi($, locale, copy.footer); updateHomeStaticUi($, copy, getBundle(homeData.accessibilityCopy, locale), locale);
     rewriteFooterLegalLinks($, locale); updateHomeWhereLinks($, locale); applyHomepageCopy($, copy, locale);
-    const card = $('.feature-card--auto-open'), title = card.find('.feature-card__title');
-    card.find('.feature-card__media').wrap($('<a>').attr({ href: buildPagePath(locale, AUTO_OPEN_PAGE_KEY), 'aria-label': title.text() }));
-    title.wrapInner($('<a>').attr('href', buildPagePath(locale, AUTO_OPEN_PAGE_KEY)));
+    // Each feature card links to its own page through its small arrow only.
+    installFeatureArrows($, { pages: Object.fromEntries(Object.entries(featureCardPages(AUTO_OPEN_PAGE_KEY)).map(([card, key]) => [card, buildPagePath(locale, key)])) });
     applyHomeSceneMedia($, { scene: homeData.sceneMedia.get('homepage-montage'), assetPrefix: buildAssetPrefix(locale, 'home'), copy: copy.hero.media });
     $('.guest-invites__cta, .business-plan--host .business-plan__media').attr('href', buildPagePath(locale, guestInvitesPageKey));
     $('.business-plan__cta, .business-plan--manager .business-plan__media').attr('href', buildPagePath(locale, MANAGER_PAGE_KEY));
@@ -247,6 +247,32 @@ async function buildAutoOpenPages(homeData) {
   return entries;
 }
 
+// A feature page says a little more than its homepage card: the card's title and text lead,
+// a line animation replaces the video, and three points ride the highlights wave.
+async function buildFeaturePages(homeData) {
+  const source = await readHtmlTemplate(nicheTemplatePath), entries = [];
+  for (const page of FEATURE_PAGES) {
+    const scene = homeData.sceneMedia.get(page.poster);
+    if (!scene) throw Error(`Accepted ${page.poster} media is required for ${page.key}`);
+    const image = { hero: scene.poster.path, og: scene.poster.path, heroWidth: scene.width, heroHeight: scene.height, ogWidth: scene.width, ogHeight: scene.height };
+    for (const { code: locale } of homeData.localeOptions) {
+      const content = getFeaturePageContent(page, locale, homeData.homepageCopies[locale]), chrome = getNicheChrome(locale), $ = cheerio.load(source, { decodeEntities: false });
+      prepareUseCaseShell($, locale, page.key, page.bodyClass);
+      fillUseCaseBody($, { chrome, content, image, locale, pageKey: page.key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
+      $('#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+      installHighlightNote($, content.note, locale);
+      setUseCaseNavigation($, { chrome, content });
+      applyLineHero($, { scene: page.scene, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, page.key), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
+      installUseCaseShopLink($, { locale, pageKey: page.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button });
+      updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
+      setUseCaseMeta($, { pageKey: page.key, content, chrome, image, locale, localeOptions: homeData.localeOptions });
+      await writeOutputFile(buildOutputFilePath(locale, page.key), serialize($, homeData, locale, page.key));
+      entries.push({ loc: buildPageUrl(locale, page.key), changefreq: 'monthly', priority: '0.8' });
+    }
+  }
+  return entries;
+}
+
 // The WIFIGATE Host and WIFIGATE Manager pages share one layout and builder.
 const SUBSCRIPTION_PAGES = [
   { product: 'host', pageKey: guestInvitesPageKey, copyDir: 'host-page-copy', scene: 'hotels-airbnb', bodyClass: 'wifigate-host-page',
@@ -331,12 +357,12 @@ async function main() {
   const homeData = { sceneMedia: await readSceneManifest(repoRoot), lineHeroFrames: await readLineHeroFrames(repoRoot), localeOptions: SITE_LANGUAGES,
     accessibilityCopy: await readWindowGlobal('accessibility-copy.js', 'accessibilityCopy'), homepageCopies: await loadHomeCopy(SITE_LANGUAGES), cookieCopy: await readWindowGlobal('cookie-consent-copy.js', 'WIFIGATE_COOKIE_COPY') };
   for (const { code } of homeData.localeOptions) if (!homeData.cookieCopy?.[code]?.reopen) throw Error(`Missing cookie settings translation for ${code}`);
-  const codes = homeData.localeOptions.map(item => item.code), problems = [...validateNichePageLocales(codes), ...validateLandingPageLocales(codes), ...validateAutoOpenPageLocales(codes, homeData.homepageCopies)];
+  const codes = homeData.localeOptions.map(item => item.code), problems = [...validateNichePageLocales(codes), ...validateLandingPageLocales(codes), ...validateAutoOpenPageLocales(codes, homeData.homepageCopies), ...validateFeaturePageLocales(codes, homeData.homepageCopies)];
   if (problems.length) throw Error(`Niche page content validation failed (${problems.length} problems):\n  ${problems.join('\n  ')}`);
   const entries = await buildHomePages(homeData);
   if (process.argv.includes('--scene-media-only')) { await buildNichePages(homeData); return; }
   entries.push(...await buildShopPages(homeData));
-  entries.push(...await buildLegalPages(homeData, legalCollections), ...await buildNichePages(homeData), ...await buildLandingPages(homeData), ...await buildAutoOpenPages(homeData));
+  entries.push(...await buildLegalPages(homeData, legalCollections), ...await buildNichePages(homeData), ...await buildLandingPages(homeData), ...await buildAutoOpenPages(homeData), ...await buildFeaturePages(homeData));
   const englishNiches = () => NICHE_DEFINITIONS.map(niche => ({ key: niche.key, content: getNichePageContent(defaultLocale).niches[niche.key] }));
   const notFound = () => buildNotFoundPage({ niches: englishNiches(), pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION });
   if (process.argv.includes('--consumer-consent-only')) { await writeOutputFile(path.join(repoRoot, '404.html'), notFound()); return; }
