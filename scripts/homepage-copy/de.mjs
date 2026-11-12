@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Ausgenommen sind die Tarife von WIFIGATE For Business.",
+    connectionNote: "* Ausgenommen ist der Tarif WIFIGATE Manager, der WLAN benötigt.",
   },
   privateAccess: {
     imageAlt: "Ein Kurier folgt einer blau gepunkteten Route zum Eingang eines Wohnhauses, während ein Bewohner die WIFIGATE-App mit einem zeitlich begrenzten Gastzugang in der Hand hält.",

@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business planları hariç.",
+    connectionNote: "* WIFIGATE Manager planı hariç; bu plan Wi-Fi gerektirir.",
   },
   privateAccess: {
     imageAlt: "Kurye mavi kesik çizgili bir rotayı izleyerek apartman girişine ilerlerken, bir bina sakini elinde süreli misafir yetkisini gösteren WIFIGATE uygulamasını tutuyor.",

@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Maliban sa mga WIFIGATE For Business plan.",
+    connectionNote: "* Maliban sa WIFIGATE Manager plan, na nangangailangan ng Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Naglalakad ang isang courier sa may tuldok na asul na ruta papunta sa pasukan ng isang residential building, habang hawak ng isang residente ang WIFIGATE app na nagpapakita ng pahintulot para sa bisita na may takdang oras.",

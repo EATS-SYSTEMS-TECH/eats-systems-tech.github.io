@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Ngoại trừ các gói WIFIGATE For Business.",
+    connectionNote: "* Ngoại trừ gói WIFIGATE Manager, gói này cần Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Một người giao hàng đi theo lộ trình chấm xanh đến lối vào tòa chung cư, trong khi một cư dân cầm ứng dụng WIFIGATE hiển thị quyền ra vào cho khách có thời hạn.",

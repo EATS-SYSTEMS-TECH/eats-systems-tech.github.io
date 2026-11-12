@@ -69,6 +69,7 @@
       },
     ],
     subscriptionNote: "* Крім тарифів WIFIGATE For Business.",
+    connectionNote: "* Крім тарифу WIFIGATE Manager, якому потрібен Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Кур’єр іде синім пунктирним маршрутом до входу в житловий будинок, а мешканець тримає телефон із застосунком WIFIGATE, де показано гостьовий доступ з обмеженням у часі.",

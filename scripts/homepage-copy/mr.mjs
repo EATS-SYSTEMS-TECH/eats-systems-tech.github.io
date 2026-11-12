@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business प्लॅन वगळता.",
+    connectionNote: "* WIFIGATE Manager प्लॅन वगळता, ज्यासाठी Wi-Fi आवश्यक आहे.",
   },
   privateAccess: {
     imageAlt: "एक कुरिअर निळ्या ठिपक्यांच्या मार्गाने निवासी इमारतीच्या प्रवेशद्वाराकडे जात आहे, तर एका रहिवाशाच्या हातातील WIFIGATE ॲपमध्ये ठरावीक वेळेपुरती पाहुण्याची परवानगी दिसत आहे.",

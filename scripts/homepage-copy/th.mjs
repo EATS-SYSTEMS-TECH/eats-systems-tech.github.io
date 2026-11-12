@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* ยกเว้นแพ็กเกจ WIFIGATE For Business",
+    connectionNote: "* ยกเว้นแพ็กเกจ WIFIGATE Manager ซึ่งต้องใช้ Wi-Fi",
   },
   privateAccess: {
     imageAlt: "พนักงานส่งของเดินตามเส้นทางจุดสีฟ้าไปยังทางเข้าอาคารที่พักอาศัย ขณะที่ผู้พักอาศัยถือแอป WIFIGATE ที่แสดงสิทธิ์ผู้มาเยือนแบบจำกัดเวลา",

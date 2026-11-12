@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Razen paketov WIFIGATE For Business.",
+    connectionNote: "* Razen paketa WIFIGATE Manager, ki potrebuje Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Kurir sledi modri pikčasti poti do vhoda v stanovanjski blok, stanovalec pa drži aplikacijo WIFIGATE s časovno omejenim dovoljenjem za gosta.",

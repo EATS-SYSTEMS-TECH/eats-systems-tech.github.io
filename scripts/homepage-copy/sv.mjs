@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Utom WIFIGATE For Business-planerna.",
+    connectionNote: "* Utom WIFIGATE Manager-planen, som kräver Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Ett bud följer en blå prickad rutt till entrén till ett flerbostadshus medan en boende håller upp WIFIGATE-appen som visar tidsbegränsad gäståtkomst.",

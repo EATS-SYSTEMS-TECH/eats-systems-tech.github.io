@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Excepto los planes WIFIGATE For Business.",
+    connectionNote: "* Excepto el plan WIFIGATE Manager, que necesita Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Un repartidor sigue una ruta azul punteada hasta la entrada de un edificio de viviendas, mientras un residente sostiene la aplicación WIFIGATE con un permiso de invitado limitado en el tiempo.",

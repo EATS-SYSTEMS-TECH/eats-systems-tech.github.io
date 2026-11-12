@@ -70,6 +70,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business प्लान को छोड़कर।",
+    connectionNote: "* WIFIGATE Manager प्लान को छोड़कर, जिसके लिए Wi-Fi ज़रूरी है।",
   },
   privateAccess: {
     imageAlt: "एक कूरियर नीले बिंदीदार रास्ते पर चलते हुए रिहायशी इमारत के प्रवेश द्वार तक जा रहा है, जबकि एक निवासी के हाथ में WIFIGATE ऐप है, जिसमें समय-सीमित गेस्ट परमिशन दिख रही है।",

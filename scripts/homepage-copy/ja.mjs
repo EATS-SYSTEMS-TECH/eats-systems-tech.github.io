@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "※ WIFIGATE For Business プランを除きます。",
+    connectionNote: "※ ただし、WIFIGATE Manager プランには Wi-Fi が必要です。",
   },
   privateAccess: {
     imageAlt: "配達員が青い点線のルートをたどってマンションのエントランスへ向かい、住人が有効期限付きのゲスト権限を表示した WIFIGATE アプリを手にしています。",

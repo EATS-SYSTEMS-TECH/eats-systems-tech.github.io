@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Cu excepția planurilor WIFIGATE For Business.",
+    connectionNote: "* Cu excepția planului WIFIGATE Manager, care are nevoie de Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Un curier urmează un traseu albastru punctat spre intrarea unui bloc de locuințe, în timp ce un locatar ține în mână aplicația WIFIGATE, care afișează o permisiune de acces pentru oaspeți limitată în timp.",

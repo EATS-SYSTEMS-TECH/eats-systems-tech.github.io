@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Kromě tarifů WIFIGATE For Business.",
+    connectionNote: "* Kromě tarifu WIFIGATE Manager, který vyžaduje Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Kurýr jde po modré tečkované trase ke vchodu do bytového domu, zatímco obyvatel drží aplikaci WIFIGATE s časově omezeným přístupem pro hosta.",

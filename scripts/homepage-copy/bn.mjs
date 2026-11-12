@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business প্ল্যানগুলো ছাড়া।",
+    connectionNote: "* WIFIGATE Manager প্ল্যান ছাড়া, যার জন্য Wi-Fi প্রয়োজন।",
   },
   privateAccess: {
     imageAlt: "একজন কুরিয়ার নীল ডটেড পথ ধরে একটি আবাসিক ভবনের প্রবেশপথের দিকে যাচ্ছেন, আর একজন বাসিন্দার হাতে থাকা WIFIGATE অ্যাপে সময়সীমিত অতিথি অনুমতি দেখা যাচ্ছে।",

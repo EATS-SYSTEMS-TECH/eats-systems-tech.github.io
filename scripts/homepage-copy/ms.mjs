@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Kecuali pelan WIFIGATE For Business.",
+    connectionNote: "* Kecuali pelan WIFIGATE Manager, yang memerlukan Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Seorang kurier mengikut laluan biru bertitik ke pintu masuk bangunan kediaman, sementara seorang penghuni memegang aplikasi WIFIGATE yang memaparkan kebenaran tetamu terhad masa.",

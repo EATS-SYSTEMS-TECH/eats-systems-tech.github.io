@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business 方案除外。",
+    connectionNote: "* WIFIGATE Manager 方案除外，該方案需要 Wi-Fi。",
   },
   privateAccess: {
     imageAlt: "外送員沿著藍色虛線路線走向住宅大樓入口，一位住戶手持顯示限時訪客權限的 WIFIGATE App。",

@@ -36,6 +36,8 @@ test("homepage feature positions retain public identities, artwork revisions and
   assert.equal(cards.eq(7).find("h3").text(), "Security & Privacy");
   assert.equal($("#subscription-note").length, 1);
   assert.equal(cards.eq(8).find("#subscription-note[hidden]").length, 1);
+  assert.equal($("#connection-note").length, 1);
+  assert.equal(cards.eq(0).find(".feature-card__text + #connection-note.feature-card__note[hidden]").length, 1);
   assert.equal($("#how-it-works .section__header").toString(), before);
 });
 

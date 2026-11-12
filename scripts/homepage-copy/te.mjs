@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business ప్లాన్‌లు తప్ప.",
+    connectionNote: "* WIFIGATE Manager ప్లాన్ తప్ప, దానికి Wi-Fi అవసరం.",
   },
   privateAccess: {
     imageAlt: "ఒక కొరియర్ నీలి చుక్కల దారి వెంట నివాస భవనం ప్రవేశ ద్వారం వైపు వెళ్తున్నారు, ఒక నివాసి చేతిలోని WIFIGATE యాప్‌లో సమయ పరిమితి ఉన్న అతిథి అనుమతి కనిపిస్తోంది.",

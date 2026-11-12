@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Kivéve a WIFIGATE For Business csomagokat.",
+    connectionNote: "* Kivéve a WIFIGATE Manager csomagot, amelyhez Wi-Fi szükséges.",
   },
   privateAccess: {
     imageAlt: "Egy futár kék pontozott útvonalon halad egy lakóépület bejárata felé, miközben egy lakó a WIFIGATE alkalmazást tartja, amely időkorlátos vendéghozzáférést mutat.",

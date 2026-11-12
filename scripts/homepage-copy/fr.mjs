@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Sauf les offres WIFIGATE For Business.",
+    connectionNote: "* Sauf l’offre WIFIGATE Manager, qui nécessite le Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Un livreur suit un itinéraire bleu en pointillés jusqu'à l'entrée d'un immeuble résidentiel, tandis qu'un résident tient l'application WIFIGATE affichant un accès invité limité dans le temps.",

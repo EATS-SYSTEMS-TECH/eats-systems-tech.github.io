@@ -34,6 +34,15 @@ export function updateHomeStaticUi($, copy, accessibility, locale) {
 export function updateHomeWhereLinks($, locale) {
   for (const { key } of NICHE_DEFINITIONS) $(`.where-list__link[data-niche-key='${key}']`).attr('href', buildPagePath(locale, key)).text(getNichePageContent(locale).niches[key].label);
 }
+// A starred note: its mark ("*", or the reference mark of the locale) and its sentence.
+const NOTE_MARK = /^[*※]\s*/u;
+// The copy keeps the whole claim, so the structured data and llms.txt stay complete;
+// on the page the claim ends before its exception, which follows as small print.
+function withoutNote(full, note, label) {
+  const sentence = typeof note === 'string' && NOTE_MARK.test(note) ? note.replace(NOTE_MARK, '') : '';
+  if (!sentence || !full.endsWith(sentence) || full.length === sentence.length) throw Error(`${label} must end with its starred note`);
+  return full.slice(0, -sentence.length).trimEnd();
+}
 export function applyHomepageCopy($, copy, locale) {
   const direction = isRtl(locale) ? 'rtl' : 'ltr', text = (selector, value) => setLocalizedText($, selector, value, locale);
   // Statement locales and conventional hero locales keep their distinct DOM.
@@ -78,12 +87,24 @@ export function applyHomepageCopy($, copy, locale) {
   }
   for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt]]) $(selector).attr('alt', value);
   $('#how-it-works .feature-card').each((index, node) => { text($(node).find('.feature-card__title'), copy.platform.features[index].title); text($(node).find('.feature-card__text'), copy.platform.features[index].text); });
+  // The no-SIM claim has one exception (the Manager plan needs Wi-Fi): small print under the card.
+  const connectionNote = copy.platform.connectionNote, connectionCard = $('#how-it-works .feature-card--no-sim-router');
+  if (connectionCard.length !== 1 || connectionCard.find('#connection-note').length !== 1) throw Error('The no-SIM card requires its connection note');
+  text(connectionCard.find('.feature-card__text'), withoutNote(copy.platform.features[0].text, connectionNote, 'The no-SIM card'));
+  $('#connection-note').removeAttr('hidden'); text('#connection-note', connectionNote);
   for (const [list, items] of [['.automation-audiences', copy.automation.audiences], ['.business-plan__audiences', copy.automation.manager.audiences]]) {
     $(`#wifigate-for-business ${list}`).attr('aria-label', copy.automation.audienceLabel).attr('dir', direction);
     $(`#wifigate-for-business ${list} li`).each((index, node) => $(node).text(items[index]));
   }
   $('#tutorial-videos .tutorial-card').each((index, node) => { text($(node).find('.tutorial-card__title'), copy.productGuide.items[index]); text($(node).find('.tutorial-card__status'), copy.productGuide.status); });
   $('#wifi-gate-faq .seo-faq__item').each((index, node) => { text($(node).find('summary'), copy.faq.items[index].question); text($(node).find('.seo-faq__answer p'), copy.faq.items[index].answer); });
+  // The answer that repeats the no-SIM claim carries the same small print.
+  const connectionAnswers = $('#wifi-gate-faq .seo-faq__item').toArray().filter((_, index) => copy.faq.items[index].answer.endsWith(connectionNote.replace(NOTE_MARK, '')));
+  if (connectionAnswers.length !== 1) throw Error('One answer must end with the connection note');
+  const connectionAnswer = $(connectionAnswers[0]).find('.seo-faq__answer'), connectionIndex = $('#wifi-gate-faq .seo-faq__item').index(connectionAnswers[0]);
+  text(connectionAnswer.find('p'), withoutNote(copy.faq.items[connectionIndex].answer, connectionNote, 'The no-SIM answer'));
+  connectionAnswer.append($('<p>').addClass('seo-faq__note'));
+  text(connectionAnswer.find('.seo-faq__note'), connectionNote);
   $('#why-wifigate .entry-point__label').each((index, node) => { if (copy.why.points[index]) text($(node), copy.why.points[index]); });
 }
 

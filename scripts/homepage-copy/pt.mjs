@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Exceto os planos WIFIGATE For Business.",
+    connectionNote: "* Exceto o plano WIFIGATE Manager, que precisa de Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Um estafeta segue um percurso azul tracejado até à entrada de um prédio de apartamentos, enquanto um morador segura a aplicação WIFIGATE com uma permissão de visita limitada no tempo.",

@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* למעט מסלולי WIFIGATE For Business.",
+    connectionNote: "* למעט מסלול WIFIGATE Manager, שדורש חיבור WiFi.",
   },
   privateAccess: {
     imageAlt: "שליח הולך לאורך מסלול כחול מקווקו אל כניסת בניין מגורים, בזמן שדייר מחזיק את אפליקציית WIFIGATE המציגה הרשאת אורח מוגבלת בזמן.",

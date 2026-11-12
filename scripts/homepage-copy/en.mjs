@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Except WIFIGATE For Business plans.",
+    connectionNote: "* Except the WIFIGATE Manager plan, which needs Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access.",

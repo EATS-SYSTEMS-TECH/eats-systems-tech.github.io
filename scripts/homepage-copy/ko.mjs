@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* WIFIGATE For Business 요금제는 제외됩니다.",
+    connectionNote: "* 단, WIFIGATE Manager 요금제는 Wi-Fi가 필요합니다.",
   },
   privateAccess: {
     imageAlt: "택배 기사가 파란 점선 경로를 따라 아파트 공동현관으로 걸어가고, 입주민이 기간 제한 게스트 권한이 표시된 WIFIGATE 앱을 들고 있습니다.",

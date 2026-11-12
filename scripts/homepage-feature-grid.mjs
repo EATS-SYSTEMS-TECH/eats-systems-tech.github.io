@@ -35,11 +35,13 @@ const HOME_FEATURES = [
 // when producing HTML; the existing locale pipeline subsequently fills the slots.
 const textHtml = text => text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
-// One card structure owns media, title and explanatory copy. Only the existing
-// no-subscription card retains its initially hidden, uniquely identified note.
+// One card structure owns media, title and explanatory copy. Two cards carry an
+// initially hidden, uniquely identified starred note that qualifies their claim:
+// the no-SIM card (the Manager plan needs Wi-Fi) and the no-subscription card.
+const FEATURE_NOTES = { noSimRouter: "connection-note", noSubscriptionFees: "subscription-note" };
 function featureCard(feature) {
-  const note = feature.key === "noSubscriptionFees"
-    ? '\n            <p class="feature-card__note" id="subscription-note" hidden></p>' : "";
+  const note = FEATURE_NOTES[feature.key]
+    ? `\n            <p class="feature-card__note" id="${FEATURE_NOTES[feature.key]}" hidden></p>` : "";
   return `          <article class="${feature.classes}">
             <figure class="feature-card__media">
               <img src="${feature.image}" alt="" class="feature-card__image" loading="lazy">

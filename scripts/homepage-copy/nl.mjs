@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Behalve de WIFIGATE For Business-plannen.",
+    connectionNote: "* Behalve het WIFIGATE Manager-plan, dat wifi nodig heeft.",
   },
   privateAccess: {
     imageAlt: "Een koerier volgt een blauwe stippellijnroute naar de ingang van een appartementencomplex terwijl een bewoner de WIFIGATE-app vasthoudt met tijdgebonden gasttoegang.",

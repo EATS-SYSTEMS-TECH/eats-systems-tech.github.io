@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Kecuali paket WIFIGATE For Business.",
+    connectionNote: "* Kecuali paket WIFIGATE Manager, yang memerlukan Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Seorang kurir menyusuri rute biru putus-putus menuju pintu masuk gedung hunian, sementara seorang penghuni memegang aplikasi WIFIGATE yang menampilkan izin tamu berbatas waktu.",

@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Z wyjątkiem planów WIFIGATE For Business.",
+    connectionNote: "* Z wyjątkiem planu WIFIGATE Manager, który wymaga Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Kurier idzie niebieską przerywaną trasą do wejścia budynku mieszkalnego, a mieszkaniec trzyma telefon z aplikacją WIFIGATE, która pokazuje ograniczony czasowo dostęp dla gościa.",

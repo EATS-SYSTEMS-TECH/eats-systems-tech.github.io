@@ -136,7 +136,9 @@ for (const localeFile of localeFiles) {
   const visibleFaq = $("#wifi-gate-faq .seo-faq__item")
     .map((_, element) => ({
       question: normalize($(element).find("summary").text()),
-      answer: normalize($(element).find(".seo-faq__answer p").text()),
+      // An answer may end in a starred note; together, without the mark, they are the answer in the copy.
+      // Scripts that put no space between sentences join them directly, as the copy does.
+      answer: normalize($(element).find(".seo-faq__answer p").map((_, part) => $(part).text().replace(/^[*※]\s*/u, "")).get().join(/[。！？]$/u.test(normalize($(element).find(".seo-faq__answer p").first().text())) ? "" : " ")),
     }))
     .get();
   const expectedFaq = copy.faq.items.map((item) => ({

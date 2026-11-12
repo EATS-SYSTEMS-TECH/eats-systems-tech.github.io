@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* باستثناء باقات WIFIGATE For Business.",
+    connectionNote: "* باستثناء باقة WIFIGATE Manager التي تتطلب شبكة Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "مندوب توصيل يسير على مسار أزرق منقّط نحو مدخل مبنى سكني، بينما يحمل أحد السكان تطبيق WIFIGATE الذي يعرض صلاحية ضيف محدودة المدة.",

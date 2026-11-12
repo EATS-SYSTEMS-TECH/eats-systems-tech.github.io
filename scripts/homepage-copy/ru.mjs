@@ -69,6 +69,7 @@
       },
     ],
     subscriptionNote: "* Кроме тарифов WIFIGATE For Business.",
+    connectionNote: "* Кроме тарифа WIFIGATE Manager, которому нужен Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Курьер идёт по синему пунктирному маршруту к подъезду жилого дома, а житель держит телефон с приложением WIFIGATE, где показан гостевой доступ с ограничением по времени.",

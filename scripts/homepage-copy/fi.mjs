@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Paitsi WIFIGATE For Business -paketit.",
+    connectionNote: "* Paitsi WIFIGATE Manager -paketti, joka tarvitsee Wi-Fi-yhteyden.",
   },
   privateAccess: {
     imageAlt: "Lähetti kulkee sinistä pisteviivareittiä kerrostalon sisäänkäynnille, kun asukas pitää kädessään WIFIGATE-sovellusta, jossa näkyy aikarajattu vieraskulkuoikeus.",

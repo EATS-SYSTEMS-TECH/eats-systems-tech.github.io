@@ -69,6 +69,7 @@
       },
     ],
     subscriptionNote: "* Осим пакета WIFIGATE For Business.",
+    connectionNote: "* Осим пакета WIFIGATE Manager, коме је потребан Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Достављач прати плаву тачкасту руту до улаза у стамбену зграду док станар држи апликацију WIFIGATE са временски ограниченим приступом за госте.",

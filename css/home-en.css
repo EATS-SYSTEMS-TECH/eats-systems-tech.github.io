@@ -519,6 +519,14 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   line-height: 1.55;
 }
 
+/* The same small print under an answer in the questions section. */
+.home-en .seo-faq__answer .seo-faq__note {
+  margin: 0.6rem 0 0;
+  color: #7c7c7c;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
 @media (min-width: 769px) {
   .home-en .feature-card .feature-card__media {
     flex: 0 0 5rem;

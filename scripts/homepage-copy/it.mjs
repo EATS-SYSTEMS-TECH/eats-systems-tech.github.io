@@ -69,6 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* Tranne i piani WIFIGATE For Business.",
+    connectionNote: "* Tranne il piano WIFIGATE Manager, che richiede il Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Un corriere segue un percorso blu tratteggiato fino all'ingresso di un condominio, mentre un residente tiene in mano l'app WIFIGATE che mostra un'autorizzazione ospite a tempo limitato.",

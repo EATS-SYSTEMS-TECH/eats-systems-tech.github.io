@@ -69,6 +69,7 @@
       },
     ],
     subscriptionNote: "* С изключение на плановете WIFIGATE For Business.",
+    connectionNote: "* С изключение на плана WIFIGATE Manager, който изисква Wi-Fi.",
   },
   privateAccess: {
     imageAlt: "Куриер следва син пунктирен маршрут до входа на жилищна сграда, докато живущ държи приложението WIFIGATE с ограничен във времето достъп за гости.",
