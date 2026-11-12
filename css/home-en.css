@@ -441,26 +441,25 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
 }
 
 /* The small arrow in a card's corner, opposite its number: the card's only link,
-   to the page that says more. A pale arrow marks a page that is not there yet. */
+   to the page that says more. It is drawn bare, in the site's line language (a
+   node dot, a thin line, an open head), and steps forward under the pointer.
+   A pale arrow would mark a page that is not there yet. */
 .home-en .feature-card__more {
   position: absolute;
-  top: 0.55rem;
-  left: 0.7rem;
+  top: 0.45rem;
+  left: 0.85rem;
   display: grid;
-  width: 2.75rem;
+  width: 3.25rem;
   height: 2.75rem;
   place-items: center;
   color: #146bff;
 }
 
 .home-en .feature-card__more svg {
-  width: 2rem;
-  height: 2rem;
-  padding: 0.42rem;
-  border: 1.5px solid rgba(20, 107, 255, 0.35);
-  border-radius: 50%;
-  background: #fff;
-  transition: background-color 180ms ease, border-color 180ms ease;
+  width: 2.4rem;
+  height: 1rem;
+  overflow: visible;
+  transition: translate 260ms cubic-bezier(0.34, 1.6, 0.64, 1);
 }
 
 html[dir="rtl"] .home-en .feature-card__more svg {
@@ -469,23 +468,32 @@ html[dir="rtl"] .home-en .feature-card__more svg {
 
 .home-en a.feature-card__more:hover svg,
 .home-en a.feature-card__more:focus-visible svg {
-  border-color: #146bff;
-  background: #eef4ff;
+  translate: 5px 0;
+}
+
+html[dir="rtl"] .home-en a.feature-card__more:hover svg,
+html[dir="rtl"] .home-en a.feature-card__more:focus-visible svg {
+  translate: -5px 0;
 }
 
 .home-en a.feature-card__more:focus-visible {
   outline: 2px solid #146bff;
   outline-offset: -4px;
-  border-radius: 50%;
+  border-radius: 6px;
 }
 
 .home-en .feature-card__more--pending {
   color: #c2c8d2;
 }
 
-.home-en .feature-card__more--pending svg {
-  border-color: #dfe3ea;
-  border-style: dashed;
+@media (prefers-reduced-motion: reduce) {
+  .home-en .feature-card__more svg {
+    transition: none;
+  }
+}
+
+html.a11y-reduced-motion .home-en .feature-card__more svg {
+  transition: none;
 }
 
 .home-en .feature-card:hover {
