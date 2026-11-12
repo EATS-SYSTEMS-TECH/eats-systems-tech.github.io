@@ -8,7 +8,7 @@
 //   autoopen - the gate opens by itself as the resident comes near, hands full
 //   events   - a clock opens and closes the gate at the scheduled hours
 //   rf       - a remote is paired through the phone, then opens the gate
-//   security - a protected link opens the gate; a listener gets nothing
+//   security - a protected link opens the gate; an attacker gets nothing
 //   nofees   - months go by on a calendar and no bill ever arrives
 // js/line-hero.js drives render(t). Nothing here has an id, reads the page or
 // keeps a global.
@@ -326,7 +326,7 @@ function createFeatureScene(svg, V) {
         extraPing = pingK(t, 2.3);
       };
     },
-    /* the link between phone and gate is protected: a listener close by gets nothing */
+    /* the link between phone and gate is protected: an attacker close by gets nothing */
     security: function () {
       var lx = 300, ly = 176;
       prim('path', { d: 'M' + (lx - 34) + ' ' + (ly - 26) + 'v-30a34 34 0 0 1 68 0v30' });
@@ -334,13 +334,22 @@ function createFeatureScene(svg, V) {
       tintOf('rect', { x: lx - 56, y: ly - 26, width: 112, height: 92, rx: 16 });
       prim('path', { d: 'M' + lx + ' ' + (ly + 10) + 'v22' });
       el('circle', { cx: lx, cy: ly + 8, r: 9, fill: BLUE, stroke: 'none' }, gTop);
-      /* the listener: an eye that looks at the link and is struck out */
-      var ex = 1330, ey = 170, eye = el('g', {}, gTop);
-      prim('path', { d: 'M' + (ex - 78) + ' ' + ey + 'Q' + ex + ' ' + (ey - 70) + ' ' + (ex + 78) + ' ' + ey + 'Q' + ex + ' ' + (ey + 70) + ' ' + (ex - 78) + ' ' + ey + 'Z', fill: '#fff' }, eye);
-      prim('circle', { cx: ex, cy: ey, r: 24 }, eye);
-      el('circle', { cx: ex, cy: ey, r: 9, fill: BLUE, stroke: 'none' }, eye);
+      /* the attacker: a hooded figure at a laptop who reaches for the link and is struck out */
+      var ex = 1330, ey = 158, foe = el('g', {}, gTop);
+      prim('path', { d: 'M' + (ex - 98) + ' ' + (ey + 84) + 'C' + (ex - 96) + ' ' + (ey + 44) + ' ' + (ex - 78) + ' ' + (ey + 26) + ' ' + (ex - 54) + ' ' + (ey + 16) +
+        'C' + (ex - 70) + ' ' + (ey - 30) + ' ' + (ex - 46) + ' ' + (ey - 82) + ' ' + ex + ' ' + (ey - 84) +
+        'C' + (ex + 46) + ' ' + (ey - 82) + ' ' + (ex + 70) + ' ' + (ey - 30) + ' ' + (ex + 54) + ' ' + (ey + 16) +
+        'C' + (ex + 78) + ' ' + (ey + 26) + ' ' + (ex + 96) + ' ' + (ey + 44) + ' ' + (ex + 98) + ' ' + (ey + 84) + 'Z', fill: '#fff' }, foe);
+      /* the face lost in the shadow of the hood, and two eyes */
+      el('path', { d: 'M' + (ex - 34) + ' ' + (ey - 20) + 'C' + (ex - 34) + ' ' + (ey - 62) + ' ' + (ex + 34) + ' ' + (ey - 62) + ' ' + (ex + 34) + ' ' + (ey - 20) +
+        'C' + (ex + 34) + ' ' + (ey + 10) + ' ' + (ex - 34) + ' ' + (ey + 10) + ' ' + (ex - 34) + ' ' + (ey - 20) + 'Z', fill: BLUE, 'fill-opacity': r3(0.2 * TINT), stroke: BLUE, 'stroke-opacity': 0.4, 'stroke-width': 1.5 }, foe);
+      el('path', { d: 'M' + (ex - 20) + ' ' + (ey - 27) + 'l12 5M' + (ex + 20) + ' ' + (ey - 27) + 'l-12 5', fill: 'none', stroke: BLUE, 'stroke-width': 3 }, foe);
+      /* the laptop, seen from behind its lid */
+      prim('rect', { x: ex - 54, y: ey + 30, width: 108, height: 66, rx: 7, fill: '#fff' }, foe);
+      pale('circle', { cx: ex, cy: ey + 63, r: 9 }, foe);
+      prim('path', { d: 'M' + (ex - 74) + ' ' + (ey + 100) + 'h148' }, foe);
       var probe = drawn('M' + (ex - 90) + ' ' + (ey + 30) + 'Q1090 330 ' + f1(LIGHT[0] + 70) + ' ' + f1(LIGHT[1] + 150), 420, 'pale');
-      var cross = strike(ex, ey);
+      var cross = strike(ex, ey + 4);
       /* the padlock that rides the link */
       var lock = el('g', { opacity: 0 }, gTop);
       el('rect', { x: -13, y: -6, width: 26, height: 22, rx: 5, fill: '#fff', stroke: BLUE, 'stroke-width': 3 }, lock);
@@ -349,7 +358,7 @@ function createFeatureScene(svg, V) {
         var t = st.t, look = seg(t, [4.8, 5.6]), out = ease(seg(t, [5.6, 6.3])) * (1 - st.back);
         probe(look * (1 - sm(seg(t, [5.8, 6.4]))));
         cross(out);
-        sa(eye, 'opacity', f2(1 - 0.5 * sm(out)));
+        sa(foe, 'opacity', f2(1 - 0.5 * sm(out)));
         if (st.link && st.sig > 0.05) {
           var u = ((t - TL.LK[0]) / 1.4) % 1;
           sa(lock, 'opacity', f2(st.sig));
