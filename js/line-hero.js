@@ -7,8 +7,8 @@
 // frame, in the same box. A toggle next to pause collapses the hero text so
 // the whole drawing can be seen.
 const SCENES = {
-  host: () => import("./line-hero-host.js?v=20261110lh3").then(module => module.createHostScene),
-  manager: () => import("./line-hero-manager.js?v=20261110lh3").then(module => module.createManagerScene),
+  host: () => import("./line-hero-host.js?v=20261112lh4").then(module => module.createHostScene),
+  manager: () => import("./line-hero-manager.js?v=20261112lh4").then(module => module.createManagerScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video", hideText: "Hide text", showText: "Show text" };

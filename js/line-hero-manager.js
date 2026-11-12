@@ -1,9 +1,13 @@
 // WIFIGATE Manager hero: the owner-approved line animation (38.9 s loop).
 // Ported mechanically from the approved standalone page: the drawing,
-// choreography and timing are unchanged. The page driver, URL debug hooks and
-// window globals were removed; js/line-hero.js drives render(t). The approved
-// page's static SVG markup is created here in its original order, and the only
-// id (the dive lens clip) is scoped as wgm-lens.
+// choreography and timing are unchanged, except the entrance (owner request,
+// 12 Nov 2026), which now shows Auto Open: the resident walks in without
+// stopping, the phone in the pocket signals and the door opens on the way;
+// the entrance has no reader, only the doors and their status light.
+// The page driver, URL debug hooks and window globals were removed;
+// js/line-hero.js drives render(t). The approved page's static SVG markup is
+// created here in its original order, and the only id (the dive lens clip) is
+// scoped as wgm-lens.
 export const MANAGER_DURATION = 38.9;
 export const MANAGER_STILL = 27.65;
 
@@ -63,8 +67,9 @@ export function createManagerScene(svg) {
   /* ================================================================ timeline */
   var TL = {
     A: [0.6, 2.1], CAR: [1.9, 4.7], AB: [5.7, 7.4], SH: [7.3, 8.9], BC: [9.9, 11.6], CD: [11.3, 12.9],
-    /* the entrance: walk to the reader, the light fills, the left leaf swings out, the resident walks in */
-    WK: [8.9, 12.05], GT: [12.15, 12.7], DO: [12.65, 13.4], WI: [13.1, 14.55], CW: [14.3, 16.3],
+    /* the entrance, Auto Open: one unbroken walk from the sidewalk into the lobby (WK); on the walkway the phone
+       in the resident's pocket signals (WF), the light fills and the left leaf swings out ahead of the resident */
+    WK: [8.9, 14.55], WF: [10.7, 12.75], GT: [12.15, 12.7], DO: [12.65, 13.4], CW: [14.3, 16.3],
     MG: [17.4, 23.0], MO: [17.4, 20.6], PN: [17.6, 19.3], ST: [19.4, 20.6], BL: [19.5, 22.0], MD: [20.3, 22.2],
     LT: [21.3, 22.5], TN: [21.6, 22.8],
     PU: [22.9, 24.2], RG: [24.0, 24.8], AR0: 24.8, ARd: 1.0, ARs: 0.32,
@@ -82,12 +87,12 @@ export function createManagerScene(svg) {
   var A_X0 = 0, A_X1 = 420, A_Y0 = -360, H_X0 = 10, H_X1 = 50, PIV = [50, PL, 62], ARM_L = 214, GAP = [50, 278];
   var B_X0 = 490, B_X1 = 790, B_Y0 = -270, B_Yf = -70, B_H = 280, GF = 150, SH_X0 = 520, SH_X1 = 760, SH_Z = 118, DEP = 36;
   var C_X0 = 880, C_X1 = 1110, C_Y0 = -410, C_Yf = -200, C_H = 380;
-  /* the tower's front entrance: a recessed double door, a reader to its right; the left leaf is the active
+  /* the tower's front entrance: a recessed double door, its status light on the wall to its right; the left leaf is the active
      one and swings out (towards the street), so the open leaf shows as a whole panel; the lobby lies behind */
   var D_X0 = 955, D_X1 = 1035, DH = 94, RD = 10, D_YR = C_Yf - RD, LW = (D_X1 - D_X0) / 2, OPEN = 95;
   var LOB = [915, -285];
   /* the canopy clears the door head by more than its own depth, so the head stays in view from above */
-  var RDR = [1056, 1066, 42, 62], CAN = [D_X0 - 14, D_X1 + 14, 124, 22], CURB = [850, 1140], WALKR = RDR[1] + 12;
+  var DLX = D_X1 + 26, DLZ = DH, CAN = [D_X0 - 14, D_X1 + 14, 124, 22], CURB = [850, 1140], WALKR = DLX + 17;
   var INKL = 0, SECD = 1, SEC = 2, SECV = 3, PRIM = 4;
 
   var PC = { cx: 0, cy: 0, cz: 0, ct: 1, st: 0, sp: 1, cp: 0, ks: 1, ox: 0, oy: 0 };
@@ -499,21 +504,21 @@ export function createManagerScene(svg) {
   }
 
   /* status-light anchors: iso (above the device) -> plan (beside it, on the sidewalk) */
-  var L_ISO = [[H_X0 + 2, PL + 22, 84 + 30], [SH_X1 + 15, B_Yf, SH_Z - 30], [(RDR[0] + RDR[1]) / 2, C_Yf, RDR[3] + 32]];
-  var L_PLAN = [[-22, 4, 0], [640, 6, 0], [(RDR[0] + RDR[1]) / 2, 6, 0]];
+  var L_ISO = [[H_X0 + 2, PL + 22, 84 + 30], [SH_X1 + 15, B_Yf, SH_Z - 30], [DLX, C_Yf, DLZ]];
+  var L_PLAN = [[-22, 4, 0], [640, 6, 0], [DLX, 6, 0]];
   var LPOS = [[0, 0], [0, 0], [0, 0]];
   function lightAt(i, mp, occR) {
     var a = L_ISO[i], b = L_PLAN[i], u = sm(mp), ux = u, uz = u;
     /* the barrier light first steps clear of the housing, then descends beside it */
     if (i === 0) { ux = sm(mp / 0.5); uz = sm((mp - 0.3) / 0.7); }
     var uy = uz;
-    /* the door light steps out from the facade first, clear of the reader below it, then settles */
+    /* the door light steps out from the facade first, then settles */
     if (i === 2) { uy = sm(mp / 0.55); uz = sm((mp - 0.25) / 0.75); }
     var p = P(lerp(a[0], b[0], ux), lerp(a[1], b[1], uy), lerp(a[2], b[2], uz));
     LPOS[i] = p;
     socc(octagon(p, occR));
   }
-  var PERS = 5, PERSON_OP = 0;
+  var PERS = 5, PERSON_OP = 0, PERSON_AT = [0, 0, 1];
   function capsule(x, top, bot, r) {
     var pts = [], k;
     for (k = 0; k <= 10; k++) { var a = Math.PI + Math.PI * k / 10; pts.push([x + r * Math.cos(a), top + r + r * Math.sin(a)]); }
@@ -527,6 +532,7 @@ export function createManagerScene(svg) {
     PERSON_OP = op;
     if (op <= 0.01) return;
     var p = P(X, Y, 0), s = PC.ks / K;
+    PERSON_AT = [p[0], p[1], s];
     var w = 18 * s, h = 40 * s, r = 8.5 * s, x = p[0], y = p[1], hy = y - h - r - 5 * s;
     var body = capsule(x, y - h, y, w / 2), head = circlePts([x, hy], r, 20);
     ST.push([LAY, body, true, PERS, keep || null]);
@@ -548,19 +554,25 @@ export function createManagerScene(svg) {
       if (hh.length >= 3) DOOR_TINT.holes.push(hh);
     }
   }
-  /* along the sidewalk, up the walkway to a stop beside the reader; then across the front of the door, through
-     the open left leaf's opening and on into the lobby (a quadratic curve) */
-  var WALK = [[1200, 6], [1054, 6], [1054, -184]], WALK_C = [980, -186], WALK_IN = [938, -250];
-  function walkPos(u, v) {
-    if (v > 0) {
-      var m = 1 - v, S = WALK[2];
-      return [m * m * S[0] + 2 * m * v * WALK_C[0] + v * v * WALK_IN[0], m * m * S[1] + 2 * m * v * WALK_C[1] + v * v * WALK_IN[1]];
-    }
-    var L1 = Math.hypot(WALK[1][0] - WALK[0][0], WALK[1][1] - WALK[0][1]), L2 = Math.hypot(WALK[2][0] - WALK[1][0], WALK[2][1] - WALK[1][1]);
-    var s = u * (L1 + L2);
-    if (s <= L1) return [lerp(WALK[0][0], WALK[1][0], s / L1), lerp(WALK[0][1], WALK[1][1], s / L1)];
-    s -= L1; return [lerp(WALK[1][0], WALK[2][0], s / L2), lerp(WALK[1][1], WALK[2][1], s / L2)];
-  }
+  /* Auto Open: one unbroken walk - along the sidewalk, round the corner into the walkway, then a long bend to
+     the active leaf's opening and straight on into the lobby; the resident never stops on the way. The
+     last leg runs up the screen, so the resident stays clear of the leaf that swings out beside the opening */
+  var WALK = (function () {
+    var o = [[1200, 6], [1104, 6]];
+    function bend(c, b) { var a = o[o.length - 1]; for (var k = 1; k <= 14; k++) o.push(qpt(a, c, b, k / 14)); }
+    bend([1062, 6], [1058, -50]);
+    bend([1050, -122], [1016, -160]);
+    o.push([938, -250]);
+    return o;
+  })();
+  var WALK_CUM = cumOf(WALK), WALK_LEN = WALK_CUM[WALK_CUM.length - 1];
+  /* the distance along the walk at which the resident crosses the facade */
+  var WALK_DOOR = (function () {
+    for (var i = 1; i < WALK.length; i++) if (WALK[i][1] < C_Yf) return lerp(WALK_CUM[i - 1], WALK_CUM[i], (C_Yf - WALK[i - 1][1]) / (WALK[i][1] - WALK[i - 1][1]));
+    return WALK_LEN;
+  })();
+  /* a short step off from standing, then an even pace all the way in */
+  function walkDist(u) { var a = 0.12; return (u < a ? u * u / (2 * a) : u - a / 2) / (1 - a / 2) * WALK_LEN; }
 
   var LS = 1, PIN_OCC = 0;
   function buildM2(stt, mp) {
@@ -574,8 +586,6 @@ export function createManagerScene(svg) {
     nxt(); tower();
     entrance(stt, (1 - sm(mp / 0.3)) * stt.wop, mp);
     lightAt(2, mp, occR);
-    /* the reader comes after its light, so the light never bites into it as it travels past */
-    nxt(); box(RDR[0], C_Yf, RDR[2], RDR[1] - RDR[0], 4, RDR[3] - RDR[2], PRIM); nxt();
     if (PIN_OCC > 0.01) { nxt(); socc(octagon(P(345, -185, 0), 19 * PIN_OCC * LS)); }
     return emit();
   }
@@ -615,6 +625,33 @@ export function createManagerScene(svg) {
     } else sa(L.ping, 'opacity', '0');
   }
   var dLights = [mkLight(gM2), mkLight(gM2), mkLight(gM2)];
+  /* Auto Open: the phone in the resident's pocket and its Wi-Fi mark, over the site lines (screen space).
+     The mark is created when it first shows, so the static start and still frames keep their markup */
+  var gWifi = null, wifiPhone, wifiArcs;
+  var WIFI_PULSES = 3, WIFI_HALF = 32 * Math.PI / 180;
+  function setWifi(t) {
+    var u = seg(t, TL.WF), op = (u > 0 && u < 1) ? Math.min(1, u / 0.08, (1 - u) / 0.1) * PERSON_OP : 0;
+    if (op <= 0.003) { if (gWifi) sa(gWifi, 'display', 'none'); return; }
+    if (!gWifi) {
+      gWifi = el('g', {}, gM2);
+      wifiPhone = el('rect', { fill: BLUE, stroke: 'none' }, gWifi);
+      wifiArcs = [0, 1, 2].map(function () { return el('path', { fill: 'none', stroke: BLUE, 'stroke-width': 3, d: '' }, gWifi); });
+    }
+    sa(gWifi, 'display', 'inline'); sa(gWifi, 'opacity', f2(op));
+    /* the phone sits at the hip, on the side of the door; the mark opens towards the entrance light, held
+       low enough for its arcs to clear the resident's own outline */
+    var s = PERSON_AT[2], cx = PERSON_AT[0] + 4.5 * s, cy = PERSON_AT[1] - 17 * s;
+    sa(wifiPhone, 'x', f1(cx - 2.6 * s)); sa(wifiPhone, 'y', f1(cy - 4.6 * s));
+    sa(wifiPhone, 'width', f1(5.2 * s)); sa(wifiPhone, 'height', f1(9.2 * s)); sa(wifiPhone, 'rx', f1(1.3 * s));
+    var aim = clamp(Math.atan2(LPOS[2][1] - cy, LPOS[2][0] - cx), -0.62, 0.2), ph = (u * WIFI_PULSES) % 1;
+    for (var i = 0; i < 3; i++) {
+      /* each pulse lights the arcs outwards, one after the other, then lets them all go */
+      var k = sm((ph - 0.14 * i) / 0.14) * (1 - sm((ph - 0.7) / 0.26)), r = (13 + 8.5 * i) * s;
+      sa(wifiArcs[i], 'opacity', f2(k));
+      sa(wifiArcs[i], 'd', 'M' + f1(cx + r * Math.cos(aim - WIFI_HALF)) + ' ' + f1(cy + r * Math.sin(aim - WIFI_HALF)) +
+        'A' + f1(r) + ' ' + f1(r) + ' 0 0 1 ' + f1(cx + r * Math.cos(aim + WIFI_HALF)) + ' ' + f1(cy + r * Math.sin(aim + WIFI_HALF)));
+    }
+  }
 
   /* ================================================================ panel (screen space, no text) */
   var PX = 96, PY = 548, PW = 300, PH = 264, PCX = PX + PW / 2, PCY = PY + PH / 2;
@@ -1014,11 +1051,11 @@ export function createManagerScene(svg) {
   function m2State(t) {
     if (t >= TL.DV[0]) return { arm: 0, shut: 0, door: 0, car: carPose(0), walk: WALK[0], wop: 1, p: [0, 0, 0] };
     var pa = ease(seg(t, TL.A)), ps = ease(seg(t, TL.SH)), pg = ease(seg(t, TL.GT));
-    /* walk-in: a gentle start, so the step across the threshold reads; the resident fades as the lintel
-       starts to take the head, so clip and fade end together */
-    var v = eSine(seg(t, TL.WI));
+    /* the resident keeps walking: the door is open before the threshold; inside, the resident fades as the
+       lintel starts to take the head, so clip and fade end together */
+    var wd = walkDist(seg(t, TL.WK));
     return { arm: 90 * pa, shut: ps, door: OPEN * ease(seg(t, TL.DO)), car: carPose(ease(seg(t, TL.CAR))),
-      walk: walkPos(Math.sin(seg(t, TL.WK) * Math.PI / 2), v), wop: 1 - sm((v - 0.6) / 0.36), p: [pa, ps, pg] };
+      walk: polyAt(WALK, WALK_CUM, wd), wop: 1 - sm((wd - WALK_DOOR - 8) / 38), p: [pa, ps, pg] };
   }
   var DONE_T = [TL.A[1], TL.SH[1], TL.GT[1]];
 
@@ -1112,6 +1149,7 @@ export function createManagerScene(svg) {
         var ringR = lerp(7 + 5 * p, 6 + 3 * p, ms) * LS, ringOp = lerp(1, 1 - p, ms), dotR = p * lerp(6.5, 6, ms) * LS;
         setLight(dLights[i], LPOS[i][0], LPOS[i][1], ringR, ringOp, dotR, LS > 0.2 ? 1 : LS / 0.2, pk, lerp(12, 6, ms) * LS);
       }
+      setWifi(t);
     } else sa(gM2, 'display', 'none');
     /* white occluder behind the panel (same as the page background) keeps site lines out of the panel */
     sa(pmr, 'fill-opacity', f2(panelP)); sa(pmr, 'display', panelP > 0.003 ? 'inline' : 'none');
