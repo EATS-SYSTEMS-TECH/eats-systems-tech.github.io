@@ -21,8 +21,9 @@
 // as the video heroes (css/media-watermark.css draws it dark on this white
 // hero once the live art is mounted).
 import { sceneAssetUrl } from "./scene-media.mjs";
+import { LINE_HERO_SCENES } from "./line-hero-frames.mjs";
 
-export const LINE_HERO_VERSION = "20261112lh6";
+export const LINE_HERO_VERSION = "20261112lh7";
 
 export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   if (!["play", "pause", "replay", "hideText", "showText"].every(key => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");
@@ -58,6 +59,8 @@ export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   hero.append($("<script>").attr({ type: "application/json", "data-scene-copy": "" }).text(JSON.stringify(copy).replace(/</g, "\\u003c")));
 
   $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/line-hero.css?v=${LINE_HERO_VERSION}" />`);
-  $("head").append(`<link rel="modulepreload" href="${assetPrefix}js/line-hero-${scene}.js?v=${LINE_HERO_VERSION}" />`);
+  // The scene's own module; several scenes may share one.
+  if (!LINE_HERO_SCENES[scene]) throw new Error(`Unknown line hero scene ${scene}`);
+  $("head").append(`<link rel="modulepreload" href="${assetPrefix}${LINE_HERO_SCENES[scene].module}?v=${LINE_HERO_VERSION}" />`);
   $("head").append(`<script type="module" src="${assetPrefix}js/line-hero.js?v=${LINE_HERO_VERSION}"></script>`);
 }

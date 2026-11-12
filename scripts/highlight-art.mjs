@@ -208,6 +208,36 @@ const DRAWINGS = {
     `<path d="M216 62l-26 12v112l26 -10Z" fill="#fff"/><path d="M197 122v13"/>`,
     ground(206, 308, 176), light(256, 42),
   ],
+  // a remote is paired through the phone
+  remote: () => [
+    `<circle cx="74" cy="42" r="10"/><rect x="42" y="54" width="64" height="118" rx="18" fill="#fff"/>`,
+    tint(`<circle cx="74" cy="90" r="17"/>`), `<circle cx="74" cy="90" r="17"/>`, thin(`<circle cx="74" cy="138" r="12"/>`),
+    waves(100, 90),
+    dashed("M150 90h34"), tip(190, 90),
+    phone(200, 28, 84, 164),
+    tint(`<rect x="212" y="64" width="60" height="34" rx="7"/>`),
+    thin(`<rect x="212" y="64" width="60" height="34" rx="7"/><rect x="212" y="108" width="60" height="34" rx="7"/><path d="M222 76v10M222 120v10M232 81h18M232 125h18"/>`),
+    `<circle cx="262" cy="81" r="9" fill="#fff"/><path d="M257.5 81l3.5 3.5l6 -7"/>`,
+  ],
+  // what is stored stays locked away
+  private: () => [
+    `<rect x="30" y="38" width="170" height="146" rx="10"/><path d="M30 64h170"/>${dot(44, 51, 2)}${dot(53, 51, 2)}${dot(62, 51, 2)}`,
+    thin([82, 112, 142].map(y => `<path d="M46 ${y}h90M46 ${y + 11}h54"/>`).join("")),
+    `<path d="M216 100v-16a26 26 0 0 1 52 0v16"/><rect x="198" y="100" width="88" height="72" rx="12" fill="#fff"/>`,
+    tint(`<rect x="198" y="100" width="88" height="72" rx="12"/>`),
+    dot(242, 128, 7), `<path d="M242 132v16"/>`,
+  ],
+  // one payment, and nothing after it
+  once: () => [
+    tint(`<circle cx="74" cy="110" r="38"/>`), `<circle cx="74" cy="110" r="38"/>`, thin(`<circle cx="74" cy="110" r="27"/>`),
+    `<path d="M64 110l7.5 7.5l13.5 -15"/>`,
+    dashed("M118 110h36"), tip(160, 110),
+    tint(`<rect x="176" y="66" width="46" height="88" rx="7"/>`), `<rect x="176" y="66" width="46" height="88" rx="7"/>`, thin(`<path d="M189 136h20"/>`), dot(199, 92, 4.5),
+    light(199, 42),
+    thin(`<circle cx="258" cy="92" r="17" stroke-dasharray="3 4"/><circle cx="286" cy="138" r="17" stroke-dasharray="3 4"/>`),
+    `<path d="M240 160L304 70"/>`,
+    ground(160, 240, 164),
+  ],
   // any other highlight: access that is protected
   default: () => [
     `<path d="M112 28l-60 24v46c0 38 24 66 60 78c36 -12 60 -40 60 -78V52Z"/>`,

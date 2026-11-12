@@ -3,9 +3,16 @@
 // detail, under a line animation in the language of the WIFIGATE Host and
 // WIFIGATE Manager heroes (no video). Every locale has its own copy; an
 // unsupported or incomplete locale never falls back.
-// The pages so far: "No SIM, No Router" and "Stability". The card's own title
-// and text are the page's label and lead (scripts/homepage-copy/*.mjs,
-// platform.features).
+// Every card but Auto Open, which has its own older page, has one. The card's
+// own title and text are the page's label and lead (scripts/homepage-copy/*.mjs,
+// platform.features); the longer copies live in scripts/feature-page-copy/.
+
+import GUEST_COPY from "./feature-page-copy/quick-guest-invite.mjs";
+import HISTORY_COPY from "./feature-page-copy/access-history.mjs";
+import EVENTS_COPY from "./feature-page-copy/scheduled-events.mjs";
+import RF_COPY from "./feature-page-copy/rf-remote-pairing.mjs";
+import SECURITY_COPY from "./feature-page-copy/security-privacy.mjs";
+import NO_FEES_COPY from "./feature-page-copy/no-subscription-fees.mjs";
 
 // headline, then three title/text pairs: nothing extra, weak reception, no monthly line.
 const NO_SIM_COPY = {
@@ -102,6 +109,19 @@ export const FEATURE_PAGES = Object.freeze([
     drawings: Object.freeze(["nosim", "nosignal", "nobill"]), copy: NO_SIM_COPY }),
   Object.freeze({ key: "stability", feature: 1, card: "stability", scene: "stability", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["offline", "failover", "instant"]), copy: STABILITY_COPY }),
+  Object.freeze({ key: "quick-guest-invite", feature: 2, card: "quick-guest-invite", scene: "guest", bodyClass: "feature-page", poster: "electric-gates-barrier",
+    drawings: Object.freeze(["invite", "clock", "phone"]), copy: GUEST_COPY }),
+  Object.freeze({ key: "access-history", feature: 3, card: "history-30-day", scene: "history", bodyClass: "feature-page", poster: "electric-gates-barrier",
+    drawings: Object.freeze(["history", "calendar", "roster"]), copy: HISTORY_COPY }),
+  Object.freeze({ key: "scheduled-events", feature: 5, card: "events", scene: "events", bodyClass: "feature-page", poster: "electric-gates-barrier",
+    drawings: Object.freeze(["calendar", "clock", "gate"]), copy: EVENTS_COPY }),
+  Object.freeze({ key: "rf-remote-pairing", feature: 6, card: "rf-remote-learning", scene: "rf", bodyClass: "feature-page", poster: "electric-gates-barrier",
+    drawings: Object.freeze(["remote", "roster", "keyless"]), copy: RF_COPY }),
+  Object.freeze({ key: "security-privacy", feature: 7, card: "security-privacy", scene: "security", bodyClass: "feature-page", poster: "electric-gates-barrier",
+    drawings: Object.freeze(["default", "private", "users"]), copy: SECURITY_COPY }),
+  // The card's own starred note (business plans are the exception) follows as small print.
+  Object.freeze({ key: "no-subscription-fees", feature: 8, card: "no-subscription-fees", scene: "nofees", bodyClass: "feature-page", poster: "electric-gates-barrier",
+    drawings: Object.freeze(["once", "nobill", "users"]), copy: NO_FEES_COPY, note: "subscriptionNote" }),
 ]);
 // Where the small arrow of each homepage feature card leads, by the card's class.
 // A card that is not listed has no page yet: its arrow is shown, but it is not a link.
@@ -126,7 +146,7 @@ export function getFeaturePageContent(page, locale, homepageCopy) {
     title: local[0],
     heroLead: lead,
     highlights: page.drawings.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
-    note: sentence && claim !== feature.text ? note : "",
+    note: page.note ? (NONEMPTY(homepageCopy.platform[page.note]) ? homepageCopy.platform[page.note] : "") : (sentence && claim !== feature.text ? note : ""),
     benefits: [],
     faq: [],
     seoTitle: `${feature.title} | WIFIGATE`,

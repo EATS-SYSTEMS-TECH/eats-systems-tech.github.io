@@ -22,6 +22,13 @@ export const LINE_HERO_SCENES = Object.freeze({
   manager: { module: "js/line-hero-manager.js", factory: "createManagerScene" },
   nosim: { module: "js/line-hero-nosim.js", factory: "createNoSimScene" },
   stability: { module: "js/line-hero-stability.js", factory: "createStabilityScene" },
+  guest: { module: "js/line-hero-features.js", factory: "createGuestScene" },
+  history: { module: "js/line-hero-features.js", factory: "createHistoryScene" },
+  autoopen: { module: "js/line-hero-features.js", factory: "createAutoOpenScene" },
+  events: { module: "js/line-hero-features.js", factory: "createEventsScene" },
+  rf: { module: "js/line-hero-features.js", factory: "createRfScene" },
+  security: { module: "js/line-hero-features.js", factory: "createSecurityScene" },
+  nofees: { module: "js/line-hero-features.js", factory: "createNoFeesScene" },
 });
 export const LINE_HERO_FRAMES = Object.freeze(["start", "still"]);
 

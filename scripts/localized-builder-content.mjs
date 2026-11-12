@@ -110,7 +110,7 @@ export function applyHomepageCopy($, copy, locale) {
 }
 
 // Version of the highlight drawings, their wave and css/niche-flow.css; change it with them.
-export const HIGHLIGHT_ART_VERSION = '20261112c';
+export const HIGHLIGHT_ART_VERSION = '20261112d';
 // Small print under the three highlights: the starred exception to what they claim.
 export function installHighlightNote($, note, locale) {
   if (!note) return;

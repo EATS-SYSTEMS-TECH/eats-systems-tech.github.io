@@ -238,7 +238,9 @@ async function buildAutoOpenPages(homeData) {
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
     $('#niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
     setUseCaseNavigation($, { chrome, content });
-    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: homeData.homepageCopies[locale].hero.media });
+    // Since 12 Nov 2026 (owner request) the hero is the Auto Open line animation, not a video; the accepted poster stays the share image.
+    applyLineHero($, { scene: 'autoopen', frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
+    installUseCaseShopLink($, { locale, pageKey: AUTO_OPEN_PAGE_KEY, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button });
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey: AUTO_OPEN_PAGE_KEY, content, chrome, image, locale, localeOptions: homeData.localeOptions });
     await writeOutputFile(buildOutputFilePath(locale, AUTO_OPEN_PAGE_KEY), serialize($, homeData, locale, AUTO_OPEN_PAGE_KEY));

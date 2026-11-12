@@ -75,12 +75,13 @@ test("static marketing and utility pages add no watermark elements, wrappers or 
   }
 });
 
-test("all 585 localized consumer pages contain exactly 468 video layers and 78 line-hero layers; every static Shabbat page has none", async () => {
+test("all 585 localized consumer pages contain exactly 429 video layers and 117 line-hero layers; every static Shabbat page has none", async () => {
   let pages = 0, frames = 0, lineFrames = 0, staticPages = 0;
   // WIFIGATE Host and Manager show a drawn line animation instead of a video;
   // since 10 Nov 2026 (owner request) their media layer carries the same mark.
-  const lineHeroKeys = ["wifigate-host", "wifigate-manager"];
-  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), ...lineHeroKeys, AUTO_OPEN_PAGE_KEY];
+  // Since 12 Nov 2026 (owner request) Auto Open shows its line animation as well.
+  const lineHeroKeys = ["wifigate-host", "wifigate-manager", AUTO_OPEN_PAGE_KEY];
+  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), ...lineHeroKeys];
   for (const { code } of SITE_LANGUAGES) for (const key of keys) {
     const relative = path.posix.join(code === "en" ? "" : code.toLowerCase(), key, "index.html");
     const $ = cheerio.load(await fs.readFile(new URL(relative, root), "utf8"));
@@ -117,6 +118,6 @@ test("all 585 localized consumer pages contain exactly 468 video layers and 78 l
   }
   assert.equal(pages, 585);
   assert.equal(staticPages, 39);
-  assert.equal(lineFrames, 78);
-  assert.equal(frames, 468 + 78);
+  assert.equal(lineFrames, 117);
+  assert.equal(frames, 429 + 117);
 });

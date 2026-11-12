@@ -285,7 +285,7 @@ async function main() {
         const benefits = $("#niche-benefits-list > .bento-card");
         if (benefits.length !== 3 || benefits.find(".bento-card__icon svg").length !== 3 || !$("#niche-benefits-title").text().trim()) problems.push(`${rel}: Auto Open needs a localized Key benefits section with three shared benefit cards`);
         if ($(".niche-highlight, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: Auto Open has duplicate highlights, unrelated sections or navigation`);
-        if ($(".niche-hero video[data-media-variants]").length !== 1 || $(".niche-hero [data-scene-replay]").length !== 1) problems.push(`${rel}: Auto Open video and replay are missing`);
+        if ($("main video").length || $(".niche-hero--line[data-line-hero='autoopen'] [data-line-hero-stage]").length !== 1 || $(".niche-hero [data-scene-replay]").length !== 1) problems.push(`${rel}: Auto Open shows its line animation with replay, not a video`);
       } else if (featureKeys.includes(pageKey)) {
         if ($(".niche-highlight > img.niche-flow__art").length !== 3 || $(".niche-highlight__title").toArray().some(element => !$(element).text().trim())) problems.push(`${rel}: a feature page needs three highlights with their drawings`);
         if ($("main video").length || $(".niche-hero--line [data-line-hero-stage]").length !== 1) problems.push(`${rel}: a feature page shows a line animation, not a video`);

@@ -33,7 +33,7 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet">
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/line-hero.css?v=20261112lh7">
 
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
@@ -45,7 +45,7 @@
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
 
-<script src="../../js/media-runtime.js?v=20261109p1" defer=""></script><link rel="stylesheet" href="../../css/scene-video.css?v=20261109a"><script src="../../js/scene-video.js?v=20261019d" defer=""></script>
+<link rel="modulepreload" href="../../js/line-hero-features.js?v=20261112lh7"><script type="module" src="../../js/line-hero.js?v=20261112lh7"></script>
   <meta name="description" content="許可されたユーザーが到着するとゲートが自動で開くので、ハンズフリーでスムーズに入場できます。">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
@@ -330,9 +330,9 @@
 
   <main id="main-content" class="niche-main">
     <!-- The hero retains one eager image, its overlay and the content layer. -->
-    <section aria-labelledby="niche-title" class="niche-hero" data-scene-video="" data-scene-state="image">
+    <section aria-labelledby="niche-title" class="niche-hero niche-hero--line" data-line-hero="autoopen" data-line-hero-state="poster">
       <div class="niche-hero__media" data-media-watermark-frame="">
-        <picture data-scene-picture=""><source type="image/avif" media="(min-width: 769px)" srcset="../../assets/img/derived-posters/auto-open-futuristic-desktop.avif?v=0657b485803e"><source media="(min-width: 769px)" srcset="../../assets/img/desktop/auto-open-futuristic-scene.webp?v=ca1b3efc1dbc"><source media="(max-width: 768px)" srcset="../../assets/img/desktop/auto-open-futuristic-scene.webp?v=ca1b3efc1dbc"><img id="niche-image" class="niche-hero__bg" alt="許可されたユーザーが到着するとゲートが自動で開くので、ハンズフリーでスムーズに入場できます。" width="1918" height="1080" loading="eager" fetchpriority="high" decoding="async" src="../../assets/img/desktop/auto-open-futuristic-scene.webp?v=ca1b3efc1dbc" data-scene-image=""></picture><video data-video-src="../../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b&quot;,&quot;poster&quot;:&quot;../../assets/img/desktop/auto-open-futuristic-scene.webp?v=ca1b3efc1dbc&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080},&quot;desktop&quot;:{&quot;src&quot;:&quot;../../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b&quot;,&quot;poster&quot;:&quot;../../assets/img/desktop/auto-open-futuristic-scene.webp?v=ca1b3efc1dbc&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video>
+        <div class="line-hero__stage" data-line-hero-stage=""><picture><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/img/line-hero/autoopen-still.svg?v=bde6eaa37d2c" type="image/svg+xml"><img id="niche-image" class="line-hero__frame" alt="許可されたユーザーが到着するとゲートが自動で開くので、ハンズフリーでスムーズに入場できます。" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" src="../../assets/img/line-hero/autoopen-start.svg?v=091d3a993c54"></picture></div>
         <div class="niche-hero__overlay"></div>
       <span class="media-watermark" data-media-watermark="" aria-hidden="true"></span></div>
       <div class="niche-hero__content container">
@@ -348,22 +348,22 @@
               </li>
             </ol>
           </nav>
-          <div class="niche-hero__pager"><div class="scene-video-controls"><button type="button" data-scene-pause="" hidden="">動画を一時停止</button></div>
+          <div class="niche-hero__pager"><div class="scene-video-controls"><button type="button" data-scene-pause="" hidden="">動画を一時停止</button><button type="button" data-hero-text-toggle="" aria-controls="niche-hero-text" aria-expanded="true" aria-label="テキストを隠す" title="テキストを隠す" hidden=""><svg class="line-hero__toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="line-hero__toggle-hide" d="M5 4.5l5 5 5-5M5 10.5l5 5 5-5"></path><path class="line-hero__toggle-show" d="M5 9.5l5-5 5 5M5 15.5l5-5 5 5"></path></svg></button></div>
 
 
           </div>
         </div>
 
         <!-- The builder fills the optional lead and proof without changing the two actions. -->
-        <div class="niche-hero__text">
+        <div class="niche-hero__text" id="niche-hero-text">
           <p id="niche-eyebrow" class="niche-hero__eyebrow">WIFIGATE · Auto Open</p>
           <h1 id="niche-title" class="niche-hero__title">到着。そのまま入場。いつもの一日へ。</h1>
           <p id="niche-hero-lead" class="niche-hero__lead">許可されたユーザーが到着するとゲートが自動で開くので、ハンズフリーでスムーズに入場できます。</p>
-          <div class="niche-hero__actions"><button type="button" id="niche-hero-replay" data-scene-replay="" class="btn btn--primary niche-hero__btn-primary" aria-label="動画をもう一度再生" title="動画をもう一度再生">動画をもう一度再生</button></div>
+          <div class="niche-hero__actions"><button type="button" id="niche-hero-replay" data-scene-replay="" class="btn btn--primary niche-hero__btn-primary" aria-label="動画をもう一度再生" title="動画をもう一度再生">動画をもう一度再生</button><a id="niche-hero-shop" href="/ja/shop/" class="btn btn--ghost niche-hero__btn-secondary">ショップを見る</a></div>
 
         </div>
       </div>
-    <script type="application/json" data-scene-copy="">{"replay":"動画をもう一度再生","mute":"動画をミュート","unmute":"動画のミュートを解除","pause":"動画を一時停止","play":"動画を再生"}</script></section>
+    <script type="application/json" data-scene-copy="">{"replay":"動画をもう一度再生","mute":"動画をミュート","unmute":"動画のミュートを解除","pause":"動画を一時停止","play":"動画を再生","hideText":"テキストを隠す","showText":"テキストを表示"}</script></section>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
 
