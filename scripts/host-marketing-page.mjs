@@ -183,7 +183,8 @@ export function installSubscriptionFlow($, { content, productName = "host", asse
     node($, "h2", { class: "wa-h2", id: "wa-flow-title" }, heading.title), node($, "p", { class: "wa-lead" }, heading.subtitle)]);
   const track = node($, "div", { class: "wa-flow__track" }, [picture(`wave-${direction}.svg`, "wa-flow__wave", 1160, 200),
     node($, "ol", { class: "wa-flow__list", id: "niche-highlights-list" }, items)]);
-  section.removeAttr("hidden").addClass("wa-page wa-flow").attr("aria-labelledby", "wa-flow-title");
+  section.removeAttr("hidden").removeClass("niche-highlights--flow").addClass("wa-page wa-flow").attr("aria-labelledby", "wa-flow-title");
+  $("link[href*='css/niche-flow.css']").remove();
   section.children(".container").first().empty().append(head, track);
   benefitsHeader.prepend(node($, "span", { class: "wa-eyebrow" }, content.benefitsEyebrow));
   $("#niche-faq-list details").first().attr("open", "");

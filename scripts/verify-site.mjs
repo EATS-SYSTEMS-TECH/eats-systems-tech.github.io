@@ -245,9 +245,9 @@ async function main() {
         if (!$("#niche-hero-lead").text().trim()) problems.push(`${rel}: hero lead is empty`);
         const highlights = $(".niche-highlight").length;
         if (highlights !== 3) problems.push(`${rel}: ${highlights} highlights, expected 3`);
-        const highlightIcons = $(".niche-highlight__icon svg").length;
+        const highlightIcons = $(".niche-highlight > img.niche-flow__art").length;
         if (highlightIcons !== 3) {
-          problems.push(`${rel}: ${highlightIcons} highlight icons, expected 3`);
+          problems.push(`${rel}: ${highlightIcons} highlight drawings, expected 3`);
         }
         $(".niche-highlight").each((i, el) => {
           if (!$(el).find(".niche-highlight__title").text().trim()) {

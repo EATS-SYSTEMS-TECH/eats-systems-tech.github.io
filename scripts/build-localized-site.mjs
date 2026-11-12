@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import * as cheerio from 'cheerio';
 import { repoRoot, defaultLocale, siteOrigin, nowDate, changedFiles, COOKIE_CONSENT_VERSION, getBundle, getNestedValue, loadHomeCopy, readWindowGlobal, readHtmlTemplate, buildPagePath, buildPageUrl, buildOutputFilePath, buildAssetPrefix, rewriteStaticAssets, removeScripts, appendScripts, alternatesFor, applyDataI18nTranslations, setBodyDirection, updateFooterStaticUi, rewriteFooterLegalLinks, updateAccessibilityMarkup, insertPageDataScript, serialize } from './localized-builder-document.mjs';
-import { getNichePageContent, getNicheChrome, buildNicheContext, applyHomepageCopy, updateHomeStaticUi, updateHomeWhereLinks, fillUseCaseBody, fillLandingSections } from './localized-builder-content.mjs';
+import { getNichePageContent, getNicheChrome, buildNicheContext, applyHomepageCopy, updateHomeStaticUi, updateHomeWhereLinks, fillUseCaseBody, fillLandingSections, installUseCaseShopLink } from './localized-builder-content.mjs';
 import { SITE_LANGUAGES } from './site-languages.mjs';
 import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index.mjs';
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
@@ -201,6 +201,8 @@ async function buildNichePages(homeData) {
     const $ = cheerio.load(source, { decodeEntities: false });
     prepareUseCaseShell($, locale, niche.key); updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
     applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key === 'electric-gates' ? 'electric-gates-barrier' : niche.key), assetPrefix: buildAssetPrefix(locale, niche.key), copy: homeData.homepageCopies[locale].hero.media });
+    // The hero offers the shop beside the replay action; its label is the shop button of the WIFIGATE Host page.
+    installUseCaseShopLink($, { locale, pageKey: niche.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button });
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey: niche.key, content: ctx.content, chrome: ctx.chrome, image: niche.image, locale, localeOptions: homeData.localeOptions });
     await publishNicheVariant({ locale, pageKey: niche.key, render: () => serialize($, homeData, locale, niche.key), legacyKeys: () => niche.legacyKeys || [] }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });

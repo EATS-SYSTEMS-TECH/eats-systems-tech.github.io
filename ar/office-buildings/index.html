@@ -33,7 +33,7 @@
   <link href="../../css/fonts.css?v=20261004a" rel="stylesheet">
   <link href="../../css/styles.css?v=20261007d" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
-  <link href="../../css/niche.css?v=20261017b" rel="stylesheet">
+  <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/niche-flow.css?v=20261112a">
   <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
@@ -409,16 +409,16 @@
           <p id="niche-eyebrow" class="niche-hero__eyebrow">حالة استخدام WIFIGATE</p>
           <h1 id="niche-title" class="niche-hero__title">لا داعي لأن يمر الدخول إلى المكتب عبر الاستقبال!</h1>
           <p id="niche-hero-lead" class="niche-hero__lead">ينتظر الزوار والمرشحون للمقابلات والموردون أن ينزل أحد ليفتح لهم، ويحصل الموظفون على بطاقات أو مفاتيح يجب استرجاعها عند انتهاء خدمتهم. امنح كل شخص صلاحية شخصية: دائمة للموظفين ومحدودة المدة لكل من سواهم.</p>
-          <div class="niche-hero__actions"><button type="button" id="niche-hero-replay" data-scene-replay="" class="btn btn--primary niche-hero__btn-primary" aria-label="إعادة تشغيل الفيديو" title="إعادة تشغيل الفيديو">إعادة تشغيل الفيديو</button></div>
+          <div class="niche-hero__actions"><button type="button" id="niche-hero-replay" data-scene-replay="" class="btn btn--primary niche-hero__btn-primary" aria-label="إعادة تشغيل الفيديو" title="إعادة تشغيل الفيديو">إعادة تشغيل الفيديو</button><a id="niche-hero-shop" href="/ar/shop/" class="btn btn--ghost niche-hero__btn-secondary">انتقل إلى المتجر</a></div>
 
         </div>
       </div>
     <script type="application/json" data-scene-copy="">{"replay":"إعادة تشغيل الفيديو","mute":"كتم صوت الفيديو","unmute":"تشغيل صوت الفيديو","pause":"إيقاف الفيديو مؤقتًا","play":"تشغيل الفيديو"}</script></section>
 
     <!-- Highlights stay absent until a locale supplies complete entries. -->
-    <section id="niche-highlights" class="niche-highlights">
+    <section id="niche-highlights" class="niche-highlights niche-highlights--flow">
       <div class="container">
-        <div id="niche-highlights-list" class="niche-highlights__grid"><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"></circle><path d="M2.8 19.5c0-3.2 2.8-5.6 6.2-5.6s6.2 2.4 6.2 5.6"></path><path d="M16.5 6.2a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.8 14.4c2.1.6 3.6 2.4 3.6 5.1"></path></svg></span><h2 class="niche-highlight__title">موظف ينضم، موظف يغادر</h2><p class="niche-highlight__text">تعيين موظف أو إنهاء خدمته إجراء واحد في القائمة، لا جولة من إصدار بطاقة ثم استرجاعها ثم تغيير القفل. تبدأ الصلاحية وتنتهي في التواريخ التي تحددها.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"></path><path d="m10 13.5 4.5-4.5"></path></svg></span><h2 class="niche-highlight__title">دعوة مرشح للمقابلة بلمسة واحدة</h2><p class="niche-highlight__text">أرسل للمرشح دعوة لمقابلة العمل تمنحه صلاحية فتح موثّقة وآمنة، مع تعليمات الوصول والتفاصيل.</p></article><article class="niche-highlight"><span class="niche-highlight__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"></path><path d="M3.5 4.5V10H9"></path><path d="M12 8v4.5l3 1.8"></path></svg></span><h2 class="niche-highlight__title">سجل وصول للتشغيل والمتابعة</h2><p class="niche-highlight__text">كل عملية فتح مسجلة باسم ووقت، فيمكنك لاحقًا التحقق من دخل إلى طابق أو مخزن أو موقف سيارات، من دون الاعتماد على الذاكرة.</p></article></div>
+        <div class="niche-flow__track"><img class="niche-flow__wave" src="../../assets/img/highlight-flow/wave-points.svg?v=20261112a" alt="" width="1160" height="200" loading="lazy" decoding="async"><div id="niche-highlights-list" class="niche-flow__list"><article class="niche-highlight niche-flow__step"><img class="niche-flow__art" src="../../assets/img/highlight-flow/users.svg?v=20261112a" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="niche-flow__text"><h2 class="niche-highlight__title">موظف ينضم، موظف يغادر</h2><p class="niche-highlight__text">تعيين موظف أو إنهاء خدمته إجراء واحد في القائمة، لا جولة من إصدار بطاقة ثم استرجاعها ثم تغيير القفل. تبدأ الصلاحية وتنتهي في التواريخ التي تحددها.</p></div></article><article class="niche-highlight niche-flow__step"><img class="niche-flow__art" src="../../assets/img/highlight-flow/invite.svg?v=20261112a" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="niche-flow__text"><h2 class="niche-highlight__title">دعوة مرشح للمقابلة بلمسة واحدة</h2><p class="niche-highlight__text">أرسل للمرشح دعوة لمقابلة العمل تمنحه صلاحية فتح موثّقة وآمنة، مع تعليمات الوصول والتفاصيل.</p></div></article><article class="niche-highlight niche-flow__step"><img class="niche-flow__art" src="../../assets/img/highlight-flow/history.svg?v=20261112a" alt="" width="320" height="220" loading="lazy" decoding="async"><div class="niche-flow__text"><h2 class="niche-highlight__title">سجل وصول للتشغيل والمتابعة</h2><p class="niche-highlight__text">كل عملية فتح مسجلة باسم ووقت، فيمكنك لاحقًا التحقق من دخل إلى طابق أو مخزن أو موقف سيارات، من دون الاعتماد على الذاكرة.</p></div></article></div></div>
       </div>
     </section>
 

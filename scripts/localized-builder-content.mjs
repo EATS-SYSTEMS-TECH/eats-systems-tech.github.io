@@ -2,6 +2,7 @@ import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES } from './niche-pages/index.mjs';
 import { NICHE_CHROME } from './niche-content.mjs';
 import { benefitIconSvg } from './benefit-icons.mjs';
 import { setNicheList } from './niche-text-list.mjs';
+import { HIGHLIGHT_ART_SIZE, HIGHLIGHT_ART_DIR, HIGHLIGHT_WAVE, highlightArtPath } from './highlight-art.mjs';
 import { setLocalizedText, setLocalizedLines, formatTextForLocaleDirection, isRtl, buildAssetPrefix, buildPagePath, nowDate, updateAccessibilityMarkup } from './localized-builder-document.mjs';
 
 // Content lookup retains the canonical English fallback and explicit chrome errors.
@@ -108,38 +109,38 @@ export function applyHomepageCopy($, copy, locale) {
   $('#why-wifigate .entry-point__label').each((index, node) => { if (copy.why.points[index]) text($(node), copy.why.points[index]); });
 }
 
-// These display-only geometric facts preserve all accepted highlight illustrations.
-const highlightGeometry = {
-  phone: '<rect x="6.5" y="2.5" width="9" height="19" rx="2"/><path d="M10.5 18.5h3"/><path d="M18 8.5a5 5 0 0 1 0 7"/><path d="M20.5 6a8.5 8.5 0 0 1 0 12"/>',
-  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
-  roster: '<circle cx="8" cy="8" r="3"/><path d="M2.8 19c0-3 2.3-5 5.2-5s5.2 2 5.2 5"/><path d="M16.5 8.5h4.7M16.5 12.5h4.7M16.5 16.5h4.7"/>',
-  invite: '<path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"/><path d="m10 13.5 4.5-4.5"/>',
-  handsfree: '<path d="M5 20.5V4.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M2.5 20.5h14"/><circle cx="12.4" cy="12.3" r=".9"/><path d="M18.5 9.5a5 5 0 0 1 0 5"/><path d="M21.3 7.5a8.5 8.5 0 0 1 0 9"/>',
-  keyless: '<circle cx="8" cy="8" r="3.5"/><path d="m10.5 10.5 8 8"/><path d="m15.5 15.5-2 2"/><path d="M3 21 21 3"/>',
-  history: '<path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4.5V10H9"/><path d="M12 8v4.5l3 1.8"/>',
-  shield: '<path d="M12 2.8 4.5 6v6c0 4.4 3.1 7.9 7.5 9.2 4.4-1.3 7.5-4.8 7.5-9.2V6L12 2.8Z"/><path d="m8.8 12 2.2 2.2 4.2-4.2"/>',
-  gate: '<path d="M3 20.5V6M21 20.5V6"/><path d="M2 20.5h20"/><path d="M6 20.5V9.5h12v11"/><path d="M12 9.5v11"/><path d="M6 14.5h12"/>',
-  shutter: '<path d="M3 5.5h18"/><path d="M4.5 5.5v15M19.5 5.5v15"/><path d="M2.5 20.5h19"/><path d="M4.5 9.5h15M4.5 12.5h15M4.5 15.5h15"/>',
-  barrier: '<path d="M5 21v-11"/><circle cx="5" cy="7.5" r="1.75"/><path d="M3 21h4"/><path d="M7 8.75 21 13"/><path d="M11.5 10.1l-.9 2.8M16 11.5l-.9 2.8"/>',
-  users: '<circle cx="9" cy="8.5" r="3.2"/><path d="M2.8 19.5c0-3.2 2.8-5.6 6.2-5.6s6.2 2.4 6.2 5.6"/><path d="M16.5 6.2a3.2 3.2 0 0 1 0 6.1"/><path d="M17.8 14.4c2.1.6 3.6 2.4 3.6 5.1"/>',
-  calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17"/><path d="M8 2.8v4M16 2.8v4"/><path d="M8.5 14h3"/>',
-  bolt: '<path d="M13.5 2 4.5 13.5h6L10 22l9.5-11.5h-6L13.5 2Z"/>',
-  default: '<circle cx="12" cy="12" r="8.5"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/>',
-};
-function setNicheHighlights($, supplied) {
+// Version of the highlight drawings, their wave and css/niche-flow.css; change it with them.
+export const HIGHLIGHT_ART_VERSION = '20261112a';
+// A use-case hero offers the shop beside its replay action, as a quiet second button.
+export function installUseCaseShopLink($, { locale, pageKey, label }) {
+  const actions = $('.niche-hero__actions');
+  if (actions.length !== 1 || typeof label !== 'string' || !label.trim()) throw Error(`The ${pageKey} hero requires its actions and a localized shop label: ${locale}`);
+  actions.append($('<a>').attr({ id: 'niche-hero-shop', href: buildPagePath(locale, 'shop') }).addClass('btn btn--ghost niche-hero__btn-secondary').text(label));
+}
+// The three highlights speak the drawing language of the WIFIGATE Host and Manager
+// pages (css/niche-flow.css): each highlight's drawing (scripts/highlight-art.mjs, by
+// its kind) stands above one point of a shared wave and its copy below. The drawings
+// are decorative; the title and text carry the meaning.
+function setNicheHighlights($, supplied, assetPrefix = '') {
   const section = $('#niche-highlights'), list = $('#niche-highlights-list');
   if (!section.length || !list.length) return;
   const items = (Array.isArray(supplied) ? supplied : []).filter(item => item && item.title && item.text);
   list.empty();
   if (!items.length) { section.remove(); return; }
-  section.removeAttr('hidden');
+  section.removeAttr('hidden').addClass('niche-highlights--flow');
+  // The page loads the highlight styles right after its own, once.
+  if (!$("link[href*='css/niche-flow.css']").length) $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/niche-flow.css?v=${HIGHLIGHT_ART_VERSION}" />`);
+  const picture = (file, className, { width, height }) => $('<img>').addClass(className).attr({ src: `${assetPrefix}${file}?v=${HIGHLIGHT_ART_VERSION}`, alt: '',
+    width: String(width), height: String(height), loading: 'lazy', decoding: 'async' });
+  list.removeClass('niche-highlights__grid').addClass('niche-flow__list');
   for (const item of items) {
-    const article = $('<article>').addClass('niche-highlight').append(
-      $('<span>').addClass('niche-highlight__icon').attr('aria-hidden', 'true').html(`<svg viewBox="0 0 24 24">${highlightGeometry[item.icon] || highlightGeometry.default}</svg>`),
+    const copy = $('<div>').addClass('niche-flow__text').append(
       $('<h2>').addClass('niche-highlight__title').text(item.title), $('<p>').addClass('niche-highlight__text').text(item.text));
-    if (item.ctaLabel && item.ctaHref) article.append($('<a>').addClass('btn btn--ghost btn--small niche-highlight__cta').attr('href', item.ctaHref).text(item.ctaLabel));
-    list.append(article);
+    if (item.ctaLabel && item.ctaHref) copy.append($('<a>').addClass('btn btn--ghost btn--small niche-highlight__cta').attr('href', item.ctaHref).text(item.ctaLabel));
+    list.append($('<article>').addClass('niche-highlight niche-flow__step').append(picture(highlightArtPath(item.icon), 'niche-flow__art', HIGHLIGHT_ART_SIZE), copy));
   }
+  list.wrap($('<div>').addClass('niche-flow__track'));
+  list.before(picture(`${HIGHLIGHT_ART_DIR}/${HIGHLIGHT_WAVE.file}`, 'niche-flow__wave', HIGHLIGHT_WAVE));
 }
 
 // Span assignment fills every row while preserving the leading asymmetric pair.
@@ -207,7 +208,7 @@ export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, ac
   $('#niche-eyebrow').text(content.eyebrow || chrome.eyebrow); $('#niche-title').text(content.title);
   const lead = $('#niche-hero-lead');
   if (lead.length) { if (content.heroLead) lead.removeAttr('hidden').text(content.heroLead); else lead.remove(); }
-  setNicheHighlights($, content.highlights);
+  setNicheHighlights($, content.highlights, buildAssetPrefix(locale, pageKey));
   if (content.heroLead) $('#niche-hero-proof').remove();
   else setNicheList($, '#niche-hero-proof', (content.benefits || []).slice(0, 2).map(item => item.title), 'niche-hero__proof-item');
   $('#niche-hero-cta-label').text('WhatsApp @WIFIGATE'); $('#niche-hero-benefits').text(chrome.benefitsTitle);
