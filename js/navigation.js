@@ -49,10 +49,11 @@ function setupNav() {
   $$(".nav__group", navWrapper).forEach(setupNavGroup);
 }
 
-// "For Business" product panel in the full header (css/site-header.css). A
-// mouse opens it on hover and it stays for a moment after the pointer leaves,
-// so a diagonal move into the panel does not close it. Touch taps keep the
-// link's normal navigation; the collapsed menu lists the product links.
+// The "Use Cases" and "For Business" panels in the full header
+// (css/site-header.css). A mouse opens a panel on hover and it stays for a
+// moment after the pointer leaves, so a diagonal move into the panel does not
+// close it; entering the other group closes it at once. Touch taps keep the
+// link's normal navigation; the collapsed menu lists the links.
 function setupNavGroup(group) {
   const link = group.querySelector(".nav__group-link");
   let closeTimer = 0;
@@ -62,6 +63,7 @@ function setupNavGroup(group) {
   group.addEventListener("pointerenter", (event) => {
     if (event.pointerType === "touch") return;
     cancelClose();
+    group.parentNode.querySelectorAll(".nav__group.is-open").forEach((other) => { if (other !== group) other.classList.remove("is-open"); });
     if (!group.classList.contains("is-dismissed")) group.classList.add("is-open");
   });
   group.addEventListener("pointerleave", (event) => {

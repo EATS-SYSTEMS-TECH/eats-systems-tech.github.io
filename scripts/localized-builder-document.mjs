@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { SITE_ORIGIN, hreflangCode } from './seo.mjs';
 import { RTL_LANGUAGES } from './site-languages.mjs';
 import { SITE_NAVIGATION, SITE_LOGIN_LABELS } from './site-navigation.mjs';
+import { NICHE_PAGE_LOCALES } from './niche-pages/index.mjs';
 import { accessibilityLinkLabels } from './legal/footer-labels.mjs';
 import { applyMediaWatermarks } from './media-watermark.mjs';
 import { serializeScriptData } from "./script-data.mjs";
@@ -215,8 +216,14 @@ export function updateSharedHeader($, data, locale, key) {
     // hovered or holds focus (css/site-header.css, js/navigation.js).
     const list = $('<ul>').addClass('nav__submenu-list').attr({ 'aria-label': copy[item.key], dir: isRtl(locale) ? 'rtl' : 'ltr' });
     for (const child of item.children) {
-      const sublink = $('<a>').addClass('nav__sublink').attr({ href: buildPagePath(locale, child.pageKey), translate: 'no' }).text(child.label);
-      if (locale !== 'en') sublink.attr('lang', 'en');
+      const sublink = $('<a>').addClass('nav__sublink').attr('href', buildPagePath(locale, child.pageKey));
+      // A product keeps its English name; a use-case page is named by its label in the page's language.
+      if (child.label) { sublink.attr('translate', 'no').text(child.label); if (locale !== 'en') sublink.attr('lang', 'en'); }
+      else {
+        const label = (NICHE_PAGE_LOCALES[locale] || NICHE_PAGE_LOCALES.en).niches?.[child.pageKey]?.label;
+        if (!label) throw Error(`${locale}: no menu label for ${child.pageKey}`);
+        sublink.text(label);
+      }
       if (child.pageKey === key) sublink.attr('aria-current', 'page');
       list.append($('<li>').append(sublink));
     }
@@ -246,7 +253,7 @@ export function updateSharedHeader($, data, locale, key) {
   if (!hebrew) $('.site-cart__drawer').attr('lang', 'en');
   $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261110nav1"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261108d">`);
   $("script[src*='js/site-account.js']").remove();
-  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261110nav2').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
+  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261113nav3').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
   $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261108e"></script>`);
 }
 

@@ -5,7 +5,9 @@ import { SITE_LANGUAGES } from "./site-languages.mjs";
 
 // The "For Business" product panel: hover with a short leave tolerance,
 // keyboard focus, Escape, start-edge alignment in both directions, and the
-// indented product links in the collapsed menu.
+// indented product links in the collapsed menu. "Use Cases" is a panel of the
+// same kind, listing the use-case pages.
+const BUSINESS = "[data-nav-group='automation']", CASES = "[data-nav-group='solutions']";
 // The shared fixture serves directories below the root; the root page is
 // requested as /index.html.
 const consent = () => localStorage.setItem("wifigate-cookie-consent-v1", JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() }));
@@ -16,17 +18,17 @@ async function newPage(browser, origin, options) {
     route.request().resourceType() === "media" || new URL(route.request().url()).origin !== origin ? route.abort() : route.continue());
   return { context, page: await context.newPage() };
 }
-const panelState = page => page.evaluate(() => {
-  const group = document.querySelector(".nav__group"), panel = group.querySelector(".nav__submenu");
+const panelState = (page, selector = BUSINESS) => page.evaluate(selector => {
+  const group = document.querySelector(selector), panel = group.querySelector(".nav__submenu");
   const list = panel.querySelector(".nav__submenu-list").getBoundingClientRect(), link = group.querySelector(".nav__group-link").getBoundingClientRect();
   const header = document.querySelector(".site-header").getBoundingClientRect();
   const style = getComputedStyle(panel);
   return { open: style.opacity === "1" && style.pointerEvents === "auto", list: { left: list.left, right: list.right, top: list.top }, link: { left: link.left, right: link.right }, headerBottom: header.bottom, viewport: innerWidth };
-});
-const waitOpen = (page, open) => page.waitForFunction(expected => {
-  const style = getComputedStyle(document.querySelector(".nav__submenu"));
+}, selector);
+const waitOpen = (page, open, selector = BUSINESS) => page.waitForFunction(([expected, selector]) => {
+  const style = getComputedStyle(document.querySelector(`${selector} .nav__submenu`));
   return (style.opacity === "1" && style.pointerEvents === "auto") === expected;
-}, open);
+}, [open, selector]);
 
 test("desktop header opens the For Business panel on hover and keyboard focus", async (t) => {
   const { origin, browser } = await startSite(t);
@@ -36,7 +38,7 @@ test("desktop header opens the For Business panel on hover and keyboard focus", 
     await page.goto(origin + path, { waitUntil: "load" });
     await page.mouse.move(5, 600);
     assert.equal((await panelState(page)).open, false, "closed at rest");
-    const link = page.locator(".nav__group-link");
+    const link = page.locator(`${BUSINESS} .nav__group-link`);
     await link.hover();
     await waitOpen(page, true);
     const state = await panelState(page);
@@ -46,7 +48,7 @@ test("desktop header opens the For Business panel on hover and keyboard focus", 
     else assert.ok(state.list.left <= state.link.left && state.link.left - state.list.left <= 16, "LTR: panel aligned to the item's left (start) edge");
     assert.ok(state.list.left >= 0 && state.list.right <= state.viewport, "panel stays on screen");
     // Moving down into the panel keeps it open; the gap is part of the group.
-    const manager = page.locator(".nav__sublink").first();
+    const manager = page.locator(`${BUSINESS} .nav__sublink`).first();
     const box = await manager.boundingBox();
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 8 });
     assert.equal((await panelState(page)).open, true, "pointer can reach the panel");
@@ -70,7 +72,7 @@ test("desktop header opens the For Business panel on hover and keyboard focus", 
     await page.mouse.move(5, 600);
     await waitOpen(page, false);
     // Keyboard: focusing the link opens the panel, Tab reaches both products.
-    await page.locator(".topbar-nav > .nav__link").nth(1).focus();
+    await page.locator(`${CASES} .nav__sublink`).last().focus();
     await page.keyboard.press("Tab");
     assert.equal(await page.evaluate(() => document.activeElement.classList.contains("nav__group-link")), true);
     await waitOpen(page, true);
@@ -99,10 +101,10 @@ test("For Business still navigates and the full header fits every language", asy
   const { context, page } = await newPage(browser, origin, { viewport: { width: 1440, height: 900 } });
   t.after(() => context.close());
   await page.goto(origin + "/he/electric-gates/", { waitUntil: "load" });
-  await page.locator(".nav__group-link").click();
+  await page.locator(`${BUSINESS} .nav__group-link`).click();
   await page.waitForURL(/\/he\/#wifigate-for-business$/);
   await page.goto(origin + "/he/", { waitUntil: "load" });
-  await page.locator(".nav__group-link").hover();
+  await page.locator(`${BUSINESS} .nav__group-link`).hover();
   await page.locator(".nav__sublink", { hasText: "WIFIGATE Manager" }).click();
   await page.waitForURL(/\/he\/wifigate-manager\/$/);
   for (const width of [1440, 1600, 1920]) {
@@ -110,8 +112,8 @@ test("For Business still navigates and the full header fits every language", asy
     for (const { code } of SITE_LANGUAGES) {
       await page.goto(`${origin}${code === "en" ? "/index.html" : `/${code.toLowerCase()}/`}`, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
-      // The group must not move any header control: compare with the same
-      // page after replacing the group by its plain link (the earlier markup).
+      // The groups must not move any header control: compare with the same
+      // page after replacing each group by its plain link (the earlier markup).
       const result = await page.evaluate(() => {
         const measure = () => {
           const links = [...document.querySelectorAll(".topbar-nav .nav__link")].map(element => element.getBoundingClientRect());
@@ -123,9 +125,11 @@ test("For Business still navigates and the full header fits every language", asy
           };
         };
         const withGroup = measure();
-        const group = document.querySelector(".nav__group"), link = group.querySelector(".nav__group-link");
-        group.replaceWith(link);
-        link.classList.remove("nav__group-link");
+        for (const group of document.querySelectorAll(".nav__group")) {
+          const link = group.querySelector(".nav__group-link");
+          group.replaceWith(link);
+          link.classList.remove("nav__group-link");
+        }
         const plain = measure();
         withGroup.controls = withGroup.controls.map(([name, ...rest]) => [name.replace(" nav__group-link", ""), ...rest]);
         return { withGroup, plain };
@@ -150,10 +154,11 @@ test("collapsed menu lists the products under For Business", async (t) => {
         return { sub: element.classList.contains("nav__sublink"), text: element.textContent, top: box.top, height: box.height, visible: style.visibility === "visible" && Number(getComputedStyle(element.closest(".nav__submenu") || element).opacity) === 1, indentStart: document.documentElement.dir === "rtl" ? innerWidth - box.right + parseFloat(style.paddingRight) : box.left + parseFloat(style.paddingLeft) };
       }));
       const label = `${path} at ${width}px`;
-      assert.deepEqual(rows.map(row => row.sub), [false, false, false, true, true, false, false, false], `${label}: products follow For Business`);
-      assert.deepEqual(rows.filter(row => row.sub).map(row => row.text), ["WIFIGATE Manager", "WIFIGATE Host"]);
+      assert.deepEqual(rows.map(row => row.sub), [false, false, ...Array(10).fill(true), false, true, true, false, false, false], `${label}: use cases follow Use Cases, products follow For Business`);
+      assert.deepEqual(rows.filter(row => row.sub).slice(-2).map(row => row.text), ["WIFIGATE Manager", "WIFIGATE Host"]);
       assert.ok(rows.every(row => row.visible && row.height >= 32), `${label}: every row is visible and tappable`);
-      assert.ok(rows[3].indentStart > rows[2].indentStart + 8, `${label}: product rows are indented from the start edge`);
+      assert.ok(rows[2].indentStart > rows[1].indentStart + 8, `${label}: use-case rows are indented from the start edge`);
+      assert.ok(rows[13].indentStart > rows[12].indentStart + 8, `${label}: product rows are indented from the start edge`);
       for (let index = 1; index < rows.length; index++) assert.ok(rows[index].top >= rows[index - 1].top + rows[index - 1].height - 1, `${label}: rows do not overlap`);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${label}: no horizontal overflow`);
     }
@@ -165,4 +170,35 @@ test("collapsed menu lists the products under For Business", async (t) => {
       await page.waitForURL(/\/he\/wifigate-host\/$/);
     }
   }
+});
+
+test("desktop header opens the Use Cases panel, one panel at a time", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const { context, page } = await newPage(browser, origin, { viewport: { width: 1440, height: 900 } });
+  t.after(() => context.close());
+  for (const path of ["/index.html", "/he/", "/de/wifigate-manager/"]) await t.test(path, async () => {
+    await page.goto(origin + path, { waitUntil: "load" });
+    await page.mouse.move(5, 700);
+    assert.equal((await panelState(page, CASES)).open, false, "closed at rest");
+    await page.locator(`${CASES} .nav__group-link`).hover();
+    await waitOpen(page, true, CASES);
+    const state = await panelState(page, CASES);
+    assert.ok(Math.abs(state.list.top - state.headerBottom) <= 8, "panel starts at the header edge");
+    assert.ok(state.list.left >= 0 && state.list.right <= state.viewport, "panel stays on screen");
+    const rows = await page.evaluate(selector => [...document.querySelectorAll(`${selector} .nav__sublink`)].map(link => { const box = link.getBoundingClientRect(); return { top: box.top, bottom: box.bottom, text: link.textContent.trim() }; }), CASES);
+    assert.equal(rows.length, 10);
+    assert.ok(rows.every(row => row.text && row.bottom <= 900), "every use case is named and on screen");
+    // Moving on to For Business closes this panel at once, so the two never overlap.
+    await page.locator(`${BUSINESS} .nav__group-link`).hover();
+    await waitOpen(page, true, BUSINESS);
+    assert.equal((await panelState(page, CASES)).open, false, "only one panel is open");
+    await page.mouse.move(5, 700);
+    await waitOpen(page, false, BUSINESS);
+  });
+  await page.goto(origin + "/he/", { waitUntil: "load" });
+  await page.locator(`${CASES} .nav__group-link`).hover();
+  await waitOpen(page, true, CASES);
+  await page.locator(`${CASES} .nav__sublink`).first().click();
+  await page.waitForURL(/\/he\/residential-buildings\/$/);
+  assert.equal(await page.locator(`${CASES} .nav__sublink[aria-current='page']`).count(), 1, "the current use case is marked");
 });
