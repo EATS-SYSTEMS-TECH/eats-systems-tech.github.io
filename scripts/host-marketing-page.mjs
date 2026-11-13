@@ -40,9 +40,9 @@ const PRODUCTS = {
     offers: [
       { key: "systems", name: "Systems", amount: "$1.90", per: "/ system / month", translated: true, description: "Every active system on your dashboard, wherever it is.", range: "Gate, Dual Control or roller shutter",
         features: ["Each system counts once, even in several groups", "Groups are free: only their systems count", "Monthly minimum: $1.90, even with no linked system", "A system added mid-month is charged by days"] },
-      { key: "organizations", name: "Organizations", amount: "$1", per: "/ extra organization / month", translated: true, description: "Run separate buildings, clients or companies under one account.", range: "First 3 organizations included",
-        features: ["3 organizations included in every account", "$1 per month for each additional organization", "Organization admins do not pay", "One account, one monthly invoice"] },
-      { key: "example", name: "Example", amount: "$21", per: "/ month", translated: true, description: "10 systems × $1.90, plus 2 extra organizations × $1.", range: "10 systems · 5 organizations",
+      { key: "organizations", name: "Organizations", amount: "$1", per: "/ extra organization / month", translated: true, description: "Run separate buildings, clients or companies under one account.", range: "First 3 organizations free",
+        features: ["3 free organizations in every account", "$1 per month for each additional organization", "Organization admins do not pay", "One account, one monthly invoice"] },
+      { key: "example", name: "Example", amount: "$21", per: "/ month", translated: true, sticker: true, description: "10 systems × $1.90, plus 2 extra organizations × $1.", range: "10 systems · 5 organizations",
         features: ["1 gate: $1.90 / month", "A group of 2 gates and 1 Dual Control: $5.70", "1 roller shutter: $1.90 / month", "Monthly estimate before tax"] },
     ],
     audience: [["residential", "Residential buildings"], ["offices", "Offices"], ["sports", "Sports facilities"], ["parking", "Parking facilities"]],
@@ -78,12 +78,14 @@ function outline($, shapes, extra = {}) {
 }
 
 // Construct one plan with the fixed translation schema; one plan per product is featured.
-function offerCard($, { key, name, amount, per, translated: named, description, range, features }, product) {
+// A plan marked `sticker` (a worked example, not an offer) shows its name as a label stuck over the card's top edge.
+function offerCard($, { key, name, amount, per, translated: named, description, range, features, sticker = false }, product) {
   const prefix = `${marketingKey}.pricing`;
   const featured = key === product.featured;
   const parts = [];
   if (featured) parts.push(translated($, "span", "wa-plan__badge", `${prefix}.badge`, product.badge));
-  parts.push(named ? translated($, "h3", "wa-plan__name", `${prefix}.${key}Name`, name) : node($, "h3", { class: "wa-plan__name" }, name));
+  const nameClass = sticker ? "wa-plan__name wa-plan__name--sticker" : "wa-plan__name";
+  parts.push(named ? translated($, "h3", nameClass, `${prefix}.${key}Name`, name) : node($, "h3", { class: nameClass }, name));
   const price = node($, "div", { class: "wa-plan__price" }, [node($, "span", { class: "wa-plan__amount", dir: "ltr" }, amount),
     translated($, "span", "wa-plan__per", named ? `${prefix}.${key}Per` : `${prefix}.per`, per)]);
   parts.push(price, translated($, "p", "wa-plan__range", `${prefix}.${key}Range`, range),
@@ -96,7 +98,7 @@ function offerCard($, { key, name, amount, per, translated: named, description, 
   parts.push(node($, "div", { class: "wa-plan__cta" }, [node($, "a", {
     class: `btn btn--${featured ? "primary" : "ghost"}`, href: "../index.html#contact", "data-i18n": `${prefix}.planCta`,
   }, "Talk to us")]));
-  return node($, "article", { class: `wa-plan${featured ? " wa-plan--featured" : ""}` }, parts);
+  return node($, "article", { class: `wa-plan${featured ? " wa-plan--featured" : ""}${sticker ? " wa-plan--sticker" : ""}` }, parts);
 }
 
 // All constructors complete before replacing the existing grid's children.

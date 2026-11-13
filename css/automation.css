@@ -694,6 +694,40 @@ html[dir="rtl"] .wa-hero::after {
   font-weight: 600;
 }
 
+/* A worked example is not an offer: its name is a label stuck over the top
+   edge of its card, a tilted rectangle with a stitched inner line. The name
+   keeps its place in the card's flow, so the three prices stay on one line. */
+.wa-plan--sticker::before {
+  display: none;
+}
+
+.wa-plan__name--sticker {
+  align-self: flex-start;
+  margin: -0.5rem -1.15rem 0;
+  padding: 0.5rem 1.6rem;
+  border: 1.5px solid var(--flow-blue);
+  border-radius: 8px;
+  outline: 1.5px dashed var(--flow-hair);
+  outline-offset: -5px;
+  background: #fff;
+  box-shadow: 0 14px 22px -14px rgba(20, 107, 255, 0.6);
+  color: var(--flow-blue);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transform: translateY(-3.2rem) rotate(-4deg);
+}
+
+/* Stacked cards: room above for the label, and less empty space under it. */
+@media (max-width: 900px) {
+  .wa-plan--sticker {
+    margin-block-start: 0.9rem;
+  }
+
+  .wa-plan__name--sticker {
+    margin-block-end: -1.2rem;
+  }
+}
+
 .wa-plan__price {
   gap: 0.6rem;
   margin-top: 0.55rem;

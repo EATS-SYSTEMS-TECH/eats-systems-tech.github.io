@@ -1,6 +1,7 @@
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES } from './niche-pages/index.mjs';
 import { NICHE_CHROME } from './niche-content.mjs';
 import { benefitIconSvg } from './benefit-icons.mjs';
+import { benefitArtSvg, hasBenefitArt } from './benefit-art.mjs';
 import { setNicheList } from './niche-text-list.mjs';
 import { HIGHLIGHT_ART_SIZE, HIGHLIGHT_ART_DIR, HIGHLIGHT_WAVE, highlightArtPath } from './highlight-art.mjs';
 import { setLocalizedText, setLocalizedLines, formatTextForLocaleDirection, isRtl, buildAssetPrefix, buildPagePath, nowDate, updateAccessibilityMarkup } from './localized-builder-document.mjs';
@@ -110,7 +111,7 @@ export function applyHomepageCopy($, copy, locale) {
 }
 
 // Version of the highlight drawings, their wave and css/niche-flow.css; change it with them.
-export const HIGHLIGHT_ART_VERSION = '20261112d';
+export const HIGHLIGHT_ART_VERSION = '20261113a';
 // Small print under the three highlights: the starred exception to what they claim.
 export function installHighlightNote($, note, locale) {
   if (!note) return;
@@ -136,8 +137,7 @@ function setNicheHighlights($, supplied, assetPrefix = '') {
   list.empty();
   if (!items.length) { section.remove(); return; }
   section.removeAttr('hidden').addClass('niche-highlights--flow');
-  // The page loads the highlight styles right after its own, once.
-  if (!$("link[href*='css/niche-flow.css']").length) $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/niche-flow.css?v=${HIGHLIGHT_ART_VERSION}" />`);
+  ensureFlowStyles($, assetPrefix);
   const picture = (file, className, { width, height }) => $('<img>').addClass(className).attr({ src: `${assetPrefix}${file}?v=${HIGHLIGHT_ART_VERSION}`, alt: '',
     width: String(width), height: String(height), loading: 'lazy', decoding: 'async' });
   list.removeClass('niche-highlights__grid').addClass('niche-flow__list');
@@ -191,14 +191,21 @@ function renderBenefitVisual($, visual, locale) {
   } else throw Error(`Unknown benefit visual "${visual.type}"`);
   return box.append(rows);
 }
-function setNicheBenefits($, benefits, locale) {
+// The page loads the styles of the highlights and the benefit drawings right after its own, once.
+function ensureFlowStyles($, assetPrefix) {
+  if (!$("link[href*='css/niche-flow.css']").length) $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/niche-flow.css?v=${HIGHLIGHT_ART_VERSION}" />`);
+}
+// With `art`, a benefit shows the small frameless drawing of its kind (scripts/benefit-art.mjs)
+// where its icon tile was; a kind without a drawing keeps its icon and its tile.
+function setNicheBenefits($, benefits, locale, { art = false, assetPrefix = '' } = {}) {
   const list = $('#niche-benefits-list');
   if (!list.length) return;
+  if (art && benefits.some(benefit => hasBenefitArt(benefit.icon))) ensureFlowStyles($, assetPrefix);
   const spans = benefitSpans(benefits.length), total = String(benefits.length).padStart(2, '0');
   list.empty().attr('data-count', String(benefits.length));
   benefits.forEach((benefit, index) => {
     const card = $('<li>').addClass(`bento-card bento-card--${spans[index]}`);
-    const top = $('<div>').addClass('bento-card__top').append($('<span>').addClass('bento-card__icon').attr('aria-hidden', 'true').html(benefitIconSvg(benefit.icon)), $('<span>').addClass('bento-card__count').attr({ 'aria-hidden': 'true', dir: 'ltr' }).text(`${String(index + 1).padStart(2, '0')} / ${total}`));
+    const top = $('<div>').addClass('bento-card__top').append($('<span>').addClass(art && hasBenefitArt(benefit.icon) ? 'bento-card__icon bento-card__icon--art' : 'bento-card__icon').attr('aria-hidden', 'true').html(art && hasBenefitArt(benefit.icon) ? benefitArtSvg(benefit.icon) : benefitIconSvg(benefit.icon)), $('<span>').addClass('bento-card__count').attr({ 'aria-hidden': 'true', dir: 'ltr' }).text(`${String(index + 1).padStart(2, '0')} / ${total}`));
     const title = $('<h3>').addClass('bento-card__title'), paragraph = $('<p>').addClass('bento-card__text');
     setLocalizedText($, title, benefit.title, locale); setLocalizedText($, paragraph, benefit.text, locale);
     const body = $('<div>').addClass('bento-card__body').append(title, paragraph);
@@ -212,7 +219,7 @@ function setNicheBenefits($, benefits, locale) {
     list.append(card);
   });
 }
-export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle }) {
+export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle, benefitArt = false }) {
   $('#niche-eyebrow').text(content.eyebrow || chrome.eyebrow); $('#niche-title').text(content.title);
   const lead = $('#niche-hero-lead');
   if (lead.length) { if (content.heroLead) lead.removeAttr('hidden').text(content.heroLead); else lead.remove(); }
@@ -221,7 +228,7 @@ export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, ac
   else setNicheList($, '#niche-hero-proof', (content.benefits || []).slice(0, 2).map(item => item.title), 'niche-hero__proof-item');
   $('#niche-hero-cta-label').text('WhatsApp @WIFIGATE'); $('#niche-hero-benefits').text(chrome.benefitsTitle);
   $('#niche-image').attr({ src: buildAssetPrefix(locale, pageKey) + image.hero, alt: content.imageAlt, width: String(image.heroWidth), height: String(image.heroHeight) });
-  $('#niche-benefits-title').text(content.benefitsTitle || chrome.benefitsTitle); setNicheBenefits($, content.benefits, locale);
+  $('#niche-benefits-title').text(content.benefitsTitle || chrome.benefitsTitle); setNicheBenefits($, content.benefits, locale, { art: benefitArt, assetPrefix: buildAssetPrefix(locale, pageKey) });
   $('#niche-faq-title').text(content.faqTitle || chrome.faqTitle);
   const questions = $('#niche-faq-list').empty();
   for (const item of content.faq) {

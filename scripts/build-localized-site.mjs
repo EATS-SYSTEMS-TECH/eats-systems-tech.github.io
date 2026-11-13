@@ -85,7 +85,7 @@ function setUseCaseNavigation($, { chrome, content }) {
 function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   const { chrome, content } = ctx;
   const localeNicheContent = getNichePageContent(locale), defaultNicheContent = getNichePageContent(defaultLocale);
-  fillUseCaseBody($, { chrome, content, image: niche.image, locale, pageKey: niche.key, accessibilityBundle });
+  fillUseCaseBody($, { chrome, content, image: niche.image, locale, pageKey: niche.key, accessibilityBundle, benefitArt: true });
   setUseCaseNavigation($, { chrome, content });
   setNichePager($, getCircularAdjacentNiches(niche.key), { localeNicheContent, defaultNicheContent, locale, buildPagePath });
 }
@@ -218,7 +218,7 @@ async function buildLandingPages(homeData) {
     const chrome = getNicheChrome(locale), content = LANDING_PAGE_LOCALES[locale][key], $ = cheerio.load(source, { decodeEntities: false });
     prepareUseCaseShell($, locale, key);
     $("link[href*='css/niche.css']").after(`\n  <link rel="stylesheet" href="${buildAssetPrefix(locale, key)}css/landing.css?v=20261016a" />`);
-    fillUseCaseBody($, { chrome, content, image, locale, pageKey: key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
+    fillUseCaseBody($, { chrome, content, image, locale, pageKey: key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale), benefitArt: true });
     fillLandingSections($, { content, locale, modified }); setUseCaseNavigation($, { chrome, content }); $('.niche-hero__pager').remove();
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey: key, content, chrome, image, locale, localeOptions: homeData.localeOptions, published, modified,
@@ -236,7 +236,8 @@ async function buildAutoOpenPages(homeData) {
     const content = getAutoOpenPageContent(locale, homeData.homepageCopies[locale]), chrome = getNicheChrome(locale), $ = cheerio.load(source, { decodeEntities: false });
     prepareUseCaseShell($, locale, AUTO_OPEN_PAGE_KEY, 'auto-open-page');
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
-    $('#niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+    // Since 13 Nov 2026 (owner request) the page is built like every feature page: three points on the highlights wave, no Key benefits cards.
+    $('#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
     setUseCaseNavigation($, { chrome, content });
     // Since 12 Nov 2026 (owner request) the hero is the Auto Open line animation, not a video; the accepted poster stays the share image.
     applyLineHero($, { scene: 'autoopen', frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
@@ -320,7 +321,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261112aud3" />`);
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261113aud4" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { '@type': 'Service', '@id': `${siteOrigin}/${pageKey}/#service`, name: content.label, serviceType, provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, pageKey), description: hostCopy.metaDescription } });

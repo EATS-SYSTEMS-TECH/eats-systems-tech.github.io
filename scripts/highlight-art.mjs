@@ -69,6 +69,15 @@ const DRAWINGS = {
     `<path d="M196 54l-30 14v122l30 -14Z" fill="#fff"/><path d="M174 118v14"/>`,
     ground(40, 160, 176), ground(202, 306, 176), light(244, 34),
   ],
+  // Auto Open: you come up, the gate already stands open, and you carry on
+  arrival: () => [
+    person(50, 104, 10),
+    tint(`<rect x="130" y="62" width="92" height="114"/>`),
+    `<path d="M130 176V62h92v114"/>`,
+    `<path d="M130 62l-24 12v112l24 -10Z" fill="#fff"/><path d="M222 62l24 12v112l-24 -10Z" fill="#fff"/>`,
+    dashed("M78 150H282"), tip(290, 150),
+    ground(20, 96, 176), ground(256, 306, 176), light(176, 40),
+  ],
   // the booking opens the entrance for exactly its dates
   calendar: () => [
     `<rect x="32" y="42" width="140" height="138" rx="10"/><path d="M32 72h140M62 32v20M142 32v20"/>`,

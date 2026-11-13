@@ -131,3 +131,26 @@
     content: "";
   }
 }
+
+/* ---------- Key benefits: a small drawing where the icon tile was ----------
+   The drawing (scripts/benefit-art.mjs) keeps the tile's size and place and
+   stands alone: no border, no background. Its colour is the benefit blue. */
+.bento-card__icon--art {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #146bff;
+}
+
+.bento-card__icon--art svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+html.a11y-high-contrast .bento-card__icon--art {
+  border: 0;
+  background: none;
+  color: #0542ad;
+}

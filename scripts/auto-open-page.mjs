@@ -2,7 +2,7 @@
 // has its own copy; unsupported or incomplete locales never fall back.
 export const AUTO_OPEN_PAGE_KEY = "auto-open";
 
-// headline, then three benefit title/text pairs: hands free, arrival, permission.
+// headline, then three title/text pairs for the highlights: hands free, arrival, permission.
 const COPY = {
   en: ["Arrive. Enter. Carry on.", "Hands free", "Keep your phone in your pocket and your hands free.", "A smoother arrival", "Come in comfortably and get on with your day.", "For authorized users", "Automatic entry for people with permission to enter."],
   he: ["מגיעים. נכנסים. ממשיכים.", "הידיים נשארות פנויות", "הטלפון נשאר בכיס והידיים נשארות פנויות.", "הגעה נעימה יותר", "נכנסים בנוחות וממשיכים ביום.", "למשתמשים מורשים", "כניסה אוטומטית לאנשים שיש להם הרשאת כניסה."],
@@ -45,7 +45,8 @@ const COPY = {
   fil: ["Dumating. Pumasok. Ituloy ang araw mo.", "Malaya ang mga kamay", "Iwan ang telepono sa bulsa at panatilihing malaya ang mga kamay.", "Mas maginhawang pagdating", "Pumasok nang maginhawa at ipagpatuloy ang araw mo.", "Para sa mga awtorisadong gumagamit", "Awtomatikong pagpasok para sa mga taong may pahintulot na pumasok."],
 };
 
-const ICONS = ["smartphone", "clock", "user-check"];
+// The drawing above each of the three points (scripts/highlight-art.mjs).
+const DRAWINGS = ["handsfree", "arrival", "users"];
 const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
 const BRAND_ONLY = /^(?:WIFIGATE|Auto Open|[\s·|.,:])+$/;
 // These words describe implementation, rather than the user's arrival.
@@ -61,8 +62,8 @@ export function getAutoOpenPageContent(locale, homepageCopy) {
     eyebrow: "WIFIGATE · Auto Open",
     title: local[0],
     heroLead: feature.text,
-    highlights: [],
-    benefits: ICONS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
+    highlights: DRAWINGS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
+    benefits: [],
     faq: [],
     seoTitle: `${feature.title} | WIFIGATE`,
     seoDescription: feature.text,
@@ -79,7 +80,7 @@ export function validateAutoOpenPageLocales(localeCodes, homepageCopies) {
     let content;
     try { content = getAutoOpenPageContent(locale, homepageCopies?.[locale]); }
     catch (error) { problems.push(error.message); continue; }
-    if (!Array.isArray(COPY[locale]) || COPY[locale].length !== 7 || !COPY[locale].every(NONEMPTY)) problems.push(`${locale}: Auto Open requires a headline and three complete benefits`);
+    if (!Array.isArray(COPY[locale]) || COPY[locale].length !== 7 || !COPY[locale].every(NONEMPTY)) problems.push(`${locale}: Auto Open requires a headline and three complete highlights`);
     const inspect = (value, reference, at) => {
       if (typeof value === "string") {
         if (!NONEMPTY(value)) problems.push(`${locale}: Auto Open ${at} is empty`);
