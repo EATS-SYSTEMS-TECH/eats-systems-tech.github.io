@@ -20,6 +20,10 @@ function setupNav() {
   const closeMenu = () => {
     navWrapper.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
+    navWrapper.querySelectorAll(".nav__group.is-expanded").forEach((group) => {
+      group.classList.remove("is-expanded");
+      group.querySelector(".nav__group-toggle")?.setAttribute("aria-expanded", "false");
+    });
   };
 
   toggle.addEventListener("click", () => {
@@ -56,6 +60,16 @@ function setupNav() {
 // link's normal navigation; the collapsed menu lists the links.
 function setupNavGroup(group) {
   const link = group.querySelector(".nav__group-link");
+  const disclosure = group.querySelector(".nav__group-toggle");
+  disclosure?.addEventListener("click", () => {
+    const opening = !group.classList.contains("is-expanded");
+    group.parentElement.querySelectorAll(".nav__group.is-expanded").forEach((other) => {
+      other.classList.remove("is-expanded");
+      other.querySelector(".nav__group-toggle")?.setAttribute("aria-expanded", "false");
+    });
+    group.classList.toggle("is-expanded", opening);
+    disclosure.setAttribute("aria-expanded", String(opening));
+  });
   let closeTimer = 0;
   const cancelClose = () => { clearTimeout(closeTimer); closeTimer = 0; };
   const close = () => { cancelClose(); group.classList.remove("is-open"); };

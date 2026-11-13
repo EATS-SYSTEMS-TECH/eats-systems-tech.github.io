@@ -598,6 +598,7 @@ html.a11y-text-scaled .site-header .nav {
    the pointer leaves. The links stay in the tab order, so focusing one opens
    the panel; Escape closes it until focus or the pointer leaves the group. */
 .site-header .nav__submenu-list { margin: 0; padding: 0; list-style: none; }
+.site-header .nav__group-toggle { display: none; }
 .site-header .nav__sublink {
   display: flex;
   align-items: center;
@@ -677,7 +678,35 @@ html.a11y-text-scaled .site-header .nav {
 }
 /* Collapsed menu: the product links are listed, indented, under For Business. */
 @media (max-width: 1439px) {
-  .site-header .nav__group { display: block; width: 100%; }
+  .site-header .nav__group { display: block; position: relative; width: 100%; }
+  .site-header .topbar-nav .nav__group-link { padding-inline-end: 3rem !important; }
+  html[dir="rtl"] .site-header .topbar-nav .nav__group-link { padding-left: 3rem !important; padding-right: 0 !important; }
+  .site-header .nav__group-toggle {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #242424;
+    cursor: pointer;
+  }
+  .site-header .nav__group-toggle:focus-visible { outline: 2px solid #0b63ff; outline-offset: -2px; }
+  .site-header .nav__group-chevron {
+    width: .55rem;
+    height: .55rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    transform: translateY(-.15rem) rotate(45deg);
+    transition: transform 160ms ease;
+  }
+  .site-header .nav__group.is-expanded .nav__group-chevron { transform: translateY(.15rem) rotate(225deg); }
+  .site-header .nav__group .nav__submenu { display: none; }
+  .site-header .nav__group.is-expanded .nav__submenu { display: block; }
   .site-header .topbar-nav .nav__sublink {
     width: 100%;
     padding-block: 0.5rem;

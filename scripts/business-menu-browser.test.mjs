@@ -140,7 +140,7 @@ test("For Business still navigates and the full header fits every language", asy
   }
 });
 
-test("collapsed menu lists the products under For Business", async (t) => {
+test("collapsed menu reveals one group at a time", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const [width, touch] of [[390, true], [1024, false], [1439, false]]) {
     const { context, page } = await newPage(browser, origin, { viewport: { width, height: 915 }, hasTouch: touch });
@@ -149,23 +149,28 @@ test("collapsed menu lists the products under For Business", async (t) => {
       await page.goto(origin + path, { waitUntil: "load" });
       await page.locator(".nav__toggle").click();
       await page.waitForFunction(() => getComputedStyle(document.querySelector(".nav__links-wrapper")).opacity === "1");
-      const rows = await page.evaluate(() => [...document.querySelectorAll(".topbar-nav .nav__link, .topbar-nav .nav__sublink")].map(element => {
-        const box = element.getBoundingClientRect(), style = getComputedStyle(element);
-        return { sub: element.classList.contains("nav__sublink"), text: element.textContent, top: box.top, height: box.height, visible: style.visibility === "visible" && Number(getComputedStyle(element.closest(".nav__submenu") || element).opacity) === 1, indentStart: document.documentElement.dir === "rtl" ? innerWidth - box.right + parseFloat(style.paddingRight) : box.left + parseFloat(style.paddingLeft) };
-      }));
       const label = `${path} at ${width}px`;
-      assert.deepEqual(rows.map(row => row.sub), [false, false, ...Array(10).fill(true), false, true, true, false, false, false], `${label}: use cases follow Use Cases, products follow For Business`);
-      assert.deepEqual(rows.filter(row => row.sub).slice(-2).map(row => row.text), ["WIFIGATE Manager", "WIFIGATE Host"]);
-      assert.ok(rows.every(row => row.visible && row.height >= 32), `${label}: every row is visible and tappable`);
-      assert.ok(rows[2].indentStart > rows[1].indentStart + 8, `${label}: use-case rows are indented from the start edge`);
-      assert.ok(rows[13].indentStart > rows[12].indentStart + 8, `${label}: product rows are indented from the start edge`);
-      for (let index = 1; index < rows.length; index++) assert.ok(rows[index].top >= rows[index - 1].top + rows[index - 1].height - 1, `${label}: rows do not overlap`);
+      const cases = page.locator('[data-nav-group="solutions"]');
+      const business = page.locator('[data-nav-group="automation"]');
+      assert.equal(await cases.locator('.nav__sublink').first().isVisible(), false, `${label}: use cases start closed`);
+      assert.equal(await business.locator('.nav__sublink').first().isVisible(), false, `${label}: business starts closed`);
+      await cases.locator('.nav__group-toggle').click();
+      assert.equal(await cases.locator('.nav__group-toggle').getAttribute('aria-expanded'), 'true');
+      assert.equal(await cases.locator('.nav__sublink').count(), 10);
+      assert.equal(await cases.locator('.nav__sublink').first().isVisible(), true);
+      await business.locator('.nav__group-toggle').click();
+      assert.equal(await cases.locator('.nav__sublink').first().isVisible(), false, `${label}: opening business closes use cases`);
+      assert.equal(await business.locator('.nav__sublink').first().isVisible(), true);
+      assert.deepEqual(await business.locator('.nav__sublink').allTextContents(), ["WIFIGATE Manager", "WIFIGATE Host"]);
+      await business.locator('.nav__group-toggle').click();
+      assert.equal(await business.locator('.nav__sublink').first().isVisible(), false, `${label}: second click closes business`);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${label}: no horizontal overflow`);
     }
     if (touch) {
       await page.goto(origin + "/he/", { waitUntil: "load" });
       await page.locator(".nav__toggle").tap();
       await page.waitForFunction(() => getComputedStyle(document.querySelector(".nav__links-wrapper")).opacity === "1");
+      await page.locator('[data-nav-group="automation"] .nav__group-toggle').tap();
       await page.locator(".nav__sublink", { hasText: "WIFIGATE Host" }).tap();
       await page.waitForURL(/\/he\/wifigate-host\/$/);
     }
