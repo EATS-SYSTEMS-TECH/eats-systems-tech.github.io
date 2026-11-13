@@ -3,6 +3,7 @@
 // The WIFIGATE Host and WIFIGATE Manager pages share one layout; each product
 // supplies its own plans, audience and icons.
 import { AUDIENCE_ART, AUDIENCE_ART_SIZE, audienceArtPath } from "./audience-art.mjs";
+import { planArt } from "./plan-art.mjs";
 
 export const HOST_PAGE_KEY = "wifigate-host";
 export const MANAGER_PAGE_KEY = "wifigate-manager";
@@ -16,15 +17,18 @@ export const AUDIENCE_ART_VERSION = "20261112b";
 // Plans describe the documented offer in USD, never a billing action.
 // Host: WIFIGATE_HOST.html, Pricing. Manager: WIFIGATE_MANAGER.html, Price.
 // A plan without a fixed name or price suffix takes them from its copy.
+// `crest` names the drawing that stands on the card's top edge (scripts/plan-art.mjs):
+// centred on the Host plans, which show one plant at three ages and carry no badge;
+// at the start edge on the Manager cards, where the worked example has its label.
 const PRODUCTS = {
   host: {
-    label: "WIFIGATE Host", featured: "growth", badge: "Most popular",
+    label: "WIFIGATE Host", featured: "growth", badge: null, crestAt: "center",
     offers: [
-      { key: "start", name: "START", amount: "$6", per: "/ system / month", description: "For a guesthouse, a vacation rental or a small business starting to host without keys.", range: "For 1–14 active systems",
+      { key: "start", crest: "sprout", name: "START", amount: "$6", per: "/ system / month", description: "For a guesthouse, a vacation rental or a small business starting to host without keys.", range: "For 1–14 active systems",
         features: ["An automatic access link for every booking, from your booking system", "Up to 14 active systems", "A booking calendar per system", "Google or Apple sign-in and two-step verification for admins"] },
-      { key: "growth", name: "GROWTH", amount: "$5", per: "/ system / month", description: "For hotels and management companies running many systems from one place.", range: "For 15–49 active systems",
+      { key: "growth", crest: "sapling", name: "GROWTH", amount: "$5", per: "/ system / month", description: "For hotels and management companies running many systems from one place.", range: "For 15–49 active systems",
         features: ["Everything in START", "Up to 49 active systems", "Several booking-system connections, with routing rules", "Team roles and priority support"] },
-      { key: "scale", name: "SCALE", amount: "$4", per: "/ system / month", description: "For hotel groups, large portfolios and enterprise rollouts.", range: "For 50+ active systems",
+      { key: "scale", crest: "tree", name: "SCALE", amount: "$4", per: "/ system / month", description: "For hotel groups, large portfolios and enterprise rollouts.", range: "For 50+ active systems",
         features: ["Everything in GROWTH", "50+ active systems", "A test environment, custom roles and an extended activity log", "Enterprise rollout support"] },
     ],
     audience: [["hotels", "Hotels"], ["rentals", "Airbnb & short-term rentals"], ["guesthouses", "Guesthouses"], ["parking", "Rental parking & garages"]],
@@ -36,11 +40,11 @@ const PRODUCTS = {
     imageAlt: "automation.imageAlt",
   },
   manager: {
-    label: "WIFIGATE Manager", featured: "systems", badge: "One simple price",
+    label: "WIFIGATE Manager", featured: "systems", badge: "One simple price", crestAt: "start",
     offers: [
-      { key: "systems", name: "Systems", amount: "$1.90", per: "/ system / month", translated: true, description: "Every active system on your dashboard, wherever it is.", range: "Gate, Dual Control or roller shutter",
+      { key: "systems", crest: "systems", name: "Systems", amount: "$1.90", per: "/ system / month", translated: true, description: "Every active system on your dashboard, wherever it is.", range: "Gate, Dual Control or roller shutter",
         features: ["Each system counts once, even in several groups", "Groups are free: only their systems count", "Monthly minimum: $1.90, even with no linked system", "A system added mid-month is charged by days"] },
-      { key: "organizations", name: "Organizations", amount: "$1", per: "/ extra organization / month", translated: true, description: "Run separate buildings, clients or companies under one account.", range: "First 3 organizations free",
+      { key: "organizations", crest: "organizations", name: "Organizations", amount: "$1", per: "/ extra organization / month", translated: true, description: "Run separate buildings, clients or companies under one account.", range: "First 3 organizations free",
         features: ["3 free organizations in every account", "$1 per month for each additional organization", "Organization admins do not pay", "One account, one monthly invoice"] },
       { key: "example", name: "Example", amount: "$21", per: "/ month", translated: true, sticker: true, description: "10 systems × $1.90, plus 2 extra organizations × $1.", range: "10 systems · 5 organizations",
         features: ["1 gate: $1.90 / month", "A group of 2 gates and 1 Dual Control: $5.70", "1 roller shutter: $1.90 / month", "Monthly estimate before tax"] },
@@ -79,11 +83,16 @@ function outline($, shapes, extra = {}) {
 
 // Construct one plan with the fixed translation schema; one plan per product is featured.
 // A plan marked `sticker` (a worked example, not an offer) shows its name as a label stuck over the card's top edge.
-function offerCard($, { key, name, amount, per, translated: named, description, range, features, sticker = false }, product) {
+function offerCard($, { key, name, amount, per, translated: named, description, range, features, sticker = false, crest = "" }, product) {
   const prefix = `${marketingKey}.pricing`;
   const featured = key === product.featured;
   const parts = [];
-  if (featured) parts.push(translated($, "span", "wa-plan__badge", `${prefix}.badge`, product.badge));
+  if (crest) {
+    const art = planArt(crest);
+    parts.push(node($, "svg", { class: "wa-plan__crest", viewBox: `0 0 ${art.width} ${art.height}`, width: String(art.width), height: String(art.height), fill: "none", stroke: "currentColor",
+      "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true", focusable: "false" }, art.shapes.map(([tag, attributes]) => node($, tag, attributes))));
+  }
+  if (featured && product.badge) parts.push(translated($, "span", "wa-plan__badge", `${prefix}.badge`, product.badge));
   const nameClass = sticker ? "wa-plan__name wa-plan__name--sticker" : "wa-plan__name";
   parts.push(named ? translated($, "h3", nameClass, `${prefix}.${key}Name`, name) : node($, "h3", { class: nameClass }, name));
   const price = node($, "div", { class: "wa-plan__price" }, [node($, "span", { class: "wa-plan__amount", dir: "ltr" }, amount),
@@ -98,7 +107,8 @@ function offerCard($, { key, name, amount, per, translated: named, description, 
   parts.push(node($, "div", { class: "wa-plan__cta" }, [node($, "a", {
     class: `btn btn--${featured ? "primary" : "ghost"}`, href: "../index.html#contact", "data-i18n": `${prefix}.planCta`,
   }, "Talk to us")]));
-  return node($, "article", { class: `wa-plan${featured ? " wa-plan--featured" : ""}${sticker ? " wa-plan--sticker" : ""}` }, parts);
+  const crestClass = crest ? ` wa-plan--crest wa-plan--crest-${product.crestAt} wa-plan--crest-${crest}` : "";
+  return node($, "article", { class: `wa-plan${featured ? " wa-plan--featured" : ""}${sticker ? " wa-plan--sticker" : ""}${crestClass}` }, parts);
 }
 
 // All constructors complete before replacing the existing grid's children.
@@ -107,7 +117,7 @@ export function installHostPricingShells($, productName = "host") {
   const grid = $("section.wa-pricing .wa-pricing__grid");
   if (grid.length !== 1) throw new Error("Host pricing requires one plan grid");
   const cards = product.offers.map(offer => offerCard($, offer, product));
-  grid.empty().append(...cards);
+  grid.empty().addClass("wa-pricing__grid--crest").append(...cards);
 }
 
 // Validate the entire destination before touching any list; missing/ambiguous
@@ -122,7 +132,7 @@ export function installHostDetailShells($, productName = "host") {
     ...product.audience.map(([key, text]) => translated($, "span", "wa-chip", `${marketingKey}.audience.${key}`, text))];
   const plans = product.offers.map(offer => offerCard($, offer, product));
   audience.empty().append(...chips);
-  pricing.empty().append(...plans);
+  pricing.empty().addClass("wa-pricing__grid--crest").append(...plans);
 }
 
 // Read a path without accepting blank/nontext fallback data. Each returned

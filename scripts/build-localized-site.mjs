@@ -309,7 +309,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     installHostDetailShells(legacy, product);
     const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale], product), chrome = getNicheChrome(locale);
     prepareUseCaseShell($, locale, pageKey, bodyClass);
-    fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle });
+    fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle, benefitArt: true });
     // The shared questions section stays: its answers restate the page's own copy.
     $('#niche-prev-link, #niche-next-link').remove();
     installSubscriptionFlow($, { content, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey), loginHref: buildPagePath(locale, 'login') });
@@ -321,7 +321,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261113aud4" />`);
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261113aud5" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { '@type': 'Service', '@id': `${siteOrigin}/${pageKey}/#service`, name: content.label, serviceType, provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, pageKey), description: hostCopy.metaDescription } });

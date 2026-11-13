@@ -179,7 +179,13 @@ test("Host pricing preserves ordered offers, localization slots, feature icons a
   assert.equal(plans.find(".wa-plan__amount[dir='ltr']").length, 3);
   assert.equal(plans.filter(".wa-plan--featured").length, 1);
   assert.equal(plans.eq(1).hasClass("wa-plan--featured"), true);
-  assert.equal(plans.find(".wa-plan__badge").attr("data-i18n"), "guestInvites.marketing.pricing.badge");
+  // Since 13 Nov 2026 the Host plans carry no badge: one plant at three ages stands on their top edges.
+  assert.equal(plans.find(".wa-plan__badge").length, 0);
+  assert.equal($(".wa-pricing__grid").hasClass("wa-pricing__grid--crest"), true);
+  assert.deepEqual(plans.map((_, node) => ["sprout", "sapling", "tree"].find(name => $(node).hasClass(`wa-plan--crest-${name}`))).get(), ["sprout", "sapling", "tree"]);
+  assert.equal(plans.filter(".wa-plan--crest-center").length, 3);
+  assert.equal(plans.find("> svg.wa-plan__crest[aria-hidden='true']").length, 3);
+  assert.deepEqual(plans.find("> svg.wa-plan__crest").map((_, node) => Number($(node).attr("height"))).get(), [46, 74, 100], "each age stands taller than the one before");
   assert.equal(plans.find(".wa-plan__per").length, 3);
   for (const [index, key] of ["start", "growth", "scale"].entries()) {
     const plan = plans.eq(index);

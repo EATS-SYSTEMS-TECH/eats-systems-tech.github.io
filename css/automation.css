@@ -651,24 +651,34 @@ html[dir="rtl"] .wa-hero::after {
   border-radius: 22px;
 }
 
-.wa-plan::before,
-.wa-plan::after {
+/* A drawing stands on the top edge of a card, which is its ground
+   (scripts/plan-art.mjs): one plant at three ages on the Host plans, a gate
+   and a row of buildings on the Manager cards. The grid leaves room for it. */
+.wa-pricing__grid--crest {
+  margin-top: 10.75rem;
+}
+
+.wa-plan__crest {
   position: absolute;
-  inset-block-start: -7px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  content: "";
-  background: var(--flow-blue);
-  box-shadow: 0 0 0 4px #fff, 0 0 0 5.5px var(--flow-hair);
+  inset-block-end: 100%;
+  inset-inline: 0;
+  width: 10.5rem;
+  height: auto;
+  margin-inline: auto;
+  color: var(--flow-blue);
+  pointer-events: none;
 }
 
-.wa-plan::before {
-  inset-inline-start: 2.1rem;
+.wa-plan--crest-start .wa-plan__crest {
+  inset-inline: 1.2rem auto;
+  width: 8rem;
+  margin-inline: 0;
 }
 
-.wa-plan::after {
-  inset-inline-end: 2.1rem;
+/* The badge gives the start edge to the drawing. */
+.wa-plan--crest-start .wa-plan__badge {
+  inset-inline: auto 1.7rem;
+  margin-inline: 0;
 }
 
 .wa-plan--featured {
@@ -697,10 +707,6 @@ html[dir="rtl"] .wa-hero::after {
 /* A worked example is not an offer: its name is a label stuck over the top
    edge of its card, a tilted rectangle with a stitched inner line. The name
    keeps its place in the card's flow, so the three prices stay on one line. */
-.wa-plan--sticker::before {
-  display: none;
-}
-
 .wa-plan__name--sticker {
   align-self: flex-start;
   margin: -0.5rem -1.15rem 0;
@@ -717,8 +723,30 @@ html[dir="rtl"] .wa-hero::after {
   transform: translateY(-3.2rem) rotate(-4deg);
 }
 
-/* Stacked cards: room above for the label, and less empty space under it. */
+/* Stacked cards: each leaves room above for its own drawing or label, and
+   the label leaves less empty space under it. */
 @media (max-width: 900px) {
+  .wa-pricing__grid--crest {
+    margin-top: 2rem;
+  }
+
+  .wa-plan--crest-sprout {
+    margin-block-start: 4.6rem;
+  }
+
+  .wa-plan--crest-sapling {
+    margin-block-start: 7rem;
+  }
+
+  .wa-plan--crest-tree {
+    margin-block-start: 9.3rem;
+  }
+
+  .wa-plan--crest-systems,
+  .wa-plan--crest-organizations {
+    margin-block-start: 5.2rem;
+  }
+
   .wa-plan--sticker {
     margin-block-start: 0.9rem;
   }
@@ -1035,6 +1063,21 @@ html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
   border-radius: 50%;
   background: var(--flow-tint);
   color: var(--flow-blue);
+}
+
+/* The small drawing of the benefit (scripts/benefit-art.mjs) stands alone, without the ring. */
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card__icon--art {
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+:is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card__icon--art svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits .bento-card__body {
