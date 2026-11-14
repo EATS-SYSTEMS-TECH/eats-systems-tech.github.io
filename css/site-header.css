@@ -679,8 +679,9 @@ html.a11y-text-scaled .site-header .nav {
 /* Collapsed menu: the product links are listed, indented, under For Business. */
 @media (max-width: 1439px) {
   .site-header .nav__group { display: block; position: relative; width: 100%; }
+  html[dir="rtl"] .site-header .nav__group { direction: rtl; }
   .site-header .topbar-nav .nav__group-link { padding-inline-end: 3rem !important; }
-  html[dir="rtl"] .site-header .topbar-nav .nav__group-link { padding-left: 3rem !important; padding-right: 0 !important; }
+  html[dir="rtl"] .site-header .topbar-nav .nav__group-link { direction: rtl; }
   .site-header .nav__group-toggle {
     position: absolute;
     inset-block-start: 0;

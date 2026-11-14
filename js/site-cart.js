@@ -1,7 +1,7 @@
 // The site cart drawer. Items live in the wifigate_cart cookie (cart-cookie.js).
 // Products are not on sale yet: the cart is sent as a WhatsApp message to the
 // WIFIGATE WhatsApp Business account asking for details. No online payment.
-import { CART_CATALOG, cartProduct, normalizeCart, readCart, writeCart } from "./cart-cookie.js?v=20261108b";
+import { CART_CATALOG, cartProduct, normalizeCart, readCart, writeCart } from "./cart-cookie.js?v=20261114roller1";
 
 // The number behind the public wa.me/message/NZWNMX6V2XVHJ1 business link; only a
 // number link can carry the prefilled cart text.
