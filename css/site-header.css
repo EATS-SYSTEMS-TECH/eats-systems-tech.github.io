@@ -465,9 +465,13 @@ html.a11y-text-scaled .site-header .nav {
     text-align: right;
   }
   .site-header .topbar-nav .nav__link:not(.nav__contact-link):hover,
-  .site-header .topbar-nav .nav__link:not(.nav__contact-link):focus-visible {
+  .site-header .topbar-nav .nav__link:not(.nav__contact-link):focus-visible,
+  .site-header .topbar-nav .nav__link--active:not(.nav__contact-link) {
     color: #0b63ff;
   }
+  /* The current section is marked by blue text alone, like the use-case
+     links; the underline belongs to the desktop bar. */
+  .site-header .topbar-nav .nav__link::after { display: none; }
   .site-header .topbar-nav .nav__contact-link {
     margin-top: .65rem;
     border-color: #0a0a0a;
