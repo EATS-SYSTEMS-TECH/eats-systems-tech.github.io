@@ -700,8 +700,8 @@ html.a11y-text-scaled .site-header .nav {
   .site-header .nav__group-chevron {
     width: .55rem;
     height: .55rem;
-    border-inline-end: 2px solid currentColor;
-    border-block-end: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
     transform: translateY(-.15rem) rotate(45deg);
     transition: transform 160ms ease;
   }
