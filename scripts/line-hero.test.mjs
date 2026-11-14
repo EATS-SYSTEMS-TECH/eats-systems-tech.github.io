@@ -10,7 +10,7 @@ import test from "node:test";
 import * as cheerio from "cheerio";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { LINE_HERO_SCENES, LINE_HERO_FRAMES, lineHeroFrameHash, lineHeroFramePath, loadLineHeroScene, renderLineHeroFrame } from "./line-hero-frames.mjs";
-import { LINE_HERO_VERSION } from "./line-hero.mjs";
+import { LINE_HERO_VERSION, LINE_HERO_LEGACY_VERSION } from "./line-hero.mjs";
 import { createPlayer } from "../js/line-hero.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -176,14 +176,16 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.ok(image.hasClass("line-hero__frame") && !image.hasClass("niche-hero__bg"));
     assert.ok((image.attr("alt") || "").trim().length > 10, `${relative}: localized image description kept`);
     assert.deepEqual([image.attr("width"), image.attr("height"), image.attr("loading"), image.attr("fetchpriority")], ["1600", "900", "eager", "high"]);
-    // Controls: one replay action, one hidden pause button in the pager, localized copy.
-    const replay = hero.find(".niche-hero__actions > *");
-    assert.equal(replay.length, 1); assert.ok(replay.is("button#niche-hero-replay[data-scene-replay].btn.btn--primary[type=button]"));
-    assert.equal(replay.text(), copy.replay); assert.equal(replay.attr("aria-label"), copy.replay);
+    // Playback controls share the top bar, with localized accessible names.
+    const replay = hero.find(".niche-hero__pager > .scene-video-controls > button#niche-hero-replay[data-scene-replay].btn.btn--primary[type=button]");
+    assert.equal(replay.length, 1);
+    assert.deepEqual([replay.attr("aria-label"), replay.attr("title")], [copy.replay, copy.replay]);
+    assert.equal(replay.find("svg.line-hero__replay-icon[aria-hidden='true'][focusable='false']").length, 1);
     const pause = hero.find(".niche-hero__pager > .scene-video-controls > button[data-scene-pause][type=button]");
     assert.equal(pause.length, 1); assert.notEqual(pause.attr("hidden"), undefined); assert.equal(pause.text(), copy.pause);
+    assert.equal(pause.next().attr("id"), replay.attr("id"), `${relative}: replay beside pause`);
     // Text toggle beside pause: hidden until the runtime runs, expanded, controlling the text block.
-    const toggle = hero.find(".niche-hero__pager > .scene-video-controls > [data-scene-pause] + button[data-hero-text-toggle][type=button]");
+    const toggle = hero.find(".niche-hero__pager > .scene-video-controls > [data-scene-replay] + button[data-hero-text-toggle][type=button]");
     assert.equal(toggle.length, 1, `${relative}: text toggle next to pause`);
     assert.notEqual(toggle.attr("hidden"), undefined);
     assert.deepEqual([toggle.attr("aria-controls"), toggle.attr("aria-expanded"), toggle.attr("aria-label"), toggle.attr("title")], ["niche-hero-text", "true", copy.hideText, copy.hideText]);
@@ -194,7 +196,7 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     const text = hero.find("> .niche-hero__content > .niche-hero__text#niche-hero-text");
     assert.equal(text.length, 1, `${relative}: controlled text block`);
     assert.ok(text.find("> h1#niche-title.niche-hero__title").text().trim().length > 0, `${relative}: the h1 stays in the HTML`);
-    assert.equal(text.find("> .niche-hero__actions > [data-scene-replay]").length, 1);
+    assert.equal(text.find("> .niche-hero__actions").length, 0);
     assert.deepEqual(JSON.parse(hero.children("script[type='application/json'][data-scene-copy]").text()), copy);
     // Assets: the light stylesheet after niche.css, the scene preloaded, the runtime as a module.
     const sheets = $("link[rel=stylesheet]").map((_, element) => $(element).attr("href")).get();
@@ -206,7 +208,10 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
   assert.equal(pages, 78);
   // The preloaded scene URL is exactly the one the runtime imports.
   // Each scene is imported from its own module (several scenes may share one) by its factory.
-  for (const [scene, { module, factory }] of Object.entries(LINE_HERO_SCENES)) assert.ok(runtime.includes(`${scene}: () => import("./${path.posix.basename(module)}?v=${LINE_HERO_VERSION}").then(module => module.${factory})`), scene);
+  for (const [scene, { module, factory }] of Object.entries(LINE_HERO_SCENES)) {
+    const version = ["host", "manager"].includes(scene) ? LINE_HERO_VERSION : LINE_HERO_LEGACY_VERSION;
+    assert.ok(runtime.includes(`${scene}: () => import("./${path.posix.basename(module)}?v=${version}").then(module => module.${factory})`), scene);
+  }
   for (const file of ["css/line-hero.css", "js/line-hero.js", "js/line-hero-host.js", "js/line-hero-manager.js"]) await fs.access(path.join(root, file));
 });
 

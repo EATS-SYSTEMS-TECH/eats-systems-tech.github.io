@@ -59,7 +59,7 @@ html[dir="rtl"] .niche-hero--line .niche-hero__text::before { --line-hero-scrim-
   border-radius: 999px; background: rgba(255,255,255,.88); filter: blur(6px);
 }
 
-/* Collapsed text: the eyebrow, title, lead and replay action and their scrim
+/* Collapsed text: the eyebrow, title, lead and their scrim
    fade out but keep their place (no layout change, so the hero and the art do
    not move); hidden, they leave the tab order and the accessibility tree,
    except the h1: it stays in the document and, invisible under the faded
@@ -96,16 +96,24 @@ html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .nic
 .niche-hero--line .niche-hero__nav-button { color: var(--home-black); border-color: rgba(10,10,10,.55); background: rgba(255,255,255,.9); }
 .niche-hero--line .niche-hero__nav-button:is(:hover,:focus-visible) { border-color: var(--home-black); background: #f1f4f9; }
 
-/* The single primary action (replay) becomes the dark button. */
+/* Host and Manager show replay beside pause; other line heroes keep their
+   replay action below the scene. */
 .niche-page .niche-hero.niche-hero--line .btn--primary { color: #fff; border: 1px solid var(--home-black); background: var(--home-black); }
 .niche-page .niche-hero.niche-hero--line .btn--primary:is(:hover,:focus-visible) { color: #fff; border-color: #2b2b2b; background: #2b2b2b; transform: none; }
 .niche-page .niche-hero.niche-hero--line .btn--ghost { color: var(--home-black); border: 1px solid rgba(10,10,10,.55); background: rgba(255,255,255,.7); }
 .niche-page .niche-hero.niche-hero--line .btn--ghost:is(:hover,:focus-visible) { color: var(--home-black); border-color: var(--home-black); background: #f1f4f9; transform: none; }
 .niche-hero--line .niche-hero__actions [data-scene-replay] { min-height: 44px; cursor: pointer; font: inherit; }
+.niche-hero--line .scene-video-controls [data-scene-replay] {
+  flex-shrink: 0; width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  padding: 0; border-radius: 4px; box-shadow: none;
+}
+.niche-hero--line .line-hero__replay-icon {
+  display: block; width: 21px; height: 21px; fill: none; stroke: currentColor;
+  stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+}
 .niche-hero--line :is(.btn,[data-scene-pause],[data-hero-text-toggle],.niche-breadcrumb__link):focus-visible { outline: 3px solid var(--home-blue); outline-offset: 3px; }
 
-/* Pause/resume sits in the top bar's pager, as on the video heroes, with the
-   text toggle beside it in the same 44 px light button style. */
+/* Pause/resume, replay and the text toggle share the top bar. */
 .niche-hero--line .scene-video-controls { display: flex; gap: .5rem; }
 .niche-hero--line :is([data-scene-pause],[data-hero-text-toggle]) {
   display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -130,6 +138,13 @@ html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .nic
 }
 
 @media (max-width:768px) {
+  /* Long translated breadcrumbs may need a second row; keep the three
+     controls together above the art without squeezing either label. */
+  :is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .niche-hero__topbar { flex-wrap: wrap; }
+  :is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .niche-hero__pager { margin-inline-start: auto; }
+  :is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .line-hero__stage {
+    --line-hero-band: calc(clamp(1.5rem,4vh,2.75rem) + 44px + 2rem);
+  }
   /* Phones: the art sits in the upper band and the text block spans the
      width, so its scrim runs edge to edge below a soft top edge and leaves
      the art above it at full strength. */
