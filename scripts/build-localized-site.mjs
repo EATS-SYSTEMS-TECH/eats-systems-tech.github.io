@@ -321,7 +321,8 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=20261113aud5" />`);
+    const automationVersion = pageKey === MANAGER_PAGE_KEY ? '20261114faq1' : '20261113aud5';
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=${automationVersion}" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { '@type': 'Service', '@id': `${siteOrigin}/${pageKey}/#service`, name: content.label, serviceType, provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, pageKey), description: hostCopy.metaDescription } });

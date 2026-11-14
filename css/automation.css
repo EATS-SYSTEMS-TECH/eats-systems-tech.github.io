@@ -591,6 +591,11 @@ html[dir="rtl"] .wa-hero::after {
    ride one wave, the benefits open into a dashed grid and a tinted panel closes the page
    with the shop. The questions keep the site's shared FAQ design (faq.css),
    the same one the homepage uses. */
+/* Keep the Manager FAQ heading in document flow while its questions scroll. */
+.wifigate-manager-page #niche-faq .seo-faq__layout > :first-child {
+  position: static;
+}
+
 :is(.wifigate-host-page, .wifigate-manager-page) {
   --flow-blue: #146bff;
   --flow-tint: #eef4ff;
