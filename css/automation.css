@@ -326,6 +326,12 @@ html[dir="rtl"] .wa-hero::after {
 }
 
 /* ================= PRICING ================= */
+.wa-pricing__currency-control { margin-top: 1.3rem; }
+.wa-pricing__currency-label { display: inline-flex; align-items: center; gap: .75rem; font-weight: 600; }
+.wa-pricing__currency-select { min-height: 2.75rem; padding: .45rem 1.8rem .45rem .75rem; border: 1px solid #89929c; border-radius: .4rem; background: #fff; color: #111; font: inherit; cursor: pointer; }
+.wa-pricing__currency-select:focus-visible { outline: 3px solid #3868ff; outline-offset: 2px; }
+.wa-pricing__currency-status { max-width: 44rem; margin: .65rem auto 0; color: var(--home-muted); font-size: .88rem; text-align: center; }
+.wa-pricing__currency-status a { text-decoration: underline; }
 .wa-pricing__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

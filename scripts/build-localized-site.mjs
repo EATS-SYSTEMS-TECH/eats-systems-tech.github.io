@@ -6,6 +6,7 @@ import * as cheerio from 'cheerio';
 import { repoRoot, defaultLocale, siteOrigin, nowDate, changedFiles, COOKIE_CONSENT_VERSION, getBundle, getNestedValue, loadHomeCopy, readWindowGlobal, readHtmlTemplate, buildPagePath, buildPageUrl, buildOutputFilePath, buildAssetPrefix, rewriteStaticAssets, removeScripts, appendScripts, alternatesFor, applyDataI18nTranslations, setBodyDirection, updateFooterStaticUi, rewriteFooterLegalLinks, updateAccessibilityMarkup, insertPageDataScript, serialize } from './localized-builder-document.mjs';
 import { getNichePageContent, getNicheChrome, buildNicheContext, applyHomepageCopy, updateHomeStaticUi, updateHomeWhereLinks, fillUseCaseBody, fillLandingSections, installUseCaseShopLink, installHighlightNote } from './localized-builder-content.mjs';
 import { SITE_LANGUAGES } from './site-languages.mjs';
+import { LOCAL_CURRENCY, VISIBLE_CURRENCIES, defaultPricingCurrency } from './pricing-currencies.mjs';
 import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index.mjs';
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
@@ -320,8 +321,20 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
+    const pricing = $('section.wa-pricing');
+    const control = $('<div class="wa-pricing__currency-control"></div>');
+    const select = $('<select class="wa-pricing__currency-select" data-pricing-currency></select>')
+      .attr('aria-label', locale === 'he' ? 'בחירת מטבע להצגת מחירים' : 'Display currency');
+    for (const currency of VISIBLE_CURRENCIES) select.append($('<option></option>').attr('value', currency).text(currency === 'ILS' ? '₪ ILS' : '$ USD'));
+    select.val(defaultPricingCurrency(locale));
+    control.append($('<label class="wa-pricing__currency-label"></label>').text(locale === 'he' ? 'מטבע להצגת מחירים' : 'Display currency').append(select));
+    pricing.find('.wa-head').append(control);
+    pricing.find('.wa-pricing__note').after('<p class="wa-pricing__currency-status" data-pricing-status aria-live="polite"></p>');
+    pricing.attr('data-local-currency', LOCAL_CURRENCY[locale]);
+    appendScripts($, ['/js/pricing-currency.js?v=20261114a'], "script[src*='js/accessibility.js']", locale, pageKey);
+    $("script[src*='js/pricing-currency.js']").attr('type', 'module');
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
-    const automationVersion = '20261114hover1';
+    const automationVersion = '20261114currency1';
     $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=${automationVersion}" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
