@@ -54,7 +54,7 @@ export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   if (compactReplay) {
     actions.remove();
     replay = $("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "", "aria-label": copy.replay, title: copy.replay })
-      .addClass("btn btn--primary").append(`<svg class="line-hero__replay-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11a8 8 0 1 1-2.5-5.8M20 4v6h-6"/></svg>`);
+      .addClass("btn btn--primary").append(`<svg class="line-hero__replay-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.7 13.6a8 8 0 1 1-2.2-8.4M20 4v6h-6"/></svg>`);
   } else actions.empty().append($("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "" })
     .addClass("btn btn--primary niche-hero__btn-primary").attr({ "aria-label": copy.replay, title: copy.replay }).text(copy.replay));
   // The text toggle sits next to pause: shown by js/line-hero.js (it needs
