@@ -1,10 +1,5 @@
-/* WIFIGATE Host and WIFIGATE Manager heroes: the white line animation in the
-   shared full-width hero. Same layers and copy as every use-case hero (media,
-   overlay, top bar, text at the bottom start); only these two pages carry
-   .niche-hero--line, and the light theme below is scoped to it. The text sits
-   over the media layer, as it does over the video, on a white scrim that is
-   limited to the text block, so the blue art stays at full strength elsewhere.
-   A toggle in the pager collapses the text and its scrim. */
+/* White line animation for the subscription heroes. Shared line heroes keep
+   their overlay layout; Host and Manager put the copy before the art below. */
 .niche-page .niche-hero.niche-hero--line { color: var(--home-ink); background: #fff; }
 .niche-hero--line .niche-hero__media { container-type: size; background: #fff; }
 
@@ -174,6 +169,30 @@ html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .nic
   }
   /* The text sits on white, so it needs no scrim over the art. */
   .niche-hero--line .niche-hero__text::before { content: none; }
+}
+
+/* Subscription pages read top to bottom: controls, heading and description,
+   then the full-width animation. The DOM follows this order as well. */
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero.niche-hero--line {
+  display: flex; flex-direction: column;
+  height: auto; min-height: 0; max-height: none; overflow: visible;
+}
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero.niche-hero--line .niche-hero__content {
+  order: 0; height: auto; min-height: 0;
+  justify-content: flex-start; gap: clamp(1.5rem,3vw,2.75rem);
+  padding-block: clamp(1.5rem,4vh,2.75rem) clamp(1.5rem,3vw,2.75rem);
+}
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .niche-hero__topbar { margin-block-end: 0; }
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .niche-hero__text { width: 100%; }
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .niche-hero__text::before { content: none; }
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .niche-hero__media {
+  position: relative; inset: auto; order: 1;
+  width: 100%; height: auto; aspect-ratio: 16 / 9;
+  container-type: normal;
+}
+body:is(.wifigate-host-page,.wifigate-manager-page) .niche-hero--line .line-hero__stage {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; aspect-ratio: 16 / 9;
 }
 
 @media print {

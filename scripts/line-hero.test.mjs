@@ -160,6 +160,8 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.equal(hero.attr("data-line-hero"), scene); assert.equal(hero.attr("data-line-hero-state"), "poster");
     assert.equal(hero.is("[data-scene-video],[data-scene-state]"), false, `${relative}: no video scene controller`);
     assert.equal($("main video").length, 0, `${relative}: no video`);
+    assert.deepEqual(hero.children().slice(0, 2).map((_, element) => $(element).attr('class').split(' ')[0]).get(),
+      ['niche-hero__content', 'niche-hero__media'], `${relative}: heading precedes animation`);
     // The same decorative mark as the video heroes, in the media layer.
     assert.equal(hero.find("> .niche-hero__media[data-media-watermark-frame] > .media-watermark[data-media-watermark][aria-hidden='true']").length, 1, `${relative}: one watermark`);
     assert.equal($("[data-media-watermark]").length, 1); assert.equal($("link[data-media-watermark-style]").length, 1);

@@ -1,23 +1,24 @@
 // The WIFIGATE Host and WIFIGATE Manager heroes keep the shared use-case
 // structure (full-width media layer, overlay, top bar with breadcrumb and
-// pager, text at the bottom start) but show the approved
+// pager) but show the approved
 // white line animation instead of a video, in a light theme.
 //
 // Generated hero, after fillUseCaseBody:
 //   section.niche-hero.niche-hero--line[data-line-hero=<scene>][data-line-hero-state=poster]
+//     .niche-hero__content: top bar pager > .scene-video-controls > [data-scene-pause][hidden]
+//                                                                  + #niche-hero-replay[data-scene-replay]
+//                                                                  + [data-hero-text-toggle][hidden]
+//                           .niche-hero__text#niche-hero-text (controlled by the toggle)
 //     .niche-hero__media
 //       .line-hero__stage[data-line-hero-stage]
 //         picture > source(prefers-reduced-motion: still frame) + img#niche-image (start frame)
 //         (js/line-hero.js adds svg.line-hero__art, aria-hidden, over the frame)
 //       .niche-hero__overlay
-//     .niche-hero__content: top bar pager > .scene-video-controls > [data-scene-pause][hidden]
-//                                                                  + #niche-hero-replay[data-scene-replay]
-//                                                                  + [data-hero-text-toggle][hidden]
-//                           .niche-hero__text#niche-hero-text (controlled by the toggle)
 //     script[data-scene-copy]
 // The text toggle collapses the eyebrow, title and lead (and their scrim)
 // so the art can be seen whole; the h1 stays in the HTML and the
-// layout. applyMediaWatermarks gives the media layer the same decorative mark
+// layout. Host and Manager place the text before the media in document flow.
+// applyMediaWatermarks gives the media layer the same decorative mark
 // as the video heroes (css/media-watermark.css draws it dark on this white
 // hero once the live art is mounted).
 import { sceneAssetUrl } from "./scene-media.mjs";
@@ -25,7 +26,8 @@ import { LINE_HERO_SCENES } from "./line-hero-frames.mjs";
 
 export const LINE_HERO_VERSION = "20261114lh10";
 export const LINE_HERO_LEGACY_VERSION = "20261113lh8";
-export const LINE_HERO_CSS_VERSION = "20261114hover1";
+export const LINE_HERO_CSS_VERSION = "20261114textfirst1";
+const LINE_HERO_LEGACY_CSS_VERSION = "20261114hover1";
 
 export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   if (!["play", "pause", "replay", "hideText", "showText"].every(key => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");
@@ -67,10 +69,11 @@ export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   const controls = $("<div>").addClass("scene-video-controls").append($("<button>").attr({ type: "button", "data-scene-pause": "", hidden: "" }).text(copy.pause));
   if (compactReplay) controls.append(replay);
   pager.prepend(controls.append(toggle));
+  if (compactReplay) media.insertAfter(hero.children('.niche-hero__content'));
   hero.append($("<script>").attr({ type: "application/json", "data-scene-copy": "" }).text(JSON.stringify(copy).replace(/</g, "\\u003c")));
 
   const version = compactReplay ? LINE_HERO_VERSION : LINE_HERO_LEGACY_VERSION;
-  $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/line-hero.css?v=${LINE_HERO_CSS_VERSION}" />`);
+  $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/line-hero.css?v=${compactReplay ? LINE_HERO_CSS_VERSION : LINE_HERO_LEGACY_CSS_VERSION}" />`);
   // The scene's own module; several scenes may share one.
   if (!LINE_HERO_SCENES[scene]) throw new Error(`Unknown line hero scene ${scene}`);
   $("head").append(`<link rel="modulepreload" href="${assetPrefix}${LINE_HERO_SCENES[scene].module}?v=${version}" />`);
