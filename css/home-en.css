@@ -1190,7 +1190,9 @@ html[dir="rtl"] .home-en .business-plan__art-letter {
 
 .home-en .business-plan__cta:hover,
 .home-en .business-plan__cta:focus-visible {
-  border-color: #ffffff;
+  color: #ffffff;
+  border-color: var(--home-blue);
+  background: var(--home-blue);
   transform: none;
 }
 

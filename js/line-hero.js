@@ -7,8 +7,8 @@
 // frame, in the same box. A toggle next to pause collapses the hero text so
 // the whole drawing can be seen.
 const SCENES = {
-  host: () => import("./line-hero-host.js?v=20261114lh9").then(module => module.createHostScene),
-  manager: () => import("./line-hero-manager.js?v=20261114lh9").then(module => module.createManagerScene),
+  host: () => import("./line-hero-host.js?v=20261114lh10").then(module => module.createHostScene),
+  manager: () => import("./line-hero-manager.js?v=20261114lh10").then(module => module.createManagerScene),
   nosim: () => import("./line-hero-nosim.js?v=20261113lh8").then(module => module.createNoSimScene),
   stability: () => import("./line-hero-stability.js?v=20261113lh8").then(module => module.createStabilityScene),
   // The other feature pages share one module; each scene is one of its factories.

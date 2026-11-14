@@ -1150,9 +1150,13 @@ html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
   box-shadow: none;
 }
 
-.wa-shop__actions .btn--primary,
-.wa-shop__actions .btn--primary:hover {
+.wa-shop__actions .btn--primary {
   background: var(--home-black);
+  color: #fff;
+}
+.wa-shop__actions .btn--primary:is(:hover,:focus-visible) {
+  border-color: var(--flow-blue);
+  background: var(--flow-blue);
   color: #fff;
 }
 

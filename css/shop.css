@@ -383,6 +383,10 @@
   background: #151719;
   color: #fff;
 }
+.shop-viewer__dimensions[aria-pressed="true"]:is(:hover,:focus-visible) {
+  border-color: #146bff;
+  background: #146bff;
+}
 .shop-viewer__dimensions[hidden] {
   display: none;
 }
@@ -680,8 +684,8 @@ body.shop-viewer-open {
   color: #fff;
   cursor: pointer;
 }
-.shop-purchase:hover {
-  background: #2a2f33;
+.shop-purchase:is(:hover,:focus-visible) {
+  background: #146bff;
 }
 .shop-purchase svg {
   width: 19px;
@@ -913,8 +917,9 @@ body.shop-viewer-open {
   background: #101315;
   color: #fff;
 }
-.shop-actions__cart:hover {
-  background: #2a2f33;
+.shop-actions__cart:is(:hover,:focus-visible) {
+  border-color: #146bff;
+  background: #146bff;
 }
 .shop-actions__cart svg {
   flex: none;

@@ -50,7 +50,7 @@ body.site-cart-open { overflow: hidden; }
 html[dir="rtl"] .site-cart__drawer:not([lang="en"]) .site-cart__item-name { text-align: right; }
 .site-cart__quantity button:disabled { cursor: not-allowed; opacity: .4; }
 .site-cart__checkout:not(:disabled) { cursor: pointer; }
-.site-cart__checkout:not(:disabled):hover { background: #2a2f33; }
+.site-cart__checkout:not(:disabled):is(:hover,:focus-visible) { background: #146bff; }
 .site-cart__subtotal strong { color: #344054; font-weight: 600; }
 .site-cart__tile { display: flex; flex-direction: column; justify-content: center; gap: .1rem; width: 5rem; height: 5rem; padding: .55rem .6rem; border-radius: 7px; background: #1f2937; color: #fff; line-height: 1.1; text-align: left; }
 .site-cart__tile small { font-size: .55rem; font-weight: 700; letter-spacing: .14em; opacity: .8; }

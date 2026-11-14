@@ -457,7 +457,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding: 0.48rem 0.78rem; text-decoration: none;
   transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
 }
-.site-footer__store:hover, .site-footer__social-link:hover { border-color: #676767; background: #222222; transform: none; }
+.site-footer__store:is(:hover,:focus-visible), .site-footer__social-link:is(:hover,:focus-visible) { border-color: #146bff; background: #146bff; transform: none; }
 .site-footer__store svg, .site-footer__support svg, .site-footer__social-link svg { flex: 0 0 auto; }
 .site-footer__store-text { display: grid; gap: 0.05rem; line-height: 1.05; white-space: nowrap; }
 .site-footer__store-kicker { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; }

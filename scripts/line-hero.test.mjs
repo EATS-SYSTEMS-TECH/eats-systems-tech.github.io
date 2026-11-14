@@ -10,7 +10,7 @@ import test from "node:test";
 import * as cheerio from "cheerio";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { LINE_HERO_SCENES, LINE_HERO_FRAMES, lineHeroFrameHash, lineHeroFramePath, loadLineHeroScene, renderLineHeroFrame } from "./line-hero-frames.mjs";
-import { LINE_HERO_VERSION, LINE_HERO_LEGACY_VERSION } from "./line-hero.mjs";
+import { LINE_HERO_VERSION, LINE_HERO_LEGACY_VERSION, LINE_HERO_CSS_VERSION } from "./line-hero.mjs";
 import { createPlayer } from "../js/line-hero.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -200,7 +200,7 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.deepEqual(JSON.parse(hero.children("script[type='application/json'][data-scene-copy]").text()), copy);
     // Assets: the light stylesheet after niche.css, the scene preloaded, the runtime as a module.
     const sheets = $("link[rel=stylesheet]").map((_, element) => $(element).attr("href")).get();
-    assert.ok(sheets.indexOf(`${prefix}css/line-hero.css?v=${LINE_HERO_VERSION}`) > sheets.findIndex(href => href.includes("css/niche.css")));
+    assert.ok(sheets.indexOf(`${prefix}css/line-hero.css?v=${LINE_HERO_CSS_VERSION}`) > sheets.findIndex(href => href.includes("css/niche.css")));
     assert.equal($(`link[rel=modulepreload][href='${prefix}js/line-hero-${scene}.js?v=${LINE_HERO_VERSION}']`).length, 1);
     assert.equal($(`script[type=module][src='${prefix}js/line-hero.js?v=${LINE_HERO_VERSION}']`).length, 1);
     pages++;
