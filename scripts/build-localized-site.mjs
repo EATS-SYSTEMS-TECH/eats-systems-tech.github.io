@@ -334,7 +334,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     appendScripts($, ['/js/pricing-currency.js?v=20261114a'], "script[src*='js/accessibility.js']", locale, pageKey);
     $("script[src*='js/pricing-currency.js']").attr('type', 'module');
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
-    const automationVersion = '20261114currency1';
+    const automationVersion = pageKey === HOST_PAGE_KEY ? '20261114hostfaq1' : '20261114currency1';
     $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=${automationVersion}" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
