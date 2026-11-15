@@ -118,3 +118,11 @@ html.a11y-reduced-motion .seo-faq__item summary::after {
     overflow-wrap: anywhere;
   }
 }
+
+/* Small print under an answer: its starred exception. */
+.seo-faq__answer .seo-faq__note {
+  margin: 0.6rem 0 0;
+  color: #7c7c7c;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}

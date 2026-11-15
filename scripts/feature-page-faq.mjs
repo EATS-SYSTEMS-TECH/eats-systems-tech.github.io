@@ -4,7 +4,8 @@
 // shows no questions section; it never falls back to another language.
 // The Auto Open answers, like the rest of that page, describe the arrival experience only.
 const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
-const qa = (question, answer) => Object.freeze({ question, answer });
+// An optional starred note is shown as small print under its answer.
+const qa = (question, answer, note) => Object.freeze(note ? { question, answer, note } : { question, answer });
 
 export const FEATURE_PAGE_FAQ = Object.freeze({
   "no-sim-no-router": Object.freeze({
@@ -12,7 +13,7 @@ export const FEATURE_PAGE_FAQ = Object.freeze({
       qa("איך הטלפון מתחבר לבקר בלי אינטרנט?", "הטלפון מתחבר לבקר ישירות ב-Bluetooth כשנמצאים ליד הכניסה. החיבור לא עובר דרך שרת, רשת סלולרית או נתב."),
       qa("האורחים שלי צריכים אינטרנט כדי להיכנס?", "רק כדי לקבל את קישור ההזמנה ולהיכנס לאפליקציה. את הכניסה עצמה הם פותחים ליד השער, ישירות מול הבקר, בלי אינטרנט."),
       qa("מתי בכל זאת צריך WiFi?", "רק במסלול WIFIGATE Manager, שמאפשר פתיחה מרחוק, ניהול משתמשים והיסטוריה מכל דפדפן. במסלול הזה הבקר מתחבר לרשת WiFi בתדר 2.4GHz. גם אז, פתיחה מהטלפון ליד הכניסה עובדת בלי אינטרנט."),
-      qa("יש חשבון חודשי על תקשורת?", "לא. בכניסה אין כרטיס SIM ואין חבילת גלישה, ולכן אין חשבון חודשי על תקשורת."),
+      qa("יש חשבון חודשי על תקשורת?", "לא. בכניסה אין כרטיס SIM ואין חבילת גלישה, ולכן אין חשבון חודשי על תקשורת.", "* למעט מסלולי WIFIGATE For Business במידת הצורך."),
     ]),
   }),
   stability: Object.freeze({
@@ -84,5 +85,5 @@ export function featurePageFaq(pageKey, locale) {
   const items = FEATURE_PAGE_FAQ[pageKey]?.[locale];
   if (!items) return [];
   if (!Array.isArray(items) || !items.length || !items.every(item => NONEMPTY(item?.question) && NONEMPTY(item?.answer))) throw new Error(`Incomplete ${pageKey} questions: ${locale}`);
-  return items.map(({ question, answer }) => ({ question, answer }));
+  return items.map(({ question, answer, note }) => (NONEMPTY(note) ? { question, answer, note } : { question, answer }));
 }
