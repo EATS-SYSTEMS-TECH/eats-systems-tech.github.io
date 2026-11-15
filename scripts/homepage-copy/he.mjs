@@ -33,7 +33,7 @@ const copy = {
     features: [
       {
         title: "ללא כרטיס SIM וללא נתב חיצוני",
-        text: "WIFIGATE מתקשרת ישירות עם ההתקן המותקן, כך שבנקודת הכניסה אין צורך בכרטיס SIM, בחבילת אינטרנט או בנתב WiFi חיצוני. למעט מסלול WIFIGATE Manager, שדורש חיבור WiFi.",
+        text: "הטלפון מתחבר ישירות לבקר, כך שבנקודת הכניסה אין צורך בכרטיס SIM, בחבילת גלישה או בנתב WiFi. למעט WIFIGATE Manager, שדורש חיבור WiFi.",
       },
       {
         title: "יציבות",
@@ -69,7 +69,7 @@ const copy = {
       },
     ],
     subscriptionNote: "* למעט מסלולי WIFIGATE For Business.",
-    connectionNote: "* למעט מסלול WIFIGATE Manager, שדורש חיבור WiFi.",
+    connectionNote: "* למעט WIFIGATE Manager, שדורש חיבור WiFi.",
   },
   privateAccess: {
     imageAlt: "שליח הולך לאורך מסלול כחול מקווקו אל כניסת בניין מגורים, בזמן שדייר מחזיק את אפליקציית WIFIGATE המציגה הרשאת אורח מוגבלת בזמן.",
@@ -133,7 +133,7 @@ const copy = {
       },
       {
         question: "האם WIFIGATE זקוקה לכרטיס SIM או לנתב WiFi חיצוני?",
-        answer: "לא. WIFIGATE מתקשרת ישירות עם ההתקן המותקן, כך שבנקודת הכניסה אין צורך בכרטיס SIM, בחבילת אינטרנט או בנתב WiFi חיצוני. למעט מסלול WIFIGATE Manager, שדורש חיבור WiFi.",
+        answer: "לא. הטלפון מתחבר ישירות לבקר, כך שבנקודת הכניסה אין צורך בכרטיס SIM, בחבילת גלישה או בנתב WiFi. למעט WIFIGATE Manager, שדורש חיבור WiFi.",
       },
       {
         question: "האם WIFIGATE דורשת מנוי חודשי?",
