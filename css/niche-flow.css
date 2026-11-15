@@ -80,8 +80,16 @@
   text-align: center;
 }
 
+/* A point's own note sits at the foot of its column, so the notes of
+   neighbouring points share one line whatever the length of their text. */
+.niche-flow__text {
+  display: flex;
+  flex-direction: column;
+}
+
 .niche-flow__text .niche-highlight__note {
-  margin-top: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.6rem;
 }
 
 /* Narrow screens: the wave gives way to one column; a dashed line links the
