@@ -111,8 +111,8 @@ test("secure session renewal preserves edits and daily identity without replayin
     .getByRole("button", { name: "Open workspace", exact: true })
     .click();
   await page.getByRole("tab", { name: "Settings", exact: true }).click();
-  const input = page.getByLabel("First pulse (ms)", { exact: true });
-  await input.fill("1234");
+  const input = page.getByLabel("First pulse (seconds)", { exact: true });
+  await input.fill("1.234");
   await page.evaluate(() => {
     window.connections[0].holdCancellation = true;
     window.connections[0].busy = true;
@@ -130,7 +130,7 @@ test("secure session renewal preserves edits and daily identity without replayin
       window.connections.length === 2 &&
       !document.querySelector("#manager-content").inert,
   );
-  assert.equal(await input.inputValue(), "1234");
+  assert.equal(await input.inputValue(), "1.234");
   assert.equal(
     await page
       .getByRole("tab", { name: "Settings", exact: true })

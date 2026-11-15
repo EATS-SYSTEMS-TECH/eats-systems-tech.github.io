@@ -70,8 +70,8 @@ test("Manager settings merges active timings with saved inactive values and only
   const choose = method => page.locator('select[name="command"]').selectOption(method);
   const save = page.getByRole("button", { name: "Save settings" });
   await choose("PULSE_AFTER_PULSE_AFTER_PULSE");
-  await page.locator("[name=pulseWidth1Millis]").fill("1500");
-  await page.locator("[name=pulseWidth2Millis]").fill("9000");
+  await page.locator("[name=pulseWidth1Millis]").fill("1.5");
+  await page.locator("[name=pulseWidth2Millis]").fill("9");
   await page.locator("[name=timeBetweenPulses2Seconds]").fill("90");
   await choose("PULSE");
   await save.click();
@@ -105,18 +105,18 @@ test("Manager settings guards pulse/gap ranges, pending confirmation navigation 
   t.after(() => page.close());
   for (const key of timing) {
     const field = page.locator(`[name=${key}]`), gap = key.startsWith("timeBetween");
-    assert.equal(await field.getAttribute("min"), gap ? "1" : "500");
-    assert.equal(await field.getAttribute("max"), gap ? "300" : "60000");
-    await field.fill(gap ? "0" : "499");
+    assert.equal(await field.getAttribute("min"), gap ? "1" : "0.5");
+    assert.equal(await field.getAttribute("max"), gap ? "300" : "60");
+    await field.fill(gap ? "0" : "0.499");
     await page.getByRole("button", { name: "Save settings" }).click();
     assert.equal(await page.evaluate(() => window.confirmations), 0);
     assert.equal(await field.evaluate((item) => item.validity.rangeUnderflow), true);
-    await field.fill(String(saved[key]));
-    await field.fill(gap ? "301" : "60001");
+    await field.fill(gap ? String(saved[key]) : String(saved[key] / 1000));
+    await field.fill(gap ? "301" : "60.001");
     await page.getByRole("button", { name: "Save settings" }).click();
     assert.equal(await page.evaluate(() => window.confirmations), 0);
     assert.equal(await field.evaluate((item) => item.validity.rangeOverflow), true);
-    await field.fill(String(saved[key]));
+    await field.fill(gap ? String(saved[key]) : String(saved[key] / 1000));
   }
   await page.getByRole("button", { name: "Save settings" }).click();
   await page.waitForFunction(() => window.confirmations === 1);
@@ -140,11 +140,11 @@ test("Manager Dual Control locks opening method and rejects programmatic method 
   const select = page.locator('select[name="command"]');
   assert.equal(await select.isDisabled(), true);
   assert.equal(await page.getByRole("spinbutton").count(), 3);
-  await page.locator("[name=pulseWidth1Millis]").fill("500");
+  await page.locator("[name=pulseWidth1Millis]").fill("0.5");
   await page.getByRole('button', {name:'ביטול שינויים',exact:true}).click();
-  assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'1000');
+  assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'1');
   assert.equal(await page.locator('[name=pulseWidth1Millis]').evaluate(el=>document.activeElement===el),true);
-  await page.locator("[name=pulseWidth1Millis]").fill("500");
+  await page.locator("[name=pulseWidth1Millis]").fill("0.5");
   await page.getByRole("button", { name: "שמירת הגדרות" }).click();
   await page.waitForFunction(() => window.confirmations === 1);
   await page.evaluate(() => window.confirmAnswer(false));
@@ -168,13 +168,13 @@ test("settings reset stays local, keyboard selection remains native, failed save
   assert.equal(await first.inputValue(),'PULSE_AFTER_PULSE');
   assert.equal(await page.evaluate(()=>document.activeElement.matches(':focus-visible')),true);
   await page.locator('select[name="command"]').selectOption("PULSE_AFTER_PULSE");
-  await page.locator('[name="pulseWidth1Millis"]').fill('1500');
+  await page.locator('[name="pulseWidth1Millis"]').fill('1.5');
   assert.equal(await reset.isEnabled(),true);
   await reset.click();
   assert.equal(await first.inputValue(),"PULSE");
-  assert.equal(await page.locator('[name="pulseWidth1Millis"]').inputValue(),'1000');
+  assert.equal(await page.locator('[name="pulseWidth1Millis"]').inputValue(),'1');
   assert.equal(await page.evaluate(()=>window.writes.length),0);
-  await page.locator('[name="pulseWidth1Millis"]').fill('1750');
+  await page.locator('[name="pulseWidth1Millis"]').fill('1.75');
   const save=page.getByRole('button',{name:'Save settings',exact:true});
   await save.click();await page.waitForFunction(()=>window.confirmations===1);
   assert.equal(await reset.isDisabled(),true);
@@ -186,13 +186,13 @@ test("settings reset stays local, keyboard selection remains native, failed save
   await save.click();await page.waitForFunction(()=>window.confirmations===2);
   await page.evaluate(()=>window.confirmAnswer(true));
   await page.getByRole('alert').filter({hasText:'CONFLICT'}).waitFor();
-  assert.equal(await page.locator('[name="pulseWidth1Millis"]').inputValue(),'1750');
+  assert.equal(await page.locator('[name="pulseWidth1Millis"]').inputValue(),'1.75');
   assert.equal(await reset.isEnabled(),true);
 });
 
 test('new settings default to five seconds without overwriting saved system values or sending commands',async t=>{
- const {origin,browser}=await startSite(t),page=await setup(browser,origin);t.after(()=>page.close());assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'1000');
+ const {origin,browser}=await startSite(t),page=await setup(browser,origin);t.after(()=>page.close());assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'1');
  await page.evaluate(async()=>{window.editor.dispose();document.getElementById('root').replaceChildren();const{renderManagerSettings}=await import('/js/manager-settings.js');window.editor=renderManagerSettings({root:document.getElementById('root'),config:{},revision:1,onSave:async payload=>window.writes.push(payload),confirm:async()=>true,errorText:e=>e.message});});
- assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'5000');assert.equal(await page.locator('select[name=command]').inputValue(),'PULSE');assert.equal(await page.evaluate(()=>window.writes.length),0);
+ assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'5');assert.equal(await page.locator('select[name=command]').inputValue(),'PULSE');assert.equal(await page.evaluate(()=>window.writes.length),0);
  await page.getByRole('button',{name:'Save settings',exact:true}).click();await page.waitForFunction(()=>window.writes.length===1);assert.equal((await page.evaluate(()=>window.writes[0])).pulseWidth3Millis,5000);
 });

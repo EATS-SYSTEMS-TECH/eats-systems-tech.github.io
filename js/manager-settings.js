@@ -11,6 +11,17 @@ export const managerOpeningMethods = Object.freeze([
   "PULSE", "PULSE_AFTER_PULSE", "PULSE_AFTER_PULSE_AFTER_PULSE", "TOGGLE", "PUSH_BUTTON",
 ]);
 const timing = ["pulseWidth1Millis", "timeBetweenPulses1Seconds", "pulseWidth2Millis", "timeBetweenPulses2Seconds", "pulseWidth3Millis"];
+// The gate stores pulses in milliseconds; people see and type seconds only.
+const isPulse = key => !key.startsWith("timeBetween");
+export function managerMillisToSeconds(millis) {
+  return Number.isFinite(Number(millis)) ? String(Number((Number(millis) / 1000).toFixed(3))) : "";
+}
+// "3.2", "3,2" or "0.5" seconds -> milliseconds text; anything else is invalid.
+export function managerSecondsToMillis(text) {
+  const value = String(text ?? "").trim().replace(",", ".");
+  return /^\d+(\.\d{1,3})?$/.test(value) ? String(Math.round(Number(value) * 1000)) : "NaN";
+}
+const shown = (key, value) => isPulse(key) ? managerMillisToSeconds(value) : String(value);
 export function managerTimingFields(method) {
   return timing.slice(0, ({ PULSE: 1, PULSE_AFTER_PULSE: 3, PULSE_AFTER_PULSE_AFTER_PULSE: 5 })[method] ?? 0);
 }
@@ -60,28 +71,29 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   card.append(createManagerSectionHeading({title:t("תזמון הפעולה", "Action timing"),description:t("מוצגים רק השלבים של אופן הפתיחה שבחרתם.", "Only the steps for your chosen opening method are shown."),icon:"history",level:"h4"}));
   const fields = node("div", undefined, "manager-timing-fields");
   const labels = {
-    pulseWidth1Millis: t("משך פולס ראשון (מילישניות)", "First pulse (ms)"),
+    pulseWidth1Millis: t("משך פולס ראשון (שניות)", "First pulse (seconds)"),
     timeBetweenPulses1Seconds: t("השהיה ראשונה (שניות)", "First delay (seconds)"),
-    pulseWidth2Millis: t("משך פולס שני (מילישניות)", "Second pulse (ms)"),
+    pulseWidth2Millis: t("משך פולס שני (שניות)", "Second pulse (seconds)"),
     timeBetweenPulses2Seconds: t("השהיה שנייה (שניות)", "Second delay (seconds)"),
-    pulseWidth3Millis: t("משך פולס שלישי (מילישניות)", "Third pulse (ms)"),
+    pulseWidth3Millis: t("משך פולס שלישי (שניות)", "Third pulse (seconds)"),
   };
   for (const [index, key] of timing.entries()) {
     const step = node("section", undefined, "manager-timing-step");
     step.append(node("span", t(`שלב ${index + 1}`, `Step ${index + 1}`), "manager-timing-step-number"));
     const label = node("label", labels[key]);
     const input = node("input");
-    input.name = key; input.type = "number"; input.step = "1";
+    input.name = key; input.type = "number"; input.step = isPulse(key) ? "any" : "1";
+    if (isPulse(key)) input.inputMode = "decimal";
     input.setAttribute("aria-label", labels[key]);
-    input.min = key.startsWith("timeBetween") ? "1" : "500";
-    input.max = key.startsWith("timeBetween") ? "300" : "60000";
-    input.value = config[key]; input.required = true;
+    input.min = key.startsWith("timeBetween") ? "1" : "0.5";
+    input.max = key.startsWith("timeBetween") ? "300" : "60";
+    input.value = shown(key, config[key]); input.required = true;
     const control = node("span", undefined, "manager-timing-control");
-    const unit = node("span", key.startsWith("timeBetween") ? t("שניות", "sec") : "ms", "manager-timing-unit");
+    const unit = node("span", t("שניות", "sec"), "manager-timing-unit");
     unit.setAttribute("aria-hidden", "true");
     input.dir = "ltr";
     control.append(input, unit); label.append(control);
-    const help = node("p", key.startsWith("timeBetween") ? t("טווח מותר: 1 עד 300 שניות", "Allowed range: 1 to 300 seconds") : t("טווח מותר: 500 עד 60,000 מילישניות", "Allowed range: 500 to 60,000 ms"), "manager-timing-range");
+    const help = node("p", key.startsWith("timeBetween") ? t("טווח מותר: 1 עד 300 שניות", "Allowed range: 1 to 300 seconds") : t("טווח מותר: 0.5 עד 60 שניות, למשל 3.2", "Allowed range: 0.5 to 60 seconds, for example 3.2"), "manager-timing-range");
     help.id = `manager-settings-help-${key}`;
     input.setAttribute("aria-describedby", help.id);
     step.append(label, help); fields.append(step);
@@ -100,7 +112,8 @@ export function renderManagerSettings({ root, language = "en", config, revision,
     const method = selectedMethod(), active = managerTimingFields(method);
     preview.replaceChildren(...active.map((key, index) => {
       const item = node("li");
-      item.append(node("span", String(index + 1)), node("strong", labels[key]), node("bdi", `${form.elements[key].value || "—"} ${key.startsWith("timeBetween") ? t("שניות", "sec") : "ms"}`));
+      // The step value carries the unit; the label drops its "(seconds)" note.
+      item.append(node("span", String(index + 1)), node("strong", labels[key].replace(/ \((שניות|seconds)\)$/, "")), node("bdi", `${form.elements[key].value || "—"} ${t("שניות", "sec")}`));
       return item;
     }));
     preview.hidden = !active.length;
@@ -112,7 +125,7 @@ export function renderManagerSettings({ root, language = "en", config, revision,
       input.closest(".manager-timing-step").hidden = !active.includes(key);
       input.disabled = busy || !active.includes(key);
     }
-    const dirty = method !== config.command || active.some(key => form.elements[key].value !== String(config[key]));
+    const dirty = method !== config.command || active.some(key => form.elements[key].value !== shown(key, config[key]));
     state.textContent = dirty ? t("יש שינויים שטרם נשמרו", "You have unsaved changes") : t("מציגים את ההגדרות שנטענו מהמערכת", "Showing settings loaded from the system");
     state.dataset.dirty = String(dirty);
     reset.disabled = busy || !dirty;
@@ -123,7 +136,7 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   reset.addEventListener("click", () => {
     if (busy || disposed || !isCurrent()) return;
     select.value = config.command;
-    timing.forEach(key => { form.elements[key].value = config[key]; });
+    timing.forEach(key => { form.elements[key].value = shown(key, config[key]); });
     feedback.hidden = true; sync();
     (!select.disabled ? select : form.querySelector('.manager-timing-fields input:not(:disabled)'))?.focus();
   });
@@ -131,7 +144,7 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   form.addEventListener("submit", async event => {
     event.preventDefault();
     if (busy || disposed || !isCurrent()) return;
-    const draft = Object.fromEntries(timing.map(key => [key, form.elements[key].value])); draft.command = selectedMethod();
+    const draft = Object.fromEntries(timing.map(key => [key, isPulse(key) ? managerSecondsToMillis(form.elements[key].value) : form.elements[key].value])); draft.command = selectedMethod();
     try {
       const payload = managerSettingsPayload(config, draft, revision);
       if (commandLocked && payload.command !== config.command) throw new Error("INVALID_CONFIG");

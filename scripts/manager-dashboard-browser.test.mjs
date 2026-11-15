@@ -351,10 +351,10 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
           .getByRole("tab", { name: he ? "הגדרות" : "Settings", exact: true })
           .click();
         await page
-          .getByLabel(he ? "משך פולס ראשון (מילישניות)" : "First pulse (ms)", {
+          .getByLabel(he ? "משך פולס ראשון (שניות)" : "First pulse (seconds)", {
             exact: true,
           })
-          .fill("1500");
+          .fill("1.5");
         await page
           .getByRole("button", {
             name: he ? "שמירת הגדרות" : "Save settings",

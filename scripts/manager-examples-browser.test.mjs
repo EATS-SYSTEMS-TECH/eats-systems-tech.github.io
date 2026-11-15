@@ -116,10 +116,10 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .waitFor();
         await tab("settings");
         await content
-          .getByLabel(copy("משך פולס ראשון (מילישניות)", "First pulse (ms)"), {
+          .getByLabel(copy("משך פולס ראשון (שניות)", "First pulse (seconds)"), {
             exact: true,
           })
-          .fill("1200");
+          .fill("1.2");
         await content
           .getByRole("button", {
             name: copy("שמירת הגדרות", "Save settings"),
@@ -131,7 +131,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           () =>
             document.querySelector(
               '#manager-content [name="pulseWidth1Millis"]',
-            )?.value === "1200",
+            )?.value === "1.2",
         );
         await tab("users");
         await content
@@ -276,11 +276,11 @@ test("Manager example gate, Dual Control and group use real workspace controls w
         assert.equal(
           await content
             .getByLabel(
-              copy("משך פולס ראשון (מילישניות)", "First pulse (ms)"),
+              copy("משך פולס ראשון (שניות)", "First pulse (seconds)"),
               { exact: true },
             )
             .inputValue(),
-          "1200",
+          "1.2",
         );
         await workspace.locator(".manager-system-menu summary").click();
         await workspace
