@@ -92,6 +92,8 @@ html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .nic
 .niche-hero--line .niche-hero__text { color: var(--home-ink); }
 .niche-hero--line .niche-hero__title { color: var(--home-black); }
 .niche-hero--line .niche-hero__lead { color: #2b2b2b; }
+/* Owner request (2026-11-15): a lead of one or two sentences stays on one line on wide screens. */
+.niche-hero--line .niche-hero__lead { max-width: 58rem; }
 .niche-hero--line .niche-hero__eyebrow { color: #4a4a4a; }
 .niche-hero--line .niche-hero__nav-button { color: var(--home-black); border-color: rgba(10,10,10,.55); background: rgba(255,255,255,.9); }
 .niche-hero--line .niche-hero__nav-button:is(:hover,:focus-visible) { border-color: var(--home-black); background: #f1f4f9; }
