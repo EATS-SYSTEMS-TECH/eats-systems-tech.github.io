@@ -13,6 +13,7 @@ function setupNav() {
       link.href = url.href;
     }
   });
+  markCurrentNavPage();
   const toggle = $(".nav__toggle");
   const navWrapper = $(".nav__links-wrapper");
   if (!toggle || !navWrapper) return;
@@ -104,35 +105,58 @@ function setupNavGroup(group) {
   });
 }
 
-function setupScrollSpy() {
-  const sections = $$("main section[id]");
-  const navLinks = $$(".nav__link");
+// Marks where the visitor is, the same way on every page: a page link (Shop)
+// on its own page, a menu group (Use cases, For Business) on any of its pages,
+// and a section link while that section is under the sticky bar. A section is
+// current when it crosses a line a third of the way down the screen, so tall
+// sections on a phone count too.
+const navMenuLinks = () => $$(".nav__link").filter((link) => !link.classList.contains("nav__contact-link"));
+const navLinkUrl = (link) => new URL(link.href, location.href);
+const isThisPage = (url) => url.origin === location.origin && url.pathname === location.pathname;
 
-  if (!sections.length || !navLinks.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const id = entry.target.dataset.navTarget || entry.target.getAttribute("id");
-        if (!id) return;
-
-        navLinks.forEach((link) => {
-          const url = new URL(link.href, location.href);
-          if (url.pathname === location.pathname && url.hash === `#${id}`) {
-            link.classList.add("nav__link--active");
-          } else {
-            link.classList.remove("nav__link--active");
-          }
-        });
-      });
-    },
-    {
-      threshold: 0.4,
+// Every page calls setupNav, so the page-level marks live here.
+function markCurrentNavPage() {
+  const pageLinks = new Set(navMenuLinks().filter((link) => {
+    if (link.classList.contains("nav__group-link")) {
+      return Boolean(link.closest(".nav__group")?.querySelector('.nav__sublink[aria-current="page"]'));
     }
-  );
+    const url = navLinkUrl(link);
+    return isThisPage(url) && !url.hash;
+  }));
+  pageLinks.forEach((link) => link.classList.add("nav__link--active"));
+  return pageLinks;
+}
 
-  sections.forEach((section) => observer.observe(section));
+function setupScrollSpy() {
+  const navLinks = navMenuLinks();
+  if (!navLinks.length) return;
+  const here = navLinkUrl;
+  const samePage = isThisPage;
+  const pageLinks = markCurrentNavPage();
+
+  const sectionLinks = navLinks.filter((link) => !pageLinks.has(link) && samePage(here(link)) && here(link).hash);
+  const sections = $$("main section[id]").filter((section) => {
+    const id = section.dataset.navTarget || section.id;
+    return sectionLinks.some((link) => here(link).hash === `#${id}`);
+  });
+  if (!sections.length) return;
+
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    const line = window.innerHeight / 3;
+    const current = sections.find((section) => {
+      const box = section.getBoundingClientRect();
+      return box.top <= line && box.bottom > line;
+    });
+    const id = current ? current.dataset.navTarget || current.id : "";
+    sectionLinks.forEach((link) => link.classList.toggle("nav__link--active", Boolean(id) && here(link).hash === `#${id}`));
+  };
+  const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  window.addEventListener("hashchange", schedule);
+  update();
 }
 
 // Header destinations open with their section label (eyebrow) right below the
