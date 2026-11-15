@@ -18,10 +18,14 @@ test('numbered legal headings keep the number beside every translated title', as
         const heading = $(`#${id}-title`);
         const match = /^(\d+\.)\s+(.+)$/u.exec(copy.title);
         assert.ok(match, `${page}/${code}/${id}: numbered copy`);
-        assert.equal(heading.find('bdi.legal-section__number[dir="ltr"]').text(), match[1]);
-        const label = heading.find('.legal-section__label');
-        const rendered = label.contents().map((_, node) => node.name === 'br' ? ' ' : $(node).text()).get().join('').replace(/\s+/g, ' ').trim();
-        assert.equal(rendered, match[2]);
+        for (const element of [heading, $(`.legal-toc a[href="#${id}"]`)]) {
+          const number = element.find('bdi.legal-section__number[dir="ltr"]');
+          assert.equal(number.text(), match[1]);
+          assert.deepEqual(number.children('span').map((_, span) => $(span).text()).get(), [match[1].slice(0, -1), '.']);
+          const label = element.find('.legal-section__label');
+          const rendered = label.contents().map((_, node) => node.name === 'br' ? ' ' : $(node).text()).get().join('').replace(/\s+/g, ' ').trim();
+          assert.equal(rendered, match[2]);
+        }
       }
     }
   }

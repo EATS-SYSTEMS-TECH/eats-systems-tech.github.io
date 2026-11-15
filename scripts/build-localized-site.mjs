@@ -160,16 +160,18 @@ function applyLegalContentLanguage($, bundle, locale) {
   });
   $('.legal-card .legal-company, .legal-card .legal-toc, .legal-card .legal-section').attr('lang', 'en').attr('dir', 'ltr');
 }
-// Keep each section number beside its translated heading when mobile text wraps.
-function alignLegalSectionHeadings($) {
-  $('.legal-section__title').each((_, element) => {
+// Keep a numeric label's digits and trailing period in their written order in RTL.
+function alignLegalNumberedLabels($) {
+  $('.legal-section__title, .legal-toc a[data-i18n^="legal.s."]').each((_, element) => {
     const heading = $(element), first = heading.contents().first()[0];
     if (first?.type !== 'text') return;
     const match = /^(\d+\.)\s+/u.exec(first.data);
     if (!match) return;
     first.data = first.data.slice(match[0].length);
     const label = $('<span class="legal-section__label"></span>').append(heading.contents());
-    heading.append($('<bdi class="legal-section__number" dir="ltr"></bdi>').text(match[1]), ' ', label);
+    const number = $('<bdi class="legal-section__number" dir="ltr"></bdi>')
+      .append($('<span></span>').text(match[1].slice(0, -1)), $('<span></span>').text('.'));
+    heading.append(number, ' ', label);
   });
 }
 async function buildLegalPages(homeData, legalCollections) {
@@ -179,7 +181,7 @@ async function buildLegalPages(homeData, legalCollections) {
     for (const { code: locale } of homeData.localeOptions) {
       const $ = cheerio.load(markup, { decodeEntities: false }), bundle = legalCollections[key][locale];
       setBodyDirection($, locale); rewriteStaticAssets($, locale, key); appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, key);
-      applyDataI18nTranslations($, bundle, locale); applyLegalContentLanguage($, bundle, locale); alignLegalSectionHeadings($);
+      applyDataI18nTranslations($, bundle, locale); applyLegalContentLanguage($, bundle, locale); alignLegalNumberedLabels($);
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale);
       rewriteLegalInternalLinks($, locale, key); setLegalMeta($, locale, key, homeData.localeOptions, bundle);
       await writeOutputFile(buildOutputFilePath(locale, key), serialize($, homeData, locale, key));

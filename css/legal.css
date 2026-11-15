@@ -171,14 +171,21 @@
 }
 
 @media (max-width: 768px) {
-  .legal-section__title {
+  .legal-section__title,
+  .legal-toc a[data-i18n^="legal.s."] {
     display: flex;
     align-items: baseline;
     gap: 0.4em;
     text-align: start;
   }
 
-  .legal-section__number { flex: none; white-space: nowrap; }
+  .legal-section__number {
+    display: inline-flex;
+    flex: none;
+    direction: ltr;
+    unicode-bidi: isolate;
+    white-space: nowrap;
+  }
   .legal-section__label { min-width: 0; overflow-wrap: anywhere; }
 
   .legal-main {
