@@ -14,7 +14,7 @@ const HOME_FEATURES = [
   { key: "history30Day", classes: "feature-card feature-card--history-30-day js-reveal", image: "assets/wifigate_features/history.svg?v=20260707p",
     title: "90-Day History",
     text: "Review the last 90 days of access activity for clearer visibility into gate usage and recent entry events." },
-  { key: "autoOpen", classes: "feature-card feature-card--auto-open js-reveal", image: "assets/wifigate_features/auto_open.svg?v=20260707am",
+  { key: "autoOpen", classes: "feature-card feature-card--auto-open js-reveal", image: "assets/wifigate_features/auto_open.svg?v=20261116ao3",
     title: "Auto Open",
     text: "Let approved users open the gate automatically when they arrive for a smoother, more convenient hands-free experience." },
   { key: "upTo50Events", classes: "feature-card feature-card--events js-reveal", image: "assets/wifigate_features/up_to_50_events.svg?v=20260707t",

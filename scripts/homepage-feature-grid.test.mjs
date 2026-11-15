@@ -12,7 +12,7 @@ test("homepage feature positions retain public identities, artwork revisions and
     ["stability", "stability", "stability.svg?v=20260707an"],
     ["quickGuestInvite", "quick-guest-invite", "quick_guest_invite.svg?v=20260707i"],
     ["history30Day", "history-30-day", "history.svg?v=20260707p"],
-    ["autoOpen", "auto-open", "auto_open.svg?v=20260707am"],
+    ["autoOpen", "auto-open", "auto_open.svg?v=20261116ao3"],
     ["upTo50Events", "events", "up_to_50_events.svg?v=20260707t"],
     ["rfRemoteLearning", "rf-remote-learning", "digital_rf_remote_learning.svg?v=20260707w"],
     ["securityPrivacy", "security-privacy", "security_privacy.svg?v=20260707ab"],

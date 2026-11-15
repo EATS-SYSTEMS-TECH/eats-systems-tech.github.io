@@ -1,21 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="88 96 306 218" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Auto Open icon">
-  <style>
-    .s0 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 11 }
-    .s1 { fill: #1463ff }
-    .s2 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 9 }
-  </style>
-  <g>
-    <path class="s2" d="M162 274V176L122 194V256L162 274Z"/>
-    <path class="s2" d="M132 252V198"/>
-    <path class="s2" d="M142 260V190"/>
-    <path class="s2" d="M152 268V182"/>
-    <path class="s2" d="M320 274V176L360 194V256L320 274Z"/>
-    <path class="s2" d="M350 252V198"/>
-    <path class="s2" d="M340 260V190"/>
-    <path class="s2" d="M330 268V182"/>
-    <path class="s0" d="M219 196C226 189 256 189 263 196"/>
-    <path class="s0" d="M206 178C218 166 264 166 276 178"/>
-    <path class="s0" d="M194 160C210 143 272 143 288 160"/>
-    <circle class="s1" cx="241" cy="208" r="5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 6 280 192" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Auto Open">
+  <!-- Auto Open, Wi-Fi mark lit, gate fully open. -->
+  <g fill="none" stroke="#146BFF" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="13" d="M110 34C134 10 186 10 210 34M124 54C143 36 177 36 196 54M139 74C151 63 169 63 181 74"/>
+    <path fill="#fff" stroke-width="10" d="M36 106L98 124L98 172L36 190Z"/>
+    <path stroke-width="8" d="M51.5 110.5V185.5M67 115V181M82.5 119.5V176.5"/>
+    <path fill="#fff" stroke-width="10" d="M284 106L222 124L222 172L284 190Z"/>
+    <path stroke-width="8" d="M268.5 110.5V185.5M253 115V181M237.5 119.5V176.5"/>
   </g>
+  <circle cx="160" cy="91" r="8" fill="#146BFF"/>
 </svg>

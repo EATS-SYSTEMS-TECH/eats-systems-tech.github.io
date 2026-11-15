@@ -544,6 +544,15 @@ html.a11y-reduced-motion .home-en .feature-card__more svg {
   transform: none;
 }
 
+/* Auto Open is drawn wide (two gate leaves under the Wi-Fi mark). */
+.home-en .feature-card--auto-open .feature-card__media {
+  width: 7.5rem;
+}
+
+.home-en .feature-card--auto-open .feature-card__image {
+  max-width: 7.5rem;
+}
+
 .home-en .feature-card:hover .feature-card__image {
   filter: grayscale(0) contrast(1);
   transform: none;
@@ -587,6 +596,10 @@ html.a11y-reduced-motion .home-en .feature-card__more svg {
   .home-en .feature-card .feature-card__media {
     flex: 0 0 5rem;
     margin: 0 auto 0;
+  }
+
+  .home-en .feature-card--auto-open .feature-card__media {
+    width: 7.5rem;
   }
 
   .home-en .feature-card__title {
