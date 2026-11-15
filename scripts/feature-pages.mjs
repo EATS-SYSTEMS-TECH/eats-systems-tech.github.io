@@ -17,7 +17,7 @@ import NO_FEES_COPY from "./feature-page-copy/no-subscription-fees.mjs";
 // headline, then three title/text pairs: nothing extra, weak reception, no monthly line.
 const NO_SIM_COPY = {
   en: ["Your phone talks straight to the gate.", "Nothing extra at the entrance", "No SIM card to buy, no data plan to renew and no router to place by the gate. The WIFIGATE device is all the entrance needs.", "Works where reception is weak", "Your phone connects to the device itself, so an underground car park or a remote gate opens just like any other entrance.", "No monthly line to pay for", "With no SIM card and no internet line at the gate, there is no monthly bill for the entrance and nothing to renew."],
-  he: ["מהטלפון לשער, בלי שום דבר באמצע.", "אין מה להוסיף בכניסה", "לא קונים כרטיס SIM, לא מחדשים חבילת גלישה ולא מציבים נתב ליד השער. התקן WIFIGATE הוא כל מה שהכניסה צריכה.", "עובד גם כשהקליטה חלשה", "הטלפון מתחבר להתקן עצמו, ולכן חניון תת־קרקעי או שער מרוחק נפתחים כמו כל כניסה אחרת.", "בלי קו חודשי לשלם עליו", "בלי כרטיס SIM ובלי קו אינטרנט בשער, אין חשבון חודשי על הכניסה ואין מה לחדש."],
+  he: ["מהטלפון לשער, בלי שום דבר באמצע.", "אין קליטה? השער עדיין יכול להיפתח.", "הטלפון מתחבר ישירות לבקר, ולכן גם כשאין רשת סלולרית או אינטרנט, הכניסה נפתחת כרגיל.", "בלי תשלום חודשי. גם עם 5000 משתמשים.", "אין כרטיס SIM ואין קו אינטרנט בשער, ולכן אין חשבון חודשי. ניהול ההרשאות נשאר פשוט ונוח, גם כשמנהלים עד 5000 משתמשים.", "מקומות מרוחקים בלי קליטה יציבה", "חניון תת־קרקעי, משק, מחסן או שער בקצה הדרך. הטלפון מתחבר לבקר עצמו, ולכן הכניסה נפתחת כמו בכל מקום אחר."],
   es: ["Tu teléfono habla directamente con la puerta.", "Nada más que instalar en la entrada", "Sin tarjeta SIM que comprar, sin plan de datos que renovar y sin router junto a la puerta. El dispositivo WIFIGATE es todo lo que necesita la entrada.", "Funciona donde hay poca cobertura", "Tu teléfono se conecta al propio dispositivo, así que un aparcamiento subterráneo o una puerta alejada se abren como cualquier otra entrada.", "Sin cuota mensual de línea", "Sin tarjeta SIM y sin línea de internet en la puerta, no hay factura mensual por la entrada ni nada que renovar."],
   fr: ["Votre téléphone parle directement au portail.", "Rien à ajouter à l’entrée", "Pas de carte SIM à acheter, pas de forfait à renouveler et pas de routeur à installer près du portail. Le boîtier WIFIGATE suffit à l’entrée.", "Fonctionne même avec peu de réseau", "Votre téléphone se connecte au boîtier lui-même : un parking souterrain ou un portail isolé s’ouvre comme n’importe quelle autre entrée.", "Aucune ligne mensuelle à payer", "Sans carte SIM ni ligne internet au portail, il n’y a ni facture mensuelle pour l’entrée ni abonnement à renouveler."],
   de: ["Ihr Telefon spricht direkt mit dem Tor.", "Nichts Zusätzliches am Eingang", "Keine SIM-Karte kaufen, keinen Datentarif verlängern und keinen Router am Tor aufstellen. Das WIFIGATE-Gerät ist alles, was der Eingang braucht.", "Funktioniert auch bei schwachem Empfang", "Ihr Telefon verbindet sich mit dem Gerät selbst. Eine Tiefgarage oder ein abgelegenes Tor öffnet sich daher wie jeder andere Eingang.", "Keine monatliche Leitung zu bezahlen", "Ohne SIM-Karte und ohne Internetanschluss am Tor gibt es keine monatliche Rechnung für den Eingang und nichts zu verlängern."],
@@ -108,7 +108,10 @@ export const FEATURE_PAGES = Object.freeze([
   Object.freeze({ key: "no-sim-no-router", feature: 0, card: "no-sim-router", scene: "nosim", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["nosim", "nosignal", "nobill"]), copy: NO_SIM_COPY,
     // A page-only lead for locales whose card text does not follow this page's headline well.
-    leads: Object.freeze({ he: "אין כרטיס SIM, אין חבילת גלישה ואין נתב WiFi. רק חיבור ישיר בין הטלפון לבקר." }) }),
+    leads: Object.freeze({ he: "אין כרטיס SIM, אין חבילת גלישה ואין נתב WiFi. רק חיבור ישיר בין הטלפון לבקר." }),
+    // Hebrew has its own three points (no reception, no monthly bill, remote sites), so its own drawings and small print.
+    localDrawings: Object.freeze({ he: Object.freeze(["offline", "nobill", "nosignal"]) }),
+    pointNotes: Object.freeze({ he: Object.freeze(["", "* למעט מסלולי WIFIGATE For Business.", ""]) }) }),
   Object.freeze({ key: "stability", feature: 1, card: "stability", scene: "stability", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["offline", "failover", "instant"]), copy: STABILITY_COPY }),
   Object.freeze({ key: "quick-guest-invite", feature: 2, card: "quick-guest-invite", scene: "guest", bodyClass: "feature-page", poster: "electric-gates-barrier",
@@ -149,7 +152,8 @@ export function getFeaturePageContent(page, locale, homepageCopy) {
     eyebrow: feature.title,
     title: local[0],
     heroLead: lead,
-    highlights: page.drawings.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
+    highlights: (page.localDrawings?.[locale] ?? page.drawings).map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2],
+      ...(NONEMPTY(page.pointNotes?.[locale]?.[index]) ? { note: page.pointNotes[locale][index] } : {}) })),
     note: page.note ? (NONEMPTY(homepageCopy.platform[page.note]) ? homepageCopy.platform[page.note] : "") : (sentence && cardClaim !== feature.text ? note : ""),
     benefits: [],
     faq: [],

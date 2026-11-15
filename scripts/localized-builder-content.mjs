@@ -144,6 +144,8 @@ function setNicheHighlights($, supplied, assetPrefix = '') {
   for (const item of items) {
     const copy = $('<div>').addClass('niche-flow__text').append(
       $('<h2>').addClass('niche-highlight__title').text(item.title), $('<p>').addClass('niche-highlight__text').text(item.text));
+    // A point's own starred exception, as small print under its text.
+    if (item.note) copy.append($('<p>').addClass('niche-flow__note niche-highlight__note').text(item.note));
     if (item.ctaLabel && item.ctaHref) copy.append($('<a>').addClass('btn btn--ghost btn--small niche-highlight__cta').attr('href', item.ctaHref).text(item.ctaLabel));
     list.append($('<article>').addClass('niche-highlight niche-flow__step').append(picture(highlightArtPath(item.icon), 'niche-flow__art', HIGHLIGHT_ART_SIZE), copy));
   }

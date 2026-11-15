@@ -80,6 +80,10 @@
   text-align: center;
 }
 
+.niche-flow__text .niche-highlight__note {
+  margin-top: 0.6rem;
+}
+
 /* Narrow screens: the wave gives way to one column; a dashed line links the
    highlights and each title sits under its own status light. */
 @media (max-width: 900px) {
