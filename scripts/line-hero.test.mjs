@@ -176,9 +176,11 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.ok(image.hasClass("line-hero__frame") && !image.hasClass("niche-hero__bg"));
     assert.ok((image.attr("alt") || "").trim().length > 10, `${relative}: localized image description kept`);
     assert.deepEqual([image.attr("width"), image.attr("height"), image.attr("loading"), image.attr("fetchpriority")], ["1600", "900", "eager", "high"]);
-    // Controls: one replay action, one hidden pause button in the pager, localized copy.
-    const replay = hero.find(".niche-hero__actions > *");
-    assert.equal(replay.length, 1); assert.ok(replay.is("button#niche-hero-replay[data-scene-replay].btn.btn--primary[type=button]"));
+    // Controls: replay then the locale shop link, one hidden pause button in the pager, localized copy.
+    const replay = hero.find(".niche-hero__actions > *").first();
+    assert.equal(hero.find(".niche-hero__actions > *").length, 2); assert.ok(replay.is("button#niche-hero-replay[data-scene-replay].btn.btn--primary[type=button]"));
+    const shop = hero.find(".niche-hero__actions > #niche-hero-replay + a#niche-hero-shop.btn.btn--ghost");
+    assert.equal(shop.length, 1, `${relative}: shop button beside replay`); assert.match(shop.attr("href"), /^\/(?:[a-z-]+\/)?shop\/$/); assert.ok(shop.text().trim());
     assert.equal(replay.text(), copy.replay); assert.equal(replay.attr("aria-label"), copy.replay);
     const pause = hero.find(".niche-hero__pager > .scene-video-controls > button[data-scene-pause][type=button]");
     assert.equal(pause.length, 1); assert.notEqual(pause.attr("hidden"), undefined); assert.equal(pause.text(), copy.pause);

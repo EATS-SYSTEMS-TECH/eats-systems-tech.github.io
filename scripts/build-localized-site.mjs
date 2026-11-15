@@ -318,6 +318,8 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     // The hero shows the product's line animation; the accepted scene poster stays the structured-data image.
     // Its controls: the shared media labels plus the hero text toggle.
     applyLineHero($, { scene: product, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, pageKey), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
+    // A shop button beside replay, as on the use-case and feature pages.
+    installUseCaseShopLink($, { locale, pageKey, label: hostCopy.marketing?.shop?.button });
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
