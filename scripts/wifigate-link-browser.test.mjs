@@ -35,13 +35,13 @@ test("invitation handoff shows a stable fallback and copies its app link", async
     });
 
     await page.goto(`${pageUrl.href}?link=${encodeURIComponent(appUrl)}`, { waitUntil: "domcontentloaded" });
-    assert.equal(await page.locator("#page-title").innerText(), "Opening WiFiGate…");
+    assert.equal(await page.locator("#page-title").innerText(), "Opening WIFIGATE…");
     assert.equal(await page.locator("#status").innerText(), "This should only take a moment.");
     assert.equal(await page.locator("#open-app").isVisible(), false);
 
     await page.waitForTimeout(1100);
     assert.equal(await page.evaluate(() => window.autoAttempts), 1, "automatic opening is scheduled once");
-    assert.equal(await page.locator("#page-title").innerText(), "Continue in WiFiGate");
+    assert.equal(await page.locator("#page-title").innerText(), "Continue in WIFIGATE");
     assert.equal(await page.locator("#status").innerText(), "Didn't open automatically? Tap below to try again.");
     assert.equal(await page.locator("#open-app").getAttribute("href"), appUrl);
     assert.equal(await page.locator("#copy-link").innerText(), "Copy link");

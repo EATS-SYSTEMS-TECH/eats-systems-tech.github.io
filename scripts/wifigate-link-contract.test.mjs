@@ -49,8 +49,8 @@ test("missing or damaged locale JSON retains every English fallback field", () =
       document: { addEventListener() {}, getElementById: () => dictionary },
     });
     const copy = JSON.parse(result);
-    assert.equal(copy.headingMissing, "Unable to open WiFiGate");
-    assert.equal(copy.headingFallback, "Continue in WiFiGate");
+    assert.equal(copy.headingMissing, "Unable to open WIFIGATE");
+    assert.equal(copy.headingFallback, "Continue in WIFIGATE");
     assert.equal(copy.copyButton, "Copy link");
     assert.equal(copy.copiedButton, "Link copied!");
     assert.equal(copy.copyError, "Couldn't copy link. Please try again.");
