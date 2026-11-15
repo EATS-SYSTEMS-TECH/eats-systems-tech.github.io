@@ -192,7 +192,7 @@ async function textToggle(page, copy) {
   await page.waitForFunction(() => getComputedStyle(document.querySelector("#niche-hero-text")).visibility === "hidden", {}, { timeout: 2000 });
   const closed = await state();
   assert.deepEqual([closed.attr, closed.expanded, closed.label, closed.title], ["collapsed", "false", copy.showText, copy.showText]);
-  assert.deepEqual([closed.visibility, closed.opacity, closed.scrimVisibility, closed.h1, closed.replayFocusable], ["hidden", 0, "hidden", true, true], "Text and scrim hidden; replay stays available in the top bar");
+  assert.deepEqual([closed.visibility, closed.opacity, closed.scrimVisibility, closed.h1, closed.replayFocusable], ["hidden", 0, "hidden", true, false], "Text and scrim hidden; the h1 stays in the DOM");
   assert.equal(closed.h1Exposed, true, "The h1 stays in the accessibility tree while the block is faded out");
   assert.equal(closed.focused, true, "Focus stays on the toggle");
   assert.deepEqual([closed.hero, closed.stage, closed.text], [open.hero, open.stage, open.text], "Neither the hero nor the art moves");
@@ -243,7 +243,7 @@ try {
         if (width === 390 || width === 1280) {
           await page.reload({ waitUntil: "load" }); await ready(page);
           const copy = JSON.parse(await page.locator("[data-scene-copy]").textContent());
-          const pause = page.locator(".niche-hero__pager [data-scene-pause]"), replay = page.locator(".niche-hero__pager [data-scene-replay]");
+          const pause = page.locator(".niche-hero__pager [data-scene-pause]"), replay = page.locator(".niche-hero__actions [data-scene-replay]");
           assert.equal(await pause.isVisible(), true, "Pause is offered while the art moves");
           assert.deepEqual([await pause.getAttribute("aria-pressed"), await pause.getAttribute("aria-label")], ["false", copy.pause]);
           await moving(page, true);

@@ -322,17 +322,21 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });
     const pricing = $('section.wa-pricing');
-    const control = $('<div class="wa-pricing__currency-control"></div>');
-    const select = $('<select class="wa-pricing__currency-select" data-pricing-currency></select>')
-      .attr('aria-label', locale === 'he' ? 'בחירת מטבע להצגת מחירים' : 'Display currency');
-    for (const currency of VISIBLE_CURRENCIES) select.append($('<option></option>').attr('value', currency).text(currency === 'ILS' ? '₪ ILS' : '$ USD'));
-    select.val(defaultPricingCurrency(locale));
-    control.append($('<label class="wa-pricing__currency-label"></label>').text(locale === 'he' ? 'מטבע להצגת מחירים' : 'Display currency').append(select));
-    pricing.find('.wa-head').append(control);
-    pricing.find('.wa-pricing__note').after('<p class="wa-pricing__currency-status" data-pricing-status aria-live="polite"></p>');
-    pricing.attr('data-local-currency', LOCAL_CURRENCY[locale]);
-    appendScripts($, ['/js/pricing-currency.js?v=20261114a'], "script[src*='js/accessibility.js']", locale, pageKey);
-    $("script[src*='js/pricing-currency.js']").attr('type', 'module');
+    // Owner decision 2026-11-15: show prices in US dollars only for now. The
+    // selector and its script return once VISIBLE_CURRENCIES lists another currency.
+    if (VISIBLE_CURRENCIES.length > 1) {
+      const control = $('<div class="wa-pricing__currency-control"></div>');
+      const select = $('<select class="wa-pricing__currency-select" data-pricing-currency></select>')
+        .attr('aria-label', locale === 'he' ? 'בחירת מטבע להצגת מחירים' : 'Display currency');
+      for (const currency of VISIBLE_CURRENCIES) select.append($('<option></option>').attr('value', currency).text(currency === 'ILS' ? '₪ ILS' : '$ USD'));
+      select.val(defaultPricingCurrency(locale));
+      control.append($('<label class="wa-pricing__currency-label"></label>').text(locale === 'he' ? 'מטבע להצגת מחירים' : 'Display currency').append(select));
+      pricing.find('.wa-head').append(control);
+      pricing.find('.wa-pricing__note').after('<p class="wa-pricing__currency-status" data-pricing-status aria-live="polite"></p>');
+      pricing.attr('data-local-currency', LOCAL_CURRENCY[locale]);
+      appendScripts($, ['/js/pricing-currency.js?v=20261114a'], "script[src*='js/accessibility.js']", locale, pageKey);
+      $("script[src*='js/pricing-currency.js']").attr('type', 'module');
+    }
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
     const automationVersion = pageKey === HOST_PAGE_KEY ? '20261114hostfaq1' : '20261114currency1';
     $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=${automationVersion}" />`);

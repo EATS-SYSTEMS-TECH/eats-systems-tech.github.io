@@ -7,18 +7,18 @@
 // frame, in the same box. A toggle next to pause collapses the hero text so
 // the whole drawing can be seen.
 const SCENES = {
-  host: () => import("./line-hero-host.js?v=20261114lh10").then(module => module.createHostScene),
-  manager: () => import("./line-hero-manager.js?v=20261114lh10").then(module => module.createManagerScene),
-  nosim: () => import("./line-hero-nosim.js?v=20261113lh8").then(module => module.createNoSimScene),
-  stability: () => import("./line-hero-stability.js?v=20261113lh8").then(module => module.createStabilityScene),
+  host: () => import("./line-hero-host.js?v=20261115lh11").then(module => module.createHostScene),
+  manager: () => import("./line-hero-manager.js?v=20261115lh11").then(module => module.createManagerScene),
+  nosim: () => import("./line-hero-nosim.js?v=20261115lh11").then(module => module.createNoSimScene),
+  stability: () => import("./line-hero-stability.js?v=20261115lh11").then(module => module.createStabilityScene),
   // The other feature pages share one module; each scene is one of its factories.
-  guest: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createGuestScene),
-  history: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createHistoryScene),
-  autoopen: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createAutoOpenScene),
-  events: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createEventsScene),
-  rf: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createRfScene),
-  security: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createSecurityScene),
-  nofees: () => import("./line-hero-features.js?v=20261113lh8").then(module => module.createNoFeesScene),
+  guest: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createGuestScene),
+  history: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createHistoryScene),
+  autoopen: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createAutoOpenScene),
+  events: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createEventsScene),
+  rf: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createRfScene),
+  security: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createSecurityScene),
+  nofees: () => import("./line-hero-features.js?v=20261115lh11").then(module => module.createNoFeesScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video", hideText: "Hide text", showText: "Show text" };
@@ -61,7 +61,7 @@ export function createPlayer(scene, { onState } = {}) {
 }
 
 // --------------------------------------------------------------- text toggle
-// Collapsing hides the eyebrow, title and lead and their white
+// Collapsing hides the eyebrow, title, lead and replay action and their white
 // scrim (css/line-hero.css); the text keeps its place, so the hero and the art
 // do not move, and the h1 stays in the document. Focus stays on the toggle.
 export function mountTextToggle(section, copy) {

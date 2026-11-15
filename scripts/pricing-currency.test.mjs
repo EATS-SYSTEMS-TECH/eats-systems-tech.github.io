@@ -8,8 +8,8 @@ import { ilsCents, displayedIlsCents } from '../js/pricing-math.js';
 
 test('currency defaults and future mapping cover every published language', () => {
   assert.deepEqual(Object.keys(LOCAL_CURRENCY).sort(), SITE_LANGUAGES.map(({ code }) => code).sort());
-  assert.deepEqual(VISIBLE_CURRENCIES, ['USD', 'ILS']);
-  for (const { code } of SITE_LANGUAGES) assert.equal(defaultPricingCurrency(code), code === 'he' ? 'ILS' : 'USD');
+  assert.deepEqual(VISIBLE_CURRENCIES, ['USD']);
+  for (const { code } of SITE_LANGUAGES) assert.equal(defaultPricingCurrency(code), 'USD');
 });
 
 test('USD to ILS uses decimal half-up agorot and sums displayed units', () => {
@@ -24,15 +24,14 @@ test('USD to ILS uses decimal half-up agorot and sums displayed units', () => {
   assert.throws(() => ilsCents(-1, '3.199'));
 });
 
-test('both generated products expose currency selection in every language', async () => {
+test('both generated products show US dollar prices only, without a currency selector', async () => {
   for (const { code: locale } of SITE_LANGUAGES) for (const product of ['wifigate-host', 'wifigate-manager']) {
     const html = await fs.readFile(new URL(`../${locale === 'en' ? '' : `${locale.toLowerCase()}/`}${product}/index.html`, import.meta.url), 'utf8');
     const $ = cheerio.load(html);
-    assert.equal($('section.wa-pricing [data-pricing-currency]').length, 1);
-    assert.deepEqual($('section.wa-pricing [data-pricing-currency] option').map((_, element) => $(element).attr('value')).get(), ['USD', 'ILS']);
-    assert.equal($('section.wa-pricing [data-pricing-currency]').val(), defaultPricingCurrency(locale));
-    assert.equal($('section.wa-pricing [data-pricing-status]').length, 1);
-    assert.equal($('script[src*="pricing-currency.js"][type="module"]').length, 1);
-    assert.equal($('section.wa-pricing').attr('data-local-currency'), LOCAL_CURRENCY[locale]);
+    assert.equal($('section.wa-pricing').length, 1);
+    assert.equal($('[data-pricing-currency], [data-pricing-status], .wa-pricing__currency-control').length, 0);
+    assert.equal($('script[src*="pricing-currency.js"]').length, 0);
+    assert.match($('section.wa-pricing .wa-plan__amount').first().text(), /^\$\d/);
+    assert.doesNotMatch($('section.wa-pricing').text(), /₪/);
   }
 });

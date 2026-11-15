@@ -5,6 +5,7 @@ import test from "node:test";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { HOST_PAGE_KEY } from "./host-marketing-page.mjs";
+import { LOCAL_CURRENCY, VISIBLE_CURRENCIES, defaultPricingCurrency } from "./pricing-currencies.mjs";
 
 const source = await readFile(new URL("./build-localized-site.mjs", import.meta.url), "utf8");
 const declaration = name => source.match(new RegExp(`^async function ${name}\\([^\\n]*\\) \\{[\\s\\S]*?^\\}`, "m"))?.[0];
@@ -21,7 +22,7 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
   };
   const boundary = {
     ...imported, NICHE_DEFINITIONS: definitions, nicheTemplatePath: "niche", guestInvitesTemplatePath: "host",
-    guestInvitesPageKey: HOST_PAGE_KEY, HOST_PAGE_KEY, defaultLocale: "en", siteOrigin: "https://example.test", ORGANIZATION_ID: "org", BRAND_ID: "brand",
+    guestInvitesPageKey: HOST_PAGE_KEY, HOST_PAGE_KEY, LOCAL_CURRENCY, VISIBLE_CURRENCIES, defaultPricingCurrency, defaultLocale: "en", siteOrigin: "https://example.test", ORGANIZATION_ID: "org", BRAND_ID: "brand",
     nicheRuntimeScriptsToAdd: [], cheerio: { load: dom },
     async readHtmlTemplate(name) { trace.push(["template", name]); return name; },
     buildNicheContext(data, niche, locale) { trace.push(["context", locale, niche.key]); return { content: {}, chrome: {} }; },
