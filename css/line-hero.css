@@ -147,6 +147,14 @@ html.a11y-reduced-motion .niche-hero--line[data-line-hero-text="collapsed"] .nic
      width, so its scrim runs edge to edge below a soft top edge and leaves
      the art above it at full strength. */
   .niche-hero--line .niche-hero__text { width: 100%; }
+  /* Short phone screens (2026-11-16, reported on a Galaxy S24 Ultra): the text
+     never rises over the art. The art (full width, 16:9) sits just below the
+     top bar; the text starts below it and its scrim's soft top edge, and the
+     hero grows instead of letting the two overlap. On taller screens the text
+     still sits at the bottom of the hero, as before. */
+  .niche-page .niche-hero.niche-hero--line { height: auto; max-height: none; }
+  .niche-hero--line .niche-hero__content { height: auto; min-height: max(560px, min(780px, calc(100svh - 6.5rem))); }
+  .niche-hero--line .niche-hero__content > .niche-hero__text { margin-top: calc(100vw * 9 / 16 + 3.25rem); }
   .niche-hero--line .niche-hero__text::before,
   html[dir="rtl"] .niche-hero--line .niche-hero__text::before {
     inset: -2.5rem -100vw -100vh; -webkit-mask-image: none; mask-image: none;

@@ -24,7 +24,7 @@
 import { sceneAssetUrl } from "./scene-media.mjs";
 import { LINE_HERO_SCENES } from "./line-hero-frames.mjs";
 
-export const LINE_HERO_VERSION = "20261115lh13";
+export const LINE_HERO_VERSION = "20261116lh14";
 
 export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   if (!["play", "pause", "replay", "hideText", "showText"].every(key => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");
