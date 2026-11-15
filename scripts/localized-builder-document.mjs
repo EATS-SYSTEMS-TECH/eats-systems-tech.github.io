@@ -274,8 +274,29 @@ export function insertPageDataScript($, scriptId, data, anchorSelector) {
 export function ensureTrailingNewline(source) {
   return source.endsWith('\n') ? source : source + '\n';
 }
+// Owner rule (2026-11-15): a page heading that goes on after a comma or a full
+// stop starts a new line there ("Less hassle,<br>more access."). Only the h1 and
+// h2 headings of the page body; the punctuation stays at the end of its line.
+const HEADING_BREAK = /([,.،])[ \t ]+(?=\S)/gu;
+export function breakHeadingsAtPunctuation($) {
+  $('main h1, main h2').each((_, heading) => {
+    const visit = node => {
+      for (const child of [...(node.children || [])]) {
+        if (child.type === 'tag' && child.name !== 'br') visit(child);
+        else if (child.type === 'text' && HEADING_BREAK.test(child.data)) {
+          HEADING_BREAK.lastIndex = 0;
+          $(child).replaceWith(child.data.split(HEADING_BREAK).reduce((html, part, index) => html + (index % 2 ? part + '<br>' : escapeHtml(part)), ''));
+        }
+        HEADING_BREAK.lastIndex = 0;
+      }
+    };
+    visit(heading);
+  });
+}
+const escapeHtml = text => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 export function serialize($, data, locale, key = 'home') {
   updateSharedHeader($, data, locale, key);
+  breakHeadingsAtPunctuation($);
   const prefix = buildAssetPrefix(locale, key);
   applyMediaWatermarks($, { assetPrefix: prefix });
   const label = data.cookieCopy[locale].reopen;
