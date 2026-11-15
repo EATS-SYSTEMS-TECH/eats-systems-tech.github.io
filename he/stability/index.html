@@ -34,7 +34,7 @@
   <link href="../../css/styles.css?v=20261114hover1" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
   <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/line-hero.css?v=20261115lh12"><link rel="stylesheet" href="../../css/niche-flow.css?v=20261113a">
-
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-stability.js?v=20261115lh12"><script type="module" src="../../js/line-hero.js?v=20261115lh12"></script>
   <meta name="description" content="גם כשהרשת נופלת, הכניסה נפתחת. בנינו את WIFIGATE כדי להיות מערכת בקרת הכניסה החכמה היציבה ביותר. החיבור הישיר להתקן מגיב מיידית ובאותה מהירות בכל פעם, בלי השהיות של שרת מרוחק ובלי תלות בעומסי רשת או בבעיות קליטה.">
   <meta name="robots" content="index, follow">
@@ -255,6 +255,48 @@
           "item": "https://wifigate.io/he/stability/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/he/stability/#faq",
+      "inLanguage": "he",
+      "isPartOf": {
+        "@id": "https://wifigate.io/he/stability/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "מה קורה כשהאינטרנט נופל?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "פתיחה מהטלפון ליד הכניסה ממשיכה לעבוד, כי היא עוברת ישירות לבקר. היכולות מרחוק, כמו במסלול WIFIGATE Manager, חוזרות ברגע שהרשת חוזרת."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "אפשר לחבר את הבקר ליותר מרשת WiFi אחת?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כן, במסלול WIFIGATE Manager. הבקר שומר עד שלוש רשתות WiFi ומנסה אותן לפי הסדר, ואחת מהן יכולה להיות נתב סלולרי."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "למה הפתיחה מגיבה כל כך מהר?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "הפקודה עוברת מהטלפון ישר לבקר, בלי שרת מרוחק בדרך, ולכן היא לא תלויה בעומס ברשת או בקליטה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "האירועים המתוזמנים עובדים גם בלי אינטרנט?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כן. הבקר מריץ אותם בעצמו. אחרי הפסקת חשמל הם חוזרים לפעול ברגע שטלפון כלשהו מתחבר לבקר ומעדכן את השעה."
+          }
+        }
+      ]
     }
   ]
 }
@@ -376,7 +418,14 @@
 
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">שאלות נפוצות</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item"><summary dir="rtl">מה קורה כשהאינטרנט נופל?‏</summary><div class="seo-faq__answer"><p dir="rtl">פתיחה מהטלפון ליד הכניסה ממשיכה לעבוד, כי היא עוברת ישירות לבקר. היכולות מרחוק, כמו במסלול WIFIGATE Manager, חוזרות ברגע שהרשת חוזרת.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">אפשר לחבר את הבקר ליותר מרשת WiFi אחת?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן, במסלול WIFIGATE Manager. הבקר שומר עד שלוש רשתות WiFi ומנסה אותן לפי הסדר, ואחת מהן יכולה להיות נתב סלולרי.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">למה הפתיחה מגיבה כל כך מהר?‏</summary><div class="seo-faq__answer"><p dir="rtl">הפקודה עוברת מהטלפון ישר לבקר, בלי שרת מרוחק בדרך, ולכן היא לא תלויה בעומס ברשת או בקליטה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">האירועים המתוזמנים עובדים גם בלי אינטרנט?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. הבקר מריץ אותם בעצמו. אחרי הפסקת חשמל הם חוזרים לפעול ברגע שטלפון כלשהו מתחבר לבקר ומעדכן את השעה.‏</p></div></details></div>
+      </div>
+    </section>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

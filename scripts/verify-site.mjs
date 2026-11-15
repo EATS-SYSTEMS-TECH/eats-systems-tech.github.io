@@ -283,12 +283,16 @@ async function main() {
         }
       } else if (pageKey === AUTO_OPEN_PAGE_KEY) {
         if ($(".niche-highlight > img.niche-flow__art").length !== 3 || $(".niche-highlight__title").toArray().some(element => !$(element).text().trim())) problems.push(`${rel}: Auto Open needs three highlights with their drawings, like every feature page`);
-        if ($("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: Auto Open has unrelated sections or navigation`);
+        // A feature page may keep the use-case questions section, but only with questions in it.
+        const emptyFaq = $("#niche-faq").length && !$("#niche-faq-list .seo-faq__item").length;
+        if ($("#niche-benefits, #niche-prev-link, #niche-next-link").length || emptyFaq) problems.push(`${rel}: Auto Open has unrelated sections or navigation`);
         if ($("main video").length || $(".niche-hero--line[data-line-hero='autoopen'] [data-line-hero-stage]").length !== 1 || $(".niche-hero [data-scene-replay]").length !== 1) problems.push(`${rel}: Auto Open shows its line animation with replay, not a video`);
       } else if (featureKeys.includes(pageKey)) {
         if ($(".niche-highlight > img.niche-flow__art").length !== 3 || $(".niche-highlight__title").toArray().some(element => !$(element).text().trim())) problems.push(`${rel}: a feature page needs three highlights with their drawings`);
         if ($("main video").length || $(".niche-hero--line [data-line-hero-stage]").length !== 1) problems.push(`${rel}: a feature page shows a line animation, not a video`);
-        if ($("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: a feature page has unrelated sections or navigation`);
+        // A feature page may keep the use-case questions section, but only with questions in it.
+        const emptyFaq = $("#niche-faq").length && !$("#niche-faq-list .seo-faq__item").length;
+        if ($("#niche-benefits, #niche-prev-link, #niche-next-link").length || emptyFaq) problems.push(`${rel}: a feature page has unrelated sections or navigation`);
         if ($("#niche-hero-shop").attr("href") !== pagePath(locale, "shop")) problems.push(`${rel}: the hero must offer the localized shop`);
       } else if (pageKey === "home") {
         const autoOpenCard = $(".feature-card--auto-open");

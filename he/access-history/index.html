@@ -34,7 +34,7 @@
   <link href="../../css/styles.css?v=20261114hover1" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
   <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/line-hero.css?v=20261115lh12"><link rel="stylesheet" href="../../css/niche-flow.css?v=20261113a">
-
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-features.js?v=20261115lh12"><script type="module" src="../../js/line-hero.js?v=20261115lh12"></script>
   <meta name="description" content="מי נכנס ומתי? התשובה כבר רשומה. צפו בפעילות הכניסה של 90 הימים האחרונים וקבלו תמונה ברורה של השימוש בשער ושל אירועי הכניסה האחרונים.">
   <meta name="robots" content="index, follow">
@@ -255,6 +255,48 @@
           "item": "https://wifigate.io/he/access-history/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/he/access-history/#faq",
+      "inLanguage": "he",
+      "isPartOf": {
+        "@id": "https://wifigate.io/he/access-history/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "מה נרשם בהיסטוריה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כל פתיחה: מי פתח, מתי ואיך, מהאפליקציה, בפתיחה אוטומטית, בשלט, בכפתור שעל הבקר או באירוע מתוזמן. גם ניסיונות שנדחו נרשמים, ובכניסה של אורח רואים גם מי הזמין אותו."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "כמה זמן ההיסטוריה נשמרת?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ההיסטוריה נשמרת על כרטיס הזיכרון שבבקר ומחזיקה את 90 הימים האחרונים. ימים ישנים יותר נמחקים כשנדרש מקום."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מי יכול לראות את ההיסטוריה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "המנהלים, באפליקציה. במסלול WIFIGATE Manager אפשר לראות אותה גם מכל דפדפן."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "אפשר לסנן ולייצא את ההיסטוריה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כן. אפשר לסנן לפי סוג משתמש, פעולה, אופן הפתיחה וניסיונות שנדחו, ולייצא לקובץ CSV."
+          }
+        }
+      ]
     }
   ]
 }
@@ -376,7 +418,14 @@
 
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">שאלות נפוצות</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item"><summary dir="rtl">מה נרשם בהיסטוריה?‏</summary><div class="seo-faq__answer"><p dir="rtl">כל פתיחה: מי פתח, מתי ואיך, מהאפליקציה, בפתיחה אוטומטית, בשלט, בכפתור שעל הבקר או באירוע מתוזמן. גם ניסיונות שנדחו נרשמים, ובכניסה של אורח רואים גם מי הזמין אותו.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">כמה זמן ההיסטוריה נשמרת?‏</summary><div class="seo-faq__answer"><p dir="rtl">ההיסטוריה נשמרת על כרטיס הזיכרון שבבקר ומחזיקה את 90 הימים האחרונים. ימים ישנים יותר נמחקים כשנדרש מקום.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מי יכול לראות את ההיסטוריה?‏</summary><div class="seo-faq__answer"><p dir="rtl">המנהלים, באפליקציה. במסלול WIFIGATE Manager אפשר לראות אותה גם מכל דפדפן.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">אפשר לסנן ולייצא את ההיסטוריה?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. אפשר לסנן לפי סוג משתמש, פעולה, אופן הפתיחה וניסיונות שנדחו, ולייצא לקובץ CSV.‏</p></div></details></div>
+      </div>
+    </section>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

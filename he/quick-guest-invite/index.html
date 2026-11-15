@@ -34,7 +34,7 @@
   <link href="../../css/styles.css?v=20261114hover1" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
   <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/line-hero.css?v=20261115lh12"><link rel="stylesheet" href="../../css/niche-flow.css?v=20261113a">
-
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-features.js?v=20261115lh12"><script type="module" src="../../js/line-hero.js?v=20261115lh12"></script>
   <meta name="description" content="האורח בדרך? הכניסה כבר אצלו. שלחו הזמנת כניסה מאובטחת עם הוראות הגעה לשליח או לאורח בתוך שניות, כדי שמבקרים יוכלו להיכנס ללא שיחות, שלטים משותפים או תיאום ידני.">
   <meta name="robots" content="index, follow">
@@ -255,6 +255,56 @@
           "item": "https://wifigate.io/he/quick-guest-invite/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/he/quick-guest-invite/#faq",
+      "inLanguage": "he",
+      "isPartOf": {
+        "@id": "https://wifigate.io/he/quick-guest-invite/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "איך שולחים הזמנה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "מהאפליקציה. ההזמנה נשלחת כקישור, למשל בוואטסאפ, ומגיעה לאורח תוך שניות."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "האורח צריך להתקין את האפליקציה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כן. הקישור מוביל להתקנת WIFIGATE, ומשם האורח פותח את הכניסה מהטלפון שלו כשהוא ליד השער."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "לכמה זמן ההזמנה תקפה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "בהזמנה רגילה בוחרים מתי היא מתחילה ומתי היא מסתיימת. הזמנה מהירה, למשל לשליח, מתחילה מיד ותקפה בין 15 דקות ל-24 שעות."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מי יכול לשלוח הזמנות?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "המנהלים, ומשתמשים שהמנהל אישר להם להזמין אורחים."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "אפשר לבטל הזמנות?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כן. כל משתמש יכול לבטל בבת אחת את כל ההזמנות ששלח, והמנהל יכול לבטל את ההזמנות של כל משתמש."
+          }
+        }
+      ]
     }
   ]
 }
@@ -376,7 +426,14 @@
 
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">שאלות נפוצות</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item"><summary dir="rtl">איך שולחים הזמנה?‏</summary><div class="seo-faq__answer"><p dir="rtl">מהאפליקציה. ההזמנה נשלחת כקישור, למשל בוואטסאפ, ומגיעה לאורח תוך שניות.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">האורח צריך להתקין את האפליקציה?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. הקישור מוביל להתקנת WIFIGATE, ומשם האורח פותח את הכניסה מהטלפון שלו כשהוא ליד השער.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">לכמה זמן ההזמנה תקפה?‏</summary><div class="seo-faq__answer"><p dir="rtl">בהזמנה רגילה בוחרים מתי היא מתחילה ומתי היא מסתיימת. הזמנה מהירה, למשל לשליח, מתחילה מיד ותקפה בין 15 דקות ל-24 שעות.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מי יכול לשלוח הזמנות?‏</summary><div class="seo-faq__answer"><p dir="rtl">המנהלים, ומשתמשים שהמנהל אישר להם להזמין אורחים.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">אפשר לבטל הזמנות?‏</summary><div class="seo-faq__answer"><p dir="rtl">כן. כל משתמש יכול לבטל בבת אחת את כל ההזמנות ששלח, והמנהל יכול לבטל את ההזמנות של כל משתמש.‏</p></div></details></div>
+      </div>
+    </section>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

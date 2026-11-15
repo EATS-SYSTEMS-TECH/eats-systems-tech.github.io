@@ -34,7 +34,7 @@
   <link href="../../css/styles.css?v=20261114hover1" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
   <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/line-hero.css?v=20261115lh12"><link rel="stylesheet" href="../../css/niche-flow.css?v=20261113a">
-
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-features.js?v=20261115lh12"><script type="module" src="../../js/line-hero.js?v=20261115lh12"></script>
   <meta name="description" content="אפשרו למשתמשים מורשים לפתוח את השער אוטומטית עם הגעתם, לחוויית כניסה חלקה ונוחה ללא מגע.">
   <meta name="robots" content="index, follow">
@@ -255,6 +255,48 @@
           "item": "https://wifigate.io/he/auto-open/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/he/auto-open/#faq",
+      "inLanguage": "he",
+      "isPartOf": {
+        "@id": "https://wifigate.io/he/auto-open/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "צריך להוציא את הטלפון כדי שהשער ייפתח?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא. הטלפון נשאר בכיס, והכניסה נפתחת כשמגיעים."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "השער ייפתח גם כשאני עדיין רחוק?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא. השער נפתח רק כשמגיעים קרוב לכניסה, למרחק שכל משתמש קובע בעצמו."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מי יכול להשתמש בפתיחה אוטומטית?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "המנהלים, ומשתמשים שהמנהל אישר להם פתיחה אוטומטית."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "זה עובד בכל סוג כניסה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "פתיחה אוטומטית עובדת בכניסות שנפתחות בלחיצה אחת, כמו רוב השערים החשמליים ומחסומי החניה."
+          }
+        }
+      ]
     }
   ]
 }
@@ -376,7 +418,14 @@
 
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">שאלות נפוצות</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item"><summary dir="rtl">צריך להוציא את הטלפון כדי שהשער ייפתח?‏</summary><div class="seo-faq__answer"><p dir="rtl">לא. הטלפון נשאר בכיס, והכניסה נפתחת כשמגיעים.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">השער ייפתח גם כשאני עדיין רחוק?‏</summary><div class="seo-faq__answer"><p dir="rtl">לא. השער נפתח רק כשמגיעים קרוב לכניסה, למרחק שכל משתמש קובע בעצמו.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מי יכול להשתמש בפתיחה אוטומטית?‏</summary><div class="seo-faq__answer"><p dir="rtl">המנהלים, ומשתמשים שהמנהל אישר להם פתיחה אוטומטית.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">זה עובד בכל סוג כניסה?‏</summary><div class="seo-faq__answer"><p dir="rtl">פתיחה אוטומטית עובדת בכניסות שנפתחות בלחיצה אחת, כמו רוב השערים החשמליים ומחסומי החניה.‏</p></div></details></div>
+      </div>
+    </section>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

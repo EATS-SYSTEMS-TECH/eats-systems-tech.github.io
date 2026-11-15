@@ -229,6 +229,12 @@ async function buildLandingPages(homeData) {
   }
   return entries;
 }
+// A feature page keeps the use-case questions section, in the same design, when its
+// locale has questions; otherwise the section and its script and styles go.
+function removeEmptyFaq($, content) {
+  if (content.faq.length) return;
+  $('#niche-faq').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+}
 async function buildAutoOpenPages(homeData) {
   const source = await readHtmlTemplate(nicheTemplatePath), scene = homeData.sceneMedia.get('auto-open-futuristic'), entries = [];
   if (!scene) throw Error('Accepted Auto Open scene is required');
@@ -238,7 +244,7 @@ async function buildAutoOpenPages(homeData) {
     prepareUseCaseShell($, locale, AUTO_OPEN_PAGE_KEY, 'auto-open-page');
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
     // Since 13 Nov 2026 (owner request) the page is built like every feature page: three points on the highlights wave, no Key benefits cards.
-    $('#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+    $('#niche-benefits, #niche-prev-link, #niche-next-link').remove(); removeEmptyFaq($, content);
     setUseCaseNavigation($, { chrome, content });
     // Since 12 Nov 2026 (owner request) the hero is the Auto Open line animation, not a video; the accepted poster stays the share image.
     applyLineHero($, { scene: 'autoopen', frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
@@ -263,7 +269,7 @@ async function buildFeaturePages(homeData) {
       const content = getFeaturePageContent(page, locale, homeData.homepageCopies[locale]), chrome = getNicheChrome(locale), $ = cheerio.load(source, { decodeEntities: false });
       prepareUseCaseShell($, locale, page.key, page.bodyClass);
       fillUseCaseBody($, { chrome, content, image, locale, pageKey: page.key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
-      $('#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link').remove(); $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+      $('#niche-benefits, #niche-prev-link, #niche-next-link').remove(); removeEmptyFaq($, content);
       installHighlightNote($, content.note, locale);
       setUseCaseNavigation($, { chrome, content });
       applyLineHero($, { scene: page.scene, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, page.key), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });

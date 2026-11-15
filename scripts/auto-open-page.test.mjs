@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
+import { featurePageFaq } from "./feature-page-faq.mjs";
 
 const copies = Object.fromEntries(await Promise.all(SITE_LANGUAGES.map(async ({ code }) => [code, (await import(`./homepage-copy/${code}.mjs`)).default])));
 const locales = SITE_LANGUAGES.map(({ code }) => code);
@@ -20,7 +21,8 @@ test("every supported locale has its own complete arrival-only page and preserve
     assert.deepEqual(content.highlights.map(item => item.icon), ["handsfree", "arrival", "users"]);
     assert.ok(content.highlights.every(item => item.title.trim() && item.text.trim()));
     assert.deepEqual(content.benefits, []);
-    assert.deepEqual(content.faq, []);
+    // Questions come from scripts/feature-page-faq.mjs, only for the locales that have them.
+    assert.deepEqual(content.faq, featurePageFaq(AUTO_OPEN_PAGE_KEY, locale));
   }
 });
 
@@ -48,5 +50,5 @@ test("returned page objects cannot mutate another locale or a later render", () 
   first.faq.push({ question: "changed", answer: "changed" });
   const second = getAutoOpenPageContent("he", copies.he);
   assert.notEqual(second.highlights[0].title, "changed");
-  assert.deepEqual(second.faq, []);
+  assert.deepEqual(second.faq, featurePageFaq(AUTO_OPEN_PAGE_KEY, "he"));
 });

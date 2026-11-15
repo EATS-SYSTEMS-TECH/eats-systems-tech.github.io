@@ -34,7 +34,7 @@
   <link href="../../css/styles.css?v=20261114hover1" rel="stylesheet">
   <link href="../../css/accessibility.css?v=20261027c" rel="stylesheet">
   <link href="../../css/niche.css?v=20261017b" rel="stylesheet"><link rel="stylesheet" href="../../css/line-hero.css?v=20261115lh12"><link rel="stylesheet" href="../../css/niche-flow.css?v=20261113a">
-
+  <link href="../../css/faq.css?v=20261018a" rel="stylesheet">
 
   <!-- Deferred behavior retains initialization order and existing public hooks. -->
   <script defer="" src="../../js/utils.js?v=20260402a"></script>
@@ -44,7 +44,7 @@
 
   <script src="../../js/language-selector.js?v=20261109flags1" defer=""></script><script defer="" src="../../js/accessibility.js?v=20261027d"></script>
   <script defer="" src="../../js/niche-page.js?v=20260708a"></script>
-
+  <script defer="" src="../../js/faq.js?v=20261017b"></script>
 <link rel="modulepreload" href="../../js/line-hero-features.js?v=20261115lh12"><script type="module" src="../../js/line-hero.js?v=20261115lh12"></script>
   <meta name="description" content="קובעים פעם אחת. השער זוכר. צרו לוחות זמנים חוזרים ופעולות אוטומטיות ישירות במערכת, בהתאם לאופן שבו המתחם שלכם מתנהל.">
   <meta name="robots" content="index, follow">
@@ -255,6 +255,48 @@
           "item": "https://wifigate.io/he/scheduled-events/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/he/scheduled-events/#faq",
+      "inLanguage": "he",
+      "isPartOf": {
+        "@id": "https://wifigate.io/he/scheduled-events/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "מה אירוע מתוזמן עושה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "הוא מחזיק את השער פתוח, או סגור, בשעות שקבעתם. למשל, שער שנשאר פתוח בשעות הפעילות."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "כמה אירועים אפשר להגדיר?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "עד 50 אירועים בשבוע. אירוע יכול לחזור כל שבוע או לקרות פעם אחת בתאריך מסוים, עד 90 יום קדימה. אירועים לא יכולים לחפוף זה לזה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "צריך אינטרנט כדי שהאירועים יפעלו?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא. הבקר מריץ אותם בעצמו. אחרי הפסקת חשמל הם חוזרים לפעול ברגע שטלפון כלשהו מתחבר לבקר ומעדכן את השעה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מי יכול ליצור אירועים?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "המנהלים, מהאפליקציה."
+          }
+        }
+      ]
     }
   ]
 }
@@ -376,7 +418,14 @@
 
 
     <!-- The existing FAQ behavior receives localized details in this list. -->
-
+    <section aria-labelledby="niche-faq-title" id="niche-faq" class="niche-section seo-faq">
+      <div class="container seo-faq__layout">
+        <div class="niche-section__header">
+          <h2 id="niche-faq-title" class="niche-section__title">שאלות נפוצות</h2>
+        </div>
+        <div id="niche-faq-list" class="seo-faq__list"><details class="seo-faq__item"><summary dir="rtl">מה אירוע מתוזמן עושה?‏</summary><div class="seo-faq__answer"><p dir="rtl">הוא מחזיק את השער פתוח, או סגור, בשעות שקבעתם. למשל, שער שנשאר פתוח בשעות הפעילות.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">כמה אירועים אפשר להגדיר?‏</summary><div class="seo-faq__answer"><p dir="rtl">עד 50 אירועים בשבוע. אירוע יכול לחזור כל שבוע או לקרות פעם אחת בתאריך מסוים, עד 90 יום קדימה. אירועים לא יכולים לחפוף זה לזה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">צריך אינטרנט כדי שהאירועים יפעלו?‏</summary><div class="seo-faq__answer"><p dir="rtl">לא. הבקר מריץ אותם בעצמו. אחרי הפסקת חשמל הם חוזרים לפעול ברגע שטלפון כלשהו מתחבר לבקר ומעדכן את השעה.‏</p></div></details><details class="seo-faq__item"><summary dir="rtl">מי יכול ליצור אירועים?‏</summary><div class="seo-faq__answer"><p dir="rtl">המנהלים, מהאפליקציה.‏</p></div></details></div>
+      </div>
+    </section>
   </main>
 
   <!-- Preserve the exact placeholder syntax consumed by shared partial injection. -->

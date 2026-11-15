@@ -1,5 +1,7 @@
 // Public Auto Open copy describes the arrival experience only. Every locale
 // has its own copy; unsupported or incomplete locales never fall back.
+import { featurePageFaq } from "./feature-page-faq.mjs";
+
 export const AUTO_OPEN_PAGE_KEY = "auto-open";
 
 // headline, then three title/text pairs for the highlights: hands free, arrival, permission.
@@ -64,7 +66,8 @@ export function getAutoOpenPageContent(locale, homepageCopy) {
     heroLead: feature.text,
     highlights: DRAWINGS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
     benefits: [],
-    faq: [],
+    // Questions and answers, for the locales that have them (scripts/feature-page-faq.mjs).
+    faq: featurePageFaq(AUTO_OPEN_PAGE_KEY, locale),
     seoTitle: `${feature.title} | WIFIGATE`,
     seoDescription: feature.text,
     imageAlt: feature.text,

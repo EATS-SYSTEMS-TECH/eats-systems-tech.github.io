@@ -13,6 +13,7 @@ import EVENTS_COPY from "./feature-page-copy/scheduled-events.mjs";
 import RF_COPY from "./feature-page-copy/rf-remote-pairing.mjs";
 import SECURITY_COPY from "./feature-page-copy/security-privacy.mjs";
 import NO_FEES_COPY from "./feature-page-copy/no-subscription-fees.mjs";
+import { featurePageFaq } from "./feature-page-faq.mjs";
 
 // headline, then three title/text pairs: nothing extra, weak reception, no monthly line.
 const NO_SIM_COPY = {
@@ -157,7 +158,8 @@ export function getFeaturePageContent(page, locale, homepageCopy) {
       ...(NONEMPTY(page.pointNotes?.[locale]?.[index]) ? { note: page.pointNotes[locale][index] } : {}) })),
     note: page.pointNotes?.[locale] ? "" : page.note ? (NONEMPTY(homepageCopy.platform[page.note]) ? homepageCopy.platform[page.note] : "") : (sentence && cardClaim !== feature.text ? note : ""),
     benefits: [],
-    faq: [],
+    // Questions and answers, for the locales that have them (scripts/feature-page-faq.mjs).
+    faq: featurePageFaq(page.key, locale),
     seoTitle: `${feature.title} | WIFIGATE`,
     seoDescription: `${local[0]} ${lead}`,
     imageAlt: lead,
