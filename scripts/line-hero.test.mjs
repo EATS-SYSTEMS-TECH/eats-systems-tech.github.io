@@ -176,17 +176,20 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.ok(image.hasClass("line-hero__frame") && !image.hasClass("niche-hero__bg"));
     assert.ok((image.attr("alt") || "").trim().length > 10, `${relative}: localized image description kept`);
     assert.deepEqual([image.attr("width"), image.attr("height"), image.attr("loading"), image.attr("fetchpriority")], ["1600", "900", "eager", "high"]);
-    // Controls: replay then the locale shop link, one hidden pause button in the pager, localized copy.
-    const replay = hero.find(".niche-hero__actions > *").first();
-    assert.equal(hero.find(".niche-hero__actions > *").length, 2); assert.ok(replay.is("button#niche-hero-replay[data-scene-replay].btn.btn--primary[type=button]"));
-    const shop = hero.find(".niche-hero__actions > #niche-hero-replay + a#niche-hero-shop.btn.btn--ghost");
-    assert.equal(shop.length, 1, `${relative}: shop button beside replay`); assert.match(shop.attr("href"), /^\/(?:[a-z-]+\/)?shop\/$/); assert.ok(shop.text().trim());
-    assert.equal(replay.text(), copy.replay); assert.equal(replay.attr("aria-label"), copy.replay);
+    // Actions: talk to us then the locale shop link. Replay is an icon beside pause in the pager.
+    assert.equal(hero.find(".niche-hero__actions > *").length, 2);
+    const contact = hero.find(".niche-hero__actions > a#niche-hero-contact.btn.btn--primary").first();
+    assert.equal(contact.length, 1, `${relative}: talk to us button`); assert.match(contact.attr("href"), /^\/(?:[a-z-]+\/)?#get-in-touch$/); assert.ok(contact.text().trim());
+    const shop = hero.find(".niche-hero__actions > #niche-hero-contact + a#niche-hero-shop.btn.btn--ghost");
+    assert.equal(shop.length, 1, `${relative}: shop button beside talk to us`); assert.match(shop.attr("href"), /^\/(?:[a-z-]+\/)?shop\/$/); assert.ok(shop.text().trim());
+    const replay = hero.find(".niche-hero__pager > .scene-video-controls > [data-scene-pause] + button#niche-hero-replay[data-scene-replay][type=button]");
+    assert.equal(replay.length, 1, `${relative}: replay icon beside pause`); assert.equal(replay.find("svg.scene-replay-icon[aria-hidden='true']").length, 1);
+    assert.equal(replay.text(), ""); assert.equal(replay.attr("aria-label"), copy.replay); assert.equal(replay.attr("title"), copy.replay);
     const pause = hero.find(".niche-hero__pager > .scene-video-controls > button[data-scene-pause][type=button]");
     assert.equal(pause.length, 1); assert.notEqual(pause.attr("hidden"), undefined); assert.equal(pause.text(), copy.pause);
     // Text toggle beside pause: hidden until the runtime runs, expanded, controlling the text block.
-    const toggle = hero.find(".niche-hero__pager > .scene-video-controls > [data-scene-pause] + button[data-hero-text-toggle][type=button]");
-    assert.equal(toggle.length, 1, `${relative}: text toggle next to pause`);
+    const toggle = hero.find(".niche-hero__pager > .scene-video-controls > [data-scene-replay] + button[data-hero-text-toggle][type=button]");
+    assert.equal(toggle.length, 1, `${relative}: text toggle next to replay`);
     assert.notEqual(toggle.attr("hidden"), undefined);
     assert.deepEqual([toggle.attr("aria-controls"), toggle.attr("aria-expanded"), toggle.attr("aria-label"), toggle.attr("title")], ["niche-hero-text", "true", copy.hideText, copy.hideText]);
     assert.equal(toggle.find("svg[aria-hidden='true'][focusable='false'] .line-hero__toggle-hide").length, 1);
@@ -196,7 +199,7 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     const text = hero.find("> .niche-hero__content > .niche-hero__text#niche-hero-text");
     assert.equal(text.length, 1, `${relative}: controlled text block`);
     assert.ok(text.find("> h1#niche-title.niche-hero__title").text().trim().length > 0, `${relative}: the h1 stays in the HTML`);
-    assert.equal(text.find("> .niche-hero__actions > [data-scene-replay]").length, 1);
+    assert.equal(text.find("> .niche-hero__actions > #niche-hero-contact").length, 1);
     assert.deepEqual(JSON.parse(hero.children("script[type='application/json'][data-scene-copy]").text()), copy);
     // Assets: the light stylesheet after niche.css, the scene preloaded, the runtime as a module.
     const sheets = $("link[rel=stylesheet]").map((_, element) => $(element).attr("href")).get();

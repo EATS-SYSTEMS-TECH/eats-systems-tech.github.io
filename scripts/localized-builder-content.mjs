@@ -120,10 +120,13 @@ export function installHighlightNote($, note, locale) {
   const line = $('<p>').addClass('niche-flow__note'); setLocalizedText($, line, note, locale);
   track.after(line);
 }
-// A use-case hero offers the shop beside its replay action, as a quiet second button.
-export function installUseCaseShopLink($, { locale, pageKey, label }) {
+// A use-case hero offers two links below its text: talk to us (the homepage
+// contact section, under the navigation's own label) and the shop.
+export function installUseCaseShopLink($, { locale, pageKey, label, contactLabel }) {
   const actions = $('.niche-hero__actions');
   if (actions.length !== 1 || typeof label !== 'string' || !label.trim()) throw Error(`The ${pageKey} hero requires its actions and a localized shop label: ${locale}`);
+  if (typeof contactLabel !== 'string' || !contactLabel.trim()) throw Error(`The ${pageKey} hero requires a localized contact label: ${locale}`);
+  actions.append($('<a>').attr({ id: 'niche-hero-contact', href: `${buildPagePath(locale)}#get-in-touch` }).addClass('btn btn--primary niche-hero__btn-primary').text(contactLabel));
   actions.append($('<a>').attr({ id: 'niche-hero-shop', href: buildPagePath(locale, 'shop') }).addClass('btn btn--ghost niche-hero__btn-secondary').text(label));
 }
 // The three highlights speak the drawing language of the WIFIGATE Host and Manager

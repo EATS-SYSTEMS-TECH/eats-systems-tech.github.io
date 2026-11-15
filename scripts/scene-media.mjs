@@ -89,13 +89,13 @@ function attachSceneAssets($, assetPrefix) {
   $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261109p1`);
   $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261019d`);
   if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261109a`));
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261115a`));
   }
   if (!$("script[src*='js/scene-video.js']").length) {
-    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`).attr("defer", ""));
+    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261115a`).attr("defer", ""));
   }
-  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261109a`);
-  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`);
+  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261115a`);
+  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261115a`);
 }
 
 function attachResponsiveMedia($, { scene, assetPrefix, image, video }) {
@@ -142,14 +142,15 @@ function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
 export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (!scene) return;
   attachScene($, { scene, assetPrefix, copy, image: $("#niche-image"), container: $(".niche-hero"), media: $(".niche-hero__media") });
-  const actions = $(".niche-hero__actions");
-  if (actions.length) actions.empty().append($("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "" }).addClass("btn btn--primary niche-hero__btn-primary"));
-  const replay = actions.find("[data-scene-replay]");
-  if (replay.length) {
-    replay.text(copy.replay).attr({ "aria-label": copy.replay, title: copy.replay });
-    $(".niche-hero .scene-video-controls [data-scene-play]").remove();
+  // Replay is an icon beside pause/resume in the top bar; the action row below
+  // the text is left for the page's contact and shop links.
+  const actions = $(".niche-hero__actions"), controls = $(".niche-hero__media > .scene-video-controls");
+  if (actions.length) actions.empty();
+  if (actions.length && controls.length) {
+    controls.find("[data-scene-play]").remove();
+    controls.append($("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "", "aria-label": copy.replay, title: copy.replay })
+      .append(`<svg class="scene-replay-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.7 13.6a8 8 0 1 1-2.2-8.4M20 4v6h-6"/></svg>`));
   }
-  // Pause/resume stays beside navigation; the single primary action restarts.
   const pager = $(".niche-hero__pager");
   if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }

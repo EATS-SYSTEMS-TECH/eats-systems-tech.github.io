@@ -9,14 +9,18 @@ import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia, sceneAsse
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
-test("niche hero has one localized replay action and separate pause control", async () => {
+test("niche hero has one localized replay icon beside a separate pause control", async () => {
   const template = await fs.readFile(new URL("../templates/niche.template.html", import.meta.url), "utf8");
   const $ = cheerio.load(template);
   applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "הפעלה", pause: "השהיה", replay: "הפעלה מחדש" } });
-  assert.equal($(".niche-hero__actions button").length, 1);
-  assert.equal($(".niche-hero__actions a").length, 0);
-  assert.equal($("[data-scene-replay]").text(), "הפעלה מחדש");
-  assert.equal($("[data-scene-replay]").attr("aria-label"), "הפעלה מחדש");
+  // The action row is left empty for the page's contact and shop links.
+  assert.equal($(".niche-hero__actions").children().length, 0);
+  const replay = $(".niche-hero__pager > .scene-video-controls > [data-scene-pause] + button#niche-hero-replay[data-scene-replay][type=button]");
+  assert.equal(replay.length, 1);
+  assert.equal(replay.find("svg.scene-replay-icon[aria-hidden='true']").length, 1);
+  assert.equal(replay.text(), "");
+  assert.equal(replay.attr("aria-label"), "הפעלה מחדש");
+  assert.equal(replay.attr("title"), "הפעלה מחדש");
   assert.equal($("[data-scene-play]").length, 0, "no duplicate primary play action");
   assert.equal($(".niche-hero__pager [data-scene-pause]").length, 1);
   assert.equal($("#niche-benefits").length, 1, "benefits content remains accessible by scrolling");
@@ -39,10 +43,10 @@ test("existing scene styles and controllers receive the current asset version wi
     const $ = cheerio.load(`<html><head><link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/hero.js?v=20261018b" defer></script><script src="../js/media-runtime.js?v=old" defer></script>${existingController ? '<script src="../js/scene-video.js?v=20261018b" defer></script>' : ""}</head><body><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>`);
     applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
     assert.equal($("link[href*='scene-video.css']").length, 1);
-    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261109a");
+    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261115a");
     for (const name of ["hero", "scene-video", "media-runtime"]) {
       assert.equal($(`script[src*='js/${name}.js']`).length, 1);
-      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=${name === "media-runtime" ? "20261109p1" : "20261019d"}`);
+      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=${name === "media-runtime" ? "20261109p1" : name === "scene-video" ? "20261115a" : "20261019d"}`);
     }
   }
 });
@@ -93,7 +97,7 @@ test("the Auto Open video page uses the accepted desktop pair as its explicit mo
   assert.equal($("video").attr("src"), undefined);
   assert.equal(variants.desktop.src, sceneAssetUrl("../../", artifact.video));
   assert.equal(variants.mobile.poster, sceneAssetUrl("../../", artifact.poster));
-  assert.equal($(".niche-hero__actions [data-scene-replay]").length, 1);
+  assert.equal($(".niche-hero__pager [data-scene-replay]").length, 1);
   assert.equal($(".niche-hero__pager [data-scene-pause]").length, 1);
 });
 

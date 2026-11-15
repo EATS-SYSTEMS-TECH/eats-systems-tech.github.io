@@ -202,8 +202,8 @@ async function buildNichePages(homeData) {
     const $ = cheerio.load(source, { decodeEntities: false });
     prepareUseCaseShell($, locale, niche.key); updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
     applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key === 'electric-gates' ? 'electric-gates-barrier' : niche.key), assetPrefix: buildAssetPrefix(locale, niche.key), copy: homeData.homepageCopies[locale].hero.media });
-    // The hero offers the shop beside the replay action; its label is the shop button of the WIFIGATE Host page.
-    installUseCaseShopLink($, { locale, pageKey: niche.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button });
+    // The hero offers talk to us and the shop; the shop label is the shop button of the WIFIGATE Host page.
+    installUseCaseShopLink($, { locale, pageKey: niche.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button, contactLabel: homeData.homepageCopies[locale]?.navigation?.contact });
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey: niche.key, content: ctx.content, chrome: ctx.chrome, image: niche.image, locale, localeOptions: homeData.localeOptions });
     await publishNicheVariant({ locale, pageKey: niche.key, render: () => serialize($, homeData, locale, niche.key), legacyKeys: () => niche.legacyKeys || [] }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
@@ -242,7 +242,7 @@ async function buildAutoOpenPages(homeData) {
     setUseCaseNavigation($, { chrome, content });
     // Since 12 Nov 2026 (owner request) the hero is the Auto Open line animation, not a video; the accepted poster stays the share image.
     applyLineHero($, { scene: 'autoopen', frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
-    installUseCaseShopLink($, { locale, pageKey: AUTO_OPEN_PAGE_KEY, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button });
+    installUseCaseShopLink($, { locale, pageKey: AUTO_OPEN_PAGE_KEY, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button, contactLabel: homeData.homepageCopies[locale]?.navigation?.contact });
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey: AUTO_OPEN_PAGE_KEY, content, chrome, image, locale, localeOptions: homeData.localeOptions });
     await writeOutputFile(buildOutputFilePath(locale, AUTO_OPEN_PAGE_KEY), serialize($, homeData, locale, AUTO_OPEN_PAGE_KEY));
@@ -267,7 +267,7 @@ async function buildFeaturePages(homeData) {
       installHighlightNote($, content.note, locale);
       setUseCaseNavigation($, { chrome, content });
       applyLineHero($, { scene: page.scene, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, page.key), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
-      installUseCaseShopLink($, { locale, pageKey: page.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button });
+      installUseCaseShopLink($, { locale, pageKey: page.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button, contactLabel: homeData.homepageCopies[locale]?.navigation?.contact });
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
       setUseCaseMeta($, { pageKey: page.key, content, chrome, image, locale, localeOptions: homeData.localeOptions });
       await writeOutputFile(buildOutputFilePath(locale, page.key), serialize($, homeData, locale, page.key));
@@ -318,8 +318,8 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     // The hero shows the product's line animation; the accepted scene poster stays the structured-data image.
     // Its controls: the shared media labels plus the hero text toggle.
     applyLineHero($, { scene: product, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, pageKey), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
-    // A shop button beside replay, as on the use-case and feature pages.
-    installUseCaseShopLink($, { locale, pageKey, label: hostCopy.marketing?.shop?.button });
+    // Talk to us and shop buttons, as on the use-case and feature pages.
+    installUseCaseShopLink($, { locale, pageKey, label: hostCopy.marketing?.shop?.button, contactLabel: homeData.homepageCopies[locale]?.navigation?.contact });
     rewriteStaticAssets(legacy, locale, pageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy, shopHref: buildPagePath(locale, 'shop') });

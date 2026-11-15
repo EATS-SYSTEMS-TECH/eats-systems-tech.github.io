@@ -33,7 +33,9 @@
     function labels() {
       const paused = video.paused;
       const playLabel = replayButton || finished ? copy.replay : copy.play;
-      playButton.textContent = playLabel;
+      // An icon button (the use-case replay) keeps its icon; only its name changes.
+      if (playButton.querySelector("svg")) playButton.setAttribute("title", playLabel);
+      else playButton.textContent = playLabel;
       playButton.setAttribute("aria-label", playLabel);
       pauseButton.textContent = paused ? copy.play : copy.pause;
       pauseButton.setAttribute("aria-label", paused ? copy.play : copy.pause);

@@ -111,7 +111,8 @@ export const FEATURE_PAGES = Object.freeze([
     leads: Object.freeze({ he: "אין כרטיס SIM, אין חבילת גלישה ואין נתב WiFi. רק חיבור ישיר בין הטלפון לבקר." }),
     // Hebrew has its own three points (no reception, no monthly bill, remote sites), so its own drawings and small print.
     localDrawings: Object.freeze({ he: Object.freeze(["offline", "nobill", "nosignal"]) }),
-    pointNotes: Object.freeze({ he: Object.freeze(["", "* למעט מסלולי WIFIGATE For Business.", ""]) }) }),
+    // Each Hebrew exception sits under its own point, so the page has no note below the points.
+    pointNotes: Object.freeze({ he: Object.freeze(["* למעט WIFIGATE Manager, שדורש חיבור WiFi.", "* למעט מסלולי WIFIGATE For Business המצריכים תשלום חודשי.", ""]) }) }),
   Object.freeze({ key: "stability", feature: 1, card: "stability", scene: "stability", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["offline", "failover", "instant"]), copy: STABILITY_COPY }),
   Object.freeze({ key: "quick-guest-invite", feature: 2, card: "quick-guest-invite", scene: "guest", bodyClass: "feature-page", poster: "electric-gates-barrier",
@@ -154,7 +155,7 @@ export function getFeaturePageContent(page, locale, homepageCopy) {
     heroLead: lead,
     highlights: (page.localDrawings?.[locale] ?? page.drawings).map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2],
       ...(NONEMPTY(page.pointNotes?.[locale]?.[index]) ? { note: page.pointNotes[locale][index] } : {}) })),
-    note: page.note ? (NONEMPTY(homepageCopy.platform[page.note]) ? homepageCopy.platform[page.note] : "") : (sentence && cardClaim !== feature.text ? note : ""),
+    note: page.pointNotes?.[locale] ? "" : page.note ? (NONEMPTY(homepageCopy.platform[page.note]) ? homepageCopy.platform[page.note] : "") : (sentence && cardClaim !== feature.text ? note : ""),
     benefits: [],
     faq: [],
     seoTitle: `${feature.title} | WIFIGATE`,

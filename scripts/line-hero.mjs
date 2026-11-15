@@ -1,6 +1,6 @@
 // The WIFIGATE Host and WIFIGATE Manager heroes keep the shared use-case
 // structure (full-width media layer, overlay, top bar with breadcrumb and
-// pager, text at the bottom start, one replay action) but show the approved
+// pager, text at the bottom start) but show the approved
 // white line animation instead of a video, in a light theme.
 //
 // Generated hero, after fillUseCaseBody:
@@ -11,11 +11,12 @@
 //         (js/line-hero.js adds svg.line-hero__art, aria-hidden, over the frame)
 //       .niche-hero__overlay
 //     .niche-hero__content: top bar pager > .scene-video-controls > [data-scene-pause][hidden]
+//                                                                  + #niche-hero-replay[data-scene-replay] (icon)
 //                                                                  + [data-hero-text-toggle][hidden]
 //                           .niche-hero__text#niche-hero-text (controlled by the toggle)
-//                             .niche-hero__actions > #niche-hero-replay[data-scene-replay]
+//                             .niche-hero__actions (the page's contact and shop links)
 //     script[data-scene-copy]
-// The text toggle collapses the eyebrow, title, lead and replay action (and
+// The text toggle collapses the eyebrow, title, lead and action links (and
 // their scrim) so the art can be seen whole; the h1 stays in the HTML and the
 // layout. applyMediaWatermarks gives the media layer the same decorative mark
 // as the video heroes (css/media-watermark.css draws it dark on this white
@@ -23,7 +24,7 @@
 import { sceneAssetUrl } from "./scene-media.mjs";
 import { LINE_HERO_SCENES } from "./line-hero-frames.mjs";
 
-export const LINE_HERO_VERSION = "20261115lh11";
+export const LINE_HERO_VERSION = "20261115lh12";
 
 export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   if (!["play", "pause", "replay", "hideText", "showText"].every(key => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");
@@ -41,11 +42,13 @@ export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   image.replaceWith($("<div>").addClass("line-hero__stage").attr("data-line-hero-stage", "").append(picture));
   picture.append(image);
 
-  // One primary action restarts the loop; pause/resume joins the top bar pager.
+  // Replay is an icon in the top bar beside pause; the action row below the
+  // text is left for the page's contact and shop links.
   const actions = hero.find(".niche-hero__actions");
   if (actions.length !== 1) throw new Error("Use-case hero actions are missing");
-  actions.empty().append($("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "" })
-    .addClass("btn btn--primary niche-hero__btn-primary").attr({ "aria-label": copy.replay, title: copy.replay }).text(copy.replay));
+  actions.empty();
+  const replay = $("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "", "aria-label": copy.replay, title: copy.replay })
+    .append(`<svg class="scene-replay-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.7 13.6a8 8 0 1 1-2.2-8.4M20 4v6h-6"/></svg>`);
   const pager = hero.find(".niche-hero__pager");
   if (pager.length !== 1) throw new Error("Use-case hero pager is missing");
   // The text toggle sits next to pause: shown by js/line-hero.js (it needs
@@ -55,7 +58,7 @@ export function applyLineHero($, { scene, frames, assetPrefix, copy }) {
   text.attr("id", "niche-hero-text");
   const toggle = $("<button>").attr({ type: "button", "data-hero-text-toggle": "", "aria-controls": "niche-hero-text", "aria-expanded": "true", "aria-label": copy.hideText, title: copy.hideText, hidden: "" })
     .append(`<svg class="line-hero__toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="line-hero__toggle-hide" d="M5 4.5l5 5 5-5M5 10.5l5 5 5-5"/><path class="line-hero__toggle-show" d="M5 9.5l5-5 5 5M5 15.5l5-5 5 5"/></svg>`);
-  pager.prepend($("<div>").addClass("scene-video-controls").append($("<button>").attr({ type: "button", "data-scene-pause": "", hidden: "" }).text(copy.pause), toggle));
+  pager.prepend($("<div>").addClass("scene-video-controls").append($("<button>").attr({ type: "button", "data-scene-pause": "", hidden: "" }).text(copy.pause), replay, toggle));
   hero.append($("<script>").attr({ type: "application/json", "data-scene-copy": "" }).text(JSON.stringify(copy).replace(/</g, "\\u003c")));
 
   $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${assetPrefix}css/line-hero.css?v=${LINE_HERO_VERSION}" />`);
