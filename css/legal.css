@@ -186,6 +186,10 @@
     unicode-bidi: isolate;
     white-space: nowrap;
   }
+
+  html[lang="he"] .legal-section__number {
+    flex-direction: row-reverse;
+  }
   .legal-section__label { min-width: 0; overflow-wrap: anywhere; }
 
   .legal-main {
