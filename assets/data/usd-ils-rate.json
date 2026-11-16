@@ -1,8 +1,8 @@
 {
   "base": "USD",
   "quote": "ILS",
-  "rate": 3.199,
+  "rate": 3.223,
   "unit": 1,
-  "lastUpdate": "2026-11-13T10:19:11.686Z",
+  "lastUpdate": "2026-11-16T13:22:05.628Z",
   "source": "https://www.boi.org.il/PublicApi/GetExchangeRate?key=USD"
 }
