@@ -170,6 +170,11 @@
   text-align: center;
 }
 
+html[lang="he"] .legal-section__number {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
 @media (max-width: 768px) {
   .legal-section__title,
   .legal-toc a[data-i18n^="legal.s."] {
@@ -187,9 +192,6 @@
     white-space: nowrap;
   }
 
-  html[lang="he"] .legal-section__number {
-    flex-direction: row-reverse;
-  }
   .legal-section__label { min-width: 0; overflow-wrap: anywhere; }
 
   .legal-main {
