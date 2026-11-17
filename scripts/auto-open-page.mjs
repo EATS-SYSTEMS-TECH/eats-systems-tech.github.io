@@ -7,7 +7,7 @@ export const AUTO_OPEN_PAGE_KEY = "auto-open";
 // headline, then three title/text pairs for the highlights: hands free, arrival, permission.
 const COPY = {
   en: ["Arrive. Enter. Carry on.", "Hands free", "Keep your phone in your pocket and your hands free.", "A smoother arrival", "Come in comfortably and get on with your day.", "For authorized users", "Automatic entry for people with permission to enter."],
-  he: ["מגיעים. נכנסים. ממשיכים.", "הידיים נשארות פנויות", "הטלפון נשאר בכיס והידיים נשארות פנויות.", "הגעה נעימה יותר", "נכנסים בנוחות וממשיכים ביום.", "למשתמשים מורשים", "כניסה אוטומטית לאנשים שיש להם הרשאת כניסה."],
+  he: ["פתיחה אוטומטית, חוויית כניסה חלקה", "הידיים נשארות פנויות", "הטלפון נשאר בכיס והידיים נשארות פנויות.", "הגעה נעימה יותר", "נכנסים בנוחות וממשיכים ביום.", "למשתמשים מורשים", "כניסה אוטומטית לאנשים שיש להם הרשאת כניסה."],
   es: ["Llega. Entra. Sigue con tu día.", "Manos libres", "Deja el teléfono en el bolsillo y mantén las manos libres.", "Una llegada más cómoda", "Entra con comodidad y sigue con tu día.", "Para usuarios autorizados", "Entrada automática para las personas que tienen permiso para entrar."],
   fr: ["Arrivez. Entrez. Poursuivez votre journée.", "Les mains libres", "Gardez votre téléphone dans votre poche et les mains libres.", "Une arrivée plus agréable", "Entrez en toute simplicité et poursuivez votre journée.", "Pour les utilisateurs autorisés", "Une entrée automatique pour les personnes autorisées à entrer."],
   de: ["Ankommen. Eintreten. Weiter geht’s.", "Die Hände bleiben frei", "Das Telefon bleibt in der Tasche und die Hände bleiben frei.", "Entspannter ankommen", "Bequem eintreten und den Tag fortsetzen.", "Für berechtigte Nutzer", "Automatischer Zutritt für Personen mit Zutrittsberechtigung."],
@@ -54,23 +54,27 @@ const BRAND_ONLY = /^(?:WIFIGATE|Auto Open|[\s·|.,:])+$/;
 // These words describe implementation, rather than the user's arrival.
 const TECHNICAL = /\b(?:BLE|Bluetooth|Wi[ -]?Fi|RF|RSSI|GPS|geofenc\w*|protocols?|algorithms?|sensors?|beacons?|firmware|encryption|encrypt\w*|triggers?|detection|detect\w*|radio|range|meters?|metres?|radius)\b|בלוטות|בלוטוס|פרוטוקול|הצפנ|זיהוי|חיישנ|טווח|תדר/iu;
 
+// A page-only lead for locales whose page wording differs from the homepage card text.
+const LEADS = Object.freeze({ he: "מגיעים, והכניסה נפתחת לבד. בלי לעצור ובלי לגעת בטלפון." });
+
 export function getAutoOpenPageContent(locale, homepageCopy) {
   if (typeof locale !== "string" || !Object.hasOwn(COPY, locale)) throw new Error(`Missing Auto Open page locale: ${locale}`);
   const local = COPY[locale];
   const feature = homepageCopy?.platform?.features?.[4];
   if (!NONEMPTY(feature?.title) || !NONEMPTY(feature?.text)) throw new Error(`Missing localized homepage Auto Open feature: ${locale}`);
+  const lead = NONEMPTY(LEADS[locale]) ? LEADS[locale] : feature.text;
   return {
     label: feature.title,
     eyebrow: "WIFIGATE · Auto Open",
     title: local[0],
-    heroLead: feature.text,
+    heroLead: lead,
     highlights: DRAWINGS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
     benefits: [],
     // Questions and answers, for the locales that have them (scripts/feature-page-faq.mjs).
     faq: featurePageFaq(AUTO_OPEN_PAGE_KEY, locale),
     seoTitle: `${feature.title} | WIFIGATE`,
-    seoDescription: feature.text,
-    imageAlt: feature.text,
+    seoDescription: lead,
+    imageAlt: lead,
   };
 }
 
