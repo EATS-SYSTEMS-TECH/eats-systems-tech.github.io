@@ -125,7 +125,8 @@ export const FEATURE_PAGES = Object.freeze([
     // The Hebrew page lead differs from the homepage card text.
     leads: Object.freeze({ he: "כל אירוע פתיחה נשמר עם שם המשתמש, השעה והמכשיר. המנהל מחליט אם לשמור את ההיסטוריה." }) }),
   Object.freeze({ key: "scheduled-events", feature: 5, card: "events", scene: "events", bodyClass: "feature-page", poster: "electric-gates-barrier",
-    drawings: Object.freeze(["calendar", "clock", "gate"]), copy: EVENTS_COPY }),
+    drawings: Object.freeze(["calendar", "clock", "gate"]), copy: EVENTS_COPY,
+    leads: Object.freeze({ he: "מחזיקים את הכניסה פתוחה או סגורה בשעות והימים שמתאימים לכם." }) }),
   Object.freeze({ key: "rf-remote-pairing", feature: 6, card: "rf-remote-learning", scene: "rf", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["remote", "roster", "keyless"]), copy: RF_COPY }),
   Object.freeze({ key: "security-privacy", feature: 7, card: "security-privacy", scene: "security", bodyClass: "feature-page", poster: "electric-gates-barrier",
