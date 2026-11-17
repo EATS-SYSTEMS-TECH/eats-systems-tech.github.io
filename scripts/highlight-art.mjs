@@ -256,7 +256,7 @@ const DRAWINGS = {
     `<path d="M24 176V112h12"/>`,
     `<g transform="rotate(18 36 120)"><rect x="36" y="108" width="50" height="24" rx="6" fill="#fff"/><circle cx="88" cy="120" r="9" fill="#fff"/></g>`,
     thin(`<path d="M98 146l18 22M90 156l10 18" stroke-dasharray="3 4"/>`),
-    `<path d="M72 150L100 122"/>`,
+    `<path d="M50 112L86 148M86 112L50 148" stroke="#fff" stroke-width="6"/><path d="M50 112L86 148M86 112L50 148" stroke-width="3"/>`,
     tint(`<rect x="196" y="62" width="64" height="114"/>`),
     `<path d="M196 176V62h64v114"/>`,
     `<path d="M196 62l-20 10v112l20 -8Z" fill="#fff"/><path d="M260 62l20 10v112l-20 -8Z" fill="#fff"/>`,
