@@ -49,6 +49,8 @@ const COPY = {
 
 // The drawing above each of the three points (scripts/highlight-art.mjs).
 const DRAWINGS = ["handsfree", "arrival", "users"];
+// Locales whose third point is about rain and darkness rather than permission.
+export const AUTO_OPEN_LOCAL_DRAWINGS = Object.freeze({ he: Object.freeze(["handsfree", "arrival", "weather"]) });
 const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
 const BRAND_ONLY = /^(?:WIFIGATE|Auto Open|[\s·|.,:])+$/;
 // These words describe implementation, rather than the user's arrival.
@@ -68,7 +70,7 @@ export function getAutoOpenPageContent(locale, homepageCopy) {
     eyebrow: "WIFIGATE · Auto Open",
     title: local[0],
     heroLead: lead,
-    highlights: DRAWINGS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
+    highlights: (AUTO_OPEN_LOCAL_DRAWINGS[locale] ?? DRAWINGS).map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
     benefits: [],
     // Questions and answers, for the locales that have them (scripts/feature-page-faq.mjs).
     faq: featurePageFaq(AUTO_OPEN_PAGE_KEY, locale),

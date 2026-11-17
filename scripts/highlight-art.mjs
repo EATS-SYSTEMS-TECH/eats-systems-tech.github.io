@@ -247,6 +247,22 @@ const DRAWINGS = {
     `<path d="M240 160L304 70"/>`,
     ground(160, 240, 164),
   ],
+  // rain and a dark night: the camera cannot see, the entrance still opens
+  weather: () => [
+    `<path d="M44 26a17 17 0 1 0 14 28a13 13 0 1 1 -14 -28Z"/>`,
+    tint(`<path d="M92 80a17 17 0 0 1 0 -34a22 22 0 0 1 40 -6a19 19 0 0 1 12 40Z"/>`),
+    `<path d="M92 80a17 17 0 0 1 0 -34a22 22 0 0 1 40 -6a19 19 0 0 1 12 40Z"/>`,
+    thin([100, 116, 132, 148].map((x, i) => `<path d="M${x} ${92 + (i % 2) * 8}l-7 16"/>`).join("")),
+    `<path d="M24 176V112h12"/>`,
+    `<g transform="rotate(18 36 120)"><rect x="36" y="108" width="50" height="24" rx="6" fill="#fff"/><circle cx="88" cy="120" r="9" fill="#fff"/></g>`,
+    thin(`<path d="M98 146l18 22M90 156l10 18" stroke-dasharray="3 4"/>`),
+    `<path d="M72 150L100 122"/>`,
+    tint(`<rect x="196" y="62" width="64" height="114"/>`),
+    `<path d="M196 176V62h64v114"/>`,
+    `<path d="M196 62l-20 10v112l20 -8Z" fill="#fff"/><path d="M260 62l20 10v112l-20 -8Z" fill="#fff"/>`,
+    dashed("M128 156H294"), tip(300, 156),
+    ground(14, 132, 176), ground(160, 306, 176), light(228, 40),
+  ],
   // any other highlight: access that is protected
   default: () => [
     `<path d="M112 28l-60 24v46c0 38 24 66 60 78c36 -12 60 -40 60 -78V52Z"/>`,
