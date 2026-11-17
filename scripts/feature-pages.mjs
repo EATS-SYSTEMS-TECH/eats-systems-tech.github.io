@@ -128,7 +128,8 @@ export const FEATURE_PAGES = Object.freeze([
     drawings: Object.freeze(["calendar", "clock", "gate"]), copy: EVENTS_COPY,
     leads: Object.freeze({ he: "מחזיקים את הכניסה פתוחה או סגורה בשעות והימים שמתאימים לכם." }) }),
   Object.freeze({ key: "rf-remote-pairing", feature: 6, card: "rf-remote-learning", scene: "rf", bodyClass: "feature-page", poster: "electric-gates-barrier",
-    drawings: Object.freeze(["remote", "roster", "keyless"]), copy: RF_COPY }),
+    drawings: Object.freeze(["remote", "roster", "keyless"]), copy: RF_COPY,
+    leads: Object.freeze({ he: "הגדירו את השלט ישירות מהאפליקציה." }) }),
   Object.freeze({ key: "security-privacy", feature: 7, card: "security-privacy", scene: "security", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["default", "private", "users"]), copy: SECURITY_COPY }),
   // The card's own starred note (business plans are the exception) follows as small print.
