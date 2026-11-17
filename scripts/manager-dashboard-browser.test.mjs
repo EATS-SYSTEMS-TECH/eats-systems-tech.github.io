@@ -342,11 +342,12 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
           .click();
         await page
           .getByRole("dialog")
-          .getByRole("button", { name: he ? "אישור" : "Confirm", exact: true })
+          .getByRole("button", { name: he ? "אישור פתיחה" : "Confirm opening", exact: true })
           .click();
         await page.waitForFunction(() =>
           window.commands.some((c) => c.cmd === "ADMIN_REMOTE_OPEN"),
         );
+        await page.locator('.manager-gate-action-dialog[data-state="success"] .manager-gate-action-footer').getByRole("button", { name: he ? "סגירה" : "Close", exact: true }).click();
         await page
           .getByRole("tab", { name: he ? "הגדרות" : "Settings", exact: true })
           .click();

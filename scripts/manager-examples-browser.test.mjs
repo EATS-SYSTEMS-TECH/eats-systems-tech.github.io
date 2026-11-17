@@ -59,7 +59,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             "manager-card manager-system",
           );
           assert.equal(await card.locator("button.primary").count(), 1, "one primary workspace action");
-          assert.equal(await card.locator(".manager-system-remove").count(), 1, "the sample retains its independent remove action");
+          assert.equal(await card.locator(".manager-system-remove").count(), 0, "the example catalogue remains available and cannot remove a real system");
           await card
             .getByRole("button", {
               name: copy("פתיחת סביבת ניהול", "Open workspace"),
@@ -84,14 +84,20 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             key,
           );
         };
-        const confirm = () =>
-          page
+        const confirm = async () => {
+          if (await page.locator(".manager-gate-action-dialog").isVisible()) {
+            await page.getByRole("dialog").getByRole("button", { name: copy("אישור פתיחה", "Confirm opening"), exact: true }).click();
+            await page.locator('.manager-gate-action-dialog[data-state="success"] .manager-gate-action-footer').getByRole("button", { name: copy("סגירה", "Close"), exact: true }).click();
+            return;
+          }
+          await page
             .getByRole("dialog")
             .getByRole("button", {
               name: copy("אישור", "Confirm"),
               exact: true,
             })
             .click();
+        };
         await open("gate");
         if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
           await page.screenshot({
@@ -105,15 +111,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           })
           .click();
         await confirm();
-        await page
-          .getByText(
-            copy(
-              "הפעולה בוצעה בסימולציה. לא הופעל שער פיזי.",
-              "Action completed in the simulation. No physical gate was activated.",
-            ),
-            { exact: true },
-          )
-          .waitFor();
+        assert.equal(await page.locator(".manager-gate-action-dialog").count(), 0, "the simulated acknowledgement was shown and explicitly closed");
         await tab("settings");
         await content
           .getByLabel(copy("משך פולס ראשון (שניות)", "First pulse (seconds)"), {
@@ -324,11 +322,11 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .first()
           .getByRole("button")
           .click();
-        await page.locator(".manager-organization-header h2").waitFor();
+        await page.locator('.manager-organization-picker-trigger .manager-organization-picker-identity strong').getByText("Example WIFIGATE Organization", {exact:true}).waitFor();
         // Like real organization cards, sample organization cards offer no card-level removal.
         assert.equal(await page.locator('[data-example-system="example-manager-gate"] .manager-system-remove').count(), 0);
         await page
-          .locator('[data-example-system="example-manager-gate"]')
+          .locator('.manager-organization-systems [data-example-system="example-manager-gate"]')
           .locator("button.primary")
           .click();
         await workspace.locator("#manager-content .manager-facts").waitFor();
@@ -339,10 +337,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           })
           .click();
         await page
-          .getByRole("heading", {
-            name: "Example WIFIGATE Organization",
-            exact: true,
-          })
+          .locator('.manager-organization-picker-trigger .manager-organization-picker-identity strong').getByText("Example WIFIGATE Organization", {exact:true})
           .waitFor();
         await nav
           .getByRole("button", {
@@ -357,13 +352,10 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .getByRole("button")
           .click();
         await page
-          .getByRole("heading", {
-            name: "Example WIFIGATE Office",
-            exact: true,
-          })
+          .locator('.manager-organization-picker-trigger .manager-organization-picker-identity strong').getByText("Example WIFIGATE Office", {exact:true})
           .waitFor();
         await page
-          .locator('[data-example-system="example-manager-group"]')
+          .locator('.manager-organization-systems [data-example-system="example-manager-group"]')
           .locator("button.primary")
           .click();
         await workspace.locator("#manager-content .manager-facts").waitFor();
@@ -374,10 +366,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           })
           .click();
         await page
-          .getByRole("heading", {
-            name: "Example WIFIGATE Office",
-            exact: true,
-          })
+          .locator('.manager-organization-picker-trigger .manager-organization-picker-identity strong').getByText("Example WIFIGATE Office", {exact:true})
           .waitFor();
         assert.equal(sockets, 0);
       });

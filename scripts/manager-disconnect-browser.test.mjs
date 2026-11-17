@@ -164,6 +164,7 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           0,
         );
         await disconnect.click();
+        assert.match(await page.getByRole("dialog").innerText(), /\$1\.90/, "removing the last system does not promise to waive the active subscription minimum");
         await page
           .getByRole("dialog")
           .getByRole("button", { name: he ? "ביטול" : "Cancel", exact: true })

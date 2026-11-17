@@ -72,7 +72,7 @@ test("Manager keeps its workspace separate from the directional shared administr
       });
       const suffix = language === "he" ? "?lang=he" : "";
       await page.goto(origin + "/dashboard/manager/" + suffix);
-      await page.locator(".manager-sidebar-roles").waitFor();
+      await page.locator(".manager-nav").waitFor();
       assert.equal(await page.locator(".manager-platform-entry").count(), 0);
       assert.equal(
         await page.locator(".manager-platform-header").isHidden(),
@@ -125,12 +125,12 @@ test("Manager keeps its workspace separate from the directional shared administr
           .count(),
         0,
       );
-      assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
-        true,
-      );
+      const fits = await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
+      if (!fits) {
+        await screenshot(page, `manager-directory-overflow-${language}-${width}`);
+        console.log(await page.evaluate(() => ({ viewport:innerWidth,documentWidth:document.documentElement.scrollWidth,body:document.body.getBoundingClientRect().toJSON(),scrolling:[...document.querySelectorAll("body *")].filter(el => el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflowX === "visible").slice(0,12).map(el => ({tag:el.tagName,class:el.className,scroll:el.scrollWidth,client:el.clientWidth,rect:el.getBoundingClientRect().toJSON()}))})));
+      }
+      assert.equal(fits, true);
       await screenshot(
         page,
         "manager-administration-" + language + "-" + width,
@@ -247,7 +247,7 @@ async function mountManagement(page, origin) {
   });
 }
 
-test("slow API reads show progress and skeletons and failures offer a safe reload", async (t) => {
+test("slow API reads show accessible progress, fence stale content and offer a safe reload after failure", async (t) => {
   const { origin, browser } = await startSite(t);
   const { page, context, errors } = await scenario(browser, auth);
   t.after(() => context.close());
@@ -280,7 +280,8 @@ test("slow API reads show progress and skeletons and failures offer a safe reloa
     await page.locator(".manager-view").getAttribute("aria-busy"),
     "true",
   );
-  assert.equal(await page.locator(".manager-loading-panel").isVisible(), true);
+  assert.equal(await page.locator(".manager-view").evaluate(view => view.inert), true);
+  assert.equal(await page.locator(".manager-progress.is-page").isVisible(), true);
   await screenshot(page, "manager-overview-loading-he");
   release();
   await page.locator(".manager-status[role=alert]").waitFor();
@@ -298,6 +299,8 @@ test("a late failure cannot clear a new view's loading state or replace its cont
   const { page, context, errors } = await scenario(browser, auth);
   t.after(() => context.close());
   let releaseOverview, releaseOrganizations;
+  let finishOverviewResponse;
+  const overviewResponseFinished = new Promise(resolve => { finishOverviewResponse = resolve; });
   await context.route("**/api/v1/manager/**", async (route) => {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith("/me")) return route.fulfill({ json: profile });
@@ -305,7 +308,8 @@ test("a late failure cannot clear a new view's loading state or replace its cont
       await new Promise((resolve) => {
         releaseOverview = resolve;
       });
-      return route.fulfill({ status: 503, json: {} });
+      try { return await route.fulfill({ status: 503, json: {} }); }
+      finally { finishOverviewResponse(); }
     }
     if (path.endsWith("/admin/organizations"))
       await new Promise((resolve) => {
@@ -326,11 +330,10 @@ test("a late failure cannot clear a new view's loading state or replace its cont
     .locator(".manager-progress")
     .getByText("טוען ארגונים…", { exact: true })
     .waitFor();
-  const oldResponse = page.waitForResponse((response) =>
-    response.url().includes("/admin/overview"),
-  );
   releaseOverview();
-  await oldResponse;
+  // Navigation may abort the old fetch, so it need not emit a response event.
+  // Release the controlled old handler, then verify the newer view still owns UI.
+  await overviewResponseFinished;
   assert.equal(await page.locator(".manager-progress").isVisible(), true);
   assert.equal(
     await page.locator(".manager-view").getAttribute("aria-busy"),
@@ -830,8 +833,13 @@ test("connection errors give localized recovery steps and safe optional diagnost
       const diagnostics = failure.locator(
         ".manager-connection-dialog__diagnostics",
       );
-      if (code === "PRIVATE_UNKNOWN_FAILURE")
-        assert.equal(await diagnostics.count(), 0);
+      if (code === "PRIVATE_UNKNOWN_FAILURE") {
+        assert.ok(await diagnostics.count() <= 1);
+        if (await diagnostics.count()) {
+          assert.doesNotMatch(await diagnostics.textContent(), /PRIVATE_|SECRET_SAMPLE/);
+          assert.equal(await diagnostics.getAttribute("open"), null, "safe timing diagnostics stay collapsed");
+        }
+      }
       else {
         assert.doesNotMatch(
           text,

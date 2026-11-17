@@ -8,7 +8,8 @@ test("Manager keeps its private profile and workspace without a separate platfor
   const f=await scenario(browser,{manager:"active",enrolled:true,verified:true,viewport:{width,height:1000}});t.after(()=>f.context.close());
   await f.context.route("**/api/v1/manager/**",r=>r.fulfill({json:new URL(r.request().url()).pathname.endsWith("/me")?{user:{uid:"fixture-user",email:"operator@example.test",name:"Manager operator"},role:"admin",roles:["admin"],account:null,organizations:[]}:{items:[],nextCursor:null}}));
   await f.page.goto(origin+"/dashboard/manager/?lang=he");
-  await f.page.locator(".manager-sidebar-roles").waitFor();
+  await f.page.locator(".manager-nav").waitFor();
+  await f.page.getByRole("button",{name:"תפקידים והרשאות",exact:true}).waitFor();
   assert.equal(await f.page.locator(".manager-platform-entry").count(),0);
   assert.equal(await f.page.locator(".manager-platform-header").isVisible(),false);
   await f.page.locator("#manager-profile-button").click();await f.page.locator("#manager-profile-panel").waitFor();
@@ -27,6 +28,7 @@ test("Manager identity, platform overview and organization columns support scope
         });
         t.after(() => page.close());
         const errors = [];
+        page.setDefaultTimeout(6000);
         page.on("pageerror", (e) => errors.push(e.message));
         await page.route(origin + "/manager-directory-fixture", (r) =>
           r.fulfill({
@@ -258,7 +260,7 @@ test("Manager identity, platform overview and organization columns support scope
           .getByText("operator@example.test", { exact: true })
           .waitFor();
         assert.equal(await profilePanel.getByText("WIFIGATE Manager Admin", {exact:true}).count(),0);
-        await page.locator('.manager-platform-header > .manager-role-badge').getByText('WIFIGATE Manager Admin',{exact:true}).waitFor();
+        assert.equal(await page.locator('.manager-platform-header .manager-role-badge').innerText(), he ? "מייסד" : "Founder", "the operator context identifies the active product role");
         const panelBox = await profilePanel.boundingBox();
         assert(panelBox.x >= 16 && panelBox.x + panelBox.width <= width - 15);
         await page.keyboard.press("Escape");
@@ -312,16 +314,13 @@ test("Manager identity, platform overview and organization columns support scope
         await page.locator('.manager-organization-header h2').waitFor();
         assert.equal(await page.locator('.manager-platform-tabs [aria-current="page"]').innerText(), he ? 'ארגונים' : 'Organizations');
         await page.locator('[data-organization-disclosure="people"] > summary').click();
-        await page.getByRole('button',{name:he?'הוספת מנהל':'Add admin',exact:true}).click();
+        await page.getByRole('button',{name:he?'הוספת צוות':'Add staff',exact:true}).click();
         await page.getByRole('dialog').getByLabel(he?'כתובת אימייל':'Email address',{exact:true}).fill('new@example.test');
-        // All four organization roles are offered; the Manager owner is the
-        // account holder, so Owner is explained but cannot be chosen.
-        const roleChoice = (name) => page.getByRole('dialog').getByRole('radio',{name:new RegExp(`Organization ${name}`)});
-        assert.equal(await page.getByRole('dialog').getByRole('radio').count(), 4);
-        assert.equal(await roleChoice('Owner').isDisabled(), true);
-        assert.equal(await roleChoice('Admin').isChecked(), true);
-        await roleChoice('Staff').check();
-        await page.getByRole('dialog').getByRole('button',{name:he?'יצירת הזמנה':'Create invitation',exact:true}).click();
+        // Role is selected through its explicit people-column action.
+        // The invitation cannot silently switch from Staff to a broader role.
+        assert.equal(await page.getByRole('dialog').getByRole('radio').count(), 0);
+        assert.equal(await page.getByRole('dialog').locator('.manager-invitation-role').getAttribute('data-role'), 'staff');
+        await page.getByRole('dialog').getByRole('button',{name:he?'שליחת הזמנה':'Send invitation',exact:true}).click();
         await page.getByRole('dialog').waitFor({state:'hidden'});
         await page.getByRole('button',{name:he?'הסרת delegate@example.test':'Remove delegate@example.test',exact:true}).click();
         await page.getByRole('dialog').getByRole('button',{name:he?'אישור':'Confirm',exact:true}).click();
@@ -399,7 +398,7 @@ test("Manager identity, platform overview and organization columns support scope
         await page.evaluate(() => window.mount("organization-admin"));
         await profileButton.click();
         assert.equal(await profilePanel.locator('.manager-role-badge').count(),0);
-        await nav.locator('.manager-sidebar-roles').getByText('WIFIGATE Manager Organization Admin',{exact:true}).waitFor();
+        await nav.locator('.manager-sidebar-roles').getByText(he?'מנהל ארגון':'Organization Admin',{exact:true}).waitFor();
         await page.keyboard.press("Escape");
         assert.equal(
           await nav

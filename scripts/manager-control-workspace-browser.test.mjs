@@ -198,12 +198,13 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
         await ready(page);
       }
       await open.click();
-      await page.getByRole("dialog").getByRole("button", { name: copy("אישור", "Confirm"), exact: true }).click();
+      await page.getByRole("dialog").getByRole("button", { name: copy("אישור פתיחה", "Confirm opening"), exact: true }).click();
       await page.waitForFunction(() => window.controlEvidence.commands.some(call => call.command === "ADMIN_REMOTE_OPEN"));
       const operation = await page.evaluate(() => window.controlEvidence.commands.filter(call => call.command === "ADMIN_REMOTE_OPEN"));
       assert.equal(operation.length, 1, "confirmation sends one operation without replay");
       assert.equal(operation[0].gate, await page.evaluate(() => window.controlEvidence.realOpenings.at(-1)), "operation targets the selected gate");
       assert.deepEqual(operation[0].payload, { mode: "METHOD", expectedGateCommand: "PULSE_AFTER_PULSE" }, "the existing secure command contract is preserved");
+      await page.locator('.manager-gate-action-dialog[data-state="success"] .manager-gate-action-footer').getByRole("button", { name: copy("סגירה", "Close"), exact: true }).click();
       await finish.click();
       await page.locator(".manager-examples > summary").click();
       await page.locator(`[data-example-system="example-manager-${type}"]`).locator("button.primary").click();
@@ -212,8 +213,9 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
       assert.deepEqual(await snapshotStyles(page), reference, "sample controls use the exact real workspace layout and styling");
       const before = await page.evaluate(() => structuredClone(window.controlEvidence));
       await open.click();
-      await page.getByRole("dialog").getByRole("button", { name: copy("אישור", "Confirm"), exact: true }).click();
-      await page.getByText(copy("הפעולה בוצעה בסימולציה. לא הופעל שער פיזי.", "Action completed in the simulation. No physical gate was activated."), { exact: true }).waitFor();
+      await page.getByRole("dialog").getByRole("button", { name: copy("אישור פתיחה", "Confirm opening"), exact: true }).click();
+      await page.getByRole("heading", { name: copy("הפעולה הושלמה בהדגמה", "Simulation completed"), exact: true }).waitFor();
+      await page.locator('.manager-gate-action-dialog[data-state="success"] .manager-gate-action-footer').getByRole("button", { name: copy("סגירה", "Close"), exact: true }).click();
       assert.deepEqual(await page.evaluate(() => window.controlEvidence), before, "sample operation cannot invoke real transport, account APIs or authentication");
       assert.equal(await page.evaluate(() => window.controlEvidence.physicalConnections), 0);
       await noPageOverflow(page, "sample controls fit the same viewport");
@@ -239,7 +241,7 @@ test("a Roller Shutter, or a Gate that is one of its sides, has no remote Open b
       const content = page.locator("#manager-content");
       assert.equal(
         await page.locator(".manager-workspace-context").innerText(),
-        variant === "roller" ? copy("תריס חשמלי · 2 שערים", "Roller Shutter · 2 gates") : copy("שער · 1 שער", "Gate · 1 gate"),
+        variant === "roller" ? "Roller Shutter\n" + copy("2 שערים", "2 gates") : "Gate\n" + copy("1 שער", "1 gate"),
       );
       if (variant === "roller")
         assert.equal(await page.locator(".manager-workspace-icon img").getAttribute("src"), "/assets/host-icons/dual-control-roller-shutter-small.svg");

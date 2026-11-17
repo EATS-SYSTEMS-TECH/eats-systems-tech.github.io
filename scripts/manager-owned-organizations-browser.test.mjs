@@ -128,12 +128,12 @@ test("mixed Manager admin and user sees owned and member organizations in the pe
           await page.screenshot({ path: path.join(process.env.MANAGER_OWNED_ORG_SCREENSHOTS, `owned-organizations-${language}-${width}.png`), fullPage: true });
         }
         await ownedCard.getByRole("button", { name: he ? "כניסה לארגון" : "Open organization", exact: true }).click();
-        await page.locator(".manager-organization-header h2").getByText(owned.name, { exact: true }).waitFor();
+        await page.locator(".manager-organization-picker-trigger .manager-organization-picker-identity strong").getByText(owned.name, { exact: true }).waitFor();
         assert.equal(await page.evaluate(() => window.calls.some((call) => call.path.startsWith("/organizations/owned/systems?"))), true);
         assert.equal(await page.evaluate(() => window.calls.some((call) => call.path.startsWith("/admin/organizations/owned"))), false);
-        await page.getByRole("button", { name: he ? "כל הארגונים" : "All organizations", exact: true }).click();
+        await page.locator('.manager-nav').getByRole("button", { name: he ? "הארגונים שלי" : "My organizations", exact: true }).click();
         await page.locator('[data-organization="member"]').getByRole("button", { name: he ? "כניסה לארגון" : "Open organization", exact: true }).click();
-        await page.locator(".manager-organization-header h2").getByText(member.name, { exact: true }).waitFor();
+        await page.locator(".manager-organization-picker-trigger .manager-organization-picker-identity strong").getByText(member.name, { exact: true }).waitFor();
         await assertSafe(page, errors);
       });
 });

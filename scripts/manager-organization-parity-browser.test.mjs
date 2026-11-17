@@ -18,7 +18,7 @@ test("organization example shares the real card and organization workspace with 
           await page.route(origin + "/org-parity", (route) =>
             route.fulfill({
               contentType: "text/html; charset=utf-8",
-              body: `<!doctype html><html lang="${language}" dir="${he ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/dashboard-header.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div class="portal-panel"><div class="manager-shell"><nav class="manager-nav">WIFIGATE Manager</nav><div class="manager-main"><section id="root" class="manager-view"></section></div></div></div></main></body></html>`,
+              body: `<!doctype html><html lang="${language}" dir="${he ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/role-guide.css"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/dashboard-header.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div class="portal-panel"><div class="manager-shell"><nav class="manager-nav">WIFIGATE Manager</nav><div class="manager-main"><section id="root" class="manager-view"></section></div></div></div></main></body></html>`,
             }),
           );
           await page.goto(origin + "/org-parity");
@@ -65,14 +65,32 @@ test("organization example shares the real card and organization workspace with 
               root.append(grid);
               window.examples.renderOrganizationCard(root);
             };
+            let selectedSection = "systems";
+            const selectSection = key => {
+              selectedSection = key;
+              root.querySelectorAll("[data-organization-section]").forEach(el => el.hidden = el.dataset.organizationSection !== key);
+            };
+            for (const key of ["systems", "people", "settings"]) {
+              const control = document.createElement("button");
+              control.dataset.testOrganizationSection = key;
+              control.textContent = key;
+              control.onclick = () => selectSection(key);
+              document.querySelector(".manager-nav").append(control);
+            }
+            const renderOrganization = async organizationId => {
+              await window.examples.renderOrganization(root, {
+                onBack: listing, organizationId, onSectionChange: selectSection,
+                onRefresh: () => renderOrganization(organizationId),
+              });
+              selectSection(selectedSection);
+            };
             window.examples = createManagerExamples({
               language,
               onOpen: () => {},
-              onOpenOrganization: (organizationId) =>
-                window.examples.renderOrganization(root, {
-                  onBack: listing,
-                  organizationId,
-                }),
+              onOpenOrganization: organizationId => {
+                selectedSection = "systems";
+                return renderOrganization(organizationId);
+              },
             });
             listing();
           }, language);
@@ -145,28 +163,17 @@ test("organization example shares the real card and organization workspace with 
               exact: true,
             })
             .click();
-          await page.locator(".manager-organization-header h2").waitFor();
-          assert.equal(
-            await page
-              .locator(".manager-organization-disclosure[open]")
-              .count(),
-            0,
-          );
-          await page
-            .locator('[data-organization-disclosure="branding"] > summary')
-            .click();
-          await page
-            .locator('[data-organization-disclosure="people"] > summary')
-            .click();
+          await page.locator('.manager-organization-workspace').waitFor({state:'attached'});
+          await page.locator('[data-test-organization-section="people"]').click();
           assert.deepEqual(
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "1", "0", "4"],
+            ["1", "2", "1", "0"],
           );
           assert.equal(
             await page.locator(".manager-organization-person-column").count(),
-            3,
+            4,
           );
           assert.equal(
             await page
@@ -189,7 +196,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-search-empty:visible")
               .count(),
-            3,
+            4,
           );
           await search.fill("");
           if (process.env.MANAGER_ORG_UX_SCREENSHOTS)
@@ -211,7 +218,7 @@ test("organization example shares the real card and organization workspace with 
           await dialog.getByRole("textbox").fill("invited@example.test");
           await dialog
             .getByRole("button", {
-              name: copy("יצירת הזמנה", "Create invitation"),
+              name: copy("שליחת הזמנה", "Send invitation"),
               exact: true,
             })
             .click();
@@ -266,7 +273,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "0", "0", "4"],
+            ["1", "2", "0", "0"],
           );
           assert.equal(
             await page.evaluate(
@@ -278,7 +285,7 @@ test("organization example shares the real card and organization workspace with 
           assert.equal(sockets, 0);
           await page
             .getByRole("button", {
-              name: copy("כל הארגונים", "All organizations"),
+              name: copy("יציאה מהסימולציה", "Exit simulation"),
               exact: true,
             })
             .click();
@@ -290,28 +297,11 @@ test("organization example shares the real card and organization workspace with 
             .nth(1)
             .getByRole("button")
             .click();
-          await page
-            .getByRole("heading", {
-              name: "Example WIFIGATE Office",
-              exact: true,
-            })
-            .waitFor();
-          assert.deepEqual(
-            await page
-              .locator(".manager-organization-metrics strong")
-              .allTextContents(),
-            ["3", "1", "0", "0"],
-          );
-          assert.equal(
-            await page
-              .locator('[data-organization-disclosure="people"]')
-              .getAttribute("open"),
-            null,
-            "another organization has its own disclosure state",
-          );
-          await page
-            .locator('[data-organization-disclosure="branding"] > summary')
-            .click();
+          await page.locator('.manager-organization-workspace').waitFor({state:'attached'});
+          assert.equal(await page.locator('[data-organization-section="people"]').first().isHidden(), true, "another organization starts at systems");
+          await page.locator('[data-test-organization-section="people"]').click();
+          assert.deepEqual(await page.locator('.manager-organization-metrics strong').allTextContents(), ["1", "2", "1", "0"]);
+          await page.locator('[data-test-organization-section="settings"]').click();
           assert.equal(
             await page.locator(".manager-organization-logo img").count(),
             1,
@@ -334,7 +324,7 @@ test("organization example shares the real card and organization workspace with 
             .waitFor({ state: "detached" });
           await page
             .getByRole("button", {
-              name: copy("כל הארגונים", "All organizations"),
+              name: copy("יציאה מהסימולציה", "Exit simulation"),
               exact: true,
             })
             .click();

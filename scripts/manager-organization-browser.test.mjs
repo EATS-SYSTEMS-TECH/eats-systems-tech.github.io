@@ -17,7 +17,7 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
   await page.route(origin + "/organization-fixture", (route) =>
     route.fulfill({
       contentType: "text/html; charset=utf-8",
-      body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div class="portal-panel"><div id="root"></div></div></main></body></html>`,
+      body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/role-guide.css"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div class="portal-panel"><div id="root"></div></div></main></body></html>`,
     }),
   );
   await page.goto(origin + "/organization-fixture");
@@ -211,87 +211,21 @@ test("selected organization contains branding, people and systems; invitation/re
         );
         await page.getByRole("button", {name:he ? "בחירת ארגון" : "Choose organization",exact:true}).click();
         await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
-        await page.locator(".manager-organization-header h2").waitFor();
-        assert.equal(
-          await page.locator(".manager-organization-disclosure[open]").count(),
-          0,
-        );
-        const manageOrganization = page.getByRole("button", { name: he ? "ניהול ארגון" : "Manage organization", exact: true });
-        assert.equal(await manageOrganization.count(), 1);
-        await manageOrganization.click();
-        assert.equal(await page.locator(".manager-organization-disclosure[open]").count(), 2);
-        for (const key of ["branding", "people"]) await page.locator(`[data-organization-disclosure="${key}"] > summary`).click();
-        assert.equal(
-          await page
-            .locator(".manager-system")
-            .first()
-            .evaluate((el) => Boolean(el.closest("details"))),
-          false,
-        );
-        const logoWidth = await page
-          .locator(".manager-organization-header .manager-organization-logo")
-          .evaluate((el) => el.getBoundingClientRect().width);
-        assert.equal(logoWidth, width > 700 ? 132 : 88);
-        // Overview tiles reveal the right section rather than scrolling to hidden content.
-        await page.locator(".manager-organization-metric").first().click();
-        assert.equal(
-          await page
-            .locator('[data-organization-disclosure="people"]')
-            .getAttribute("open"),
-          "",
-        );
-        await page
-          .locator('[data-organization-disclosure="people"] > summary')
-          .focus();
-        await page.keyboard.press("Enter");
-        assert.equal(
-          await page
-            .locator('[data-organization-disclosure="people"]')
-            .getAttribute("open"),
-          null,
-        );
-        await page.keyboard.press("Enter");
-        await page
-          .locator('[data-organization-disclosure="branding"] > summary')
-          .click();
-        assert.deepEqual(
-          await page
-            .locator(".manager-organization-metrics strong")
-            .allTextContents(),
-          ["3", "1", "0", "1"],
-        );
-        assert.equal(
-          await page
-            .locator(".manager-system .manager-system-actions button")
-            .count(),
-          1,
-        );
-        assert.equal(
-          await page.locator(".manager-organization-person-column").count(),
-          3,
-        );
-        assert.equal(
-          await page
-            .getByRole("button", {
-              name: he
-                ? "הסרת owner@example.test"
-                : "Remove owner@example.test",
-              exact: true,
-            })
-            .count(),
-          0,
-        );
-        assert.equal(
-          await page
-            .getByRole("button", {
-              name: he
-                ? "הסרת admin@example.test"
-                : "Remove admin@example.test",
-              exact: true,
-            })
-            .count(),
-          0,
-        );
+        const section = key => page.locator(`.manager-nav [data-organization-view="${key}"]`);
+        await section("systems").waitFor();
+        assert.equal(await section("systems").getAttribute("aria-current"), "page");
+        const systemCard = page.locator('.manager-system').filter({hasText:"Entrance gate"});
+        await systemCard.waitFor();
+        assert.equal(await systemCard.evaluate(el => Boolean(el.closest("details"))), false);
+        assert.equal(await systemCard.locator('.manager-system-actions button').count(), 1);
+        await section("people").click();
+        assert.deepEqual(await page.locator('.manager-organization-metrics strong').allTextContents(), ["1", "2", "1", "0"]);
+        assert.equal(await page.locator('.manager-organization-person-column').count(), 4);
+        for (const email of ["owner@example.test", "admin@example.test"]) {
+          assert.equal(await page.getByRole("button", {name: (he ? "הסרת " : "Remove ") + email, exact:true}).count(), 0);
+        }
+        await section("settings").click();
+        await page.locator('.manager-settings-brand-card').waitFor();
         const upload = page.getByLabel(
           he ? "בחירת קובץ לוגו" : "Choose logo file",
           { exact: true },
@@ -332,20 +266,10 @@ test("selected organization contains branding, people and systems; invitation/re
           (await page.evaluate(() => window.writes[0])).body.expectedVersion,
           1,
         );
-        if (process.env.MANAGER_ORG_SCREENSHOTS) {
-          for (const key of ["branding", "people"])
-            await page.locator(`[data-organization-disclosure="${key}"] > summary`).click();
-          await page.screenshot({
-            path: path.join(process.env.MANAGER_ORG_SCREENSHOTS, `organization-overview-${language}-${width}.png`),
-            fullPage: true,
-          });
-          for (const key of ["branding", "people"])
-            await page.locator(`[data-organization-disclosure="${key}"] > summary`).click();
-        }
         const backToList = () =>
           page
             .getByRole("button", {
-              name: he ? "כל הארגונים" : "All organizations",
+              name: he ? "הארגונים שלי" : "My organizations",
               exact: true,
             })
             .click();
@@ -388,6 +312,7 @@ test("selected organization contains branding, people and systems; invitation/re
           "returning to the directory is read-only",
         );
         await enter();
+        await section("settings").click();
         await page
           .getByRole("button", {
             name: he ? "הסרת לוגו" : "Remove logo",
@@ -409,6 +334,7 @@ test("selected organization contains branding, people and systems; invitation/re
           "H",
         );
         await enter();
+        await section("people").click();
         await page
           .getByRole("button", {
             name: he ? "הוספת צוות" : "Add staff",
@@ -422,7 +348,7 @@ test("selected organization contains branding, people and systems; invitation/re
         await page
           .getByRole("dialog")
           .getByRole("button", {
-            name: he ? "יצירת הזמנה" : "Create invitation",
+            name: he ? "שליחת הזמנה" : "Send invitation",
             exact: true,
           })
           .click();
@@ -484,7 +410,7 @@ test("selected organization contains branding, people and systems; invitation/re
         // The staff tile (legacy organization users) drops to zero.
         await page.waitForFunction(
           () =>
-            document.querySelectorAll(".manager-organization-metrics strong")[1]
+            document.querySelectorAll(".manager-organization-metrics strong")[2]
               ?.textContent === "0",
         );
         assert.equal(await page.evaluate(() => window.connections), 0);
@@ -502,7 +428,7 @@ test("organization users can open system workspaces without organization people 
   const page = await fixture(t, browser, origin, "he", 390, true);
   await page.getByRole("button", {name:"בחירת ארגון",exact:true}).click();
   await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
-  await page.locator(".manager-organization-header h2").waitFor();
+  await page.locator('.manager-nav [data-organization-view="systems"]').waitFor();
   assert.equal(await page.getByRole("button", { name: "ניהול ארגון", exact: true }).count(), 0);
   assert.equal(
     await page
@@ -541,6 +467,7 @@ test("organization pencil opens prefilled rename dialog; cancel is local and sav
   const page=await fixture(t,browser,origin,language,width), he=language==="he";
   await page.getByRole("button",{name:he?"בחירת ארגון":"Choose organization",exact:true}).click();
   await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
+  await page.locator('.manager-nav [data-organization-view="settings"]').click();
   const edit=page.getByRole("button",{name:he?"שינוי שם הארגון":"Rename organization",exact:true});
   await edit.click();
   const input=page.locator('dialog input[name="name"]');
@@ -550,7 +477,7 @@ test("organization pencil opens prefilled rename dialog; cancel is local and sav
   await edit.click();
   await input.fill("  New organization  ");
   await page.getByRole("button",{name:he?"שמירת השם":"Save name",exact:true}).click();
-  await page.getByRole("heading",{name:"New organization",exact:true}).waitFor();
+  await page.locator(".manager-organization-picker-trigger .manager-organization-picker-identity strong").getByText("New organization",{exact:true}).waitFor();
   assert.deepEqual(await page.evaluate(()=>window.writes),[{path:"/organizations/org-a/name",body:{name:"New organization",expectedVersion:1}}]);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  }

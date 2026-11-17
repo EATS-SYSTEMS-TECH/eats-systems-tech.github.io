@@ -1197,8 +1197,8 @@ export function createManagerDashboard({
             if (
               !(await confirmAction(
                 t(
-                  `להסיר את ${s.name} מ־Manager ולבטל את החיוב עבורה? אם זו המערכת האחרונה, חיוב המערכות יתאפס. רכיבים שמופיעים גם במערכות אחרות ותוספות ארגון ימשיכו להיות מחושבים בנפרד. בבדיקה הבאה השער ימחק את רשתות ה־Wi-Fi השמורות בו ויכבה את ה־Wi-Fi; כדי לחבר אותו שוב צריך לייצא אותו מהאפליקציה ולהגדיר Wi-Fi ליד השער. הניהול המקומי ב־Bluetooth יישאר פעיל.`,
-                  `Remove ${s.name} from Manager and stop its system subscription charge? Removing the last system leaves no system subscription charge. Components still represented in other systems and organization extras remain billed separately. On its next check the gate deletes its saved Wi-Fi networks and turns Wi-Fi off; reconnecting needs an export from the app and setting Wi-Fi again near the gate. Local Bluetooth management stays available.`,
+                  `להסיר את ${s.name} מ־Manager? המערכת תוסר מחישוב העלות, אך מנוי פעיל בתשלום נשאר עם מינימום של $1.90 לחודש גם ללא מערכות. מנהלי WIFIGATE פטורים מחיוב. רכיבים שמופיעים גם במערכות אחרות ותוספות ארגון ימשיכו להיות מחושבים בנפרד. בבדיקה הבאה השער ימחק את רשתות ה־Wi-Fi השמורות בו ויכבה את ה־Wi-Fi; כדי לחבר אותו שוב צריך לייצא אותו מהאפליקציה ולהגדיר Wi-Fi ליד השער. הניהול המקומי ב־Bluetooth יישאר פעיל.`,
+                  `Remove ${s.name} from Manager? The system will be excluded from the cost estimate, but an active paid subscription keeps its $1.90 monthly minimum even with no systems. WIFIGATE administrators are billing-exempt. Components still represented in other systems and organization extras remain counted separately. On its next check the gate deletes its saved Wi-Fi networks and turns Wi-Fi off; reconnecting needs an export from the app and setting Wi-Fi again near the gate. Local Bluetooth management stays available.`,
                 ),
               ))
             )

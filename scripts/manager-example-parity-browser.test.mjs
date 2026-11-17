@@ -80,6 +80,9 @@ test("real and simulated Manager systems render identical cards and all ten work
         const normalizeCard = (node) => {
           const clone = node.cloneNode(true);
           clone.querySelector(".manager-example-badge")?.remove();
+          // Examples share the workspace action, but their fixed catalogue
+          // has no destructive system-removal action.
+          clone.querySelector(".manager-system-remove")?.remove();
           delete clone.dataset.exampleSystem;
           return clone.outerHTML;
         };

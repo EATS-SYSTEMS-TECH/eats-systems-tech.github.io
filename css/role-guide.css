@@ -823,6 +823,6 @@ dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] { bac
 
 /* The permission table on its own, last in an organization people view
    (createOrganizationRoleMatrix): the same table as in the guide. */
-.role-guide-matrix-card { margin: 28px 0 0; color: var(--rg-ink); font-family: "Manrope", system-ui, sans-serif; }
+.role-guide-matrix-card { min-width: 0; max-width: 100%; margin: 28px 0 0; color: var(--rg-ink); font-family: "Manrope", system-ui, sans-serif; }
 .role-guide-matrix-card .role-guide-matrix { margin-top: 0; }
 .role-guide-matrix-card .role-guide-avatar { border-radius: 11px; }

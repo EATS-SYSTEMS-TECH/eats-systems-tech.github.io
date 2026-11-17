@@ -1382,6 +1382,9 @@ body[data-platform-view="management"] .platform-eyebrow { color:#7890aa; font-si
 .platform-admin-workbench { border:1px solid #dfe7f1; border-radius:16px; padding:22px; background:#fff; min-width:0; }
 .platform-admin-management .platform-admin-list-toolbar { gap:12px; margin:0 0 20px; align-items:center; }
 .platform-admin-list-title { display:flex; align-items:center; gap:11px; flex:1 1 220px; min-width:0; }
+/* The mobile toolbar's full-width heading rule predates the icon wrapper.
+   Let this nested heading share the row with its icon instead of overflowing. */
+.platform-admin-management .platform-admin-list-toolbar .platform-admin-list-title > h3 { flex:1 1 0; min-width:0; overflow-wrap:anywhere; }
 .platform-admin-list-symbol { width:38px; height:38px; flex:0 0 38px; display:grid; place-items:center; border-radius:10px; background:#f0f5fc; color:#6587ac; }
 .platform-admin-list-symbol svg { width:21px; height:21px; }
 .platform-admin-management .platform-admin-list-toolbar h3 { font-size:20px; color:#264562; margin:0; line-height:1.5; }

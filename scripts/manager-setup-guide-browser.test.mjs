@@ -53,10 +53,19 @@ test("My systems explains the app Export flow below Examples with accessible res
         const before = calls.length;
         await summary.focus();
         await page.keyboard.press("Enter");
-        assert.equal(await guide.locator("ol > li:visible").count(), 5);
-        assert.match(await guide.innerText(), /Export/);
-        assert.match(await guide.innerText(), /Sync/);
-        assert.match(await guide.innerText(), /Bluetooth/);
+        assert.equal(await guide.locator("ol > li").count(), 5);
+        let instructions = "";
+        for (let step = 1; step <= 5; step++) {
+          assert.equal(await guide.locator("ol > li:visible").count(), 1, "the guide presents one step at a time");
+          assert.equal(await guide.locator(`ol > li[data-step="${step}"]`).isVisible(), true);
+          assert.equal(await guide.locator("progress").getAttribute("value"), String(step));
+          instructions += await guide.innerText();
+          if (step < 5) await guide.getByRole("button", { name: language === "he" ? "הבא" : "Next", exact: true }).click();
+        }
+        assert.equal(await guide.getAttribute("data-guide-complete"), "true");
+        assert.match(instructions, /Export/);
+        assert.match(instructions, /Sync/);
+        assert.match(instructions, /Bluetooth/);
         if (process.env.MANAGER_GUIDE_SCREENSHOTS) {
           await mkdir(process.env.MANAGER_GUIDE_SCREENSHOTS, {
             recursive: true,

@@ -167,7 +167,7 @@ test("imports validate before consent, do not mutate on cancel, and reject late 
 });
 
 test("imports preserve protected administrator and enforce per-board capacity atomically", async () => {
-  const { data, connection } = await fixture(managerExampleSystems[1]);
+  const { data, connection } = await fixture(managerExampleSystems.find(system => system.id === "example-manager-dual"));
   const gate = data.gate("DEMO-24981"),
     revision = gate.revision;
   const rows = Array.from({ length: 1001 }, (_, i) => [

@@ -1,0 +1,198 @@
+/* Manager follows the public site's white / ink / blue presentation.
+   Keep this product-scoped: Host and Pay share components, not this skin. */
+body.platform-page[data-product="manager"] {
+  --ink: #151515;
+  --muted: #626262;
+  --line: #dedede;
+  --manager: #146bff;
+  --manager-accent: #146bff;
+  --manager-strong: #0757df;
+  --manager-soft: #edf3ff;
+  --dashboard-accent: #146bff;
+  --dashboard-soft: #edf3ff;
+  --focus: #146bff;
+  --radius-control: 4px;
+  --card-shadow: none;
+  --card-shadow-hover: 0 8px 24px #0a0a0a08;
+  color: var(--ink);
+  background: #fff;
+  font-family: "Manrope", Arial, system-ui, sans-serif;
+}
+body.platform-page[data-product="manager"] :is(.role-guide-card,.role-guide-picker,.role-guide-matrix-card)[data-product="manager"] {
+  --rg-accent: #146bff;
+  --rg-soft: #edf3ff;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,dialog) :is(h1,h2,h3,h4) {
+  color: var(--ink);
+  font-family: "Space Grotesk", "Manrope", Arial, sans-serif;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+html[lang="he"] body.platform-page[data-product="manager"] :is(h1,h2,h3,h4) {
+  font-family: Arial, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+body.platform-page[data-product="manager"] .platform-header {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  padding-block: 16px;
+  margin-block-end: 28px;
+}
+body.platform-page[data-product="manager"] .platform-header::before {
+  background: #fff;
+  border-radius: 0;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) :is(.manager-nav,.manager-card,.manager-settings-card,.manager-device-card,.manager-event-card,.manager-action-panel,.manager-organization-header,.manager-workspace-head,.manager-workspace-hero,.manager-workspace-title,.manager-primary-control,.manager-overview-metric,.manager-overview-details,.manager-history-day,.manager-platform-header) {
+  border-color: var(--line);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: none;
+  color: var(--ink);
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-nav {
+  background: #f4f4f2;
+  padding: 18px 12px;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-nav :is(.manager-nav-title,.manager-nav-group,.manager-sidebar-roles) {
+  color: var(--muted);
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-nav button {
+  background: transparent;
+  color: #464646;
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-nav button:hover {
+  background: #eaeae7;
+  color: #111;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-nav button[aria-current="page"] {
+  color: #fff;
+  background: #111;
+  box-shadow: none;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-nav .manager-organization-picker-trigger {
+  border: 1px solid #d3d3ce;
+  background: #fff;
+  color: var(--ink);
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,dialog) :is(.manager-button,.manager-event-button,.manager-tabs button,.platform-button) {
+  min-height: 44px;
+  border-radius: 4px;
+  box-shadow: none;
+  font-family: inherit;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog,.manager-connection-dialog,.manager-gate-action-dialog,.manager-guest-dialog) button.manager-button {
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog,.manager-connection-dialog,.manager-gate-action-dialog,.manager-guest-dialog) button.manager-button.primary {
+  color: #fff;
+  border-color: #111;
+  background: #111;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog,.manager-connection-dialog,.manager-gate-action-dialog,.manager-guest-dialog) button.manager-button:hover:not(:disabled) {
+  color: #fff;
+  border-color: #146bff;
+  background: #146bff;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog,.manager-gate-action-dialog,.manager-guest-dialog) button.manager-button:is(.danger,.manager-button-danger) {
+  color: #a32525;
+  border-color: #e6bcbc;
+  background: #fff;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog,.manager-gate-action-dialog,.manager-guest-dialog) button.manager-button:is(.danger,.manager-button-danger):hover:not(:disabled) {
+  color: #fff;
+  border-color: #a32525;
+  background: #a32525;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-tabs {
+  border-bottom: 1px solid var(--line);
+  gap: 4px;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-tabs button {
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-tabs button[aria-selected="true"] {
+  border-color: transparent transparent #146bff;
+  background: #edf3ff;
+  color: #0757df;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-form :is(input,select,textarea) {
+  background: #fff;
+  border-color: #c9c9c9;
+  border-radius: 4px;
+  color: var(--ink);
+  min-height: 44px;
+}
+body.platform-page[data-product="manager"] :is(.manager-form label,.manager-supporting-copy,.manager-view-description,.manager-workspace-context) {
+  color: var(--muted);
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) :is(.manager-table-wrap,.manager-facts,.manager-empty,.manager-note,.manager-history-workspace,.manager-history-summary > div) {
+  border-color: var(--line);
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: none;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-table th {
+  background: #f4f4f2;
+  color: #464646;
+  border-color: var(--line);
+  font-weight: 700;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-table :is(td,th) {
+  border-color: var(--line);
+}
+body.platform-page[data-product="manager"] :is(.manager-role-badge,.manager-system-kind-tag,.manager-event-count,.manager-empty-symbol) {
+  color: #0757df;
+  background: #edf3ff;
+  border-color: #ccdcff;
+  border-radius: 4px;
+}
+body.platform-page[data-product="manager"] .manager-control-workspace {
+  --control-ink: #151515;
+  --control-muted: #626262;
+  --control-line: #dedede;
+  --control-accent: #0757df;
+  --control-soft: #edf3ff;
+}
+body.platform-page[data-product="manager"] .manager-connection-dialog {
+  --connection-accent: #146bff;
+  border-radius: 8px;
+  color: var(--ink);
+}
+body.platform-page[data-product="manager"] .manager-connection-dialog__header {
+  background: #f4f4f2;
+  border-color: var(--line);
+}
+body.platform-page[data-product="manager"] .manager-connection-dialog__steps [data-state="current"] .manager-connection-dialog__step {
+  border-color: #b9d0ff;
+  color: #0757df;
+  background: #edf3ff;
+  box-shadow: none;
+}
+body.platform-page[data-product="manager"] :focus-visible {
+  outline: 3px solid #146bff;
+  outline-offset: 3px;
+}
+/* Match the shared workspace's explicit navigation exclusion so the public
+   site's control geometry also wins over the legacy Host bridge selectors. */
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,dialog) button.manager-button:not(.manager-nav button) {
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.platform-page[data-product="manager"] *,
+  body.platform-page[data-product="manager"] *::before,
+  body.platform-page[data-product="manager"] *::after {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}
