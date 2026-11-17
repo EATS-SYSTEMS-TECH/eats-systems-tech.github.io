@@ -129,7 +129,9 @@ export const FEATURE_PAGES = Object.freeze([
     leads: Object.freeze({ he: "מחזיקים את הכניסה פתוחה או סגורה בשעות והימים שמתאימים לכם." }) }),
   Object.freeze({ key: "rf-remote-pairing", feature: 6, card: "rf-remote-learning", scene: "rf", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["remote", "roster", "keyless"]), copy: RF_COPY,
-    leads: Object.freeze({ he: "הגדירו את השלט ישירות מהאפליקציה." }) }),
+    leads: Object.freeze({ he: "הגדירו את השלט ישירות מהאפליקציה." }),
+    // The Hebrew points walk through the learning steps: start, press the remote, save.
+    localDrawings: Object.freeze({ he: Object.freeze(["phone", "remote", "arrival"]) }) }),
   Object.freeze({ key: "security-privacy", feature: 7, card: "security-privacy", scene: "security", bodyClass: "feature-page", poster: "electric-gates-barrier",
     drawings: Object.freeze(["default", "private", "users"]), copy: SECURITY_COPY }),
   // The card's own starred note (business plans are the exception) follows as small print.
