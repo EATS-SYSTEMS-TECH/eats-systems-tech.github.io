@@ -55,14 +55,14 @@ const BRAND_ONLY = /^(?:WIFIGATE|Auto Open|[\s·|.,:])+$/;
 const TECHNICAL = /\b(?:BLE|Bluetooth|Wi[ -]?Fi|RF|RSSI|GPS|geofenc\w*|protocols?|algorithms?|sensors?|beacons?|firmware|encryption|encrypt\w*|triggers?|detection|detect\w*|radio|range|meters?|metres?|radius)\b|בלוטות|בלוטוס|פרוטוקול|הצפנ|זיהוי|חיישנ|טווח|תדר/iu;
 
 // A page-only lead for locales whose page wording differs from the homepage card text.
-const LEADS = Object.freeze({ he: "מגיעים, והכניסה נפתחת לבד. בלי לעצור ובלי לגעת בטלפון." });
+export const AUTO_OPEN_PAGE_LEADS = Object.freeze({ he: "מגיעים, והכניסה נפתחת לבד. בלי לעצור ובלי לגעת בטלפון." });
 
 export function getAutoOpenPageContent(locale, homepageCopy) {
   if (typeof locale !== "string" || !Object.hasOwn(COPY, locale)) throw new Error(`Missing Auto Open page locale: ${locale}`);
   const local = COPY[locale];
   const feature = homepageCopy?.platform?.features?.[4];
   if (!NONEMPTY(feature?.title) || !NONEMPTY(feature?.text)) throw new Error(`Missing localized homepage Auto Open feature: ${locale}`);
-  const lead = NONEMPTY(LEADS[locale]) ? LEADS[locale] : feature.text;
+  const lead = NONEMPTY(AUTO_OPEN_PAGE_LEADS[locale]) ? AUTO_OPEN_PAGE_LEADS[locale] : feature.text;
   return {
     label: feature.title,
     eyebrow: "WIFIGATE · Auto Open",
@@ -98,6 +98,8 @@ export function validateAutoOpenPageLocales(localeCodes, homepageCopies) {
       else if (value && typeof value === "object") for (const [key, item] of Object.entries(value)) inspect(item, reference?.[key], at ? `${at}.${key}` : key);
     };
     inspect(content, english, "");
+    // The homepage card text stays published even when the page has a lead of its own.
+    inspect(homepageCopies[locale].platform.features[4].text, homepageCopies?.en?.platform?.features?.[4]?.text, "homepage card text");
   }
   return problems;
 }

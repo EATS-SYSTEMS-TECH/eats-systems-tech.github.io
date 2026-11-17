@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
+import { AUTO_OPEN_PAGE_KEY, AUTO_OPEN_PAGE_LEADS, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { featurePageFaq } from "./feature-page-faq.mjs";
 
@@ -13,11 +13,12 @@ test("every supported locale has its own complete arrival-only page and preserve
   assert.deepEqual(validateAutoOpenPageLocales(locales, copies), []);
   for (const locale of locales) {
     const content = getAutoOpenPageContent(locale, copies[locale]), feature = copies[locale].platform.features[4];
+    const lead = AUTO_OPEN_PAGE_LEADS[locale] ?? feature.text;
     assert.equal(content.label, feature.title);
-    assert.equal(content.heroLead, feature.text);
+    assert.equal(content.heroLead, lead);
     assert.equal(content.seoTitle, `${feature.title} | WIFIGATE`);
-    assert.equal(content.seoDescription, feature.text);
-    assert.equal(content.imageAlt, feature.text);
+    assert.equal(content.seoDescription, lead);
+    assert.equal(content.imageAlt, lead);
     assert.deepEqual(content.highlights.map(item => item.icon), ["handsfree", "arrival", "users"]);
     assert.ok(content.highlights.every(item => item.title.trim() && item.text.trim()));
     assert.deepEqual(content.benefits, []);
