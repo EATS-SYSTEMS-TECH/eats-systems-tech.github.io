@@ -26,6 +26,7 @@ export function requestMfaChallenge(resolver, text = {}) {
   const submit = form.querySelector("button[type=submit]");
   status.textContent = "";
   delete status.dataset.tone;
+  delete status.dataset.errorCode;
   code.value = "";
   dialog.showModal();
   code.focus();
@@ -82,6 +83,11 @@ export function requestMfaChallenge(resolver, text = {}) {
         clean();
         resolve(result);
       } catch (error) {
+        // Diagnostics contain enum/type only, never the entered OTP, resolver or token.
+        const diagnostic = /^auth\/[a-z-]{1,70}$/.test(error?.code || "") ? error.code :
+          ["TypeError","ReferenceError","RangeError"].includes(error?.name) ? error.name : "MFA_ERROR";
+        console.warn("WIFIGATE MFA verification refused",diagnostic);
+        status.dataset.errorCode=diagnostic;
         status.dataset.tone = "error";
         status.textContent = (text.errorMessage ?? authErrorMessage)(error);
         code.value = "";

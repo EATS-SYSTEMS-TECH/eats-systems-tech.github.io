@@ -136,9 +136,9 @@ test('Automatic firmware panel shows installed/latest/decision and one update ac
   }
 });
 
-test('Up-to-date, newer-installed and unavailable releases never offer a download',async t=>{
+test('Identical and unavailable releases never offer a download',async t=>{
   const {origin,browser}=await startSite(t);
-  for(const options of [{latestCounter:2026110018,latestVersion:'W.11.26.18'},{latestCounter:2026110017,latestVersion:'W.11.26.17'},{unavailable:true}]){
+  for(const options of [{latestCounter:2026110018,latestVersion:'W.11.26.18'},{unavailable:true}]){
     const page=await setup(t,browser,origin,'firmware','en',options);
     assert.equal(await page.getByRole('button',{name:'Update firmware',exact:true}).isDisabled(),true);
     assert.equal(await page.locator('input[type="file"]').count(),0);
@@ -272,8 +272,17 @@ test('Pending controller verification blocks updates and Check again reads fresh
       };
     });
     await page.getByRole('button',{name:'Check again',exact:true}).click();
-    assert.equal(await update.isDisabled(),true);
+    assert.equal(await update.isDisabled(),false);
     assert.match(await page.locator('.manager-firmware-facts').innerText(),/W\.11\.26\.20/);
     assert.equal(await page.evaluate(()=>window.calls.at(-1).name),'ADMIN_FOTA_GET_STATUS');
   }
+});
+
+test('A different signed published build is offered even when its build counter is lower',async t=>{
+ const {origin,browser}=await startSite(t);
+ const page=await setup(t,browser,origin,'firmware','en',{latestVersion:'W.11.26.17',latestCounter:2026110017});
+ assert.equal(await page.getByRole('button',{name:'Update firmware',exact:true}).isEnabled(),true);
+ assert.match(await page.locator('.manager-firmware-facts').innerText(),/Yes/);
+ await page.getByRole('button',{name:'Update firmware',exact:true}).click();
+ assert.equal(await page.evaluate(()=>window.firmwareDownloads),0); // cancelled confirmation
 });

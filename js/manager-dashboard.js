@@ -2200,7 +2200,9 @@ export function createManagerDashboard({
           if (!current()) throw new Error("CANCELLED");
           const gate=currentGate,version=prepared.beginPayload.version,system=currentSystem,epoch=generation;
           if(typeof source.updateFirmware!=="function")throw new Error("UNSUPPORTED");
+          const transferStartedAt=performance.now();
           const result=await source.updateFirmware(prepared,progress);
+          const transferFinishedAt=performance.now();
           const ownerCurrent=()=>!closed&&currentGate===gate&&currentSystem===system;
           if(!ownerCurrent()||generation!==epoch)throw new Error("CANCELLED");
           const delay=Math.max(4000,Math.min(30000,(Number(result.data?.rebootInMs)||0)+2500));
@@ -2219,8 +2221,12 @@ export function createManagerDashboard({
             await new Promise(resolve=>setTimeout(resolve,1500));
           }while(Date.now()<deadline);
           if(status.pendingVerify || status.rebootPending)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
+          const verifiedAt=performance.now();
+          const timing={version,downloadMs:Math.round((prepared.managerTiming?.downloadedAt??transferStartedAt)-(prepared.managerTiming?.startedAt??transferStartedAt)),transferMs:Math.round(transferFinishedAt-transferStartedAt),reconnectAndVerifyMs:Math.round(verifiedAt-transferFinishedAt),totalMs:Math.round(verifiedAt-(prepared.managerTiming?.startedAt??transferStartedAt))};
+          console.info("Manager FOTA verified",JSON.stringify(timing));
           await showTab("firmware");
-          say(t(`העדכון הושלם. גרסה ${version} אומתה לאחר האתחול.`,`Update complete. Version ${version} verified after restart.`));
+          const seconds=Math.ceil(timing.totalMs/1000);
+          say(t(`העדכון הושלם בתוך ${seconds} שניות. גרסה ${version} אומתה לאחר האתחול.`,`Update complete in ${seconds} seconds. Version ${version} verified after restart.`));
         } });
       if (current()) workspacePanel = panel; else panel.dispose();
       return;

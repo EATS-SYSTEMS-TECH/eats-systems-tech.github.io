@@ -442,12 +442,14 @@ export async function renderManagerDeviceControls({
         await ensureRecent({maxAgeSeconds:240,requireTotp:true});
         if (!alive())return;
         if (!(await confirm(t(`לעדכן לגרסה ${release.manifest.version}? הבקר יאתחל לאחר אימות והתקנה.`,`Update to ${release.manifest.version}? The controller restarts after verification and installation.`))) || !alive())return;
+        const startedAt=performance.now();
         progress.hidden=false;progress.value=0;
         state.textContent=t("מורידים את העדכון המוצפן…","Downloading the encrypted update…");
         prepared=await firmwareSource.download(release,data,(done,total)=>{
           if(alive())progress.value=.25*done/total;
         });
         if(!alive())return;
+        prepared.managerTiming={startedAt,downloadedAt:performance.now()};
         state.textContent=t("מעבירים ומאמתים את העדכון בבקר…","Transferring and authenticating the update on the controller…");
         await onFirmwareUpdate(prepared,(received,total)=>{
           if(alive())progress.value=.25+.75*received/total;
@@ -480,15 +482,13 @@ export async function renderManagerDeviceControls({
         release=result;latest.textContent=result.manifest.version;
         const currentCounter=data.releaseCounter;
         if(!Number.isSafeInteger(currentCounter)||currentCounter<1)throw new Error("INVALID_RESPONSE");
-        const newer=result.manifest.releaseCounter>currentCounter;
-        decision.textContent=newer?t("כן","Yes"):t("לא","No");
+        const different=result.manifest.version!==data.firmwareVersion;
+        decision.textContent=different?t("כן","Yes"):t("לא","No");
         state.setAttribute("role","status");
-        state.textContent=newer?t("עדכון מאובטח זמין למערכת.","A secure update is available for this system."):
-          result.manifest.releaseCounter<currentCounter?t("מותקנת גרסה חדשה יותר מהגרסה המפורסמת. אין צורך בעדכון.","The installed version is newer than the published release. No update is needed."):
-          t("המערכת מעודכנת.","The system is up to date.");
-        update.disabled=!newer||!onFirmwareUpdate||data.pendingVerify||Boolean(data.rebootPending);
+        state.textContent=different?t("הגרסה המותקנת שונה מהגרסה המפורסמת. אפשר להתקין את הגרסה המפורסמת לאחר אימות התאמה ואבטחה בבקר.","The installed version differs from the published release. You can install the published release after controller compatibility and security checks."):t("המערכת מעודכנת.","The system is up to date.");
+        update.disabled=!different||!onFirmwareUpdate||data.pendingVerify||Boolean(data.rebootPending);
         if(data.pendingVerify || data.rebootPending)state.textContent=t("הבקר משלים אתחול ואימות של עדכון קודם. בדקו שוב לאחר שהאימות יסתיים.","The controller is completing restart and verification of a previous update. Check again after verification finishes.");
-        else if(newer && ["RECEIVING","READY"].includes(data.resumableTransfer?.state))state.textContent=t("נמצאה העברה קודמת. לחיצה על עדכון תמשיך אותה אם היא תואמת לגרסה הזמינה; חבילה אחרת תידחה על ידי הבקר.","A previous transfer exists. Update will resume it if it matches the available release; the controller refuses a different package.");
+        else if(different && ["RECEIVING","READY"].includes(data.resumableTransfer?.state))state.textContent=t("נמצאה העברה קודמת. לחיצה על עדכון תמשיך אותה אם היא תואמת לגרסה הזמינה; חבילה אחרת תידחה על ידי הבקר.","A previous transfer exists. Update will resume it if it matches the available release; the controller refuses a different package.");
       } catch(error){
         if(alive()){
           latest.textContent=t("לא ניתן לבדוק כרגע","Unable to check right now");
