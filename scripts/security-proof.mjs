@@ -11,7 +11,7 @@ export const SECURITY_PROOF_STYLE_VERSION = "20261118sp6";
 export const SECURITY_PROOF_COPY = Object.freeze({
   he: Object.freeze({
     eyebrow: "הידעת?",
-    title: "נבנה לעמוד מול כלי פריצה מודרניים.",
+    title: "WIFI GATE נבנה לעמוד מול כלי פריצה מודרניים.",
     layersTitle: "4 שכבות הגנה",
     layersText: "כל פתיחה מהאפליקציה מוגנת בארבע שכבות, כך שאי אפשר לקרוא אותה, לזייף אותה או להעתיק אותה.",
     layers: Object.freeze([
