@@ -83,6 +83,7 @@ export function applyHomepageCopy($, copy, locale) {
   else $('#wifi-gate-faq .section__subtitle').remove();
   for (const key of ['distributorTitle', 'distributorText', 'distributorButton', 'supportTitle', 'supportText', 'interestTitle', 'interestText', 'whatsappButton']) text(`[data-i18n='contact.${key}']`, copy.contact[key]);
   setLocalizedLines($, '#where-title', copy.solutions.titleLines, locale);
+  if (copy.why.title.includes('\n')) setLocalizedLines($, '#why-wifigate-title', copy.why.title.split('\n'), locale);
   setLocalizedLines($, '#guest-invites-title', copy.automation.titleLines, locale);
   if (copy.automation.subtitle.includes('\n')) {
     setLocalizedLines($, '#wifigate-for-business .guest-invites__subtitle', copy.automation.subtitle.split('\n'), locale);

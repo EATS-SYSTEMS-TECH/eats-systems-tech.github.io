@@ -1,6 +1,7 @@
 /* Shared header appearance for every content page. Base controls live in styles.css. */
 :root { --nav-height: 4.75rem; }
 .site-header {
+  color: #151515;
   position: sticky;
   top: 0;
   z-index: 100;
