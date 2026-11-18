@@ -11,6 +11,7 @@ import { NICHE_DEFINITIONS, validateNichePageLocales } from './niche-pages/index
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from './landing-pages/index.mjs';
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
 import { FEATURE_PAGES, featureCardPages, getFeaturePageContent, validateFeaturePageLocales } from './feature-pages.mjs';
+import { installSecurityProof } from './security-proof.mjs';
 import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, installSubscriptionFlow, installAudienceList, appendHostMarketingDetails } from './host-marketing-page.mjs';
 import { installHomeFeatureCards, installFeatureArrows } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
@@ -285,6 +286,7 @@ async function buildFeaturePages(homeData) {
       fillUseCaseBody($, { chrome, content, image, locale, pageKey: page.key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
       $('#niche-benefits, #niche-prev-link, #niche-next-link').remove(); removeEmptyFaq($, content);
       installHighlightNote($, content.note, locale);
+      installSecurityProof($, { pageKey: page.key, locale, assetPrefix: buildAssetPrefix(locale, page.key) });
       setUseCaseNavigation($, { chrome, content });
       applyLineHero($, { scene: page.scene, frames: homeData.lineHeroFrames, assetPrefix: buildAssetPrefix(locale, page.key), copy: { ...homeData.homepageCopies[locale].hero.media, hideText: homeData.homepageCopies[locale].hero.textToggle?.hide, showText: homeData.homepageCopies[locale].hero.textToggle?.show } });
       installUseCaseShopLink($, { locale, pageKey: page.key, label: (await loadSubscriptionCopy('host-page-copy', locale)).marketing?.shop?.button, contactLabel: homeData.homepageCopies[locale]?.navigation?.contact });

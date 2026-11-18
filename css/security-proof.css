@@ -1,0 +1,279 @@
+/* "Did you know?" panel of the security and privacy page
+   (scripts/security-proof.mjs): a dark report-like panel with the four
+   protection layers on one side and the hacking tools that failed on the other. */
+.security-proof {
+  --proof-blue: #146bff;
+  --proof-ink: #0a0a0a;
+  --proof-text: rgba(255, 255, 255, 0.92);
+  --proof-muted: rgba(255, 255, 255, 0.66);
+  --proof-hair: rgba(255, 255, 255, 0.14);
+  --proof-red: #ff5a5f;
+  padding: clamp(3rem, 7vw, 5rem) 0 0;
+  background: #fff;
+}
+
+.security-proof__panel {
+  padding: clamp(1.75rem, 4vw, 3.25rem);
+  border-radius: 4px;
+  color: var(--proof-text);
+  background: var(--proof-ink);
+}
+
+.security-proof__eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--proof-blue);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.security-proof__title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.security-proof__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.security-proof__card {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--proof-hair);
+  border-radius: 4px;
+}
+
+.security-proof__card-title {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.2;
+}
+
+.security-proof__card-text {
+  margin: 0;
+  color: var(--proof-muted);
+  line-height: 1.7;
+}
+
+/* The four rings around the lock. */
+.security-proof__art-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.security-proof__art {
+  width: min(100%, 200px);
+  height: auto;
+}
+
+.security-proof__ring {
+  fill: none;
+  stroke: rgba(20, 107, 255, 0.55);
+  stroke-width: 1.5;
+}
+
+.security-proof__ring--core {
+  fill: rgba(20, 107, 255, 0.14);
+  stroke: var(--proof-blue);
+}
+
+.security-proof__badge circle {
+  fill: var(--proof-ink);
+  stroke: var(--proof-blue);
+  stroke-width: 1.5;
+}
+
+.security-proof__badge text {
+  fill: #fff;
+  font: 700 12px/1 "Manrope", system-ui, sans-serif;
+  text-anchor: middle;
+}
+
+.security-proof__lock {
+  fill: var(--proof-blue);
+}
+
+.security-proof__shackle {
+  fill: none;
+  stroke: var(--proof-blue);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.security-proof__keyhole {
+  fill: var(--proof-ink);
+}
+
+.security-proof__device {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 2;
+}
+
+.security-proof__screen {
+  fill: rgba(20, 107, 255, 0.2);
+  stroke: var(--proof-blue);
+  stroke-width: 1.5;
+}
+
+.security-proof__device-ring,
+.security-proof__antenna {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.security-proof__device-dot {
+  fill: rgba(255, 255, 255, 0.75);
+}
+
+.security-proof__wave {
+  fill: none;
+  stroke: rgba(255, 90, 95, 0.75);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 4 5;
+}
+
+.security-proof__stop {
+  fill: rgba(255, 90, 95, 0.14);
+  stroke: var(--proof-red);
+  stroke-width: 2;
+}
+
+.security-proof__stop-cross {
+  fill: none;
+  stroke: var(--proof-red);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.security-proof__layers {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.security-proof__layer {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.security-proof__number {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1.5px solid var(--proof-blue);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.security-proof__layer-copy {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.security-proof__layer-title {
+  color: #fff;
+}
+
+.security-proof__layer-text {
+  color: var(--proof-muted);
+  line-height: 1.6;
+}
+
+/* The tools, as rows of a test report. */
+.security-proof__tools {
+  display: grid;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--proof-hair);
+}
+
+.security-proof__tool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--proof-hair);
+}
+
+.security-proof__tool-name {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.security-proof__tool-name bdi {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 1.1rem;
+}
+
+.security-proof__tool-detail {
+  color: var(--proof-muted);
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.security-proof__result {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(255, 90, 95, 0.45);
+  border-radius: 999px;
+  color: var(--proof-red);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* The test card ends with its result, at the foot of the card. */
+.security-proof__card--test {
+  display: flex;
+  flex-direction: column;
+}
+
+.security-proof__outcome {
+  margin: auto 0 0;
+  padding-top: 1.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.security-proof__note {
+  margin: 1rem 0 0;
+  color: #7c7c7c;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .security-proof__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
