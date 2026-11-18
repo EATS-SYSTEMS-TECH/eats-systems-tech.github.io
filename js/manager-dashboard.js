@@ -252,7 +252,11 @@ export function createManagerDashboard({
       FIRMWARE_NOT_NEWER:t("החבילה אינה חדשה יותר מהקושחה במערכת.","This package is not newer than the installed firmware."),
       FOTA_REBOOT_NOT_VERIFIED:t("לא אומתה הגרסה החדשה לאחר האתחול. התחברו שוב ובדקו את גרסת המערכת לפני ניסיון נוסף.","The new version was not verified after restart. Reconnect and check the installed version before retrying."),
       // History may use internal LittleFS on BETA boards or SD on newer hardware.
-      STORAGE_IO: ["history", "guests"].includes(currentTab)
+      STORAGE_IO: /^ADMIN_IMPORT_(BEGIN|VALIDATE|STATUS)$/.test(error.command ?? "")
+        ? t("המערכת לא הצליחה להכין ולאמת את היבוא. הרשומות הקיימות לא הוחלפו. בדקו את לשונית האחסון ונסו שוב.", "The system could not prepare and validate the import. Existing records were not replaced. Check the Storage tab and retry.")
+        : error.command === "ADMIN_IMPORT_COMMIT"
+        ? t("לא התקבל אישור שהיבוא נשמר. התחברו שוב ובדקו את הרשומות לפני ניסיון נוסף.", "Import completion was not confirmed. Reconnect and check the records before retrying.")
+        : ["history", "guests"].includes(currentTab)
         ? t("לא ניתן לקרוא כעת את אחסון ההיסטוריה במערכת. בדקו את המצב בלשונית אחסון ופתחו שוב את ההיסטוריה.", "The system's history storage is unavailable. Check the Storage tab, then reopen History to retry.")
         : /^ADMIN_LIST_(USERS|ADMINS)$/.test(error.command ?? "")
           ? t("השער לא הצליח לקרוא את הרשימה מהאחסון שלו. נסו לפתוח את הלשונית שוב; אם זה חוזר, יש לבדוק את השער.", "The gate could not read this list from its storage. Reopen the tab; if this continues, the gate needs checking.")
