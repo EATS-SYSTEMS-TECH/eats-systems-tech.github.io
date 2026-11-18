@@ -18,7 +18,7 @@ export const SECURITY_PROOF_COPY = Object.freeze({
       Object.freeze({ icon: "controller", title: "אימות הבקר", text: "האפליקציה מוודאת שהחיבור הוא לבקר שלכם." }),
       Object.freeze({ icon: "lock", title: "הצפנה", text: "אף אחד לא יכול לקרוא את הפקודה." }),
       Object.freeze({ icon: "phone", title: "אימות הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
-      Object.freeze({ icon: "replay", title: "הגנה מהעתקה", text: "פקודה שהוקלטה לא תעבוד שוב." }),
+      Object.freeze({ icon: "replay", title: "הגנה מהעתקה", text: "גם אם מישהו יעתיק את פקודת הפתיחה, הוא לא יוכל להשתמש בה שוב." }),
     ]),
     standardTitle: "תקני הצפנה בינלאומיים",
     standardText: "ההגנה בנויה על אלגוריתמים מוכרים של NIST, אותם תקנים שעליהם נשענות מערכות פיננסיות וממשלתיות, ומעליהם הוספנו שכבות הגנה משלנו.",
