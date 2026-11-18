@@ -17,7 +17,7 @@
   border-radius: 4px;
   color: var(--proof-text);
   background: #fff;
-  border: 1px solid var(--proof-hair);
+  border: none;
 }
 
 .security-proof__eyebrow {
