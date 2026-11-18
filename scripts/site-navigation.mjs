@@ -16,6 +16,7 @@ export const SITE_NAVIGATION = [
     { label: "WIFIGATE Manager", pageKey: "wifigate-manager" },
     { label: "WIFIGATE Host", pageKey: "wifigate-host" },
   ] },
+  { key: "productGuide", hash: "tutorial-videos" },
   { key: "shop", pageKey: "shop" },
   { key: "contact", hash: "get-in-touch" },
 ];

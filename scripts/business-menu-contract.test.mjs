@@ -67,7 +67,7 @@ test("every shared-header page renders the For Business product links", () => {
     const link = group.children("a.nav__link.nav__group-link");
     assert.equal(link.attr("href"), `${buildPagePath(locale)}#wifigate-for-business`, `${label}: For Business still opens the homepage section`);
     assert.equal($(".topbar-nav .nav__link").length, SITE_NAVIGATION.length, `${label}: canonical top-level links`);
-    assert.equal($('.topbar-nav a[href$="#tutorial-videos"]').length, 0, `${label}: tutorials removed from navigation`);
+    assert.equal($('.topbar-nav a[href$="#tutorial-videos"]').length, 1, `${label}: tutorials available in navigation`);
     assert.equal($('.topbar-nav > .nav__shop-link').length, 1, `${label}: one outlined shop link`);
     const list = group.find(".nav__submenu > ul.nav__submenu-list");
     assert.equal(list.attr("aria-label"), link.text().replace(/\u200f/g, ""), `${label}: list is named after For Business`);
