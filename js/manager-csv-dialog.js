@@ -76,6 +76,7 @@ export function createManagerCsvDialog({
       ),
       DUPLICATE_PHONE: t("אותו מספר טלפון מופיע בקובץ יותר מפעם אחת. השאירו רשומה אחת לכל מספר.", "A phone number appears more than once. Keep one row per phone number."),
       CSV_CAPACITY_EXCEEDED: t("מספר הרשומות בקובץ גדול מקיבולת המערכת לקבוצה הזו.", "The file contains more records than this collection allows."),
+      IMPORT_PREPARATION_TIMEOUT: t("המערכת עדיין מתכוננת לקליטת הקובץ. הרשומות לא נשלחו. המתינו מעט ונסו שוב.", "The system is still preparing to receive the file. No records were sent. Wait briefly and try again."),
       CSV_FILE_TOO_LARGE: t("הקובץ גדול מדי. הגודל המרבי הוא 4 MB.", "The file is too large. The maximum size is 4 MB."),
       IMPORT_REJECTED: t("המערכת לא אישרה את הייבוא. בדקו קיבולת, נתוני משתמשים והרשאות. הרשומות לא נשמרו.", "The system rejected the import. Check capacity, user details and permissions. The records were not saved."),
       EXAMPLE_DELEGATION_ADMIN: t("יש להשאיר את מנהל ההרשאות ברשימת המנהלים. ניתן לבחור במיזוג כדי לשמור את הרשומות הקיימות.", "The delegated administrator must remain in the administrator list. Choose Merge to preserve existing records."),

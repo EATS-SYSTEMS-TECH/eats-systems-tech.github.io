@@ -13,6 +13,39 @@ const makeSession = () => beginBulkSendEpoch({
   deviceWriteKey: new Uint8Array(32).fill(3),
 });
 
+test("import BEGIN waits for confirmed controller cleanup before creating the transfer", async (t) => {
+  const c = new ManagerConnection({api: async()=>({}), user:{uid:"fixture"}});
+  const payload = {collection:"USERS", expectedRevision:7, sha256:"a".repeat(64)};
+  let calls=0, waits=0;
+  t.mock.method(globalThis,"setTimeout",resolve=>{waits++;queueMicrotask(resolve);return 0;});
+  c.command=async(name,body)=>{
+    assert.equal(name,"ADMIN_IMPORT_BEGIN");assert.equal(body,payload);
+    if(++calls<3)throw Object.assign(new Error("BUSY"),{code:"BUSY",field:"cleanup",firmwareRefusal:true});
+    return {data:{transferId:42}};
+  };
+  assert.equal((await c.beginPreparedImport(payload)).data.transferId,42);
+  assert.equal(calls,3);assert.equal(waits,2);
+});
+
+test("import preparation never retries timeouts, unverified errors or another busy resource", async () => {
+  for(const error of [new Error("RESPONSE_TIMEOUT"),Object.assign(new Error("BUSY"),{code:"BUSY",field:"cleanup"}),Object.assign(new Error("BUSY"),{code:"BUSY",field:"collection",firmwareRefusal:true}),Object.assign(new Error("STORAGE_IO"),{code:"STORAGE_IO",field:"cleanup",firmwareRefusal:true})]){
+    const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});let calls=0;
+    c.command=async()=>{calls++;throw error;};
+    await assert.rejects(c.beginPreparedImport({}),e=>e===error);assert.equal(calls,1);
+  }
+});
+
+test("import preparation is bounded to ninety seconds and stops when disconnected", async (t) => {
+  let now=0, calls=0;
+  t.mock.method(Date,"now",()=>now);
+  t.mock.method(globalThis,"setTimeout",resolve=>{now+=500;queueMicrotask(resolve);return 0;});
+  const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});
+  c.command=async()=>{calls++;throw Object.assign(new Error("BUSY"),{code:"BUSY",field:"cleanup",firmwareRefusal:true});};
+  await assert.rejects(c.beginPreparedImport({}),/IMPORT_PREPARATION_TIMEOUT/);
+  assert.equal(now,90000);assert.equal(calls,181);
+  c.closed=true;await assert.rejects(c.beginPreparedImport({}),/DISCONNECTED/);assert.equal(calls,181);
+});
+
 for(const verified of [true,false])test(`Manager firmware bulk ${verified?"finishes after verification":"refuses FINISH on an unverified image"}`,async()=>{
   const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});c.session=makeSession();
   const bytes=new Uint8Array(1800).map((_,i)=>i%251),expected=bytes.slice();

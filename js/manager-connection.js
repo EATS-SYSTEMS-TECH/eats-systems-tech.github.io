@@ -311,7 +311,7 @@ export class ManagerConnection {
       if (data.status !== "OK")
         throw Object.assign(
           new Error(data.admin?.error?.code ?? data.status ?? "COMMAND_FAILED"),
-          { code: data.admin?.error?.code, reason: data.admin?.error?.message, firmwareRefusal: true, command: cmd },
+          { code: data.admin?.error?.code, field: data.admin?.error?.field, reason: data.admin?.error?.message, firmwareRefusal: true, command: cmd },
         );
       return data.admin;
     } catch (error) {
@@ -516,6 +516,22 @@ export class ManagerConnection {
       this.transfer = false;
     }
   }
+  async beginPreparedImport(payload) {
+    const deadline = Date.now() + 90000;
+    for (;;) {
+      if (this.closed) throw new Error("DISCONNECTED");
+      try {
+        return await this.command("ADMIN_IMPORT_BEGIN", payload, 120000);
+      } catch (error) {
+        // A confirmed cleanup refusal has not created a transfer. Only this
+        // controller response permits retry; never replay a timed-out BEGIN,
+        // another BUSY reason, validation, COMMIT or any access mutation.
+        if (!error.firmwareRefusal || error.code !== "BUSY" || error.field !== "cleanup") throw error;
+        if (Date.now() >= deadline) throw new Error("IMPORT_PREPARATION_TIMEOUT");
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+    }
+  }
   async importCollection(
     collection,
     mode,
@@ -540,8 +556,7 @@ export class ManagerConnection {
     let id;
     try {
       const begin = (
-        await this.command(
-          "ADMIN_IMPORT_BEGIN",
+        await this.beginPreparedImport(
           {
             collection,
             mode,
@@ -551,7 +566,6 @@ export class ManagerConnection {
             sha256: bytesHex(await sha(data)),
             expectedRevision,
           },
-          120000,
         )
       ).data;
       id = begin.transferId;
