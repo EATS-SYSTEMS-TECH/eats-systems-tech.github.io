@@ -1234,7 +1234,7 @@ export function createManagerDashboard({
     }
     // A new gate needs an organization before the app can authorize Wi-Fi.
     // Keep assignment reachable on its card, before any remote connection.
-    if ((workspace || operatorAccount || (!scope && !examples.isSystem(s))) && secondary.childElementCount) {
+    if ((workspace || operatorAccount || (!scope && currentView !== "example-organization")) && secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");
       menu.name = "manager-system-options";
       const trigger = node("summary");
