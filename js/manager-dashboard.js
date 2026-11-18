@@ -1886,7 +1886,9 @@ export function createManagerDashboard({
       if (typeof candidate[method] !== "function") continue;
       const run = candidate[method].bind(candidate);
       candidate[method] = (...args) =>
-        activity.track(
+        method === "command" && args[0] === "ADMIN_PING"
+          ? run(...args)
+          : activity.track(
           method === "exportCollection"
             ? t("מייצא נתונים מהמערכת…", "Exporting system data…")
             : method === "updateFirmware" ? t("מעביר ומאמת עדכון קושחה…","Transferring and verifying firmware…")
@@ -1948,7 +1950,7 @@ export function createManagerDashboard({
       }
       renderTabs();
       if (!preserveView) await showTab("overview");
-      else if (!existingContent?.childElementCount) await showTab(currentTab);
+      else if (!existingContent?.childElementCount || existingContent.querySelector(".manager-connection-recovery")) await showTab(currentTab);
       else if (currentTab === "auto") await showTab("auto");
       await window.wifigateManagerLoading?.whenStyled(view);
       if (Date.now() >= deadline) expireAttempt();

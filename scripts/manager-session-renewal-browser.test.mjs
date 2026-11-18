@@ -2,6 +2,44 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite } from "./platform-test-fixtures.mjs";
 
+test("manual retry after a renewed channel fails replaces the recovery card with live controls", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const page = await browser.newPage();
+  page.setDefaultTimeout(5000);
+  t.after(() => page.close());
+  await page.route(origin + "/renewal-retry-fixture", route => route.fulfill({ contentType: "text/html", body: '<!doctype html><div id="root"></div>' }));
+  await page.goto(origin + "/renewal-retry-fixture");
+  await page.evaluate(async () => {
+    const { createManagerDashboard } = await import("/js/manager-dashboard.js");
+    window.connections = [];
+    const system = { id: "system", name: "Test gate", type: "gate", systemIds: ["gate"], version: 1, status: "active" };
+    class Connection {
+      constructor({ onState }) { this.onState = onState; window.connections.push(this); }
+      async open() { this.session = {}; this.onState("active"); }
+      close() { this.session = null; }
+      async command() { return { data: { systemId: "gate" } }; }
+    }
+    const api = async path => {
+      if (path === "/me") return { role: "user", account: { id: "owner" }, organizations: [] };
+      if (path.startsWith("/systems?")) return { items: [system] };
+      throw new Error(path);
+    };
+    window.manager = createManagerDashboard({ root: document.querySelector("#root"), user: { uid: "owner" }, api, Connection });
+    await window.manager.ready;
+  });
+  await page.getByRole("button", { name: "Open workspace", exact: true }).click();
+  await page.getByRole("button", { name: "Open gate", exact: true }).waitFor();
+  await page.evaluate(() => { window.connections[0].onState("SECURE_SESSION_EXPIRED"); window.connections[0].close(); });
+  await page.waitForFunction(() => window.connections.length === 2 && !document.querySelector("#manager-content").inert);
+  await page.evaluate(() => { window.connections[1].onState("DISCONNECTED"); window.connections[1].close(); });
+  const popup = await assertPopupOnlyFailure(page);
+  await popup.getByRole("button", { name: "Try connecting again", exact: true }).click();
+  await page.waitForFunction(() => window.connections.length === 3);
+  await page.getByRole("button", { name: "Open gate", exact: true }).waitFor();
+  assert.equal(await page.locator(".manager-connection-recovery").count(), 0);
+  assert.equal(await page.getByRole("tab", { name: "Overview & open", exact: true }).getAttribute("aria-selected"), "true");
+});
+
 async function assertPopupOnlyFailure(page) {
   const popup = page.locator('.manager-connection-dialog[data-state="error"]');
   await popup.waitFor();
@@ -79,6 +117,13 @@ test("secure session renewal preserves edits and daily identity without replayin
       }
       async command(cmd) {
         window.commands.push(cmd);
+        if (cmd === "ADMIN_PING" && this.holdHeartbeat) {
+          this.busy = true;
+          this.pendingCommand = cmd;
+          return new Promise(resolve => {
+            window.releaseHeartbeat = () => { this.busy = false; this.pendingCommand = undefined; resolve({ data: {} }); };
+          });
+        }
         if (cmd === "ADMIN_GET_GATE_CONFIG")
           return {
             data: {
@@ -113,6 +158,15 @@ test("secure session renewal preserves edits and daily identity without replayin
   await page.getByRole("tab", { name: "Settings", exact: true }).click();
   const input = page.getByLabel("First pulse (seconds)", { exact: true });
   await input.fill("1.234");
+  await page.evaluate(() => {
+    window.connections[0].holdHeartbeat = true;
+    void window.connections[0].command("ADMIN_PING");
+  });
+  await page.waitForFunction(() => typeof window.releaseHeartbeat === "function");
+  assert.equal(await page.locator("#manager-content").evaluate(el => el.inert), false, "keep-alives must not disable the editing panel");
+  assert.equal(await page.locator("#manager-tabs").evaluate(el => el.inert), false, "keep-alives must not disable navigation");
+  assert.equal(await input.inputValue(), "1.234");
+  await page.evaluate(() => window.releaseHeartbeat());
   await page.evaluate(() => {
     window.connections[0].holdCancellation = true;
     window.connections[0].busy = true;
