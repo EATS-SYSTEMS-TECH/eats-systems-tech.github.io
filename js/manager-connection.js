@@ -556,7 +556,7 @@ export class ManagerConnection {
         size < 1 ||
         !Number.isInteger(credits) ||
         credits < 1 ||
-        credits > 8
+        credits > 20
       )
         throw new Error("INVALID_IMPORT");
       let sent = offset,
@@ -584,7 +584,7 @@ export class ManagerConnection {
           f.byteOffset < 0 ||
           f.byteOffset > sent ||
           f.flagsOrValue < 1 ||
-          f.flagsOrValue > 8
+          f.flagsOrValue > 20
         )
           throw new Error("INVALID_IMPORT_ACK");
         receiveSeq = f.packetSeq;

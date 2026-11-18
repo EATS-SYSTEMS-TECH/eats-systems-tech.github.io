@@ -171,6 +171,7 @@ for (const accepted of [true, false])
       feedback = 1,
       lastClient = 0,
       inWindow = 0,
+      grantedCredits = 8,
       chain = Promise.resolve(),
       commits = 0,
       aborts = 0;
@@ -185,15 +186,16 @@ for (const accepted of [true, false])
           assert.equal(f.offset, received.length);
           received = Buffer.concat([received, f.plain]);
           inWindow++;
-          if (inWindow === 4 || f.value & 1) {
+          if (inWindow === Math.max(1, Math.floor(grantedCredits / 2)) || f.value & 1) {
             inWindow = 0;
+            grantedCredits = 20;
             c.onBulk(
               await managerBulkFrame(c.session, "d2c", {
                 type: 2,
                 transferId: 42,
                 packetSeq: feedback++,
                 byteOffset: received.length,
-                flagsOrValue: 8,
+                flagsOrValue: grantedCredits,
               }),
             );
           }
@@ -246,6 +248,20 @@ for (const accepted of [true, false])
     if (accepted) assert.equal(result.created, 250);
     else assert.equal(result.cancelled, true);
   });
+for (const credits of [0, 21, 1.5]) test(`Manager rejects invalid import credit grant ${credits} before sending data`, async () => {
+  const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});
+  c.session=makeSession();c.capabilities={data:{limits:{maxUsers:1000,maxAdmins:20}}};
+  let sent=0,aborted=0;
+  c.socket={send(){sent++;}};
+  c.command=async command=>{
+    if(command==="ADMIN_IMPORT_BEGIN")return {data:{transferId:42,acceptedOffset:0,maxPacketBytes:476,credits}};
+    if(command==="ADMIN_IMPORT_ABORT"){aborted++;return {data:{aborted:true}};}
+    throw new Error(command);
+  };
+  await assert.rejects(c.importCollection("USERS","MERGE",[["972","500000001","Resident","",0,0,0]],7,async()=>true),/INVALID_IMPORT/);
+  assert.equal(sent,0);assert.equal(aborted,1);assert.equal(c.transfer,false);
+});
+
 test("Manager verifies the complete encrypted export before returning any rows", async () => {
   const c = new ManagerConnection({
     api: async () => ({}),
