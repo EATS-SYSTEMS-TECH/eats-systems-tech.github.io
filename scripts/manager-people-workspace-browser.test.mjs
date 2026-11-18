@@ -25,6 +25,11 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
         class Connection extends ManagerExampleConnection {
           constructor(options){super({data,system:template,onState:options.onState});}
           async command(command,payload){window.commands.push({command,payload});return super.command(command,payload);}
+          async exportCollection(collection){
+            const rows=await super.exportCollection(collection);
+            const columns=['countryCode','localNumber','name','email','floorNumber','apartmentNumber','parkingNumber'];
+            return rows.map(row=>Array.isArray(row)?row:columns.map(key=>row[key]));
+          }
         }
         window.dashboard=createManagerDashboard({root:document.querySelector('#root'),user:{uid:'people-fixture'},language,Connection,
           api:async path=>path==='/me'?{role:'user',account:{id:'fixture'},organizations:[]}:{items:path.startsWith('/systems?')?[{...template,id:'real-fixture',status:'active'}]:[],nextCursor:null}});
@@ -98,6 +103,14 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
       await page.locator('[data-tab="users"]').click();
       await workspace.getByRole('button',{name:copy('טעינת כל המשתמשים','Load all users'),exact:true}).click();
       assert.equal(await workspace.locator('tbody tr').count(),30,'load all reads the full collection into the table');
+      await workspace.getByText('Updated resident',{exact:true}).waitFor();
+      assert.doesNotMatch(await workspace.innerText(),/undefined/,'canonical bulk tuples retain person fields');
+      await workspace.getByRole('searchbox').fill('resident1@example.test');
+      assert.equal(await workspace.locator('tbody tr:visible').count(),1);
+      await workspace.getByRole('button',{name:copy('עריכה','Edit'),exact:true}).first().click();
+      assert.equal(await form.locator('[name="localNumber"]').inputValue(),'500000001');
+      assert.equal(await form.locator('[name="name"]').inputValue(),'Updated resident');
+      await page.locator('dialog.manager-people-dialog').getByRole('button',{name:copy('סגירה','Close'),exact:true}).click();
       if(mode==='real'){
         const writes=await page.evaluate(()=>window.commands.filter(x=>/UPSERT|DELETE/.test(x.command)));
         assert.deepEqual(writes.map(x=>x.command),['ADMIN_UPSERT_USER','ADMIN_UPSERT_USER','ADMIN_DELETE_USER']);

@@ -21,7 +21,7 @@ import { isRollerShutter, rollerShutterAppOnlyText } from "./wifigate-objects.js
 import { createManagerDialog } from "./manager-dialog.js";
 import { createManagerGateActionDialog } from "./manager-gate-action-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
-import { encodeManagerCsv } from "./manager-csv.js";
+import { encodeManagerCsv, managerColumns } from "./manager-csv.js";
 import { createManagerCsvDialog } from "./manager-csv-dialog.js";
 import { renderManagerSettings } from "./manager-settings.js";
 import { renderManagerDeviceControls } from "./manager-device-controls.js";
@@ -2632,7 +2632,15 @@ export function createManagerDashboard({
         const source = connection, epoch = generation, panel = tabGeneration;
         const rows = await source.exportCollection(collection);
         if (closed || connection !== source || generation !== epoch || tabGeneration !== panel || !source.session) return;
-        currentRows = rows; cursor = null;
+        // Bulk export returns canonical seven-column import tuples; paged
+        // fallback returns profile objects. The table and edit actions use
+        // named fields in both cases.
+        currentRows = rows.map(row => {
+          if (!Array.isArray(row)) return row;
+          if (row.length !== managerColumns.length) throw new Error("INVALID_EXPORT");
+          return Object.fromEntries(managerColumns.map((key, index) => [key, row[index]]));
+        });
+        cursor = null;
         content.replaceChildren(); renderTable(content, currentRows); renderPeopleActions(content, tab);
       });
       loadAll.dataset.peopleAction = "load-all";
