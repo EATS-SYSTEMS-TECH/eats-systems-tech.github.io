@@ -1,13 +1,14 @@
 /* "Did you know?" panel of the security and privacy page
-   (scripts/security-proof.mjs): a dark report-like panel with the four
+   (scripts/security-proof.mjs): a white report-like panel with the four
    protection layers on one side and the hacking tools that failed on the other. */
 .security-proof {
   --proof-blue: #146bff;
   --proof-ink: #0a0a0a;
-  --proof-text: rgba(255, 255, 255, 0.92);
-  --proof-muted: rgba(255, 255, 255, 0.66);
-  --proof-hair: rgba(255, 255, 255, 0.14);
-  --proof-red: #ff5a5f;
+  --proof-heading: #0a0a0a;
+  --proof-text: #151515;
+  --proof-muted: #626262;
+  --proof-hair: #dedede;
+  --proof-red: #e5484d;
   padding: clamp(3rem, 7vw, 5rem) 0 0;
   background: #fff;
 }
@@ -16,7 +17,8 @@
   padding: clamp(1.75rem, 4vw, 3.25rem);
   border-radius: 4px;
   color: var(--proof-text);
-  background: var(--proof-ink);
+  background: #fff;
+  border: 1px solid var(--proof-hair);
 }
 
 .security-proof__eyebrow {
@@ -29,7 +31,7 @@
 
 .security-proof__title {
   margin: 0;
-  color: #fff;
+  color: var(--proof-heading);
   font-size: clamp(1.7rem, 3.4vw, 2.6rem);
   font-weight: 500;
   line-height: 1.15;
@@ -51,7 +53,7 @@
 
 .security-proof__card-title {
   margin: 0 0 0.5rem;
-  color: #fff;
+  color: var(--proof-heading);
   font-size: clamp(1.25rem, 2vw, 1.55rem);
   line-height: 1.2;
 }
@@ -86,13 +88,13 @@
 }
 
 .security-proof__badge circle {
-  fill: var(--proof-ink);
+  fill: #fff;
   stroke: var(--proof-blue);
   stroke-width: 1.5;
 }
 
 .security-proof__badge text {
-  fill: #fff;
+  fill: var(--proof-heading);
   font: 700 12px/1 "Manrope", system-ui, sans-serif;
   text-anchor: middle;
 }
@@ -109,12 +111,12 @@
 }
 
 .security-proof__keyhole {
-  fill: var(--proof-ink);
+  fill: #fff;
 }
 
 .security-proof__device {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.75);
+  stroke: rgba(21, 21, 21, 0.7);
   stroke-width: 2;
 }
 
@@ -127,13 +129,13 @@
 .security-proof__device-ring,
 .security-proof__antenna {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.75);
+  stroke: rgba(21, 21, 21, 0.7);
   stroke-width: 2;
   stroke-linecap: round;
 }
 
 .security-proof__device-dot {
-  fill: rgba(255, 255, 255, 0.75);
+  fill: rgba(21, 21, 21, 0.7);
 }
 
 .security-proof__wave {
@@ -179,7 +181,7 @@
   height: 1.75rem;
   border: 1.5px solid var(--proof-blue);
   border-radius: 50%;
-  color: #fff;
+  color: var(--proof-heading);
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -191,7 +193,7 @@
 }
 
 .security-proof__layer-title {
-  color: #fff;
+  color: var(--proof-heading);
 }
 
 .security-proof__layer-text {
@@ -222,7 +224,7 @@
   display: grid;
   gap: 0.15rem;
   min-width: 0;
-  color: #fff;
+  color: var(--proof-heading);
   font-weight: 700;
 }
 
@@ -259,7 +261,7 @@
 .security-proof__outcome {
   margin: auto 0 0;
   padding-top: 1.5rem;
-  color: #fff;
+  color: var(--proof-heading);
   font-size: 1.1rem;
   font-weight: 700;
 }

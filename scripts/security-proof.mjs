@@ -6,7 +6,7 @@
 import { setLocalizedText } from "./localized-builder-document.mjs";
 
 export const SECURITY_PROOF_PAGE_KEY = "security-privacy";
-export const SECURITY_PROOF_STYLE_VERSION = "20261118sp1";
+export const SECURITY_PROOF_STYLE_VERSION = "20261118sp2";
 
 export const SECURITY_PROOF_COPY = Object.freeze({
   he: Object.freeze({
