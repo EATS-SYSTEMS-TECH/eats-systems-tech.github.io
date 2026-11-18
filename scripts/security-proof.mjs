@@ -6,7 +6,7 @@
 import { setLocalizedText } from "./localized-builder-document.mjs";
 
 export const SECURITY_PROOF_PAGE_KEY = "security-privacy";
-export const SECURITY_PROOF_STYLE_VERSION = "20261118sp2";
+export const SECURITY_PROOF_STYLE_VERSION = "20261118sp3";
 
 export const SECURITY_PROOF_COPY = Object.freeze({
   he: Object.freeze({
@@ -20,14 +20,19 @@ export const SECURITY_PROOF_COPY = Object.freeze({
       Object.freeze({ title: "זיהוי הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
       Object.freeze({ title: "הגנה מהעתקה", text: "פקודה שהוקלטה לא תעבוד שוב." }),
     ]),
+    standardTitle: "תקני הצפנה בינלאומיים",
+    standardText: "ההגנה בנויה על אלגוריתמים מוכרים של NIST, אותם תקנים שעליהם נשענות מערכות פיננסיות וממשלתיות, ומעליהם הוספנו שכבות הגנה משלנו.",
     testTitle: "המומחים שלנו ניסו לפרוץ.",
-    testText: "הם ניסו להעתיק ולפרוץ את הפתיחה מהאפליקציה עם כלי הפריצה המוכרים היום:",
+    testText: "בדקנו את הפתיחה מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
     tools: Object.freeze([
       Object.freeze({ name: "Flipper Zero", detail: "עם מודול הרחבה" }),
       Object.freeze({ name: "HackRF One", detail: "" }),
+      Object.freeze({ name: "Ubertooth One", detail: "" }),
+      Object.freeze({ name: "nRF52840", detail: "" }),
     ]),
-    failed: "לא הצליח",
-    outcome: "אף ניסיון לא הצליח.",
+    // Stated positively: the opening withstood each tool.
+    result: "מוגן",
+    outcome: "הפתיחה מהאפליקציה עמדה בכל הניסיונות.",
     note: "* המידע בחלק הזה מתייחס לפתיחה ידנית מהאפליקציה בלבד, ולא לשלט או לפתיחה אוטומטית.",
   }),
 });
@@ -37,7 +42,7 @@ const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
 export function securityProofCopy(pageKey, locale) {
   if (pageKey !== SECURITY_PROOF_PAGE_KEY || !Object.hasOwn(SECURITY_PROOF_COPY, locale)) return null;
   const copy = SECURITY_PROOF_COPY[locale];
-  const texts = [copy.eyebrow, copy.title, copy.layersTitle, copy.layersText, copy.testTitle, copy.testText, copy.failed, copy.outcome, copy.note];
+  const texts = [copy.eyebrow, copy.title, copy.layersTitle, copy.layersText, copy.standardTitle, copy.standardText, copy.testTitle, copy.testText, copy.result, copy.outcome, copy.note];
   if (!texts.every(NONEMPTY) || copy.layers.length !== 4 || !copy.layers.every(layer => NONEMPTY(layer.title) && NONEMPTY(layer.text))
     || !copy.tools.length || !copy.tools.every(tool => NONEMPTY(tool.name))) throw new Error(`Incomplete security proof copy: ${locale}`);
   return copy;
@@ -58,7 +63,7 @@ const LAYERS_ART = `<svg class="security-proof__art" viewBox="0 0 240 240" aria-
   <circle cx="120" cy="127" r="3" class="security-proof__keyhole"/>
 </svg>`;
 
-// A handheld hacking tool whose signal stops at a crossed-out mark before the lock.
+// A handheld hacking tool whose signal stops at a shield before the lock.
 const TOOLS_ART = `<svg class="security-proof__art" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
   <rect x="22" y="82" width="64" height="104" rx="12" class="security-proof__device"/>
   <rect x="32" y="94" width="44" height="30" rx="3" class="security-proof__screen"/>
@@ -67,8 +72,8 @@ const TOOLS_ART = `<svg class="security-proof__art" viewBox="0 0 240 240" aria-h
   <path d="M74 82V52" class="security-proof__antenna"/>
   <circle cx="74" cy="48" r="4" class="security-proof__device-dot"/>
   <path d="M96 112q10 16 0 32M108 102q16 26 0 52M120 92q22 36 0 72" class="security-proof__wave"/>
-  <circle cx="150" cy="128" r="17" class="security-proof__stop"/>
-  <path d="M142 120l16 16M158 120l-16 16" class="security-proof__stop-cross"/>
+  <path d="M150 104l20 8v14c0 13-8 22-20 27c-12-5-20-14-20-27v-14z" class="security-proof__shield"/>
+  <path d="M141 128l6 6l12-13" class="security-proof__shield-check"/>
   <rect x="180" y="124" width="36" height="28" rx="4" class="security-proof__lock"/>
   <path d="M188 124v-8a10 10 0 0 1 20 0v8" class="security-proof__shackle"/>
   <circle cx="198" cy="137" r="3.5" class="security-proof__keyhole"/>
@@ -88,14 +93,15 @@ export function installSecurityProof($, { pageKey, locale, assetPrefix }) {
     $("<span>").addClass("security-proof__layer-copy").append(text("strong", "security-proof__layer-title", layer.title), text("span", "security-proof__layer-text", layer.text)))));
   const layersCard = $("<div>").addClass("security-proof__card security-proof__card--layers").append(
     $("<div>").addClass("security-proof__art-wrap").append(LAYERS_ART),
-    text("h3", "security-proof__card-title", copy.layersTitle), text("p", "security-proof__card-text", copy.layersText), layers);
+    text("h3", "security-proof__card-title", copy.layersTitle), text("p", "security-proof__card-text", copy.layersText), layers,
+    $("<div>").addClass("security-proof__standard").append(text("strong", "security-proof__standard-title", copy.standardTitle), text("p", "security-proof__standard-text", copy.standardText)));
 
   const tools = $("<ul>").addClass("security-proof__tools");
   for (const tool of copy.tools) {
     const name = $("<span>").addClass("security-proof__tool-name").append($("<bdi>").attr("dir", "ltr").text(tool.name));
     if (NONEMPTY(tool.detail)) name.append(text("span", "security-proof__tool-detail", tool.detail));
     tools.append($("<li>").addClass("security-proof__tool").append(name, $("<span>").addClass("security-proof__result").append(
-      $("<span>").addClass("security-proof__cross").attr("aria-hidden", "true").text("✕"), text("span", "security-proof__result-text", copy.failed))));
+      $("<span>").addClass("security-proof__check").attr("aria-hidden", "true").text("✓"), text("span", "security-proof__result-text", copy.result))));
   }
   const testCard = $("<div>").addClass("security-proof__card security-proof__card--test").append(
     $("<div>").addClass("security-proof__art-wrap").append(TOOLS_ART),

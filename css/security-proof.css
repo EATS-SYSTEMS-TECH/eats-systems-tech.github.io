@@ -1,6 +1,6 @@
 /* "Did you know?" panel of the security and privacy page
    (scripts/security-proof.mjs): a white report-like panel with the four
-   protection layers on one side and the hacking tools that failed on the other. */
+   protection layers on one side and the hacking tools it withstood on the other. */
 .security-proof {
   --proof-blue: #146bff;
   --proof-ink: #0a0a0a;
@@ -8,7 +8,6 @@
   --proof-text: #151515;
   --proof-muted: #626262;
   --proof-hair: #dedede;
-  --proof-red: #e5484d;
   padding: clamp(3rem, 7vw, 5rem) 0 0;
   background: #fff;
 }
@@ -146,17 +145,19 @@
   stroke-dasharray: 4 5;
 }
 
-.security-proof__stop {
-  fill: rgba(255, 90, 95, 0.14);
-  stroke: var(--proof-red);
+.security-proof__shield {
+  fill: rgba(20, 107, 255, 0.12);
+  stroke: var(--proof-blue);
   stroke-width: 2;
+  stroke-linejoin: round;
 }
 
-.security-proof__stop-cross {
+.security-proof__shield-check {
   fill: none;
-  stroke: var(--proof-red);
+  stroke: var(--proof-blue);
   stroke-width: 3;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .security-proof__layers {
@@ -199,6 +200,25 @@
 .security-proof__layer-text {
   color: var(--proof-muted);
   line-height: 1.6;
+}
+
+/* The standards the protection is built on, at the foot of the layers card. */
+.security-proof__standard {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--proof-hair);
+}
+
+.security-proof__standard-title {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--proof-heading);
+}
+
+.security-proof__standard-text {
+  margin: 0;
+  color: var(--proof-muted);
+  line-height: 1.65;
 }
 
 /* The tools, as rows of a test report. */
@@ -244,9 +264,10 @@
   gap: 0.4rem;
   align-items: center;
   padding: 0.3rem 0.7rem;
-  border: 1px solid rgba(255, 90, 95, 0.45);
+  border: 1px solid rgba(20, 107, 255, 0.4);
   border-radius: 999px;
-  color: var(--proof-red);
+  color: var(--proof-blue);
+  background: rgba(20, 107, 255, 0.06);
   font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
