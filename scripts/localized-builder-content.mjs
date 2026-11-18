@@ -85,6 +85,9 @@ export function applyHomepageCopy($, copy, locale) {
   if (copy.automation.subtitle.includes('\n')) {
     setLocalizedLines($, '#wifigate-for-business .guest-invites__subtitle', copy.automation.subtitle.split('\n'), locale);
   }
+  if (copy.automation.text.includes('\n')) {
+    setLocalizedLines($, '.business-plan--host .business-plan__text', copy.automation.text.split('\n'), locale);
+  }
   // Optional notes retain their original visibility/removal boundary.
   for (const [selector, value] of [['#subscription-note', copy.platform.subscriptionNote], ['#entry-points-note', copy.why.pointsNote]]) {
     if (!$(selector).length) continue;
