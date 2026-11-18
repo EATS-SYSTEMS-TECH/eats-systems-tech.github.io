@@ -19,6 +19,7 @@ import {
   canOpenProduct,
 } from "./platform-model.js";
 import { platformText } from "./platform-copy.js";
+import { verifyManagerRecentIdentity } from "./manager-recent-identity.js";
 import { watchSession } from "./platform-session.js";
 import {
   renderProductSwitcher,
@@ -569,14 +570,10 @@ async function refresh() {
             document.title = managerTitle(enabled);
           },
           onProfile: (profile) => managerProfile?.update({ ...profile, platformRole: "platformRole" in profile ? profile.platformRole : identity.platformRole }, user),
-          ensureRecent: async ({ maxAgeSeconds = 86400 } = {}) => {
-            const token = await user.getIdTokenResult();
-            const age = Date.now() / 1000 - Number(token.claims.auth_time ?? 0);
-            if (!Number.isFinite(age) || age < 0 || age > maxAgeSeconds) {
-              await reauthenticate(user, requestMfaChallenge);
-              await user.getIdToken(true);
-            }
-          },
+          ensureRecent: options => verifyManagerRecentIdentity({ user,
+            reauthenticate: () => reauthenticate(user, requestMfaChallenge),
+            isCurrent: () => currentUser === user && requestGeneration === generation,
+          }, options),
         });
         await managerDashboard.ready;
         if (requestGeneration !== generation) return;

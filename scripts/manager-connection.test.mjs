@@ -13,6 +13,15 @@ const makeSession = () => beginBulkSendEpoch({
   deviceWriteKey: new Uint8Array(32).fill(3),
 });
 
+test("Expected reset disconnect closes transport without starting recovery",async()=>{
+  const states=[],calls=[];
+  const c=new ManagerConnection({api:async path=>{calls.push(path);return{}},user:{uid:'fixture'},onState:s=>states.push(s)});
+  c.requestId='reset-fixture';c.factoryResetExpected=true;
+  await c.fail(new Error('DISCONNECTED'));
+  assert.equal(c.closed,true);assert.deepEqual(states,[]);
+  assert.deepEqual(calls,['/connection-requests/reset-fixture/cancel']);
+});
+
 test("remaining transfer budget counts down without extending the hard session deadline", t => {
   let now=1000;t.mock.method(Date,"now",()=>now);
   const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});

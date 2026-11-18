@@ -81,11 +81,11 @@ export function createManagerDashboard({
     for (const menu of root.querySelectorAll("details.manager-system-menu[open]"))
       if (!menu.contains(event.target)) menu.open = false;
   });
-  const confirmAction = (message) =>
+  const confirmAction = (message, options) =>
     dialogs.confirm(
       view.dataset.simulation === "true"
         ? `${t("סימולציה בלבד · מערכת לדוגמה", "Simulation only · example system")}\n${message}`
-        : message,
+        : message, options,
     );
   let organizationPicker;
   let exampleOrganizationId = null;
@@ -2174,6 +2174,18 @@ export function createManagerDashboard({
       const transport = {get session(){return context.source.session;},get capabilities(){return context.source.capabilities;},command:(...args)=>context.source.command(...args)};
       const panel = await renderManagerDeviceControls({ root: content, kind: tab, language, connection: transport,
         confirm: confirmAction, ensureRecent, isCurrent: current, errorText, onRefresh: () => showTab(tab),
+        onFactoryReset: async ({ acknowledged }) => {
+          if (closed || context.source !== connection || context.epoch !== generation) return;
+          stop();
+          const title = node("h3", t("הגישה לבקר לאחר איפוס", "Controller access after reset"));
+          title.tabIndex = -1;
+          const notice = node("p", acknowledged
+            ? t("הבקר אישר את בקשת האיפוס. נתוני ה־Wi-Fi, המנהלים וגישת Manager יימחקו. לא ניתן להתחבר אליו מחדש מרחוק עד לרישום מנהל, ייצוא ל־Manager והגדרת Wi-Fi מחדש ליד הבקר.", "The controller accepted reset. Its Wi-Fi networks, administrators and Manager authorization will be erased. Remote reconnection requires local administrator enrollment, export to Manager and Wi-Fi setup near the controller.")
+            : t("לא ניתן לוודא אם בקשת האיפוס בוצעה. לא ננסה לשלוח אותה שוב או להתחבר אוטומטית. אם בוצעה, רשתות ה־Wi-Fi, המנהלים וגישת Manager נמחקו; נדרשת בדיקה והגדרה מחדש ליד הבקר.", "Reset outcome could not be verified. The request will not be resent and automatic reconnection is stopped. If applied, Wi-Fi networks, administrators and Manager access were erased; check and set up the controller locally."));
+          notice.setAttribute("role", "status");
+          view.replaceChildren(title, notice);
+          title.focus();
+        },
         onFirmwareUpdate: async (prepared,progress) => {
           const gate=currentGate,version=prepared.beginPayload.version,system=currentSystem,epoch=generation;
           if(typeof context.source.updateFirmware!=="function")throw new Error("UNSUPPORTED");

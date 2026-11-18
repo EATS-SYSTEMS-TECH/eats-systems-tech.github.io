@@ -356,6 +356,17 @@
   color: #b42318;
   border-color: #efd3d6;
 }
+:is(.manager-shell, .manager-confirm-dialog) button.manager-button:is(.manager-reset-button, .primary.danger),
+.platform-page .manager-confirm-dialog button.manager-button.primary.danger {
+  background: #b42318;
+  border-color: #b42318;
+  color: #fff;
+}
+:is(.manager-shell, .manager-confirm-dialog) button.manager-button:is(.manager-reset-button, .primary.danger):hover:not(:disabled),
+.platform-page .manager-confirm-dialog button.manager-button.primary.danger:hover:not(:disabled) {
+  background: #912018;
+  border-color: #912018;
+}
 :is(.manager-shell, .manager-confirm-dialog) button.manager-button:disabled {
   opacity: 0.5;
   cursor: default;

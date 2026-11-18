@@ -304,6 +304,7 @@ export class ManagerConnection {
         admin: { version: 1, requestId: crypto.randomUUID(), payload },
       };
       const text = await encryptManagerCommand(this.session, command);
+      if (cmd === "ADMIN_FACTORY_RESET_COMMIT") this.factoryResetExpected = true;
       const response = this.next(
         (v) => v.type === "frame" && v.seq === this.session.seq,
         timeout,
@@ -312,11 +313,13 @@ export class ManagerConnection {
       const data = await decryptManagerResponse(this.session, await response);
       if (Number.isInteger(data.clock?.tz)) this.timeZoneOffset = data.clock.tz;
       if (data.cmd !== cmd) throw new Error("RESPONSE_MISMATCH");
-      if (data.status !== "OK")
+      if (data.status !== "OK") {
+        if (cmd === "ADMIN_FACTORY_RESET_COMMIT") this.factoryResetExpected = false;
         throw Object.assign(
           new Error(data.admin?.error?.code ?? data.status ?? "COMMAND_FAILED"),
           { code: data.admin?.error?.code, field: data.admin?.error?.field, reason: data.admin?.error?.message, firmwareRefusal: true, command: cmd },
         );
+      }
       return data.admin;
     } catch (error) {
       if (["RESPONSE_TIMEOUT", "DISCONNECTED"].includes(error.message))
@@ -331,7 +334,7 @@ export class ManagerConnection {
   fail(error) {
     if (this.closed) return this.closing;
     this.failure = error;
-    if (!(this.firmwareRebootExpected && ["DISCONNECTED", "CONNECTION_FAILED", "RESPONSE_TIMEOUT"].includes(error.message))) this.onState(error.message);
+    if (!((this.firmwareRebootExpected || this.factoryResetExpected) && ["DISCONNECTED", "CONNECTION_FAILED", "RESPONSE_TIMEOUT"].includes(error.message))) this.onState(error.message);
     this.close();
   }
   bulkReceiver() {

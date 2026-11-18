@@ -16,6 +16,7 @@ async function setup(t, browser, origin, kind, language = "en") {
       window.calls = [];
       window.refreshes = 0;
       window.confirmed = false;
+      window.resetResults = [];
       window.current = true;
       window.connection = {
         session: {},
@@ -38,6 +39,8 @@ async function setup(t, browser, origin, kind, language = "en") {
             data:
               name === "ADMIN_FACTORY_RESET_PREPARE"
                 ? { challenge: "a".repeat(32) }
+                : name === "ADMIN_FACTORY_RESET_COMMIT"
+                  ? { accepted: true }
                 : name === "ADMIN_GET_QR_PAYLOAD"
                   ? {
                       sensitive: true,
@@ -63,8 +66,9 @@ async function setup(t, browser, origin, kind, language = "en") {
         language,
         connection: window.connection,
         isCurrent: () => window.current,
-        confirm: async () => window.confirmed,
+        confirm: async (message, options) => { window.confirmation = {message, options}; return window.confirmed; },
         ensureRecent: async (options) => (window.authOptions = options),
+        onFactoryReset: async result => window.resetResults.push(result),
         errorText: (e) => e.message,
         onRefresh: async () => window.refreshes++,
       });
@@ -149,16 +153,50 @@ test("Late QR response is discarded after navigation", async (t) => {
 test("Factory reset prepares but never commits after cancellation", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await setup(t, browser, origin, "reset");
-  await page.getByRole("button", { name: "Prepare factory reset" }).click();
+  await page.getByRole("button", { name: "Factory reset", exact: true }).click();
   assert.deepEqual(await page.evaluate(() => window.calls.map((x) => x.name)), [
     "ADMIN_FACTORY_RESET_PREPARE",
   ]);
   await page.evaluate(() => (window.confirmed = true));
-  await page.getByRole("button", { name: "Prepare factory reset" }).click();
+  assert.deepEqual(await page.evaluate(() => window.authOptions), {maxAgeSeconds:240,force:true,requireTotp:true});
+  assert.equal(await page.locator('.manager-reset-button.danger').count(), 1);
+  assert.match(await page.locator('main').innerText(), /Wi-Fi networks.*administrators.*Manager authorization/s);
+  assert.equal((await page.evaluate(() => window.confirmation.options)).danger, true);
+  await page.getByRole("button", { name: "Factory reset", exact: true }).click();
   assert.deepEqual(await page.evaluate(() => window.calls.at(-1)), {
     name: "ADMIN_FACTORY_RESET_COMMIT",
     payload: { challenge: "a".repeat(32), confirmation: "factory_reset" },
   });
+  assert.deepEqual(await page.evaluate(() => window.resetResults), [{acknowledged:true}]);
+});
+
+test("Factory reset never prepares when authenticator verification fails", async t => {
+  const {origin,browser}=await startSite(t);
+  const page=await setup(t,browser,origin,"reset","he");
+  await page.evaluate(async()=>{
+    window.panel.dispose();document.querySelector('main').replaceChildren();
+    const {renderManagerDeviceControls}=await import('/js/manager-device-controls.js');
+    window.panel=await renderManagerDeviceControls({root:document.querySelector('main'),kind:'reset',language:'he',connection:window.connection,isCurrent:()=>true,confirm:async()=>true,ensureRecent:async()=>{throw Error('TOTP_REQUIRED')},errorText:e=>e.message});
+  });
+  await page.getByRole('button',{name:'איפוס להגדרות יצרן',exact:true}).click();
+  assert.deepEqual(await page.evaluate(()=>window.calls),[]);
+  assert.match(await page.getByRole('alert').innerText(),/TOTP_REQUIRED/);
+});
+
+test("Factory reset uncertain reply closes the workspace once without replay", async t => {
+  const {origin,browser}=await startSite(t);
+  const page=await setup(t,browser,origin,"reset");
+  await page.evaluate(()=>{
+    window.confirmed=true;
+    const send=window.connection.command;
+    window.connection.command=async(name,payload)=>{
+      if(name!=='ADMIN_FACTORY_RESET_COMMIT')return send(name,payload);
+      window.calls.push({name,payload});throw Error('RESPONSE_TIMEOUT');
+    };
+  });
+  await page.getByRole('button',{name:'Factory reset',exact:true}).click();
+  assert.deepEqual(await page.evaluate(()=>window.resetResults),[{acknowledged:false}]);
+  assert.equal(await page.evaluate(()=>window.calls.filter(x=>x.name==='ADMIN_FACTORY_RESET_COMMIT').length),1);
 });
 test("RF learning saves only the detected operation after confirmation", async (t) => {
   const { origin, browser } = await startSite(t);

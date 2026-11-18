@@ -56,6 +56,7 @@ export async function renderManagerDeviceControls({
   errorText,
   onRefresh,
   onFirmwareUpdate,
+  onFactoryReset,
 }) {
   const t = (he, en) => (language === "he" ? he : en),
     spec = definitions[kind];
@@ -375,13 +376,13 @@ export async function renderManagerDeviceControls({
       el(
         "p",
         t(
-          "האיפוס מוחק את הגדרות המערכת ואת הרשאות הגישה. נדרש אישור מפורש לפני ביצוע.",
-          "Reset removes system configuration and access credentials. Explicit confirmation is required.",
+          "האיפוס מוחק את רשתות ה־Wi-Fi השמורות בבקר, את כל המנהלים והמשתמשים, מפתחות הגישה, ההיסטוריה וההגדרות, ואת הרשאת החיבור ל־WIFIGATE Manager. החיבור הנוכחי יסתיים ולא ניתן יהיה להתחבר מחדש מרחוק. כדי לחבר שוב: יש לרשום מנהל, לייצא ל־Manager ולהגדיר Wi-Fi מחדש באפליקציה ליד הבקר. הפעולה אינה ניתנת לביטול ודורשת קוד מאפליקציית המאמת.",
+          "Reset erases the controller's saved Wi-Fi networks, all administrators and users, access keys, history, settings and WIFIGATE Manager authorization. The current connection will end and remote reconnection will be unavailable. To reconnect, enroll an administrator, export to Manager and set up Wi-Fi again in the app near the controller. This cannot be undone and requires an authenticator-app code.",
         ),
       ),
     );
-    button(t("הכנת איפוס להגדרות יצרן", "Prepare factory reset"), async () => {
-      await ensureRecent({ maxAgeSeconds: 240 });
+    const resetButton = button(t("איפוס להגדרות יצרן", "Factory reset"), async () => {
+      await ensureRecent({ maxAgeSeconds: 240, force: true, requireTotp: true });
       if (!alive()) return;
       const prepared = (await connection.command("ADMIN_FACTORY_RESET_PREPARE"))
         .data;
@@ -391,22 +392,33 @@ export async function renderManagerDeviceControls({
         !alive() ||
         !(await confirm(
           t(
-            "לאפס את המערכת ולהסיר את הגדרותיה והרשאות הגישה? הפעולה אינה ניתנת לביטול.",
-            "Reset the system and remove its configuration and access credentials? This cannot be undone.",
+            "למחוק לצמיתות את רשתות ה־Wi-Fi, כל המנהלים והמשתמשים, מפתחות הגישה, ההיסטוריה וההגדרות, ואת גישת Manager? החיבור יסתיים, ולא ניתן יהיה להתחבר מרחוק עד לרישום מנהל והגדרת Wi-Fi מחדש ליד הבקר. הפעולה אינה ניתנת לביטול.",
+            "Permanently erase Wi-Fi networks, all administrators and users, access keys, history, settings and Manager access? This connection will end; remote access requires local administrator enrollment and Wi-Fi setup again. This cannot be undone.",
           ),
+          { danger: true, confirmLabel: t("איפוס ומחיקת נתוני המערכת", "Reset and erase system data") },
         )) ||
         !alive()
       )
         return;
-      await connection.command("ADMIN_FACTORY_RESET_COMMIT", {
-        challenge: prepared.challenge,
-        confirmation: "factory_reset",
-      });
+      try {
+        const committed = await connection.command("ADMIN_FACTORY_RESET_COMMIT", {
+          challenge: prepared.challenge,
+          confirmation: "factory_reset",
+        });
+        if (committed?.data?.accepted !== true) throw new Error("INVALID_RESET_RESPONSE");
+      } catch (error) {
+        // An explicit controller refusal is safe to display. A missing/invalid
+        // response is uncertain: do not replay a destructive command.
+        if (!error.firmwareRefusal) await onFactoryReset?.({ acknowledged: false });
+        throw error;
+      }
       state.textContent = t(
         "בקשת האיפוס אושרה על ידי המערכת. נדרש רישום מחדש ליד הבקר.",
         "The system accepted reset. Local enrollment is required again.",
       );
+      await onFactoryReset?.({ acknowledged: true });
     });
+    resetButton.classList.add("danger", "manager-reset-button");
   } else if (kind === "firmware") {
     state.textContent =
       t("גרסת קושחה נוכחית: ", "Current firmware: ") +

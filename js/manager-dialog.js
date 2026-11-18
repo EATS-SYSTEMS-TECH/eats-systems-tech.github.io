@@ -48,7 +48,10 @@ export function createManagerDialog({
         return button;
       };
       const dismiss = add(options.dismissLabel ?? t("ביטול", "Cancel"), null);
-      for (const choice of choices) add(choice.label, choice.value, true);
+      for (const choice of choices) {
+        const action = add(choice.label, choice.value, true);
+        if (options.danger) action.classList.add("danger");
+      }
       dialog.append(heading, body);
       if (options.content) dialog.append(options.content);
       let form;
@@ -173,8 +176,8 @@ export function createManagerDialog({
     info: (options) =>
       ask("", [], { ...options, focusHeading:true, dismissLabel: t("סגירה", "Close") }),
     form: (options) => ask(options.message, [], options),
-    confirm: async (message) =>
-      (await ask(message, [{ label: t("אישור", "Confirm"), value: true }])) ===
+    confirm: async (message, options = {}) =>
+      (await ask(message, [{ label: options.confirmLabel ?? t("אישור", "Confirm"), value: true }], options)) ===
       true,
     chooseState: () =>
       ask(

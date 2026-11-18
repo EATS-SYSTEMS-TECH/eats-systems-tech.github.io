@@ -46,8 +46,10 @@ async function fixture(t, browser, origin, { language, width, type, real }) {
       }
       async command(command, payload) {
         window.controlEvidence.commands.push({ command, payload, gate: this.gateId });
+        if(command === "ADMIN_FACTORY_RESET_COMMIT" && window.resetLoseAck) throw Error("RESPONSE_TIMEOUT");
         return super.command(command, payload);
       }
+      async close() { window.controlEvidence.closes=(window.controlEvidence.closes||0)+1; return super.close(); }
     }
     const system = { ...template, ...real, id: "fixture-real-" + type, status: "active", version: 1 };
     window.dashboard = createManagerDashboard({
@@ -66,6 +68,40 @@ async function fixture(t, browser, origin, { language, width, type, real }) {
   }, { language, type, real });
   return { page, errors };
 }
+
+test("Factory reset ends management after acknowledgement or an uncertain reply without reconnecting",async t=>{
+  const {origin,browser}=await startSite(t);
+  for(const language of ['he','en']) for(const uncertain of [false,true]) {
+    const {page,errors}=await fixture(t,browser,origin,{language,width:390,type:'gate'});
+    const he=language==='he',copy=(h,e)=>he?h:e;
+    await page.locator('.manager-view > .manager-grid .manager-system').getByRole('button',{name:copy('פתיחת סביבת ניהול','Open workspace'),exact:true}).click();
+    await ready(page);
+    await page.locator('[data-tab="reset"]').click();await ready(page,'reset');
+    const reset=page.getByRole('button',{name:copy('איפוס להגדרות יצרן','Factory reset'),exact:true});
+    await page.mouse.move(0,0);
+    await page.waitForFunction(()=>getComputedStyle(document.querySelector('.manager-reset-button')).backgroundColor==='rgb(180, 35, 24)');
+    assert.equal(await reset.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(180, 35, 24)');
+    await reset.click();
+    const dialog=page.getByRole('dialog');
+    const action=dialog.getByRole('button',{name:copy('איפוס ומחיקת נתוני המערכת','Reset and erase system data'),exact:true});
+    await page.mouse.move(0,0);
+    await page.waitForFunction(()=>getComputedStyle(document.querySelector('.manager-confirm-dialog .danger')).backgroundColor==='rgb(180, 35, 24)');
+    assert.equal(await action.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(180, 35, 24)');
+    assert.equal(await dialog.getByRole('button',{name:copy('ביטול','Cancel'),exact:true}).evaluate(el=>el===document.activeElement),true);
+    await page.evaluate(uncertain=>window.resetLoseAck=uncertain,uncertain);
+    const connections=await page.evaluate(()=>window.controlEvidence.realConnections);
+    await action.click();
+    await page.getByRole('heading',{name:copy('הגישה לבקר לאחר איפוס','Controller access after reset'),exact:true}).waitFor();
+    const text=await page.locator('.manager-view').innerText();
+    assert.match(text,uncertain?copy(/לא ניתן לוודא/,/could not be verified/):copy(/הבקר אישר/,/controller accepted/));
+    assert.match(text,/Wi-Fi/);
+    assert.equal(await page.getByRole('tab').count(),0);
+    const result=await page.evaluate(()=>window.controlEvidence);
+    assert.equal(result.realConnections,connections);
+    assert.equal(result.commands.filter(c=>c.command==='ADMIN_FACTORY_RESET_COMMIT').length,1);
+    assert.ok(result.closes>=1);assert.deepEqual(errors,[]);
+  }
+});
 
 async function ready(page, tab = "overview") {
   await page.locator(`[data-tab="${tab}"][aria-selected="true"]`).waitFor();
