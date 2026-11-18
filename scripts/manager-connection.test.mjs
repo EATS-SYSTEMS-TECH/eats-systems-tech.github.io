@@ -148,7 +148,7 @@ test("bulk capacity follows the gate's 8 MB/16 MB limits and keeps the admin lim
   assert.throws(() => c.collectionCapacity("USERS"), /INVALID_CAPABILITIES/);
 });
 for (const accepted of [true, false])
-  test(`Manager imports an encrypted staged collection with half-window ACKs and ${accepted ? "commits" : "cancels"} after validation`, async () => {
+  test(`Manager imports an encrypted staged collection with half-window ACKs and ${accepted ? "commits" : "cancels"} after validation`, async (t) => {
     const c = new ManagerConnection({
       api: async () => ({}),
       user: { uid: "fixture" },
@@ -231,6 +231,7 @@ for (const accepted of [true, false])
         aborts++;
         return { data: { aborted: true } };
       }
+      if (cmd === "ADMIN_PING") return { data: {} };
       throw new Error(cmd);
     };
     const result = await c.importCollection(
@@ -238,12 +239,21 @@ for (const accepted of [true, false])
       "MERGE",
       rows,
       7,
-      async () => accepted,
+      async () => {
+        t.mock.timers.enable({ apis: ["setInterval"] });
+        c.startHeartbeat();
+        assert.equal(c.importAwaitingConfirmation, true);
+        t.mock.timers.tick(45000);
+        assert.equal(commands.filter(v => v === "ADMIN_PING").length, 4, "human confirmation must survive the controller's 30-second idle window");
+        return accepted;
+      },
     );
     await chain;
     assert.equal(commits, accepted ? 1 : 0);
     assert.equal(aborts, accepted ? 0 : 1);
     assert.equal(c.transfer, false);
+    assert.equal(c.importAwaitingConfirmation, false);
+    clearInterval(c.heartbeat);
     assert.equal(c.onBulk, null);
     if (accepted) assert.equal(result.created, 250);
     else assert.equal(result.cancelled, true);
@@ -350,6 +360,19 @@ test("history allows a slow safe SD remount without changing other command waits
     assert.equal(observed, expected, cmd);
     assert.equal(connection.busy, false);
   }
+});
+
+test("confirmation keep-alive admits only PING and leaves other controls blocked during import", async () => {
+  const connection = new ManagerConnection({user: {}, api: async () => ({})});
+  connection.session = {...makeSession(), seq: 1, authKey: new Uint8Array(32), clientNoncePrefix: new Uint8Array(8)};
+  connection.transfer = true;
+  connection.next = () => { throw new Error("REACHED_ENCRYPTED_SEND"); };
+  await assert.rejects(connection.command("ADMIN_PING"), /BUSY/);
+  connection.importAwaitingConfirmation = true;
+  await assert.rejects(connection.command("ADMIN_PING"), /REACHED_ENCRYPTED_SEND/);
+  await assert.rejects(connection.command("ADMIN_OPEN_GATE"), /BUSY/);
+  connection.importAwaitingConfirmation = false;
+  await assert.rejects(connection.command("ADMIN_PING"), /BUSY/);
 });
 
 test("a user command waits for the idle keep-alive ping instead of failing BUSY", async () => {

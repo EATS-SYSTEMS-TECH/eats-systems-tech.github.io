@@ -213,15 +213,21 @@ export class ManagerConnection {
       clientBulkVersions: [1],
     });
     this.requireOpen();
-    this.heartbeat = setInterval(() => {
-      if (!this.busy && !this.transfer)
-        void this.command("ADMIN_PING", {}).catch((error) => this.fail(error));
-    }, 10000);
+    this.startHeartbeat();
     this.maximum = setTimeout(
       () => this.fail(new Error("SECURE_SESSION_EXPIRED")),
       280000,
     );
     return this.capabilities;
+  }
+  startHeartbeat() {
+    clearInterval(this.heartbeat);
+    this.heartbeat = setInterval(() => {
+      // No bulk packets are in flight while a human approves the validated
+      // import. Keep the existing 30-second secure session alive in that gap.
+      if (!this.busy && (!this.transfer || this.importAwaitingConfirmation))
+        void this.command("ADMIN_PING", {}).catch((error) => this.fail(error));
+    }, 10000);
   }
   next(match, timeout = 15000) {
     if (this.closed) return Promise.reject(new Error("CANCELLED"));
@@ -270,7 +276,7 @@ export class ManagerConnection {
     }
     if (this.busy) throw new Error("BUSY");
     this.busy = true;
-    if (this.transfer && !/^ADMIN_(IMPORT|EXPORT|FOTA)_/.test(cmd)) {
+    if (this.transfer && !(cmd === "ADMIN_PING" && this.importAwaitingConfirmation) && !/^ADMIN_(IMPORT|EXPORT|FOTA)_/.test(cmd)) {
       this.busy = false;
       throw new Error("BUSY");
     }
@@ -616,7 +622,14 @@ export class ManagerConnection {
       } while (validation.pending);
       if (!validation.valid || validation.rejected)
         throw new Error("IMPORT_REJECTED");
-      if (!(await confirmCommit(validation))) return { cancelled: true };
+      let confirmed;
+      try {
+        this.importAwaitingConfirmation = true;
+        confirmed = await confirmCommit(validation);
+      } finally {
+        this.importAwaitingConfirmation = false;
+      }
+      if (!confirmed) return { cancelled: true };
       const result = (
         await this.command(
           "ADMIN_IMPORT_COMMIT",
