@@ -1406,10 +1406,12 @@ html[dir="rtl"] .home-en .business-plan__art-letter {
 }
 
 .home-en .contact-option-card__icon {
+  --contact-illustration-size: 9rem;
   display: grid;
-  width: 3.25rem;
-  height: 3.25rem;
-  margin: 0 0 2.5rem;
+  width: var(--contact-illustration-size);
+  height: var(--contact-illustration-size);
+  margin: 0 0 1.75rem;
+  flex-shrink: 0;
   place-items: center;
   color: var(--home-blue);
   border: 0;
@@ -1418,8 +1420,8 @@ html[dir="rtl"] .home-en .business-plan__art-letter {
 }
 
 .home-en .contact-option-card__icon svg {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 100%;
+  height: 100%;
 }
 
 .home-en .contact-option-card__title {
