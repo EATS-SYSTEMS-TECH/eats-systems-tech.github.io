@@ -375,6 +375,24 @@ test("confirmation keep-alive admits only PING and leaves other controls blocked
   await assert.rejects(connection.command("ADMIN_PING"), /BUSY/);
 });
 
+for (const [error, transfer, expected] of [["RESPONSE_TIMEOUT", false, "SECURE_SESSION_EXPIRED"], ["RESPONSE_TIMEOUT", true, "RESPONSE_TIMEOUT"], ["INVALID_TAG", false, "INVALID_TAG"]])
+  test(`heartbeat ${error} with transfer=${transfer} reports ${expected} without replaying a command`, async (t) => {
+    t.mock.timers.enable({ apis: ["setInterval"] });
+    const states = [], connection = new ManagerConnection({ user: {}, api: async () => ({}), onState: state => states.push(state) });
+    connection.session = makeSession();
+    connection.transfer = transfer;
+    connection.importAwaitingConfirmation = transfer;
+    let calls = 0;
+    connection.command = async command => { assert.equal(command, "ADMIN_PING"); calls++; throw new Error(error); };
+    connection.startHeartbeat();
+    t.mock.timers.tick(10000);
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.deepEqual(states, [expected]);
+    assert.equal(calls, 1);
+    assert.equal(connection.closed, true);
+  });
+
 test("a user command waits for the idle keep-alive ping instead of failing BUSY", async () => {
   const connection = new ManagerConnection({user: {}, WebSocketImpl: class {}, api: async () => ({})});
   connection.session = {...makeSession(), seq: 1, authKey: new Uint8Array(32), clientNoncePrefix: new Uint8Array(8)};

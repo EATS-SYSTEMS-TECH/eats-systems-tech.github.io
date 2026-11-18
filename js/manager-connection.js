@@ -226,7 +226,13 @@ export class ManagerConnection {
       // No bulk packets are in flight while a human approves the validated
       // import. Keep the existing 30-second secure session alive in that gap.
       if (!this.busy && (!this.transfer || this.importAwaitingConfirmation))
-        void this.command("ADMIN_PING", {}).catch((error) => this.fail(error));
+        void this.command("ADMIN_PING", {}).catch((error) => {
+          // Background timer delays can outlive the controller's freshness
+          // window. Renew an idle read-only channel; never replay a transfer
+          // or hide integrity/authorization/storage errors behind a retry.
+          this.fail(error?.message === "RESPONSE_TIMEOUT" && !this.transfer
+            ? new Error("SECURE_SESSION_EXPIRED") : error);
+        });
     }, 10000);
   }
   next(match, timeout = 15000) {
