@@ -53,6 +53,7 @@ export const terms = {
         blocks: [
           "We design the Service with software and hardware safety and security measures, including encrypted and authenticated commands, permission checks, limits on how long a signal is held, automatic release of a held signal, refusal of commands during configured events and override modes, and secure boot and encryption on production Controllers.",
           "These measures protect the integrity of the commands that WIFIGATE sends and who may send them. They do not make any Supported Equipment safe, they do not detect people, vehicles or objects, and they do not replace, and must never be used instead of, the safety devices that the Supported Equipment and the law require. No measure can guarantee that a command will always, or never, be carried out.",
+          "Manual opening from the app is the most secure way to open with the Service. Opening with a remote and Auto Open are convenience features with a different level of security, and the Administrator is responsible for deciding whether to use them. Where maximum security is required, we recommend turning Auto Open off, deleting the saved remote in the app, and opening only manually from the app.",
         ],
       },
       {
@@ -329,6 +330,7 @@ export const terms = {
         blocks: [
           "אנו מתכננים את השירות עם אמצעי בטיחות ואבטחה תוכנתיים וחומרתיים, ובכלל זה פקודות מוצפנות ומאומתות, בדיקות הרשאה, הגבלת משך החזקת האות, שחרור אוטומטי של אות מוחזק, דחיית פקודות בזמן אירועים ומצבי עקיפה שהוגדרו, ואתחול מאובטח והצפנה בבקרי ייצור.",
           "אמצעים אלה מגינים על שלמות הפקודות ש‑WIFIGATE שולחת ועל זהות מי שרשאי לשלוח אותן. הם אינם הופכים ציוד נתמך כלשהו לבטוח, אינם מזהים אנשים, כלי רכב או חפצים, ואינם מחליפים, ואסור להשתמש בהם במקום, את התקני הבטיחות שהציוד הנתמך והדין מחייבים. אין אמצעי שיכול להבטיח שפקודה תבוצע תמיד, או שלעולם לא תבוצע.",
+          "פתיחה ידנית מהאפליקציה היא דרך הפתיחה המאובטחת ביותר בשירות. פתיחה באמצעות שלט ופתיחה אוטומטית הן תכונות נוחות שרמת האבטחה שלהן שונה, והמנהל אחראי להחליט אם להפעיל אותן. כשנדרשת אבטחה מרבית, מומלץ לכבות את הפתיחה האוטומטית, למחוק את השלט השמור מהאפליקציה ולפתוח רק ידנית מהאפליקציה.",
         ],
       },
       {
