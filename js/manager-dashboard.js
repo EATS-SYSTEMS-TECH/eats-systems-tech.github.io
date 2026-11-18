@@ -1098,6 +1098,10 @@ export function createManagerDashboard({
       button(t("רענון", "Refresh"), () => showSystems(scope, operatorAccount)),
     );
     view.append(bar);
+    if(scope&&!operatorAccount&&organizationDetail?.permissions.openWorkspace===false) {
+      const notice=node("p",t("צפייה בלבד. ניהול הבקר מרחוק זמין לבעל הארגון ולמנהלי הארגון.","View only. Remote controller management is available to the organization owner and administrators."),"manager-note");
+      notice.dataset.organizationSection="systems";view.append(notice);
+    }
     focusView();
     if (!systems.length) {
       const empty = node(
@@ -2164,13 +2168,26 @@ export function createManagerDashboard({
       const panel = await renderManagerDeviceControls({ root: content, kind: tab, language, connection: transport,
         confirm: confirmAction, ensureRecent, isCurrent: current, errorText, onRefresh: () => showTab(tab),
         onFirmwareUpdate: async (prepared,progress) => {
-          const gate=currentGate,version=prepared.beginPayload.version;
+          const gate=currentGate,version=prepared.beginPayload.version,system=currentSystem,epoch=generation;
           if(typeof context.source.updateFirmware!=="function")throw new Error("UNSUPPORTED");
-          await context.source.updateFirmware(prepared,progress);
+          const result=await context.source.updateFirmware(prepared,progress);
+          const ownerCurrent=()=>!closed&&currentGate===gate&&currentSystem===system;
+          if(!ownerCurrent()||generation!==epoch)throw new Error("CANCELLED");
+          const delay=Math.max(4000,Math.min(30000,(Number(result.data?.rebootInMs)||0)+2500));
+          await new Promise(resolve=>setTimeout(resolve,delay));
+          if(!ownerCurrent()||generation!==epoch)throw new Error("CANCELLED");
           await openGate(gate,true);
-          if(closed||currentGate!==gate||!connection?.session)throw new Error("DISCONNECTED");
-          const status=(await connection.command("ADMIN_FOTA_GET_STATUS")).data;
-          if(status.firmwareVersion!==version||status.pendingVerify||status.rolledBackVersion===version)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
+          const verificationEpoch=generation,deadline=Date.now()+90000;
+          let status;
+          do {
+            if(!ownerCurrent()||generation!==verificationEpoch||!connection?.session)throw new Error("CANCELLED");
+            status=(await connection.command("ADMIN_FOTA_GET_STATUS")).data;
+            if(!ownerCurrent()||generation!==verificationEpoch)throw new Error("CANCELLED");
+            if(status.firmwareVersion!==version||status.rolledBackVersion===version)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
+            if(!status.pendingVerify)break;
+            await new Promise(resolve=>setTimeout(resolve,1500));
+          }while(Date.now()<deadline);
+          if(status.pendingVerify)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
           await showTab("firmware");
           say(t(`העדכון הושלם. גרסה ${version} אומתה לאחר האתחול.`,`Update complete. Version ${version} verified after restart.`));
         } });

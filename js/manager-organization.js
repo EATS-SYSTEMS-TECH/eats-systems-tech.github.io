@@ -124,7 +124,7 @@ export async function renderManagerOrganization({
       : sharedOrganizationRole(detail.role) ??
         roleOf(members.find((m) => m.uid === user.uid && m.status === "active") ?? {});
   const section = node("section", undefined, "manager-organization-workspace");
-  if (permissions.openWorkspace !== false) {
+  if (!path.startsWith("/admin/") && ownRole) {
     document.body.dataset.organizationRole = ownRole ?? "";
     const roleCard = createOrganizationRoleCard({
         product: "manager",
@@ -715,7 +715,7 @@ export async function renderManagerOrganization({
     section.append(pending);
   }
   // What each role can do, last in the organization's people.
-  if (permissions.openWorkspace !== false) {
+  if (!path.startsWith("/admin/") && ownRole) {
     const roleMatrix = createOrganizationRoleMatrix({
       product: "manager",
       language,

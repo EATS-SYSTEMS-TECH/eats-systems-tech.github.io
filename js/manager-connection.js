@@ -315,7 +315,7 @@ export class ManagerConnection {
   fail(error) {
     if (this.closed) return this.closing;
     this.failure = error;
-    this.onState(error.message);
+    if (!(this.firmwareRebootExpected && ["DISCONNECTED", "CONNECTION_FAILED", "RESPONSE_TIMEOUT"].includes(error.message))) this.onState(error.message);
     this.close();
   }
   bulkReceiver() {
@@ -664,8 +664,17 @@ export class ManagerConnection {
       }
       const verified=(await this.command("ADMIN_FOTA_STATUS",{transferId:id,manifestSha256:beginPayload.manifestSha256},120000)).data;
       if(verified.state!=="READY"||verified.verifiedOffset!==bytes.length)throw new Error("FOTA_NOT_VERIFIED");
-      const result=await this.command("ADMIN_FOTA_FINISH",{transferId:id,manifestSha256:beginPayload.manifestSha256},120000);
-      finished=true;return result;
+      this.firmwareRebootExpected=true;
+      try {
+        const result=await this.command("ADMIN_FOTA_FINISH",{transferId:id,manifestSha256:beginPayload.manifestSha256},120000);
+        if(result.data?.verified!==true||result.data.targetVersion!==beginPayload.version)throw new Error("FOTA_NOT_VERIFIED");
+        finished=true;return result;
+      } catch(error) {
+        // A reboot can close the socket before FINISH's ACK arrives. Never
+        // resend FINISH: reconnect and verify the installed version instead.
+        if(error.firmwareRefusal||!["DISCONNECTED","CONNECTION_FAILED","RESPONSE_TIMEOUT"].includes(this.failure?.message??error.message))throw error;
+        finished=true;return {data:{rebootUnconfirmed:true}};
+      } finally {this.firmwareRebootExpected=false;}
     } finally {
       // Interrupted transfers remain resumable for this same authenticated
       // owner. Never erase a verified checkpoint merely because a tab closed.

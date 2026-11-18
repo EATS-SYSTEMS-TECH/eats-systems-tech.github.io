@@ -25,11 +25,29 @@ for(const verified of [true,false])test(`Manager firmware bulk ${verified?"finis
   c.command=async(cmd)=>{
     if(cmd==="ADMIN_FOTA_BEGIN")return{data:{transferId:99,acceptedOffset:0,maxPacketBytes:476,credits:4}};
     if(cmd==="ADMIN_FOTA_STATUS"){await chain;assert.deepEqual(received,expected);return{data:{state:verified?"READY":"RECEIVING",verifiedOffset:verified?expected.length:0}};}
-    if(cmd==="ADMIN_FOTA_FINISH"){finishes++;return{data:{accepted:true}};}throw new Error(cmd);
+    if(cmd==="ADMIN_FOTA_FINISH"){finishes++;return{data:{verified:true,targetVersion:"W.11.26.19"}};}throw new Error(cmd);
   };
-  const run=c.updateFirmware({bytes,beginPayload:{manifestSha256:"a".repeat(64)}});
+  const run=c.updateFirmware({bytes,beginPayload:{manifestSha256:"a".repeat(64),version:"W.11.26.19"}});
   if(verified)await run;else await assert.rejects(run,/FOTA_NOT_VERIFIED/);
   await chain;assert.equal(finishes,verified?1:0);assert.equal(bytes.every(x=>x===0),true);assert.equal(c.transfer,false);assert.equal(c.closed,verified);
+});
+
+for(const outcome of ["lost-ack","refused","cancelled","unverified-ack"])test(`Firmware FINISH ${outcome} preserves the difference between restart uncertainty, refusal and cancellation`,async()=>{
+  const states=[],commands=[],c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"},onState:state=>states.push(state)});c.session=makeSession();c.socket={close(){}};
+  const bytes=new Uint8Array(20).fill(1);
+  c.command=async name=>{
+    commands.push(name);
+    if(name==="ADMIN_FOTA_BEGIN")return{data:{transferId:2,acceptedOffset:20,maxPacketBytes:476,credits:4}};
+    if(name==="ADMIN_FOTA_STATUS")return{data:{state:"READY",verifiedOffset:20}};
+    if(outcome==="lost-ack"){c.fail(new Error("DISCONNECTED"));throw new Error("CANCELLED");}
+    if(outcome==="cancelled"){c.close();throw new Error("CANCELLED");}
+    if(outcome==="refused")throw Object.assign(new Error("STORAGE_IO"),{firmwareRefusal:true});
+    return{data:{verified:false,targetVersion:"W.11.26.19"}};
+  };
+  const run=c.updateFirmware({bytes,beginPayload:{version:"W.11.26.19",manifestSha256:"a".repeat(64)}});
+  if(outcome==="lost-ack")assert.deepEqual(await run,{data:{rebootUnconfirmed:true}});
+  else await assert.rejects(run,outcome==="refused"?/STORAGE_IO/:outcome==="cancelled"?/CANCELLED/:/FOTA_NOT_VERIFIED/);
+  assert.deepEqual(states,[]);assert.equal(commands.filter(x=>x==="ADMIN_FOTA_FINISH").length,1);assert.equal(bytes.every(x=>x===0),true);assert.equal(c.firmwareRebootExpected,false);
 });
 
 test("closing a Manager channel exposes one cancellation barrier without reopening authentication", async () => {
