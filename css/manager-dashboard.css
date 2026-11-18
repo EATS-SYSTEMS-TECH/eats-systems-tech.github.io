@@ -1,5 +1,5 @@
 @import url("./manager-events.css?v=20261105now1");
-@import url("./manager-control-workspace.css?v=20261118ux9");
+@import url("./manager-control-workspace.css?v=20261118ux10");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -1976,3 +1976,4 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
 .manager-connection-dialog__live h3 > svg { flex: 0 0 26px; width: 26px; height: 26px; padding: 5px; box-sizing: border-box; border-radius: 9px; background: #fde4df; color: #c2412d; stroke-width: 2.2; }
 .manager-connection-dialog[data-state="error"] .manager-connection-dialog__live p { color: #6e3a33; }
 .manager-access-note .manager-access-edit-hint { margin: 0; color: #64748b; font-size: 12px; line-height: 1.7; white-space: normal; }
+.manager-history-phone-role { display:block; margin-top:4px; color:#64748b; font-size:11px; }

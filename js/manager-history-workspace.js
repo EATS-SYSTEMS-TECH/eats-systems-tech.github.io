@@ -124,7 +124,10 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
       cells[4].append(node("strong",data.name));
       if (data.inviter) cells[4].append(node("small", t(`הוזמן על ידי ${data.inviter}`, `Invited by ${data.inviter}`)));
       const phone=node("bdi",data.phone || "—"); phone.dir="ltr"; cells[5].append(phone);
-      if (raw[7] === 3) cells[5].title = t("טלפון המזמין", "Inviter phone");
+      if (raw[7] === 3) {
+        cells[5].title = t("טלפון המזמין", "Inviter phone");
+        cells[5].append(node("small",t("טלפון המזמין","Inviter phone"),"manager-history-phone-role"));
+      }
       const result=node("span",data.result,"manager-history-result"); result.dataset.state=data.state;
       cells[6].append(result);
       row.append(...cells); body.append(row);

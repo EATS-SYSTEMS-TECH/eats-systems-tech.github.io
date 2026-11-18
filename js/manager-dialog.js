@@ -22,6 +22,7 @@ export function createManagerDialog({
       const heading = document.createElement("h2");
       heading.id = "manager-confirm-title";
       heading.textContent = options.title ?? t("אישור פעולה", "Confirm action");
+      if(options.focusHeading){heading.tabIndex=-1;heading.setAttribute("autofocus","");}
       const body = document.createElement("p");
       body.id = "manager-confirm-message";
       body.textContent = message;
@@ -160,7 +161,8 @@ export function createManagerDialog({
       host.append(dialog);
       dialog.showModal();
       // Default focus never selects the action that writes to a physical gate.
-      (form?.querySelector("input") ?? dismiss).focus();
+      if(options.focusHeading){heading.focus({preventScroll:true});dialog.scrollTop=0;}
+      else (form?.querySelector("input") ?? dismiss).focus();
     });
   }
   return {
@@ -169,7 +171,7 @@ export function createManagerDialog({
       return Boolean(active);
     },
     info: (options) =>
-      ask("", [], { ...options, dismissLabel: t("סגירה", "Close") }),
+      ask("", [], { ...options, focusHeading:true, dismissLabel: t("סגירה", "Close") }),
     form: (options) => ask(options.message, [], options),
     confirm: async (message) =>
       (await ask(message, [{ label: t("אישור", "Confirm"), value: true }])) ===

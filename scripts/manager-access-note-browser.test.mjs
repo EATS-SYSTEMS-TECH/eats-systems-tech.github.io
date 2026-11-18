@@ -81,6 +81,10 @@ test("access note is readable in Hebrew and English on narrow and desktop screen
         }, language);
         const dialog = page.getByRole("dialog");
         await dialog.waitFor();
+        assert.equal(await dialog.evaluate(element=>element.scrollTop),0,"a long note opens at its title rather than scrolling to Close");
+        assert.equal(await dialog.getByRole("heading",{level:2}).evaluate(element=>document.activeElement===element),true);
+        const headingBox=await dialog.getByRole("heading",{level:2}).boundingBox();
+        assert.ok(headingBox.y>=0&&headingBox.y+headingBox.height<=1000,"the access-note title is initially visible");
         assert.equal(
           await dialog
             .locator(".manager-access-metrics dd")
