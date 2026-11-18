@@ -35,7 +35,7 @@ export const getNestedValue = (object, dotted) => dotted.split('.').reduce((valu
   value && typeof value === 'object' && key in value ? value[key] : undefined, object);
 
 // Required copy shape excludes explicitly optional messages on both sides.
-const OPTIONAL_COPY_KEYS = new Set(['hero.statement', 'footer.taglineLines', 'platform.subscriptionNote', 'why.pointsNote']);
+const OPTIONAL_COPY_KEYS = new Set(['hero.statement', 'footer.taglineLines', 'platform.subscriptionNote', 'why.pointsNote', 'faq.subtitle']);
 export function validateCopyShape(reference, candidate, pathSegments = []) {
   const location = pathSegments.join('.') || 'homepage copy';
   if (Array.isArray(reference)) {

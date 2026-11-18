@@ -125,7 +125,6 @@ const copy = {
   faq: {
     eyebrow: "כל מה שצריך לדעת על WIFIGATE",
     title: "שאלות ותשובות",
-    subtitle: "תשובות ברורות על התקנה, קישוריות, עלויות וגישת אורחים.",
     items: [
       {
         question: "מהי מערכת WIFIGATE?",

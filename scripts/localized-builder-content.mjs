@@ -74,11 +74,13 @@ export function applyHomepageCopy($, copy, locale) {
     ['.business-plan--manager .business-plan__tagline', copy.automation.manager.tagline], ['.business-plan--manager .business-plan__text', copy.automation.manager.text], ['.business-plan--manager .business-plan__cta span', copy.automation.manager.cta],
     ['#tutorial-videos .section__eyebrow', copy.productGuide.eyebrow], ['#tutorials-title', copy.productGuide.title], ['#tutorial-videos .section__subtitle', copy.productGuide.subtitle],
     ['#one-tap-invite .security-statement__eyebrow', copy.oneTapInvite.eyebrow], ['#one-tap-invite-title', copy.oneTapInvite.title], ['#one-tap-invite .security-statement__copy p', copy.oneTapInvite.description],
-    ['#wifi-gate-faq .section__eyebrow', copy.faq.eyebrow], ['#wifi-gate-faq-title', copy.faq.title], ['#wifi-gate-faq .section__subtitle', copy.faq.subtitle],
+    ['#wifi-gate-faq .section__eyebrow', copy.faq.eyebrow], ['#wifi-gate-faq-title', copy.faq.title],
     ['#why-wifigate .security-statement__eyebrow', copy.why.eyebrow], ['#why-wifigate-title', copy.why.title], ['#why-wifigate .security-statement__copy p', copy.why.description],
     ['#get-in-touch .section__eyebrow', copy.contact.eyebrow], ['#contact-title', copy.contact.title], ['#contact-description', copy.contact.subtitle],
   ];
   for (const [selector, value] of slots) text(selector, value);
+  if (copy.faq.subtitle) text('#wifi-gate-faq .section__subtitle', copy.faq.subtitle);
+  else $('#wifi-gate-faq .section__subtitle').remove();
   for (const key of ['distributorTitle', 'distributorText', 'distributorButton', 'supportTitle', 'supportText', 'interestTitle', 'interestText', 'whatsappButton']) text(`[data-i18n='contact.${key}']`, copy.contact[key]);
   setLocalizedLines($, '#where-title', copy.solutions.titleLines, locale);
   setLocalizedLines($, '#guest-invites-title', copy.automation.titleLines, locale);
