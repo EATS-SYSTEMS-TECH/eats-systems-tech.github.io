@@ -7,6 +7,7 @@ const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
 // An optional starred note is shown as small print under its answer.
 // A line break in an answer starts a new paragraph.
 const qa = (question, answer, note) => Object.freeze(note ? { question, answer, note } : { question, answer });
+const qaList = (question, answer) => Object.freeze({ question, answer, list: true });
 
 export const FEATURE_PAGE_FAQ = Object.freeze({
   "no-sim-no-router": Object.freeze({
@@ -71,7 +72,7 @@ export const FEATURE_PAGE_FAQ = Object.freeze({
   "security-privacy": Object.freeze({
     he: Object.freeze([
       qa("איך התקשורת עם הבקר מוגנת?", "כל פקודה מהטלפון לבקר מוצפנת וחתומה בתקן AES-256, ולכל טלפון יש מפתח משלו."),
-      qa("קישור הזמנה שהגיע לאדם אחר יכול לפתוח את הכניסה?", "הקישור עצמו לא פותח את הכניסה. הוא רק מאפשר להצטרף כמשתמש.\nהזמנה פרטית: מיועדת למספר הטלפון של מי שהוזמן. שלחו אותה רק אליו, ובקשו שלא יעביר אותה הלאה.\nהזמנה ציבורית: כל מי שמקבל את הקישור יכול להצטרף כמשתמש, עד שתוקף ההזמנה נגמר. כדאי לשלוח אותה רק לקבוצה שאתם סומכים עליה.\nהמנהל רואה באפליקציה את כל המשתמשים, ויכול להסיר משתמש שלא אמור להיות שם."),
+      qaList("קישור הזמנה שהגיע לאדם אחר יכול לפתוח את הכניסה?", "הקישור עצמו לא פותח את הכניסה. הוא רק מאפשר להצטרף כמשתמש.\nהזמנה פרטית: מיועדת למספר הטלפון של מי שהוזמן. שלחו אותה רק אליו, ובקשו שלא יעביר אותה הלאה.\nהזמנה ציבורית: כל מי שמקבל את הקישור יכול להצטרף כמשתמש, עד שתוקף ההזמנה נגמר. כדאי לשלוח אותה רק לקבוצה שאתם סומכים עליה.\nהמנהל רואה באפליקציה את כל המשתמשים, ויכול להסיר משתמש שלא אמור להיות שם."),
       qa("איך מבטלים גישה למישהו?", "מוחקים אותו באפליקציה. לכל אדם יש הרשאות משלו, כמו הזמנת אורחים ופתיחה אוטומטית, והמנהל יכול לשנות אותן בכל רגע."),
       qa("כמה משתמשים ומנהלים אפשר להגדיר?", "עד 20 מנהלים, ועד 5000 משתמשים בהתאם לדגם הבקר."),
     ]),
@@ -89,5 +90,5 @@ export function featurePageFaq(pageKey, locale) {
   const items = FEATURE_PAGE_FAQ[pageKey]?.[locale];
   if (!items) return [];
   if (!Array.isArray(items) || !items.length || !items.every(item => NONEMPTY(item?.question) && NONEMPTY(item?.answer))) throw new Error(`Incomplete ${pageKey} questions: ${locale}`);
-  return items.map(({ question, answer, note }) => (NONEMPTY(note) ? { question, answer, note } : { question, answer }));
+  return items.map(({ question, answer, note, list }) => ({ question, answer, ...(NONEMPTY(note) ? { note } : {}), ...(list ? { list: true } : {}) }));
 }

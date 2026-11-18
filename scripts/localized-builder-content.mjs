@@ -239,9 +239,14 @@ export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, ac
   for (const item of content.faq) {
     const summary = $('<summary>');
     setLocalizedText($, summary, item.question, locale);
-    // Each line of an answer is its own paragraph.
+    // Each line is a paragraph, optionally grouped as a readable bullet list.
     const body = $('<div>').addClass('seo-faq__answer');
-    for (const line of item.answer.split('\n')) { const answer = $('<p>'); setLocalizedText($, answer, line, locale); body.append(answer); }
+    const list = item.list ? $('<ul>').addClass('seo-faq__bullets').attr('dir', locale === 'he' ? 'rtl' : 'ltr') : null;
+    for (const line of item.answer.split('\n')) {
+      const answer = $('<p>'); setLocalizedText($, answer, line, locale);
+      if (list) list.append($('<li>').append(answer)); else body.append(answer);
+    }
+    if (list) body.append(list);
     // An answer's starred exception, as small print under it.
     if (item.note) { const note = $('<p>').addClass('seo-faq__note'); setLocalizedText($, note, item.note, locale); body.append(note); }
     questions.append($('<details>').addClass('seo-faq__item').append(summary, body));

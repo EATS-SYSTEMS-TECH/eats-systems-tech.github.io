@@ -11,19 +11,19 @@ export const SECURITY_PROOF_STYLE_VERSION = "20261118sp6";
 export const SECURITY_PROOF_COPY = Object.freeze({
   he: Object.freeze({
     eyebrow: "הידעת?",
-    title: "נבנה לעמוד מול כלי פריצה מודרניים.",
+    title: "WIFI GATE נבנה לעמוד מול כלי פריצה מודרניים.",
     layersTitle: "4 שכבות הגנה",
     layersText: "כל פתיחה מהאפליקציה מוגנת בארבע שכבות, כך שאי אפשר לקרוא אותה, לזייף אותה או להעתיק אותה.",
     layers: Object.freeze([
-      Object.freeze({ icon: "controller", title: "זיהוי הבקר", text: "הטלפון מוודא שהוא מדבר עם הבקר שלכם." }),
-      Object.freeze({ icon: "lock", title: "הצפנה", text: "אף אחד מבחוץ לא יכול לקרוא את הפקודה." }),
-      Object.freeze({ icon: "phone", title: "זיהוי הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
-      Object.freeze({ icon: "replay", title: "הגנה מהעתקה", text: "פקודה שהוקלטה לא תעבוד שוב." }),
+      Object.freeze({ icon: "controller", title: "אימות הבקר", text: "האפליקציה מוודאת שהחיבור הוא לבקר שלכם." }),
+      Object.freeze({ icon: "lock", title: "הצפנה", text: "אף אחד לא יכול לקרוא את הפקודה." }),
+      Object.freeze({ icon: "phone", title: "אימות הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
+      Object.freeze({ icon: "replay", title: "הגנה מהעתקה", text: "גם אם מישהו יעתיק את פקודת הפתיחה, הוא לא יוכל להשתמש בה שוב." }),
     ]),
     standardTitle: "תקני הצפנה בינלאומיים",
     standardText: "ההגנה בנויה על אלגוריתמים מוכרים של NIST, אותם תקנים שעליהם נשענות מערכות פיננסיות וממשלתיות, ומעליהם הוספנו שכבות הגנה משלנו.",
-    testTitle: "המומחים שלנו ניסו לפרוץ.",
-    testText: "בדקנו את הפתיחה מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
+    testTitle: "העמדנו את ההגנה למבחן.",
+    testText: "המומחים שלנו בדקו את הפתיחה מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
     tools: Object.freeze([
       Object.freeze({ name: "Flipper Zero", detail: "עם מודול הרחבה" }),
       Object.freeze({ name: "HackRF One", detail: "" }),
