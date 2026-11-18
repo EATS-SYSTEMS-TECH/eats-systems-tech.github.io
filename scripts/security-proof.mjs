@@ -22,8 +22,8 @@ export const SECURITY_PROOF_COPY = Object.freeze({
     ]),
     standardTitle: "תקני הצפנה בינלאומיים",
     standardText: "ההגנה בנויה על אלגוריתמים מוכרים של NIST, אותם תקנים שעליהם נשענות מערכות פיננסיות וממשלתיות, ומעליהם הוספנו שכבות הגנה משלנו.",
-    testTitle: "המומחים שלנו ניסו לפרוץ.",
-    testText: "בדקנו את הפתיחה מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
+    testTitle: "העמדנו את ההגנה למבחן.",
+    testText: "המומחים שלנו בדקו את הפתיחה מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
     tools: Object.freeze([
       Object.freeze({ name: "Flipper Zero", detail: "עם מודול הרחבה" }),
       Object.freeze({ name: "HackRF One", detail: "" }),
