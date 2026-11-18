@@ -208,6 +208,7 @@ export function updateSharedHeader($, data, locale, key) {
   for (const item of SITE_NAVIGATION) {
     const link = $('<a>').addClass('nav-link nav__link').attr('href', item.pageKey ? buildPagePath(locale, item.pageKey) : home + '#' + item.hash);
     if (item.key === 'contact') link.addClass('nav__contact-link');
+    if (item.key === 'shop') link.addClass('nav__shop-link');
     setLocalizedText($, link, item.key === 'shop' ? locale === 'he' ? 'חנות' : 'Shop' : copy[item.key], locale);
     if (item.key === 'shop' && locale !== 'he') link.attr('lang', 'en');
     if (!item.children) { menu.append(link); continue; }
@@ -257,7 +258,7 @@ export function updateSharedHeader($, data, locale, key) {
   ['.site-cart__empty', '.site-cart__subtotal span', '.site-cart__checkout', '.site-cart__note'].forEach((selector, index) => $(selector).text(cart[index + 3])); $('.site-cart__subtotal strong').text(cart[7]);
   $('.site-cart__drawer').attr('data-cart-copy', JSON.stringify({ trigger: cart[0], remove: hebrew ? 'הסרת פריט' : 'Remove item', decrease: hebrew ? 'הפחתת כמות' : 'Decrease quantity', increase: hebrew ? 'הגדלת כמות' : 'Increase quantity' }));
   if (!hebrew) $('.site-cart__drawer').attr('lang', 'en');
-  $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261115nav4"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261114hover1">`);
+  $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261118shop1"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261114hover1">`);
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261115nav2').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
   $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261114roller1"></script>`);

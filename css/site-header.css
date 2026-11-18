@@ -724,3 +724,38 @@ html.a11y-text-scaled .site-header .nav {
   .site-header .topbar-nav .nav__sublink:focus-visible,
   .site-header .topbar-nav .nav__sublink[aria-current="page"] { color: #0b63ff; }
 }
+
+/* Shop is an outlined peer of the filled contact button. */
+.site-header .topbar-nav .nav__link.nav__shop-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: .65rem 1rem;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  background: transparent;
+  color: #242424;
+  text-align: center;
+  box-sizing: border-box;
+}
+.site-header .nav__shop-link::after { display: none; }
+.site-header .topbar-nav .nav__link.nav__shop-link:hover,
+.site-header .topbar-nav .nav__link.nav__shop-link:focus-visible {
+  border-color: #0b63ff;
+  color: #0b63ff;
+  background: #f3f7ff;
+}
+.site-header .nav__shop-link:focus-visible {
+  outline: 2px solid #0b63ff;
+  outline-offset: 3px;
+}
+@media (max-width: 1439px) {
+  .site-header .topbar-nav .nav__link.nav__shop-link {
+    margin-top: .75rem;
+    align-self: stretch;
+  }
+  html[dir="rtl"] .site-header .topbar-nav .nav__link.nav__shop-link {
+    text-align: center;
+  }
+}
