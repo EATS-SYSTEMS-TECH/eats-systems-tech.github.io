@@ -4,6 +4,54 @@ import { mkdir, readFile } from "node:fs/promises";
 import { startSite } from "./platform-test-fixtures.mjs";
 import { parseManagerCsv } from "../js/manager-csv.js";
 
+test("People renews an ageing channel before load-all, export or opening CSV import, without replaying writes", async t => {
+  const {origin,browser}=await startSite(t),page=await browser.newPage();
+  t.after(()=>page.close());page.setDefaultTimeout(8000);
+  await page.route(origin+'/people-budget-fixture',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><div id="root"></div>'}));
+  await page.goto(origin+'/people-budget-fixture');
+  await page.evaluate(async()=>{
+    const {createManagerDashboard}=await import('/js/manager-dashboard.js');
+    const {ManagerExampleConnection}=await import('/js/manager-example-connection.js');
+    const {createManagerExampleData,managerExampleSystems}=await import('/js/manager-example-data.js');
+    const data=createManagerExampleData(),template=managerExampleSystems[0];
+    window.opens=0;window.exports=[];window.commands=[];window.lowBudget=false;
+    class Connection extends ManagerExampleConnection{
+      constructor(options){super({data,system:template,onState:options.onState});this.ordinal=++window.opens;}
+      async open(gate){window.lowBudget=false;return super.open(gate);}
+      remainingSessionMs(){return window.lowBudget?10000:280000;}
+      async command(command,payload){window.commands.push(command);return super.command(command,payload);}
+      async exportCollection(collection){window.exports.push(this.ordinal);return super.exportCollection(collection);}
+    }
+    window.dashboard=createManagerDashboard({root:document.querySelector('#root'),user:{uid:'fixture'},Connection,
+      api:async path=>path==='/me'?{role:'user',account:{id:'fixture'},organizations:[]}:{items:path.startsWith('/systems?')?[{...template,id:'real-fixture',status:'active'}]:[],nextCursor:null}});
+    await window.dashboard.ready;
+  });
+  await page.locator('.manager-view > .manager-grid .manager-system').getByRole('button',{name:'Open workspace',exact:true}).click();
+  await page.locator('[data-tab="users"]').click();
+  await page.locator('.manager-people-workspace').waitFor();
+  await page.evaluate(()=>window.lowBudget=true);
+  await page.getByRole('button',{name:'Load all users',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelectorAll('.manager-people-workspace tbody tr').length===30);
+  assert.deepEqual(await page.evaluate(()=>({opens:window.opens,exports:window.exports})),{opens:2,exports:[2]});
+  await page.locator('.manager-people-exports > summary').click();
+  const loadedDownload=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Export loaded records',exact:true}).click();
+  assert.equal(parseManagerCsv(await readFile(await(await loadedDownload).path(),'utf8')).length,30);
+  assert.deepEqual(await page.evaluate(()=>window.exports),[2],"loaded-record export must reuse the verified rows without another gate transfer");
+  await page.evaluate(()=>window.lowBudget=true);
+  await page.locator('.manager-people-exports > summary').click();
+  const download=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Export all records',exact:true}).click();
+  assert.equal(parseManagerCsv(await readFile(await(await download).path(),'utf8')).length,30);
+  assert.deepEqual(await page.evaluate(()=>({opens:window.opens,exports:window.exports})),{opens:3,exports:[2,3]});
+  await page.evaluate(()=>window.lowBudget=true);
+  await page.getByRole('button',{name:'Import CSV',exact:true}).click();
+  await page.getByRole('dialog',{name:'Import users from CSV',exact:true}).waitFor();
+  assert.equal(await page.evaluate(()=>window.opens),4);
+  assert.equal(await page.evaluate(()=>window.commands.some(v=>/ADMIN_(IMPORT|UPSERT|DELETE)_/.test(v))),false);
+  await page.getByRole('button',{name:'Cancel',exact:true}).click();
+});
+
 test("People workspace keeps real/example CRUD, CSV and loaded-record search accessible on phone and desktop", async t => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"]) for (const width of [390, 1440]) for (const mode of ["real", "sample"]) {

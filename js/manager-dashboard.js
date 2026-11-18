@@ -2631,11 +2631,23 @@ export function createManagerDashboard({
       if (!current()) operation.close();
     }
   }
+  async function freshPeopleTransferConnection() {
+    const source = connection, gate = currentGate, tab = currentTab, system = currentSystem;
+    // A full collection may take minutes. Renew before BEGIN while no data
+    // transfer or confirmation exists; keep the existing hard session limit.
+    if (typeof source?.remainingSessionMs === "function" && source.remainingSessionMs() < 240000) {
+      if (source.transfer || (source.busy && source.pendingCommand !== "ADMIN_PING")) throw new Error("BUSY");
+      await openGate(gate, true);
+      if (closed || connection === source || connection?.closed || !connection?.session ||
+          currentGate !== gate || currentTab !== tab || currentSystem !== system) throw new Error("CANCELLED");
+    }
+    return connection;
+  }
   function renderPeopleActions(content, tab) {
     const collection = tab === "users" ? "USERS" : "ADMINS";
     if (cursor) {
       const loadAll = button(t(tab === "users" ? "טעינת כל המשתמשים" : "טעינת כל המנהלים", tab === "users" ? "Load all users" : "Load all administrators"), async () => {
-        const source = connection, epoch = generation, panel = tabGeneration;
+        const source = await freshPeopleTransferConnection(), epoch = generation, panel = tabGeneration;
         const rows = await source.exportCollection(collection);
         if (closed || connection !== source || generation !== epoch || tabGeneration !== panel || !source.session) return;
         // Bulk export returns canonical seven-column import tuples; paged
@@ -2647,14 +2659,20 @@ export function createManagerDashboard({
           return Object.fromEntries(managerColumns.map((key, index) => [key, row[index]]));
         });
         cursor = null;
-        content.replaceChildren(); renderTable(content, currentRows); renderPeopleActions(content, tab);
+        content.replaceChildren();
+        renderTable(content, currentRows);
+        const displayed = button(t("ייצוא הנתונים המוצגים", "Export displayed data"), () => exportRows(currentRows));
+        displayed.dataset.peopleAction = "displayed";
+        content.append(displayed);
+        renderPeopleActions(content, tab);
       });
       loadAll.dataset.peopleAction = "load-all";
       content.append(loadAll);
     }
     content.append(
       button(t("ייצוא כל הרשומות", "Export all records"), async () => {
-        const rows = await connection.exportCollection(collection, (bytes) =>
+        const source = await freshPeopleTransferConnection();
+        const rows = await source.exportCollection(collection, (bytes) =>
           say(t(`התקבלו ${bytes} בתים…`, `Received ${bytes} bytes…`)),
         );
         downloadCsv(encodeManagerCsv(rows));
@@ -2665,7 +2683,7 @@ export function createManagerDashboard({
     );
     content.lastElementChild.dataset.peopleAction = "all";
     content.append(button(t("ייבוא CSV", "Import CSV"), async () => {
-      const source = connection, epoch = generation, panel = tabGeneration;
+      const source = await freshPeopleTransferConnection(), epoch = generation, panel = tabGeneration;
       const alive = () => source === connection && epoch === generation && panel === tabGeneration && source.session && !closed;
       const result = await csvDialog.open({
         collection,

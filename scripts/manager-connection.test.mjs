@@ -13,6 +13,15 @@ const makeSession = () => beginBulkSendEpoch({
   deviceWriteKey: new Uint8Array(32).fill(3),
 });
 
+test("remaining transfer budget counts down without extending the hard session deadline", t => {
+  let now=1000;t.mock.method(Date,"now",()=>now);
+  const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});
+  c.session=makeSession();c.sessionDeadline=281000;
+  assert.equal(c.remainingSessionMs(),280000);now+=60000;assert.equal(c.remainingSessionMs(),220000);
+  now+=300000;assert.equal(c.remainingSessionMs(),0);assert.equal(c.sessionDeadline,281000);
+  c.closed=true;now=1000;assert.equal(c.remainingSessionMs(),0);
+});
+
 test("import BEGIN waits for confirmed controller cleanup before creating the transfer", async (t) => {
   const c = new ManagerConnection({api: async()=>({}), user:{uid:"fixture"}});
   const payload = {collection:"USERS", expectedRevision:7, sha256:"a".repeat(64)};

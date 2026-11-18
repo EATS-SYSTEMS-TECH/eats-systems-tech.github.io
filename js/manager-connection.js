@@ -214,11 +214,15 @@ export class ManagerConnection {
     });
     this.requireOpen();
     this.startHeartbeat();
+    this.sessionDeadline = Date.now() + 280000;
     this.maximum = setTimeout(
       () => this.fail(new Error("SECURE_SESSION_EXPIRED")),
       280000,
     );
     return this.capabilities;
+  }
+  remainingSessionMs() {
+    return this.closed || !this.session ? 0 : Math.max(0, (this.sessionDeadline ?? 0) - Date.now());
   }
   startHeartbeat() {
     clearInterval(this.heartbeat);
