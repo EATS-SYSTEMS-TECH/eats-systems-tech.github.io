@@ -16,7 +16,7 @@ import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailS
 import { installHomeFeatureCards, installFeatureArrows } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
 import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
-import { SHOP_PAGE_KEYS, getShopPageContent } from './shop-pages.mjs';
+import { SHOP_PAGE_KEYS, getShopPageContent, businessArtworkTag } from './shop-pages.mjs';
 import { BRAND_ID, ORGANIZATION_ID, SHARE_IMAGE, setPageMeta, webPageNode, breadcrumbNode, faqNode } from './seo.mjs';
 import { readSceneManifest, applyHomeSceneMedia, applyNicheSceneMedia } from './scene-media.mjs';
 import { readLineHeroFrames } from './line-hero-frames.mjs';
@@ -136,6 +136,9 @@ async function buildHomePages(homeData) {
     applyHomeSceneMedia($, { scene: homeData.sceneMedia.get('homepage-montage'), assetPrefix: buildAssetPrefix(locale, 'home'), copy: copy.hero.media });
     $('.guest-invites__cta, .business-plan--host .business-plan__media').attr('href', buildPagePath(locale, guestInvitesPageKey));
     $('.business-plan__cta, .business-plan--manager .business-plan__media').attr('href', buildPagePath(locale, MANAGER_PAGE_KEY));
+    for (const id of ['host', 'manager']) {
+      $(`.business-plan--${id} .business-plan__art-tag`).text(businessArtworkTag(locale, id));
+    }
     const main = $('#main-content');
     for (const id of ['home', 'advantages', 'private-access', 'where', 'guest-invites-api', 'tutorials', 'one-tap-invite', 'wifi-gate-faq', 'why-wifigate', 'system-overview', 'contact']) {
       const section = main.children('#' + id); if (section.length) main.append(section);

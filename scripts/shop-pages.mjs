@@ -125,6 +125,10 @@ function renderCard(product, locale, copy, headingTag = "h2", first = false) {
 // at the corner, with the WIFIGATE label and the plan name.
 const BUSINESS_LETTERS = { host: "H", manager: "M" };
 
+export function businessArtworkTag(locale, id) {
+  return COPY[locale === "he" ? "he" : "en"][`${id}Tag`];
+}
+
 function renderBusinessCard(copy, { id, name, href }) {
   const features = copy[`${id}Features`].map((feature) => `<li>${feature}</li>`).join("");
   return `<article class="shop-business-card shop-business-card--${id}" data-business="${id}">
