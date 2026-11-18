@@ -2229,7 +2229,8 @@ export function createManagerDashboard({
     if (cmd === "ADMIN_LIST_HISTORY" && Array.isArray(r.data.days)) {
       renderManagerHistoryDays(content, {
         days: r.data.days, language, guests: tab === "guests", more, createButton: button,
-        onDay: day => showRead(content, cmd, { dayKey: day, page: { limit: 20, cursor: null } }, "items", false),
+        systemName: currentSystem?.name || currentGate,
+        onDay: day => showRead(content, cmd, { dayKey: day, page: { limit: 20, cursor: null }, ...(tab === "guests" ? { filter: { pr: [3] } } : {}) }, "items", false),
         moreButton: r.data.page?.nextCursor ? button(t("ימים נוספים", "More days"), () =>
           showRead(content, cmd, { dayKey: null, page: { limit: 20, cursor: r.data.page.nextCursor } }, "items", true)) : undefined,
       });
@@ -2246,6 +2247,7 @@ export function createManagerDashboard({
         const visibleRows = currentRows.filter(row => tab !== "guests" || row[7] === 3);
         renderManagerHistoryRecords(content, {
           rows: visibleRows, language, guests: tab === "guests", day: payload.dayKey,
+          systemName: currentSystem?.name || currentGate,
           undecryptable: currentUndecryptable,
           backButton: button(t("חזרה לימים", "Back to days"), () => showTab(tab)),
           exportButton: button(t("ייצוא הנתונים המוצגים", "Export displayed data"), () => exportRows(visibleRows)),
@@ -2569,6 +2571,17 @@ export function createManagerDashboard({
   }
   function renderPeopleActions(content, tab) {
     const collection = tab === "users" ? "USERS" : "ADMINS";
+    if (cursor) {
+      const loadAll = button(t(tab === "users" ? "טעינת כל המשתמשים" : "טעינת כל המנהלים", tab === "users" ? "Load all users" : "Load all administrators"), async () => {
+        const source = connection, epoch = generation, panel = tabGeneration;
+        const rows = await source.exportCollection(collection);
+        if (closed || connection !== source || generation !== epoch || tabGeneration !== panel || !source.session) return;
+        currentRows = rows; cursor = null;
+        content.replaceChildren(); renderTable(content, currentRows); renderPeopleActions(content, tab);
+      });
+      loadAll.dataset.peopleAction = "load-all";
+      content.append(loadAll);
+    }
     content.append(
       button(t("ייצוא כל הרשומות", "Export all records"), async () => {
         const rows = await connection.exportCollection(collection, (bytes) =>
@@ -2774,8 +2787,13 @@ export function createManagerDashboard({
     const empty = node("p", t("אין התאמות במשתמשים שנטענו. נסו שם או טלפון אחר.", "No matches in the loaded users. Try another name or phone."), "manager-auto-no-matches"); empty.hidden = true;
     const seen = new Set(), identities = new Set(); let next = null, loaded = 0;
     const more = button(t("משתמשים נוספים", "More users"), () => load(next));
+    const all = button(t("טעינת כל משתמשי Auto Open", "Load all Auto Open users"), async () => {
+      all.disabled = true;
+      try { while (alive() && next) { if (!(await load(next))) break; } }
+      finally { all.disabled = false; }
+    });
     more.classList.add("manager-auto-more");
-    section.append(filter, state, list, empty, more); more.hidden = true;
+    section.append(filter, state, list, empty, more, all); more.hidden = all.hidden = true;
     function filterUsers() {
       const query = search.value.trim().toLocaleLowerCase(); let visible = 0;
       for (const row of list.children) { row.hidden = !row.dataset.search.includes(query); if (!row.hidden) visible++; }
@@ -2801,10 +2819,11 @@ export function createManagerDashboard({
         next = result.data.page?.nextCursor ?? null;
         if (next && seen.has(next)) throw new Error("LIST_LIMIT");
         if (next) seen.add(next);
-        more.hidden = !next;
+        more.hidden = all.hidden = !next;
         more.textContent = t("משתמשים נוספים", "More users");
         filterUsers();
         state.textContent = loaded ? "" : next ? t("אפשר להמשיך לטעון את הרשימה.", "Continue loading the list.") : t("אין משתמשים הרשומים ל־Auto Open במערכת זו.", "No users are enrolled for Auto Open on this system.");
+        return true;
       } catch (error) {
         if (!alive()) return;
         if ((error.code ?? error.message) === "STALE_CURSOR") {

@@ -44,7 +44,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
     assert.equal(await content.locator('[data-history-day]').count(),3,'duplicate days are not repeated');
     await content.locator('[data-history-day="20261027"]').click();
     assert.equal(await content.locator('tbody tr').count(),20);
-    assert.deepEqual(await content.locator('thead th').allTextContents(),he?['מועד','פעולה','מקור הפעולה','פרטי משתמש','תוצאה']:['When','Action','Source','Person','Result']);
+    assert.deepEqual(await content.locator('thead th').allTextContents(),he?['תאריך','שעה','פעולה','מקור הפעולה','פרטי משתמש','טלפון','תוצאה']:['Date','Time','Action','Source','Person','Phone','Result']);
     assert.equal(await content.getByText(copy('לחצן טכנאי','Technician button'),{exact:true}).count(),20);
     assert.equal(await content.locator('.manager-history-result[data-state="refused"]').count(),1);
     await content.getByRole('button',{name:copy('טען עוד','Load more'),exact:true}).click();

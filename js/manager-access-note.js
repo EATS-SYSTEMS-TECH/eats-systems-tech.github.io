@@ -1,3 +1,4 @@
+import { managerAccessNoteArt } from "./manager-art.js";
 const element = (tag, text, className) => {
   const node = document.createElement(tag);
   if (text !== undefined) node.textContent = text;
@@ -32,6 +33,7 @@ export function arrivalLinks(note = {}) {
 export function accessNoteContent(note = {}, language = "en") {
   const t = (he, en) => (language === "he" ? he : en);
   const content = element("div", undefined, "manager-access-note");
+  content.append(managerAccessNoteArt());
   const row = (parent, label, value) => {
     if (typeof value !== "string" || !value.trim()) return;
     const entry = element("div", undefined, "manager-access-note-row");
@@ -51,7 +53,7 @@ export function accessNoteContent(note = {}, language = "en") {
       element("span", t("נמסר על ידי", "Provided by")),
       element("strong", note.residentName),
     );
-    provider.append(avatar, person);
+    provider.append(managerAccessNoteArt("person"), avatar, person);
     content.append(provider);
   }
   const instructions = element(
@@ -60,6 +62,7 @@ export function accessNoteContent(note = {}, language = "en") {
     "manager-access-instructions",
   );
   instructions.append(element("h3", t("הנחיות כניסה", "Entry instructions")));
+  instructions.prepend(managerAccessNoteArt("note"));
   const text = element(
     "p",
     typeof note.note === "string" && note.note.trim()
@@ -70,6 +73,7 @@ export function accessNoteContent(note = {}, language = "en") {
   content.append(instructions);
   const arrival = element("section", undefined, "manager-access-arrival");
   arrival.append(element("h3", t("מיקום והגעה", "Location & arrival")));
+  arrival.prepend(managerAccessNoteArt("location"));
   if (typeof note.address === "string" && note.address.trim()) {
     const address = element("div", undefined, "manager-access-address");
     address.append(

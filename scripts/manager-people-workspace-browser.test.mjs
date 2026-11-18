@@ -95,6 +95,9 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
       await page.getByRole('dialog').getByText(/Name,Email,Country,Local,Floor,Apt,Parking/).waitFor();
       await page.keyboard.press('Escape');
       assert.deepEqual(errors,[]);
+      await page.locator('[data-tab="users"]').click();
+      await workspace.getByRole('button',{name:copy('טעינת כל המשתמשים','Load all users'),exact:true}).click();
+      assert.equal(await workspace.locator('tbody tr').count(),30,'load all reads the full collection into the table');
       if(mode==='real'){
         const writes=await page.evaluate(()=>window.commands.filter(x=>/UPSERT|DELETE/.test(x.command)));
         assert.deepEqual(writes.map(x=>x.command),['ADMIN_UPSERT_USER','ADMIN_UPSERT_USER','ADMIN_DELETE_USER']);

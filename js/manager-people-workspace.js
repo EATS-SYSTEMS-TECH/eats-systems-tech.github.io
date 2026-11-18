@@ -12,6 +12,7 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
   const displayed = content.querySelector('[data-people-action="displayed"]');
   if (displayed) displayed.textContent = t("ייצוא הרשומות שנטענו", "Export loaded records");
   const more = content.querySelector('[data-people-action="more"]');
+  const loadAll = content.querySelector('[data-people-action="load-all"]');
   const all = content.querySelector('[data-people-action="all"]');
   const importButton = content.querySelector('[data-people-action="import"]');
   const wrap = content.querySelector(".manager-table-wrap");
@@ -162,7 +163,7 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
   if (wrap) workspace.append(wrap);
   else workspace.append(el("p", t("אין עדיין רשומות. הוסיפו אדם ראשון או ייבאו קובץ CSV.", "No records yet. Add the first person or import a CSV file."), "manager-people-empty"));
   workspace.append(noMatches);
-  if (more) { const footer = el("footer", undefined, "manager-people-footer"); footer.append(el("span", t("טענו רשומות נוספות כדי להרחיב את הרשימה והחיפוש", "Load more records to extend the list and search")), more); workspace.append(footer); }
+  if (more || loadAll) { const footer = el("footer", undefined, "manager-people-footer"); footer.append(el("span", t("טענו רשומות נוספות כדי להרחיב את הרשימה והחיפוש", "Load more records to extend the list and search"))); if (more) footer.append(more); if (loadAll) footer.append(loadAll); workspace.append(footer); }
   // All controls have been moved before discarding the generic action container.
   panel?.remove();
   content.replaceChildren(workspace);

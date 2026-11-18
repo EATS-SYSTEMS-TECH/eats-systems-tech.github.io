@@ -1,5 +1,5 @@
 @import url("./manager-events.css?v=20261105now1");
-@import url("./manager-control-workspace.css?v=20261109guest1");
+@import url("./manager-control-workspace.css?v=20261118ux7");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -17,6 +17,13 @@
 .manager-settings-card select { width: 100%; max-width: 480px; margin-block: 8px; }
 .manager-timing-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .manager-timing-fields input { width: 100%; min-width: 0; }
+.manager-timing-art { display:block; width:100%; max-width:680px; height:auto; margin:20px auto 8px; direction:ltr; }
+.manager-feature-art { display:block; width:280px; max-width:100%; height:auto; margin:8px auto 24px; }
+.manager-arrival-art { display:block; width:264px; max-width:100%; height:auto; margin:0 auto 24px; }
+.manager-note-art { width:48px; height:48px; flex-shrink:0; margin-block-end:12px; }
+.manager-history-system { margin:0 0 16px; color:#146bff; font-weight:700; }
+.manager-history-person small { display:block; margin-block-start:5px; color:#64748b; }
+.manager-access-note :is(.manager-access-instructions,.manager-access-arrival) { background:#fff; border:1px solid #e5ebf2; border-radius:14px; padding:20px; }
 .manager-device-card { margin-block: 0 20px; }
 .manager-device-facts { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 1fr); margin: 18px 0 0; }
 .manager-device-facts dt, .manager-device-facts dd { margin: 0; padding-block: 13px; border-bottom: 1px solid #e8edf3; }

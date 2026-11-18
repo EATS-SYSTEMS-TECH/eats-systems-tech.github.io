@@ -59,7 +59,7 @@ test("Auto Open shows confirmed state, one action, local search, paged enrollmen
     await list.getByRole('button',{name:copy('ניסיון נוסף','Try again'),exact:true}).click();
     assert.equal(await list.locator('.manager-auto-user').count(),10);
     await search.fill('');
-    await more.click();await more.click();
+    await list.getByRole('button',{name:copy('טעינת כל משתמשי Auto Open','Load all Auto Open users'),exact:true}).click();
     assert.equal(await list.locator('.manager-auto-user').count(),24);
     assert.equal(await more.isHidden(),true);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);

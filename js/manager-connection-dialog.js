@@ -20,8 +20,8 @@ export function createManagerConnectionDialog({
     [
       t("ממתינים למערכת", "Waiting for your system"),
       t(
-        "החיבור והכנת סביבת הניהול עשויים להימשך עד שתי דקות. תודה על הסבלנות, נפתח עבורכם את סביבת הניהול ברגע שהיא תהיה מוכנה.",
-        "Connecting and preparing your workspace may take up to two minutes. Thank you for your patience. We’ll open your workspace as soon as it is ready.",
+        "החיבור והכנת סביבת הניהול עשויים להימשך מספר דקות. תודה על הסבלנות, נפתח עבורכם את סביבת הניהול ברגע שהיא תהיה מוכנה.",
+        "Connecting and preparing your workspace may take a few minutes. Thank you for your patience. We’ll open your workspace as soon as it is ready.",
       ),
     ],
     [

@@ -1,4 +1,5 @@
 import { createManagerSectionHeading } from "./manager-section-heading.js";
+import { managerTimingArt } from "./manager-art.js";
 
 const node = (tag, text, className) => {
   const value = document.createElement(tag);
@@ -61,6 +62,7 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   select.setAttribute("aria-describedby",description.id);
   description.setAttribute("aria-live", "polite");
   methodCard.append(heading, node("p", t("בחרו כיצד המערכת מגיבה לפקודת פתיחה.", "Choose how the system responds to an opening command."), "manager-supporting-copy"), picker, description);
+  const artwork = node("div", undefined, "manager-method-artwork"); methodCard.append(artwork);
   if (commandLocked) methodCard.append(node("p", rollerShutter
     ? t("בתריס חשמלי אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In a Roller Shutter, the opening method follows the shared configuration.")
     : t("במערכת Dual Control אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In Dual Control, the opening method follows the shared configuration."), "manager-supporting-copy"));
@@ -110,6 +112,7 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   let busy = false, disposed = false;
   function sync() {
     const method = selectedMethod(), active = managerTimingFields(method);
+    artwork.replaceChildren(managerTimingArt(method, Object.fromEntries(timing.map(key => [key, form.elements[key].value])), language));
     preview.replaceChildren(...active.map((key, index) => {
       const item = node("li");
       // The step value carries the unit; the label drops its "(seconds)" note.

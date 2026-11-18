@@ -855,11 +855,13 @@ body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
 .manager-control-workspace .manager-history-day:hover :is(span,strong) { color:inherit; }
 .manager-control-workspace .manager-history-table { width:100%; min-width:0; table-layout:fixed; }
 .manager-control-workspace .manager-history-table :is(th,td) { padding:17px 12px; overflow-wrap:anywhere; vertical-align:middle; }
-.manager-control-workspace .manager-history-table th:nth-child(1) { width:19%; }
-.manager-control-workspace .manager-history-table th:nth-child(2) { width:16%; }
-.manager-control-workspace .manager-history-table th:nth-child(3) { width:21%; }
-.manager-control-workspace .manager-history-table th:nth-child(4) { width:27%; }
-.manager-control-workspace .manager-history-table th:nth-child(5) { width:17%; }
+.manager-control-workspace .manager-history-table th:nth-child(1) { width:15%; }
+.manager-control-workspace .manager-history-table th:nth-child(2) { width:11%; }
+.manager-control-workspace .manager-history-table th:nth-child(3) { width:10%; }
+.manager-control-workspace .manager-history-table th:nth-child(4) { width:17%; }
+.manager-control-workspace .manager-history-table th:nth-child(5) { width:23%; }
+.manager-control-workspace .manager-history-table th:nth-child(6) { width:14%; }
+.manager-control-workspace .manager-history-table th:nth-child(7) { width:10%; }
 .manager-control-workspace .manager-history-time > bdi { display:block; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; color:#263e58; }
 .manager-control-workspace .manager-history-time > span { display:block; margin-block-start:5px; color:#718196; font-size:12px; }
 .manager-control-workspace .manager-history-action { display:inline-block; padding:6px 9px; background:#fff1e7; color:#a13e13; border-radius:8px; font-size:12px; line-height:1.5; }

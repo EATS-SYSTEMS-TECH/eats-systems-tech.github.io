@@ -11,3 +11,4 @@ dev-server*.log
 # Private launch evidence and local browser screenshots.
 /logs/manager-launch-2026-11-17/
 /logs/manager-live-2026-11-18/
+/logs/manager-launch-2026-11-18/

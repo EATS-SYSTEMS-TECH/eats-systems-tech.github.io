@@ -2,6 +2,15 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { managerHistoryRecord, managerHistoryDay } from "../js/manager-history-workspace.js";
 
+test("Guest history keeps the signed guest name and separately identifies the inviter", () => {
+  const row=[0,0,0,0,0,1,1,3,0,0,0,0,0,'','972501234567','Recorded inviter'];
+  const unnamed=managerHistoryRecord(row,'he');
+  assert.match(unnamed.name,/שם האורח לא נכלל בהזמנה/);
+  assert.equal(unnamed.inviter,'Recorded inviter');
+  assert.equal(managerHistoryRecord(row.map((v,i)=>i===13?'Named guest':v)).name,'Named guest');
+  assert.equal(managerHistoryRecord(row.map((v,i)=>i===7?2:v)).inviter,'');
+});
+
 test("History uses firmware source/event/result codes and the recorded gate offset", () => {
   const row=[0,Date.parse('2026-10-27T10:58:40Z')/1000,180,0,0,1,3,3,0,0,0,0,0,'Guest visitor','972501234567'];
   const he=managerHistoryRecord(row,'he');

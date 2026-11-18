@@ -26,7 +26,8 @@ export function managerHistoryRecord(row, language = "en") {
     date, time,
     action: events[row[5]] || t("פעולה לא מזוהה", "Unrecognized action"),
     source: sources[row[6]] || t("מקור לא מזוהה", "Unrecognized source"),
-    name: row[13] || t("לא תועד שם", "Name not recorded"), phone: row[14] || "",
+    name: row[13] || (row[7] === 3 ? t("שם האורח לא נכלל בהזמנה", "Guest name was not included in the invitation") : t("לא תועד שם", "Name not recorded")), phone: row[14] || "",
+    inviter: row[7] === 3 ? row[15] || "" : "",
     result: row[8] === 0 ? t("בוצע", "Done") : row[8] === 1 ? t("סורב", "Refused") : t("תוצאה לא זמינה", "Result unavailable"),
     state: row[8] === 0 ? "done" : row[8] === 1 ? "refused" : "unknown",
   };
@@ -42,13 +43,14 @@ function heading(language, guests, subtitle) {
   const he = language === "he";
   return createManagerSectionHeading({title:guests ? (he ? "פעילות אורחים" : "Guest activity") : (he ? "היסטוריית המערכת" : "System history"),description:subtitle,icon:guests ? "account" : "history",level:"h4",className:"manager-history-header"});
 }
-export function renderManagerHistoryDays(content, { days, language, guests, more, createButton, onDay, moreButton }) {
+export function renderManagerHistoryDays(content, { days, language, guests, more, createButton, onDay, moreButton, systemName }) {
   const he = language === "he", t = (h,e) => he ? h : e;
   let workspace = more ? content.querySelector(".manager-history-workspace") : null;
   if (!workspace) {
     workspace = node("section", undefined, "manager-history-workspace");
     workspace.append(heading(language, guests, guests ? t("בחרו יום לצפייה בפעילות האורחים שתועדה במערכת", "Choose a day to view guest activity recorded by the system") : t("בחרו יום לצפייה בפעולות שתועדו במערכת", "Choose a day to view recorded system activity")), node("div", undefined, "manager-history-days"));
     content.replaceChildren(workspace);
+    if (systemName) workspace.prepend(node("p", t(`מערכת: ${systemName}`, `System: ${systemName}`), "manager-history-system"));
   }
   workspace.querySelector(".manager-history-more-days")?.remove();
   const list = workspace.querySelector(".manager-history-days");
@@ -67,9 +69,10 @@ export function renderManagerHistoryDays(content, { days, language, guests, more
   if (!list.childElementCount) list.append(node("p", t("אין עדיין היסטוריה זמינה במערכת.", "No system history is available yet."), "manager-history-empty"));
   if (moreButton) { moreButton.classList.add("manager-history-more-days"); workspace.append(moreButton); }
 }
-export function renderManagerHistoryRecords(content, { rows, language, guests, day, backButton, moreButton, exportButton, undecryptable = 0 }) {
+export function renderManagerHistoryRecords(content, { rows, language, guests, day, backButton, moreButton, exportButton, undecryptable = 0, systemName }) {
   const he = language === "he", t = (h,e) => he ? h : e;
   const workspace = node("section", undefined, "manager-history-workspace");
+  if (systemName) workspace.append(node("p", t(`מערכת: ${systemName}`, `System: ${systemName}`), "manager-history-system"));
   const header = heading(language, guests, managerHistoryDay(day, language));
   const tools = node("div", undefined, "manager-history-tools");
   tools.append(backButton, exportButton);
@@ -96,12 +99,12 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
     ? t("רשומה אחת ביום זה שמורה במערכת אך אינה ניתנת לפענוח במפתח הנוכחי של המערכת. היא נכתבה לפני שהמערכת קיבלה מפתח חדש, ולכן לא תוצג.", "1 record from this day is stored on the system but cannot be decrypted with its current key. It was written before the system received a new key, so it is not shown.")
     : t(`${undecryptable} רשומות ביום זה שמורות במערכת אך אינן ניתנות לפענוח במפתח הנוכחי של המערכת. הן נכתבו לפני שהמערכת קיבלה מפתח חדש, ולכן לא יוצגו.`, `${undecryptable} records from this day are stored on the system but cannot be decrypted with its current key. They were written before the system received a new key, so they are not shown.`),
     "manager-history-undecryptable"));
-  if (!rows.length && !undecryptable) workspace.append(node("p", guests ? t("אין פעילות אורחים ברשומות שנטענו ליום זה.", "No guest activity in the records loaded for this day.") : t("אין רשומות שנטענו ליום זה.", "No records loaded for this day."), "manager-history-empty"));
+  if (!rows.length && !undecryptable) workspace.append(node("p", moreButton ? t("לא נמצאו רשומות תואמות בחלק שנסרק. טענו עוד כדי לבדוק את שאר היום.", "No matching records in the scanned portion. Load more to check the rest of the day.") : guests ? t("אין פעילות אורחים ברשומות שנטענו ליום זה במערכת הזו.", "No guest activity in the loaded records for this day on this system.") : t("אין רשומות שנטענו ליום זה.", "No records loaded for this day."), "manager-history-empty"));
   else if (rows.length) {
     const wrap = node("div", undefined, "manager-table-wrap");
     const table = node("table", undefined, "manager-table manager-history-table");
     table.setAttribute("aria-label", guests ? t("פעילות אורחים", "Guest activity") : t("היסטוריית המערכת", "System history"));
-    const titles = [t("מועד", "When"), t("פעולה", "Action"), t("מקור הפעולה", "Source"), t("פרטי משתמש", "Person"), t("תוצאה", "Result")];
+    const titles = [t("תאריך", "Date"), t("שעה", "Time"), t("פעולה", "Action"), t("מקור הפעולה", "Source"), t("פרטי משתמש", "Person"), t("טלפון", "Phone"), t("תוצאה", "Result")];
     const head = node("thead"), headRow = node("tr");
     for (const text of titles) { const cell=node("th",text); cell.scope="col"; headRow.append(cell); }
     head.append(headRow);
@@ -110,18 +113,20 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
       const data = managerHistoryRecord(raw, language), row = node("tr");
       const cells = titles.map(title => { const td=node("td"); td.dataset.label=title; return td; });
       cells[0].className = "manager-history-time";
-      const time = node("bdi", data.time || data.date); time.dir="ltr";
+      const time = node("bdi", data.date); time.dir="auto";
       cells[0].append(time);
-      if (data.time) cells[0].append(node("span", data.date));
-      cells[1].append(node("span",data.action,"manager-history-action"));
+      const clock = node("bdi", data.time || "—"); clock.dir="ltr"; cells[1].append(clock);
+      cells[2].append(node("span",data.action,"manager-history-action"));
       const source = node("span",undefined,"manager-history-source");
       source.append(managerUiIcon(({1:"app",2:"gate",5:"signal",6:"calendar",9:"systems"})[raw[6]]||"history"),node("span",data.source));
-      cells[2].append(source);
-      cells[3].className = "manager-history-person";
-      cells[3].append(node("strong",data.name));
-      if (data.phone) { const phone=node("bdi",data.phone); phone.dir="ltr"; cells[3].append(phone); }
+      cells[3].append(source);
+      cells[4].className = "manager-history-person";
+      cells[4].append(node("strong",data.name));
+      if (data.inviter) cells[4].append(node("small", t(`הוזמן על ידי ${data.inviter}`, `Invited by ${data.inviter}`)));
+      const phone=node("bdi",data.phone || "—"); phone.dir="ltr"; cells[5].append(phone);
+      if (raw[7] === 3) cells[5].title = t("טלפון המזמין", "Inviter phone");
       const result=node("span",data.result,"manager-history-result"); result.dataset.state=data.state;
-      cells[4].append(result);
+      cells[6].append(result);
       row.append(...cells); body.append(row);
     }
     table.append(head,body); wrap.append(table); workspace.append(wrap);
