@@ -82,6 +82,9 @@ export function applyHomepageCopy($, copy, locale) {
   for (const key of ['distributorTitle', 'distributorText', 'distributorButton', 'supportTitle', 'supportText', 'interestTitle', 'interestText', 'whatsappButton']) text(`[data-i18n='contact.${key}']`, copy.contact[key]);
   setLocalizedLines($, '#where-title', copy.solutions.titleLines, locale);
   setLocalizedLines($, '#guest-invites-title', copy.automation.titleLines, locale);
+  if (copy.automation.subtitle.includes('\n')) {
+    setLocalizedLines($, '#wifigate-for-business .guest-invites__subtitle', copy.automation.subtitle.split('\n'), locale);
+  }
   // Optional notes retain their original visibility/removal boundary.
   for (const [selector, value] of [['#subscription-note', copy.platform.subscriptionNote], ['#entry-points-note', copy.why.pointsNote]]) {
     if (!$(selector).length) continue;
