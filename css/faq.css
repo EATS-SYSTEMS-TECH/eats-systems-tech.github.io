@@ -89,6 +89,17 @@
   margin-top: 0.5rem;
 }
 
+.seo-faq__bullets {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  color: var(--home-muted);
+  list-style: disc;
+}
+
+.seo-faq__bullets li + li {
+  margin-top: 0.75rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .seo-faq__item summary::after {
     transition: none;
