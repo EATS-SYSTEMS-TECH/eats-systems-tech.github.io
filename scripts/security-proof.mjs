@@ -6,7 +6,7 @@
 import { setLocalizedText } from "./localized-builder-document.mjs";
 
 export const SECURITY_PROOF_PAGE_KEY = "security-privacy";
-export const SECURITY_PROOF_STYLE_VERSION = "20261118sp3";
+export const SECURITY_PROOF_STYLE_VERSION = "20261118sp5";
 
 export const SECURITY_PROOF_COPY = Object.freeze({
   he: Object.freeze({
@@ -15,10 +15,10 @@ export const SECURITY_PROOF_COPY = Object.freeze({
     layersTitle: "4 שכבות הגנה",
     layersText: "כל פתיחה מהאפליקציה מוגנת בארבע שכבות, כך שאי אפשר לקרוא אותה, לזייף אותה או להעתיק אותה.",
     layers: Object.freeze([
-      Object.freeze({ title: "זיהוי הבקר", text: "הטלפון מוודא שהוא מדבר עם הבקר שלכם." }),
-      Object.freeze({ title: "הצפנה", text: "אף אחד מבחוץ לא יכול לקרוא את הפקודה." }),
-      Object.freeze({ title: "זיהוי הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
-      Object.freeze({ title: "הגנה מהעתקה", text: "פקודה שהוקלטה לא תעבוד שוב." }),
+      Object.freeze({ icon: "controller", title: "זיהוי הבקר", text: "הטלפון מוודא שהוא מדבר עם הבקר שלכם." }),
+      Object.freeze({ icon: "lock", title: "הצפנה", text: "אף אחד מבחוץ לא יכול לקרוא את הפקודה." }),
+      Object.freeze({ icon: "phone", title: "זיהוי הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
+      Object.freeze({ icon: "replay", title: "הגנה מהעתקה", text: "פקודה שהוקלטה לא תעבוד שוב." }),
     ]),
     standardTitle: "תקני הצפנה בינלאומיים",
     standardText: "ההגנה בנויה על אלגוריתמים מוכרים של NIST, אותם תקנים שעליהם נשענות מערכות פיננסיות וממשלתיות, ומעליהם הוספנו שכבות הגנה משלנו.",
@@ -43,21 +43,30 @@ export function securityProofCopy(pageKey, locale) {
   if (pageKey !== SECURITY_PROOF_PAGE_KEY || !Object.hasOwn(SECURITY_PROOF_COPY, locale)) return null;
   const copy = SECURITY_PROOF_COPY[locale];
   const texts = [copy.eyebrow, copy.title, copy.layersTitle, copy.layersText, copy.standardTitle, copy.standardText, copy.testTitle, copy.testText, copy.result, copy.outcome, copy.note];
-  if (!texts.every(NONEMPTY) || copy.layers.length !== 4 || !copy.layers.every(layer => NONEMPTY(layer.title) && NONEMPTY(layer.text))
+  if (!texts.every(NONEMPTY) || copy.layers.length !== 4 || !copy.layers.every(layer => Object.hasOwn(LAYER_ICONS, layer.icon) && NONEMPTY(layer.title) && NONEMPTY(layer.text))
     || !copy.tools.length || !copy.tools.every(tool => NONEMPTY(tool.name))) throw new Error(`Incomplete security proof copy: ${locale}`);
   return copy;
 }
 
-// Four rings around a lock, one ring for each layer, numbered from the outside in.
+// Small line icons of the four layers, drawn on a 24-unit grid.
+const LAYER_ICONS = Object.freeze({
+  // The controller, with a check: the phone knows it is yours.
+  controller: '<rect x="4" y="3" width="13" height="18" rx="2"/><rect x="7" y="6" width="7" height="4.5" rx="0.8"/><circle cx="8.2" cy="14.5" r="0.9"/><circle cx="18" cy="17" r="4.2" class="security-proof__icon-fill"/><path d="M16.2 17l1.3 1.3l2.4-2.6"/>',
+  // A closed lock: nobody outside can read the command.
+  lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/>',
+  // A phone, with a check: only an authorised phone is obeyed.
+  phone: '<rect x="6" y="2.5" width="11" height="19" rx="2.2"/><path d="M10 5.5h3"/><circle cx="17.5" cy="16.5" r="4.2" class="security-proof__icon-fill"/><path d="M15.7 16.5l1.3 1.3l2.4-2.6"/>',
+  // A replay arrow, struck through: a recorded command does not work again.
+  replay: '<path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M4.5 3.5v4h4"/><path d="M5 19L19 5"/>',
+});
+const layerIcon = name => `<svg class="security-proof__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${LAYER_ICONS[name]}</svg>`;
+
+// Four rings around a lock, one ring for each layer.
 const LAYERS_ART = `<svg class="security-proof__art" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
   <circle cx="120" cy="120" r="112" class="security-proof__ring"/>
   <circle cx="120" cy="120" r="88" class="security-proof__ring"/>
   <circle cx="120" cy="120" r="64" class="security-proof__ring"/>
   <circle cx="120" cy="120" r="40" class="security-proof__ring security-proof__ring--core"/>
-  <g class="security-proof__badge"><circle cx="120" cy="8" r="11"/><text x="120" y="12.5">1</text></g>
-  <g class="security-proof__badge"><circle cx="120" cy="32" r="11"/><text x="120" y="36.5">2</text></g>
-  <g class="security-proof__badge"><circle cx="120" cy="56" r="11"/><text x="120" y="60.5">3</text></g>
-  <g class="security-proof__badge"><circle cx="120" cy="80" r="11"/><text x="120" y="84.5">4</text></g>
   <rect x="104" y="116" width="32" height="25" rx="4" class="security-proof__lock"/>
   <path d="M111 116v-7a9 9 0 0 1 18 0v7" class="security-proof__shackle"/>
   <circle cx="120" cy="127" r="3" class="security-proof__keyhole"/>
@@ -88,8 +97,8 @@ export function installSecurityProof($, { pageKey, locale, assetPrefix }) {
   const text = (tag, className, value) => { const node = $(`<${tag}>`).addClass(className); setLocalizedText($, node, value, locale); return node; };
 
   const layers = $("<ol>").addClass("security-proof__layers");
-  copy.layers.forEach((layer, index) => layers.append($("<li>").addClass("security-proof__layer").append(
-    $("<span>").addClass("security-proof__number").attr("aria-hidden", "true").text(String(index + 1)),
+  copy.layers.forEach(layer => layers.append($("<li>").addClass("security-proof__layer").append(
+    $("<span>").addClass("security-proof__number").append(layerIcon(layer.icon)),
     $("<span>").addClass("security-proof__layer-copy").append(text("strong", "security-proof__layer-title", layer.title), text("span", "security-proof__layer-text", layer.text)))));
   const layersCard = $("<div>").addClass("security-proof__card security-proof__card--layers").append(
     $("<div>").addClass("security-proof__art-wrap").append(LAYERS_ART),

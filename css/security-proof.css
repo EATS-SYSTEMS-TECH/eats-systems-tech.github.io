@@ -86,18 +86,6 @@
   stroke: var(--proof-blue);
 }
 
-.security-proof__badge circle {
-  fill: #fff;
-  stroke: var(--proof-blue);
-  stroke-width: 1.5;
-}
-
-.security-proof__badge text {
-  fill: var(--proof-heading);
-  font: 700 12px/1 "Manrope", system-ui, sans-serif;
-  text-anchor: middle;
-}
-
 .security-proof__lock {
   fill: var(--proof-blue);
 }
@@ -178,13 +166,25 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border: 1.5px solid var(--proof-blue);
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
-  color: var(--proof-heading);
-  font-size: 0.8rem;
-  font-weight: 700;
+  background: rgba(20, 107, 255, 0.1);
+}
+
+/* A layer's small line icon. */
+.security-proof__icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: var(--proof-blue);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.security-proof__icon .security-proof__icon-fill {
+  fill: #fff;
 }
 
 .security-proof__layer-copy {
@@ -263,12 +263,8 @@
   display: inline-flex;
   gap: 0.4rem;
   align-items: center;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid rgba(20, 107, 255, 0.4);
-  border-radius: 999px;
   color: var(--proof-blue);
-  background: rgba(20, 107, 255, 0.06);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
 }
