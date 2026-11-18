@@ -25,6 +25,7 @@ import { encodeManagerCsv, managerColumns } from "./manager-csv.js";
 import { createManagerCsvDialog } from "./manager-csv-dialog.js";
 import { renderManagerSettings } from "./manager-settings.js";
 import { renderManagerDeviceControls } from "./manager-device-controls.js";
+import { createManagerFirmwareSource } from "./manager-firmware-source.js";
 import { createManagerEvents } from "./manager-events.js";
 import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumUsers } from "./manager-device-details.js";
 import { managerRequest } from "./api/index.js";
@@ -248,8 +249,14 @@ export function createManagerDashboard({
     if (explanation) return [explanation.message, ...explanation.steps].join(" ");
     return ({
       "mfa-cancelled":t("אימות הזהות בוטל. הפעולה לא נשלחה למערכת.","Identity verification was cancelled. The action was not sent to the system."),
-      INVALID_FIRMWARE_PACKAGE:t("חבילת העדכון אינה תקינה או אינה מתאימה למערכת. בחרו manifest.json ואת עשרת הקבצים המקוריים.","The update package is invalid or does not match this system. Select manifest.json and the ten original encrypted files."),
+      INVALID_FIRMWARE_PACKAGE:t("לא ניתן לאמת עדכון מתאים למערכת. לא יבוצע שינוי בבקר; נסו לבדוק שוב.","A compatible update could not be verified. The controller will not be changed; check again."),
       FIRMWARE_NOT_NEWER:t("החבילה אינה חדשה יותר מהקושחה במערכת.","This package is not newer than the installed firmware."),
+      FIRMWARE_NOT_PUBLISHED:t("עדיין לא פורסמה גרסת עדכון לדגם זה.","No update release has been published for this model yet."),
+      FIRMWARE_SOURCE_UNAVAILABLE:t("שירות העדכונים אינו זמין כרגע. נסו שוב בהמשך.","The update service is unavailable. Try again later."),
+      FIRMWARE_RELEASE_INVALID:t("לא ניתן לאמת את חבילת העדכון. לא יבוצע שינוי בבקר.","The update package could not be validated. The controller will not be changed."),
+      FIRMWARE_RELEASE_CHANGED:t("גרסת העדכון השתנתה. בדקו שוב לפני העדכון.","The update release changed. Check again before updating."),
+      TOTP_REQUIRED:t("יש להשלים אימות באמצעות אפליקציית המאמת לפני הפעולה.","Complete authenticator verification before this action."),
+      RECENT_REAUTH_REQUIRED:t("נדרש אימות חשבון חדש לפני הפעולה. נסו שוב והשלימו את האימות.","A new account verification is required. Try again and complete verification."),
       FOTA_REBOOT_NOT_VERIFIED:t("לא אומתה הגרסה החדשה לאחר האתחול. התחברו שוב ובדקו את גרסת המערכת לפני ניסיון נוסף.","The new version was not verified after restart. Reconnect and check the installed version before retrying."),
       // History may use internal LittleFS on BETA boards or SD on newer hardware.
       STORAGE_IO: /^ADMIN_IMPORT_(BEGIN|VALIDATE|STATUS)$/.test(error.command ?? "")
@@ -2174,6 +2181,7 @@ export function createManagerDashboard({
       const transport = {get session(){return context.source.session;},get capabilities(){return context.source.capabilities;},command:(...args)=>context.source.command(...args)};
       const panel = await renderManagerDeviceControls({ root: content, kind: tab, language, connection: transport,
         confirm: confirmAction, ensureRecent, isCurrent: current, errorText, onRefresh: () => showTab(tab),
+        firmwareSource: examples.isSystem(currentSystem) ? null : createManagerFirmwareSource({request:api,gateId:currentGate,isCurrent:current}),
         onFactoryReset: async ({ acknowledged }) => {
           if (closed || context.source !== connection || context.epoch !== generation) return;
           stop();
@@ -2187,9 +2195,12 @@ export function createManagerDashboard({
           title.focus();
         },
         onFirmwareUpdate: async (prepared,progress) => {
+          // Renew an ageing channel before BEGIN; preserve this panel and draft.
+          const source = await freshPeopleTransferConnection();
+          if (!current()) throw new Error("CANCELLED");
           const gate=currentGate,version=prepared.beginPayload.version,system=currentSystem,epoch=generation;
-          if(typeof context.source.updateFirmware!=="function")throw new Error("UNSUPPORTED");
-          const result=await context.source.updateFirmware(prepared,progress);
+          if(typeof source.updateFirmware!=="function")throw new Error("UNSUPPORTED");
+          const result=await source.updateFirmware(prepared,progress);
           const ownerCurrent=()=>!closed&&currentGate===gate&&currentSystem===system;
           if(!ownerCurrent()||generation!==epoch)throw new Error("CANCELLED");
           const delay=Math.max(4000,Math.min(30000,(Number(result.data?.rebootInMs)||0)+2500));
@@ -2203,10 +2214,11 @@ export function createManagerDashboard({
             status=(await connection.command("ADMIN_FOTA_GET_STATUS")).data;
             if(!ownerCurrent()||generation!==verificationEpoch)throw new Error("CANCELLED");
             if(status.firmwareVersion!==version||status.rolledBackVersion===version)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
-            if(!status.pendingVerify)break;
+            if(typeof status.pendingVerify!=="boolean" || (status.rebootPending!==undefined && typeof status.rebootPending!=="boolean"))throw new Error("INVALID_RESPONSE");
+            if(status.pendingVerify===false && !status.rebootPending)break;
             await new Promise(resolve=>setTimeout(resolve,1500));
           }while(Date.now()<deadline);
-          if(status.pendingVerify)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
+          if(status.pendingVerify || status.rebootPending)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
           await showTab("firmware");
           say(t(`העדכון הושלם. גרסה ${version} אומתה לאחר האתחול.`,`Update complete. Version ${version} verified after restart.`));
         } });

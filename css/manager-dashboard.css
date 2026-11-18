@@ -28,6 +28,10 @@
 .manager-device-controls .manager-button { justify-self:start; }
 .manager-device-controls label { display:grid; gap:10px; font-weight:600; }
 .manager-device-controls select { width:100%; padding:14px; font:inherit; border:1px solid #cbd5e1; border-radius:10px; background:white; }
+.manager-firmware-facts {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:20px 0;}
+.manager-firmware-facts > div {padding:16px;border:1px solid #dedede;border-radius:6px;background:#fff;}
+.manager-firmware-facts dt {font-size:13px;color:#626262;margin-bottom:8px;}
+.manager-firmware-facts dd {margin:0;font-size:20px;font-weight:700;overflow-wrap:anywhere;}
 .manager-device-controls .manager-control-switch { display:flex; align-items:center; gap:12px; }
 .manager-qr-label svg { display:block; width:320px; max-width:100%; margin:auto; }
 .manager-qr-label strong { display:block; text-align:center; direction:ltr; }

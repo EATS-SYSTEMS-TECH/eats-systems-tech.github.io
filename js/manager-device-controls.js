@@ -1,6 +1,5 @@
 import { managerFeatureArt } from "./manager-art.js";
 import qrcode from "./vendor/qrcode-generator.js";
-import { prepareManagerFirmware } from "./manager-firmware-package.js";
 import { managerRfDetails } from "./manager-device-details.js";
 
 const el = (tag, text, cls) => {
@@ -57,6 +56,7 @@ export async function renderManagerDeviceControls({
   onRefresh,
   onFirmwareUpdate,
   onFactoryReset,
+  firmwareSource,
 }) {
   const t = (he, en) => (language === "he" ? he : en),
     spec = definitions[kind];
@@ -90,6 +90,8 @@ export async function renderManagerDeviceControls({
     document.removeEventListener("visibilitychange", visibility);
   };
   const message = (error) => {
+    const safeCode = error?.code || error?.message;
+    if (/^[A-Z_]{1,64}$/.test(safeCode || "")) console.warn("Manager control refused",kind,safeCode);
     if (alive()) {
       state.textContent = errorText(error);
       state.setAttribute("role", "alert");
@@ -123,7 +125,7 @@ export async function renderManagerDeviceControls({
     );
     return { dispose };
   }
-  const data = spec.read ? (await connection.command(spec.read)).data : null;
+  let data = spec.read ? (await connection.command(spec.read)).data : null;
   if (!alive()) return { dispose };
   const save = async (command, payload, question) => {
     if (!Number.isInteger(data?.revision)) throw new Error("INVALID_RESPONSE");
@@ -420,93 +422,83 @@ export async function renderManagerDeviceControls({
     });
     resetButton.classList.add("danger", "manager-reset-button");
   } else if (kind === "firmware") {
-    state.textContent =
-      t("גרסת קושחה נוכחית: ", "Current firmware: ") +
-      String(data.firmwareVersion || "—");
-    panel.append(
-      el(
-        "p",
-        t(
-          "בחרו את manifest.json ואת עשרת הקבצים המוצפנים מתוך חבילת העדכון של WIFIGATE. הבקר מאמת את החבילה לפני התקנתה.",
-          "Select manifest.json and the ten encrypted files from a WIFIGATE update package. The controller authenticates the package before installation.",
-        ),
-      ),
-    );
-    const label = el(
-        "label",
-        t("חבילת עדכון קושחה", "Firmware update package"),
-      ),
-      input = el("input");
-    input.type = "file";
-    input.multiple = true;
-    label.append(input);
-    panel.append(label);
-    const progress = el("progress");
-    progress.max = 1;
-    progress.value = 0;
-    progress.hidden = true;
-    progress.setAttribute(
-      "aria-label",
-      t("התקדמות עדכון קושחה", "Firmware update progress"),
-    );
-    panel.append(progress);
-    if (onFirmwareUpdate)
-      button(
-        t("עדכון קושחה", "Update firmware"),
-        async () => {
-          const files = [...input.files];
-          if (
-            files.length !== 11 ||
-            files.reduce((sum, file) => sum + file.size, 0) >
-              3 * 1024 * 1024 + 32768
-          )
-            throw new Error("INVALID_FIRMWARE_PACKAGE");
-          const manifestFile = files.find(
-            (file) => file.name === "manifest.json",
-          );
-          if (!manifestFile || manifestFile.size > 32768)
-            throw new Error("INVALID_FIRMWARE_PACKAGE");
-          const manifest = JSON.parse(await manifestFile.text()),
-            chunks = new Map();
-          for (const file of files) {
-            if (file === manifestFile) continue;
-            if (chunks.has(file.name))
-              throw new Error("INVALID_FIRMWARE_PACKAGE");
-            chunks.set(file.name, new Uint8Array(await file.arrayBuffer()));
-          }
-          const prepared = await prepareManagerFirmware(manifest, chunks, data);
-          try {
-            if (manifest.releaseCounter <= (data.releaseCounter ?? 0))
-              throw new Error("FIRMWARE_NOT_NEWER");
-            if (!alive()) return;
-            await ensureRecent({ maxAgeSeconds: 240 });
-            if (
-              !alive() ||
-              !(await confirm(
-                t(
-                  `להתקין את ${manifest.version}? המערכת תאתחל לאחר אימות העדכון.`,
-                  `Install ${manifest.version}? The system restarts after verifying the update.`,
-                ),
-              )) ||
-              !alive()
-            )
-              return;
-            progress.hidden = false;
-            input.disabled = true;
-            state.textContent = t(
-              "מעבירים ומאמתים את העדכון…",
-              "Transferring and verifying the update…",
-            );
-            await onFirmwareUpdate(prepared, (received, total) => {
-              if (alive()) progress.value = received / total;
-            });
-          } finally {
-            prepared.bytes.fill(0);
-            if (alive()) input.disabled = false;
-          }
-        },
-        true,
-      );
+    const facts = el("dl",undefined,"manager-firmware-facts");
+    const fact = (name,value) => {
+      const row=el("div"), term=el("dt",name), detail=el("dd",value);
+      row.append(term,detail);facts.append(row);return detail;
+    };
+    const installed = fact(t("גרסה מותקנת","Installed version"),String(data.firmwareVersion || "—"));
+    const latest= fact(t("הגרסה העדכנית למערכת","Latest version for this system"),t("בודקים…","Checking…"));
+    const decision=fact(t("האם נדרש עדכון?","Is an update needed?"),"—");
+    panel.append(facts,el("p",t("העדכון נבחר אוטומטית לפי הבקר. החבילה מוצפנת, והבקר מאמת אותה לפני ההתקנה.","The update is selected automatically for this controller. The package stays encrypted and the controller authenticates it before installation.")));
+    const progress=el("progress");progress.max=1;progress.value=0;progress.hidden=true;
+    progress.setAttribute("aria-label",t("התקדמות עדכון קושחה","Firmware update progress"));panel.append(progress);
+    let release, checking=false, updating=false, firstRead=true;
+    const update=button(t("עדכון קושחה","Update firmware"),async()=>{
+      if (!release || updating) return;
+      updating=true;refresh.disabled=true;
+      let prepared;
+      try {
+        await ensureRecent({maxAgeSeconds:240,requireTotp:true});
+        if (!alive())return;
+        if (!(await confirm(t(`לעדכן לגרסה ${release.manifest.version}? הבקר יאתחל לאחר אימות והתקנה.`,`Update to ${release.manifest.version}? The controller restarts after verification and installation.`))) || !alive())return;
+        progress.hidden=false;progress.value=0;
+        state.textContent=t("מורידים את העדכון המוצפן…","Downloading the encrypted update…");
+        prepared=await firmwareSource.download(release,data,(done,total)=>{
+          if(alive())progress.value=.25*done/total;
+        });
+        if(!alive())return;
+        state.textContent=t("מעבירים ומאמתים את העדכון בבקר…","Transferring and authenticating the update on the controller…");
+        await onFirmwareUpdate(prepared,(received,total)=>{
+          if(alive())progress.value=.25+.75*received/total;
+        });
+      } finally {
+        prepared?.bytes.fill(0);updating=false;
+        if(alive())refresh.disabled=false;
+      }
+    },true);
+    update.disabled=true;
+    const load=async()=>{
+      if(checking || updating || !alive())return;
+      checking=true;update.disabled=true;refresh.disabled=true;release=undefined;
+      latest.textContent=t("בודקים…","Checking…");decision.textContent="—";
+      try {
+        if(!firmwareSource){
+          latest.textContent=String(data.firmwareVersion || "—");
+          decision.textContent=t("מערכת לדוגמה","Example system");
+          state.textContent=t("בדוגמה זו לא מתבצע עדכון אמיתי.","This example does not perform a real update.");return;
+        }
+        if (!firstRead) {
+          data=(await connection.command("ADMIN_FOTA_GET_STATUS")).data;
+          if(!alive())return;
+          installed.textContent=String(data.firmwareVersion || "—");
+        }
+        firstRead=false;
+        if(typeof data.pendingVerify!=="boolean" || (data.rebootPending!==undefined && typeof data.rebootPending!=="boolean"))throw new Error("INVALID_RESPONSE");
+        const result=await firmwareSource.latest(data);
+        if(!alive())return;
+        release=result;latest.textContent=result.manifest.version;
+        const currentCounter=data.releaseCounter;
+        if(!Number.isSafeInteger(currentCounter)||currentCounter<1)throw new Error("INVALID_RESPONSE");
+        const newer=result.manifest.releaseCounter>currentCounter;
+        decision.textContent=newer?t("כן","Yes"):t("לא","No");
+        state.setAttribute("role","status");
+        state.textContent=newer?t("עדכון מאובטח זמין למערכת.","A secure update is available for this system."):
+          result.manifest.releaseCounter<currentCounter?t("מותקנת גרסה חדשה יותר מהגרסה המפורסמת. אין צורך בעדכון.","The installed version is newer than the published release. No update is needed."):
+          t("המערכת מעודכנת.","The system is up to date.");
+        update.disabled=!newer||!onFirmwareUpdate||data.pendingVerify||Boolean(data.rebootPending);
+        if(data.pendingVerify || data.rebootPending)state.textContent=t("הבקר משלים אתחול ואימות של עדכון קודם. בדקו שוב לאחר שהאימות יסתיים.","The controller is completing restart and verification of a previous update. Check again after verification finishes.");
+        else if(newer && ["RECEIVING","READY"].includes(data.resumableTransfer?.state))state.textContent=t("נמצאה העברה קודמת. לחיצה על עדכון תמשיך אותה אם היא תואמת לגרסה הזמינה; חבילה אחרת תידחה על ידי הבקר.","A previous transfer exists. Update will resume it if it matches the available release; the controller refuses a different package.");
+      } catch(error){
+        if(alive()){
+          latest.textContent=t("לא ניתן לבדוק כרגע","Unable to check right now");
+          decision.textContent=t("לא ידוע","Unknown");message(error);
+        }
+      } finally {checking=false;if(alive())refresh.disabled=false;}
+    };
+    const refresh=button(t("בדיקה מחדש","Check again"),load);
+    await load();
   }
+
   return { dispose };
 }

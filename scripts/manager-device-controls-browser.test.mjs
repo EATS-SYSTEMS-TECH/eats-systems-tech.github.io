@@ -2,12 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite } from "./platform-test-fixtures.mjs";
 
-async function setup(t, browser, origin, kind, language = "en") {
+async function setup(t, browser, origin, kind, language = "en", options = {}) {
   const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
   t.after(() => page.close());
   await page.goto(origin + "/404.html");
   await page.evaluate(
-    async ({ kind, language }) => {
+    async ({ kind, language, options }) => {
       const { renderManagerDeviceControls } =
         await import("/js/manager-device-controls.js");
       document.body.replaceChildren();
@@ -18,6 +18,7 @@ async function setup(t, browser, origin, kind, language = "en") {
       window.confirmed = false;
       window.resetResults = [];
       window.current = true;
+      window.firmwareDownloads=0;window.firmwareUpdates=0;
       window.connection = {
         session: {},
         capabilities: {
@@ -55,7 +56,10 @@ async function setup(t, browser, origin, kind, language = "en") {
                           config: { enabled: false, swapWiring: false },
                           revision: 7,
                           rfCode: {},
-                          firmwareVersion: "11.26.18",
+                          firmwareVersion: "W.11.26.18",
+                          releaseCounter:2026110018,
+                          pendingVerify:false,
+                          ...options.status,
                         },
           };
         },
@@ -71,9 +75,17 @@ async function setup(t, browser, origin, kind, language = "en") {
         onFactoryReset: async result => window.resetResults.push(result),
         errorText: (e) => e.message,
         onRefresh: async () => window.refreshes++,
+        firmwareSource:kind==='firmware'?{
+          latest:async()=>{
+            if(options.unavailable)throw Error('FIRMWARE_SOURCE_UNAVAILABLE');
+            return{releaseId:'a'.repeat(64),manifest:{version:options.latestVersion||'W.11.26.19',releaseCounter:options.latestCounter||2026110019}};
+          },
+          download:async()=>{window.firmwareDownloads++;return{bytes:new Uint8Array([1,2,3]),beginPayload:{version:'W.11.26.19'}}},
+        }:undefined,
+        onFirmwareUpdate:async()=>{window.firmwareUpdates++},
       });
     },
-    { kind, language },
+    { kind, language, options },
   );
   return page;
 }
@@ -104,6 +116,34 @@ test("Device settings send revisions only after confirmation", async (t) => {
       payload: { ...payload, expectedRevision: 7 },
     });
     assert.equal(await page.evaluate(() => window.refreshes), 1);
+  }
+});
+
+test('Automatic firmware panel shows installed/latest/decision and one update action without file inputs',async t=>{
+  const {origin,browser}=await startSite(t);
+  for(const language of ['he','en']){
+    const page=await setup(t,browser,origin,'firmware',language);
+    assert.equal(await page.locator('input[type="file"]').count(),0);
+    const facts=await page.locator('.manager-firmware-facts').innerText();
+    assert.match(facts,/W\.11\.26\.18/);assert.match(facts,/W\.11\.26\.19/);
+    const update=page.getByRole('button',{name:language==='he'?'עדכון קושחה':'Update firmware',exact:true});
+    await update.click();assert.equal(await page.evaluate(()=>window.firmwareUpdates),0);
+    await page.evaluate(()=>window.confirmed=true);
+    await update.click();
+    assert.equal(await page.evaluate(()=>window.firmwareDownloads),1);
+    assert.equal(await page.evaluate(()=>window.firmwareUpdates),1);
+    assert.deepEqual(await page.evaluate(()=>window.authOptions),{maxAgeSeconds:240,requireTotp:true});
+  }
+});
+
+test('Up-to-date, newer-installed and unavailable releases never offer a download',async t=>{
+  const {origin,browser}=await startSite(t);
+  for(const options of [{latestCounter:2026110018,latestVersion:'W.11.26.18'},{latestCounter:2026110017,latestVersion:'W.11.26.17'},{unavailable:true}]){
+    const page=await setup(t,browser,origin,'firmware','en',options);
+    assert.equal(await page.getByRole('button',{name:'Update firmware',exact:true}).isDisabled(),true);
+    assert.equal(await page.locator('input[type="file"]').count(),0);
+    assert.equal(await page.evaluate(()=>window.firmwareDownloads),0);
+    assert.match(await page.locator('.manager-firmware-facts').innerText(),options.unavailable?/Unknown/:/No/);
   }
 });
 test("QR uses display purpose, recent identity, no persistence and clears on dispose", async (t) => {
@@ -215,4 +255,25 @@ test("RF learning saves only the detected operation after confirmation", async (
     name: "ADMIN_RF_LEARN_SAVE",
     payload: { operationId: "learn-1", expectedRevision: 7 },
   });
+});
+
+
+test('Pending controller verification blocks updates and Check again reads fresh controller status',async t=>{
+  const {origin,browser}=await startSite(t);
+  for(const status of [{pendingVerify:true},{rebootPending:true}]){
+    const page=await setup(t,browser,origin,'firmware','en',{status});
+    const update=page.getByRole('button',{name:'Update firmware',exact:true});
+    assert.equal(await update.isDisabled(),true);
+    assert.match(await page.getByRole('status').innerText(),/completing restart and verification/);
+    await page.evaluate(()=>{
+      window.connection.command=async name=>{
+        window.calls.push({name});
+        return {data:{firmwareVersion:'W.11.26.20',releaseCounter:2026110020,pendingVerify:false}};
+      };
+    });
+    await page.getByRole('button',{name:'Check again',exact:true}).click();
+    assert.equal(await update.isDisabled(),true);
+    assert.match(await page.locator('.manager-firmware-facts').innerText(),/W\.11\.26\.20/);
+    assert.equal(await page.evaluate(()=>window.calls.at(-1).name),'ADMIN_FOTA_GET_STATUS');
+  }
 });
