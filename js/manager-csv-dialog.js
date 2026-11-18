@@ -215,9 +215,8 @@ export function createManagerCsvDialog({
         preview.replaceChildren();
         preview.hidden = !rows;
         if (!rows) return;
-        preview.append(element("h3", capacity === undefined
-          ? t(`${rows.length} רשומות מוכנות לבדיקה`, `${rows.length} records ready for validation`)
-          : t(`${rows.length} רשומות מוכנות לבדיקה · קיבולת ${capacity}`, `${rows.length} records ready for validation · capacity ${capacity}`)));
+        const ready = rows.length === 1 ? t("רשומה אחת מוכנה לבדיקה", "1 record ready for validation") : t(`${rows.length} רשומות מוכנות לבדיקה`, `${rows.length} records ready for validation`);
+        preview.append(element("h3", capacity === undefined ? ready : `${ready} · ${t("קיבולת", "capacity")} ${capacity}`));
         if (capacity === undefined) preview.append(element("p", t("הקיבולת תיבדק במערכת לפני אישור השמירה.", "The system will check capacity before saving can be confirmed.")));
         const wrap = element("div", undefined, "manager-csv-table-wrap"), table = element("table"), head = element("thead"), tr = element("tr");
         for (const label of [t("שם", "Name"), t("טלפון", "Phone"), t("אימייל", "Email")]) {
@@ -305,9 +304,10 @@ export function createManagerCsvDialog({
                 throw new Error("IMPORT_REJECTED");
               statusText.textContent = t("האימות הושלם. ממתין לאישור שלכם לפני שמירה.", "Validation complete. Waiting for your approval before saving.");
               progress.value = 100;
-              consentText.textContent = mode.value === "REPLACE"
-                ? t(`המערכת אימתה ${validation.accepted} רשומות. השמירה תחליף את כל הרשומות בקבוצה זו. לשמור כעת?`, `The system validated ${validation.accepted} records. Saving will replace every record in this collection. Save now?`)
-                : t(`המערכת אימתה ${validation.accepted} רשומות. לשמור את המיזוג כעת?`, `The system validated ${validation.accepted} records. Save the merge now?`);
+              const validated = validation.accepted === 1 ? t("המערכת אימתה רשומה אחת.", "The system validated 1 record.") : t(`המערכת אימתה ${validation.accepted} רשומות.`, `The system validated ${validation.accepted} records.`);
+              consentText.textContent = validated + " " + (mode.value === "REPLACE"
+                ? t("השמירה תחליף את כל הרשומות בקבוצה זו. לשמור כעת?", "Saving will replace every record in this collection. Save now?")
+                : t("לשמור את המיזוג כעת?", "Save the merge now?"));
               consent.hidden = false;
               dialog.removeAttribute("aria-busy");
               dismiss.focus();
@@ -322,7 +322,7 @@ export function createManagerCsvDialog({
           controls.hidden = true; preview.hidden = true; warning.hidden = true; format.hidden = true;
           const success = element("div", undefined, "manager-csv-success");
           success.setAttribute("role", "status");
-          success.append(element("h3", t("הייבוא הושלם בהצלחה", "Import completed")), element("p", t(`${snapshot.length} רשומות יובאו ונשמרו במערכת.`, `${snapshot.length} records were imported and saved to the system.`)));
+          success.append(element("h3", t("הייבוא הושלם בהצלחה", "Import completed")), element("p", snapshot.length === 1 ? t("רשומה אחת יובאה ונשמרה במערכת.", "1 record was imported and saved to the system.") : t(`${snapshot.length} רשומות יובאו ונשמרו במערכת.`, `${snapshot.length} records were imported and saved to the system.`)));
           body.insertBefore(success, actions);
           dismiss.textContent = t("סגירה", "Close");
         } catch (failure) {

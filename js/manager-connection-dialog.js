@@ -92,7 +92,7 @@ export function createManagerConnectionDialog({
   function tick() {
     if (!dialog) return;
     const seconds = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
-    elapsed.textContent = t(`חלפו ${seconds} שניות`, `${seconds}s elapsed`);
+    elapsed.textContent = t(seconds === 1 ? "חלפה שנייה אחת" : `חלפו ${seconds} שניות`, `${seconds}s elapsed`);
     const extended = Date.now() - startedAt >= CONNECTION_SOFT_WAIT_MS;
     const message = options.simulation
       ? t(

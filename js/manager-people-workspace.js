@@ -154,7 +154,9 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
     const query = search.value.trim().toLocaleLowerCase();
     let visible = 0;
     for (const item of rendered) { item.row.hidden = !item.text.includes(query); if (!item.row.hidden) visible++; }
-    count.textContent = query ? t(`${visible} מתוך ${rows.length} רשומות שנטענו`, `${visible} of ${rows.length} loaded records`) : t(`${rows.length} רשומות שנטענו`, `${rows.length} loaded records`);
+    count.textContent = query
+      ? t(`${visible} מתוך ${rows.length === 1 ? "רשומה אחת שנטענה" : `${rows.length} רשומות שנטענו`}`, `${visible} of ${rows.length} loaded ${rows.length === 1 ? "record" : "records"}`)
+      : rows.length === 1 ? t("רשומה אחת נטענה", "1 loaded record") : t(`${rows.length} רשומות שנטענו`, `${rows.length} loaded records`);
     noMatches.hidden = !query || visible > 0;
   };
   search.addEventListener("input", update);
