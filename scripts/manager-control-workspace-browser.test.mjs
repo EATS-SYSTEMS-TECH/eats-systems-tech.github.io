@@ -113,7 +113,7 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
       const content = page.locator("#manager-content");
       const finish = page.getByRole("button", { name: copy("סיום וחזרה", "End and return"), exact: true });
       const open = content.getByRole("button", { name: copy("פתיחת שער", "Open gate"), exact: true });
-      assert.equal(await workspace.getByRole("tab").count(), 10);
+      assert.equal(await workspace.getByRole("tab").count(), 16);
       if (width >= 851) {
         assert.equal(await page.locator("#manager-tabs").evaluate(element => element.scrollWidth <= element.clientWidth), true, "desktop shows every section without horizontal clipping");
         const navigation = await page.locator("#manager-tabs").boundingBox();
@@ -171,17 +171,17 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
         assert.equal(await page.locator('[role="tab"][tabindex="0"]').count(), 1, "tabs provide a single keyboard entry point");
         await overview.focus();
         await page.keyboard.press("End");
-        assert.equal(await page.locator(":focus").getAttribute("data-tab"), "system");
+        assert.equal(await page.locator(":focus").getAttribute("data-tab"), "reset");
         assert.equal(await overview.getAttribute("aria-selected"), "true", "moving tab focus does not fetch or activate a tab");
         await page.keyboard.press("Enter");
-        await ready(page, "system");
-        assert.equal(await page.locator(":focus").getAttribute("data-tab"), "system", "activation restores focus after rendering");
+        await ready(page, "reset");
+        assert.equal(await page.locator(":focus").getAttribute("data-tab"), "reset", "activation restores focus after rendering");
         await page.keyboard.press("Home");
         assert.equal(await page.locator(":focus").getAttribute("data-tab"), "overview");
         await page.keyboard.press("Space");
         await ready(page);
         await page.keyboard.press("ArrowRight");
-        assert.ok(tabs.slice(1).includes(await page.locator(":focus").getAttribute("data-tab")), "arrow navigation works in both reading directions");
+        assert.ok(["users","reset"].includes(await page.locator(":focus").getAttribute("data-tab")), "arrow navigation works in both reading directions");
         assert.equal(await overview.getAttribute("aria-selected"), "true");
       }
       // Reaching and leaving every data tab cannot issue a physical operation.
@@ -251,7 +251,7 @@ test("a Roller Shutter, or a Gate that is one of its sides, has no remote Open b
         copy("תריס חשמלי מופעל רק באפליקציית WIFIGATE, עם Safety והחזקת אצבע.", "Roller Shutter is operated only in the WIFIGATE app, with Safety and a finger hold."),
       );
       // The rest of the remote workspace stays: every tab still loads.
-      assert.equal(await page.getByRole("tab").count(), 10);
+      assert.equal(await page.getByRole("tab").count(), 16);
       for (const tab of tabs) {
         await page.locator(`[data-tab="${tab}"]`).click();
         await ready(page, tab);

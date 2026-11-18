@@ -17,8 +17,9 @@ export function managerTimingArt(method, values, language = "en") {
     const count = method === "PULSE" ? 1 : method === "PULSE_AFTER_PULSE" ? 2 : 3;
     const segments=[];
     for(let i=0;i<count;i++) {
-      segments.push({pulse:true,index:i,value:Number(values[`pulseWidth${i+1}Millis`])});
-      if(i<count-1) segments.push({pulse:false,value:Number(values[`timeBetweenPulses${i+1}Seconds`])});
+      const finite=value=>Number.isFinite(Number(value))&&Number(value)>0?Number(value):0;
+      segments.push({pulse:true,index:i,value:finite(values[`pulseWidth${i+1}Millis`])});
+      if(i<count-1) segments.push({pulse:false,value:finite(values[`timeBetweenPulses${i+1}Seconds`])});
     }
     const total=segments.reduce((sum,s)=>sum+(s.value>0?s.value:1),0);
     let x=35;

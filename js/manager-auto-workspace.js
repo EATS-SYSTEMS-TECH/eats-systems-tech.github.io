@@ -1,3 +1,4 @@
+import { managerTimingArt } from "./manager-art.js";
 const node = (tag, text, cls) => {
   const element = document.createElement(tag);
   if (text !== undefined) element.textContent = text;
@@ -19,6 +20,10 @@ export function createManagerAutoStatus({ config, language = "en", action }) {
   controls.append(badge);
   if(action) controls.append(action);
   card.append(identity,controls);
+  if(config?.command?.startsWith("PULSE")&&config.timings?.[config.command]) {
+    const seconds=Object.fromEntries(Object.entries(config.timings[config.command]).map(([key,value])=>[key,key.startsWith("pulseWidth")?Number(value)/1000:value]));
+    card.append(managerTimingArt(config.command,seconds,language));
+  }
   return card;
 }
 export function createManagerAutoPerson(person, language = "en") {

@@ -3,6 +3,16 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { startSite } from "./platform-test-fixtures.mjs";
 
+test("Auto Open illustrates the controller's separate timing family in seconds",async t=>{
+  const {origin,browser}=await startSite(t),page=await browser.newPage();t.after(()=>page.close());await page.goto(origin+"/404.html");
+  await page.evaluate(async()=>{
+    const {createManagerAutoStatus}=await import("/js/manager-auto-workspace.js");
+    document.body.replaceChildren(createManagerAutoStatus({config:{enabled:true,command:"PULSE_AFTER_PULSE",timings:{PULSE_AFTER_PULSE:{pulseWidth1Millis:2000,timeBetweenPulses1Seconds:3,pulseWidth2Millis:1000}}},language:"en"}));
+  });
+  const diagram=page.getByRole("img",{name:"Opening timing diagram"});
+  assert.equal(await diagram.count(),1);assert.match(await diagram.textContent(),/2 sec/);assert.match(await diagram.textContent(),/3 sec/);assert.doesNotMatch(await diagram.textContent(),/2000/);
+});
+
 test("Auto Open shows confirmed state, one action, local search, paged enrollment and safe recovery",async t=>{
   const {origin,browser}=await startSite(t);
   for(const language of ['he','en'])for(const width of [320,390,1440])await t.test(`${language}/${width}`,async t=>{

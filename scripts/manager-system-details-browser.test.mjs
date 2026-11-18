@@ -65,7 +65,7 @@ async function assertDetails(page, language) {
   }
   await tab(page, "rf");
   assert.match(await content.textContent(), /0x0000000000A1B2C3/);
-  assert.equal(await content.getByRole("button").count(), 0, "RF is a read-only learned-code summary");
+  assert.equal(await content.getByRole("button",{name:he?"התחלת לימוד שלט":"Start remote learning",exact:true}).count(), 1, "RF learning is available alongside the stored-code summary");
   assert.equal(await content.locator("input,select").count(), 0);
   await tab(page, "system");
   const sd = content.locator(".manager-device-card").first();
@@ -75,7 +75,7 @@ async function assertDetails(page, language) {
   await tab(page, "auto");
   const rows = content.locator(".manager-auto-user");
   assert.equal(await rows.count(), 10);
-  const more = content.locator(".manager-auto-users").getByRole("button");
+  const more = content.locator(".manager-auto-users").getByRole("button",{name:he?"משתמשים נוספים":"More users",exact:true});
   await more.click(); assert.equal(await rows.count(), 20);
   await more.click(); assert.equal(await rows.count(), 24);
   assert.equal(await more.isHidden(), true);

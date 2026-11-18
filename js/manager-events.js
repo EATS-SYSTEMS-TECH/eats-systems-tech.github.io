@@ -280,14 +280,6 @@ export function createManagerEvents({
     card.append(chart); section.append(card);
     const controls = el("div", undefined, "manager-event-global-actions");
     controls.append(el("h4", lang === "he" ? "הגדרות לכל האירועים" : "All-event settings"));
-    if (typeof table.swapContacts === "boolean") {
-      const options = el("label", undefined, "manager-event-options");
-      const text = el("span"); text.append(el("strong", copy.swap), el("small", copy.swapHelp));
-      const toggle = el("input"); toggle.type = "checkbox"; toggle.checked = table.swapContacts;
-      toggle.dataset.eventFocus = "options";
-      toggle.disabled = busy; toggle.addEventListener("change", () => void mutate("ADMIN_SET_EVENT_OPTIONS", { swapContacts: toggle.checked }));
-      options.append(text, toggle); controls.append(options);
-    }
     const clear = action(copy.clear, async () => {
       if (!busy && await confirm(copy.clearConfirm) && alive()) await mutate("ADMIN_CLEAR_EVENTS", {});
     }, "is-danger");

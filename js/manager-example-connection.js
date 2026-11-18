@@ -63,7 +63,7 @@ export class ManagerExampleConnection {
     this.session = { simulation: true };
     const gate = this.data.gate(gateId);
     this.capabilities = { data: {
-      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH", "GUEST_PASS_ISSUE"],
+      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH", "GUEST_PASS_ISSUE", "GATE_OVERRIDE", "RELAY_WIRING", "SENSORS", "RF_LEARN", "FOTA", "MANAGER_QR_LABEL", "MANAGER_FACTORY_RESET"],
       limits: { maxUsers: gate.maxUsers, maxAdmins: gate.maxAdmins, maxEvents: gate.maxEvents, maxPageItems: 20 },
     } };
     this.onState("active");
@@ -92,6 +92,41 @@ export class ManagerExampleConnection {
         break;
       case "ADMIN_GET_GATE_CONFIG":
         value = { config: clone(gate.config), revision: gate.revision };
+        break;
+      case "ADMIN_GET_GATE_OVERRIDE":
+        value={override:{mode:gate.override},relayState:gate.relayOn?"OPEN":"CLOSE",revision:gate.revision};
+        break;
+      case "ADMIN_SET_GATE_OVERRIDE":
+        if(!["NORMAL","FORCE_NO","FORCE_NC"].includes(payload.mode))throw new Error("INVALID_CONFIG");
+        gate.override=payload.mode;gate.revision++;value={revision:gate.revision};
+        break;
+      case "ADMIN_GET_RELAY_WIRING":
+        value={config:{swapWiring:Boolean(gate.swapWiring)},legacyEventSwap:gate.swapContacts,revision:gate.revision};
+        break;
+      case "ADMIN_SET_RELAY_WIRING":
+        if(typeof payload.swapWiring!=="boolean")throw new Error("INVALID_CONFIG");
+        gate.swapWiring=payload.swapWiring;gate.revision++;value={revision:gate.revision};
+        break;
+      case "ADMIN_GET_SENSOR_CONFIG":
+        value={config:{enabled:gate.sensor},revision:gate.revision};
+        break;
+      case "ADMIN_SET_SENSOR_CONFIG":
+        if(typeof payload.enabled!=="boolean")throw new Error("INVALID_CONFIG");
+        gate.sensor=payload.enabled;gate.revision++;value={revision:gate.revision};
+        break;
+      case "ADMIN_FOTA_GET_STATUS":
+        value={firmwareVersion:gate.firmware,flashVariantMb:gate.boardMb,targetChip:"esp32c6",targetProfile:"development",releaseCounter:2026100047,secureVersion:0,state:"IDLE"};
+        break;
+      case "ADMIN_GET_QR_PAYLOAD":
+        if(payload.purpose!=="DISPLAY")throw new Error("INVALID_CONFIG");
+        value={sensitive:true,payload:{i:gate.id,n:gate.name,example:true}};
+        break;
+      case "ADMIN_FACTORY_RESET_PREPARE":
+        this.resetChallenge="example-reset-confirmation";value={challenge:this.resetChallenge};
+        break;
+      case "ADMIN_FACTORY_RESET_COMMIT":
+        if(payload.challenge!==this.resetChallenge||payload.confirmation!=="factory_reset")throw new Error("INVALID_CONFIG");
+        gate.users=[];gate.events=[];gate.admins=[];gate.revision++;this.resetChallenge=null;value={accepted:true,simulation:true};
         break;
       case "ADMIN_SET_GATE_CONFIG": {
         const { expectedRevision, ...config } = payload;
@@ -305,6 +340,7 @@ export class ManagerExampleConnection {
         if (command.endsWith("CANCEL")) gate.remote.learning = false;
         value = {
           operationId: this.operationId,
+          state:gate.remote.learning?(gate.remote.detected?"DETECTED":"LEARNING"):"IDLE",
           detected: gate.remote.detected,
           saved: gate.remote.saved,
           learning: gate.remote.learning,
@@ -418,6 +454,10 @@ export class ManagerExampleConnection {
       accepted: snapshot.length,
       simulation: true,
     };
+  }
+  async updateFirmware(prepared,onProgress=()=>{}) {
+    const gate=this.gate();gate.firmware=prepared.beginPayload.version;
+    onProgress(prepared.bytes.length,prepared.bytes.length);prepared.bytes.fill(0);this.close();return{data:{simulation:true}};
   }
   close() {
     this.closed = true;

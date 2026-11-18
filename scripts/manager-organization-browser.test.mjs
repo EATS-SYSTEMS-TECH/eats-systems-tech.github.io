@@ -106,7 +106,7 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
             permissions: {
               managePeople: !viewer,
               manageLogo: !viewer,
-              openWorkspace: true,
+              openWorkspace: !viewer,
             },
           };
         if (p.startsWith("/organizations/org-a/systems?"))
@@ -423,7 +423,7 @@ test("selected organization contains branding, people and systems; invitation/re
       });
 });
 
-test("organization users can open system workspaces without organization people or branding controls", async (t) => {
+test("organization staff see metadata without opening a full controller management session", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await fixture(t, browser, origin, "he", 390, true);
   await page.getByRole("button", {name:"בחירת ארגון",exact:true}).click();
@@ -442,7 +442,7 @@ test("organization users can open system workspaces without organization people 
     await page
       .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
       .count(),
-    1,
+    0,
   );
   assert.equal(
     await page.getByText("משתמש · צפייה בלבד", { exact: true }).count(),
@@ -450,12 +450,7 @@ test("organization users can open system workspaces without organization people 
   );
   assert.deepEqual(await page.evaluate(() => window.writes), []);
   assert.equal(await page.evaluate(() => window.connections), 0);
-  await page
-    .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
-    .click();
-  await page.locator("#manager-content .manager-facts").waitFor();
-  assert.equal(await page.evaluate(() => window.connections), 1);
-  assert.equal(await page.getByRole("tab").count(), 10);
+  assert.equal(await page.getByRole("tab").count(), 0);
   assert.deepEqual(await page.evaluate(() => window.writes), []);
   await page.evaluate(() => window.dashboard.close());
 });

@@ -92,9 +92,8 @@ test("Manager event editor prevents overlap writes, handles stale revisions, and
     assert.match(await page.getByRole("alert").textContent(), /changed meanwhile/);
     assert.deepEqual(await page.evaluate(() => window.eventCalls.map((call) => call.name)), ["ADMIN_SET_EVENTS", "ADMIN_LIST_EVENTS"]);
     assert.equal(await page.locator("dialog").count(), 0);
-    await page.locator(".manager-event-options input").check();
-    await page.waitForFunction(() => window.eventTable.swapContacts);
-    assert.equal((await page.evaluate(() => window.eventCalls.at(-1))).payload.expectedRevision, 9);
+    assert.equal(await page.locator(".manager-event-options input").count(), 0);
+    assert.equal(await page.evaluate(() => window.eventCalls.some(call => call.name === "ADMIN_SET_EVENT_OPTIONS")), false);
     await page.locator(".manager-event-edit").first().click();
     await page.locator("[data-event-palette='CLOSE']").click();
     const track = page.locator("[data-event-timeline='editor']");

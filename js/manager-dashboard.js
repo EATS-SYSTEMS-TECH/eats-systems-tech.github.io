@@ -24,6 +24,7 @@ import { placeManagerActions } from "./manager-action-layout.js";
 import { encodeManagerCsv } from "./manager-csv.js";
 import { createManagerCsvDialog } from "./manager-csv-dialog.js";
 import { renderManagerSettings } from "./manager-settings.js";
+import { renderManagerDeviceControls } from "./manager-device-controls.js";
 import { createManagerEvents } from "./manager-events.js";
 import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumUsers } from "./manager-device-details.js";
 import { managerRequest } from "./api/index.js";
@@ -246,6 +247,9 @@ export function createManagerDashboard({
     const explanation = managerConnectionError(error, language);
     if (explanation) return [explanation.message, ...explanation.steps].join(" ");
     return ({
+      INVALID_FIRMWARE_PACKAGE:t("חבילת העדכון אינה תקינה או אינה מתאימה למערכת. בחרו manifest.json ואת עשרת הקבצים המקוריים.","The update package is invalid or does not match this system. Select manifest.json and the ten original encrypted files."),
+      FIRMWARE_NOT_NEWER:t("החבילה אינה חדשה יותר מהקושחה במערכת.","This package is not newer than the installed firmware."),
+      FOTA_REBOOT_NOT_VERIFIED:t("לא אומתה הגרסה החדשה לאחר האתחול. התחברו שוב ובדקו את גרסת המערכת לפני ניסיון נוסף.","The new version was not verified after restart. Reconnect and check the installed version before retrying."),
       // The gate reports any storage failure this way; only History reads the SD card.
       STORAGE_IO: currentTab === "history"
         ? t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry.")
@@ -367,13 +371,13 @@ export function createManagerDashboard({
       }
     }
   }
-  async function ensureRecent() {
+  async function ensureRecent(options) {
     if (examples.isSystem(currentSystem) && view.dataset.simulation === "true")
       return;
     const epoch = generation;
     await activity.track(
       t("מאמת את הזהות…", "Verifying your identity…"),
-      verifyRecent,
+      () => verifyRecent(options),
     );
     if (closed || epoch !== generation) throw new Error("CANCELLED");
   }
@@ -1698,6 +1702,9 @@ export function createManagerDashboard({
       note.prepend(managerUiIcon("key"));
       head.querySelector(".manager-workspace-status").after(note);
     }
+    const qrLabel = button(t("מדבקת QR Code", "QR Code label"), () => showTab("qr"));
+    qrLabel.classList.add("manager-workspace-access-note");
+    (head.querySelector(".manager-workspace-access-note") || head.querySelector(".manager-workspace-status")).after(qrLabel);
     // Action results span the header instead of crowding the system's name.
     head.querySelector(".manager-workspace-progress").before(status);
     const workspaceTitle = createManagerSectionHeading({ title: t("סביבת ניהול", "Management workspace"), description: t("השליטה, האנשים וההגדרות של המערכת — במקום אחד.", "Control, people and system settings, together in one place."), level: "h2", className: "manager-workspace-title" });
@@ -1866,13 +1873,14 @@ export function createManagerDashboard({
       : new Connection(options);
     connection = candidate;
     let pendingOperations = 0;
-    for (const method of ["command", "exportCollection", "importCollection"]) {
+    for (const method of ["command", "exportCollection", "importCollection", "updateFirmware"]) {
       if (typeof candidate[method] !== "function") continue;
       const run = candidate[method].bind(candidate);
       candidate[method] = (...args) =>
         activity.track(
           method === "exportCollection"
             ? t("מייצא נתונים מהמערכת…", "Exporting system data…")
+            : method === "updateFirmware" ? t("מעביר ומאמת עדכון קושחה…","Transferring and verifying firmware…")
             : method === "importCollection"
               ? t("מייבא ומאמת נתונים…", "Importing and verifying data…")
               : /^(ADMIN_(GET_|LIST_).+|ADMIN_PING|ADMIN_RF_GET)$/.test(args[0])
@@ -2005,12 +2013,18 @@ export function createManagerDashboard({
     users: ["משתמשים", "Users"],
     admins: ["מנהלים", "Administrators"],
     guests: ["אורחים", "Guests"],
-    auto: ["Auto Open", "Auto Open"],
     settings: ["הגדרות", "Settings"],
+    override: ["עקיפת מצב השער", "Gate override"],
+    wiring: ["החלפת חיווט", "Swap wiring"],
+    sensor: ["חיישן", "Sensor"],
+    rf: ["לימוד שלט", "Remote learning"],
+    auto: ["Auto Open", "Auto Open"],
     events: ["אירועים", "Events"],
     history: ["היסטוריה", "History"],
-    rf: ["שלטים", "RF remotes"],
-    system: ["מערכת", "System"],
+    firmware: ["עדכון קושחה", "Firmware update"],
+    system: ["אחסון", "Storage"],
+    qr: ["מדבקת QR Code", "QR Code label"],
+    reset: ["איפוס להגדרות יצרן", "Factory reset"],
   };
   function renderTabs() {
     const tabs = view.querySelector("#manager-tabs");
@@ -2037,7 +2051,7 @@ export function createManagerDashboard({
         icon.width = 24;
         icon.height = 20;
         b.prepend(icon);
-      } else b.prepend(managerUiIcon({ overview: "systems", users: "people", admins: "admin", guests: "account", settings: "settings", events: "calendar", history: "history", rf: "signal", system: "app" }[id]));
+      } else b.prepend(managerUiIcon({ overview: "systems", users: "people", admins: "admin", guests: "account", settings: "settings", events: "calendar", history: "history", rf: "signal", system: "storage", override:"gate",wiring:"wiring",sensor:"signal",firmware:"firmware",qr:"qr",reset:"refresh" }[id]));
       b.setAttribute("role", "tab");
       b.setAttribute("aria-selected", String(id === currentTab));
       b.setAttribute("aria-controls", "manager-content");
@@ -2137,6 +2151,30 @@ export function createManagerDashboard({
         "items",
         false,
       );
+      return;
+    }
+    if (["override", "wiring", "sensor", "rf", "firmware", "reset", "qr"].includes(tab)) {
+      const context = { source: connection, epoch: generation, panel: tabGeneration };
+      workspacePanelContext = context;
+      const current = () => !closed && context === workspacePanelContext && context.source === connection &&
+        context.epoch === generation && context.panel === tabGeneration && Boolean(context.source.session);
+      // Resolve the active transport at action time, including after a secure
+      // session renewal. The panel's unsent values remain on screen.
+      const transport = {get session(){return context.source.session;},get capabilities(){return context.source.capabilities;},command:(...args)=>context.source.command(...args)};
+      const panel = await renderManagerDeviceControls({ root: content, kind: tab, language, connection: transport,
+        confirm: confirmAction, ensureRecent, isCurrent: current, errorText, onRefresh: () => showTab(tab),
+        onFirmwareUpdate: async (prepared,progress) => {
+          const gate=currentGate,version=prepared.beginPayload.version;
+          if(typeof context.source.updateFirmware!=="function")throw new Error("UNSUPPORTED");
+          await context.source.updateFirmware(prepared,progress);
+          await openGate(gate,true);
+          if(closed||currentGate!==gate||!connection?.session)throw new Error("DISCONNECTED");
+          const status=(await connection.command("ADMIN_FOTA_GET_STATUS")).data;
+          if(status.firmwareVersion!==version||status.pendingVerify||status.rolledBackVersion===version)throw new Error("FOTA_REBOOT_NOT_VERIFIED");
+          await showTab("firmware");
+          say(t(`העדכון הושלם. גרסה ${version} אומתה לאחר האתחול.`,`Update complete. Version ${version} verified after restart.`));
+        } });
+      if (current()) workspacePanel = panel; else panel.dispose();
       return;
     }
     const [cmd, items] = tables[tab];

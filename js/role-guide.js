@@ -353,14 +353,14 @@ const products = {
         admin:
           "Manages people and daily operations: invites and removes people, changes the organization's name and logo, and opens and operates its gates remotely, Wi-Fi setup and guest links included.",
         staff:
-          "Opens and operates the organization's gates remotely, Wi-Fi setup and guest links included. Does not manage people or branding.",
+          "Views the organization's people and system details. Remote controller management, Wi-Fi setup and guest links require an organization owner or administrator.",
         viewer:
           "View only: the organization, its people and its gates. Cannot open or configure a gate.",
       },
       rows: [
         ["View the organization, people and gates", 4, "eye"],
-        ["Open and operate gates remotely, Wi-Fi setup", 3, "gate"],
-        ["Guest links", 3, "link"],
+        ["Open and operate gates remotely, Wi-Fi setup", 2, "gate"],
+        ["Guest links", 2, "link"],
         ["Invite and remove people, name and logo", 2, "userPlus"],
         ["Add, assign and remove systems", 1, "wifi"],
         ["Delete the organization", 1, "trash"],
@@ -373,14 +373,14 @@ const products = {
         admin:
           "מנהל אנשים ותפעול שוטף: מזמין ומסיר אנשים, משנה את שם הארגון והלוגו, ופותח ומפעיל את השערים שלו מרחוק, כולל הגדרת Wi-Fi וקישורי אורח.",
         staff:
-          "פותח ומפעיל את שערי הארגון מרחוק, כולל הגדרת Wi-Fi וקישורי אורח. אינו מנהל אנשים או מיתוג.",
+          "צופה באנשי הארגון ובפרטי המערכות. ניהול בקר מרחוק, הגדרת Wi-Fi וקישורי אורח זמינים לבעל הארגון ולמנהלי הארגון.",
         viewer:
           "צפייה בלבד: הארגון, האנשים והשערים שלו. אינו פותח ואינו מגדיר שער.",
       },
       rows: [
         ["צפייה: הארגון, האנשים והשערים", 4, "eye"],
-        ["פתיחה והפעלה של שערים מרחוק, הגדרת Wi-Fi", 3, "gate"],
-        ["קישורי אורח", 3, "link"],
+        ["פתיחה והפעלה של שערים מרחוק, הגדרת Wi-Fi", 2, "gate"],
+        ["קישורי אורח", 2, "link"],
         ["הזמנה והסרה של אנשים, שם ולוגו", 2, "userPlus"],
         ["הוספה, שיוך והסרה של מערכות", 1, "wifi"],
         ["מחיקת הארגון", 1, "trash"],

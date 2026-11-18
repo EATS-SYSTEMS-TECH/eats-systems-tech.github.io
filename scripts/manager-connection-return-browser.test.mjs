@@ -204,7 +204,7 @@ test("successful completion timer and footer, X or Escape keep the active worksp
     else await dismiss(page, method, "en", "complete");
     await page.locator(".manager-connection-dialog").waitFor({ state: "detached" });
     assert.equal(await page.getByRole("button", { name: "Open gate", exact: true }).count(), 1);
-    assert.equal(await page.locator("#manager-tabs button").count(), 10);
+    assert.equal(await page.locator("#manager-tabs button").count(), 16);
     assert.equal(await page.locator(".manager-workspace-head").count(), 1);
     assert.equal(await page.evaluate(() => window.connections[0].closed === true), false);
     assert.deepEqual(await page.evaluate(() => window.commands), ["ADMIN_GET_OVERVIEW"]);

@@ -68,7 +68,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             .click();
           await workspace.locator(".manager-simulation-note").waitFor();
           await content.locator(".manager-facts").waitFor();
-          assert.equal(await workspace.getByRole("tab").count(), 10);
+          assert.equal(await workspace.getByRole("tab").count(), 16);
         };
         const tab = async (key) => {
           await workspace.locator(`[data-tab="${key}"]`).click();

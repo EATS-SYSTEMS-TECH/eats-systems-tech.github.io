@@ -270,7 +270,7 @@ export class ManagerConnection {
     }
     if (this.busy) throw new Error("BUSY");
     this.busy = true;
-    if (this.transfer && !/^ADMIN_(IMPORT|EXPORT)_/.test(cmd)) {
+    if (this.transfer && !/^ADMIN_(IMPORT|EXPORT|FOTA)_/.test(cmd)) {
       this.busy = false;
       throw new Error("BUSY");
     }
@@ -636,6 +636,41 @@ export class ManagerConnection {
       receiver.close();
       this.transfer = false;
       data.fill(0);
+    }
+  }
+  async updateFirmware(prepared, onProgress = () => {}) {
+    if(this.transfer)throw new Error("BUSY");
+    const {bytes,beginPayload}=prepared;
+    if(!(bytes instanceof Uint8Array)||bytes.length<9||bytes.length>3*1024*1024+32776)throw new Error("INVALID_FIRMWARE_PACKAGE");
+    this.transfer=true;const receiver=this.bulkReceiver();let id,finished=false;
+    try {
+      const begin=(await this.command("ADMIN_FOTA_BEGIN",beginPayload,120000)).data;id=begin.transferId;
+      let offset=begin.acceptedOffset,credits=begin.credits,receivedSeq=0;
+      const size=Math.min(476,begin.maxPacketBytes);
+      if(!Number.isInteger(id)||id<1||!Number.isInteger(offset)||offset<0||offset>bytes.length||!Number.isInteger(size)||size<1||!Number.isInteger(credits)||credits<1||credits>32)throw new Error("INVALID_FOTA_RESPONSE");
+      let sent=offset,inFlight=[];
+      while(offset<bytes.length){
+        while(inFlight.length<Math.min(8,credits)&&sent<bytes.length){
+          const end=Math.min(bytes.length,sent+size);
+          this.requireOpen();this.socket.send(await managerClientBulkFrame(this.session,{type:1,transferId:id,byteOffset:sent,flagsOrValue:end===bytes.length?1:0,plaintext:bytes.slice(sent,end)}));
+          sent=end;inFlight.push(end);
+        }
+        const f=await decryptManagerBulk(this.session,await receiver.next());
+        if(f.transferId!==id||f.packetSeq<=receivedSeq||![2,3].includes(f.type)||f.byteOffset<0||f.byteOffset>sent||f.flagsOrValue<1||f.flagsOrValue>32)throw new Error("INVALID_FOTA_ACK");
+        receivedSeq=f.packetSeq;
+        if(f.type===3){if(f.flagsOrValue!==1)throw new Error("FOTA_REJECTED");offset=sent=f.byteOffset;inFlight=[];credits=1;continue;}
+        if(f.byteOffset<offset)throw new Error("INVALID_FOTA_ACK");
+        offset=f.byteOffset;inFlight=inFlight.filter(end=>end>offset);credits=f.flagsOrValue;onProgress(offset,bytes.length);
+      }
+      const verified=(await this.command("ADMIN_FOTA_STATUS",{transferId:id,manifestSha256:beginPayload.manifestSha256},120000)).data;
+      if(verified.state!=="READY"||verified.verifiedOffset!==bytes.length)throw new Error("FOTA_NOT_VERIFIED");
+      const result=await this.command("ADMIN_FOTA_FINISH",{transferId:id,manifestSha256:beginPayload.manifestSha256},120000);
+      finished=true;return result;
+    } finally {
+      // Interrupted transfers remain resumable for this same authenticated
+      // owner. Never erase a verified checkpoint merely because a tab closed.
+      receiver.close();this.transfer=false;bytes.fill(0);
+      if(finished)this.close();
     }
   }
   close() {

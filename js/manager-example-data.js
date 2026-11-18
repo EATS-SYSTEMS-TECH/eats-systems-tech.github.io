@@ -72,8 +72,6 @@ export const openingMethods = Object.freeze([
   "PUSH_BUTTON",
 ]);
 export const localOnlyFeatures = Object.freeze([
-  "Factory reset",
-  "Owner QR / secret",
   "Initial Manager delegation",
   "First network setup / forget network",
   "Phone enrollment",

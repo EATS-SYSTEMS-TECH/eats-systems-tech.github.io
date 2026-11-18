@@ -13,6 +13,25 @@ const makeSession = () => beginBulkSendEpoch({
   deviceWriteKey: new Uint8Array(32).fill(3),
 });
 
+for(const verified of [true,false])test(`Manager firmware bulk ${verified?"finishes after verification":"refuses FINISH on an unverified image"}`,async()=>{
+  const c=new ManagerConnection({api:async()=>({}),user:{uid:"fixture"}});c.session=makeSession();
+  const bytes=new Uint8Array(1800).map((_,i)=>i%251),expected=bytes.slice();
+  let received=new Uint8Array(0),seq=1,chain=Promise.resolve(),finishes=0;
+  c.socket={close(){},send:bytes=>{chain=chain.then(async()=>{
+    const f=decodeClient(c.session,bytes);assert.equal(f.offset,received.length);assert.equal(f.type,1);assert.equal(f.id,99);
+    const next=new Uint8Array(received.length+f.plain.length);next.set(received);next.set(f.plain,received.length);received=next;
+    c.onBulk(await managerBulkFrame(c.session,"d2c",{type:2,transferId:99,packetSeq:seq++,byteOffset:received.length,flagsOrValue:4}));
+  });}};
+  c.command=async(cmd)=>{
+    if(cmd==="ADMIN_FOTA_BEGIN")return{data:{transferId:99,acceptedOffset:0,maxPacketBytes:476,credits:4}};
+    if(cmd==="ADMIN_FOTA_STATUS"){await chain;assert.deepEqual(received,expected);return{data:{state:verified?"READY":"RECEIVING",verifiedOffset:verified?expected.length:0}};}
+    if(cmd==="ADMIN_FOTA_FINISH"){finishes++;return{data:{accepted:true}};}throw new Error(cmd);
+  };
+  const run=c.updateFirmware({bytes,beginPayload:{manifestSha256:"a".repeat(64)}});
+  if(verified)await run;else await assert.rejects(run,/FOTA_NOT_VERIFIED/);
+  await chain;assert.equal(finishes,verified?1:0);assert.equal(bytes.every(x=>x===0),true);assert.equal(c.transfer,false);assert.equal(c.closed,verified);
+});
+
 test("closing a Manager channel exposes one cancellation barrier without reopening authentication", async () => {
   let release;
   const calls = [];

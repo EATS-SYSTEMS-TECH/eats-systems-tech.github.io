@@ -569,10 +569,10 @@ async function refresh() {
             document.title = managerTitle(enabled);
           },
           onProfile: (profile) => managerProfile?.update({ ...profile, platformRole: "platformRole" in profile ? profile.platformRole : identity.platformRole }, user),
-          ensureRecent: async () => {
+          ensureRecent: async ({ maxAgeSeconds = 86400 } = {}) => {
             const token = await user.getIdTokenResult();
             const age = Date.now() / 1000 - Number(token.claims.auth_time ?? 0);
-            if (!Number.isFinite(age) || age < 0 || age > 86400) {
+            if (!Number.isFinite(age) || age < 0 || age > maxAgeSeconds) {
               await reauthenticate(user, requestMfaChallenge);
               await user.getIdToken(true);
             }
