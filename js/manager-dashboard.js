@@ -1742,6 +1742,7 @@ export function createManagerDashboard({
       connectionDialog.open({
         systemName: currentSystem.name,
         gate,
+        established: workspaceReady || preserveView,
         startedAt: workspaceReady ? Date.now() : deadline - 150000,
         simulation: examples.isSystem(currentSystem),
         returnFocus,

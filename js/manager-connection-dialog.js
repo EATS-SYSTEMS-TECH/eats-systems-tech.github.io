@@ -359,10 +359,9 @@ export function createManagerConnectionDialog({
     tick();
     clearTimers();
     dialog.dataset.state = "error";
-    dialog.querySelector("h2").textContent = t(
-      "החיבור לא הושלם",
-      "Connection did not complete",
-    );
+    dialog.querySelector("h2").textContent = options.established
+      ? t("חיבור הניהול הסתיים", "The management connection ended")
+      : t("החיבור לא הושלם", "Connection did not complete");
     const explanation = typeof message === "object" && message !== null ? message : null;
     title.replaceChildren(managerUiIcon("warning"), document.createTextNode(explanation?.title ?? t("פרטי החיבור", "Connection details")));
     // A renewal that fails at once has no meaningful elapsed time.
@@ -386,10 +385,10 @@ export function createManagerConnectionDialog({
       }
       timing.before(recovery);
     }
-    phase.textContent = t(
-      `נעצר בשלב ${step + 1} מתוך 3`,
-      `Stopped at step ${step + 1} of 3`,
-    );
+    phase.textContent = options.established
+      ? t("סביבת הניהול הייתה פעילה", "The workspace was previously active")
+      : t(`נעצר בשלב ${step + 1} מתוך 3`, `Stopped at step ${step + 1} of 3`);
+    progress.hidden = steps.hidden = Boolean(options.established);
     const failed = steps.children[step];
     failed.dataset.state = "error";
     failed.removeAttribute("aria-current");

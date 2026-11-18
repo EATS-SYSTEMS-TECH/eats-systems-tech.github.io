@@ -153,6 +153,10 @@ test("secure session renewal preserves edits and daily identity without replayin
     c.expire();
   });
   const uncertain = await assertPopupOnlyFailure(page);
+  assert.equal(await uncertain.locator("h2").innerText(), "The management connection ended");
+  assert.match(await uncertain.innerText(), /workspace was previously active/i);
+  assert.doesNotMatch(await uncertain.innerText(), /Stopped at step|Connection did not complete/);
+  assert.equal(await uncertain.getByRole("progressbar").count(), 0);
   assert.match(await uncertain.innerText(), /result|history|whether.+completed/i, "uncertain writes require readback guidance in the popup");
   assert.equal(await page.evaluate(() => window.connections.length), 2);
   assert.equal(await page.evaluate(() => window.commands.some(cmd => cmd.startsWith("ADMIN_SET"))), false);
