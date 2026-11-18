@@ -5,6 +5,7 @@
 // The Auto Open answers, like the rest of that page, describe the arrival experience only.
 const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
 // An optional starred note is shown as small print under its answer.
+// A line break in an answer starts a new paragraph.
 const qa = (question, answer, note) => Object.freeze(note ? { question, answer, note } : { question, answer });
 
 export const FEATURE_PAGE_FAQ = Object.freeze({
@@ -70,7 +71,7 @@ export const FEATURE_PAGE_FAQ = Object.freeze({
   "security-privacy": Object.freeze({
     he: Object.freeze([
       qa("איך התקשורת עם הבקר מוגנת?", "כל פקודה מהטלפון לבקר מוצפנת וחתומה בתקן AES-256, ולכל טלפון יש מפתח משלו."),
-      qa("קישור הזמנה שהגיע לאדם אחר יכול לפתוח את השער?", "לא. הקישור לבדו לא פותח את השער. הוא רק מאפשר להצטרף, ורק בטלפון של מי שהוזמן."),
+      qa("קישור הזמנה שהגיע לאדם אחר יכול לפתוח את הכניסה?", "הזמנה פרטית: קשורה למספר הטלפון של מי שהוזמן. אם היא מגיעה לאדם אחר, היא לא תעבוד אצלו.\nהזמנה ציבורית: כל מי שמקבל את הקישור יכול להצטרף כמשתמש, עד שתוקף ההזמנה נגמר. כדאי לשלוח אותה רק לקבוצה שאתם סומכים עליה."),
       qa("איך מבטלים גישה למישהו?", "מוחקים אותו באפליקציה. לכל אדם יש הרשאות משלו, כמו הזמנת אורחים ופתיחה אוטומטית, והמנהל יכול לשנות אותן בכל רגע."),
       qa("כמה משתמשים ומנהלים אפשר להגדיר?", "עד 20 מנהלים, ועד 5000 משתמשים בהתאם לדגם הבקר."),
     ]),

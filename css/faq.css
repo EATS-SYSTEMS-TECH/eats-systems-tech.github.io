@@ -85,6 +85,10 @@
   line-height: 1.75;
 }
 
+.seo-faq__answer p + p:not(.seo-faq__note) {
+  margin-top: 0.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .seo-faq__item summary::after {
     transition: none;

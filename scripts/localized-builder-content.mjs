@@ -237,9 +237,11 @@ export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, ac
   $('#niche-faq-title').text(content.faqTitle || chrome.faqTitle);
   const questions = $('#niche-faq-list').empty();
   for (const item of content.faq) {
-    const summary = $('<summary>'), answer = $('<p>');
-    setLocalizedText($, summary, item.question, locale); setLocalizedText($, answer, item.answer, locale);
-    const body = $('<div>').addClass('seo-faq__answer').append(answer);
+    const summary = $('<summary>');
+    setLocalizedText($, summary, item.question, locale);
+    // Each line of an answer is its own paragraph.
+    const body = $('<div>').addClass('seo-faq__answer');
+    for (const line of item.answer.split('\n')) { const answer = $('<p>'); setLocalizedText($, answer, line, locale); body.append(answer); }
     // An answer's starred exception, as small print under it.
     if (item.note) { const note = $('<p>').addClass('seo-faq__note'); setLocalizedText($, note, item.note, locale); body.append(note); }
     questions.append($('<details>').addClass('seo-faq__item').append(summary, body));
