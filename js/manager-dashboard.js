@@ -247,17 +247,18 @@ export function createManagerDashboard({
     const explanation = managerConnectionError(error, language);
     if (explanation) return [explanation.message, ...explanation.steps].join(" ");
     return ({
+      "mfa-cancelled":t("אימות הזהות בוטל. הפעולה לא נשלחה למערכת.","Identity verification was cancelled. The action was not sent to the system."),
       INVALID_FIRMWARE_PACKAGE:t("חבילת העדכון אינה תקינה או אינה מתאימה למערכת. בחרו manifest.json ואת עשרת הקבצים המקוריים.","The update package is invalid or does not match this system. Select manifest.json and the ten original encrypted files."),
       FIRMWARE_NOT_NEWER:t("החבילה אינה חדשה יותר מהקושחה במערכת.","This package is not newer than the installed firmware."),
       FOTA_REBOOT_NOT_VERIFIED:t("לא אומתה הגרסה החדשה לאחר האתחול. התחברו שוב ובדקו את גרסת המערכת לפני ניסיון נוסף.","The new version was not verified after restart. Reconnect and check the installed version before retrying."),
-      // The gate reports any storage failure this way; only History reads the SD card.
-      STORAGE_IO: currentTab === "history"
-        ? t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry.")
+      // History may use internal LittleFS on BETA boards or SD on newer hardware.
+      STORAGE_IO: ["history", "guests"].includes(currentTab)
+        ? t("לא ניתן לקרוא כעת את אחסון ההיסטוריה במערכת. בדקו את המצב בלשונית אחסון ופתחו שוב את ההיסטוריה.", "The system's history storage is unavailable. Check the Storage tab, then reopen History to retry.")
         : /^ADMIN_LIST_(USERS|ADMINS)$/.test(error.command ?? "")
           ? t("השער לא הצליח לקרוא את הרשימה מהאחסון שלו. נסו לפתוח את הלשונית שוב; אם זה חוזר, יש לבדוק את השער.", "The gate could not read this list from its storage. Reopen the tab; if this continues, the gate needs checking.")
           : ["users", "admins"].includes(currentTab)
           ? t("השער לא הצליח לשמור את הרשומה ולכן לא נשמר דבר. בדקו שקידומת המדינה ומספר הטלפון תקינים ונסו שוב.", "The gate could not store the record, so nothing was saved. Check the country code and phone number, then try again.")
-          : t("השער לא הצליח לשמור את השינוי באחסון שלו. נסו שוב; אם זה חוזר, בדקו את מצב האחסון בלשונית מערכת.", "The gate could not store the change. Try again; if this continues, check storage on the System tab."),
+          : t("השער לא הצליח לשמור את השינוי באחסון שלו. נסו שוב; אם זה חוזר, בדקו את המצב בלשונית אחסון.", "The gate could not store the change. Try again; if this continues, check the Storage tab."),
       STORAGE_FULL: t("הרשימה בשער מלאה. מחקו רשומה קיימת לפני הוספת רשומה חדשה.", "The gate's list is full. Delete an existing record before adding a new one."),
       INVALID_ARGUMENT: t("השער דחה את הפרטים שנשלחו. בדקו את השדות ונסו שוב.", "The gate rejected the submitted details. Check the fields and try again."),
       GUEST_PASS_ISSUER_MISMATCH: t("הקישור לא נחתם בשם המנהל שעליו נשענת הרשאת הניהול. חברו את המערכת מחדש ל־Manager מהאפליקציה ונסו שוב.", "The pass was not signed as the administrator behind management access. Reconnect the system to Manager from the app and try again."),

@@ -81,7 +81,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
     for(const code of ['STORAGE_IO','STORAGE_RECOVERY_REQUIRED']){
       await page.evaluate(code=>{window.historyFailure=code;},code);
       await page.locator('[data-tab="history"]').click();
-      await page.getByRole('alert').filter({hasText:code==='STORAGE_IO'?copy('כרטיס ה־SD','SD card'):copy('התאוששות','recovery')}).waitFor();
+      await page.getByRole('alert').filter({hasText:code==='STORAGE_IO'?copy('אחסון ההיסטוריה','history storage'):copy('התאוששות','recovery')}).waitFor();
       assert.equal(await content.locator('.manager-history-empty').count(),0,'failure never appears as empty history');
     }
     await page.evaluate(()=>{window.historyFailure=null;});
