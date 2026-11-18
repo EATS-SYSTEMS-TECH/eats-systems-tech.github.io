@@ -15,9 +15,9 @@ export const SECURITY_PROOF_COPY = Object.freeze({
     layersTitle: "4 שכבות הגנה",
     layersText: "כל פתיחה מהאפליקציה מוגנת בארבע שכבות, כך שאי אפשר לקרוא אותה, לזייף אותה או להעתיק אותה.",
     layers: Object.freeze([
-      Object.freeze({ icon: "controller", title: "זיהוי הבקר", text: "הטלפון מוודא שהוא מדבר עם הבקר שלכם." }),
+      Object.freeze({ icon: "controller", title: "אימות הבקר", text: "האפליקציה מוודאת שהחיבור הוא לבקר שלכם." }),
       Object.freeze({ icon: "lock", title: "הצפנה", text: "אף אחד מבחוץ לא יכול לקרוא את הפקודה." }),
-      Object.freeze({ icon: "phone", title: "זיהוי הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
+      Object.freeze({ icon: "phone", title: "אימות הטלפון", text: "הבקר מקבל פקודה רק מטלפון מורשה." }),
       Object.freeze({ icon: "replay", title: "הגנה מהעתקה", text: "פקודה שהוקלטה לא תעבוד שוב." }),
     ]),
     standardTitle: "תקני הצפנה בינלאומיים",
