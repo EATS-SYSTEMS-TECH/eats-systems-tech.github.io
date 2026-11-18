@@ -1232,7 +1232,9 @@ export function createManagerDashboard({
       if(workspace || operatorAccount)secondary.append(removeButton);
       else if(!scope && currentView !== "example-organization") {removeButton.classList.add("manager-system-remove");removeButton.prepend(managerUiIcon("remove"));removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
     }
-    if ((workspace || operatorAccount) && secondary.childElementCount) {
+    // A new gate needs an organization before the app can authorize Wi-Fi.
+    // Keep assignment reachable on its card, before any remote connection.
+    if (secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");
       menu.name = "manager-system-options";
       const trigger = node("summary");
