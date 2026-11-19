@@ -16,17 +16,38 @@
   --access-ui-button-fill: rgba(11, 99, 255, .1);
   --access-ui-border: rgba(148, 163, 184, .28);
   --access-ui-card: rgba(255, 255, 255, .88);
+  /* Room the button's corner takes at the bottom of the screen. */
+  --access-ui-clearance: calc(var(--access-ui-corner) + var(--access-ui-fab) + .75rem);
 }
+
+/* A control that takes focus scrolls clear of the button's corner, and of
+   the cookie banner and the button above it while the banner shows
+   (js/cookie-consent.js sets the class and the banner's height). The end of
+   the page can scroll above both: on narrow screens above the button, and
+   above the banner while it shows. That room is inside the dark site footer
+   where there is one, so it never shows as a strip of page background under
+   it. The sign-in screen never scrolls; its card keeps clear of them itself
+   (css/portal-accessibility.css). */
+html { scroll-padding-block-end: var(--access-ui-clearance); }
+html.has-cookie-banner {
+  scroll-padding-block-end: calc(var(--cookie-banner-height, 0px) + 1rem + var(--access-ui-fab) + .75rem);
+}
+body.has-cookie-banner:not(.app-login)::after,
+body.has-cookie-banner > .site-footer::after { content: ""; display: block; height: var(--cookie-banner-height, 0px); }
+body:not(.app-login):has(> .site-footer)::after,
+body.has-cookie-banner:has(> .site-footer)::after { content: none; }
+/* The skip link's target is a reading position, not a control: no ring. */
+#main-content[tabindex="-1"]:focus { outline: none; }
 
 /* Keyboard entry and persistent launcher occupy independent overlay layers. */
 .skip-link {
   position: fixed; z-index: 200; top: 1rem; inset-inline-start: 1rem;
   padding: .8rem 1.1rem; border-radius: 999px; font-weight: 700;
   color: var(--access-ui-white); background: #111827;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, .18);
   transition: transform 180ms ease; transform: translateY(-180%);
 }
-.skip-link:focus-visible { transform: translateY(0); }
+/* The shadow appears with the link, so nothing of it shows above the page. */
+.skip-link:focus-visible { transform: translateY(0); box-shadow: 0 12px 24px rgba(15, 23, 42, .18); }
 .a11y-fab {
   position: fixed; z-index: 80;
   inset-inline-start: var(--access-ui-corner); inset-block-end: var(--access-ui-corner);
@@ -66,7 +87,14 @@
 .a11y-panel {
   position: fixed; z-index: 70; inset-inline-start: var(--access-ui-corner);
   inset-block-end: calc(var(--access-ui-corner) + 5.6rem);
-  width: min(24rem, calc(100vw - 2rem)); max-height: min(80vh, 42rem);
+  width: min(24rem, calc(100vw - 2rem));
+  /* Never taller than the room between the button and the page's sticky
+     header (--nav-height, on pages that have one): a short, wide screen (a
+     phone held sideways) scrolls the menu instead of cutting off its top.
+     The limits include the padding on every page, whatever its box model. */
+  box-sizing: border-box;
+  max-height: min(80vh, 42rem, calc(100vh - var(--access-ui-corner) - 6.6rem - var(--nav-height, 0px)));
+  max-height: min(80vh, 42rem, calc(100dvh - var(--access-ui-corner) - 6.6rem - var(--nav-height, 0px)));
   padding: 1.25rem; border-radius: 1.5rem; border: 1px solid var(--a11y-panel-border);
   background: linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(248, 250, 252, .96)), var(--a11y-panel-bg);
   box-shadow: var(--a11y-panel-shadow); backdrop-filter: blur(18px); overflow: auto;
@@ -193,6 +221,7 @@ html.a11y-highlight-headings :is(h1, h2, h3, h4, h5, h6, [role="heading"]) {
 html.a11y-focus-highlight :is(:focus-visible, :focus) {
   outline: 4px solid #ff9f1c !important; outline-offset: 3px !important; box-shadow: 0 0 0 7px #111827 !important;
 }
+html.a11y-focus-highlight #main-content[tabindex="-1"]:focus { outline: none !important; box-shadow: none !important; }
 html.a11y-big-cursor, html.a11y-big-cursor * {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M6 3l30 18-13 3 8 16-6 3-8-16-11 9z' fill='%23000' stroke='%23fff' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E") 6 3, auto !important;
 }
@@ -252,9 +281,16 @@ html.a11y-reduced-motion *, html.a11y-reduced-motion *::before, html.a11y-reduce
   :root { --access-ui-fab: 3.5rem; --access-ui-glyph: 2.4rem; }
   body.a11y-panel-open { overflow: hidden; }
   .a11y-panel {
-    inset-inline: .75rem; inset-block-end: .85rem; width: auto;
-    max-height: min(82vh, 40rem); border-radius: 1.3rem;
+    inset-inline: .75rem; inset-block-end: .85rem; width: auto; border-radius: 1.3rem;
+    max-height: min(82vh, 40rem, calc(100vh - 1.7rem - var(--nav-height, 0px)));
+    max-height: min(82vh, 40rem, calc(100dvh - 1.7rem - var(--nav-height, 0px)));
   }
+  body:not(.app-login)::after,
+  body > .site-footer::after { content: ""; display: block; height: var(--access-ui-clearance); }
+  body.has-cookie-banner:not(.app-login)::after,
+  body.has-cookie-banner > .site-footer::after { height: calc(var(--cookie-banner-height, 0px) + var(--access-ui-clearance)); }
+  body:not(.app-login):has(> .site-footer)::after,
+  body.has-cookie-banner:has(> .site-footer)::after { content: none; }
 }
 @media (max-width: 520px) {
   .a11y-panel { padding: 1rem; }

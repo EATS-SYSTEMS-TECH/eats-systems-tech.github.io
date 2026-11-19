@@ -64,11 +64,18 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   let panel;
   let details;
   let analyticsInput;
+  let announcer;
+  let announceTimer;
 
+  // While the banner shows, the page makes room for it at the bottom
+  // (css/accessibility.css), so the end of the page can scroll above it.
   function syncBannerOffset() {
     const visible = panel && !panel.hidden;
-    document.body.classList.toggle("has-cookie-banner", Boolean(visible));
-    document.body.style.setProperty("--cookie-banner-height", visible ? `${Math.ceil(panel.getBoundingClientRect().height)}px` : "0px");
+    const height = visible ? `${Math.ceil(panel.getBoundingClientRect().height)}px` : "0px";
+    for (const element of [document.documentElement, document.body]) {
+      element.classList.toggle("has-cookie-banner", Boolean(visible));
+      element.style.setProperty("--cookie-banner-height", height);
+    }
   }
 
   function validConsent(value) {
@@ -217,11 +224,28 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     }
   }
 
+  // A first visit announces the banner without taking focus from the page.
+  // A live region that appears already filled is often not read, so an empty
+  // status region is in the page from the start and is filled shortly after
+  // the banner shows, then emptied once a choice is made.
+  function announceBanner() {
+    clearTimeout(announceTimer);
+    announceTimer = setTimeout(() => {
+      if (panel && !panel.hidden && announcer) announcer.textContent = `${copy.title}. ${copy.banner}`;
+    }, 600);
+  }
+
+  function clearAnnouncement() {
+    clearTimeout(announceTimer);
+    if (announcer) announcer.textContent = "";
+  }
+
   function closePanel() {
     if (!currentConsent || !panel) return;
     panel.hidden = true;
     details.hidden = true;
     panel.classList.remove("is-customizing");
+    clearAnnouncement();
     syncBannerOffset();
     document.querySelector("[data-cookie-settings]")?.focus();
   }
@@ -232,6 +256,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     panel.hidden = true;
     details.hidden = true;
     panel.classList.remove("is-customizing");
+    clearAnnouncement();
     syncBannerOffset();
   }
 
@@ -286,7 +311,16 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
         <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-accept>${safe.accept}</button>
         <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-save hidden>${safe.save}</button>
       </div>`;
-    document.body.append(panel);
+    // The skip link stays the first stop and the banner's buttons follow it.
+    const skipLink = document.querySelector("body > .skip-link");
+    if (skipLink) skipLink.after(panel);
+    else document.body.prepend(panel);
+    announcer = document.createElement("div");
+    announcer.className = "cookie-consent__announcer";
+    announcer.setAttribute("role", "status");
+    announcer.setAttribute("aria-live", "polite");
+    announcer.dir = panel.dir;
+    document.body.append(announcer);
     details = panel.querySelector("[data-cookie-details]");
     analyticsInput = panel.querySelector("[data-cookie-analytics]");
     const acceptButton = panel.querySelector("[data-cookie-accept]");
@@ -304,7 +338,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     if (currentConsent) applyConsent(currentConsent.analytics);
     else {
       panel.hidden = false;
-      panel.focus({ preventScroll: true });
+      announceBanner();
     }
     closeButton.hidden = !currentConsent;
     syncBannerOffset();

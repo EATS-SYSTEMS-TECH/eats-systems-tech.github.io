@@ -80,6 +80,8 @@ export function accessibilityPageProblems(html, rel, { copy, signature }) {
   }
   const target = $("#main-content");
   if (target.length !== 1 || !target.is("main")) fail("the page needs exactly one main#main-content");
+  // The skip link moves keyboard focus only to an element that can take it.
+  else if (target.attr("tabindex") !== "-1") fail('main#main-content needs tabindex="-1" for the skip link to move focus');
 
   // 2. The accessibility menu: the shared partial, its stylesheet, its copy
   // and its controller, copy first.

@@ -203,6 +203,9 @@ test("the checkbox fits the sign-in card in every language on a small phone", as
   assert.deepEqual(fixture.errors, []);
 });
 
+// With a cookie choice saved. On a first visit the cookie banner takes the
+// bottom of the screen: the card then ends above it and its last lines scroll
+// into view inside it (scripts/accessibility-components-browser.test.mjs).
 test("the whole card, down to the legal and statement lines, stays on a landscape phone screen in every language", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const viewport of [{ width: 568, height: 320 }, { width: 667, height: 375 }]) {
@@ -210,6 +213,7 @@ test("the whole card, down to the legal and statement lines, stays on a landscap
       const fixture = await scenario(browser, { signedIn: false, viewport });
       t.after(() => fixture.context.close());
       const { page } = fixture;
+      await page.addInitScript(() => localStorage.setItem("wifigate-cookie-consent-v1", JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() })));
       for (const { code } of SITE_LANGUAGES) {
         await page.goto(origin + pagePath(code));
         await page.locator(".app-login__legal").waitFor();

@@ -185,6 +185,8 @@ async function buildLegalPages(homeData, legalCollections) {
     const markup = shell.replace('  <main class="legal-main" id="main-content"></main>', renderLegalMain(key));
     for (const { code: locale } of homeData.localeOptions) {
       const $ = cheerio.load(markup, { decodeEntities: false }), bundle = legalCollections[key][locale];
+      // The skip link's target takes focus (the frozen legal body stays as approved).
+      $('#main-content').attr('tabindex', '-1');
       setBodyDirection($, locale); rewriteStaticAssets($, locale, key); appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, key);
       applyDataI18nTranslations($, bundle, locale); applyLegalContentLanguage($, bundle, locale); alignLegalNumberedLabels($);
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale);

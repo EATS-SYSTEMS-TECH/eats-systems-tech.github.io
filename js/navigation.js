@@ -227,10 +227,23 @@ function centerScrollToElement(el, smooth = true) {
   }
 }
 
+// Focus a same-page target without leaving a tabindex behind that was not
+// there before: a target that already takes focus (the skip link's <main>)
+// keeps its own.
+function focusHashTarget(target) {
+  const added = !target.hasAttribute("tabindex");
+  if (added) target.setAttribute("tabindex", "-1");
+  target.focus({ preventScroll: true });
+  if (added) target.removeAttribute("tabindex");
+}
+
 function setupCenteredScroll() {
   document.addEventListener("click", (event) => {
     const anchor = event.target.closest && event.target.closest('a[href]');
     if (!anchor) return;
+    // The skip link keeps the browser's own jump: it moves to the start of the
+    // content and focuses it, instead of centring a page-tall <main>.
+    if (anchor.classList.contains("skip-link")) return;
 
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || anchor.target === "_blank" || anchor.hasAttribute("download")) return;
     const url = new URL(anchor.href, location.href);
@@ -263,9 +276,7 @@ function setupCenteredScroll() {
     }
 
     try {
-      target.setAttribute("tabindex", "-1");
-      target.focus({ preventScroll: true });
-      target.removeAttribute("tabindex");
+      focusHashTarget(target);
     } catch (error) {
       // Ignore focus errors.
     }
@@ -274,14 +285,13 @@ function setupCenteredScroll() {
   if (location.hash) {
     const id = location.hash.slice(1);
     const target = document.getElementById(id);
-    if (!target) return;
+    // The browser already opened the page at the skip link's target.
+    if (!target || target.id === "main-content") return;
 
     setTimeout(() => {
       centerScrollToElement(target, false);
       try {
-        target.setAttribute("tabindex", "-1");
-        target.focus({ preventScroll: true });
-        target.removeAttribute("tabindex");
+        focusHashTarget(target);
       } catch (error) {
         // Ignore focus errors.
       }

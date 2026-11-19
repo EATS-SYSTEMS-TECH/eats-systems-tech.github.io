@@ -15,7 +15,7 @@ import { serializeScriptData } from "../script-data.mjs";
 // together when css/accessibility.css, js/accessibility-copy.js or
 // js/accessibility.js change.
 export const ACCESSIBILITY_ASSETS = Object.freeze({
-  stylesheet: "/css/accessibility.css?v=20261027c",
+  stylesheet: "/css/accessibility.css?v=20261119a11y2",
   copy: "/js/accessibility-copy.js?v=20261007a",
   controller: "/js/accessibility.js?v=20261027d",
 });

@@ -53,21 +53,6 @@
 .host-app button:disabled {
   cursor: not-allowed;
 }
-.workspace-skip-link {
-  position: fixed;
-  inset-block-start: -100px;
-  inset-inline-start: 16px;
-  z-index: 100;
-  padding: 12px 20px;
-  border: 2px solid var(--host);
-  border-radius: var(--radius-control);
-  background: #ffffff;
-  color: var(--ink);
-  font-weight: 700;
-}
-.workspace-skip-link:focus {
-  inset-block-start: 12px;
-}
 
 /* Nothing to navigate (a pending account) or no access: one column. */
 .host-menu-empty .host-sidebar,

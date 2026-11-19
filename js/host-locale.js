@@ -31,7 +31,6 @@ const hebrew = {
   Access: "גישה",
   Authenticator: "מאמת",
   "Not enrolled": "לא נרשם מאמת",
-  "Skip to workspace": "דילוג לסביבת העבודה",
   "Check again": "בדיקה חוזרת",
   Loading: "טוענים…",
   "Founder": "מייסד",

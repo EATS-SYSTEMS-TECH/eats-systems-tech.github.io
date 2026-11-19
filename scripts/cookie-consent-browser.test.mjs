@@ -40,10 +40,24 @@ try {
     assert.equal(await panel.isVisible(), true);
     assert.equal(await panel.locator(".cookie-consent__description").innerText(), `${copies[locale].banner} ${copies[locale].privacy}`);
     assert.equal(await panel.locator("[data-cookie-settings-open]").count(), 0);
+    // The banner is announced without taking focus: the skip link stays the
+    // first stop and the banner's buttons follow it.
+    // A status region, in the page empty before the banner showed, is filled
+    // shortly after it and emptied once a choice is saved.
+    assert.equal(await panel.getAttribute("aria-live"), null, `${locale}: the whole dialog is a live region`);
+    const announcer = page.locator(".cookie-consent__announcer[role='status']");
+    await page.waitForFunction((title) => document.querySelector(".cookie-consent__announcer")?.textContent.includes(title), copies[locale].title, { timeout: 3000 }).catch(() => {});
+    assert.ok((await announcer.textContent()).includes(copies[locale].title), `${locale}: the banner is not announced`);
+    assert.equal(await page.evaluate(() => document.activeElement === document.body), true, `${locale}: the banner took focus`);
+    await page.keyboard.press("Tab");
+    assert.equal(await page.evaluate(() => document.activeElement?.classList.contains("skip-link")), true, `${locale}: the skip link is not first`);
+    await page.keyboard.press("Tab");
+    assert.equal(await page.evaluate(() => Boolean(document.activeElement?.closest(".cookie-consent"))), true, `${locale}: the banner does not follow the skip link`);
     if (process.env.CONSENT_SCREENSHOTS) await page.screenshot({ path: path.resolve(`.cookie-consent-${locale}.png`) });
     assert.equal(await page.evaluate(() => localStorage.getItem("wifigate-cookie-consent-v1")), null);
     await panel.getByRole("button", { name: copies[locale].reject }).click();
     assert.equal(await panel.isVisible(), false);
+    assert.equal(await announcer.textContent(), "", `${locale}: the announcement stays after the choice`);
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem("wifigate-cookie-consent-v1")).analytics), false);
     await page.reload();
     assert.equal(await panel.isVisible(), false);

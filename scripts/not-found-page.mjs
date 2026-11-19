@@ -40,7 +40,7 @@ export function buildNotFoundPage({ niches, pageUrl, cookieConsentVersion, acces
 </head>
 <body>
   ${accessibility.skipLink}
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <p><a href="/"><img src="/logo-1024.png" alt="WIFIGATE" width="56" height="56" /></a></p>
     <h1>This page doesn't exist</h1>
     <p>The link may be old or mistyped. WIFIGATE opens gates, doors, parking barriers and roller shutters from your phone; start from the home page or pick a use case.</p>

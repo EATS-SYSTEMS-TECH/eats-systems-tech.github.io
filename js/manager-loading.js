@@ -54,6 +54,18 @@
     }
   }, true);
   document.addEventListener("DOMContentLoaded", paint, { once: true });
+  // While the workspace loads, or after it failed to, <main> is inert, so the
+  // skip link leads to the loading screen instead: its status, then its
+  // reload link.
+  document.addEventListener("click", event => {
+    const screen = find("manager-loading");
+    if (!html.hasAttribute("data-manager-loading") || !screen || screen.hidden) return;
+    if (!(event.target instanceof Element) || !event.target.closest(".skip-link")) return;
+    event.preventDefault();
+    screen.tabIndex = -1;
+    screen.style.outline = "none";
+    screen.focus();
+  });
   async function whenStyled(surface) {
     if (fatal) throw new Error("MANAGER_PRESENTATION_FAILED");
     await Promise.all([...document.querySelectorAll('link[rel="stylesheet"]')].map(link =>

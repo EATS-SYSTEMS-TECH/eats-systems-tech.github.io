@@ -11,6 +11,12 @@
 @media (max-width: 480px) {
   .app-login__statement { font-size: min(0.78rem, 2.95vw); }
 }
+/* While the cookie banner shows, the card ends above it, so the legal and
+   statement links at the card's end scroll into view inside the card, also
+   on a phone held sideways. */
+body.app-login.has-cookie-banner .app-login__screen {
+  padding-block-end: calc(var(--cookie-banner-height, 0px) + 8px);
+}
 /* Upright phones: the card is centred above the button. */
 @media (max-width: 480px) and (min-height: 600px) {
   .app-login__screen { padding-block-end: calc(var(--access-ui-corner) + var(--access-ui-fab) + 8px); }
@@ -20,7 +26,7 @@
      the menu stops above the banner. */
   body.app-login.has-cookie-banner .app-login__screen {
     padding-block-start: calc(var(--access-ui-corner) + var(--access-ui-fab) + 8px);
-    padding-block-end: clamp(10px, 2.5dvh, 20px);
+    padding-block-end: calc(var(--cookie-banner-height, 0px) + 8px);
   }
   body.app-login.has-cookie-banner .a11y-fab { top: var(--access-ui-corner); bottom: auto; }
   body.app-login.has-cookie-banner .a11y-panel {
@@ -38,6 +44,14 @@
   .app-login__legal { margin-top: 4px; }
   .app-login__statement { margin-top: 0; }
 }
+
+/* While a workspace loads, or after it failed to, its loading screen covers
+   the page (z-index 10000). The skip link and the accessibility button and
+   menu stay above it, so they can still be seen and used. */
+html:is([data-manager-loading], [data-host-loading]) .a11y-backdrop { z-index: 10001; }
+html:is([data-manager-loading], [data-host-loading]) .a11y-panel { z-index: 10002; }
+html:is([data-manager-loading], [data-host-loading]) .a11y-fab { z-index: 10003; }
+html:is([data-manager-loading], [data-host-loading]) :is(.a11y-fab__dismiss, .skip-link) { z-index: 10004; }
 
 /* Workspaces: the statement link closes the page, like the Host portal's
    legal links. */

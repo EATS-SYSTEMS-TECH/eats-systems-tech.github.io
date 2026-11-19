@@ -56,6 +56,20 @@
 }
 .cookie-settings-trigger { padding: 0; border: 0; background: none; font: inherit; text-align: start; cursor: pointer; }
 body.has-cookie-banner .a11y-fab { bottom: calc(var(--cookie-banner-height, 0px) + 1rem); }
+/* While the accessibility menu is open it has the screen: the banner steps
+   aside and the button returns to its corner, so neither covers the menu on a
+   short screen. The banner comes back when the menu closes. */
+body.a11y-panel-open .cookie-consent { visibility: hidden; }
+body.has-cookie-banner.a11y-panel-open .a11y-fab { bottom: var(--access-ui-corner); }
+/* Screen-reader announcement of the banner on a first visit. */
+.cookie-consent__announcer {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .cookie-consent.is-customizing {
   inset-inline: 1rem;

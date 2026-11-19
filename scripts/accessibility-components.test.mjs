@@ -59,6 +59,7 @@ const breakages = {
   "no skip link": ($) => $("a.skip-link").remove(),
   "skip link elsewhere": ($) => $("a.skip-link").attr("href", "#top"),
   "no main#main-content": ($) => $("#main-content").removeAttr("id"),
+  "main#main-content cannot take focus": ($) => $("#main-content").removeAttr("tabindex"),
   "no menu button": ($) => $("#a11y-fab").remove(),
   "an option missing": ($) => $('[data-a11y-setting="grayscale"]').remove(),
   "no controller": ($) => $("script[src*='js/accessibility.js']").remove(),
@@ -88,6 +89,14 @@ test("a hand-copied menu must keep the shared partial's structure", async () => 
   const html = await read("dashboard/index.html");
   const changed = html.replace('<span class="a11y-option__switch" aria-hidden="true"></span>', "");
   assert.ok(accessibilityPageProblems(changed, "dashboard/index.html", context).some((problem) => problem.includes("differs from the shared partial")));
+});
+
+// The Host portal's own skip link was replaced by the shared one; its rules
+// and copy are gone with it.
+test("no leftover rules or copy of the Host portal's former skip link", async () => {
+  assert.doesNotMatch(await read("css/host-dashboard.css"), /workspace-skip-link/);
+  for (const rel of ["js/host-locale.js", "js/host-dashboard.bundle.js", "js/platform-dashboard.bundle.js"])
+    assert.doesNotMatch(await read(rel), /Skip to workspace/, rel);
 });
 
 test("the workspaces' statement link labels are the site footer's", async () => {

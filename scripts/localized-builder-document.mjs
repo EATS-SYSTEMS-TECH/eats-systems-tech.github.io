@@ -15,7 +15,7 @@ export const repoRoot = process.cwd();
 export const defaultLocale = 'en';
 export const siteOrigin = SITE_ORIGIN;
 export const nowDate = new Date().toISOString().slice(0, 10);
-export const COOKIE_CONSENT_VERSION = '20261109ga1';
+export const COOKIE_CONSENT_VERSION = '20261119a11y2';
 // Browsers that support it fetch a public page when the visitor hovers or
 // presses its link, so the click opens it without waiting. Fetch only: no
 // script runs and no analytics fire until the page is opened. Sign-in and the
@@ -260,7 +260,7 @@ export function updateSharedHeader($, data, locale, key) {
   if (!hebrew) $('.site-cart__drawer').attr('lang', 'en');
   $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261118uniform1"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261114hover1">`);
   $("script[src*='js/site-account.js']").remove();
-  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261115nav2').after(`\n  <script src="${prefix}js/site-account.js?v=20261119remember1" defer></script>`);
+  $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261119a11y2').after(`\n  <script src="${prefix}js/site-account.js?v=20261119remember1" defer></script>`);
   $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261114roller1"></script>`);
 }
 
