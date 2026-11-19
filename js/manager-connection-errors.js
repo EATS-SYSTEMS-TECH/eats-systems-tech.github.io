@@ -21,7 +21,11 @@ export function managerConnectionError(error, language = "en", fallback = false)
     ERR_NETWORK: "HOST_API_UNAVAILABLE",
     NETWORK_ERROR: "HOST_API_UNAVAILABLE",
   };
-  const code = Object.hasOwn(aliases, original) ? aliases[original] : original;
+  // A controller refusal is about its local credential/delegation, whereas
+  // HTTP UNAUTHORIZED means the website sign-in needs renewal.
+  const code = original === "UNAUTHORIZED" && error?.firmwareRefusal === true
+    ? "CREDENTIAL_REVOKED"
+    : Object.hasOwn(aliases, original) ? aliases[original] : original;
   const localSync = [
     t("פתחו את האפליקציה ליד המערכת, עם חשבון WIFIGATE Manager פעיל.", "Open the app near the system using an active WIFIGATE Manager account."),
     t("התחברו למערכת באפליקציה כמנהל מקומי שהרשאתו עדיין תקפה.", "Connect to the system in the app as a local administrator whose access is still valid."),

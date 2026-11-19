@@ -376,6 +376,8 @@ export async function renderManagerDeviceControls({
         image.append(
           el("strong", String(result.payload.n || result.payload.i || "")),
         );
+        state.textContent = t("מדבקת WIFIGATE של המערכת מוכנה לסריקה.", "This system's WIFIGATE label is ready to scan.");
+        state.setAttribute("role", "status");
         labelTimer = setTimeout(clearLabel, 120000);
       },
       true,

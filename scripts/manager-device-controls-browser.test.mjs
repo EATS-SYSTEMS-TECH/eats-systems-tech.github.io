@@ -208,6 +208,26 @@ test("Raw JSON is never rendered as a label; hiding during encoding discards the
   await page.waitForFunction(()=>!document.querySelector('.manager-button.primary').disabled);
   assert.equal(await page.locator('.manager-qr-label svg').count(),0);
 });
+
+test('A successful label retry clears an earlier failure message',async t=>{
+  const {origin,browser}=await startSite(t);const page=await setup(t,browser,origin,'qr','en',{badQr:true});
+  await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+  assert.match(await page.getByRole('alert').innerText(),/INVALID_RESPONSE/);
+  await page.evaluate(()=>{window.connection.command=async()=>({data:{sensitive:true,payload:{i:'DEMO',n:'Demo'}}});});
+  // Replace the fixture encoder only through a new real component invocation.
+  await page.evaluate(async()=>{
+    window.panel.dispose();document.querySelector('main').replaceChildren();
+    const {renderManagerDeviceControls}=await import('/js/manager-device-controls.js');
+    window.panel=await renderManagerDeviceControls({root:document.querySelector('main'),kind:'qr',connection:window.connection,
+      isCurrent:()=>true,ensureRecent:async()=>{},errorText:e=>e.message,qrSource:async()=>{if(!window.qrReady)throw Error('QR_LABEL_UNAVAILABLE');return 'WGQ.'+'a'.repeat(100);}});
+  });
+  await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+  assert.match(await page.getByRole('alert').innerText(),/QR_LABEL_UNAVAILABLE/);
+  await page.evaluate(()=>window.qrReady=true);
+  await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+  assert.equal(await page.getByRole('alert').count(),0);
+  assert.match(await page.getByRole('status').innerText(),/ready to scan/);
+});
 test("Factory reset prepares but never commits after cancellation", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await setup(t, browser, origin, "reset");
