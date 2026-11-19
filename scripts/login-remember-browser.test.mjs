@@ -127,6 +127,9 @@ test("a redirect sign-in is kept where it was chosen, and the choice is used onc
       assert.ok(signin >= 0);
       assert.deepEqual(choices(returned.slice(signin)), [remember ? "local" : "session"]);
       assert.equal(await page.evaluate((key) => sessionStorage.getItem(key), REMEMBER_KEY), null);
+      // A new anonymous sign-in starts unchecked. A still-signed-in account
+      // is automatically redirected and cannot reliably expose this form.
+      fixture.state.signedIn = false;
       await page.goto(origin + "/login/?reason=no-account");
       assert.equal(await page.locator("#login-remember").isChecked(), false, "every visit starts unchecked");
       assert.deepEqual(fixture.errors, []);
