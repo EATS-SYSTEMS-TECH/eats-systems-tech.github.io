@@ -45,6 +45,8 @@ async function setup(t, browser, origin, kind, language = "en", options = {}) {
                 : name === "ADMIN_GET_QR_PAYLOAD"
                   ? {
                       sensitive: true,
+                      hardwareType: options.hardwareType,
+                      firmwareVersion: "W.11.26.28",
                       payload: { i: "DEMO-1", n: "Demo", example: true },
                     }
                   : name === "ADMIN_RF_LEARN_START"
@@ -344,4 +346,24 @@ test('A different signed published build is offered even when its build counter 
  assert.match(await page.locator('.manager-firmware-facts').innerText(),/Yes/);
  await page.getByRole('button',{name:'Update firmware',exact:true}).click();
  assert.equal(await page.evaluate(()=>window.firmwareDownloads),0); // cancelled confirmation
+});
+
+
+test('HW Type is above firmware and old firmware never gets a guessed revision',async t=>{
+  const {origin,browser}=await startSite(t);
+  for(const hardwareType of ['8.0','16.0','16.1',undefined]){
+    const page=await setup(t,browser,origin,'firmware','en',{status:{hardwareType,flashVariantMb:16}});
+    const facts=await page.locator('.manager-firmware-facts').innerText();
+    assert.ok(facts.indexOf('HW Type')<facts.indexOf('Installed version'));
+    assert.match(facts,new RegExp(hardwareType?hardwareType.replace('.','\\.'):'—'));
+  }
+});
+
+test('the original encrypted QR label includes reported HW Type above firmware',async t=>{
+  const {origin,browser}=await startSite(t);
+  const page=await setup(t,browser,origin,'qr','en',{hardwareType:'16.1'});
+  await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+  const label=await page.locator('.manager-qr-label').innerText();
+  assert.match(label,/HW Type: 16\.1/);assert.ok(label.indexOf('HW Type')<label.indexOf('W.11.26.28'));
+  assert.equal(await page.locator('.manager-qr-label svg').count(),1);
 });

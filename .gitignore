@@ -12,3 +12,6 @@ dev-server*.log
 /logs/manager-launch-2026-11-17/
 /logs/manager-live-2026-11-18/
 /logs/manager-launch-2026-11-18/
+
+# Private local HW Type qualification evidence.
+/logs/hardware-type-2026-11-19/

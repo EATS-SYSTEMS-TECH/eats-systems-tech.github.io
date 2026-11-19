@@ -3,6 +3,11 @@
 const byteCount = (value) =>
   Number.isSafeInteger(value) && value >= 0 ? value : null;
 
+export function managerHardwareType(value) {
+  const type = value?.hardwareType;
+  return ["8.0", "16.0", "16.1"].includes(type) ? type : null;
+}
+
 export function formatManagerBytes(value, language = "en") {
   const bytes = byteCount(value);
   if (bytes === null) return null;

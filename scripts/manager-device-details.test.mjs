@@ -2,8 +2,15 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   formatManagerBytes, managerMaximumUsers, managerRfDetails, managerSdDetails,
-  managerOpeningFields,
+  managerOpeningFields, managerHardwareType,
 } from "../js/manager-device-details.js";
+
+test("HW Type comes only from a reported revision, never inferred from flash capacity", () => {
+  for (const hardwareType of ["8.0", "16.0", "16.1"])
+    assert.equal(managerHardwareType({hardwareType}), hardwareType);
+  for (const value of [{flashVariantMb:16}, {hardwareType:16.1}, {hardwareType:"unknown"}, {}, null])
+    assert.equal(managerHardwareType(value), null);
+});
 
 test("capacity scales from bytes without losing zero or treating invalid data as capacity", () => {
   for (const language of ["en", "he"]) {

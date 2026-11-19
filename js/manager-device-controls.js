@@ -1,6 +1,6 @@
 import { managerFeatureArt } from "./manager-art.js";
 import qrcode from "./vendor/qrcode-generator.js";
-import { managerRfDetails } from "./manager-device-details.js";
+import { managerRfDetails, managerHardwareType } from "./manager-device-details.js";
 
 const el = (tag, text, cls) => {
   const n = document.createElement(tag);
@@ -381,6 +381,8 @@ export async function renderManagerDeviceControls({
         );
         image.append(
           el("strong", String(result.payload.n || result.payload.i || "")),
+          el("span", `HW Type: ${managerHardwareType(result) ?? "—"}`),
+          el("small", String(result.firmwareVersion || "—")),
         );
         state.textContent = t("מדבקת WIFIGATE של המערכת מוכנה לסריקה.", "This system's WIFIGATE label is ready to scan.");
         state.setAttribute("role", "status");
@@ -443,6 +445,7 @@ export async function renderManagerDeviceControls({
       const row=el("div"), term=el("dt",name), detail=el("dd",value);
       row.append(term,detail);facts.append(row);return detail;
     };
+    const hardware = fact("HW Type",managerHardwareType(data) ?? "—");
     const installed = fact(t("גרסה מותקנת","Installed version"),String(data.firmwareVersion || "—"));
     const latest= fact(t("הגרסה העדכנית למערכת","Latest version for this system"),t("בודקים…","Checking…"));
     const decision=fact(t("האם נדרש עדכון?","Is an update needed?"),"—");
@@ -490,6 +493,7 @@ export async function renderManagerDeviceControls({
           data=(await connection.command("ADMIN_FOTA_GET_STATUS")).data;
           if(!alive())return;
           installed.textContent=String(data.firmwareVersion || "—");
+          hardware.textContent=managerHardwareType(data) ?? "—";
         }
         firstRead=false;
         if(typeof data.pendingVerify!=="boolean" || (data.rebootPending!==undefined && typeof data.rebootPending!=="boolean"))throw new Error("INVALID_RESPONSE");

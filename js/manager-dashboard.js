@@ -28,7 +28,7 @@ import { renderManagerDeviceControls } from "./manager-device-controls.js";
 import { createManagerFirmwareSource } from "./manager-firmware-source.js";
 import { createManagerQrSource } from "./manager-qr-source.js";
 import { createManagerEvents } from "./manager-events.js";
-import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumUsers } from "./manager-device-details.js";
+import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumUsers, managerHardwareType } from "./manager-device-details.js";
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
@@ -2391,6 +2391,7 @@ export function createManagerDashboard({
     const names = {
       systemName: t("שם מערכת", "System name"),
       firmwareVersion: t("גרסת קושחה", "Firmware version"),
+      hardwareType: "HW Type",
       maxUsers: t("מספר משתמשים מרבי", "Maximum users"),
       uptimeSec: t("זמן פעילות (שניות)", "Uptime (seconds)"),
       counts: t("כמויות", "Counts"),
@@ -2446,7 +2447,11 @@ export function createManagerDashboard({
     };
     const byteKeys = new Set(["bytes", "freeHeap", "minFreeHeap", "largestFreeBlock"]);
     function add(o, prefix = "") {
-      for (const [key, v] of Object.entries(o ?? {})) {
+      const entries = Object.entries(o ?? {});
+      const ordered = o?.firmwareVersion !== undefined
+        ? [["hardwareType", managerHardwareType(o) ?? "—"], ["firmwareVersion", o.firmwareVersion], ...entries.filter(([key]) => !["hardwareType", "firmwareVersion"].includes(key))]
+        : entries;
+      for (const [key, v] of ordered) {
         if (/secret|credential|private|password|passphrase|flashVariantMb|boardMb|targetChip|cpuModel|processorModel/i.test(key))
           continue;
         if (v && typeof v === "object" && !Array.isArray(v)) {
