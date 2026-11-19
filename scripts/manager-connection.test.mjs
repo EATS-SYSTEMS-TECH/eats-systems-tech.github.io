@@ -13,6 +13,17 @@ const makeSession = () => beginBulkSendEpoch({
   deviceWriteKey: new Uint8Array(32).fill(3),
 });
 
+test('Controller credential refusal keeps its origin when transport termination reports state',async()=>{
+  const states=[];
+  const c=new ManagerConnection({api:async()=>({}),user:{uid:'fixture'},onState:s=>states.push(s)});
+  await c.fail(Object.assign(Error('UNAUTHORIZED'),{code:'UNAUTHORIZED',firmwareRefusal:true}));
+  assert.deepEqual(states,['CREDENTIAL_REVOKED']);
+  const webStates=[];
+  const web=new ManagerConnection({api:async()=>({}),user:{uid:'fixture'},onState:s=>webStates.push(s)});
+  await web.fail(Object.assign(Error('UNAUTHORIZED'),{code:'UNAUTHORIZED'}));
+  assert.deepEqual(webStates,['UNAUTHORIZED']);
+});
+
 test("Expected reset disconnect closes transport without starting recovery",async()=>{
   const states=[],calls=[];
   const c=new ManagerConnection({api:async path=>{calls.push(path);return{}},user:{uid:'fixture'},onState:s=>states.push(s)});

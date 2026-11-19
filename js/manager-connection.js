@@ -334,7 +334,10 @@ export class ManagerConnection {
   fail(error) {
     if (this.closed) return this.closing;
     this.failure = error;
-    if (!((this.firmwareRebootExpected || this.factoryResetExpected) && ["DISCONNECTED", "CONNECTION_FAILED", "RESPONSE_TIMEOUT"].includes(error.message))) this.onState(error.message);
+    const state = error.firmwareRefusal === true &&
+      (error.code === "UNAUTHORIZED" || error.message === "UNAUTHORIZED")
+      ? "CREDENTIAL_REVOKED" : error.message;
+    if (!((this.firmwareRebootExpected || this.factoryResetExpected) && ["DISCONNECTED", "CONNECTION_FAILED", "RESPONSE_TIMEOUT"].includes(error.message))) this.onState(state);
     this.close();
   }
   bulkReceiver() {

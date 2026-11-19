@@ -1,12 +1,12 @@
 import { AuthErrors, HttpStatus } from "./host-constants.js";
-import { authErrorMessage, isAppCheckError } from "./host-auth-errors.js?v=20261119ux27";
+import { authErrorMessage, isAppCheckError } from "./host-auth-errors.js?v=20261119ux28";
 import {
   initializeSiteAuth,
   signIn,
   signOut,
   completeAuthCallback,
   signInRedirect,
-} from "./site-auth.js?v=20261119ux27";
+} from "./site-auth.js?v=20261119ux28";
 import { isLocalStaging } from "./firebase-config.js";
 import { portalLogin } from "./api/index.js?v=20261026login1";
 import { createLoginAttemptHint } from "./login-attempts.js?v=20261026login1";
@@ -18,7 +18,7 @@ import {
   signInRefusals,
 } from "./platform-model.js?v=20261027managerux1";
 import { watchSession } from "./platform-session.js?v=20261022day1";
-import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261119ux27";
+import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261119ux28";
 import { requestHumanCheck } from "./login-gate-game.js?v=20261109gate2";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
