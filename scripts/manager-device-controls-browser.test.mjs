@@ -71,7 +71,10 @@ async function setup(t, browser, origin, kind, language = "en", options = {}) {
         connection: window.connection,
         isCurrent: () => window.current,
         confirm: async (message, options) => { window.confirmation = {message, options}; return window.confirmed; },
-        ensureRecent: async (options) => (window.authOptions = options),
+        ensureRecent: async (options) => {
+          window.authOptions = options;
+          if(window.deferQrAuth)await new Promise(resolve=>window.finishQrAuth=resolve);
+        },
         qrSource:async(payload)=>{window.qrEncodedPayload=payload;return options.badQr?'plain-json-not-a-WIFIGATE-code':'WGQ.'+'a'.repeat(100);},
         onFactoryReset: async result => window.resetResults.push(result),
         errorText: (e) => e.message,
@@ -227,6 +230,24 @@ test('A successful label retry clears an earlier failure message',async t=>{
   await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
   assert.equal(await page.getByRole('alert').count(),0);
   assert.match(await page.getByRole('status').innerText(),/ready to scan/);
+});
+
+test('Hide during QR identity verification cancels the pending label; the normal authentication popup can return safely',async t=>{
+  const {origin,browser}=await startSite(t);
+  for(const hide of [true,false]){
+    const page=await setup(t,browser,origin,'qr');
+    await page.evaluate(()=>{
+      window.deferQrAuth=true;window.backgrounded=false;
+      Object.defineProperty(document,'hidden',{configurable:true,get:()=>window.backgrounded});
+    });
+    await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+    await page.waitForFunction(()=>typeof window.finishQrAuth==='function');
+    if(hide)await page.getByRole('button',{name:'Hide label',exact:true}).click();
+    else await page.evaluate(()=>{window.backgrounded=true;document.dispatchEvent(new Event('visibilitychange'));window.backgrounded=false;document.dispatchEvent(new Event('visibilitychange'));});
+    await page.evaluate(()=>window.finishQrAuth());
+    await page.waitForFunction(()=>!document.querySelector('.manager-button.primary').disabled);
+    assert.equal(await page.locator('.manager-qr-label svg').count(),hide?0:1);
+  }
 });
 test("Factory reset prepares but never commits after cancellation", async (t) => {
   const { origin, browser } = await startSite(t);
