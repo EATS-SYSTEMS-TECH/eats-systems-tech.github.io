@@ -1,5 +1,5 @@
 import { AuthErrors, HttpStatus } from "./host-constants.js";
-import { authErrorMessage, isAppCheckError } from "./host-auth-errors.js?v=20261119ux26";
+import { authErrorMessage, isAppCheckError } from "./host-auth-errors.js?v=20261119ux28";
 import {
   initializeSiteAuth,
   signIn,
