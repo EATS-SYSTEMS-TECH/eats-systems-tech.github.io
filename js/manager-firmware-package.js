@@ -28,7 +28,7 @@ const keys = [
 ];
 // Packages contain ciphertext only. The gate independently authenticates the
 // manifest, decrypts/verifies the image, enforces anti-rollback and selects OTA.
-export async function prepareManagerFirmware(manifest, chunks, status) {
+export async function describeManagerFirmware(manifest, status) {
   if (!manifest || typeof manifest !== "object" || Array.isArray(manifest))
     invalid();
   const m = manifest,
@@ -64,8 +64,7 @@ export async function prepareManagerFirmware(manifest, chunks, status) {
     ) ||
     m.chunkCount !== 10 ||
     !Array.isArray(m.chunks) ||
-    m.chunks.length !== 10 ||
-    !(chunks instanceof Map)
+    m.chunks.length !== 10
   )
     invalid();
   if (
@@ -83,8 +82,7 @@ export async function prepareManagerFirmware(manifest, chunks, status) {
   );
   let offset = 0;
   const nonces = new Set(),
-    names = new Set(),
-    data = [];
+    names = new Set();
   for (let i = 0; i < 10; i++) {
     const c = ordered[i];
     if (
@@ -107,14 +105,7 @@ export async function prepareManagerFirmware(manifest, chunks, status) {
     if (offset > m.firmwareSize) invalid();
     nonces.add(c.nonce);
     names.add(c.fileName);
-    const bytes = chunks.get(c.fileName);
-    if (
-      !(bytes instanceof Uint8Array) ||
-      bytes.length !== c.cipherSize ||
-      bytesHex(await sha(bytes)) !== c.sha256
-    )
-      invalid();
-    data.push(bytes);
+
   }
   if (offset !== m.firmwareSize) invalid();
   const document = Object.fromEntries(keys.map((key) => [key, m[key]]));
@@ -136,17 +127,9 @@ export async function prepareManagerFirmware(manifest, chunks, status) {
   const manifestBytes = new TextEncoder().encode(canonical(document));
   if (manifestBytes.length > 32768) invalid();
   const manifestSha256 = bytesHex(await sha(manifestBytes));
-  const bytes = new Uint8Array(8 + manifestBytes.length + offset);
-  bytes.set([0x57, 0x47, 0x46, 0x31]);
-  new DataView(bytes.buffer).setUint32(4, manifestBytes.length, false);
-  bytes.set(manifestBytes, 8);
-  let at = 8 + manifestBytes.length;
-  for (const chunk of data) {
-    bytes.set(chunk, at);
-    at += chunk.length;
-  }
   return {
-    bytes,
+    manifestBytes,
+    ordered,
     beginPayload: {
       manifestByteCount: manifestBytes.length,
       manifestSha256,
@@ -161,4 +144,22 @@ export async function prepareManagerFirmware(manifest, chunks, status) {
       secureVersion: m.secureVersion,
     },
   };
+}
+
+export async function prepareManagerFirmware(manifest, chunks, status) {
+  const descriptor = await describeManagerFirmware(manifest, status);
+  if (!(chunks instanceof Map) || chunks.size !== 10) invalid();
+  const parts = [];
+  for (const c of descriptor.ordered) {
+    const bytes = chunks.get(c.fileName);
+    if (!(bytes instanceof Uint8Array) || bytes.length !== c.cipherSize || bytesHex(await sha(bytes)) !== c.sha256) invalid();
+    parts.push(bytes);
+  }
+  const bytes = new Uint8Array(8 + descriptor.manifestBytes.length + manifest.firmwareSize);
+  bytes.set([0x57, 0x47, 0x46, 0x31]);
+  new DataView(bytes.buffer).setUint32(4, descriptor.manifestBytes.length, false);
+  bytes.set(descriptor.manifestBytes, 8);
+  let at = 8 + descriptor.manifestBytes.length;
+  for (const part of parts) { bytes.set(part, at); at += part.length; }
+  return {bytes, beginPayload:descriptor.beginPayload};
 }

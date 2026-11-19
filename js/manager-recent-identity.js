@@ -1,6 +1,6 @@
 // The UI guard complements, and never replaces, server-side identity checks.
 // Destructive reset always requires a new provider + authenticator sign-in.
-export async function verifyManagerRecentIdentity({ user, reauthenticate, isCurrent }, {
+export async function verifyManagerRecentIdentity({ user, reauthenticate, isCurrent, verifySensitive }, {
   maxAgeSeconds = 86400, force = false, requireTotp = false,
 } = {}) {
   const assertCurrent = () => {
@@ -22,6 +22,15 @@ export async function verifyManagerRecentIdentity({ user, reauthenticate, isCurr
     assertCurrent();
     token = await user.getIdTokenResult(true);
     assertCurrent();
+  }
+  if (requireTotp && verifySensitive) {
+    // Firebase Auth's signed token, enrolled factor and authentication age are
+    // checked on the server. A PC clock skew cannot turn a successful MFA into
+    // a false failure, and a client-supplied claim never authorizes the action.
+    const verified = await verifySensitive();
+    assertCurrent();
+    if (verified?.verified !== true || verified.maxAgeSeconds !== 240) throw new Error("TOTP_REQUIRED");
+    return;
   }
   if (!recent(token)) throw new Error("RECENT_REAUTH_REQUIRED");
   if (requireTotp && !totp(token)) throw new Error("TOTP_REQUIRED");

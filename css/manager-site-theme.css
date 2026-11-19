@@ -111,6 +111,17 @@ body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.man
   border-color: #a32525;
   background: #a32525;
 }
+/* Reset and its final destructive confirmation remain solid red even when
+   this product skin follows the shared dashboard styles. */
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog) button.manager-button.danger:is(.manager-reset-button,.primary) {
+  color: #fff;
+  border-color: #b42318;
+  background: #b42318;
+}
+body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell,.manager-confirm-dialog) button.manager-button.danger:is(.manager-reset-button,.primary):hover:not(:disabled) {
+  border-color: #912018;
+  background: #912018;
+}
 body.platform-page[data-product="manager"] :is(#manager-root,.manager-shell) .manager-tabs {
   border-bottom: 1px solid var(--line);
   gap: 4px;

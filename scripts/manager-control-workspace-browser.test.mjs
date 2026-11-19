@@ -17,7 +17,7 @@ async function fixture(t, browser, origin, { language, width, type, real }) {
   page.on("pageerror", error => errors.push(error.message));
   await page.route(origin + "/manager-control-workspace-fixture", route => route.fulfill({
     contentType: "text/html",
-    body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body data-product="manager" class="platform-page"><main class="platform-shell"><section class="portal-panel"><div id="root"></div></section></main></body></html>`,
+    body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"><link rel="stylesheet" href="/css/manager-site-theme.css"></head><body data-product="manager" class="platform-page"><main class="platform-shell"><section class="portal-panel"><div id="root"></div></section></main></body></html>`,
   }));
   await page.goto(origin + "/manager-control-workspace-fixture");
   await page.evaluate(async ({ language, type, real }) => {

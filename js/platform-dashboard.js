@@ -20,6 +20,7 @@ import {
 } from "./platform-model.js";
 import { platformText } from "./platform-copy.js";
 import { verifyManagerRecentIdentity } from "./manager-recent-identity.js";
+import { managerRequest as verifyManagerRequest } from "./api/index.js";
 import { watchSession } from "./platform-session.js";
 import {
   renderProductSwitcher,
@@ -573,6 +574,7 @@ async function refresh() {
           ensureRecent: options => verifyManagerRecentIdentity({ user,
             reauthenticate: () => reauthenticate(user, requestMfaChallenge),
             isCurrent: () => currentUser === user && requestGeneration === generation,
+            verifySensitive: () => verifyManagerRequest(user,"/api/v1/manager/verification","POST",{}),
           }, options),
         });
         await managerDashboard.ready;

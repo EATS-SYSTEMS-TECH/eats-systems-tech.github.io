@@ -33,3 +33,14 @@ test('Cancelled authenticator and changed identity never authorize a command',as
   const changed=fixture();changed.reauthenticate=async()=>changed.leave();
   await assert.rejects(verifyManagerRecentIdentity(changed,{force:true,requireTotp:true}),/CANCELLED/);
 });
+
+test('Sensitive authorization uses the signed server identity and refuses an unverified response',async()=>{
+  const f=fixture(token(0,'sms'),token(-1,'sms'));
+  let serverChecks=0;f.verifySensitive=async()=>{serverChecks++;return{verified:true,maxAgeSeconds:240}};
+  await verifyManagerRecentIdentity(f,{force:true,requireTotp:true,maxAgeSeconds:240});
+  assert.equal(f.calls,1);assert.equal(serverChecks,1);
+  f.verifySensitive=async()=>({verified:false,maxAgeSeconds:240});
+  await assert.rejects(verifyManagerRecentIdentity(f,{force:true,requireTotp:true}),/TOTP_REQUIRED/);
+  f.verifySensitive=async()=>{throw Object.assign(Error('expired'),{code:'RECENT_REAUTH_REQUIRED'})};
+  await assert.rejects(verifyManagerRecentIdentity(f,{force:true,requireTotp:true}),{code:'RECENT_REAUTH_REQUIRED'});
+});
