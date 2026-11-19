@@ -6,6 +6,7 @@ export default {
   home: "Domača stran WIFIGATE",
   google: "Nadaljuj z računom Google",
   apple: "Nadaljuj z računom Apple",
+  remember: "Zapomni si me v tej napravi",
   signingInLabel: "Prijavljanje",
   legal: "Z nadaljevanjem se strinjate z dokumentoma {terms} in {privacy}.",
   terms: "Pogoji uporabe",

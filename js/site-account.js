@@ -1,7 +1,7 @@
 // /js/site-account.js
 // The signed-in account in the shared header. /login/ keeps its Firebase Auth
-// session in localStorage (js/site-auth.js, browserLocalPersistence).
-// Also recognize existing sessionStorage entries during the transition.
+// session in sessionStorage (this tab only) or, with "Remember me on this
+// device", in localStorage (js/site-auth.js); both are recognized.
 // A page without an entry shows "Log in" and
 // does nothing more: no Firebase code loads. With it, the header shows the
 // account from the stored entry at once (the inline check in the header
@@ -15,7 +15,7 @@
 
   const SESSION_KEY = /^firebase:authUser:[^:]+:\[DEFAULT\]$/;
   const SIGNED_IN = "site-header--account";
-  const authUrl = new URL("site-auth.js?v=20261022day1", document.currentScript.src).href;
+  const authUrl = new URL("site-auth.js?v=20261119remember1", document.currentScript.src).href;
   const button = account.querySelector(".site-account__button");
   const panel = account.querySelector(".site-account__panel");
   const avatar = account.querySelector(".site-account__avatar");
@@ -31,7 +31,8 @@
 
   function sessionKeys() {
     const keys = [];
-    for (const name of ["localStorage", "sessionStorage"]) {
+    // This tab's sign-in first, as Firebase looks (js/site-auth.js).
+    for (const name of ["sessionStorage", "localStorage"]) {
       try {
         const storage = window[name];
         for (let index = 0; index < storage.length; index += 1) {

@@ -9,9 +9,9 @@
     <title>登录 | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/fonts.css?v=20261004a" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261119remember1" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261109gate2"></script>
+    <script type="module" src="/js/host-login.js?v=20261119remember1"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261109ga1" />
   </head>
   <body class="portal-login app-login">
@@ -83,6 +83,10 @@
             </svg>
             <span>通过 Apple 继续</span>
           </button>
+          <label class="app-login__remember">
+            <input type="checkbox" id="login-remember" name="remember" autocomplete="off" />
+            <span>在此设备上记住我</span>
+          </label>
         </div>
         <p class="app-login__status" id="login-attempts" role="status" aria-live="polite" hidden><span>失败次数</span> <bdi id="login-attempt-count" dir="ltr">0/5</bdi></p>
         <div

@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE ana sayfası",
   google: "Google ile devam et",
   apple: "Apple ile devam et",
+  remember: "Bu cihazda beni hatırla",
   signingInLabel: "Giriş yapılıyor",
   legal: "Devam ederek {terms} ve {privacy} metinlerini kabul etmiş olursunuz.",
   terms: "Şartlar",

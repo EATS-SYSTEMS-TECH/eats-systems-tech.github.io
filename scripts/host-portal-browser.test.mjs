@@ -88,7 +88,7 @@ async function scenario(options = {}) {
     export const getAuth = () => ({get currentUser(){return signedIn ? user : null;}});
     export const connectAuthEmulator = () => {};
     export const browserLocalPersistence = {};
-    export const setPersistence = async () => {};
+    export const setPersistence = async () => {}; export const initializeAuth = () => getAuth(); export const browserSessionPersistence = {}; export const indexedDBLocalPersistence = {}; export const browserPopupRedirectResolver = {};
     export const onAuthStateChanged = (_, callback) => { observer=callback; setTimeout(()=>callback(signedIn ? user : null),0); return ()=>{}; };
     export const GoogleAuthProvider = function(){this.providerId="google.com";this.setCustomParameters=()=>{};};
     export const OAuthProvider = function(id){this.providerId=id;this.addScope=()=>{};};

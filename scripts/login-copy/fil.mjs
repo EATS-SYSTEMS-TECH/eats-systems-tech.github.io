@@ -6,6 +6,7 @@ export default {
   home: "Pangunahing pahina ng WIFIGATE",
   google: "Magpatuloy gamit ang Google",
   apple: "Magpatuloy gamit ang Apple",
+  remember: "Tandaan ako sa device na ito",
   signingInLabel: "Pumapasok",
   legal: "Sa pagpapatuloy, sumasang-ayon ka sa {terms} at {privacy}.",
   terms: "Mga Tuntunin",

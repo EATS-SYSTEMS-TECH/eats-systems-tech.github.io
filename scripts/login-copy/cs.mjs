@@ -6,6 +6,7 @@ export default {
   home: "Domovská stránka WIFIGATE",
   google: "Pokračovat přes Google",
   apple: "Pokračovat přes Apple",
+  remember: "Zapamatovat si mě na tomto zařízení",
   signingInLabel: "Přihlašování",
   legal: "Pokračováním souhlasíte s dokumenty {terms} a {privacy}.",
   terms: "Podmínky použití",

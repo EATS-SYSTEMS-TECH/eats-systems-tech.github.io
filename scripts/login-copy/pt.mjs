@@ -6,6 +6,7 @@ export default {
   home: "Página inicial do WIFIGATE",
   google: "Continuar com o Google",
   apple: "Continuar com a Apple",
+  remember: "Lembrar-me neste dispositivo",
   signingInLabel: "Entrando",
   legal: "Ao continuar, você concorda com os {terms} e com a {privacy}.",
   terms: "Termos de uso",

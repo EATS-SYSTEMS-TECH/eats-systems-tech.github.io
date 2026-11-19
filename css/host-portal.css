@@ -84,7 +84,7 @@ dialog::backdrop { background: rgb(7 24 39 / 65%); }
 html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 .app-login { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; overscroll-behavior: none; background: #ffffff url("../assets/img/login-backdrop.svg") center / cover no-repeat; }
 .app-login__screen { height: 100%; display: flex; align-items: center; justify-content: center; padding: clamp(10px, 2.5dvh, 20px); box-sizing: border-box; overflow: hidden; }
-.app-login__card { width: 100%; max-width: 420px; max-height: 100%; box-sizing: border-box; padding: clamp(14px, 2.8dvh, 22px); border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 28px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12); }
+.app-login__card { width: 100%; max-width: 420px; max-height: 100%; box-sizing: border-box; padding: clamp(14px, 2.8dvh, 22px); border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 28px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12); overflow-y: auto; overscroll-behavior: contain; }
 .app-login__logo { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 280px; height: clamp(64px, 24dvh, 190px); margin: 0 auto clamp(12px, 3.5dvh, 28px); }
 .app-login__logo img { width: 100%; height: 100%; object-fit: contain; }
 .app-login__actions { display: grid; gap: clamp(8px, 1.5dvh, 12px); }
@@ -96,6 +96,22 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 .app-login__provider--apple:hover:not(:disabled) { filter: brightness(1.25); }
 .app-login__provider:disabled { opacity: 0.55; cursor: progress; }
 .app-login__provider:focus-visible, .app-login__legal a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+/* "Remember me on this device", under the provider buttons and unchecked by
+   default: a native checkbox whose whole label is the target. */
+.app-login__remember { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: clamp(32px, 5.5dvh, 44px); margin: 0; color: #334155; font: 600 0.9rem/1.35 "Manrope", system-ui, sans-serif; text-align: start; cursor: pointer; }
+.app-login__remember input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: #0b63ff; cursor: pointer; }
+.app-login__remember input:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+.app-login__remember:has(input:disabled) { opacity: 0.55; cursor: progress; }
+.app-login__remember input:disabled { cursor: progress; }
+/* Short (landscape phone) screens: the row and the logo give up height so the
+   whole card, down to the legal line, stays on screen; the card scrolls if a
+   long translation still needs more. */
+@media (max-height: 420px) {
+  .app-login__logo { height: clamp(36px, 11dvh, 190px); margin-bottom: 8px; }
+  .app-login__provider { height: 42px; }
+  .app-login__remember { min-height: 24px; }
+  .app-login__legal { margin-top: 6px; }
+}
 /* Sign-in progress: an indeterminate bar from the provider tap until the
    dashboard opens. */
 .app-login__progress { position: relative; height: 4px; margin: 16px 0 0; border-radius: 999px; background: #e6edf7; overflow: hidden; }

@@ -6,6 +6,7 @@ export default {
   home: "Beranda WIFIGATE",
   google: "Lanjutkan dengan Google",
   apple: "Lanjutkan dengan Apple",
+  remember: "Ingat saya di perangkat ini",
   signingInLabel: "Sedang masuk",
   legal: "Dengan melanjutkan, Anda menyetujui {terms} dan {privacy}.",
   terms: "Ketentuan",

@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE kezdőlap",
   google: "Folytatás a Google-lal",
   apple: "Folytatás az Apple-lel",
+  remember: "Emlékezzen rám ezen az eszközön",
   signingInLabel: "Bejelentkezés folyamatban",
   legal: "A folytatással elfogadod a következőket: {terms} és {privacy}.",
   terms: "Felhasználási feltételek",

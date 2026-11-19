@@ -28,6 +28,22 @@ test("each sign-in page is in its own language with a picker of every language",
   }
 });
 
+test("each sign-in page offers Remember me, unchecked, with the provider buttons", () => {
+  for (const { code } of SITE_LANGUAGES) {
+    const html = renderLoginPage(template, code, copies[code]);
+    const actions = html.match(/<div class="app-login__actions">([\s\S]*?)<\/div>/)[1];
+    const label = actions.match(/<label class="app-login__remember">([\s\S]*?)<\/label>/)?.[1];
+    assert.ok(label, code);
+    const input = label.match(/<input\b[^>]*>/)[0];
+    assert.match(input, /type="checkbox"/);
+    assert.match(input, /id="login-remember"/);
+    assert.match(input, /autocomplete="off"/, "a restored form never pre-checks it");
+    assert.doesNotMatch(input, /\bchecked\b/);
+    assert.ok(label.includes(`<span>${copies[code].remember}</span>`), code);
+    assert.ok(actions.indexOf('data-provider="apple"') < actions.indexOf("app-login__remember"));
+  }
+});
+
 test("the sign-in page asks for the same host-portal.css as the dashboards", async () => {
   // Both load one file; a new version on one side only leaves the other on
   // an old cached copy.

@@ -6,6 +6,7 @@ export default {
   home: "Trang chủ WIFIGATE",
   google: "Tiếp tục với Google",
   apple: "Tiếp tục với Apple",
+  remember: "Ghi nhớ tôi trên thiết bị này",
   signingInLabel: "Đang đăng nhập",
   legal: "Khi tiếp tục, bạn đồng ý với {terms} và {privacy}.",
   terms: "Điều khoản",

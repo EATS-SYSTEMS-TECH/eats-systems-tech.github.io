@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE-etusivu",
   google: "Jatka Googlella",
   apple: "Jatka Applella",
+  remember: "Muista minut tällä laitteella",
   signingInLabel: "Kirjaudutaan",
   legal: "Jatkamalla hyväksyt seuraavat: {terms} ja {privacy}.",
   terms: "Käyttöehdot",

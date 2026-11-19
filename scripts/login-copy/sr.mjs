@@ -6,6 +6,7 @@ export default {
   home: "Почетна страница WIFIGATE",
   google: "Наставите уз Google",
   apple: "Наставите уз Apple",
+  remember: "Запамти ме на овом уређају",
   signingInLabel: "Пријављивање",
   legal: "Ако наставите, прихватате документе {terms} и {privacy}.",
   terms: "Услови коришћења",

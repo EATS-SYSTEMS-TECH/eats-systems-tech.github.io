@@ -82,6 +82,8 @@ test("fresh TOTP is required before a mutation and cancelling reauthentication s
   await modal.getByText(/Access is ready/).waitFor();
   assert.equal(changes.length, 1);
   assert.ok(calls.includes("reauth"));
+  // Reauthentication and its second factor keep the storage the account is in.
+  assert.deepEqual(calls.filter((event) => event?.type === "persistence"), []);
 });
 
 test("a delayed revenue response cannot overwrite the newest product filter", async (t) => {

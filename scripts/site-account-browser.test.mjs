@@ -37,7 +37,7 @@ function authStub(live) {
     export const getAuth = () => ({});
     export const connectAuthEmulator = () => {};
     export const browserLocalPersistence = {};
-    export const setPersistence = async () => {};
+    export const setPersistence = async () => {}; export const initializeAuth = () => getAuth(); export const browserSessionPersistence = {}; export const indexedDBLocalPersistence = {}; export const browserPopupRedirectResolver = {};
     export const GoogleAuthProvider = function () {};
     export const OAuthProvider = function () {};
     export const onAuthStateChanged = (_, callback) => {

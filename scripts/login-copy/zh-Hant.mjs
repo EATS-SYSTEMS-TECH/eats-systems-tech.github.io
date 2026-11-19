@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE 首頁",
   google: "透過 Google 繼續",
   apple: "透過 Apple 繼續",
+  remember: "在此裝置上記住我",
   signingInLabel: "正在登入",
   legal: "繼續即表示您同意{terms}及{privacy}。",
   terms: "條款",

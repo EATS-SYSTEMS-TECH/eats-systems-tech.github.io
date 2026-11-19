@@ -17,7 +17,7 @@ export const cookies = {
         id: "summary",
         title: "1. Summary",
         blocks: [
-          "The website uses essential browser storage for your accessibility and cookie choices, and an essential cookie for your shopping cart. The language comes from the page address and is not stored. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it.",
+          "The website uses essential browser storage for your accessibility and cookie choices, and an essential cookie for your shopping cart. The language comes from the page address and is not stored. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also keeps you signed in: by default until you close the tab, or on this device if you choose to be remembered when you sign in.",
         ],
       },
       {
@@ -41,12 +41,14 @@ export const cookies = {
                 ["wifigate_cart", "Essential cookie (first party)", "Keeps the products and subscriptions in your shopping cart, and their quantities, so the cart keeps them on every page. It contains no prices or personal details.", "30 days from your last cart change"],
                 ["Public media cache", "CacheStorage (first party)", "Reuses public videos and matching images already requested for your screen size. Stores media files, without account data or tracking identifiers, up to 96 MB and 48 files.", "Reused for up to 30 days; expired files are removed on later cache activity or when site data is cleared."],
                 ["_ga and _ga_*", "Analytics cookies (Google, only with consent)", "Measure visits and site usage.", "Up to 180 days"],
-                ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open.", "Until you sign out or close the tab"],
+                ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open. This is the default when you sign in. Some browsers bring back closed tabs together with this storage.", "Until you sign out or close the tab"],
+                ["Firebase Authentication session (Remember me)", "Local storage (first party, web portal only)", "Keeps you signed in to the web portal on this device, if you choose to be remembered when you sign in. Sign-ins made before this option existed also stay saved this way until you sign out.", "Until you sign out or clear site data"],
+                ["wifigate-auth-remember", "Session storage (first party, web portal only)", "Carries your choice to be remembered while the sign-in page sends you to Google or Apple and back. It is set only when you make that choice and is deleted when you return.", "Until you return to the sign-in page or close the tab"],
                 ["Firebase SDK data", "IndexedDB (first party, web portal only)", "Technical data the Firebase sign-in library needs in order to operate.", "Until you clear site data"],
               ],
             },
           },
-          "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages.",
+          "The public pages set analytics cookies only after you allow them. The sign-in storage above and IndexedDB are used only for portal sign-in: on the sign-in and dashboard pages, and on public pages only while you are signed in, to show your account in the header.",
           "Media caching does not download both screen variants or preload every video. It does not store portal, sign-in, API or analytics responses. Browser settings, available space or clearing site data may prevent or remove cached files; playback can then download them again. This cache does not make the whole website available offline.",
         ],
       },
@@ -71,7 +73,7 @@ export const cookies = {
         id: "control",
         title: "6. How to control cookies",
         blocks: [
-          "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session.",
+          "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in. On a shared or public computer, do not choose to be remembered, and sign out when you finish, because some browsers bring back closed tabs together with the sign-in; signing out ends the session in either case.",
         ],
       },
       {
@@ -109,7 +111,7 @@ export const cookies = {
         id: "summary",
         title: "1. בקצרה",
         blocks: [
-          "האתר משתמש באחסון הכרחי לשמירת בחירות הנגישות והעוגיות שלכם, ובעוגייה הכרחית לסל הקניות. השפה נקבעת לפי כתובת הדף ואינה נשמרת. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו.",
+          "האתר משתמש באחסון הכרחי לשמירת בחירות הנגישות והעוגיות שלכם, ובעוגייה הכרחית לסל הקניות. השפה נקבעת לפי כתובת הדף ואינה נשמרת. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם את החיבור שלכם: כברירת מחדל עד לסגירת הלשונית, או במכשיר הזה אם תסמנו ״זכור אותי במכשיר הזה״ בכניסה.",
         ],
       },
       {
@@ -133,12 +135,14 @@ export const cookies = {
                 ["wifigate_cart", "עוגייה הכרחית (צד ראשון)", "שומרת את המוצרים והמנויים בסל הקניות ואת הכמויות שלהם, כדי שהסל יישמר בכל דפי האתר. אינה כוללת מחירים או פרטים אישיים.", "30 ימים מהשינוי האחרון בסל"],
                 ["מטמון מדיה ציבורית", "CacheStorage (צד ראשון)", "משתמש שוב בסרטונים ציבוריים ובתמונות תואמות שכבר התבקשו בהתאם לרוחב המסך. שומר קובצי מדיה ללא פרטי חשבון או מזהי מעקב, עד 96 מגה־בייט ו־48 קבצים.", "שימוש חוזר עד 30 ימים; קבצים שפג תוקפם נמחקים בפעילות מטמון מאוחרת יותר או במחיקת נתוני האתר."],
                 ["_ga ו־_ga_*", "עוגיות מדידה (Google, רק בהסכמה)", "מדידת ביקורים ושימוש באתר.", "עד 180 ימים"],
-                ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.", "עד ההתנתקות או סגירת הלשונית"],
+                ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה. זו ברירת המחדל בכניסה. יש דפדפנים שמשחזרים לשוניות סגורות יחד עם האחסון הזה.", "עד ההתנתקות או סגירת הלשונית"],
+                ["סשן Firebase Authentication (זכור אותי)", "אחסון מקומי (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל במכשיר הזה, אם סימנתם ״זכור אותי במכשיר הזה״ בכניסה. גם כניסות שבוצעו לפני שהאפשרות נוספה נשמרות כך עד ההתנתקות.", "עד ההתנתקות או מחיקת נתוני האתר"],
+                ["wifigate-auth-remember", "אחסון סשן (צד ראשון, בפורטל בלבד)", "מעביר את בחירתכם ב״זכור אותי במכשיר הזה״ כשדף הכניסה מעביר אתכם ל־Google או ל־Apple וחזרה. נשמר רק אם סימנתם את האפשרות, ונמחק כשאתם חוזרים.", "עד החזרה לדף הכניסה או סגירת הלשונית"],
                 ["נתוני Firebase SDK", "IndexedDB (צד ראשון, בפורטל בלבד)", "נתונים טכניים שספריית הכניסה של Firebase צריכה כדי לפעול.", "עד שתמחקו את נתוני האתר"],
               ],
             },
           },
-          "הדפים הציבוריים שומרים עוגיות מדידה רק לאחר אישורכם. אחסון סשן ו־IndexedDB משמשים רק בדפי הכניסה ולוח הבקרה של הפורטל.",
+          "הדפים הציבוריים שומרים עוגיות מדידה רק לאחר אישורכם. אחסון הכניסה שלמעלה ו־IndexedDB משמשים רק לכניסה לפורטל: בדפי הכניסה ולוח הבקרה, ובדפים הציבוריים רק בזמן שאתם מחוברים, כדי להציג את החשבון שלכם בכותרת.",
           "שמירת המדיה אינה מורידה את שתי גרסאות המסך ואינה טוענת מראש את כל הסרטונים. היא אינה שומרת תשובות מהפורטל, מהכניסה לחשבון, מ־API או ממדידה. הגדרות הדפדפן, מקום פנוי או מחיקת נתוני האתר עלולים למנוע שמירה או לפנות קבצים; במקרה כזה הניגון עשוי להוריד אותם שוב. המטמון אינו מאפשר שימוש בכל האתר ללא חיבור לרשת.",
         ],
       },
@@ -163,7 +167,7 @@ export const cookies = {
         id: "control",
         title: "6. איך לשלוט בעוגיות",
         blocks: [
-          "תוכלו לשנות או לבטל את הסכמתכם למדידה בכל עת דרך ״הגדרות עוגיות״ בתחתית האתר. ביטול ההסכמה מפסיק מדידה נוספת ומוחק את עוגיות Google Analytics באתר. תוכלו גם לצפות בנתוני האתר, למחוק או לחסום אותם בהגדרות הדפדפן. מחיקת האחסון תאפס את העדפותיכם; חסימת אחסון הפורטל תמנע הישארות מחוברים אליו.",
+          "תוכלו לשנות או לבטל את הסכמתכם למדידה בכל עת דרך ״הגדרות עוגיות״ בתחתית האתר. ביטול ההסכמה מפסיק מדידה נוספת ומוחק את עוגיות Google Analytics באתר. תוכלו גם לצפות בנתוני האתר, למחוק או לחסום אותם בהגדרות הדפדפן. מחיקת האחסון תאפס את העדפותיכם; חסימת אחסון הפורטל תמנע הישארות מחוברים אליו. במחשב משותף או ציבורי, השאירו את ״זכור אותי במכשיר הזה״ לא מסומן והתנתקו בסיום, כי יש דפדפנים שמשחזרים לשוניות סגורות יחד עם החיבור; ההתנתקות מסיימת את החיבור בכל מקרה.",
         ],
       },
       {

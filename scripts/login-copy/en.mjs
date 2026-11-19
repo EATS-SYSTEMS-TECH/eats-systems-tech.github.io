@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE home",
   google: "Continue with Google",
   apple: "Continue with Apple",
+  remember: "Remember me on this device",
   signingInLabel: "Signing in",
   legal: "By continuing you agree to the {terms} and {privacy}.",
   terms: "Terms",

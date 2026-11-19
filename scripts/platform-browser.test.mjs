@@ -5,7 +5,7 @@ import { passGateGame } from "./gate-game-helper.mjs";
 import { scenario, startSite } from "./platform-test-fixtures.mjs";
 import { workspaceFor } from "./host-test-shell.mjs";
 
-test("web sign-in persists locally and activity renews a full idle day", async (t) => {
+test("a page load keeps the stored sign-in where it is and activity renews a full idle day", async (t) => {
   const { origin, browser } = await startSite(t);
   const fixture = await scenario(browser);
   t.after(() => fixture.context.close());
@@ -13,7 +13,12 @@ test("web sign-in persists locally and activity renews a full idle day", async (
   await page.clock.install();
   await page.goto(origin + "/dashboard/");
   await page.locator("#product-switcher-button").waitFor();
-  assert.ok(calls.some(event => event?.type === "persistence" && event.mode === "local"));
+  // Auth starts tab-only first and never moves the restored account: only a
+  // sign-in chooses local storage ("Remember me", login-remember-browser).
+  const starts = calls.filter(event => event?.type === "init");
+  assert.ok(starts.length > 0);
+  for (const start of starts) assert.deepEqual(start.persistence, ["session", "local", "indexedDB"]);
+  assert.equal(calls.some(event => event?.type === "persistence"), false);
   await page.clock.fastForward(23 * 60 * 60 * 1000);
   assert.equal(calls.includes("signout"), false);
   await page.evaluate(() => window.dispatchEvent(new Event("pointerdown")));

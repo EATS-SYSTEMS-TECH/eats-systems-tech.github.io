@@ -17,7 +17,7 @@ test("TOTP initializes its own auth module when sign-in used a versioned module"
     contentType: "application/javascript",
     body: `export const getAuth = () => ({});
       export const browserLocalPersistence = {};
-      export const setPersistence = async () => {};
+      export const setPersistence = async () => {}; export const initializeAuth = () => getAuth(); export const browserSessionPersistence = {}; export const indexedDBLocalPersistence = {}; export const browserPopupRedirectResolver = {};
       export const onAuthStateChanged = () => () => {};
       export const TotpMultiFactorGenerator = {
         assertionForSignIn: (factor, code) => ({factor, code})

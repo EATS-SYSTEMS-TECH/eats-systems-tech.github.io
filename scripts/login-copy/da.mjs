@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE-forside",
   google: "Fortsæt med Google",
   apple: "Fortsæt med Apple",
+  remember: "Husk mig på denne enhed",
   signingInLabel: "Logger ind",
   legal: "Ved at fortsætte accepterer du vores {terms} og vores {privacy}.",
   terms: "vilkår",

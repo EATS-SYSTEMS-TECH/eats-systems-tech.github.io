@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE ホーム",
   google: "Google で続行",
   apple: "Apple で続ける",
+  remember: "このデバイスでログイン状態を保持する",
   signingInLabel: "ログイン中",
   legal: "続行すると、{terms}と{privacy}に同意したことになります。",
   terms: "利用規約",

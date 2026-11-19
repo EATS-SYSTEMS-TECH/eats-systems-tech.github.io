@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE-Startseite",
   google: "Weiter mit Google",
   apple: "Mit Apple fortfahren",
+  remember: "Auf diesem Gerät angemeldet bleiben",
   signingInLabel: "Anmeldung läuft",
   legal: "Wenn du fortfährst, stimmst du den {terms} und der {privacy} zu.",
   terms: "Nutzungsbedingungen",

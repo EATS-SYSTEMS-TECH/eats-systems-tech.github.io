@@ -9,11 +9,11 @@
     <meta name="description" content="Reserve WIFIGATE systems with your WIFIGATE account." />
     <title>WIFIGATE Reservations</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261119remember1" />
     <link rel="stylesheet" href="/css/platform.css?v=20261027organization1" />
     <link rel="stylesheet" href="/css/dashboard-header.css?v=20261109hostparity2" />
-    <link rel="stylesheet" href="/css/reservations.css?v=20261027reservations1" />
-    <script type="module" src="/js/reservations.bundle.js?v=20261104roles1"></script>
+    <link rel="stylesheet" href="/css/reservations.css?v=20261119remember1" />
+    <script type="module" src="/js/reservations.bundle.js?v=20261119remember1"></script>
   </head>
   <body class="platform-page reservations-page" data-session="loading">
     <main class="platform-shell">
@@ -48,6 +48,10 @@
         <div class="reservations-providers">
           <button class="platform-button" type="button" data-provider="google">Continue with Google</button>
           <button class="platform-button reservation-secondary" type="button" data-provider="apple">Continue with Apple</button>
+          <label class="reservations-remember">
+            <input type="checkbox" id="reservations-remember" name="remember" autocomplete="off" />
+            <span data-text="remember">Remember me on this device</span>
+          </label>
         </div>
         <p id="sign-in-status" class="reservation-status" role="status" aria-live="polite" hidden></p>
       </section>

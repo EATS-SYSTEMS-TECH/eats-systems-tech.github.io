@@ -6,6 +6,7 @@ export default {
   home: "WIFIGATE मुख्यपृष्ठ",
   google: "Google सह सुरू ठेवा",
   apple: "Apple सह सुरू ठेवा",
+  remember: "या डिव्हाइसवर मला लक्षात ठेवा",
   signingInLabel: "साइन इन होत आहे",
   legal: "पुढे सुरू ठेवून, तुम्ही {terms} आणि {privacy} यांना सहमती देता.",
   terms: "अटी",

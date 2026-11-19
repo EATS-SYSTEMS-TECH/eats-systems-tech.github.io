@@ -6,7 +6,8 @@ import {
   signOut,
   completeAuthCallback,
   signInRedirect,
-} from "./site-auth.js?v=20261022day1";
+  forgetRedirectChoice,
+} from "./site-auth.js?v=20261119remember1";
 import { isLocalStaging } from "./firebase-config.js";
 import { portalLogin } from "./api/index.js?v=20261026login1";
 import { createLoginAttemptHint } from "./login-attempts.js?v=20261026login1";
@@ -18,11 +19,19 @@ import {
   signInRefusals,
 } from "./platform-model.js?v=20261027managerux1";
 import { watchSession } from "./platform-session.js?v=20261022day1";
-import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261024mfa1";
+import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261119remember1";
 import { requestHumanCheck } from "./login-gate-game.js?v=20261109gate2";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
 const buttons = [...document.querySelectorAll("[data-provider]")];
+// "Remember me on this device", unchecked on every visit: without it the
+// sign-in lasts until the tab closes (js/site-auth.js).
+const rememberBox = document.querySelector("#login-remember");
+// Back from the provider page restores this page from the back/forward cache
+// without a new start: the abandoned redirect's choice is not kept.
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) forgetRedirectChoice();
+});
 let attemptStorage;
 try { attemptStorage = localStorage; } catch { /* The server still enforces limits. */ }
 const attemptHint = createLoginAttemptHint({ storage: attemptStorage });
@@ -139,6 +148,7 @@ function updateAttempts() {
   buttons.forEach((button) => {
     button.disabled = busy || locked;
   });
+  rememberBox.disabled = busy || locked;
   if (locked) {
     hideProgress();
     showMessage(copy.gameLocked.replace("{s}", String(Math.max(1, Math.ceil((Date.parse(state.lockedUntil) - Date.now()) / 1000)))));
@@ -266,6 +276,9 @@ buttons.forEach((button) =>
       item.classList.remove("app-login__provider--ready"),
     );
     providerName = button.dataset.provider;
+    // The choice shown when the button was pressed, also for the full-page
+    // fallback after a blocked window.
+    const remember = rememberBox.checked;
     refused = false;
     setBusy(true);
     showProgress(copy.signingIn);
@@ -276,14 +289,14 @@ buttons.forEach((button) =>
       if (restoredUser) {
         await finishLogin(restoredUser);
       } else {
-        const credential = await signIn(providerName, mfaChallenge);
+        const credential = await signIn(providerName, mfaChallenge, { remember });
         restoredUser = credential.user;
         await finishLogin(credential.user);
       }
     } catch (error) {
       if (error.code === AuthErrors.POPUP_BLOCKED) {
         try {
-          await signInRedirect(providerName);
+          await signInRedirect(providerName, { remember });
           return;
         } catch (redirectError) {
           report(redirectError);

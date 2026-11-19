@@ -13,6 +13,7 @@ import {
   signIn,
   signInRedirect,
   completeAuthCallback,
+  forgetRedirectChoice,
   signOut,
 } from "./site-auth.js";
 import { AuthErrors, AuthProviders } from "./host-constants.js";
@@ -198,16 +199,21 @@ function renderProducts(editable) {
 async function startSignIn(provider) {
   const status = $("#sign-in-status");
   const buttons = document.querySelectorAll("[data-provider]");
+  // "Remember me on this device", unchecked by default: without it the
+  // sign-in lasts until the tab closes (js/site-auth.js).
+  const rememberBox = $("#reservations-remember");
+  const remember = rememberBox.checked;
 
   for (const button of buttons) button.disabled = true;
+  rememberBox.disabled = true;
   setStatus(status, t("signingIn"));
 
   try {
-    await signIn(provider, (resolver) => requestMfaChallenge(resolver));
+    await signIn(provider, (resolver) => requestMfaChallenge(resolver), { remember });
     setStatus(status, "");
   } catch (error) {
     if (error?.code === AuthErrors.POPUP_BLOCKED) {
-      await signInRedirect(provider);
+      await signInRedirect(provider, { remember });
       return;
     }
 
@@ -218,8 +224,15 @@ async function startSignIn(provider) {
     );
   } finally {
     for (const button of buttons) button.disabled = false;
+    rememberBox.disabled = false;
   }
 }
+
+// Back from the provider page restores this page from the back/forward cache
+// without a new start: the abandoned redirect's choice is not kept.
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) forgetRedirectChoice();
+});
 
 for (const button of document.querySelectorAll("[data-provider]")) {
   button.textContent = t(button.dataset.provider === AuthProviders.APPLE ? "apple" : "google");

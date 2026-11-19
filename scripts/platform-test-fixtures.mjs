@@ -143,9 +143,18 @@ export async function scenario(browser, options = {}) {
         metadata: ${JSON.stringify(state.userMetadata ?? {})},
         getIdToken: async () => "isolated-token",
         getIdTokenResult: async () => ({claims: {auth_time: ${JSON.stringify(state.authTime ?? 0)}, firebase: {sign_in_provider: "google.com"}}}) };
-      export const getAuth = () => ({});
+      const auth = {};
+      export const getAuth = () => auth;
+      // Records the storage order a page load starts Auth with (js/site-auth.js).
+      export const initializeAuth = (_, options) => {
+        void window.authFixtureEvent({type: "init", persistence: options.persistence.map(item => item.type)});
+        return auth;
+      };
       export const connectAuthEmulator = () => {};
       export const browserLocalPersistence = {type: "local"};
+      export const browserSessionPersistence = {type: "session"};
+      export const indexedDBLocalPersistence = {type: "indexedDB"};
+      export const browserPopupRedirectResolver = {};
       export const setPersistence = async (_, persistence) => { await window.authFixtureEvent({type: "persistence", mode: persistence.type}); };
       export const onAuthStateChanged = (_, callback) => { observer = callback; setTimeout(() => callback(signedIn ? user : null), 0); return () => {}; };
       window.fixtureChangeUser = async uid => { user = {...user, uid}; enrolled = false; await window.authFixtureEvent({type: "identity", uid}); observer?.(user); };
@@ -156,8 +165,19 @@ export async function scenario(browser, options = {}) {
         if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
         signedIn = true; await window.authFixtureEvent("signin"); observer?.(user); return { user };
       };
-      export const getRedirectResult = async () => null;
-      export const signInWithRedirect = async () => { await window.authFixtureEvent("redirect"); };
+      // A started redirect returns its sign-in on the next load of this tab
+      // (a second factor first when one is enrolled).
+      export const getRedirectResult = async () => {
+        if (sessionStorage.getItem("fixture-redirect") !== "1") return null;
+        sessionStorage.removeItem("fixture-redirect");
+        if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
+        signedIn = true; await window.authFixtureEvent("signin"); return { user };
+      };
+      export const signInWithRedirect = async () => {
+        await window.authFixtureEvent({type: "redirect-choice", remember: sessionStorage.getItem("wifigate-auth-remember")});
+        sessionStorage.setItem("fixture-redirect", "1");
+        await window.authFixtureEvent("redirect");
+      };
       export const signOut = async () => { signedIn = false; await window.authFixtureEvent("signout"); observer?.(null); };
       export const reauthenticateWithPopup = async () => {
         await window.authFixtureEvent("reauth");

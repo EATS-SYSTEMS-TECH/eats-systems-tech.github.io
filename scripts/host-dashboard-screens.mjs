@@ -725,7 +725,7 @@ const firebaseAuth = (state) => `
   export const getAuth = () => ({});
   export const connectAuthEmulator = () => {};
   export const browserLocalPersistence = {};
-  export const setPersistence = async () => {};
+  export const setPersistence = async () => {}; export const initializeAuth = () => getAuth(); export const browserSessionPersistence = {}; export const indexedDBLocalPersistence = {}; export const browserPopupRedirectResolver = {};
   export const onAuthStateChanged = (_, callback) => { setTimeout(() => callback(user), 0); return () => {}; };
   export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };
   export const OAuthProvider = function () { this.addScope = () => {}; };

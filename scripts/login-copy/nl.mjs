@@ -6,6 +6,7 @@ export default {
   home: "Startpagina van WIFIGATE",
   google: "Doorgaan met Google",
   apple: "Doorgaan met Apple",
+  remember: "Onthoud mij op dit apparaat",
   signingInLabel: "Bezig met inloggen",
   legal: "Door verder te gaan, ga je akkoord met de {terms} en het {privacy}.",
   terms: "Gebruiksvoorwaarden",

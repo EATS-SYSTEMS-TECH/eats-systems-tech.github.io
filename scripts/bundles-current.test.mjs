@@ -7,6 +7,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { build } from "esbuild";
 import {
@@ -70,4 +71,32 @@ test("the picker, Pay and Manager pages load the versioned picker bundle", async
     versions.add(bundle[0].split("?v=")[1]);
   }
   assert.equal(versions.size, 1, "the three pages share one bundle version");
+});
+
+// Browsers keep a bundle for a while under its ?v= URL (GitHub Pages allows
+// 10 minutes), so a rebuilt bundle needs a new version on every page that
+// loads it, or an old copy keeps running. Checked against the last commit
+// while the change is uncommitted; with no difference there is nothing to do.
+test("a rebuilt bundle is loaded under a new version on every page", async () => {
+  const git = (...args) => {
+    try {
+      return execFileSync("git", args, { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    } catch {
+      return null;
+    }
+  };
+  for (const { outfile } of [dashboardBundle, pickerBundle, reservationsBundle, payPointBundle, shop3dBundle]) {
+    const before = git("show", `HEAD:${outfile}`);
+    if (before === null) continue;
+    const now = await readFile(path.join(root, outfile), "utf8");
+    if (text(before) === text(now)) continue;
+    const pages = (git("grep", "-l", "--fixed-strings", `/${outfile}?v=`, "HEAD", "--", "*.html") ?? "")
+      .split("\n").filter(Boolean).map((line) => line.replace(/^HEAD:/, ""));
+    const version = (html) => html.split(`/${outfile}?v=`)[1]?.match(/^[^"']+/)?.[0];
+    for (const page of pages) {
+      const old = version(git("show", `HEAD:${page}`) ?? "");
+      const current = version(await readFile(path.join(root, page), "utf8"));
+      assert.notEqual(current, old, `${page} still loads the rebuilt ${outfile} as ?v=${old}`);
+    }
+  }
 });
