@@ -53,14 +53,22 @@ function providerFor(name) {
   }
   return provider;
 }
-async function authenticate(action, onChallenge) {
-  try {
-    return await action();
-  } catch (error) {
-    if (error.code !== AuthErrors.MFA_REQUIRED) {
-      throw error;
+async function authenticate(action, onChallenge, restartable = false) {
+  let restarts = 0;
+  for (;;) {
+    try {
+      return await action();
+    } catch (error) {
+      if (error.code !== AuthErrors.MFA_REQUIRED) throw error;
+      try {
+        return await onChallenge(authApi.getMultiFactorResolver(auth, error));
+      } catch (challengeError) {
+        // Only the user's explicit Restart button opens a new provider flow.
+        // Redirect callbacks cannot be replayed, and cancellation never retries.
+        if (!restartable || challengeError.code !== "mfa-restart-required" || restarts >= 2) throw challengeError;
+        restarts++;
+      }
     }
-    return onChallenge(authApi.getMultiFactorResolver(auth, error));
   }
 }
 export async function resolveTotp(resolver, factorUid, code) {
@@ -75,7 +83,7 @@ export async function signIn(providerName, onChallenge) {
   await ready();
   return authenticate(
     () => authApi.signInWithPopup(auth, providerFor(providerName)),
-    onChallenge
+    onChallenge, true
   );
 }
 export async function completeAuthCallback(onChallenge) {
@@ -92,7 +100,7 @@ export async function reauthenticate(user, onChallenge) {
   const name = id === AuthProviders.GOOGLE_ID ? AuthProviders.GOOGLE : id === AuthProviders.APPLE_ID ? AuthProviders.APPLE : null;
   return authenticate(
     () => authApi.reauthenticateWithPopup(user, providerFor(name)),
-    onChallenge
+    onChallenge, true
   );
 }
 export async function beginTotpEnrollment(user) {

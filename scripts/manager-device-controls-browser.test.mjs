@@ -72,6 +72,7 @@ async function setup(t, browser, origin, kind, language = "en", options = {}) {
         isCurrent: () => window.current,
         confirm: async (message, options) => { window.confirmation = {message, options}; return window.confirmed; },
         ensureRecent: async (options) => (window.authOptions = options),
+        qrSource:async(payload)=>{window.qrEncodedPayload=payload;return options.badQr?'plain-json-not-a-WIFIGATE-code':'WGQ.'+'a'.repeat(100);},
         onFactoryReset: async result => window.resetResults.push(result),
         errorText: (e) => e.message,
         onRefresh: async () => window.refreshes++,
@@ -155,6 +156,7 @@ test("QR uses display purpose, recent identity, no persistence and clears on dis
   assert.equal(await page.locator(".manager-qr-label svg").count(), 1);
   assert.deepEqual(await page.evaluate(() => window.authOptions), {
     maxAgeSeconds: 240,
+    requireTotp: true,
   });
   assert.deepEqual(await page.evaluate(() => window.calls), [
     { name: "ADMIN_GET_QR_PAYLOAD", payload: { purpose: "DISPLAY" } },
@@ -189,6 +191,22 @@ test("Late QR response is discarded after navigation", async (t) => {
     window.resolveQr({ data: { sensitive: true, payload: { i: "DEMO" } } });
   });
   assert.equal(await page.locator(".manager-qr-label svg").count(), 0);
+});
+
+test("Raw JSON is never rendered as a label; hiding during encoding discards the late token",async t=>{
+  const {origin,browser}=await startSite(t);
+  const invalid=await setup(t,browser,origin,'qr','en',{badQr:true});
+  await invalid.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+  assert.equal(await invalid.locator('.manager-qr-label svg').count(),0);
+  assert.match(await invalid.getByRole('alert').innerText(),/INVALID_RESPONSE/);
+  const page=await setup(t,browser,origin,'qr');
+  await page.evaluate(()=>{window.connection.command=()=>new Promise(resolve=>window.resolveQr=resolve);});
+  await page.getByRole('button',{name:'Show QR Code label',exact:true}).click();
+  await page.waitForFunction(()=>Boolean(window.resolveQr));
+  await page.getByRole('button',{name:'Hide label',exact:true}).click();
+  await page.evaluate(()=>window.resolveQr({data:{sensitive:true,payload:{i:'DEMO',n:'Demo'}}}));
+  await page.waitForFunction(()=>!document.querySelector('.manager-button.primary').disabled);
+  assert.equal(await page.locator('.manager-qr-label svg').count(),0);
 });
 test("Factory reset prepares but never commits after cancellation", async (t) => {
   const { origin, browser } = await startSite(t);

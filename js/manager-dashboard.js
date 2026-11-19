@@ -26,6 +26,7 @@ import { createManagerCsvDialog } from "./manager-csv-dialog.js";
 import { renderManagerSettings } from "./manager-settings.js";
 import { renderManagerDeviceControls } from "./manager-device-controls.js";
 import { createManagerFirmwareSource } from "./manager-firmware-source.js";
+import { createManagerQrSource } from "./manager-qr-source.js";
 import { createManagerEvents } from "./manager-events.js";
 import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumUsers } from "./manager-device-details.js";
 import { managerRequest } from "./api/index.js";
@@ -257,6 +258,7 @@ export function createManagerDashboard({
       FIRMWARE_RELEASE_CHANGED:t("גרסת העדכון השתנתה. בדקו שוב לפני העדכון.","The update release changed. Check again before updating."),
       TOTP_REQUIRED:t("יש להשלים אימות באמצעות אפליקציית המאמת לפני הפעולה.","Complete authenticator verification before this action."),
       RECENT_REAUTH_REQUIRED:t("נדרש אימות חשבון חדש לפני הפעולה. נסו שוב והשלימו את האימות.","A new account verification is required. Try again and complete verification."),
+      QR_LABEL_UNAVAILABLE:t("לא ניתן להכין כרגע את מדבקת WIFIGATE. נסו שוב בעוד רגע.","The WIFIGATE label cannot be prepared right now. Try again shortly."),
       FOTA_REBOOT_NOT_VERIFIED:t("לא אומתה הגרסה החדשה לאחר האתחול. התחברו שוב ובדקו את גרסת המערכת לפני ניסיון נוסף.","The new version was not verified after restart. Reconnect and check the installed version before retrying."),
       // History may use internal LittleFS on BETA boards or SD on newer hardware.
       STORAGE_IO: /^ADMIN_IMPORT_(BEGIN|VALIDATE|STATUS)$/.test(error.command ?? "")
@@ -2182,6 +2184,7 @@ export function createManagerDashboard({
       const panel = await renderManagerDeviceControls({ root: content, kind: tab, language, connection: transport,
         confirm: confirmAction, ensureRecent, isCurrent: current, errorText, onRefresh: () => showTab(tab),
         firmwareSource: examples.isSystem(currentSystem) ? null : createManagerFirmwareSource({request:api,gateId:currentGate,isCurrent:current}),
+        qrSource: examples.isSystem(currentSystem) ? null : createManagerQrSource({request:api,gateId:currentGate,isCurrent:current}),
         onFactoryReset: async ({ acknowledged }) => {
           if (closed || context.source !== connection || context.epoch !== generation) return;
           stop();

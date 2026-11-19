@@ -19,6 +19,10 @@ export function authErrorMessage(
     const messages = {
       "auth/popup-closed-by-user": "ההתחברות בוטלה.",
       "auth/popup-blocked": "הדפדפן חסם את חלון ההתחברות.",
+      "auth/totp-challenge-timeout": "פג תוקף ניסיון האימות. יש להתחיל אימות חדש.",
+      "auth/code-expired": "פג תוקף ניסיון האימות. יש להתחיל אימות חדש.",
+      "auth/session-expired": "פג תוקף ניסיון האימות. יש להתחיל אימות חדש.",
+      "mfa-restart-required": "יש להתחיל אימות חדש מהפעולה שבחרתם.",
       "auth/invalid-verification-code": "הקוד שגוי או שפג תוקפו.",
       "auth/missing-verification-code": "יש להזין את הקוד מאפליקציית האימות.",
       "auth/requires-recent-login":
@@ -42,6 +46,10 @@ export function authErrorMessage(
     return "משהו השתבש. נא לנסות שוב.";
   }
   const messages = {
+    "auth/totp-challenge-timeout": "This verification attempt expired. Start a new verification.",
+    "auth/code-expired": "This verification attempt expired. Start a new verification.",
+    "auth/session-expired": "This verification attempt expired. Start a new verification.",
+    "mfa-restart-required": "Start a new verification from the action you selected.",
     RECENT_REAUTH_REQUIRED: "Sign in again to complete this sensitive action.",
     RECENT_AUTH_REQUIRED: "Sign in again to complete this sensitive action.",
     RECENT_TOTP_REQUIRED:

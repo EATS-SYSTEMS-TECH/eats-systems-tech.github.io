@@ -15,7 +15,7 @@
 
   const SESSION_KEY = /^firebase:authUser:[^:]+:\[DEFAULT\]$/;
   const SIGNED_IN = "site-header--account";
-  const authUrl = new URL("site-auth.js?v=20261022day1", document.currentScript.src).href;
+  const authUrl = new URL("site-auth.js?v=20261119ux25", document.currentScript.src).href;
   const button = account.querySelector(".site-account__button");
   const panel = account.querySelector(".site-account__panel");
   const avatar = account.querySelector(".site-account__avatar");

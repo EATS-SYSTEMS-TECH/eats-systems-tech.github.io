@@ -57,6 +57,7 @@ export async function renderManagerDeviceControls({
   onFirmwareUpdate,
   onFactoryReset,
   firmwareSource,
+  qrSource,
 }) {
   const t = (he, en) => (language === "he" ? he : en),
     spec = definitions[kind];
@@ -64,7 +65,8 @@ export async function renderManagerDeviceControls({
     timer,
     operation,
     labelTimer,
-    labelImage;
+    labelImage,
+    labelEpoch = 0;
   const alive = () => !disposed && isCurrent() && Boolean(connection.session);
   const panel = el(
     "section",
@@ -77,6 +79,7 @@ export async function renderManagerDeviceControls({
   panel.append(state);
   root.append(panel);
   const clearLabel = () => {
+    labelEpoch++;
     clearTimeout(labelTimer);
     labelImage?.replaceChildren();
   };
@@ -340,14 +343,15 @@ export async function renderManagerDeviceControls({
       t("הצגת מדבקת QR Code", "Show QR Code label"),
       async () => {
         clearLabel();
-        await ensureRecent({ maxAgeSeconds: 240 });
-        if (!alive()) return;
+        await ensureRecent({ maxAgeSeconds: 240, requireTotp: true });
+        if (!alive() || document.hidden) return;
+        const epoch = labelEpoch;
         const result = (
           await connection.command("ADMIN_GET_QR_PAYLOAD", {
             purpose: "DISPLAY",
           })
         ).data;
-        if (!alive()) return;
+        if (!alive() || epoch !== labelEpoch || document.hidden) return;
         if (
           result?.sensitive !== true ||
           !result.payload ||
@@ -356,8 +360,12 @@ export async function renderManagerDeviceControls({
           JSON.stringify(result.payload).length > 2048
         )
           throw new Error("INVALID_RESPONSE");
+        if (!qrSource) throw new Error("QR_LABEL_UNAVAILABLE");
+        const token = await qrSource(result.payload);
+        if (!alive() || epoch !== labelEpoch || document.hidden) return;
+        if (typeof token !== "string" || !/^WGQ\.[A-Za-z0-9_-]{40,2800}$/.test(token)) throw new Error("INVALID_RESPONSE");
         const qr = qrcode(0, "M");
-        qr.addData(JSON.stringify(result.payload));
+        qr.addData(token);
         qr.make();
         image.replaceChildren(
           new DOMParser().parseFromString(
