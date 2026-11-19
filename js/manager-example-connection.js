@@ -63,7 +63,7 @@ export class ManagerExampleConnection {
     this.session = { simulation: true };
     const gate = this.data.gate(gateId);
     this.capabilities = { data: {
-      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH", "GUEST_PASS_ISSUE", "GATE_OVERRIDE", "RELAY_WIRING", "SENSORS", "RF_LEARN", "FOTA", "MANAGER_QR_LABEL", "MANAGER_FACTORY_RESET"],
+      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH", "GUEST_PASS_ISSUE", "GATE_OVERRIDE", "RELAY_WIRING", "SENSORS", "RF_LEARN", "FOTA", "MANAGER_QR_LABEL", "MANAGER_FACTORY_RESET", "HISTORY_SWITCH"],
       limits: { maxUsers: gate.maxUsers, maxAdmins: gate.maxAdmins, maxEvents: gate.maxEvents, maxPageItems: 20 },
     } };
     this.onState("active");
@@ -113,6 +113,13 @@ export class ManagerExampleConnection {
       case "ADMIN_SET_SENSOR_CONFIG":
         if(typeof payload.enabled!=="boolean")throw new Error("INVALID_CONFIG");
         gate.sensor=payload.enabled;gate.revision++;value={revision:gate.revision};
+        break;
+      case "ADMIN_GET_HISTORY_CONFIG":
+        value={config:{enabled:gate.historyEnabled!==false},revision:gate.revision};
+        break;
+      case "ADMIN_SET_HISTORY_CONFIG":
+        if(typeof payload.enabled!=="boolean")throw new Error("INVALID_CONFIG");
+        gate.historyEnabled=payload.enabled;gate.revision++;value={config:{enabled:payload.enabled},revision:gate.revision};
         break;
       case "ADMIN_FOTA_GET_STATUS":
         value={firmwareVersion:gate.firmware,flashVariantMb:gate.boardMb,targetChip:"esp32c6",targetProfile:"development",releaseCounter:2026100047,secureVersion:0,state:"IDLE"};

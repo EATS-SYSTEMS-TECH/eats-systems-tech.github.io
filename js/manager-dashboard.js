@@ -25,6 +25,7 @@ import { encodeManagerCsv, managerColumns } from "./manager-csv.js";
 import { createManagerCsvDialog } from "./manager-csv-dialog.js";
 import { renderManagerSettings } from "./manager-settings.js";
 import { renderManagerDeviceControls } from "./manager-device-controls.js";
+import { renderManagerHistorySwitch } from "./manager-history-switch.js";
 import { createManagerFirmwareSource } from "./manager-firmware-source.js";
 import { createManagerQrSource } from "./manager-qr-source.js";
 import { createManagerEvents } from "./manager-events.js";
@@ -2241,6 +2242,19 @@ export function createManagerDashboard({
           say(t(`העדכון הושלם בתוך ${seconds} שניות. גרסה ${version} אומתה לאחר האתחול.`,`Update complete in ${seconds} seconds. Version ${version} verified after restart.`));
         } });
       if (current()) workspacePanel = panel; else panel.dispose();
+      return;
+    }
+    if (tab === "history" && !more) {
+      // The master switch stays above the days; History replaces only what it renders into.
+      const source = connection, epoch = generation, panelEpoch = tabGeneration;
+      const current = () => !closed && connection === source && generation === epoch &&
+        tabGeneration === panelEpoch && currentTab === "history" && Boolean(source.session);
+      await renderManagerHistorySwitch({ root: content, connection: source, language, confirm: confirmAction, isCurrent: current, errorText });
+      if (!current()) throw new Error("CANCELLED");
+      const records = node("div", undefined, "manager-history-records");
+      content.append(records);
+      await showRead(records, "ADMIN_LIST_HISTORY", { dayKey: null, page: { limit: 20, cursor: null } }, "items", false);
+      placeManagerActions(content, language);
       return;
     }
     const [cmd, items] = tables[tab];
