@@ -10,6 +10,8 @@ async function setup(t, language='en', timeoutMs=120000) {
   await page.route('**/firebase-app.js',route=>route.fulfill({contentType:'application/javascript',body:'export const initializeApp=()=>({});export const getApp=()=>({});export const getApps=()=>[];'}));
   await page.route('**/firebase-auth.js',route=>route.fulfill({contentType:'application/javascript',body:`
     export const getAuth=()=>({});export const browserLocalPersistence={};export const setPersistence=async()=>{};
+    export const initializeAuth=()=>getAuth();export const browserSessionPersistence={};
+    export const indexedDBLocalPersistence={};export const browserPopupRedirectResolver={};
     export const TotpMultiFactorGenerator={assertionForSignIn:(factor,code)=>({factor,code})};
   `}));
   await page.route(origin+'/mfa-timer-test',route=>route.fulfill({contentType:'text/html',body:`<!doctype html><html lang="${language}"><dialog id="mfa-challenge"><form><select name="factor"></select><label>Code<input name="code" required pattern="[0-9]{6}" maxlength="6"></label><p role="status"></p><button type="submit">${language==='he'?'אימות':'Verify'}</button><button type="button" data-cancel>Cancel</button></form></dialog></html>`}));
