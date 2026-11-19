@@ -66,7 +66,8 @@ export async function renderManagerDeviceControls({
     operation,
     labelTimer,
     labelImage,
-    labelEpoch = 0;
+    labelEpoch = 0,
+    labelAuthenticating = false;
   const alive = () => !disposed && isCurrent() && Boolean(connection.session);
   const panel = el(
     "section",
@@ -84,7 +85,7 @@ export async function renderManagerDeviceControls({
     labelImage?.replaceChildren();
   };
   const visibility = () => {
-    if (document.hidden) clearLabel();
+    if (document.hidden && !labelAuthenticating) clearLabel();
   };
   const dispose = () => {
     disposed = true;
@@ -343,9 +344,14 @@ export async function renderManagerDeviceControls({
       t("הצגת מדבקת QR Code", "Show QR Code label"),
       async () => {
         clearLabel();
-        await ensureRecent({ maxAgeSeconds: 240, requireTotp: true });
-        if (!alive() || document.hidden) return;
         const epoch = labelEpoch;
+        labelAuthenticating = true;
+        try {
+          await ensureRecent({ maxAgeSeconds: 240, requireTotp: true });
+        } finally {
+          labelAuthenticating = false;
+        }
+        if (!alive() || epoch !== labelEpoch || document.hidden) return;
         const result = (
           await connection.command("ADMIN_GET_QR_PAYLOAD", {
             purpose: "DISPLAY",
