@@ -1,6 +1,6 @@
 import { AuthProviders, AuthErrors } from "./host-constants.js";
-import { resolveTotp } from "./site-auth.js?v=20261119ux26";
-import { authErrorMessage } from "./host-auth-errors.js?v=20261119ux26";
+import { resolveTotp } from "./site-auth.js?v=20261119ux27";
+import { authErrorMessage } from "./host-auth-errors.js?v=20261119ux27";
 // The sign-in page passes its own wording in `text`; the dashboards use the
 // English/Hebrew defaults.
 export function requestMfaChallenge(resolver, text = {}, { timeoutMs = 120000 } = {}) {

@@ -389,11 +389,20 @@ export function createManagerDashboard({
     if (examples.isSystem(currentSystem) && view.dataset.simulation === "true")
       return;
     const epoch = generation;
+    const context = workspacePanelContext, system = currentSystem, gate = currentGate;
     await activity.track(
       t("מאמת את הזהות…", "Verifying your identity…"),
       () => verifyRecent(options),
     );
-    if (closed || epoch !== generation) throw new Error("CANCELLED");
+    // Waiting for TOTP can outlast a controller session. An authenticated,
+    // transparent renewal updates this exact panel context; it must not undo
+    // successful identity verification. Navigation/another gate/closed sessions
+    // still fence the action, and no command is replayed here.
+    const renewedSamePanel = context && context === workspacePanelContext &&
+      context.source === connection && context.epoch === generation &&
+      context.panel === tabGeneration && connection?.session &&
+      currentSystem === system && currentGate === gate;
+    if (closed || (epoch !== generation && !renewedSamePanel)) throw new Error("CANCELLED");
   }
   function form(fields, label, submit) {
     const f = node("form", undefined, "manager-form"),
