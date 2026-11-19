@@ -40,8 +40,10 @@
             color: var(--text);
             background-color: var(--bg);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 16px;
             padding: 20px;
         }
 
@@ -94,6 +96,16 @@
         }
 
         [hidden] { display: none !important; }
+
+        .statement {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .statement a {
+            color: var(--muted);
+            text-underline-offset: 0.15em;
+        }
 
         .demo-banner {
             margin: 20px 0 0;
@@ -494,6 +506,9 @@
             scheduleAppOpen(buildDeepLink());
         });
     </script>
+    <link rel="stylesheet" href="../../css/accessibility.css?v=20261027c">
+    <script>window.accessibilityCopy = {"th":{"skipLink":"ข้ามไปยังเนื้อหาหลัก","eyebrow":"การเข้าถึง","openButton":"เปิดเมนูการเข้าถึง","closeButton":"ปิดเมนูการเข้าถึง","title":"เมนูการเข้าถึง","description":"ปรับเว็บไซต์ให้เหมาะกับวิธีอ่านและการใช้งานของคุณ ตัวเลือกของคุณจะถูกบันทึกไว้ในอุปกรณ์นี้","reset":"รีเซ็ตทั้งหมด","statusDefault":"มุมมองเว็บไซต์มาตรฐาน","statusActive":"เปิดใช้การปรับ {count} รายการ","hideButton":"ซ่อนปุ่มการเข้าถึงจนกว่าจะโหลดหน้าใหม่","statementLink":"คำแถลงการเข้าถึง","textSize":{"label":"ขนาดข้อความ","description":"ขยายข้อความทั่วทั้งเว็บไซต์","decrease":"ข้อความเล็กลง","increase":"ข้อความใหญ่ขึ้น","level":"ขนาดข้อความ {percent}%"},"options":{"highContrast":{"label":"ความคมชัดสูง","description":"ข้อความสีเข้มบนพื้นหลังสีอ่อนพร้อมเส้นขอบชัดเจน"},"grayscale":{"label":"โทนสีเทา","description":"แสดงเว็บไซต์โดยไม่มีสี"},"underlineLinks":{"label":"เน้นลิงก์","description":"ขีดเส้นใต้และทำเครื่องหมายทุกลิงก์"},"readableFont":{"label":"แบบอักษรอ่านง่าย","description":"แบบอักษรเรียบง่ายที่อ่านง่ายมาก"},"textSpacing":{"label":"ระยะห่างข้อความ","description":"เพิ่มระยะห่างระหว่างบรรทัด คำ และตัวอักษร"},"highlightHeadings":{"label":"เน้นหัวข้อ","description":"ทำเครื่องหมายหัวข้อเพื่อแสดงโครงสร้างของหน้า"},"bigCursor":{"label":"เคอร์เซอร์ขนาดใหญ่","description":"ตัวชี้เมาส์ที่ใหญ่ขึ้น"},"focusHighlight":{"label":"โฟกัสที่เห็นชัด","description":"เส้นขอบหนารอบองค์ประกอบที่มีโฟกัสของแป้นพิมพ์"},"reducedMotion":{"label":"หยุดภาพเคลื่อนไหว","description":"หยุดภาพเคลื่อนไหว เอฟเฟกต์การเปลี่ยนหน้า และวิดีโอพื้นหลัง"}}}};</script>
+    <script src="../../js/accessibility.js?v=20261027d" defer=""></script>
 
   <meta name="description" content="Open your WIFIGATE invitation securely in the app.">
   <meta name="robots" content="noindex, follow">
@@ -607,6 +622,7 @@
   </script><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
 
 <body>
+    <a class="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>
     <main class="card" id="main-content">
         <img class="logo" src="../../assets/img/wifigate-link-logo.webp" alt="WIFIGATE" width="84" height="84">
         <h1 id="page-title">Opening WIFIGATE…</h1>
@@ -618,6 +634,112 @@
         </div>
         <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
     </main>
+    <p class="statement"><a id="accessibility-statement-link" href="/th/accessibility/">คำชี้แจงการเข้าถึง</a></p>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="เปิดเมนูการเข้าถึง" title="เปิดเมนูการเข้าถึง">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">การเข้าถึง</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="ปิดเมนูการเข้าถึง">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">เมนูการเข้าถึง</h2>
+      <p class="a11y-panel__description" id="a11y-description">ปรับเว็บไซต์ให้เหมาะกับวิธีอ่านและการใช้งานของคุณ ตัวเลือกของคุณจะถูกบันทึกไว้ในอุปกรณ์นี้</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">มุมมองเว็บไซต์มาตรฐาน</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">รีเซ็ตทั้งหมด</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">ขนาดข้อความ</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">ขยายข้อความทั่วทั้งเว็บไซต์</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="ข้อความเล็กลง" title="ข้อความเล็กลง">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="ข้อความใหญ่ขึ้น" title="ข้อความใหญ่ขึ้น">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">ความคมชัดสูง</span>
+            <span class="a11y-option__description">ข้อความสีเข้มบนพื้นหลังสีอ่อนพร้อมเส้นขอบชัดเจน</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">โทนสีเทา</span>
+            <span class="a11y-option__description">แสดงเว็บไซต์โดยไม่มีสี</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">เน้นลิงก์</span>
+            <span class="a11y-option__description">ขีดเส้นใต้และทำเครื่องหมายทุกลิงก์</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">แบบอักษรอ่านง่าย</span>
+            <span class="a11y-option__description">แบบอักษรเรียบง่ายที่อ่านง่ายมาก</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">ระยะห่างข้อความ</span>
+            <span class="a11y-option__description">เพิ่มระยะห่างระหว่างบรรทัด คำ และตัวอักษร</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">เน้นหัวข้อ</span>
+            <span class="a11y-option__description">ทำเครื่องหมายหัวข้อเพื่อแสดงโครงสร้างของหน้า</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">เคอร์เซอร์ขนาดใหญ่</span>
+            <span class="a11y-option__description">ตัวชี้เมาส์ที่ใหญ่ขึ้น</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">โฟกัสที่เห็นชัด</span>
+            <span class="a11y-option__description">เส้นขอบหนารอบองค์ประกอบที่มีโฟกัสของแป้นพิมพ์</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">หยุดภาพเคลื่อนไหว</span>
+            <span class="a11y-option__description">หยุดภาพเคลื่อนไหว เอฟเฟกต์การเปลี่ยนหน้า และวิดีโอพื้นหลัง</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/th/accessibility/">คำแถลงการเข้าถึง</a>
+    </div>
 
 
 

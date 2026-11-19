@@ -223,7 +223,7 @@ function renderSidebarSystems(plan) {
 
 export function loadHostManagement(user, identity, preferredId) {
   if (document.body.classList.contains("host-manager-workspace")) {
-    activity ??= createManagerActivity({ main: document.getElementById("workspace-main"), view: root, language: hostLanguage });
+    activity ??= createManagerActivity({ main: document.getElementById("main-content"), view: root, language: hostLanguage });
     activity.reset();
     return activity.track(hostText("Loading your workspace…"), () => loadWorkspace(user, identity, preferredId));
   }

@@ -200,7 +200,7 @@ test("the checkbox fits the sign-in card in every language on a small phone", as
   assert.deepEqual(fixture.errors, []);
 });
 
-test("the whole card, down to the legal line, stays on a landscape phone screen in every language", async (t) => {
+test("the whole card, down to the legal and statement lines, stays on a landscape phone screen in every language", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const viewport of [{ width: 568, height: 320 }, { width: 667, height: 375 }]) {
     await t.test(`${viewport.width}x${viewport.height}`, async (t) => {
@@ -214,13 +214,15 @@ test("the whole card, down to the legal line, stays on a landscape phone screen 
           const card = document.querySelector(".app-login__card");
           const box = card.getBoundingClientRect();
           const legal = document.querySelector(".app-login__legal").getBoundingClientRect();
+          const statement = document.querySelector(".app-login__statement").getBoundingClientRect();
           return {
             cardFits: card.scrollHeight <= card.clientHeight,
             legalInCard: legal.bottom <= box.bottom,
             legalOnScreen: legal.bottom <= innerHeight,
+            statementInCard: statement.top >= legal.bottom && statement.bottom <= box.bottom,
           };
         });
-        assert.deepEqual(layout, { cardFits: true, legalInCard: true, legalOnScreen: true }, code);
+        assert.deepEqual(layout, { cardFits: true, legalInCard: true, legalOnScreen: true, statementInCard: true }, code);
       }
       assert.deepEqual(fixture.errors, []);
     });

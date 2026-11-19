@@ -205,7 +205,7 @@ test("Host navigation keeps deep links, aliases, history, the bell and inline ph
   await navigation.locator('button[data-view-id="calendar"]').focus();
   await page.keyboard.press("Enter");
   assert.equal(query("view"), "calendar");
-  assert.equal(await page.locator("#workspace-main").evaluate(node => node.inert), false);
+  assert.equal(await page.locator("#main-content").evaluate(node => node.inert), false);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   await page.evaluate(() => window.dispatchEvent(new CustomEvent("host:workspace-reset")));
   assert.equal(query("view"), null);

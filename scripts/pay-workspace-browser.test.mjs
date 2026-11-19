@@ -404,7 +404,8 @@ test("Pay public preview rejects an invalid link and fails closed if the server 
   await page.goto(origin + `/pay/point/?id=${PUBLIC}`);
   await page.getByRole("heading", { name: "Unable to load this point", exact: true }).waitFor();
   assert.equal(await page.locator("#pay-point button").count(), 1);
-  assert.equal(await page.getByRole("button", { name: /pay|open|charge/i }).count(), 0);
+  // The point offers no payment action (the accessibility menu button is not one).
+  assert.equal(await page.locator("#pay-point").getByRole("button", { name: /pay|open|charge/i }).count(), 0);
 });
 
 test("Pay lists the Roller Shutter example, and its own eligibility names Roller Shutter as the reason", async t => {

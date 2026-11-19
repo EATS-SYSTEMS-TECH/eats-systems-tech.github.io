@@ -40,8 +40,10 @@
             color: var(--text);
             background-color: var(--bg);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 16px;
             padding: 20px;
         }
 
@@ -94,6 +96,16 @@
         }
 
         [hidden] { display: none !important; }
+
+        .statement {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .statement a {
+            color: var(--muted);
+            text-underline-offset: 0.15em;
+        }
 
         .demo-banner {
             margin: 20px 0 0;
@@ -494,6 +506,9 @@
             scheduleAppOpen(buildDeepLink());
         });
     </script>
+    <link rel="stylesheet" href="../../css/accessibility.css?v=20261027c">
+    <script>window.accessibilityCopy = {"mr":{"skipLink":"मुख्य मजकुराकडे जा","eyebrow":"सुलभता","openButton":"सुलभता मेनू उघडा","closeButton":"सुलभता मेनू बंद करा","title":"सुलभता मेनू","description":"तुम्ही जसे वाचता आणि नेव्हिगेट करता त्यानुसार साइट जुळवून घ्या. तुमच्या निवडी या डिव्हाइसवर जतन केल्या जातात.","reset":"सर्व रीसेट करा","statusDefault":"साइटचे सामान्य दृश्य","statusActive":"{count} बदल सुरू","hideButton":"पेज पुन्हा लोड होईपर्यंत सुलभता बटण लपवा","statementLink":"सुलभता विधान","textSize":{"label":"मजकुराचा आकार","description":"संपूर्ण साइटवरील मजकूर मोठा करा.","decrease":"लहान मजकूर","increase":"मोठा मजकूर","level":"मजकुराचा आकार {percent}%"},"options":{"highContrast":{"label":"उच्च कॉन्ट्रास्ट","description":"फिकट पार्श्वभूमीवर गडद मजकूर आणि ठळक किनारी."},"grayscale":{"label":"ग्रेस्केल","description":"साइट रंगांशिवाय दाखवा."},"underlineLinks":{"label":"लिंक हायलाइट करा","description":"प्रत्येक लिंक अधोरेखित करून चिन्हांकित करा."},"readableFont":{"label":"वाचनीय फॉन्ट","description":"साधा, सहज वाचता येणारा फॉन्ट."},"textSpacing":{"label":"मजकुरातील अंतर","description":"ओळी, शब्द आणि अक्षरांमध्ये अधिक जागा."},"highlightHeadings":{"label":"शीर्षके हायलाइट करा","description":"पेजची रचना दाखवण्यासाठी शीर्षके चिन्हांकित करा."},"bigCursor":{"label":"मोठा कर्सर","description":"मोठा माउस पॉइंटर."},"focusHighlight":{"label":"ठळक फोकस","description":"कीबोर्ड फोकस असलेल्या घटकाभोवती जाड बाह्यरेषा."},"reducedMotion":{"label":"अ‍ॅनिमेशन थांबवा","description":"अ‍ॅनिमेशन, ट्रान्झिशन आणि पार्श्वभूमी व्हिडिओ थांबवा."}}}};</script>
+    <script src="../../js/accessibility.js?v=20261027d" defer=""></script>
 
   <meta name="description" content="तुमचे WIFIGATE आमंत्रण अॅपमध्ये सुरक्षितपणे उघडा.">
   <meta name="robots" content="noindex, follow">
@@ -607,6 +622,7 @@
   </script><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
 
 <body>
+    <a class="skip-link" href="#main-content">मुख्य मजकुराकडे जा</a>
     <main class="card" id="main-content">
         <img class="logo" src="../../assets/img/wifigate-link-logo.webp" alt="WIFIGATE" width="84" height="84">
         <h1 id="page-title">WIFIGATE उघडत आहे</h1>
@@ -618,6 +634,112 @@
         </div>
         <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
     </main>
+    <p class="statement"><a id="accessibility-statement-link" href="/mr/accessibility/">सुलभता निवेदन</a></p>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="सुलभता मेनू उघडा" title="सुलभता मेनू उघडा">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">सुलभता</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="सुलभता मेनू बंद करा">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">सुलभता मेनू</h2>
+      <p class="a11y-panel__description" id="a11y-description">तुम्ही जसे वाचता आणि नेव्हिगेट करता त्यानुसार साइट जुळवून घ्या. तुमच्या निवडी या डिव्हाइसवर जतन केल्या जातात.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">साइटचे सामान्य दृश्य</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">सर्व रीसेट करा</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">मजकुराचा आकार</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">संपूर्ण साइटवरील मजकूर मोठा करा.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="लहान मजकूर" title="लहान मजकूर">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="मोठा मजकूर" title="मोठा मजकूर">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">उच्च कॉन्ट्रास्ट</span>
+            <span class="a11y-option__description">फिकट पार्श्वभूमीवर गडद मजकूर आणि ठळक किनारी.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">ग्रेस्केल</span>
+            <span class="a11y-option__description">साइट रंगांशिवाय दाखवा.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">लिंक हायलाइट करा</span>
+            <span class="a11y-option__description">प्रत्येक लिंक अधोरेखित करून चिन्हांकित करा.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">वाचनीय फॉन्ट</span>
+            <span class="a11y-option__description">साधा, सहज वाचता येणारा फॉन्ट.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">मजकुरातील अंतर</span>
+            <span class="a11y-option__description">ओळी, शब्द आणि अक्षरांमध्ये अधिक जागा.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">शीर्षके हायलाइट करा</span>
+            <span class="a11y-option__description">पेजची रचना दाखवण्यासाठी शीर्षके चिन्हांकित करा.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">मोठा कर्सर</span>
+            <span class="a11y-option__description">मोठा माउस पॉइंटर.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">ठळक फोकस</span>
+            <span class="a11y-option__description">कीबोर्ड फोकस असलेल्या घटकाभोवती जाड बाह्यरेषा.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">अ‍ॅनिमेशन थांबवा</span>
+            <span class="a11y-option__description">अ‍ॅनिमेशन, ट्रान्झिशन आणि पार्श्वभूमी व्हिडिओ थांबवा.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/mr/accessibility/">सुलभता विधान</a>
+    </div>
 
 
 

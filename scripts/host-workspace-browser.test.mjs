@@ -725,7 +725,7 @@ test("workspace isolates failures, follows permissions and keeps history", async
       assert.equal(await page.locator(".workspace-menu-toggle").isVisible(), false);
       await nav(page, "bookings").click();
       await page.getByRole("region", { name: "הזמנות", exact: true }).waitFor();
-      assert.equal(await page.locator("#workspace-main").evaluate(node => node.inert), false);
+      assert.equal(await page.locator("#main-content").evaluate(node => node.inert), false);
       assert.ok(await fits(page));
       assert.deepEqual(errors, []);
     },

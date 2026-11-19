@@ -40,8 +40,10 @@
             color: var(--text);
             background-color: var(--bg);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 16px;
             padding: 20px;
         }
 
@@ -94,6 +96,16 @@
         }
 
         [hidden] { display: none !important; }
+
+        .statement {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .statement a {
+            color: var(--muted);
+            text-underline-offset: 0.15em;
+        }
 
         .demo-banner {
             margin: 20px 0 0;
@@ -494,6 +506,9 @@
             scheduleAppOpen(buildDeepLink());
         });
     </script>
+    <link rel="stylesheet" href="../../css/accessibility.css?v=20261027c">
+    <script>window.accessibilityCopy = {"cs":{"skipLink":"Přeskočit na hlavní obsah","eyebrow":"Přístupnost","openButton":"Otevřít nabídku přístupnosti","closeButton":"Zavřít nabídku přístupnosti","title":"Nabídka přístupnosti","description":"Přizpůsobte si web tomu, jak čtete a procházíte. Vaše volby se uloží v tomto zařízení.","reset":"Obnovit vše","statusDefault":"Standardní zobrazení webu","statusActive":"Aktivní úpravy: {count}","hideButton":"Skrýt tlačítko přístupnosti do opětovného načtení stránky","statementLink":"Prohlášení o přístupnosti","textSize":{"label":"Velikost textu","description":"Zvětšit text na celém webu.","decrease":"Menší text","increase":"Větší text","level":"Velikost textu {percent} %"},"options":{"highContrast":{"label":"Vysoký kontrast","description":"Tmavý text na světlém pozadí s výraznými okraji."},"grayscale":{"label":"Odstíny šedi","description":"Zobrazit web bez barev."},"underlineLinks":{"label":"Zvýraznit odkazy","description":"Podtrhnout a označit každý odkaz."},"readableFont":{"label":"Čitelné písmo","description":"Jednoduché, dobře čitelné písmo."},"textSpacing":{"label":"Rozestupy textu","description":"Více místa mezi řádky, slovy a písmeny."},"highlightHeadings":{"label":"Zvýraznit nadpisy","description":"Označit nadpisy, aby byla vidět struktura stránky."},"bigCursor":{"label":"Velký kurzor","description":"Větší ukazatel myši."},"focusHighlight":{"label":"Výrazný fokus","description":"Silný obrys kolem prvku, na kterém je fokus klávesnice."},"reducedMotion":{"label":"Zastavit animace","description":"Zastavit animace, přechody a video na pozadí."}}}};</script>
+    <script src="../../js/accessibility.js?v=20261027d" defer=""></script>
 
   <meta name="description" content="Otevřete svou pozvánku do WIFIGATE bezpečně v aplikaci.">
   <meta name="robots" content="noindex, follow">
@@ -607,6 +622,7 @@
   </script><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
 
 <body>
+    <a class="skip-link" href="#main-content">Přeskočit na hlavní obsah</a>
     <main class="card" id="main-content">
         <img class="logo" src="../../assets/img/wifigate-link-logo.webp" alt="WIFIGATE" width="84" height="84">
         <h1 id="page-title">Otevírá se WIFIGATE</h1>
@@ -618,6 +634,112 @@
         </div>
         <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
     </main>
+    <p class="statement"><a id="accessibility-statement-link" href="/cs/accessibility/">Prohlášení o přístupnosti</a></p>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Otevřít nabídku přístupnosti" title="Otevřít nabídku přístupnosti">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Přístupnost</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Zavřít nabídku přístupnosti">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">Nabídka přístupnosti</h2>
+      <p class="a11y-panel__description" id="a11y-description">Přizpůsobte si web tomu, jak čtete a procházíte. Vaše volby se uloží v tomto zařízení.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">Standardní zobrazení webu</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">Obnovit vše</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">Velikost textu</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">Zvětšit text na celém webu.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="Menší text" title="Menší text">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="Větší text" title="Větší text">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Vysoký kontrast</span>
+            <span class="a11y-option__description">Tmavý text na světlém pozadí s výraznými okraji.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Odstíny šedi</span>
+            <span class="a11y-option__description">Zobrazit web bez barev.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Zvýraznit odkazy</span>
+            <span class="a11y-option__description">Podtrhnout a označit každý odkaz.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Čitelné písmo</span>
+            <span class="a11y-option__description">Jednoduché, dobře čitelné písmo.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Rozestupy textu</span>
+            <span class="a11y-option__description">Více místa mezi řádky, slovy a písmeny.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Zvýraznit nadpisy</span>
+            <span class="a11y-option__description">Označit nadpisy, aby byla vidět struktura stránky.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Velký kurzor</span>
+            <span class="a11y-option__description">Větší ukazatel myši.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Výrazný fokus</span>
+            <span class="a11y-option__description">Silný obrys kolem prvku, na kterém je fokus klávesnice.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Zastavit animace</span>
+            <span class="a11y-option__description">Zastavit animace, přechody a video na pozadí.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/cs/accessibility/">Prohlášení o přístupnosti</a>
+    </div>
 
 
 

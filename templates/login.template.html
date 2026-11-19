@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
     <script type="module" src="/js/host-login.js?v=20261119remember1"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v={{cookieConsentVersion}}" />
+    <link rel="stylesheet" href="{{accessibilityStylesheet}}" />
+    <link rel="stylesheet" href="/css/portal-accessibility.css?v=20261119a11y1" />
+    <script src="{{accessibilityCopyScript}}" defer></script>
+    <script src="{{accessibilityControllerScript}}" defer></script>
   </head>
   <body class="portal-login app-login">
-    <main class="app-login__screen">
+    {{skipLink}}
+    <main class="app-login__screen" id="main-content">
       <section class="app-login__card" aria-labelledby="login-title">
         <h1 id="login-title" class="visually-hidden">{{heading}}</h1>
         <a class="app-login__logo" href="{{homeHref}}" aria-label="{{home}}"
@@ -111,8 +116,10 @@
           ><code>pending@wifigate.test</code>
         </div>
         <p class="app-login__legal">{{legal}}</p>
+        <p class="app-login__statement"><a href="{{statementHref}}">{{statementLabel}}</a></p>
       </section>
     </main>
+{{accessibilityWidget}}
     <dialog
       id="language-picker"
       class="language-picker"

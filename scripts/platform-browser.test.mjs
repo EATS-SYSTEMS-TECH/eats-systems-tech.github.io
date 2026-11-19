@@ -1878,7 +1878,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       );
       for (const selector of [
         ".host-topbar",
-        "#workspace-main",
+        "#main-content",
         "#host-tabbar",
         ".portal-legal",
       ])
@@ -1904,7 +1904,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await page.keyboard.press("Escape");
       await page.locator("#host-sidebar.is-open").waitFor({ state: "detached" });
       assert.equal(
-        await page.locator("#workspace-main").evaluate((element) => element.inert),
+        await page.locator("#main-content").evaluate((element) => element.inert),
         false,
       );
       assert.equal(

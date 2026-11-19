@@ -1,0 +1,53 @@
+/* The shared accessibility components (css/accessibility.css) on the sign-in
+   pages and the signed-in workspaces: room for the accessibility button and
+   the link to the accessibility statement. */
+
+/* Sign-in: the statement link is its own line under the legal line, in the
+   same type. The screen never scrolls, so the card keeps clear of the
+   button's corner instead of the button covering the card. */
+.app-login__statement { margin: 4px 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
+.app-login__statement a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }
+.app-login__statement a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+@media (max-width: 480px) {
+  .app-login__statement { font-size: min(0.78rem, 2.95vw); }
+}
+/* Upright phones: the card is centred above the button. */
+@media (max-width: 480px) and (min-height: 600px) {
+  .app-login__screen { padding-block-end: calc(var(--access-ui-corner) + var(--access-ui-fab) + 8px); }
+  /* On a first visit the cookie banner lifts the button (css/cookie-consent.css)
+     to a height the card cannot clear, so while the banner is showing the
+     button and its menu move to the top corner, the card makes room there and
+     the menu stops above the banner. */
+  body.app-login.has-cookie-banner .app-login__screen {
+    padding-block-start: calc(var(--access-ui-corner) + var(--access-ui-fab) + 8px);
+    padding-block-end: clamp(10px, 2.5dvh, 20px);
+  }
+  body.app-login.has-cookie-banner .a11y-fab { top: var(--access-ui-corner); bottom: auto; }
+  body.app-login.has-cookie-banner .a11y-panel {
+    top: calc(var(--access-ui-corner) + var(--access-ui-fab) + 8px); bottom: auto;
+    max-height: min(80vh, 42rem, calc(100dvh - var(--access-ui-corner) - var(--access-ui-fab) - 16px - var(--cookie-banner-height, 0px)));
+  }
+}
+/* Sideways phones: the card moves away from the button's side, and the
+   controls give up a little height for the statement line. */
+@media (max-height: 420px) {
+  .app-login__screen { padding-inline-start: calc(var(--access-ui-corner) + var(--access-ui-fab) + 8px); }
+  .app-login__language { min-height: 34px; margin-bottom: 6px; }
+  .app-login__provider { height: 36px; }
+  .app-login__logo { margin-bottom: 4px; }
+  .app-login__legal { margin-top: 4px; }
+  .app-login__statement { margin-top: 0; }
+}
+
+/* Workspaces: the statement link closes the page, like the Host portal's
+   legal links. */
+.portal-a11y-footer { display: flex; justify-content: center; padding: 1.5rem 1rem 2rem; font-size: 0.9rem; }
+.portal-a11y-footer a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
+.portal-a11y-footer a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+.pay-public .portal-a11y-footer { padding-top: 0; }
+/* Narrow screens: at the end of the page the footer links sit above the
+   button's corner instead of under it. */
+@media (max-width: 600px) {
+  .host-app .portal-legal,
+  .portal-a11y-footer { padding-block-end: calc(var(--access-ui-corner) + var(--access-ui-fab) + 12px); }
+}

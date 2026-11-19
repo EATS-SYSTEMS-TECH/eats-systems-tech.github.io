@@ -40,8 +40,10 @@
             color: var(--text);
             background-color: var(--bg);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 16px;
             padding: 20px;
         }
 
@@ -94,6 +96,16 @@
         }
 
         [hidden] { display: none !important; }
+
+        .statement {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .statement a {
+            color: var(--muted);
+            text-underline-offset: 0.15em;
+        }
 
         .demo-banner {
             margin: 20px 0 0;
@@ -494,6 +506,9 @@
             scheduleAppOpen(buildDeepLink());
         });
     </script>
+    <link rel="stylesheet" href="../../css/accessibility.css?v=20261027c">
+    <script>window.accessibilityCopy = {"ja":{"skipLink":"メインコンテンツへスキップ","eyebrow":"アクセシビリティ","openButton":"アクセシビリティメニューを開く","closeButton":"アクセシビリティメニューを閉じる","title":"アクセシビリティメニュー","description":"読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。","reset":"すべてリセット","statusDefault":"標準のサイト表示","statusActive":"{count} 件の調整が有効","hideButton":"ページを再読み込みするまでアクセシビリティボタンを非表示にする","statementLink":"アクセシビリティ方針","textSize":{"label":"文字サイズ","description":"サイト全体の文字を拡大します。","decrease":"文字を小さく","increase":"文字を大きく","level":"文字サイズ {percent}%"},"options":{"highContrast":{"label":"ハイコントラスト","description":"明るい背景に濃い文字と、はっきりした枠線を表示します。"},"grayscale":{"label":"グレースケール","description":"サイトを色なしで表示します。"},"underlineLinks":{"label":"リンクを強調","description":"すべてのリンクに下線と目印を付けます。"},"readableFont":{"label":"読みやすいフォント","description":"シンプルで読みやすいフォントを使用します。"},"textSpacing":{"label":"文字間隔","description":"行・単語・文字の間隔を広げます。"},"highlightHeadings":{"label":"見出しを強調","description":"見出しに目印を付けてページの構造を示します。"},"bigCursor":{"label":"大きいカーソル","description":"マウスポインターを大きくします。"},"focusHighlight":{"label":"フォーカスを強調","description":"キーボードフォーカスのある要素を太い枠で囲みます。"},"reducedMotion":{"label":"アニメーションを停止","description":"アニメーション、トランジション、背景動画を停止します。"}}}};</script>
+    <script src="../../js/accessibility.js?v=20261027d" defer=""></script>
 
   <meta name="description" content="WIFIGATEの招待をアプリで安全に開きます。">
   <meta name="robots" content="noindex, follow">
@@ -607,6 +622,7 @@
   </script><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261109ga1"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
 
 <body>
+    <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
     <main class="card" id="main-content">
         <img class="logo" src="../../assets/img/wifigate-link-logo.webp" alt="WIFIGATE" width="84" height="84">
         <h1 id="page-title">WIFIGATEを開いています</h1>
@@ -618,6 +634,112 @@
         </div>
         <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
     </main>
+    <p class="statement"><a id="accessibility-statement-link" href="/ja/accessibility/">アクセシビリティ方針</a></p>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="アクセシビリティメニューを開く" title="アクセシビリティメニューを開く">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">アクセシビリティ</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="アクセシビリティメニューを閉じる">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">アクセシビリティメニュー</h2>
+      <p class="a11y-panel__description" id="a11y-description">読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">標準のサイト表示</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">すべてリセット</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">文字サイズ</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">サイト全体の文字を拡大します。</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="文字を小さく" title="文字を小さく">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="文字を大きく" title="文字を大きく">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">ハイコントラスト</span>
+            <span class="a11y-option__description">明るい背景に濃い文字と、はっきりした枠線を表示します。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">グレースケール</span>
+            <span class="a11y-option__description">サイトを色なしで表示します。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">リンクを強調</span>
+            <span class="a11y-option__description">すべてのリンクに下線と目印を付けます。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">読みやすいフォント</span>
+            <span class="a11y-option__description">シンプルで読みやすいフォントを使用します。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">文字間隔</span>
+            <span class="a11y-option__description">行・単語・文字の間隔を広げます。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">見出しを強調</span>
+            <span class="a11y-option__description">見出しに目印を付けてページの構造を示します。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">大きいカーソル</span>
+            <span class="a11y-option__description">マウスポインターを大きくします。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">フォーカスを強調</span>
+            <span class="a11y-option__description">キーボードフォーカスのある要素を太い枠で囲みます。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">アニメーションを停止</span>
+            <span class="a11y-option__description">アニメーション、トランジション、背景動画を停止します。</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/ja/accessibility/">アクセシビリティ方針</a>
+    </div>
 
 
 

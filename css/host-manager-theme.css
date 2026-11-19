@@ -34,7 +34,7 @@ body.host-app.host-manager-workspace[data-product="host"] {
   white-space: nowrap;
 }
 .host-manager-workspace #host-section-navigation { display: contents; }
-.host-manager-workspace #workspace-main.manager-main { width: auto; max-width: none; min-width: 0; margin: 0; padding: 0; }
+.host-manager-workspace #main-content.manager-main { width: auto; max-width: none; min-width: 0; margin: 0; padding: 0; }
 
 /* With no navigation (a pending account, an access error) the workspace is
    one column, as Manager's management mode. */

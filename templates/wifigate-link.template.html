@@ -43,8 +43,10 @@
             color: var(--text);
             background-color: var(--bg);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 16px;
             padding: 20px;
         }
 
@@ -97,6 +99,16 @@
         }
 
         [hidden] { display: none !important; }
+
+        .statement {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .statement a {
+            color: var(--muted);
+            text-underline-offset: 0.15em;
+        }
 
         .demo-banner {
             margin: 20px 0 0;
@@ -498,9 +510,13 @@
             scheduleAppOpen(buildDeepLink());
         });
     </script>
+    <link rel="stylesheet" href="css/accessibility.css?v=20261027c" />
+    <script src="js/accessibility-copy.js?v=20261007a" defer></script>
+    <script src="js/accessibility.js?v=20261027d" defer></script>
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <main class="card" id="main-content">
         <img class="logo" src="assets/img/wifigate-link-logo.webp" alt="WIFIGATE" width="84" height="84" />
         <h1 id="page-title">Opening WIFIGATE…</h1>
@@ -512,6 +528,8 @@
         </div>
         <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
     </main>
+    <p class="statement"><a id="accessibility-statement-link" href="accessibility/">Accessibility Statement</a></p>
+    <div data-partial="accessibility-widget"></div>
 </body>
 
 </html>

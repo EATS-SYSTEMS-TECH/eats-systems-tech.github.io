@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
     <script type="module" src="/js/host-login.js?v=20261119remember1"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261109ga1" />
+    <link rel="stylesheet" href="/css/accessibility.css?v=20261027c" />
+    <link rel="stylesheet" href="/css/portal-accessibility.css?v=20261119a11y1" />
+    <script src="/js/accessibility-copy.js?v=20261007a" defer></script>
+    <script src="/js/accessibility.js?v=20261027d" defer></script>
   </head>
   <body class="portal-login app-login">
-    <main class="app-login__screen">
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+    <main class="app-login__screen" id="main-content">
       <section class="app-login__card" aria-labelledby="login-title">
         <h1 id="login-title" class="visually-hidden">Inicia sesión en WIFIGATE</h1>
         <a class="app-login__logo" href="/es/" aria-label="Página de inicio de WIFIGATE"
@@ -111,8 +116,114 @@
           ><code>pending@wifigate.test</code>
         </div>
         <p class="app-login__legal">Al continuar, aceptas los <a href="/es/terms-and-conditions/">Términos</a> y la <a href="/es/privacy-policy/">Política de privacidad</a>.</p>
+        <p class="app-login__statement"><a href="/es/accessibility/">Declaración de accesibilidad</a></p>
       </section>
     </main>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Abrir el menú de accesibilidad" title="Abrir el menú de accesibilidad">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Accesibilidad</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Cerrar el menú de accesibilidad">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">Menú de accesibilidad</h2>
+      <p class="a11y-panel__description" id="a11y-description">Adapta el sitio a tu forma de leer y navegar. Tus preferencias se guardan en este dispositivo.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">Vista estándar del sitio</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">Restablecer todo</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">Tamaño del texto</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">Amplía el texto en todo el sitio.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="Texto más pequeño" title="Texto más pequeño">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="Texto más grande" title="Texto más grande">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Alto contraste</span>
+            <span class="a11y-option__description">Texto oscuro sobre fondo claro con bordes marcados.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Escala de grises</span>
+            <span class="a11y-option__description">Muestra el sitio sin colores.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Resaltar enlaces</span>
+            <span class="a11y-option__description">Subraya y marca todos los enlaces.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Fuente legible</span>
+            <span class="a11y-option__description">Una fuente sencilla y muy legible.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Espaciado del texto</span>
+            <span class="a11y-option__description">Más espacio entre líneas, palabras y letras.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Resaltar títulos</span>
+            <span class="a11y-option__description">Marca los títulos para mostrar la estructura de la página.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Cursor grande</span>
+            <span class="a11y-option__description">Un puntero más grande.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Foco bien visible</span>
+            <span class="a11y-option__description">Un contorno grueso alrededor del elemento con el foco del teclado.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Detener animaciones</span>
+            <span class="a11y-option__description">Detiene las animaciones, las transiciones y el video de fondo.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/es/accessibility/">Declaración de accesibilidad</a>
+    </div>
     <dialog
       id="language-picker"
       class="language-picker"

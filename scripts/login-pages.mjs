@@ -11,6 +11,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { COOKIE_CONSENT_VERSION, readWindowGlobal } from "./localized-builder-document.mjs";
 import { INLINE_SCRIPT, dashboardContentSecurityPolicy, inlineScriptHash } from "./lib/content-security-policy.mjs";
+import { ACCESSIBILITY_ASSETS, accessibilityComponents, indent } from "./lib/accessibility-components.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const templatePath = path.join(repoRoot, "templates", "login.template.html");
@@ -18,6 +19,12 @@ const SOURCE_LOCALE = "he";
 // Only the page's own language of the cookie banner copy is embedded, as on
 // the public pages, which also share the cookie-consent file version.
 const COOKIE_COPY = await readWindowGlobal("cookie-consent-copy.js", "WIFIGATE_COOKIE_COPY");
+// The skip link, the accessibility menu and the statement link, localized as
+// on every other page. The menu copy loads as the shared external file: the
+// policy admits no inline script other than the cookie copy.
+const ACCESSIBILITY = Object.fromEntries(
+  await Promise.all(SITE_LANGUAGES.map(async ({ code }) => [code, await accessibilityComponents(code)])),
+);
 
 // Read by js/host-login.js, js/login-gate-game.js and the MFA dialog at run
 // time; every other key is written into the page by the build.
@@ -141,6 +148,13 @@ export function renderLoginPage(template, locale, copy) {
     legal,
     runtimeCopy,
     cookieConsentVersion: COOKIE_CONSENT_VERSION,
+    skipLink: ACCESSIBILITY[locale].skipLink,
+    accessibilityWidget: indent(ACCESSIBILITY[locale].widget, 4),
+    statementHref: ACCESSIBILITY[locale].statementHref,
+    statementLabel: ACCESSIBILITY[locale].statementLabel,
+    accessibilityStylesheet: ACCESSIBILITY_ASSETS.stylesheet,
+    accessibilityCopyScript: ACCESSIBILITY_ASSETS.copy,
+    accessibilityControllerScript: ACCESSIBILITY_ASSETS.controller,
     cookieCopy: JSON.stringify({ [locale]: COOKIE_COPY[locale] }).replace(/</g, "\\u003c"),
   };
   const page = template.replace(/\{\{(\w+)\}\}/g, (match, key) => {

@@ -1,11 +1,15 @@
 // scripts/not-found-page.mjs
 // /404.html: GitHub Pages serves it for every missing path. It keeps the
 // visitor (and a crawler following a stale link) inside the site: the home
-// page, every use case and contact, with no index of its own.
+// page, every use case and contact, with no index of its own. Like every
+// page, it carries the skip link, the accessibility menu and the statement
+// link (scripts/lib/accessibility-components.mjs), with absolute paths.
+
+import { ACCESSIBILITY_ASSETS, indent } from "./lib/accessibility-components.mjs";
 
 const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
-export function buildNotFoundPage({ niches, pageUrl, cookieConsentVersion }) {
+export function buildNotFoundPage({ niches, pageUrl, cookieConsentVersion, accessibility }) {
   const links = niches
     .map((niche) => `      <li><a href="${new URL(pageUrl("en", niche.key)).pathname}">${escapeHtml(niche.content.label)}</a></li>`)
     .join("\n");
@@ -18,9 +22,10 @@ export function buildNotFoundPage({ niches, pageUrl, cookieConsentVersion }) {
   <meta name="robots" content="noindex, follow" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="/css/cookie-consent.css?v=${cookieConsentVersion}">
+  <link rel="stylesheet" href="${ACCESSIBILITY_ASSETS.stylesheet}">
   <style>
     :root { color-scheme: light; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 2rem 1rem;
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 2rem 1rem 6rem;
       background: #f5f7fb; color: #0f172a; font: 400 1rem/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
     main { width: min(40rem, 100%); }
     h1 { margin: 0 0 .5rem; font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; }
@@ -30,10 +35,12 @@ export function buildNotFoundPage({ niches, pageUrl, cookieConsentVersion }) {
     h2 { margin: 0 0 .6rem; font-size: 1rem; }
     ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .35rem 1rem; }
     a { color: #0b4fbd; }
+    .statement { margin: 2rem 0 0; font-size: .9rem; }
   </style>
 </head>
 <body>
-  <main>
+  ${accessibility.skipLink}
+  <main id="main-content">
     <p><a href="/"><img src="/logo-1024.png" alt="WIFIGATE" width="56" height="56" /></a></p>
     <h1>This page doesn't exist</h1>
     <p>The link may be old or mistyped. WIFIGATE opens gates, doors, parking barriers and roller shutters from your phone; start from the home page or pick a use case.</p>
@@ -45,7 +52,11 @@ ${links}
       <li><a href="/wifigate-manager/">WIFIGATE Manager</a></li>
       <li><a href="/contact-us/">Contact us</a></li>
     </ul>
+    <p class="statement"><a href="${accessibility.statementHref}">${accessibility.statementLabel}</a></p>
   </main>
+${indent(accessibility.widget, 2)}
+  ${accessibility.inlineCopy}
+  <script src="${ACCESSIBILITY_ASSETS.controller}" defer></script>
   <script src="/js/cookie-consent-copy.js?v=${cookieConsentVersion}" defer></script>
   <script src="/js/cookie-consent.js?v=${cookieConsentVersion}" defer></script>
   <script src="/js/site-cache.js?v=20261109cache1" defer></script>

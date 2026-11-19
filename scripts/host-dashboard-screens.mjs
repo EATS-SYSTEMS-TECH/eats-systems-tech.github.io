@@ -935,7 +935,7 @@ function audit({ lang, phone }) {
       "button, summary, a[href], select, input:not([type=hidden]), [role=tab]",
     )) {
       if (!visible(element)) continue;
-      if (element.closest(".portal-legal, .workspace-skip-link")) continue;
+      if (element.closest(".portal-legal, .skip-link")) continue;
       const box = element.getBoundingClientRect();
       let { width, height } = box;
       const hit = getComputedStyle(element, "::after");

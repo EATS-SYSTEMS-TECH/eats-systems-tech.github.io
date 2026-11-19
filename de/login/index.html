@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
     <script type="module" src="/js/host-login.js?v=20261119remember1"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261109ga1" />
+    <link rel="stylesheet" href="/css/accessibility.css?v=20261027c" />
+    <link rel="stylesheet" href="/css/portal-accessibility.css?v=20261119a11y1" />
+    <script src="/js/accessibility-copy.js?v=20261007a" defer></script>
+    <script src="/js/accessibility.js?v=20261027d" defer></script>
   </head>
   <body class="portal-login app-login">
-    <main class="app-login__screen">
+    <a class="skip-link" href="#main-content">Zum Hauptinhalt springen</a>
+    <main class="app-login__screen" id="main-content">
       <section class="app-login__card" aria-labelledby="login-title">
         <h1 id="login-title" class="visually-hidden">Bei WIFIGATE anmelden</h1>
         <a class="app-login__logo" href="/de/" aria-label="WIFIGATE-Startseite"
@@ -111,8 +116,114 @@
           ><code>pending@wifigate.test</code>
         </div>
         <p class="app-login__legal">Wenn du fortfährst, stimmst du den <a href="/de/terms-and-conditions/">Nutzungsbedingungen</a> und der <a href="/de/privacy-policy/">Datenschutzerklärung</a> zu.</p>
+        <p class="app-login__statement"><a href="/de/accessibility/">Erklärung zur Barrierefreiheit</a></p>
       </section>
     </main>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Barrierefreiheitsmenü öffnen" title="Barrierefreiheitsmenü öffnen">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Barrierefreiheit</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Barrierefreiheitsmenü schließen">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">Barrierefreiheitsmenü</h2>
+      <p class="a11y-panel__description" id="a11y-description">Passen Sie die Website an Ihre Art zu lesen und zu navigieren an. Ihre Auswahl wird auf diesem Gerät gespeichert.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">Standardansicht der Website</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">Alles zurücksetzen</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">Textgröße</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">Text auf der gesamten Website vergrößern.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="Kleinerer Text" title="Kleinerer Text">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="Größerer Text" title="Größerer Text">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Hoher Kontrast</span>
+            <span class="a11y-option__description">Dunkler Text auf hellem Hintergrund mit kräftigen Rahmen.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Graustufen</span>
+            <span class="a11y-option__description">Website ohne Farben anzeigen.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Links hervorheben</span>
+            <span class="a11y-option__description">Alle Links unterstreichen und markieren.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Lesbare Schrift</span>
+            <span class="a11y-option__description">Eine schlichte, gut lesbare Schrift.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Textabstand</span>
+            <span class="a11y-option__description">Mehr Abstand zwischen Zeilen, Wörtern und Buchstaben.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Überschriften hervorheben</span>
+            <span class="a11y-option__description">Überschriften markieren, um die Seitenstruktur zu zeigen.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Großer Cursor</span>
+            <span class="a11y-option__description">Ein größerer Mauszeiger.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Deutliche Fokusanzeige</span>
+            <span class="a11y-option__description">Ein dicker Rahmen um das Element mit dem Tastaturfokus.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Animationen stoppen</span>
+            <span class="a11y-option__description">Animationen, Übergänge und das Hintergrundvideo stoppen.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/de/accessibility/">Erklärung zur Barrierefreiheit</a>
+    </div>
     <dialog
       id="language-picker"
       class="language-picker"

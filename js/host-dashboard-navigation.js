@@ -91,9 +91,9 @@ const mobile = matchMedia("(max-width: 959px)");
 // so Tab and a screen reader stay inside the drawer until it closes.
 const behindDrawer = () =>
   [
-    ".workspace-skip-link",
+    ".skip-link",
     ".host-topbar",
-    "#workspace-main",
+    "#main-content",
     "#host-tabbar",
     ".portal-legal",
   ]

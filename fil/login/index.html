@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
     <script type="module" src="/js/host-login.js?v=20261119remember1"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261109ga1" />
+    <link rel="stylesheet" href="/css/accessibility.css?v=20261027c" />
+    <link rel="stylesheet" href="/css/portal-accessibility.css?v=20261119a11y1" />
+    <script src="/js/accessibility-copy.js?v=20261007a" defer></script>
+    <script src="/js/accessibility.js?v=20261027d" defer></script>
   </head>
   <body class="portal-login app-login">
-    <main class="app-login__screen">
+    <a class="skip-link" href="#main-content">Lumaktaw sa pangunahing nilalaman</a>
+    <main class="app-login__screen" id="main-content">
       <section class="app-login__card" aria-labelledby="login-title">
         <h1 id="login-title" class="visually-hidden">Pumasok sa WIFIGATE</h1>
         <a class="app-login__logo" href="/fil/" aria-label="Pangunahing pahina ng WIFIGATE"
@@ -111,8 +116,114 @@
           ><code>pending@wifigate.test</code>
         </div>
         <p class="app-login__legal">Sa pagpapatuloy, sumasang-ayon ka sa <a href="/fil/terms-and-conditions/">Mga Tuntunin</a> at <a href="/fil/privacy-policy/">Patakaran sa Pagkapribado</a>.</p>
+        <p class="app-login__statement"><a href="/fil/accessibility/">Pahayag sa accessibility</a></p>
       </section>
     </main>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Buksan ang menu ng accessibility" title="Buksan ang menu ng accessibility">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Accessibility</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Isara ang menu ng accessibility">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">Menu ng accessibility</h2>
+      <p class="a11y-panel__description" id="a11y-description">Iangkop ang site sa paraan ng inyong pagbasa at pag-navigate. Naka-save ang inyong mga pinili sa device na ito.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">Karaniwang view ng site</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">I-reset lahat</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">Laki ng teksto</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">Palakihin ang teksto sa buong site.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="Mas maliit na teksto" title="Mas maliit na teksto">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="Mas malaking teksto" title="Mas malaking teksto">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Mataas na contrast</span>
+            <span class="a11y-option__description">Madilim na teksto sa maliwanag na background na may malinaw na border.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Grayscale</span>
+            <span class="a11y-option__description">Ipakita ang site nang walang kulay.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">I-highlight ang mga link</span>
+            <span class="a11y-option__description">Salungguhitan at markahan ang bawat link.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Madaling basahing font</span>
+            <span class="a11y-option__description">Simple at napakalinaw na font.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Pagitan ng teksto</span>
+            <span class="a11y-option__description">Mas maluwag na pagitan ng mga linya, salita at titik.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">I-highlight ang mga heading</span>
+            <span class="a11y-option__description">Markahan ang mga heading para ipakita ang istruktura ng page.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Malaking cursor</span>
+            <span class="a11y-option__description">Mas malaking mouse pointer.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Kapansin-pansing focus</span>
+            <span class="a11y-option__description">Makapal na outline sa elementong naka-focus sa keyboard.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Ihinto ang mga animation</span>
+            <span class="a11y-option__description">Ihinto ang mga animation, transition at background video.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/fil/accessibility/">Pahayag sa accessibility</a>
+    </div>
     <dialog
       id="language-picker"
       class="language-picker"

@@ -102,7 +102,7 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
               );
             return [
               after(".host-topbar", "#host-sidebar"),
-              after("#host-sidebar", "#workspace-main"),
+              after("#host-sidebar", "#main-content"),
               [...document.querySelectorAll(".host-role-badge")].filter(
                 (chip) => chip.tabIndex >= 0,
               ).length,

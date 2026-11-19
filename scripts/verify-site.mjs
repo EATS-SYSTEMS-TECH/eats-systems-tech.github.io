@@ -10,6 +10,8 @@
 //   - sitemap entries resolve to generated pages
 //   - no leftover "undefined" text in rendered pages
 //   - invitation redirects preserve opaque protocol query parameters
+//   - every page except redirect stubs has the skip link, the accessibility
+//     menu and a statement link in its own language
 
 import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
@@ -21,6 +23,7 @@ import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
 import { FEATURE_PAGES, featureCardPages } from "./feature-pages.mjs";
 import { HOST_PAGE_KEY, MANAGER_PAGE_KEY } from "./host-marketing-page.mjs";
 import { SHOP_PAGE_KEYS } from "./shop-pages.mjs";
+import { checkSiteAccessibility, portalLabelProblems } from "./lib/accessibility-page-check.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
@@ -333,8 +336,9 @@ async function main() {
     }
 
     // Every normal content page must carry the complete shared language and
-    // accessibility controls. Redirect/deep-link utility pages are excluded
-    // because they intentionally leave the website immediately.
+    // accessibility controls. The invitation pages (wifigate-link/-api) have
+    // no language selector; their accessibility components, like every other
+    // page's, are checked by checkSiteAccessibility below.
     for (const pageKey of interactivePages) {
       const filePath = pageFile(locale, pageKey);
       const rel = path.relative(repoRoot, filePath);
@@ -539,6 +543,11 @@ async function main() {
     }
   }
 
+  // The skip link, the accessibility menu and the statement link on every
+  // page, generated or hand-written; only redirect stubs are exempt.
+  const accessibility = await checkSiteAccessibility(repoRoot);
+  problems.push(...accessibility.problems, ...(await portalLabelProblems(repoRoot)));
+
   // Sitemap: every URL must resolve to a generated page, and every indexable
   // home/niche page must be listed.
   const sitemap = await fs.readFile(path.join(repoRoot, "sitemap.xml"), "utf8");
@@ -574,7 +583,8 @@ async function main() {
     console.log(
       `OK: ${localeOptions.length} locales x ${indexablePages.length} pages verified, ` +
         `${localeOptions.length * interactivePages.length} interactive pages, ` +
-        `${sitemapUrls.length} sitemap URLs, redirects in place`
+        `${sitemapUrls.length} sitemap URLs, redirects in place, ` +
+        `accessibility components on ${accessibility.pages} pages`
     );
   }
 }

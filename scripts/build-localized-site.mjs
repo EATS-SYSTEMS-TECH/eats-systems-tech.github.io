@@ -29,6 +29,7 @@ import { previousSitemapDates, sitemapDocument } from "./sitemap.mjs";
 import { buildLlmsTxt } from './llms-txt.mjs';
 import { buildNotFoundPage } from './not-found-page.mjs';
 import { buildLoginPages } from './login-pages.mjs';
+import { accessibilityComponents, accessibilityStatementLabel, accessibilityStatementPath } from './lib/accessibility-components.mjs';
 
 // The CLI coordinates immutable content renderers; it never publishes a website.
 const template = name => path.join(repoRoot, 'templates', `${name}.template.html`);
@@ -203,6 +204,8 @@ async function buildUtilityPages(homeData) {
       const $ = cheerio.load(source, { decodeEntities: false });
       setBodyDirection($, locale); rewriteStaticAssets($, locale, key);
       for (const [selector, value] of [['#page-title', copy.heading], ['#status', copy.statusOpening], ['#open-app', copy.openButton], ['#copy-link', copy.copyButton]]) $(selector).text(value);
+      updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale);
+      $('#accessibility-statement-link').attr('href', accessibilityStatementPath(locale)).text(accessibilityStatementLabel(locale));
       $('#wifigate-link-copy').text(JSON.stringify({ headingFallback: copy.headingFallback || copy.openButton, headingMissing: copy.headingMissing || copy.openButton, statusMissing: copy.statusMissing, statusFallback: copy.statusFallback, copyButton: copy.copyButton, copiedButton: copy.copiedButton, copyError: copy.copyError || wifigateLinkLocales.en.copyError }));
       const url = buildPageUrl(locale, key), title = copy.socialTitle || copy.pageTitle;
       setPageMeta($, { locale, url, title, description: copy.description, robots: 'noindex, follow', image: SHARE_IMAGE, graph: [webPageNode({ url, title, description: copy.description, locale })] });
@@ -412,7 +415,8 @@ async function main() {
   entries.push(...await buildShopPages(homeData));
   entries.push(...await buildLegalPages(homeData, legalCollections), ...await buildNichePages(homeData), ...await buildLandingPages(homeData), ...await buildAutoOpenPages(homeData), ...await buildFeaturePages(homeData));
   const englishNiches = () => NICHE_DEFINITIONS.map(niche => ({ key: niche.key, content: getNichePageContent(defaultLocale).niches[niche.key] }));
-  const notFound = () => buildNotFoundPage({ niches: englishNiches(), pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION });
+  const notFoundAccessibility = await accessibilityComponents(defaultLocale);
+  const notFound = () => buildNotFoundPage({ niches: englishNiches(), pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION, accessibility: notFoundAccessibility });
   if (process.argv.includes('--consumer-consent-only')) { await writeOutputFile(path.join(repoRoot, '404.html'), notFound()); return; }
   entries.push(...await buildSubscriptionPages(homeData), ...await buildUtilityPages(homeData));
   await buildLoginPages(writeOutputFile);
