@@ -1206,17 +1206,21 @@ html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
 }
 
 .wa-spotlight__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  position: relative;
+  display: inline-block;
   margin-top: 1.5rem;
+  padding-inline-end: 1.6em;
   color: var(--home-black);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 0.3em;
 }
 
+/* Absolutely positioned, so the link underline stops before the arrow. */
 .wa-spotlight__link::after {
+  position: absolute;
+  inset-inline-end: 0;
+  text-decoration: none;
   content: "\2192";
 }
 
