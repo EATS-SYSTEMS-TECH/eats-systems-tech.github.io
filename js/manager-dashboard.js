@@ -2411,6 +2411,7 @@ export function createManagerDashboard({
       counts: t("כמויות", "Counts"),
       health: t("תקינות", "Health"),
       historyAvailable: t("היסטוריה זמינה", "History available"),
+      historyEnabled: t("שמירת היסטוריה", "Keep history"),
       events: t("אירועים", "Events"),
       clock: t("שעון מערכת", "System clock"),
       credentialReplicasHealthy: t(
