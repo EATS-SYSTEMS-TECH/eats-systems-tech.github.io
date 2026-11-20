@@ -2,11 +2,28 @@ import { signOut } from "./site-auth.js";
 import { loginPath, pageLanguage } from "./platform-model.js";
 
 export const idleTimeoutMs = 24 * 60 * 60 * 1000;
+// Owner decision 2026-11-21 (docs/WIFIGATE_BUSINESS_SIGN_IN.html in the
+// mobile repository): with "Remember me on this device" a sign-in lasts up to
+// 30 days; without it, until the tab closes or a day without activity.
+export const rememberedTimeoutMs = 30 * 24 * 60 * 60 * 1000;
+
+// "Remember me" signs in with local persistence, where Firebase keeps the
+// account under a firebase:authUser: key; otherwise it is in session storage.
+export function rememberedOnThisDevice(storage = globalThis.localStorage) {
+  try {
+    for (let index = 0; index < storage.length; index++) {
+      if (storage.key(index)?.startsWith("firebase:authUser:")) return true;
+    }
+  } catch {
+    // Storage is blocked: treat the sign-in as not remembered.
+  }
+  return false;
+}
 
 export function watchSession({
   clear,
   clock = Date.now,
-  timeout = idleTimeoutMs,
+  timeout = rememberedOnThisDevice() ? rememberedTimeoutMs : idleTimeoutMs,
 }) {
   let lastActivity = clock();
   let ended = false;
@@ -28,9 +45,10 @@ export function watchSession({
 
   function schedule() {
     clearTimeout(timer);
+    // Browsers fire a longer delay than 2^31-1 ms at once; checkIdle re-arms.
     timer = setTimeout(
       checkIdle,
-      Math.max(0, timeout - (clock() - lastActivity)),
+      Math.min(2 ** 31 - 1, Math.max(0, timeout - (clock() - lastActivity))),
     );
   }
 
