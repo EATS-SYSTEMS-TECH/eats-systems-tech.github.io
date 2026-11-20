@@ -233,6 +233,37 @@ export function installAudienceList($, { items, productName = "host", assetPrefi
 // The plans come first, right under the hero; the audience follows the shared
 // benefits; the shop section closes the page after the questions. All three
 // wrappers attach only after every guard succeeds.
+// Optional feature sections right after the hero (marketing.spotlights in a
+// locale's copy): each has its own heading, text, line illustration and a link
+// to the feature page. Locales without them keep the page unchanged. All items
+// are validated before the page changes.
+const SPOTLIGHT_ART = { "auto-open": "autoopen-still.svg", "quick-guest-invite": "guest-still.svg" };
+export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor }) {
+  if (spotlights === undefined) return;
+  if (!Array.isArray(spotlights) || !spotlights.length) throw new Error("Spotlights must be a non-empty list");
+  for (const item of spotlights) {
+    if (!SPOTLIGHT_ART[item?.page]) throw new Error(`Unknown spotlight page: ${item?.page}`);
+    for (const key of ["eyebrow", "title", "text", "link"]) if (typeof item[key] !== "string" || !item[key].trim()) throw new Error(`Missing spotlight ${key} for ${item.page}`);
+  }
+  const hero = $("section.niche-hero");
+  if (hero.length !== 1) throw new Error("Spotlights require one hero section");
+  const sections = spotlights.map((item, index) => {
+    const id = `wa-spotlight-${index + 1}-title`;
+    const copy = node($, "div", { class: "wa-spotlight__copy" }, [
+      node($, "span", { class: "wa-eyebrow" }, item.eyebrow),
+      node($, "h2", { class: "wa-h2", id }, item.title),
+      node($, "p", { class: "wa-lead" }, item.text),
+      node($, "a", { class: "wa-spotlight__link", href: hrefFor(item.page) }, item.link),
+    ]);
+    const art = node($, "img", { class: "wa-spotlight__art", src: `${assetPrefix}assets/img/line-hero/${SPOTLIGHT_ART[item.page]}`, alt: "",
+      width: "1600", height: "900", loading: "lazy", decoding: "async" });
+    return node($, "section", { class: `section wa-spotlight${index % 2 ? " wa-spotlight--reverse" : ""}`, "aria-labelledby": id }, [
+      node($, "div", { class: "container" }, [node($, "div", { class: "wa-spotlight__panel" }, [copy, art])]),
+    ]);
+  });
+  hero.after(...sections);
+}
+
 export function appendHostMarketingDetails($, { legacyTemplate, shopHref }) {
   if (typeof legacyTemplate !== "function") throw new Error("A localized Host detail document is required");
   if (shopHref !== undefined && (typeof shopHref !== "string" || !shopHref.trim())) throw new Error("The locale shop link must be a path");

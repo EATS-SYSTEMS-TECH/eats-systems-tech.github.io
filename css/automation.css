@@ -1172,6 +1172,79 @@ html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
   height: auto;
 }
 
+/* ---------- Feature spotlights after the hero ---------- */
+.wa-spotlight {
+  padding-block: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.wa-spotlight + .wa-spotlight {
+  padding-block-start: 0;
+}
+
+.wa-spotlight__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  padding: clamp(1.75rem, 4.5vw, 3.75rem);
+  border-radius: 30px;
+  background: var(--flow-tint);
+}
+
+.wa-spotlight--reverse .wa-spotlight__copy {
+  order: 2;
+}
+
+.wa-spotlight__panel .wa-h2 {
+  max-width: 18ch;
+  font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+  line-height: 1.1;
+}
+
+.wa-spotlight__panel .wa-lead {
+  max-width: 44ch;
+}
+
+.wa-spotlight__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: var(--home-black);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.wa-spotlight__link::after {
+  content: "\2192";
+}
+
+[dir="rtl"] .wa-spotlight__link::after {
+  content: "\2190";
+}
+
+.wa-spotlight__link:is(:hover, :focus-visible) {
+  color: var(--flow-blue);
+}
+
+.wa-spotlight__art {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .wa-spotlight__panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wa-spotlight--reverse .wa-spotlight__copy {
+    order: 0;
+  }
+}
+
 /* ---------- Narrow screens ---------- */
 @media (max-width: 900px) {
   .wa-pricing::before {

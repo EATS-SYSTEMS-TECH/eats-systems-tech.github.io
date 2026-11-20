@@ -12,7 +12,7 @@ import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from 
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from './auto-open-page.mjs';
 import { FEATURE_PAGES, featureCardPages, getFeaturePageContent, validateFeaturePageLocales } from './feature-pages.mjs';
 import { installSecurityProof } from './security-proof.mjs';
-import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, installSubscriptionFlow, installAudienceList, appendHostMarketingDetails } from './host-marketing-page.mjs';
+import { HOST_PAGE_KEY, MANAGER_PAGE_KEY, getHostPageContent, installHostDetailShells, installSubscriptionFlow, installAudienceList, appendHostMarketingDetails, installSpotlights } from './host-marketing-page.mjs';
 import { installHomeFeatureCards, installFeatureArrows } from './homepage-feature-grid.mjs';
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from './legal/legal-pages.mjs';
 import { wifigateLinkLocales } from './wifigate-link-locales.mjs';
@@ -370,7 +370,8 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
       $("script[src*='js/pricing-currency.js']").attr('type', 'module');
     }
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
-    const automationVersion = pageKey === HOST_PAGE_KEY ? '20261114hostfaq1' : '20261114currency1';
+    installSpotlights($, { spotlights: hostCopy.marketing?.spotlights, assetPrefix: buildAssetPrefix(locale, pageKey), hrefFor: key => buildPagePath(locale, key) });
+    const automationVersion = pageKey === HOST_PAGE_KEY ? '20261114hostfaq1' : '20261121spotlight1';
     $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=${automationVersion}" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
