@@ -151,9 +151,13 @@ test("deep links reject external URLs, encoded separators and traversal", () => 
   );
   assert.equal(loginPath("//outside.example", "he"), "/he/login/");
   assert.equal(
-    loginPath("/dashboard/pay/", "zh-Hans"),
-    "/zh-hans/login/?next=%2Fdashboard%2Fpay%2F",
+    loginPath("/dashboard/manager/", "zh-Hans"),
+    "/zh-hans/login/?next=%2Fdashboard%2Fmanager%2F",
   );
+  // WIFIGATE Pay is hidden from the website: its dashboard is never a destination.
+  assert.equal(loginPath("/dashboard/pay/", "zh-Hans"), "/zh-hans/login/");
+  assert.equal(safeDashboardPath("/dashboard/pay/"), null);
+  assert.equal(safeDashboardPath("/dashboard/pay/platform/"), null);
   assert.equal(loginPath(null, "en"), "/login/");
   assert.equal(loginPath(null, "../evil"), "/login/");
   assert.equal(
@@ -161,8 +165,8 @@ test("deep links reject external URLs, encoded separators and traversal", () => 
     "/he/login/?reason=no-account",
   );
   assert.equal(
-    loginPath("/dashboard/pay/", "en", "unverified-email"),
-    "/login/?next=%2Fdashboard%2Fpay%2F&reason=unverified-email",
+    loginPath("/dashboard/manager/", "en", "unverified-email"),
+    "/login/?next=%2Fdashboard%2Fmanager%2F&reason=unverified-email",
   );
   assert.equal(loginPath(null, "en", "<script>"), "/login/");
 });

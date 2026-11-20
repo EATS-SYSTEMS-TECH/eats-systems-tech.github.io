@@ -1,4 +1,4 @@
-import { productIds, canOpenProduct } from "./platform-model.js";
+import { visibleProductIds, canOpenProduct } from "./platform-model.js";
 import { platformText } from "./platform-copy.js";
 import { attachPopover } from "./popover.js";
 
@@ -84,7 +84,7 @@ export function renderProductSwitcher(
   list.setAttribute("role", "listbox");
   list.setAttribute("aria-label", copy.products);
   list.tabIndex = -1;
-  const options = productIds.map((id) => {
+  const options = visibleProductIds.map((id) => {
     const state = identity.products[id].state;
     const enabled = canOpenProduct(identity, id);
     const option = element("li", "product-switcher__option");

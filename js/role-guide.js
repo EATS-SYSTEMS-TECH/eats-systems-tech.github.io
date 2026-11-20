@@ -6,8 +6,9 @@
 
 import { planRoleName, organizationRoleName } from "./role-names.js";
 import { isPlatformFounder } from "./profile-roles.js";
+import { visibleProductIds } from "./platform-model.js";
 
-export const roleGuideProducts = ["host", "pay", "manager"];
+export const roleGuideProducts = visibleProductIds;
 const organizationRoles = ["owner", "admin", "staff", "viewer"];
 const productNames = { host: "Host", pay: "Pay", manager: "Manager" };
 

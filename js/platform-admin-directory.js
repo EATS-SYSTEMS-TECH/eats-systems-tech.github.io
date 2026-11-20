@@ -9,6 +9,7 @@ import {
   formatMoney,
 } from "./profile-financials.js";
 import { productLink, productIconPaths } from "./product-switcher.js";
+import { visibleProductIds } from "./platform-model.js";
 import { createPlatformAccountDeletion } from "./platform-account-deletion.js";
 import { createPlatformAccountActions } from "./platform-account-actions.js";
 import { createPlatformOrganizationDeletion } from "./platform-organization-deletion.js";
@@ -68,7 +69,7 @@ export function createPlatformAdminDirectory({
   let closed = false,
     generation = 0,
     selected = "all",
-    selectedProduct = product === "all" && ["host","pay","manager"].includes(new URLSearchParams(location.search).get("product")) ? new URLSearchParams(location.search).get("product") : product,
+    selectedProduct = product === "all" && visibleProductIds.includes(new URLSearchParams(location.search).get("product")) ? new URLSearchParams(location.search).get("product") : product,
     productCounts = {},
     financialGeneration = 0,
     next;
@@ -142,7 +143,7 @@ export function createPlatformAdminDirectory({
   resetProduct.addEventListener("click", () => selectProduct("all"));
   const business = element("nav", null, "platform-admin-business");
   business.setAttribute("aria-label", t("סינון לפי מסלול", "Filter by plan"));
-  for (const id of ["host", "pay", "manager"]) {
+  for (const id of visibleProductIds) {
     if (product === "all") {
       const button = element("button", null, "platform-admin-product-filter");
       button.type = "button";
@@ -588,7 +589,7 @@ export function createPlatformAdminDirectory({
       "mfa-required": t("נדרש אימות", "Verification required"),
     };
     for (const id of selectedProduct === "all"
-      ? ["host", "pay", "manager"]
+      ? visibleProductIds
       : [selectedProduct]) {
       const plan = person.products[id];
       const estimate = monthlyEstimate({ ...plan, billingExempt: exempt });

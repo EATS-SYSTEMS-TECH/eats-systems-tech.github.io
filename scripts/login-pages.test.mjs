@@ -50,7 +50,7 @@ test("the sign-in page asks for the same host-portal.css as the dashboards", asy
   const version = (html) => html.match(/\/css\/host-portal\.css\?v=([^"]+)"/)?.[1];
   const loginVersion = version(template);
   assert.ok(loginVersion);
-  for (const page of ["index.html", "host/index.html", "host/overview/index.html", "pay/index.html", "manager/index.html"]) {
+  for (const page of ["index.html", "host/index.html", "host/overview/index.html", "manager/index.html"]) {
     const html = await fs.readFile(new URL(`../dashboard/${page}`, import.meta.url), "utf8");
     assert.equal(version(html), loginVersion, page);
   }

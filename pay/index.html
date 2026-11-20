@@ -4,12 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>WIFIGATE pay</title>
+    <meta http-equiv="refresh" content="0; url=/" />
+    <title>WIFIGATE</title>
     <script type="module">
-      location.replace("/dashboard/pay/" + location.search + location.hash);
+      // This product is not offered on the website for now.
+      const he = new URLSearchParams(location.search).get("lang") === "he";
+      location.replace(he ? "/he/" : "/");
     </script>
   </head>
   <body>
-    <a href="/dashboard/pay/">Open WIFIGATE pay</a>
+    <a href="/">WIFIGATE</a>
   </body>
 </html>

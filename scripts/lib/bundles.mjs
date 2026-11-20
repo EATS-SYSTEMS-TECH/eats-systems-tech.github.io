@@ -99,8 +99,7 @@ export const shop3dBundle = {
 // The pages that load the picker bundle.
 export const pickerPages = [
   "dashboard/index.html",
-  "dashboard/pay/index.html",
-  "dashboard/pay/platform/index.html",
+  // dashboard/pay/ pages only redirect while WIFIGATE Pay is hidden.
   "dashboard/manager/index.html",
   "dashboard/manager/platform/index.html",
   "dashboard/platform/index.html",

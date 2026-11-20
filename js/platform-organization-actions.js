@@ -43,7 +43,7 @@ export function createPlatformOrganizationActions({
       };
       const products = node("select");
       products.name = "product";
-      for (const id of ["manager", "pay", "host"]) {
+      for (const id of ["manager", "host"]) {
         const option = node(
           "option",
           "WIFIGATE " + id[0].toUpperCase() + id.slice(1),

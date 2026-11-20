@@ -1,4 +1,9 @@
 export const productIds = Object.freeze(["host", "pay", "manager"]);
+// WIFIGATE Pay is hidden from the website for now (owner decision,
+// 20 November 2026): it is not listed, offered or opened anywhere. The
+// identity still carries all three products, so server data stays valid.
+export const hiddenProductIds = Object.freeze(["pay"]);
+export const visibleProductIds = Object.freeze(productIds.filter((id) => !hiddenProductIds.includes(id)));
 const productStates = new Set([
   "active",
   "pending",
@@ -60,6 +65,7 @@ export function hasHostPlan(identity) {
 // invitation is pending, with only the join-organization view, so the
 // invitation can be accepted there.
 export function canOpenProduct(identity, id) {
+  if (hiddenProductIds.includes(id)) return false;
   const state = identity?.products?.[id]?.state;
   return state === "active" || (["host", "manager"].includes(id) && state === "pending");
 }
@@ -95,9 +101,8 @@ export function safeDashboardPath(value) {
     path === "/dashboard/platform/" ||
     path === "/dashboard/reservations/" ||
     path === "/dashboard/manager/platform/" ||
-    path === "/dashboard/pay/platform/" ||
     path === "/dashboard/host/overview/" ||
-    productIds.some((id) => path === `/dashboard/${id}/`);
+    visibleProductIds.some((id) => path === `/dashboard/${id}/`);
   if (!supported) return null;
   return value;
 }

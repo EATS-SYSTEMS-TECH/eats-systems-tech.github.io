@@ -13,6 +13,7 @@ import {
 import {
   parsePlatformIdentity,
   productIds,
+  visibleProductIds,
   pageLanguage,
   loginPath,
   signInRefusal,
@@ -341,7 +342,7 @@ function productIcon(id) {
 }
 
 function renderProducts() {
-  const tiles = productIds.map((id) => {
+  const tiles = visibleProductIds.map((id) => {
     const state = identity.products[id].state;
     const tile = document.createElement("article");
     tile.className = "product-tile";
@@ -676,7 +677,7 @@ function renderProfileDetails() {
   const details = $("#profile-details");
   if (!details) return;
   details.replaceChildren();
-  const activeSubscriptions = productIds
+  const activeSubscriptions = visibleProductIds
     .filter((id) => ["active", "mfa-required"].includes(identity.products[id].state))
     .map((id) => ({ host: "Host", pay: "Pay", manager: "Manager" })[id]);
   const accountDate = (value) => {
@@ -693,8 +694,8 @@ function renderProfileDetails() {
     [
       language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role",
       identity.platformRole === "admin" ? planRoleName("admin", language) :
-        productIds.some(id => identity.products[id].state === "active" && identity.products[id].role === "user") ? planRoleName("user", language) :
-        productIds.some(id => identity.products[id].organizations > 0 || ["organization-user", "organization-admin"].includes(identity.products[id].role)) ? (language === "he" ? "משתמש ארגון" : "Organization user") :
+        visibleProductIds.some(id => identity.products[id].state === "active" && identity.products[id].role === "user") ? planRoleName("user", language) :
+        visibleProductIds.some(id => identity.products[id].organizations > 0 || ["organization-user", "organization-admin"].includes(identity.products[id].role)) ? (language === "he" ? "משתמש ארגון" : "Organization user") :
         (language === "he" ? "חשבון ללא מנוי פעיל" : "Account without an active subscription"),
     ],
     [
@@ -809,7 +810,7 @@ function pricingExplanation(product, category) {
 function renderSubscriptionPreview() {
   if (!$("#profile-subscriptions")) return;
   // Server estimates use owned, deduplicated physical gates; Pay is revenue only.
-  for (const id of productIds) {
+  for (const id of visibleProductIds) {
     const card = $(`#product-grid [data-product="${id}"]`);
     if (!card) continue;
     card.dataset.subscription = id;

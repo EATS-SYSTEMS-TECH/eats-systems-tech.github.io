@@ -1,3 +1,4 @@
+import { visibleProductIds } from "./platform-model.js";
 import {
   changePlatformProductAccess,
   getPayAccessOrganizations,
@@ -9,7 +10,7 @@ const node = (tag, text, className) => {
   if (className) value.className = className;
   return value;
 };
-const products = ["host", "pay", "manager"];
+const products = visibleProductIds;
 const nameFor = (id) => `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
 
 export function createPlatformAccountActions({
