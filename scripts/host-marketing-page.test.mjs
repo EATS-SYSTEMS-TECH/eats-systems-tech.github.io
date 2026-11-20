@@ -73,16 +73,21 @@ test("all 39 Manager locales supply the shared page layout with the Manager plan
       for (const key of ["Name", "Per", "Range", "Desc", "F1", "F2", "F3", "F4"]) assert.ok(manager.marketing.pricing[`${plan}${key}`]?.trim(), `${locale}: ${plan}${key}`);
     }
     assert.match(manager.marketing.pricing.exampleDesc, /\$1\.90/, `${locale}: the documented USD price`);
-    assert.equal(content.faq.length, 8);
+    // At least the shared eight questions, plus any further numbered ones in the copy.
+    assert.equal(content.faq.length, Object.keys(manager.marketing.faq).filter((key) => /^q\d+$/.test(key)).length, locale);
+    assert.ok(content.faq.length >= 8, locale);
     content.faq.forEach((item, index) => {
       assert.equal(item.question, manager.marketing.faq[`q${index + 1}`], locale);
       assert.equal(item.answer, unmarked(manager.marketing.faq[`a${index + 1}`]), `${locale}: answer ${index + 1}`);
     });
     // An activated Manager subscription has a monthly minimum of one system, even with no linked system.
     for (const key of ["systemsF3", "note"]) assert.match(manager.marketing.pricing[key], /\$1\.90/, `${locale}: ${key} states the $1.90 minimum`);
-    assert.match(manager.marketing.faq.a8, /\$1\.90/, `${locale}: the minimum answer`);
-    assert.equal((manager.marketing.steps.s1x.match(/\[\[/g) || []).length, 1, `${locale}: one sign-in link in step 1`);
-    assert.equal((manager.marketing.steps.s1x.match(/\]\]/g) || []).length, 1, `${locale}: one sign-in link in step 1`);
+    // The minimum and the sign-in link may sit in any question or step; the Hebrew copy leads with Auto Open and guests.
+    const answers = Object.entries(manager.marketing.faq).filter(([key]) => /^a\d+$/.test(key)).map(([, text]) => text);
+    assert.ok(answers.some((text) => /\$1\.90/.test(text)), `${locale}: an answer states the $1.90 minimum`);
+    const steps = ["s1x", "s2x", "s3x"].map((key) => manager.marketing.steps[key]).join(" ");
+    assert.equal((steps.match(/\[\[/g) || []).length, 1, `${locale}: one sign-in link in the steps`);
+    assert.equal((steps.match(/\]\]/g) || []).length, 1, `${locale}: one sign-in link in the steps`);
     assert.deepEqual(content.audiences, home.automation.manager.audiences, `${locale}: the localized customer types, ending open`);
     for (const key of ["title", "text", "button"]) assert.ok(manager.marketing.shop[key]?.trim(), `${locale}: shop.${key}`);
   }

@@ -148,6 +148,13 @@ function localizedList(source, path, label) {
   if (!Array.isArray(value) || value.length < 2 || value.some(item => typeof item !== "string" || !item.trim())) throw new Error(`Missing localized ${label} copy: homepage.${path}`);
   return [...value];
 }
+// Every page has at least the shared eight questions; a locale's copy may add
+// further numbered ones (q9, q10...), which are shown in order.
+function faqCount(hostCopy) {
+  let count = questionCount;
+  while (hostCopy?.marketing?.faq?.[`q${count + 1}`] !== undefined) count++;
+  return count;
+}
 export function getHostPageContent(hostCopy, homepageCopy, productName = "host") {
   const product = productOf(productName);
   const read = path => localized(hostCopy, path, path, product.label);
@@ -161,7 +168,7 @@ export function getHostPageContent(hostCopy, homepageCopy, productName = "host")
     benefits: ordered(product.benefits, "benefits", "b"),
     stepsHeading: { eyebrow: read("marketing.steps.eyebrow"), title: read("marketing.steps.title"), subtitle: read("marketing.steps.subtitle") },
     benefitsEyebrow: read("marketing.benefits.eyebrow"),
-    faq: Array.from({ length: questionCount }, (_, index) => ({ question: read(`marketing.faq.q${index + 1}`), answer: unmarked(read(`marketing.faq.a${index + 1}`)) })),
+    faq: Array.from({ length: faqCount(hostCopy) }, (_, index) => ({ question: read(`marketing.faq.q${index + 1}`), answer: unmarked(read(`marketing.faq.a${index + 1}`)) })),
     seoTitle: read("metaTitle"), seoDescription: read("metaDescription") };
 }
 
