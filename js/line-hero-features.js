@@ -3,7 +3,8 @@
 // share the site of the "No SIM, No Router" scene (a gate in a wall, the
 // WIFIGATE device on its post, a resident on the pavement) and its walk-in;
 // each adds its own story above it:
-//   guest    - an invite flies from a phone to a guest, who then opens the gate
+//   guest    - an invite flies from a phone to a courier on a bicycle (a WIFIGATE
+//              delivery box marked W on the back), whose phone then opens the gate
 //   history  - every entry lands as a new line in the access history
 //   autoopen - the gate opens by itself as the resident comes near, hands full
 //   events   - a clock opens and closes the gate at the scheduled hours
@@ -137,7 +138,55 @@ function createFeatureScene(svg, V) {
     el('circle', { cx: 0, cy: f1(-PH_ - PR_ - 5 * S), r: f1(PR_), fill: '#fff', stroke: BLUE, 'stroke-width': 3 }, g);
     return g;
   }
-  var personFront = mkPerson(gPersonFront), personBack = mkPerson(gPersonBack);
+  /* the courier (guest scene): on a bicycle, a WIFIGATE delivery box marked W on the back and the phone on
+     the handlebar. Two poses, riding along the pavement (-x) and in through the gate (-y); the shape is
+     built in world offsets from the ground point under the bike, so it moves rigidly with translate(). */
+  var O0 = P(0, 0, 0);
+  function mkCourier(parent, hx, hy) {
+    var g = el('g', {}, parent), nx = -hy, ny = hx;
+    function L(a, b, z) { var q = P(hx * a + nx * b, hy * a + ny * b, z); return [q[0] - O0[0], q[1] - O0[1]]; }
+    function d(pts, closed) { return pts.map(function (q, i) { var v = L(q[0], q[1], q[2]); return (i ? 'L' : 'M') + f1(v[0]) + ' ' + f1(v[1]); }).join('') + (closed ? 'Z' : ''); }
+    function wheel(a0) { var pts = []; for (var k = 0; k <= 24; k++) { var t = Math.PI * 2 * k / 24; pts.push([a0 + 7.5 * Math.cos(t), 0, 7.5 + 7.5 * Math.sin(t)]); } return d(pts, true); }
+    var STROKE = { fill: 'none', stroke: BLUE, 'stroke-width': 3 };
+    function stroke(dd, extra) { var a = { d: dd }; for (var k in STROKE) a[k] = STROKE[k]; for (var e in extra || {}) a[e] = extra[e]; return el('path', a, g); }
+    stroke(wheel(-13)); stroke(wheel(13));
+    stroke(d([[-13, 0, 7.5], [0, 0, 7], [10, 0, 19], [13, 0, 7.5]]));                 /* the frame */
+    stroke(d([[-13, 0, 7.5], [-4, 0, 19], [10, 0, 19]])); stroke(d([[0, 0, 7], [-4, 0, 21]]));
+    stroke(d([[10, 0, 19], [11, 0, 24]])); stroke(d([[11, -4, 24], [11, 4, 24]]));     /* the handlebar */
+    /* the rider: a leg to the pedal, the body leaning forward (an outlined thick line), the arm, the head */
+    stroke(d([[-4, 0, 21], [4, 0, 15], [1, 0, 6]]));
+    var torso = d([[-4, 0, 22], [3, 0, 35]]);
+    stroke(torso, { 'stroke-width': 14 }); el('path', { d: torso, fill: 'none', stroke: '#fff', 'stroke-width': 8 }, g);
+    stroke(d([[2, 0, 33], [11, 0, 24]]));
+    var hc = L(6, 0, 44); el('circle', { cx: f1(hc[0]), cy: f1(hc[1]), r: f1(5.6 * S), fill: '#fff', stroke: BLUE, 'stroke-width': 3 }, g);
+    /* the delivery box on the back: its top and the two faces toward the street, each marked W */
+    var a0 = -14, a1 = -3, b0 = -6, b1 = 6, z0 = 22, z1 = 36;
+    var xs = [hx * a0 + nx * b0, hx * a1 + nx * b1], ys = [hy * a0 + ny * b0, hy * a1 + ny * b1];
+    var X0 = Math.min(xs[0], xs[1]), X1 = Math.max(xs[0], xs[1]), Y0 = Math.min(ys[0], ys[1]), Y1 = Math.max(ys[0], ys[1]);
+    function W(pts) { var q = pts.map(function (v) { var r = P(v[0], v[1], v[2]); return [r[0] - O0[0], r[1] - O0[1]]; }); return q.map(function (v, i) { return (i ? 'L' : 'M') + f1(v[0]) + ' ' + f1(v[1]); }).join(''); }
+    [[[X0, Y0, z1], [X1, Y0, z1], [X1, Y1, z1], [X0, Y1, z1]], [[X0, Y1, z0], [X1, Y1, z0], [X1, Y1, z1], [X0, Y1, z1]], [[X1, Y0, z0], [X1, Y1, z0], [X1, Y1, z1], [X1, Y0, z1]]].forEach(function (f, i) {
+      el('path', { d: W(f) + 'Z', fill: '#fff', stroke: BLUE, 'stroke-width': 3 }, g);
+      if (i === 0) el('path', { d: W(f) + 'Z', fill: BLUE, 'fill-opacity': r3(0.06 * TINT * 2), stroke: 'none' }, g);
+    });
+    function mark(u0, u1, at) { var w = u1 - u0, zt = z1 - 3, zb = z0 + 3, zm = zb + 0.6 * (zt - zb); return [at(u0 + 0.14 * w, zt), at(u0 + 0.32 * w, zb), at(u0 + 0.5 * w, zm), at(u0 + 0.68 * w, zb), at(u0 + 0.86 * w, zt)]; }
+    el('path', { d: W(mark(X0, X1, function (u, z) { return [u, Y1, z]; })), fill: 'none', stroke: BLUE, 'stroke-width': 2.6 }, g);
+    el('path', { d: W(mark(Y1, Y0, function (u, z) { return [X1, u, z]; })), fill: 'none', stroke: BLUE, 'stroke-width': 2.6 }, g);
+    g._phone = L(11, 0, 27);
+    return g;
+  }
+  function mkRider(parent) {
+    var g = el('g', {}, parent);
+    g._poses = [mkCourier(g, -1, 0), mkCourier(g, 0, -1)];
+    return g;
+  }
+  var personFront = V.courier ? mkRider(gPersonFront) : mkPerson(gPersonFront), personBack = V.courier ? mkRider(gPersonBack) : mkPerson(gPersonBack);
+  /* which pose rides, from the direction of travel at distance d */
+  function pose(g, d) {
+    if (!g._poses) return null;
+    var a = walkAt(Math.max(0, d - 2)), b = walkAt(d + 2), k = Math.abs(b[0] - a[0]) >= Math.abs(b[1] - a[1]) ? 0 : 1;
+    sa(g._poses[0], 'display', k ? 'none' : 'inline'); sa(g._poses[1], 'display', k ? 'inline' : 'none');
+    return g._poses[k]._phone;
+  }
   function qpt(a, c, b, t) { return [(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * c[0] + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * c[1] + t * t * b[1]]; }
   /* along the pavement, round onto the drive, through the gate and on into the yard */
   var WALK = (function () {
@@ -412,13 +461,14 @@ function createFeatureScene(svg, V) {
     sa(gPersonFront, 'display', inside ? 'none' : 'inline'); sa(gPersonBack, 'display', inside ? 'inline' : 'none');
     place(inside ? personBack : personFront, p);
     sa(inside ? gPersonBack : gPersonFront, 'opacity', f2(op));
+    var phone = pose(inside ? personBack : personFront, d);
 
     /* the phone in the pocket signals: the Wi-Fi mark pulses and, in some stories, a direct link reaches the device */
     var u = TL.WF ? seg(t, TL.WF) : 0, sig = (u > 0 && u < 1 && !inside) ? Math.min(1, u / 0.07, (1 - u) / 0.1) : 0, ends = null;
     if (sig <= 0.003) { sa(gWifi, 'display', 'none'); sa(link, 'd', ''); sa(linkDot, 'opacity', '0'); }
     else {
       sa(gWifi, 'display', 'inline'); sa(gWifi, 'opacity', f2(sig));
-      var cx = p[0] + 4.5 * S, cy = p[1] - 17 * S;
+      var cx = phone ? p[0] + phone[0] : p[0] + 4.5 * S, cy = phone ? p[1] + phone[1] : p[1] - 17 * S;
       sa(wifiPhone, 'x', f1(cx - 2.6 * S)); sa(wifiPhone, 'y', f1(cy - 4.6 * S));
       sa(wifiPhone, 'width', f1(5.2 * S)); sa(wifiPhone, 'height', f1(9.2 * S)); sa(wifiPhone, 'rx', f1(1.3 * S));
       var aim = clamp(Math.atan2(LIGHT[1] - cy, LIGHT[0] - cx), -1.1, 0.2), ph = (u * V.pulses) % 1;
@@ -454,7 +504,7 @@ function createFeatureScene(svg, V) {
    WK the walk, WF the phone's signal (absent where the phone plays no part), LK the direct link,
    GT the light, DO and DC the gate opening and closing, LO the light going out, RS the reset. */
 var SCENES = {
-  guest: { name: 'guest', DUR: 14.5, STILL: 6.8, pulses: 3,
+  guest: { name: 'guest', DUR: 14.5, STILL: 6.8, pulses: 3, courier: true,
     TL: { WK: [3.2, 10.8], WF: [5.4, 7.8], LK: [5.7, 6.4], GT: [7.4, 7.9], DO: [7.8, 8.8], DC: [11.0, 11.9], LO: [11.9, 12.3], RS: [12.5, 13.5] } },
   history: { name: 'history', DUR: 13, STILL: 8.3, pulses: 3,
     TL: { WK: [1.6, 9.4], WF: [3.6, 6.0], LK: [3.9, 4.6], GT: [5.6, 6.1], DO: [6.0, 7.0], DC: [9.6, 10.5], LO: [10.5, 10.9], RS: [11.2, 12.2] } },
