@@ -234,15 +234,16 @@ export function installAudienceList($, { items, productName = "host", assetPrefi
 // The plans come first, right under the hero; the audience follows the shared
 // benefits; the shop section closes the page after the questions. All three
 // wrappers attach only after every guard succeeds.
-// Optional feature sections right after the hero (marketing.spotlights in a
+// Optional feature sections right after the price list, which stays directly
+// under the hero (owner request 2026-11-21) (marketing.spotlights in a
 // locale's copy): each has its own heading, text, line illustration and a link
 // to the feature page. Locales without them keep the page unchanged. All items
 // are validated before the page changes.
 // A spotlight with a scene shows that line animation (js/line-spotlight.js)
 // over the scene's own start frame; the others show their still drawing.
 const SPOTLIGHT_ART = { "auto-open": "autoopen-still.svg", "quick-guest-invite": "guest-still.svg" };
-export const SPOTLIGHT_SCENES = { "auto-open": "building" };
-export const LINE_SPOTLIGHT_VERSION = "20261121ao1";
+export const SPOTLIGHT_SCENES = { "auto-open": "building", "quick-guest-invite": "guest" };
+export const LINE_SPOTLIGHT_VERSION = "20261121guest1";
 function spotlightScene($, { scene, frames, assetPrefix, copy }) {
   const frame = frames?.get?.(scene);
   if (!frame?.start || !frame?.still) throw new Error(`Line scene frames are required for the ${scene} spotlight`);
@@ -281,7 +282,9 @@ export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor, fr
       node($, "div", { class: "container" }, [node($, "div", { class: "wa-spotlight__panel" }, [copy, art])]),
     ]);
   });
-  hero.after(...sections);
+  // Under the price list when the page has one, otherwise under the hero.
+  const pricing = $(".host-marketing-pricing");
+  (pricing.length === 1 ? pricing : hero).after(...sections);
   if (spotlights.some(item => SPOTLIGHT_SCENES[item.page]))
     $("head").append(`<script type="module" src="${assetPrefix}js/line-spotlight.js?v=${LINE_SPOTLIGHT_VERSION}"></script>`);
 }

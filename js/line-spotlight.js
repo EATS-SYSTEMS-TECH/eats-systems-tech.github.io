@@ -1,6 +1,7 @@
-// Animated spotlight art on the WIFIGATE Manager page: the Auto Open panel
-// plays a line scene (a resident walks into an apartment building and the
-// lobby doors open by themselves) with the hero player from js/line-hero.js.
+// Animated spotlight art on the WIFIGATE Manager page, with the hero player
+// from js/line-hero.js: the Auto Open panel (a resident walks into an
+// apartment building and the lobby doors open by themselves) and the guest
+// invite panel (a courier on a bicycle gets the invite and opens the gate).
 // The page ships the scene's start frame (or its still frame under
 // prefers-reduced-motion) as the panel image, so the panel is complete
 // without JavaScript; this module draws the live SVG over that frame in the
@@ -13,6 +14,7 @@ import { createPlayer } from "./line-hero.js?v=20261116lh14";
 
 const SCENES = {
   building: () => import("./line-hero-building.js?v=20261116lh14").then(module => module.createBuildingEntryScene),
+  guest: () => import("./line-hero-features.js?v=20261116lh14").then(module => module.createGuestScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 
