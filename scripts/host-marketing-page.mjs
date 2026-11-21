@@ -4,6 +4,7 @@
 // supplies its own plans, audience and icons.
 import { AUDIENCE_ART, AUDIENCE_ART_SIZE, audienceArtPath } from "./audience-art.mjs";
 import { planArt } from "./plan-art.mjs";
+import { sceneAssetUrl } from "./scene-media.mjs";
 
 export const HOST_PAGE_KEY = "wifigate-host";
 export const MANAGER_PAGE_KEY = "wifigate-manager";
@@ -237,8 +238,25 @@ export function installAudienceList($, { items, productName = "host", assetPrefi
 // locale's copy): each has its own heading, text, line illustration and a link
 // to the feature page. Locales without them keep the page unchanged. All items
 // are validated before the page changes.
+// A spotlight with a scene shows that line animation (js/line-spotlight.js)
+// over the scene's own start frame; the others show their still drawing.
 const SPOTLIGHT_ART = { "auto-open": "autoopen-still.svg", "quick-guest-invite": "guest-still.svg" };
-export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor }) {
+export const SPOTLIGHT_SCENES = { "auto-open": "building" };
+export const LINE_SPOTLIGHT_VERSION = "20261121ao1";
+function spotlightScene($, { scene, frames, assetPrefix, copy }) {
+  const frame = frames?.get?.(scene);
+  if (!frame?.start || !frame?.still) throw new Error(`Line scene frames are required for the ${scene} spotlight`);
+  if (!["play", "pause"].every(key => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized spotlight controls");
+  const picture = node($, "picture", {}, [
+    node($, "source", { media: "(prefers-reduced-motion: reduce)", srcset: sceneAssetUrl(assetPrefix, frame.still), type: "image/svg+xml" }),
+    node($, "img", { class: "wa-spotlight__frame", src: sceneAssetUrl(assetPrefix, frame.start), alt: "", width: "1600", height: "900", loading: "lazy", decoding: "async" }),
+  ]);
+  // Pause/resume: shown by the runtime once the scene plays (it needs script).
+  const pause = node($, "button", { type: "button", class: "wa-spotlight__pause", "data-scene-pause": "", "data-label-play": copy.play, "data-label-pause": copy.pause,
+    "aria-label": copy.pause, title: copy.pause, "aria-pressed": "false", hidden: "" }, copy.pause);
+  return node($, "div", { class: "wa-spotlight__art wa-spotlight__scene", "data-line-spotlight": scene, "data-line-spotlight-state": "poster" }, [picture, pause]);
+}
+export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor, frames, controls }) {
   if (spotlights === undefined) return;
   if (!Array.isArray(spotlights) || !spotlights.length) throw new Error("Spotlights must be a non-empty list");
   for (const item of spotlights) {
@@ -255,13 +273,17 @@ export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor }) 
       node($, "p", { class: "wa-lead" }, item.text),
       node($, "a", { class: "wa-spotlight__link", href: hrefFor(item.page) }, item.link),
     ]);
-    const art = node($, "img", { class: "wa-spotlight__art", src: `${assetPrefix}assets/img/line-hero/${SPOTLIGHT_ART[item.page]}`, alt: "",
-      width: "1600", height: "900", loading: "lazy", decoding: "async" });
+    const scene = SPOTLIGHT_SCENES[item.page];
+    const art = scene ? spotlightScene($, { scene, frames, assetPrefix, copy: controls })
+      : node($, "img", { class: "wa-spotlight__art", src: `${assetPrefix}assets/img/line-hero/${SPOTLIGHT_ART[item.page]}`, alt: "",
+        width: "1600", height: "900", loading: "lazy", decoding: "async" });
     return node($, "section", { class: `section wa-spotlight${index % 2 ? " wa-spotlight--reverse" : ""}`, "aria-labelledby": id }, [
       node($, "div", { class: "container" }, [node($, "div", { class: "wa-spotlight__panel" }, [copy, art])]),
     ]);
   });
   hero.after(...sections);
+  if (spotlights.some(item => SPOTLIGHT_SCENES[item.page]))
+    $("head").append(`<script type="module" src="${assetPrefix}js/line-spotlight.js?v=${LINE_SPOTLIGHT_VERSION}"></script>`);
 }
 
 export function appendHostMarketingDetails($, { legacyTemplate, shopHref }) {

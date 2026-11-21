@@ -44,7 +44,8 @@ test("scene modules keep the approved timing and carry no page driver, debug hoo
   // The feature page scenes (No SIM, No Router; Stability) need no clip path, so they have no id at all.
   const expected = { host: { duration: 42, still: 27.0, clip: "wgh-door-clip" }, manager: { duration: 38.9, still: 27.65, clip: "wgm-lens" }, nosim: { duration: 14, still: 6.3, clip: null }, stability: { duration: 16, still: 9.2, clip: null },
     guest: { duration: 14.5, still: 6.8, clip: null }, history: { duration: 13, still: 8.3, clip: null }, autoopen: { duration: 12.4, still: 5.2, clip: null },
-    events: { duration: 12.5, still: 6.4, clip: null }, rf: { duration: 13.5, still: 5.6, clip: null }, security: { duration: 13, still: 6.0, clip: null }, nofees: { duration: 13, still: 7.0, clip: null } };
+    events: { duration: 12.5, still: 6.4, clip: null }, rf: { duration: 13.5, still: 5.6, clip: null }, security: { duration: 13, still: 6.0, clip: null }, nofees: { duration: 13, still: 7.0, clip: null },
+    building: { duration: 11.9, still: 7.3, clip: null } };
   for (const [name, scene] of Object.entries(LINE_HERO_SCENES)) {
     const source = await read(scene.module);
     for (const forbidden of [/\bwindow\./, /\bdocument\./, /\blocation\b/, /URLSearchParams/, /requestAnimationFrame/, /IntersectionObserver/, /matchMedia/, /WG_/, /geomtest|selftest|data-geom|data-frames|data-selftest/i, /document\.title|onerror/])
