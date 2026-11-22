@@ -48,9 +48,15 @@ export const SITE_LANGUAGES = [
   },
   {
     "code": "pt",
-    "label": "Português",
+    "label": "Português (Portugal)",
     "flagSrc": "flag-pt.svg",
     "flagAlt": "PT"
+  },
+  {
+    "code": "pt-BR",
+    "label": "Português (Brasil)",
+    "flagSrc": "flag-br.svg",
+    "flagAlt": "BR"
   },
   {
     "code": "pl",

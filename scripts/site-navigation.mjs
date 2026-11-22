@@ -24,7 +24,7 @@ export const SITE_NAVIGATION = [
 // The header link to the WIFIGATE Host portal sign-in, in every language.
 export const SITE_LOGIN_LABELS = {
   en: "Log in", he: "התחברות", es: "Iniciar sesión", fr: "Connexion", de: "Anmelden", nl: "Inloggen",
-  it: "Accedi", pt: "Iniciar sessão", pl: "Zaloguj się", no: "Logg inn", cs: "Přihlásit se", ru: "Войти",
+  it: "Accedi", pt: "Iniciar sessão", "pt-BR": "Entrar", pl: "Zaloguj się", no: "Logg inn", cs: "Přihlásit se", ru: "Войти",
   uk: "Увійти", tr: "Giriş yap", ar: "تسجيل الدخول", hi: "लॉग इन", bn: "লগ ইন", mr: "लॉग इन", te: "లాగిన్",
   "zh-Hans": "登录", "zh-Hant": "登入", ja: "ログイン", ko: "로그인", da: "Log ind", sv: "Logga in",
   hu: "Bejelentkezés", el: "Σύνδεση", ro: "Autentificare", hr: "Prijava", fi: "Kirjaudu", bg: "Вход",

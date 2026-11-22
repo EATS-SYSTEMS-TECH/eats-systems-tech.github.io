@@ -70,7 +70,7 @@ function assertUnavailable($, main, locale, product) {
 }
 
 test("shop renderer provides usable catalog and product content before any JavaScript runs", () => {
-  assert.equal(SITE_LANGUAGES.length, 39, "The published language inventory remains explicit");
+  assert.equal(SITE_LANGUAGES.length, 40, "The published language inventory remains explicit");
   for (const { code: locale } of SITE_LANGUAGES) {
     for (const product of routes) {
       const content = getShopPageContent(locale, product);

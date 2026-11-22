@@ -7,6 +7,7 @@
     "he",
     "es",
     "pt",
+    "pt-BR",
     "pl",
     "ru",
     "cs",
@@ -59,6 +60,11 @@
     "pt": {
       "eyebrow": "Legal",
       "pricingButton": "Abrir WhatsApp",
+      "backButton": "Ir para a página inicial"
+    },
+    "pt-BR": {
+      "eyebrow": "Jurídico",
+      "pricingButton": "Abrir o WhatsApp",
       "backButton": "Ir para a página inicial"
     },
     "pl": {
@@ -168,7 +174,7 @@
     }
   },
   "originalDataSha256": "6e0ddc1a03507638cf97abb6df750bcb353bc68e2c37e01116fd255e54d34413",
-  "replacementDataSha256": "377644942e8baafd038594d477a5cf576faf2698d57ab4cb0ff88cd96bb86eeb",
+  "replacementDataSha256": "cb172b750aae998d15b821fdfb26abd0c7c76422e89dba728903198bc44321a1",
   "normalizedBundles": {
     "privacy-policy": {
       "en": "5d28ab7e3e4de05bbccd72352cc8a52b73a654b263502d385253e5375e12634c",
@@ -179,6 +185,7 @@
       "nl": "7f6ac7e5b3f36561ab725c46274c675ea4a02c3c3c6d1e8ef3fc15f43d398811",
       "it": "676eb172affec948a0cf6880e342816b7c3010ca2decc99615f8cf184802957b",
       "pt": "d35b704428423281a74e702991dc12981d8e0f5db2e291173882b8f1a630a58c",
+      "pt-BR": "b5e03518fabc45ac7844460a5ed8045fd8ca2aff0b6c9c9f304892cd8ebc8e59",
       "pl": "edd85df693af63cf0fd406bf6379e7b9b667ee1afb67a21e640493450665674e",
       "no": "552c3da27b02cd248da609d271125d0c34d8cf46e28929e203b031c2c313317a",
       "cs": "cd5ca96830a8d7072eb38285ace841283e3a846effc6a03b3dc9af2bb9adf7cc",
@@ -220,6 +227,7 @@
       "nl": "e72b8e5cbabfa33e66b83c742366fcb335e3717aaffb88a9a7626d5f923f7899",
       "it": "df2aeb4f5878cc18b131e6d599ee49d9b84bfe5975ed2c903c71826ab7258b99",
       "pt": "0361702c120cea99e1bbb4a27a18173ef6f9f979227dab29b52402e16c924e65",
+      "pt-BR": "7101a2730f6b467bbfeaf2b281b819da70b2a0c3ff327265ca6ff0bd26a2a064",
       "pl": "e85b1750c807e120c30b5617bbbcc2fa750f669b725b4b39f7bd40a7879f3d4f",
       "no": "ae9390010944a0d7bfabd75c3538d1329fe23ff82425a844387bce5f937a62fb",
       "cs": "ac91792ae3d06340cc24bdcff11700012814ac01fae5b604ebd42f535e68a73f",
@@ -261,6 +269,7 @@
       "nl": "849a4febb2ba6963e5df4f1cb1a79a3f7b5df9f428223331df748c0c55cf7263",
       "it": "24908e660c5a7fb24fde80b0cc3edf864997d9159bdf7c24dacb620a4687233f",
       "pt": "5781d3d2528560d74243224d52f37f05ee80809423edfe9c4846085ededdba0a",
+      "pt-BR": "23aebfb82ccc5d1cf4019435e6d47f3096b67c02d53ffcb397641c133bb0c3a9",
       "pl": "0f85ef6e056fec92178577850ab913300b009d4aff9e49edb42fcd1ad7a4bbed",
       "no": "c3eb4b5faec21b225576e1d607056ca4224ab619585b4b63c1b15922cb673d9b",
       "cs": "c9382263fedbb37bee72d305eba42101f44e99dbb630a1f4d22a364a13ecfd47",
@@ -302,6 +311,7 @@
       "nl": "e081163dc69847478f0616c8b73d9816d0d52417a21b9fa72ac4378c5afb2c89",
       "it": "c07e20c3764ab5e18a78e448bbe2c2a3668180b9ce7e3c000bb4fe2e2adebb9b",
       "pt": "e868f9c198de4087ed423663bcc0bf9dfa2275710a996594c75bb7f64dabe1e7",
+      "pt-BR": "fb3fa9a6525266208454eef42c0690973becc4359ad18eec11e3125f96243349",
       "pl": "7c6daee4bb496bb1eaf2f50a21d776602b1ddbf7ea8369ad47108648f71ef607",
       "no": "4d4c56ce42d199d87ae91394e99a47aea8ef158f4e4618efe367fd99015ce6d0",
       "cs": "c9615a5751426ad3a53eb2414f531ad1f5d9e17cd511a7894186a39c879eaaca",
@@ -430,6 +440,20 @@
       "back.text": {
         "original": "9a9010baad337ad2c61fe782ebfddbab2235853d5e9be2e5bfcc4aa299376302",
         "replacement": "3945bb4a529354e272d9d774d61dbb25567e9cf8bfa24514f71382fbaece776d"
+      }
+    },
+    "pt-BR": {
+      "pricing.title": {
+        "replacement": "cf9e951f2dfb3d872d6c0b04e86b179ccc43057e69bd53a078784aa887372d66"
+      },
+      "pricing.text": {
+        "replacement": "db1b9901ec52eee8d28364796de53180fb563775be035e232b6decf5189ac72b"
+      },
+      "back.title": {
+        "replacement": "fa96b7c4284fe4af605e5729758bce43b4d8954520828e00fbd5f7e3b461bbd9"
+      },
+      "back.text": {
+        "replacement": "87abd9a55ea4103b142e680f9588e8da1643922156aba3741d5af3bed4205ae5"
       }
     },
     "pl": {
@@ -811,5 +835,8 @@
       }
     }
   },
-  "limits": "104 independently worded commercial title/paragraph fields; fixed legal eyebrows, native action labels, locale/field order, all governing policy content and real action destinations remain unchanged."
+  "limits": "104 independently worded commercial title/paragraph fields; fixed legal eyebrows, native action labels, locale/field order, all governing policy content and real action destinations remain unchanged.",
+  "addedLocales": {
+    "pt-BR": "Added 2026-11-22 with owner approval (Brazilian Portuguese as a separate website language). It has no original phase: its CTA copy was written for the replacement only, so freshFieldHashes record only the replacement hash."
+  }
 }

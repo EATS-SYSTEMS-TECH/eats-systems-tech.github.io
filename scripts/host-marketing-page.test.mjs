@@ -16,9 +16,9 @@ const copies = await Promise.all(SITE_LANGUAGES.map(async ({ code }) => ({
   home: (await import(`./homepage-copy/${code}.mjs`)).default,
 })));
 
-test("all 39 Host locales reuse existing hero, steps, benefits and SEO without new claims", () => {
+test("all 40 Host locales reuse existing hero, steps, benefits and SEO without new claims", () => {
   assert.equal(HOST_PAGE_KEY, "wifigate-host");
-  assert.equal(copies.length, 39);
+  assert.equal(copies.length, 40);
   for (const { locale, host, home } of copies) {
     const before = structuredClone({ host, home });
     const content = getHostPageContent(host, home);
@@ -59,7 +59,7 @@ test("all 39 Host locales reuse existing hero, steps, benefits and SEO without n
   }
 });
 
-test("all 39 Manager locales supply the shared page layout with the Manager plans and photo", async () => {
+test("all 40 Manager locales supply the shared page layout with the Manager plans and photo", async () => {
   for (const { locale, home } of copies) {
     const manager = (await import(`./manager-page-copy/${locale}.mjs`)).default;
     const content = getHostPageContent(manager, home, "manager");

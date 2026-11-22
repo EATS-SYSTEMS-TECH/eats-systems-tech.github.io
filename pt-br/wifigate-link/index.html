@@ -1,0 +1,746 @@
+<!DOCTYPE html><html lang="pt-BR" dir="ltr"><head>
+    <meta charset="utf-8">
+    <title>Convite do WIFIGATE</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        :root {
+            --bg: #edf2f8;
+            --panel: #ffffff;
+            --text: #152238;
+            --muted: #526176;
+            --accent: #0b63ff;
+            --accent-strong: #2563eb;
+            --border: #d9e2ee;
+            --shadow: 0 18px 48px rgba(25, 50, 90, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .card {
+            width: min(100%, 400px);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            padding: 32px 28px;
+            text-align: center;
+        }
+
+        .logo {
+            --logo-edge: 84px;
+            inline-size: var(--logo-edge);
+            block-size: var(--logo-edge);
+            border-radius: calc(var(--logo-edge) * 2 / 7);
+            display: block;
+            margin: 0 auto 24px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(24px, 6vw, 30px);
+            line-height: 1.18;
+        }
+
+        p {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            margin: 28px auto 0;
+            border: 3px solid #dce7f8;
+            border-top-color: var(--accent-strong);
+            border-radius: 50%;
+            animation: spin 850ms linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .spinner { animation: none; }
+        }
+
+        [hidden] { display: none !important; }
+
+        .statement {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .statement a {
+            color: var(--muted);
+            text-underline-offset: 0.15em;
+        }
+
+        .demo-banner {
+            margin: 20px 0 0;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .demo-phone {
+            max-width: 300px;
+            margin: 20px auto 0;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: #f8fafc;
+        }
+
+        .demo-tile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(25, 50, 90, 0.08);
+            text-align: start;
+        }
+
+        .demo-icon {
+            display: grid;
+            flex: none;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .demo-icon img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .demo-tile div {
+            min-width: 0;
+        }
+
+        .demo-name {
+            margin: 0;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .demo-guest {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .demo-window {
+            margin: 12px 0 0;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .demo-when {
+            white-space: nowrap;
+        }
+
+        .actions {
+            display: grid;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button,
+        .secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 52px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
+        }
+
+        .secondary {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: #ffffff;
+        }
+
+        .button:hover,
+        .secondary:hover {
+            transform: translateY(-1px);
+        }
+
+        .button:focus-visible,
+        .secondary:focus-visible {
+            outline: 3px solid #173d91;
+            outline-offset: 3px;
+        }
+
+        .feedback {
+            min-height: 24px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .feedback:empty { display: none; }
+
+        .feedback.error { color: #a32626; }
+
+        @media (max-width: 360px) {
+            body { padding: 14px; }
+            .card { padding: 28px 20px; }
+        }
+    </style>
+    <script id="wifigate-link-copy" type="application/json">{"headingFallback":"Abrir no WIFIGATE","headingMissing":"Abrir no WIFIGATE","statusMissing":"Este link de convite não traz os dados de acesso. Peça para quem enviou compartilhar de novo.","statusFallback":"Se o WIFIGATE não abriu automaticamente, use o botão abaixo.","copyButton":"Copiar link do aplicativo","copiedButton":"Link do aplicativo copiado","copyError":"Couldn't copy link. Please try again."}</script>
+    <script>
+        const WIFIGATE_LINK_DEFAULT_COPY = {
+            headingFallback: "Continue in WIFIGATE",
+            statusMissing: "This invitation link is missing the access details. Ask the sender to share it again.",
+            statusFallback: "Didn't open automatically? Tap below to try again.",
+            copyButton: "Copy link",
+            copiedButton: "Link copied!",
+            copyError: "Couldn't copy link. Please try again."
+        };
+
+        function getUtilityPageCopy() {
+            const script = document.getElementById("wifigate-link-copy");
+            if (!script) {
+                return WIFIGATE_LINK_DEFAULT_COPY;
+            }
+
+            try {
+                return {
+                    ...WIFIGATE_LINK_DEFAULT_COPY,
+                    ...JSON.parse(script.textContent || "{}")
+                };
+            } catch (error) {
+                return WIFIGATE_LINK_DEFAULT_COPY;
+            }
+        }
+
+        // Choose the first meaningful alias while retaining the original query's order.
+        const firstRouteValue = (values) =>
+            values.find((value) => typeof value === "string" && value.trim())?.trim() || "";
+
+        // Resolve an invitation target from the public parameter and path aliases.
+        function invitationTarget(url) {
+            const query = url.searchParams;
+            const segments = url.pathname.split("/").filter(Boolean).map((component) => {
+                try { return decodeURIComponent(component); } catch { return ""; }
+            });
+            const choices = [
+                { route: "dual-control", aliases: ["dcid", "dualControlId"], canonical: "dcid" },
+                { route: "group", aliases: ["gid", "groupId"], canonical: "gid" },
+                { route: "gate", aliases: ["i", "id", "chip"], canonical: null }
+            ];
+
+            for (const choice of choices) {
+                const pathId = segments[0] === choice.route ? segments[1] : "";
+                const id = firstRouteValue([...choice.aliases.map((key) => query.get(key)), pathId]);
+                if (id) return { ...choice, id };
+            }
+            return query.get("ep") ? { ...choices[2], id: "invite" } : null;
+        }
+
+        // Direct links win; otherwise build the app route without discarding opaque parameters.
+        const buildDeepLink = () => {
+            const url = new URL(window.location.href);
+            const query = url.searchParams;
+            if (isDemoLink(query)) return "";
+
+            const direct = firstRouteValue([query.get("link")]);
+            if (direct) return direct;
+
+            const target = invitationTarget(url);
+            if (!target) return "";
+
+            query.delete("link");
+            if (target.canonical && !query.has(target.canonical)) query.set(target.canonical, target.id);
+            if (!query.has("id")) query.set("id", target.id);
+            const suffix = query.toString();
+            return `wifigate://${target.route}/${encodeURIComponent(target.id)}${suffix ? "?" + suffix : ""}`;
+        };
+        // Replace the waiting state with recovery actions, or explain that no route exists.
+        const revealFallback = (deepLink) => {
+            const copy = getUtilityPageCopy();
+            const title = document.getElementById("page-title");
+            const status = document.getElementById("status");
+            const spinner = document.getElementById("spinner");
+            const openApp = document.getElementById("open-app");
+            const copyLink = document.getElementById("copy-link");
+            const feedback = document.getElementById("feedback");
+
+            title.textContent = deepLink ? copy.headingFallback : copy.headingMissing;
+            status.textContent = deepLink ? copy.statusFallback : copy.statusMissing;
+            spinner.hidden = true;
+            // Both recovery actions appear together only when a usable route exists.
+            for (const action of [openApp, copyLink]) action.hidden = !deepLink;
+            openApp.setAttribute("href", deepLink || "#");
+            copyLink.textContent = copy.copyButton;
+            copyLink.onclick = async function () {
+                if (!deepLink) {
+                    return;
+                }
+
+                feedback.textContent = "";
+                feedback.classList.remove("error");
+                try {
+                    await navigator.clipboard.writeText(deepLink);
+                    feedback.textContent = copy.copiedButton;
+                } catch (error) {
+                    feedback.textContent = copy.copyError;
+                    feedback.classList.add("error");
+                }
+            };
+        };
+        // Hand off to the app first; recovery actions appear once the page is visible again.
+        const scheduleAppOpen = (deepLink) => {
+            if (!deepLink) return revealFallback("");
+
+            // Restore the manual recovery actions after the operating system handoff.
+            const showRecovery = () => {
+                if (document.visibilityState === "visible") {
+                    revealFallback(deepLink);
+                } else {
+                    document.addEventListener("visibilitychange", function showOnReturn() {
+                        if (document.visibilityState === "visible") {
+                            document.removeEventListener("visibilitychange", showOnReturn);
+                            revealFallback(deepLink);
+                        }
+                    });
+                }
+            };
+            window.setTimeout(showRecovery, 900);
+
+            // Keep the immediate opening attempt separate from the recovery timer.
+            window.setTimeout(() => window.location.replace(deepLink), 40);
+        };
+
+        // A demo guest link from the WIFIGATE Host examples (ep=v1.demo_…)
+        // carries only which example and the stay window. It shows what a
+        // guest would see and never opens the app.
+        const WIFIGATE_DEMO_PREFIX = "v1.demo_";
+        const WIFIGATE_DEMO_SYSTEMS = {
+            room: { name: "Example WIFIGATE Room 212 🥂🍾", icon: "gate-bed-outline" },
+            dual: { name: "Example WIFIGATE Dual Control 212 🥂🍾", icon: "dual-control-barrier-gate-small" },
+            roller: { name: "Example WIFIGATE Roller Shutter 212 🥂🍾", icon: "dual-control-roller-shutter-small" },
+            group: { name: "Example WIFIGATE Group 212 🥂🍾", icon: "group-hosting" }
+        };
+        const WIFIGATE_DEMO_COPY = {
+            en: {
+                title: "Example guest link",
+                banner: "Example: this link doesn't open a gate.",
+                guest: "GUEST",
+                incomplete: "This example link is incomplete.",
+                more: "About WIFIGATE"
+            },
+            he: {
+                title: "קישור לדוגמה לאורח",
+                banner: "דוגמה: הקישור הזה לא פותח שער.",
+                guest: "אורח",
+                incomplete: "קישור הדוגמה הזה לא שלם.",
+                more: "על WIFIGATE"
+            }
+        };
+
+        function isDemoLink(params) {
+            return params.getAll("ep").some(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) === 0;
+            }) || params.getAll("link").some(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) !== -1;
+            });
+        }
+
+        function readDemoToken(ep) {
+            try {
+                const encoded = ep.slice(WIFIGATE_DEMO_PREFIX.length).replace(/-/g, "+").replace(/_/g, "/");
+                const value = JSON.parse(atob(encoded + "===".slice((encoded.length + 3) % 4)));
+                const keys = Object.keys(value || {}).sort().join(",");
+                if (keys !== "k,se,ss" || !Object.prototype.hasOwnProperty.call(WIFIGATE_DEMO_SYSTEMS, value.k) ||
+                    !Number.isSafeInteger(value.ss) || !Number.isSafeInteger(value.se) || value.se <= value.ss) {
+                    return null;
+                }
+                return value;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function demoElement(tag, className, text) {
+            const element = document.createElement(tag);
+            if (className) {
+                element.className = className;
+            }
+            if (text !== undefined) {
+                element.textContent = text;
+            }
+            return element;
+        }
+
+        function showDemoPreview() {
+            const params = new URL(window.location.href).searchParams;
+            if (!isDemoLink(params)) {
+                return false;
+            }
+            const pageLanguage = (document.documentElement.lang || "en").slice(0, 2);
+            const language = pageLanguage === "he" ||
+                (pageLanguage === "en" && (navigator.language || "").slice(0, 2) === "he") ? "he" : "en";
+            const copy = WIFIGATE_DEMO_COPY[language];
+            const locale = language === "he" ? "he-IL" : "en-US";
+            const ep = params.getAll("ep").filter(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) === 0;
+            })[0] || "";
+            const demo = readDemoToken(ep);
+            const main = document.getElementById("main-content");
+            const logo = main.querySelector(".logo");
+            const title = demoElement("h1", "", copy.title);
+            title.id = "page-title";
+            const banner = demoElement("p", "demo-banner", copy.banner);
+            banner.id = "demo-banner";
+            const parts = [title, banner];
+            if (demo) {
+                const system = WIFIGATE_DEMO_SYSTEMS[demo.k];
+                const format = new Intl.DateTimeFormat(locale, {
+                    weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
+                });
+                const phone = demoElement("div", "demo-phone");
+                const tile = demoElement("div", "demo-tile");
+                const icon = demoElement("span", "demo-icon");
+                const image = document.createElement("img");
+                image.alt = "";
+                image.src = (logo ? logo.getAttribute("src") : "/assets/img/wifigate-link-logo.webp")
+                    .replace("assets/img/wifigate-link-logo.webp", "assets/host-icons/" + system.icon + ".svg");
+                icon.append(image);
+                const text = demoElement("div");
+                const name = demoElement("p", "demo-name");
+                name.append(demoElement("bdi", "", system.name));
+                text.append(name, demoElement("span", "demo-guest", copy.guest));
+                tile.append(icon, text);
+                // Each end of the stay stays on one line; a narrow screen breaks at the arrow.
+                const stay = demoElement("p", "demo-window");
+                stay.append(
+                    demoElement("span", "demo-when", format.format(new Date(demo.ss))),
+                    language === "he" ? " ← " : " → ",
+                    demoElement("span", "demo-when", format.format(new Date(demo.se))));
+                stay.id = "demo-window";
+                phone.append(tile, stay);
+                parts.push(phone);
+            } else {
+                const status = demoElement("p", "", copy.incomplete);
+                status.id = "status";
+                parts.push(status);
+            }
+            const more = demoElement("a", "secondary", copy.more);
+            more.href = language === "he" ? "/he/" : "/";
+            const actions = demoElement("div", "actions");
+            actions.append(more);
+            parts.push(actions);
+            document.title = copy.title;
+            document.documentElement.lang = language;
+            document.documentElement.dir = language === "he" ? "rtl" : "ltr";
+            main.dataset.demo = "true";
+            main.replaceChildren.apply(main, (logo ? [logo] : []).concat(parts));
+            return true;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (showDemoPreview()) {
+                return;
+            }
+            scheduleAppOpen(buildDeepLink());
+        });
+    </script>
+    <link rel="stylesheet" href="../../css/accessibility.css?v=20261119a11y2">
+    <script>window.accessibilityCopy = {"pt-BR":{"skipLink":"Pular para o conteúdo principal","eyebrow":"Acessibilidade","openButton":"Abrir o menu de acessibilidade","closeButton":"Fechar o menu de acessibilidade","title":"Menu de acessibilidade","description":"Ajuste o site ao seu jeito de ler e navegar. Suas escolhas ficam salvas neste dispositivo.","reset":"Redefinir tudo","statusDefault":"Visualização padrão do site","statusActive":"{count} ajustes ativos","hideButton":"Ocultar o botão de acessibilidade até recarregar a página","statementLink":"Declaração de acessibilidade","textSize":{"label":"Tamanho do texto","description":"Aumentar o texto em todo o site.","decrease":"Texto menor","increase":"Texto maior","level":"Tamanho do texto {percent}%"},"options":{"highContrast":{"label":"Alto contraste","description":"Texto escuro sobre fundo claro com contornos fortes."},"grayscale":{"label":"Tons de cinza","description":"Mostrar o site sem cores."},"underlineLinks":{"label":"Destacar links","description":"Sublinhar e marcar todos os links."},"readableFont":{"label":"Fonte legível","description":"Uma fonte simples e muito legível."},"textSpacing":{"label":"Espaçamento do texto","description":"Mais espaço entre linhas, palavras e letras."},"highlightHeadings":{"label":"Destacar títulos","description":"Marcar os títulos para mostrar a estrutura da página."},"bigCursor":{"label":"Cursor grande","description":"Um ponteiro do mouse maior."},"focusHighlight":{"label":"Foco bem destacado","description":"Um contorno grosso em volta do elemento com o foco do teclado."},"reducedMotion":{"label":"Parar animações","description":"Parar animações, transições e o vídeo de fundo."}}}};</script>
+    <script src="../../js/accessibility.js?v=20261027d" defer=""></script>
+
+  <meta name="description" content="Abra seu convite do WIFIGATE com segurança no aplicativo.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="googlebot" content="noindex, follow">
+  <link rel="canonical" href="https://wifigate.io/pt-br/wifigate-link/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WIFIGATE">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wifigate.io/pt-br/wifigate-link/">
+  <meta property="og:title" content="Convite do WIFIGATE">
+  <meta property="og:description" content="Abra seu convite do WIFIGATE com segurança no aplicativo.">
+  <meta property="og:image" content="https://wifigate.io/assets/img/wifigate-logo-share.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WIFIGATE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Convite do WIFIGATE">
+  <meta name="twitter:description" content="Abra seu convite do WIFIGATE com segurança no aplicativo.">
+  <meta name="twitter:image" content="https://wifigate.io/assets/img/wifigate-logo-share.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://wifigate.io/#organization",
+      "name": "EATS SYSTEMS TECH",
+      "url": "https://wifigate.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wifigate.io/logo-1024.png",
+        "width": 1024,
+        "height": 1024
+      },
+      "email": "support@wifigate.io",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IL"
+      },
+      "sameAs": [
+        "https://www.facebook.com/WIFIGATE.io",
+        "https://www.youtube.com/@WIFIGATE",
+        "https://www.linkedin.com/company/wifigate/",
+        "https://www.instagram.com/wifigate.io/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "support@wifigate.io",
+          "url": "https://wa.me/message/NZWNMX6V2XVHJ1",
+          "availableLanguage": [
+            "English",
+            "Hebrew"
+          ]
+        }
+      ],
+      "brand": {
+        "@id": "https://wifigate.io/#brand"
+      }
+    },
+    {
+      "@type": "Brand",
+      "@id": "https://wifigate.io/#brand",
+      "name": "WIFIGATE",
+      "alternateName": [
+        "WiFi Gate",
+        "Wi-Fi Gate",
+        "Wifigate",
+        "WiFiGate"
+      ],
+      "url": "https://wifigate.io",
+      "logo": "https://wifigate.io/logo-1024.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://wifigate.io/#website",
+      "name": "WIFIGATE",
+      "alternateName": [
+        "WiFi Gate",
+        "Wi-Fi Gate",
+        "Wifigate",
+        "WiFiGate"
+      ],
+      "url": "https://wifigate.io/",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@id": "https://wifigate.io/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://wifigate.io/pt-br/wifigate-link/#webpage",
+      "url": "https://wifigate.io/pt-br/wifigate-link/",
+      "name": "Convite do WIFIGATE",
+      "description": "Abra seu convite do WIFIGATE com segurança no aplicativo.",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://wifigate.io/#website"
+      },
+      "publisher": {
+        "@id": "https://wifigate.io/#organization"
+      },
+      "about": {
+        "@id": "https://wifigate.io/#brand"
+      }
+    }
+  ]
+}
+  </script><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261119a11y2"><script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*login/*"}},{"not":{"href_matches":"/(dashboard|manager|pay|reservations|work|api)/*"}},{"not":{"selector_matches":"[download], [rel~=\"nofollow\"]"}}]},"eagerness":"moderate"}]}</script></head>
+
+<body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+    <main class="card" id="main-content" tabindex="-1">
+        <img class="logo" src="../../assets/img/wifigate-link-logo.webp" alt="WIFIGATE" width="84" height="84">
+        <h1 id="page-title">Abrindo o WIFIGATE</h1>
+        <p id="status">Estamos tentando abrir seu convite no aplicativo.</p>
+        <div id="spinner" class="spinner" aria-hidden="true"></div>
+        <div class="actions">
+            <a id="open-app" class="button" href="#" hidden="">Abrir no WIFIGATE</a>
+            <button id="copy-link" class="secondary" type="button" hidden="">Copiar link do aplicativo</button>
+        </div>
+        <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+    </main>
+    <p class="statement"><a id="accessibility-statement-link" href="/pt-br/accessibility/">Declaração de acessibilidade</a></p>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Abrir o menu de acessibilidade" title="Abrir o menu de acessibilidade">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Acessibilidade</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Fechar o menu de acessibilidade">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">Menu de acessibilidade</h2>
+      <p class="a11y-panel__description" id="a11y-description">Ajuste o site ao seu jeito de ler e navegar. Suas escolhas ficam salvas neste dispositivo.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">Visualização padrão do site</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">Redefinir tudo</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">Tamanho do texto</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">Aumentar o texto em todo o site.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="Texto menor" title="Texto menor">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="Texto maior" title="Texto maior">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Alto contraste</span>
+            <span class="a11y-option__description">Texto escuro sobre fundo claro com contornos fortes.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Tons de cinza</span>
+            <span class="a11y-option__description">Mostrar o site sem cores.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Destacar links</span>
+            <span class="a11y-option__description">Sublinhar e marcar todos os links.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Fonte legível</span>
+            <span class="a11y-option__description">Uma fonte simples e muito legível.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Espaçamento do texto</span>
+            <span class="a11y-option__description">Mais espaço entre linhas, palavras e letras.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Destacar títulos</span>
+            <span class="a11y-option__description">Marcar os títulos para mostrar a estrutura da página.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Cursor grande</span>
+            <span class="a11y-option__description">Um ponteiro do mouse maior.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Foco bem destacado</span>
+            <span class="a11y-option__description">Um contorno grosso em volta do elemento com o foco do teclado.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Parar animações</span>
+            <span class="a11y-option__description">Parar animações, transições e o vídeo de fundo.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/pt-br/accessibility/">Declaração de acessibilidade</a>
+    </div>
+
+
+
+<script>window.WIFIGATE_COOKIE_COPY = {"pt-BR":{"title":"Preferências de privacidade e cookies","description":"Usamos cookies necessários para o funcionamento do site. Com o seu consentimento, também usamos o Google Analytics para entender como o site é usado e melhorá-lo. Você pode mudar sua escolha a qualquer momento.","privacy":"Política de privacidade","cookies":"Política de cookies","settings":"Configurações","accept":"Aceitar todos","reject":"Rejeitar todos","save":"Salvar seleção","necessary":"Cookies necessários","necessaryHelp":"Necessários para o funcionamento do site e para salvar suas preferências. Sempre ativos.","alwaysOn":"Sempre ativo","analytics":"Cookies analíticos","analyticsHelp":"O Google Analytics só mede o uso do site se você permitir.","reopen":"Configurações de cookies","close":"Fechar configurações","banner":"Usamos cookies para analisar o tráfego do site com o Google Analytics. A análise só é ativada com o seu consentimento. Saiba mais:"}};</script><script src="../../js/cookie-consent.js?v=20261119a11y2" defer=""></script><script src="../../js/site-cache.js?v=20261109cache1" defer=""></script></body></html>

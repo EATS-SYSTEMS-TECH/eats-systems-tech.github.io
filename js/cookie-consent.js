@@ -9,7 +9,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   // Only static consumer marketing pages are eligible. The same preference UI
   // is also used by portal and invitation pages, which must never load GA.
   const analyticsLocales = new Set([
-    "es", "fr", "de", "he", "nl", "it", "pt", "pl", "no", "cs", "ru", "uk",
+    "es", "fr", "de", "he", "nl", "it", "pt", "pt-br", "pl", "no", "cs", "ru", "uk",
     "tr", "ar", "hi", "bn", "mr", "te", "zh-hans", "zh-hant", "ja", "ko",
     "da", "sv", "hu", "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl",
     "id", "th", "vi", "ms", "fil",

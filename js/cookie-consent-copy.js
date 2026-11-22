@@ -144,6 +144,24 @@ window.WIFIGATE_COOKIE_COPY = {
     "close": "Fechar definições",
     "banner": "Utilizamos cookies para analisar o tráfego do site com o Google Analytics. A análise só é ativada com o seu consentimento. Mais informações:"
   },
+  "pt-BR": {
+    "title": "Preferências de privacidade e cookies",
+    "description": "Usamos cookies necessários para o funcionamento do site. Com o seu consentimento, também usamos o Google Analytics para entender como o site é usado e melhorá-lo. Você pode mudar sua escolha a qualquer momento.",
+    "privacy": "Política de privacidade",
+    "cookies": "Política de cookies",
+    "settings": "Configurações",
+    "accept": "Aceitar todos",
+    "reject": "Rejeitar todos",
+    "save": "Salvar seleção",
+    "necessary": "Cookies necessários",
+    "necessaryHelp": "Necessários para o funcionamento do site e para salvar suas preferências. Sempre ativos.",
+    "alwaysOn": "Sempre ativo",
+    "analytics": "Cookies analíticos",
+    "analyticsHelp": "O Google Analytics só mede o uso do site se você permitir.",
+    "reopen": "Configurações de cookies",
+    "close": "Fechar configurações",
+    "banner": "Usamos cookies para analisar o tráfego do site com o Google Analytics. A análise só é ativada com o seu consentimento. Saiba mais:"
+  },
   "pl": {
     "title": "Prywatność i preferencje dotyczące plików cookie",
     "description": "Do działania strony używamy niezbędnych plików cookie. Za Twoją zgodą korzystamy też z Google Analytics, aby lepiej rozumieć, jak używasz strony, i ją ulepszać. Swój wybór możesz zmienić w dowolnym momencie.",

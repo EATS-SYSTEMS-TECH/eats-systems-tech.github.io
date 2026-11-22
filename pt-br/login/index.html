@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com/firebasejs/ https://apis.google.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://www.googletagmanager.com/gtag/ 'sha256-MQ/Hl2LaDbhreN+/QFaI4ELQHkJBfvpXjrhTSxoTrxg='; connect-src 'self' https://api.wifigate.io https://manager.wifigate.io https://wifigate-manager-api-759449834452.us-central1.run.app wss://relay.wifigate.io wss://wifigate-manager-relay-759449834452.us-central1.run.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://content-firebaseappcheck.googleapis.com https://www.google.com/recaptcha/ https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: blob: https://*.googleusercontent.com https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src https://eats-wifigate.firebaseapp.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Entrar | WIFIGATE</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/fonts.css?v=20261004a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261119remember1" />
+    <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
+    <script type="module" src="/js/host-login.js?v=20261121remember30"></script>
+    <link rel="stylesheet" href="/css/cookie-consent.css?v=20261119a11y2" />
+    <link rel="stylesheet" href="/css/accessibility.css?v=20261119a11y2" />
+    <link rel="stylesheet" href="/css/portal-accessibility.css?v=20261119a11y2" />
+    <script src="/js/accessibility-copy.js?v=20261007a" defer></script>
+    <script src="/js/accessibility.js?v=20261027d" defer></script>
+  </head>
+  <body class="portal-login app-login">
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+    <main class="app-login__screen" id="main-content" tabindex="-1">
+      <section class="app-login__card" aria-labelledby="login-title">
+        <h1 id="login-title" class="visually-hidden">Entrar no WIFIGATE</h1>
+        <a class="app-login__logo" href="/pt-br/" aria-label="Página inicial do WIFIGATE"
+          ><img
+            src="/assets/img/wifigate-login-logo.webp"
+            alt="WIFIGATE"
+            width="280"
+            height="190"
+        /></a>
+        <button
+          type="button"
+          class="app-login__language"
+          aria-haspopup="dialog"
+          aria-controls="language-picker"
+          aria-label="Escolha o idioma. Português (Brasil)"
+        >
+          <img
+            src="/assets/img/flags/flag-br.svg"
+            alt=""
+            width="33"
+            height="22"
+          />
+          <span>Português (Brasil)</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path
+              d="M5 7.5l5 5 5-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="app-login__actions">
+          <button
+            type="button"
+            class="app-login__provider app-login__provider--google"
+            data-provider="google"
+            disabled
+          >
+            <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+              <path
+                fill="currentColor"
+                d="M473.16 221.48l-2.26-9.59H262.46v88.22H387c-12.93 61.4-72.93 93.72-121.94 93.72-35.66 0-73.25-15-98.13-39.11a140.08 140.08 0 01-41.8-98.88c0-37.16 16.7-74.33 41-98.78s61-38.13 97.49-38.13c41.79 0 71.74 22.19 82.94 32.31l62.69-62.36C390.86 72.72 340.34 32 261.6 32c-60.75 0-119 23.27-161.58 65.71C58 139.5 36.25 199.93 36.25 256s20.58 113.48 61.3 155.6c43.51 44.92 105.13 68.4 168.58 68.4 57.73 0 112.45-22.62 151.45-63.66 38.34-40.4 58.17-96.3 58.17-154.9 0-24.67-2.48-39.32-2.59-39.96z"
+              />
+            </svg>
+            <span>Continuar com o Google</span>
+          </button>
+          <button
+            type="button"
+            class="app-login__provider app-login__provider--apple"
+            data-provider="apple"
+            disabled
+          >
+            <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+              <path
+                fill="currentColor"
+                d="M349.13 136.86c-40.32 0-57.36 19.24-85.44 19.24-28.79 0-50.75-19.1-85.69-19.1-34.2 0-70.67 20.88-93.83 56.45-32.52 50.16-27 144.63 25.67 225.11 18.84 28.81 44 61.12 77 61.47h.6c28.68 0 37.2-18.78 76.67-19h.6c38.88 0 46.68 18.89 75.24 18.89h.6c33-.35 59.51-36.15 78.35-64.85 13.56-20.64 18.6-31 29-54.35-76.19-28.92-88.43-136.93-13.08-178.34-23-28.8-55.32-45.48-85.79-45.48z"
+              />
+              <path
+                fill="currentColor"
+                d="M340.25 32c-24 1.63-52 16.91-68.4 36.86-14.88 18.08-27.12 44.9-22.32 70.91h1.92c25.56 0 51.72-15.39 67-35.11 14.72-19.01 25.88-45.95 21.8-72.66z"
+              />
+            </svg>
+            <span>Continuar com a Apple</span>
+          </button>
+          <label class="app-login__remember">
+            <input type="checkbox" id="login-remember" name="remember" autocomplete="off" />
+            <span>Lembrar de mim neste dispositivo</span>
+          </label>
+        </div>
+        <p class="app-login__status" id="login-attempts" role="status" aria-live="polite" hidden><span>Tentativas malsucedidas</span> <bdi id="login-attempt-count" dir="ltr">0/5</bdi></p>
+        <div
+          id="login-progress"
+          class="app-login__progress"
+          role="progressbar"
+          aria-label="Entrando"
+          hidden
+        >
+          <span></span>
+        </div>
+        <p
+          id="login-status"
+          class="app-login__status"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <div class="staging-note" data-staging hidden>
+          <strong>Ambiente de teste local</strong>
+          <p>Use contas simuladas do Google ou da Apple. Não é necessária a senha do provedor.</p>
+          <code>admin@wifigate.test</code><code>owner@grandplaza.test</code
+          ><code>pending@wifigate.test</code>
+        </div>
+        <p class="app-login__legal">Ao continuar, você concorda com os <a href="/pt-br/terms-and-conditions/">Termos de uso</a> e com a <a href="/pt-br/privacy-policy/">Política de privacidade</a>.</p>
+        <p class="app-login__statement"><a href="/pt-br/accessibility/">Declaração de acessibilidade</a></p>
+      </section>
+    </main>
+    <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Abrir o menu de acessibilidade" title="Abrir o menu de acessibilidade">
+      <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+        <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+    <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
+      <div class="a11y-panel__header">
+        <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Acessibilidade</p>
+        <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Fechar o menu de acessibilidade">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <h2 class="a11y-panel__title" id="a11y-title">Menu de acessibilidade</h2>
+      <p class="a11y-panel__description" id="a11y-description">Ajuste o site ao seu jeito de ler e navegar. Suas escolhas ficam salvas neste dispositivo.</p>
+
+      <div class="a11y-panel__status-row">
+        <span class="a11y-panel__status" id="a11y-status" role="status">Visualização padrão do site</span>
+        <button class="a11y-panel__reset" id="a11y-reset" type="button">Redefinir tudo</button>
+      </div>
+
+      <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title" id="a11y-text-size-title">Tamanho do texto</span>
+          <span class="a11y-option__description" id="a11y-text-size-description">Aumentar o texto em todo o site.</span>
+        </span>
+        <span class="a11y-text-size__controls">
+          <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="Texto menor" title="Texto menor">A−</button>
+          <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+          <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="Texto maior" title="Texto maior">A+</button>
+        </span>
+      </div>
+
+      <div class="a11y-options">
+        <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Alto contraste</span>
+            <span class="a11y-option__description">Texto escuro sobre fundo claro com contornos fortes.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Tons de cinza</span>
+            <span class="a11y-option__description">Mostrar o site sem cores.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Destacar links</span>
+            <span class="a11y-option__description">Sublinhar e marcar todos os links.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Fonte legível</span>
+            <span class="a11y-option__description">Uma fonte simples e muito legível.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Espaçamento do texto</span>
+            <span class="a11y-option__description">Mais espaço entre linhas, palavras e letras.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Destacar títulos</span>
+            <span class="a11y-option__description">Marcar os títulos para mostrar a estrutura da página.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Cursor grande</span>
+            <span class="a11y-option__description">Um ponteiro do mouse maior.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Foco bem destacado</span>
+            <span class="a11y-option__description">Um contorno grosso em volta do elemento com o foco do teclado.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+        <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+          <span class="a11y-option__copy">
+            <span class="a11y-option__title">Parar animações</span>
+            <span class="a11y-option__description">Parar animações, transições e o vídeo de fundo.</span>
+          </span>
+          <span class="a11y-option__switch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="a11y-panel__statement" id="a11y-statement" href="/pt-br/accessibility/">Declaração de acessibilidade</a>
+    </div>
+    <dialog
+      id="language-picker"
+      class="language-picker"
+      aria-labelledby="language-picker-title"
+    >
+      <div class="language-picker__box">
+        <div class="language-picker__head">
+          <h2 id="language-picker-title">Escolha o idioma</h2>
+          <button
+            type="button"
+            class="language-picker__close"
+            aria-label="Fechar"
+            data-close
+          >
+            ×
+          </button>
+        </div>
+        <ul class="language-picker__list">
+          <li>
+            <a class="language-picker__option" href="/login/" hreflang="en">
+              <img src="/assets/img/flags/flag-us.webp" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="en" dir="ltr">English</span>
+                <span class="language-picker__local">(inglês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/es/login/" hreflang="es">
+              <img src="/assets/img/flags/flag-es.webp" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="es" dir="ltr">Español</span>
+                <span class="language-picker__local">(espanhol)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/fr/login/" hreflang="fr">
+              <img src="/assets/img/flags/flag-fr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="fr" dir="ltr">Français</span>
+                <span class="language-picker__local">(francês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/de/login/" hreflang="de">
+              <img src="/assets/img/flags/flag-de.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="de" dir="ltr">Deutsch</span>
+                <span class="language-picker__local">(alemão)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/he/login/" hreflang="he">
+              <img src="/assets/img/flags/flag-il.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="he" dir="rtl">עברית</span>
+                <span class="language-picker__local">(hebraico)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/nl/login/" hreflang="nl">
+              <img src="/assets/img/flags/flag-nl.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="nl" dir="ltr">Nederlands</span>
+                <span class="language-picker__local">(holandês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/it/login/" hreflang="it">
+              <img src="/assets/img/flags/flag-it.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="it" dir="ltr">Italiano</span>
+                <span class="language-picker__local">(italiano)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/pt/login/" hreflang="pt">
+              <img src="/assets/img/flags/flag-pt.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="pt" dir="ltr">Português (Portugal)</span>
+                <span class="language-picker__local">(português)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/pt-br/login/" hreflang="pt-BR" aria-current="page">
+              <img src="/assets/img/flags/flag-br.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="pt-BR" dir="ltr">Português (Brasil)</span>
+                <span class="language-picker__local">(português (Brasil))</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/pl/login/" hreflang="pl">
+              <img src="/assets/img/flags/flag-pl.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="pl" dir="ltr">Polski</span>
+                <span class="language-picker__local">(polonês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/no/login/" hreflang="no">
+              <img src="/assets/img/flags/flag-no.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="no" dir="ltr">Norsk</span>
+                <span class="language-picker__local">(norueguês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/cs/login/" hreflang="cs">
+              <img src="/assets/img/flags/flag-cz.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="cs" dir="ltr">Čeština</span>
+                <span class="language-picker__local">(tcheco)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ru/login/" hreflang="ru">
+              <img src="/assets/img/flags/flag-ru.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ru" dir="ltr">Русский</span>
+                <span class="language-picker__local">(russo)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/uk/login/" hreflang="uk">
+              <img src="/assets/img/flags/flag-ua.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="uk" dir="ltr">Українська</span>
+                <span class="language-picker__local">(ucraniano)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/tr/login/" hreflang="tr">
+              <img src="/assets/img/flags/flag-tr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="tr" dir="ltr">Türkçe</span>
+                <span class="language-picker__local">(turco)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ar/login/" hreflang="ar">
+              <img src="/assets/img/flags/flag-ae.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ar" dir="rtl">العربية</span>
+                <span class="language-picker__local">(árabe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/hi/login/" hreflang="hi">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="hi" dir="ltr">हिन्दी</span>
+                <span class="language-picker__local">(hindi)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/bn/login/" hreflang="bn">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="bn" dir="ltr">বাংলা</span>
+                <span class="language-picker__local">(bengali)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/mr/login/" hreflang="mr">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="mr" dir="ltr">मराठी</span>
+                <span class="language-picker__local">(marati)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/te/login/" hreflang="te">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="te" dir="ltr">తెలుగు</span>
+                <span class="language-picker__local">(télugo)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/zh-hans/login/" hreflang="zh-Hans">
+              <img src="/assets/img/flags/flag-cn.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="zh-Hans" dir="ltr">简体中文</span>
+                <span class="language-picker__local">(chinês simplificado)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/zh-hant/login/" hreflang="zh-Hant">
+              <img src="/assets/img/flags/flag-tw.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="zh-Hant" dir="ltr">繁體中文</span>
+                <span class="language-picker__local">(chinês tradicional)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ja/login/" hreflang="ja">
+              <img src="/assets/img/flags/flag-jp.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ja" dir="ltr">日本語</span>
+                <span class="language-picker__local">(japonês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ko/login/" hreflang="ko">
+              <img src="/assets/img/flags/flag-kr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ko" dir="ltr">한국어</span>
+                <span class="language-picker__local">(coreano)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/da/login/" hreflang="da">
+              <img src="/assets/img/flags/flag-dk.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="da" dir="ltr">Dansk</span>
+                <span class="language-picker__local">(dinamarquês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sv/login/" hreflang="sv">
+              <img src="/assets/img/flags/flag-se.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sv" dir="ltr">Svenska</span>
+                <span class="language-picker__local">(sueco)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/el/login/" hreflang="el">
+              <img src="/assets/img/flags/flag-gr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="el" dir="ltr">Ελληνικά</span>
+                <span class="language-picker__local">(grego)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ro/login/" hreflang="ro">
+              <img src="/assets/img/flags/flag-ro.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ro" dir="ltr">Română</span>
+                <span class="language-picker__local">(romeno)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/hr/login/" hreflang="hr">
+              <img src="/assets/img/flags/flag-hr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="hr" dir="ltr">Hrvatski</span>
+                <span class="language-picker__local">(croata)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/fi/login/" hreflang="fi">
+              <img src="/assets/img/flags/flag-fi.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="fi" dir="ltr">Suomi</span>
+                <span class="language-picker__local">(finlandês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/bg/login/" hreflang="bg">
+              <img src="/assets/img/flags/flag-bg.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="bg" dir="ltr">Български</span>
+                <span class="language-picker__local">(búlgaro)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sr/login/" hreflang="sr">
+              <img src="/assets/img/flags/flag-rs.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sr" dir="ltr">Српски</span>
+                <span class="language-picker__local">(sérvio)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sk/login/" hreflang="sk">
+              <img src="/assets/img/flags/flag-sk.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sk" dir="ltr">Slovenčina</span>
+                <span class="language-picker__local">(eslovaco)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sl/login/" hreflang="sl">
+              <img src="/assets/img/flags/flag-si.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sl" dir="ltr">Slovenščina</span>
+                <span class="language-picker__local">(esloveno)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/id/login/" hreflang="id">
+              <img src="/assets/img/flags/flag-id.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="id" dir="ltr">Bahasa Indonesia</span>
+                <span class="language-picker__local">(indonésio)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/th/login/" hreflang="th">
+              <img src="/assets/img/flags/flag-th.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="th" dir="ltr">ไทย</span>
+                <span class="language-picker__local">(tailandês)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/vi/login/" hreflang="vi">
+              <img src="/assets/img/flags/flag-vn.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="vi" dir="ltr">Tiếng Việt</span>
+                <span class="language-picker__local">(vietnamita)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ms/login/" hreflang="ms">
+              <img src="/assets/img/flags/flag-my.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ms" dir="ltr">Bahasa Melayu</span>
+                <span class="language-picker__local">(malaio)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/fil/login/" hreflang="fil">
+              <img src="/assets/img/flags/flag-ph.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="fil" dir="ltr">Filipino</span>
+                <span class="language-picker__local">(filipino)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/hu/login/" hreflang="hu">
+              <img src="/assets/img/flags/flag-hu.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="hu" dir="ltr">Magyar</span>
+                <span class="language-picker__local">(húngaro)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </dialog>
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <h2 id="challenge-title" class="mfa-dialog__title">Verificação pelo app autenticador</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Digite o código atual do seu app autenticador para concluir o acesso.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>App autenticador</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Código de verificação</span
+          ><input
+            class="mfa-dialog__code"
+            name="code"
+            dir="ltr"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]{6}"
+            minlength="6"
+            maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
+            required
+        /></label>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Verificar</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Cancelar</button>
+        </div>
+        <p class="mfa-dialog__help">Perdeu o acesso? Entre em contato com o administrador da plataforma para verificar sua identidade e recuperar seu método de autenticação.</p>
+      </form>
+    </dialog>
+    <script type="application/json" id="login-copy">{"close":"Fechar","authenticatorN":"App autenticador {n}","verifying":"Verificando...","checking":"Verificando seu acesso...","opening":"Abrindo o painel...","signingIn":"Entrando...","humanReady":"Aprovado. Agora você pode continuar com o Google ou a Apple.","accessUnavailable":"Não é possível verificar o acesso agora. Tente novamente.","gameTitle":"Não sou um robô","gameInstruction":"Para confirmar, arraste o carro até o portão aberto","gameFooter":"Verificação humana · WIFIGATE","gameKeyboard":"Carro na faixa {lane} de 3. As setas trocam de faixa, Enter avança.","gameGate":"Portão {n}, {state}","gateOpen":"aberto","gateClosed":"fechado","gameRetry":"Quase. Entre pelo portão verde.","gameLocked":"Muitas tentativas. Tente novamente em {s} segundos.","gameDone":"Verificado. Você não é um robô.","errorCancelled":"O acesso foi cancelado.","errorPopupBlocked":"O navegador bloqueou a janela de acesso.","errorInvalidCode":"O código está incorreto ou expirou.","errorMissingCode":"Digite o código do seu app autenticador.","errorNetwork":"Não foi possível conectar. Verifique sua conexão de rede.","errorMfaCancelled":"A verificação da conta foi cancelada.","errorMfaUnsupported":"Esta conta não tem um app autenticador compatível.","errorUnverifiedEmail":"Use o e-mail verificado aprovado pelo administrador.","errorUnconfigured":"As configurações de acesso estão ausentes. Entre em contato com o suporte.","errorAppCheck":"Não foi possível verificar o navegador. Atualize a página e tente novamente. Se o problema continuar, entre em contato com o suporte.","errorServer":"Não foi possível acessar o servidor do WIFIGATE. Tente novamente.","errorSessionExpired":"Sua sessão expirou. Entre novamente.","errorForbidden":"Acesso não autorizado. Entre em contato com o administrador do sistema.","errorGeneric":"Algo deu errado. Tente novamente.","errorNoAccount":"Você não tem uma conta WIFIGATE. Entre em contato com o suporte: {email}"}</script>
+    <script>window.WIFIGATE_COOKIE_COPY = {"pt-BR":{"title":"Preferências de privacidade e cookies","description":"Usamos cookies necessários para o funcionamento do site. Com o seu consentimento, também usamos o Google Analytics para entender como o site é usado e melhorá-lo. Você pode mudar sua escolha a qualquer momento.","privacy":"Política de privacidade","cookies":"Política de cookies","settings":"Configurações","accept":"Aceitar todos","reject":"Rejeitar todos","save":"Salvar seleção","necessary":"Cookies necessários","necessaryHelp":"Necessários para o funcionamento do site e para salvar suas preferências. Sempre ativos.","alwaysOn":"Sempre ativo","analytics":"Cookies analíticos","analyticsHelp":"O Google Analytics só mede o uso do site se você permitir.","reopen":"Configurações de cookies","close":"Fechar configurações","banner":"Usamos cookies para analisar o tráfego do site com o Google Analytics. A análise só é ativada com o seu consentimento. Saiba mais:"}};</script>
+    <script src="/js/cookie-consent.js?v=20261119a11y2" defer></script>
+    <script src="/js/site-cache.js?v=20261109cache1" defer></script>
+  </body>
+</html>

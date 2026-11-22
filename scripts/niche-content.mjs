@@ -9,6 +9,7 @@ const labelRows = [
   ["nl", "WIFIGATE-toepassing", "Belangrijkste voordelen", "Home", "Veelgestelde vragen"],
   ["it", "Caso d'uso WIFIGATE", "Vantaggi principali", "Home", "Domande frequenti"],
   ["pt", "Caso de utilização da WIFIGATE", "Principais benefícios", "Início", "Perguntas frequentes"],
+  ["pt-BR", "Caso de uso da WIFIGATE", "Principais benefícios", "Início", "Perguntas frequentes"],
   ["pl", "Zastosowanie WIFIGATE", "Najważniejsze korzyści", "Strona główna", "Najczęściej zadawane pytania"],
   ["no", "WIFIGATE-bruksområde", "Viktigste fordeler", "Forside", "Ofte stilte spørsmål"],
   ["cs", "Využití WIFIGATE", "Hlavní výhody", "Domů", "Časté dotazy"],

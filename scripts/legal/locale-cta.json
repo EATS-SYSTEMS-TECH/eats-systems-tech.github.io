@@ -64,6 +64,19 @@
       "button": "Ir para a página inicial"
     }
   },
+  "pt-BR": {
+    "eyebrow": "Jurídico",
+    "pricing": {
+      "title": "Vamos falar sobre preço e instalação",
+      "text": "Fale com a nossa equipe pelo WhatsApp para escolher o produto certo, planejar a instalação e definir o próximo passo.",
+      "button": "Abrir o WhatsApp"
+    },
+    "back": {
+      "title": "Conheça o WIFIGATE",
+      "text": "Na página inicial você encontra os recursos do produto, exemplos de uso, guias e formas de falar com a nossa equipe.",
+      "button": "Ir para a página inicial"
+    }
+  },
   "pl": {
     "eyebrow": "Informacje prawne",
     "pricing": {

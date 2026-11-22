@@ -21,6 +21,7 @@ import de from "./de.mjs";
 import nl from "./nl.mjs";
 import it from "./it.mjs";
 import pt from "./pt.mjs";
+import ptBr from "./pt-br.mjs";
 import pl from "./pl.mjs";
 import no from "./no.mjs";
 import cs from "./cs.mjs";
@@ -54,7 +55,7 @@ import ms from "./ms.mjs";
 import fil from "./fil.mjs";
 
 export const LANDING_PAGE_LOCALES = {
-  en, he, es, fr, de, nl, it, pt, pl, no, cs, ru, uk, tr, ar, hi, bn, mr, te,
+  en, he, es, fr, de, nl, it, pt, "pt-BR": ptBr, pl, no, cs, ru, uk, tr, ar, hi, bn, mr, te,
   "zh-Hans": zhHans, "zh-Hant": zhHant, ja, ko, da, sv, hu, el, ro, hr, fi,
   bg, sr, sk, sl, id, th, vi, ms, fil,
 };

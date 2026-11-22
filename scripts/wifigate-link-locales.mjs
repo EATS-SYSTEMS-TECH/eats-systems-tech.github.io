@@ -98,6 +98,18 @@ export const wifigateLinkLocales = {
     copyButton: "Copiar link da aplicação",
     copiedButton: "Link da aplicação copiado"
   },
+  "pt-BR": {
+    pageTitle: "Abrir o WIFIGATE",
+    socialTitle: "Convite do WIFIGATE",
+    description: "Abra seu convite do WIFIGATE com segurança no aplicativo.",
+    heading: "Abrindo o WIFIGATE",
+    statusOpening: "Estamos tentando abrir seu convite no aplicativo.",
+    statusMissing: "Este link de convite não traz os dados de acesso. Peça para quem enviou compartilhar de novo.",
+    statusFallback: "Se o WIFIGATE não abriu automaticamente, use o botão abaixo.",
+    openButton: "Abrir no WIFIGATE",
+    copyButton: "Copiar link do aplicativo",
+    copiedButton: "Link do aplicativo copiado"
+  },
   pl: {
     pageTitle: "Otwórz WIFIGATE",
     socialTitle: "Zaproszenie WIFIGATE",

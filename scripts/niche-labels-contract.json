@@ -1,6 +1,6 @@
 {
   "source": "6df2c2468a85901dbcef7e0915cf266bcb87598e",
-  "sha256": "0faa5d8d3a88cd52767de33a432236940d27a7b7310fde0bc265192150487dd2",
+  "sha256": "808d6274729fa0a0b49f618488fd3f255827e889ab02edba03cb772c6792c5c7",
   "locales": [
     "en",
     "he",
@@ -10,6 +10,7 @@
     "nl",
     "it",
     "pt",
+    "pt-BR",
     "pl",
     "no",
     "cs",

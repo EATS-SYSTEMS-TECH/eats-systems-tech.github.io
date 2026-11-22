@@ -3,7 +3,7 @@
 // description, robots, canonical, hreflang, Open Graph, Twitter and a single
 // JSON-LD @graph. Every page carries the same Organization, WebSite and Brand
 // nodes (fixed @ids), so search engines and AI answer engines see one entity
-// behind all 39 languages and every page type.
+// behind all 40 languages and every page type.
 
 export const SITE_ORIGIN = "https://wifigate.io";
 export const ORGANIZATION_ID = `${SITE_ORIGIN}/#organization`;
@@ -29,7 +29,7 @@ export const WHATSAPP_URL = "https://wa.me/message/NZWNMX6V2XVHJ1";
 // Open Graph wants language_TERRITORY.
 const OG_LOCALES = {
   en: "en_US", he: "he_IL", es: "es_ES", fr: "fr_FR", de: "de_DE", nl: "nl_NL",
-  it: "it_IT", pt: "pt_PT", pl: "pl_PL", no: "nb_NO", cs: "cs_CZ", ru: "ru_RU",
+  it: "it_IT", pt: "pt_PT", "pt-BR": "pt_BR", pl: "pl_PL", no: "nb_NO", cs: "cs_CZ", ru: "ru_RU",
   uk: "uk_UA", tr: "tr_TR", ar: "ar_AR", hi: "hi_IN", bn: "bn_IN", mr: "mr_IN",
   te: "te_IN", "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", ja: "ja_JP", ko: "ko_KR",
   da: "da_DK", sv: "sv_SE", hu: "hu_HU", el: "el_GR", ro: "ro_RO", hr: "hr_HR",
@@ -43,10 +43,12 @@ export function ogLocale(locale) {
   return value;
 }
 
-// Google's hreflang takes only ISO 639-1 language codes. Filipino has none, so
-// its pages are listed as "tl"; the URL (/fil/) and html lang stay "fil", the
-// registered BCP 47 subtag, which browsers treat as the same language as "tl".
-const HREFLANG_CODES = { fil: "tl" };
+// Google's hreflang takes an ISO 639-1 language code, optionally with a region.
+// Filipino has no such code, so its pages are listed as "tl"; the URL (/fil/)
+// and html lang stay "fil", the registered BCP 47 subtag, which browsers treat
+// as the same language as "tl". Portuguese has two versions: /pt/ is listed as
+// "pt-PT" (its URL and html lang stay "pt") and /pt-br/ as "pt-BR".
+const HREFLANG_CODES = { fil: "tl", pt: "pt-PT" };
 
 export function hreflangCode(locale) {
   return HREFLANG_CODES[locale] || locale;

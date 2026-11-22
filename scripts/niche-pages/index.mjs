@@ -25,6 +25,7 @@ import de from "./de.mjs";
 import nl from "./nl.mjs";
 import it from "./it.mjs";
 import pt from "./pt.mjs";
+import ptBr from "./pt-br.mjs";
 import pl from "./pl.mjs";
 import no from "./no.mjs";
 import cs from "./cs.mjs";
@@ -202,6 +203,7 @@ export const NICHE_PAGE_LOCALES = {
   nl,
   it,
   pt,
+  "pt-BR": ptBr,
   pl,
   no,
   cs,

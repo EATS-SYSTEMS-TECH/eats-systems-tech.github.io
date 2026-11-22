@@ -16,9 +16,9 @@ test('complete dictionary values and nested insertion order match the frozen ori
   assert.equal(digest(result), frozen.serializationSha256);
   assert.deepEqual(Object.keys(result), frozen.localeOrder);
 });
-test('all39locale records retain their34field shape and exact localized facts', () => {
+test('all40locale records retain their34field shape and exact localized facts', () => {
   const copy = evaluate().window.accessibilityCopy;
-  assert.equal(Object.keys(copy).length, 39);
+  assert.equal(Object.keys(copy).length, 40);
   for (const locale of frozen.localeOrder) {
     assert.deepEqual(leaves(copy[locale]).map(([key]) => key), frozen.fieldOrder);
     assert.equal(digest(copy[locale]), frozen.locales[locale]);

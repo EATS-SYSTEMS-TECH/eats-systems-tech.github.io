@@ -15,7 +15,7 @@ export function buildLlmsTxt({ homeCopy, homeSeo, niches, pageUrl }) {
     "",
     `${homeCopy.platform.subtitle} It is made by EATS SYSTEMS TECH (Israel). ${homeCopy.platform.features.map((feature) => `${feature.title}: ${feature.text}`).join(" ")}`,
     "",
-    `The website is published in 39 languages; every page has a language version at /<language>/ (for example ${pageUrl("he", "home")}).`,
+    `The website is published in 40 languages; every page has a language version at /<language>/ (for example ${pageUrl("he", "home")}).`,
     "",
     "## Product",
     "",

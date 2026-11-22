@@ -88,9 +88,9 @@ function legalFixture(markup, locale, { home, failBody } = {}) {
   return { $, events, run: () => rewrite($, locale, 'privacy-policy') };
 }
 
-test('legal links localize literal home fragments and body paths in all39 locales', () => {
+test('legal links localize literal home fragments and body paths in all40 locales', () => {
   const locales = SITE_LANGUAGES.map(({ code }) => code);
-  assert.equal(locales.length, 39);
+  assert.equal(locales.length, 40);
   for (const locale of locales) {
     const f = legalFixture(`<a id="plain" href="../index.html">Home</a>
       <a id="fragment" href="../index.html?source=old#contact?keep=1">Contact</a>

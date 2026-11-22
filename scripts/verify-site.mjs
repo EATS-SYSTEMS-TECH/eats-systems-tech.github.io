@@ -30,7 +30,7 @@ const siteOrigin = "https://wifigate.io";
 const problems = [];
 
 const localeOptions = [
-  "en", "es", "fr", "de", "he", "nl", "it", "pt", "pl", "no", "cs", "ru", "uk",
+  "en", "es", "fr", "de", "he", "nl", "it", "pt", "pt-BR", "pl", "no", "cs", "ru", "uk",
   "tr", "ar", "hi", "bn", "mr", "te", "zh-Hans", "zh-Hant", "ja", "ko", "da", "sv", "hu",
   "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl", "id", "th", "vi", "ms", "fil",
 ];

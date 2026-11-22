@@ -75,7 +75,7 @@ test("static marketing and utility pages add no watermark elements, wrappers or 
   }
 });
 
-test("all 585 localized consumer pages contain exactly 429 video layers and 117 line-hero layers; every static Shabbat page has none", async () => {
+test("all 600 localized consumer pages contain exactly 440 video layers and 120 line-hero layers; every static Shabbat page has none", async () => {
   let pages = 0, frames = 0, lineFrames = 0, staticPages = 0;
   // WIFIGATE Host and Manager show a drawn line animation instead of a video;
   // since 10 Nov 2026 (owner request) their media layer carries the same mark.
@@ -116,8 +116,8 @@ test("all 585 localized consumer pages contain exactly 429 video layers and 117 
     frames += $("[data-media-watermark]").length;
     pages++;
   }
-  assert.equal(pages, 585);
-  assert.equal(staticPages, 39);
-  assert.equal(lineFrames, 117);
-  assert.equal(frames, 429 + 117);
+  assert.equal(pages, 600);
+  assert.equal(staticPages, 40);
+  assert.equal(lineFrames, 120);
+  assert.equal(frames, 440 + 120);
 });

@@ -8,6 +8,7 @@ export const accessibilityLinkLabels = {
   nl: "Toegankelijkheidsverklaring",
   it: "Dichiarazione di accessibilità",
   pt: "Declaração de acessibilidade",
+  "pt-BR": "Declaração de acessibilidade",
   pl: "Deklaracja dostępności",
   no: "Tilgjengelighetserklæring",
   cs: "Prohlášení o přístupnosti",

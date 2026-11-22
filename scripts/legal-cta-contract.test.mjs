@@ -24,7 +24,10 @@ test('legal CTA data retains the exact approved phase, locale order and seven-fi
  for(const [locale,row] of Object.entries(data)){
   assert.deepEqual(Object.keys(row),['eyebrow','pricing','back']);
   for(const group of ['pricing','back'])assert.deepEqual(Object.keys(row[group]),['title','text','button']);
-  for(const field of fixed.fields){const [group,key]=field.split('.');assert.equal(sha(row[group][key]),fixed.freshFieldHashes[locale][field][phase]);assert.notEqual(fixed.freshFieldHashes[locale][field].original,fixed.freshFieldHashes[locale][field].replacement);}
+  for(const field of fixed.fields){const [group,key]=field.split('.');const hashes=fixed.freshFieldHashes[locale][field];
+   // A locale added after the original freeze (fixed.addedLocales) has only a replacement hash.
+   if(locale in (fixed.addedLocales??{})){assert.equal(phase,'replacement');assert.ok(!('original' in hashes));assert.equal(sha(row[group][key]),hashes.replacement);continue;}
+   assert.equal(sha(row[group][key]),hashes[phase]);assert.notEqual(hashes.original,hashes.replacement);}
  }
 });
 test('legal eyebrows and native action labels remain fixed nonempty plain-text facts',()=>{
@@ -34,9 +37,9 @@ test('legal eyebrows and native action labels remain fixed nonempty plain-text f
   assert.doesNotMatch(row.pricing.button,/@/);
  }
 });
-test('all 156 complete actual legal bundles retain policy, company and fallback data',()=>{
+test('all 160 complete actual legal bundles retain policy, company and fallback data',()=>{
  for(const page of LEGAL_PAGES){
-  const bundles=legalBundles(page);assert.equal(Object.keys(bundles).length,39);
+  const bundles=legalBundles(page);assert.equal(Object.keys(bundles).length,40);
   for(const [locale,value] of Object.entries(bundles)){
    const row=structuredClone(value);
    if(locale in data)for(const field of fixed.fields){const [group,key]=field.split('.');assert.equal(row.cta[group][key],data[locale][group][key]);row.cta[group][key]='FIXED_APPROVED_CTA_COPY_SLOT';}

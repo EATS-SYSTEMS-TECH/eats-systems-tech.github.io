@@ -9,7 +9,7 @@ const locales = SITE_LANGUAGES.map(({ code }) => code);
 
 test("every supported locale has its own complete arrival-only page and preserves the existing localized feature", () => {
   assert.equal(AUTO_OPEN_PAGE_KEY, "auto-open");
-  assert.equal(locales.length, 39);
+  assert.equal(locales.length, 40);
   assert.deepEqual(validateAutoOpenPageLocales(locales, copies), []);
   for (const locale of locales) {
     const content = getAutoOpenPageContent(locale, copies[locale]), feature = copies[locale].platform.features[4];

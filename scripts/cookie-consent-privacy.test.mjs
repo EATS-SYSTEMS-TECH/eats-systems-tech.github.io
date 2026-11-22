@@ -238,7 +238,7 @@ test("withdrawal during a pending tag download prevents late grant or pageview",
 });
 
 test("all published locales and consumer niche routes are eligible", async () => {
-  assert.equal(locales.length, 39);
+  assert.equal(locales.length, 40);
   const fixture = await analyticsFixture(browser, { consent: accepted() });
   try {
     const paths = [...locales.map((locale) => locale === "en" ? "/" : `/${locale}/`),

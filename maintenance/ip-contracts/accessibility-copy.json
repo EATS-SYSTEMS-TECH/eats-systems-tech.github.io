@@ -10,6 +10,7 @@
     "nl",
     "it",
     "pt",
+    "pt-BR",
     "pl",
     "no",
     "cs",
@@ -78,7 +79,7 @@
     "options.reducedMotion.label",
     "options.reducedMotion.description"
   ],
-  "serializationSha256": "4b64f010214504fe93888e116b877b921aee036d34c54ecf2092feae0583e595",
+  "serializationSha256": "9a13bc463d86ae67eb24347f7e339a99901b9851837e5ee72e98d34424fca449",
   "locales": {
     "en": "db52d70d47107e293b090aa43c4bb5651d46b46d2f14c3f0822d78a8bf4634fb",
     "he": "f3818929350a94bb31d9c83ec364589d41af247446e6ed4f3899d2d1b2307778",
@@ -88,6 +89,7 @@
     "nl": "e4f41e40916bcc14d74bc1166dfc27d2fc054940c9df96302077afb5ad72b44d",
     "it": "26a7d15968ece44ca6ce0e9679d9b524622b9e3ee39350c430b20e79301524ae",
     "pt": "5a5370f936cab22fc64f07e5f31fb1d32160920f10694306a4a54ed3c4527a3c",
+    "pt-BR": "0d20720f8330d5de670262c61443d89cc088c3c6d8827a73402205763d263cc4",
     "pl": "fcb3ef204ee74f3d9313912355c3858eba7516ac42ba59f83a4ee62bd06b351c",
     "no": "b6aeaa6202da4d6a402cc0156f449d6dfa450ed3767a15324c4ae1cb0449c582",
     "cs": "eeac0de38895ef3de939465e40549b9d7f87a3c49db13796e573f6f6df39a75c",

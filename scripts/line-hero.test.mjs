@@ -1,6 +1,6 @@
 // The WIFIGATE Host and WIFIGATE Manager line-animation heroes: committed
-// static frames, scene modules, the CSS stage, the playback runtime and all 78
-// generated pages (39 locales x 2). Browser behaviour is covered separately by
+// static frames, scene modules, the CSS stage, the playback runtime and all 80
+// generated pages (40 locales x 2). Browser behaviour is covered separately by
 // scripts/line-hero-browser.test.mjs.
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
@@ -145,7 +145,7 @@ test("the player loops by elapsed frame time, pauses, resumes, restarts at 0 and
   } finally { delete globalThis.document; delete globalThis.requestAnimationFrame; delete globalThis.cancelAnimationFrame; }
 });
 
-test("all 78 Host and Manager pages carry the light line hero with the existing controls and no video", async () => {
+test("all 80 Host and Manager pages carry the light line hero with the existing controls and no video", async () => {
   const runtime = await read("js/line-hero.js");
   const frames = {};
   for (const name of Object.keys(LINE_HERO_SCENES)) for (const frame of LINE_HERO_FRAMES) frames[`${name}-${frame}`] = await sha12(lineHeroFramePath(name, frame));
@@ -209,7 +209,7 @@ test("all 78 Host and Manager pages carry the light line hero with the existing 
     assert.equal($(`script[type=module][src='${prefix}js/line-hero.js?v=${LINE_HERO_VERSION}']`).length, 1);
     pages++;
   }
-  assert.equal(pages, 78);
+  assert.equal(pages, 80);
   // The preloaded scene URL is exactly the one the runtime imports.
   // Each scene is imported from its own module (several scenes may share one) by its factory.
   for (const [scene, { module, factory }] of Object.entries(LINE_HERO_SCENES)) assert.ok(runtime.includes(`${scene}: () => import("./${path.posix.basename(module)}?v=${LINE_HERO_VERSION}").then(module => module.${factory})`), scene);

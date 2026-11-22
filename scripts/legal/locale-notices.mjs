@@ -7,6 +7,7 @@ export const languageNotices = {
   nl: "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie.",
   it: "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante.",
   pt: "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa.",
+  "pt-BR": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculante.",
   pl: "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą.",
   no: "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen.",
   cs: "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze.",
