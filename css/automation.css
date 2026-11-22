@@ -1022,6 +1022,8 @@ html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
 .wa-flow__link {
   color: var(--flow-blue);
   font-weight: 700;
+  /* The dashboard link stays on one line (owner request 2026-11-22). */
+  white-space: nowrap;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -1030,6 +1032,9 @@ html.a11y-reduced-motion .wa-audience__list .wa-chip:hover .wa-chip__art {
 .wa-flow__link:focus-visible {
   text-decoration-thickness: 2px;
 }
+
+/* The Host hero lead keeps the owner's line break before its last sentence. */
+.wifigate-host-page #niche-hero-lead { white-space: pre-line; }
 
 /* ---------- Benefits: an open dashed grid ---------- */
 :is(.wifigate-host-page, .wifigate-manager-page) #niche-benefits {

@@ -240,10 +240,15 @@ export function installAudienceList($, { items, productName = "host", assetPrefi
 // to the feature page. Locales without them keep the page unchanged. All items
 // are validated before the page changes.
 // A spotlight with a scene shows that line animation (js/line-spotlight.js)
-// over the scene's own start frame; the others show their still drawing.
+// over the scene's own start frame; the others show their still drawing. An
+// item may name its scene ("scene"), so one link target (the sign-in page, for
+// example) can carry different art on the Host and Manager pages.
 const SPOTLIGHT_ART = { "auto-open": "autoopen-still.svg", "quick-guest-invite": "guest-still.svg", "login": "control-still.svg" };
 export const SPOTLIGHT_SCENES = { "auto-open": "building", "quick-guest-invite": "guest", "login": "control" };
-export const LINE_SPOTLIGHT_VERSION = "20261122control1";
+// Every scene js/line-spotlight.js can play.
+export const SPOTLIGHT_SCENE_NAMES = Object.freeze(["building", "guest", "control", "hostcontrol", "hostbooking", "hoststay", "nosim"]);
+export const LINE_SPOTLIGHT_VERSION = "20261122host1";
+const spotlightSceneOf = item => item.scene ?? SPOTLIGHT_SCENES[item.page];
 function spotlightScene($, { scene, frames, assetPrefix, copy }) {
   const frame = frames?.get?.(scene);
   if (!frame?.start || !frame?.still) throw new Error(`Line scene frames are required for the ${scene} spotlight`);
@@ -261,7 +266,8 @@ export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor, fr
   if (spotlights === undefined) return;
   if (!Array.isArray(spotlights) || !spotlights.length) throw new Error("Spotlights must be a non-empty list");
   for (const item of spotlights) {
-    if (!SPOTLIGHT_ART[item?.page]) throw new Error(`Unknown spotlight page: ${item?.page}`);
+    if (item?.scene !== undefined ? !SPOTLIGHT_SCENE_NAMES.includes(item.scene) : !SPOTLIGHT_ART[item?.page]) throw new Error(`Unknown spotlight page or scene: ${item?.page} ${item?.scene ?? ""}`);
+    if (typeof item.page !== "string" || !item.page.trim()) throw new Error("Missing spotlight page");
     for (const key of ["eyebrow", "title", "text", "link"]) if (typeof item[key] !== "string" || !item[key].trim()) throw new Error(`Missing spotlight ${key} for ${item.page}`);
   }
   const hero = $("section.niche-hero");
@@ -274,7 +280,7 @@ export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor, fr
       node($, "p", { class: "wa-lead" }, item.text),
       node($, "a", { class: "wa-spotlight__link", href: hrefFor(item.page) }, item.link),
     ]);
-    const scene = SPOTLIGHT_SCENES[item.page];
+    const scene = spotlightSceneOf(item);
     const art = scene ? spotlightScene($, { scene, frames, assetPrefix, copy: controls })
       : node($, "img", { class: "wa-spotlight__art", src: `${assetPrefix}assets/img/line-hero/${SPOTLIGHT_ART[item.page]}`, alt: "",
         width: "1600", height: "900", loading: "lazy", decoding: "async" });
@@ -285,7 +291,7 @@ export function installSpotlights($, { spotlights, assetPrefix = "", hrefFor, fr
   // Under the price list when the page has one, otherwise under the hero.
   const pricing = $(".host-marketing-pricing");
   (pricing.length === 1 ? pricing : hero).after(...sections);
-  if (spotlights.some(item => SPOTLIGHT_SCENES[item.page]))
+  if (spotlights.some(spotlightSceneOf))
     $("head").append(`<script type="module" src="${assetPrefix}js/line-spotlight.js?v=${LINE_SPOTLIGHT_VERSION}"></script>`);
 }
 

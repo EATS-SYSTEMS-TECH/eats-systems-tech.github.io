@@ -2,7 +2,9 @@
 // from js/line-hero.js: the Auto Open panel (a resident walks into an
 // apartment building and the lobby doors open by themselves) and the guest
 // invite panel (a courier on a bicycle gets the invite and opens the gate)
-// and the "simple management" panel (the Manager control panel at work).
+// and the "simple management" panel (the Manager control panel at work); on
+// the WIFIGATE Host page: booking to access link, the guest's stay, the Host
+// control panel and the No SIM, No Router scene.
 // The page ships the scene's start frame (or its still frame under
 // prefers-reduced-motion) as the panel image, so the panel is complete
 // without JavaScript; this module draws the live SVG over that frame in the
@@ -17,6 +19,10 @@ const SCENES = {
   building: () => import("./line-hero-building.js?v=20261116lh14").then(module => module.createBuildingEntryScene),
   guest: () => import("./line-hero-features.js?v=20261116lh14").then(module => module.createGuestScene),
   control: () => import("./line-hero-control.js?v=20261116lh14").then(module => module.createControlScene),
+  hostcontrol: () => import("./line-hero-control.js?v=20261116lh14").then(module => module.createHostControlScene),
+  hostbooking: () => import("./line-hero-host-spotlights.js?v=20261116lh14").then(module => module.createHostBookingScene),
+  hoststay: () => import("./line-hero-host-spotlights.js?v=20261116lh14").then(module => module.createHostStayScene),
+  nosim: () => import("./line-hero-nosim.js?v=20261116lh14").then(module => module.createNoSimScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 

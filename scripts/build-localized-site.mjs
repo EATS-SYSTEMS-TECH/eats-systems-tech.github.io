@@ -372,7 +372,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
     installAudienceList($, { items: content.audiences, productName: product, assetPrefix: buildAssetPrefix(locale, pageKey) });
     installSpotlights($, { spotlights: hostCopy.marketing?.spotlights, assetPrefix: buildAssetPrefix(locale, pageKey), hrefFor: key => buildPagePath(locale, key),
       frames: homeData.lineHeroFrames, controls: homeData.homepageCopies[locale].hero.media });
-    const automationVersion = pageKey === HOST_PAGE_KEY ? '20261114hostfaq1' : '20261121spotlight4';
+    const automationVersion = pageKey === HOST_PAGE_KEY ? '20261122host1' : '20261122flow1';
     $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, pageKey)}css/automation.css?v=${automationVersion}" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,

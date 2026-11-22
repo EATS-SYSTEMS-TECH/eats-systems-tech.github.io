@@ -33,6 +33,10 @@ export const LINE_HERO_SCENES = Object.freeze({
   building: { module: "js/line-hero-building.js", factory: "createBuildingEntryScene" },
   // Not a hero either: the animated "simple management" spotlight on the Manager page.
   control: { module: "js/line-hero-control.js", factory: "createControlScene" },
+  // The WIFIGATE Host page spotlights.
+  hostcontrol: { module: "js/line-hero-control.js", factory: "createHostControlScene" },
+  hostbooking: { module: "js/line-hero-host-spotlights.js", factory: "createHostBookingScene" },
+  hoststay: { module: "js/line-hero-host-spotlights.js", factory: "createHostStayScene" },
 });
 export const LINE_HERO_FRAMES = Object.freeze(["start", "still"]);
 

@@ -23,6 +23,10 @@ const SCENES = {
   building: () => import("./line-hero-building.js?v=20261116lh14").then(module => module.createBuildingEntryScene),
   // The "simple management" spotlight on the Manager page; js/line-spotlight.js mounts it.
   control: () => import("./line-hero-control.js?v=20261116lh14").then(module => module.createControlScene),
+  // The WIFIGATE Host page spotlights; js/line-spotlight.js mounts them.
+  hostcontrol: () => import("./line-hero-control.js?v=20261116lh14").then(module => module.createHostControlScene),
+  hostbooking: () => import("./line-hero-host-spotlights.js?v=20261116lh14").then(module => module.createHostBookingScene),
+  hoststay: () => import("./line-hero-host-spotlights.js?v=20261116lh14").then(module => module.createHostStayScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video", hideText: "Hide text", showText: "Show text" };

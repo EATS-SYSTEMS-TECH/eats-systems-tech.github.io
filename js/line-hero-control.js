@@ -6,11 +6,17 @@
 // a shield with a lock and a check seals it all. The loop starts and ends on
 // the resting panel, so the start frame is the complete panel. Same line
 // language as the other line heroes; js/line-spotlight.js mounts it.
-// Builds the scene inside an empty <svg> and returns its deterministic render(t).
+// The WIFIGATE Host page has its own variant (createHostControlScene): the
+// sidebar lists properties instead of buildings and the residents card is a
+// booking chart, where a new stay is added and a finished one is struck out.
+// Both build the scene inside an empty <svg> and return its deterministic render(t).
 export const CONTROL_DURATION = 16;
 export const CONTROL_STILL = 12.6;
 
-export function createControlScene(svg) {
+export function createControlScene(svg) { return buildControlScene(svg, false); }
+export function createHostControlScene(svg) { return buildControlScene(svg, true); }
+
+function buildControlScene(svg, host) {
   var NS = 'http://www.w3.org/2000/svg';
   var BLUE = '#146BFF';
   /* Line tone, as in the Host and Manager scenes: every stroke opacity passes
@@ -97,14 +103,21 @@ export function createControlScene(svg) {
   path('M' + (WX + 486) + ' ' + (WY + 26) + 'v-4a4 4 0 0 1 8 0v4');
   line(WX + 506, WY + 28, WX + 700, WY + 28);
 
-  /* the sidebar: four buildings, the first one selected */
+  /* the sidebar: four buildings (Host: properties), the first one selected */
   var SX = WX + WW - 250, SY = WY + 56;
   line(SX, SY, SX, WY + WH);
   for (var b = 0; b < 4; b++) {
     var by = SY + 36 + b * 120;
     if (b === 0) tint(SX + 18, by - 14, 214, 100, 14);
-    rect(SX + 40, by + 8, 44, 62, 4, b === 0 ? PRIM : CTX);
-    for (var wy = 0; wy < 3; wy++) for (var wx = 0; wx < 2; wx++) rect(SX + 48 + wx * 18, by + 16 + wy * 16, 9, 9, 1.5);
+    if (host) {
+      /* a house: walls, a pitched roof, a door and a window */
+      path('M' + (SX + 34) + ' ' + (by + 34) + 'L' + (SX + 62) + ' ' + (by + 10) + 'L' + (SX + 90) + ' ' + (by + 34), b === 0 ? PRIM : CTX);
+      rect(SX + 40, by + 30, 44, 40, 3, b === 0 ? PRIM : CTX);
+      rect(SX + 56, by + 50, 12, 20, 2); rect(SX + 46, by + 38, 9, 9, 1.5);
+    } else {
+      rect(SX + 40, by + 8, 44, 62, 4, b === 0 ? PRIM : CTX);
+      for (var wy = 0; wy < 3; wy++) for (var wx = 0; wx < 2; wx++) rect(SX + 48 + wx * 18, by + 16 + wy * 16, 9, 9, 1.5);
+    }
     line(SX + 104, by + 26, SX + 210, by + 26, b === 0 ? PRIM : CTX);
     line(SX + 104, by + 50, SX + 176, by + 50);
   }
@@ -119,17 +132,25 @@ export function createControlScene(svg) {
   var cGuest = card(0), cUsers = card(1), cHist = card(2), cEvents = card(3);
 
   /* ================================================================ residents */
-  function person(x, y, style, parent) {
+  /* Host: each row is a guest and the stay's dates as a bar on a week. */
+  var STAYS = [[0, 120], [60, 140], [20, 90], [80, 130]];
+  function person(x, y, style, parent, row) {
     var g = group(parent);
     circle(x, y - 10, 13, style, g);
     path('M' + (x - 22) + ' ' + (y + 24) + 'q22 -26 44 0', style, g);
-    line(x + 40, y - 6, x + 200, y - 6, style, g);
-    line(x + 40, y + 16, x + 150, y + 16, CTX, g);
+    if (host) {
+      var s = STAYS[row];
+      line(x + 40, y + 20, x + 240, y + 20, CTX, g);
+      rect(x + 40 + s[0], y - 12, s[1], 22, 11, style, g);
+    } else {
+      line(x + 40, y - 6, x + 200, y - 6, style, g);
+      line(x + 40, y + 16, x + 150, y + 16, CTX, g);
+    }
     return g;
   }
   var ux = cUsers.x, uy = cUsers.y;
-  var users = [0, 1, 2].map(function (i) { return person(ux + 60, uy + 58 + i * 64, CTX); });
-  var newUser = person(ux + 60, uy + 250, PRIM);
+  var users = [0, 1, 2].map(function (i) { return person(ux + 60, uy + 58 + i * 64, CTX, null, i); });
+  var newUser = person(ux + 60, uy + 250, PRIM, null, 3);
   var plus = group();
   circle(ux + CW - 50, uy + 250, 18, PRIM, plus);
   line(ux + CW - 59, uy + 250, ux + CW - 41, uy + 250, PRIM, plus);
