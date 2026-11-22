@@ -249,9 +249,12 @@ export function fillUseCaseBody($, { chrome, content, image, locale, pageKey, ac
     const summary = $('<summary>');
     setLocalizedText($, summary, item.question, locale);
     // Each line is a paragraph, optionally grouped as a readable bullet list.
+    // In a list, a first line that ends with a colon introduces the bullets.
     const body = $('<div>').addClass('seo-faq__answer');
     const list = item.list ? $('<ul>').addClass('seo-faq__bullets').attr('dir', locale === 'he' ? 'rtl' : 'ltr') : null;
-    for (const line of item.answer.split('\n')) {
+    const lines = item.answer.split('\n');
+    if (list && lines.length > 1 && lines[0].trim().endsWith(':')) { const intro = $('<p>'); setLocalizedText($, intro, lines.shift(), locale); body.append(intro); }
+    for (const line of lines) {
       const answer = $('<p>'); setLocalizedText($, answer, line, locale);
       if (list) list.append($('<li>').append(answer)); else body.append(answer);
     }

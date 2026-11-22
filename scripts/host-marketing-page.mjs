@@ -169,7 +169,11 @@ export function getHostPageContent(hostCopy, homepageCopy, productName = "host")
     benefits: ordered(product.benefits, "benefits", "b"),
     stepsHeading: { eyebrow: read("marketing.steps.eyebrow"), title: read("marketing.steps.title"), subtitle: read("marketing.steps.subtitle") },
     benefitsEyebrow: read("marketing.benefits.eyebrow"),
-    faq: Array.from({ length: faqCount(hostCopy) }, (_, index) => ({ question: read(`marketing.faq.q${index + 1}`), answer: unmarked(read(`marketing.faq.a${index + 1}`)) })),
+    // An answer written on several lines is shown as a bullet list.
+    faq: Array.from({ length: faqCount(hostCopy) }, (_, index) => {
+      const answer = unmarked(read(`marketing.faq.a${index + 1}`));
+      return { question: read(`marketing.faq.q${index + 1}`), answer, ...(answer.includes("\n") ? { list: true } : {}) };
+    }),
     seoTitle: read("metaTitle"), seoDescription: read("metaDescription") };
 }
 
