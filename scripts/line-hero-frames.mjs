@@ -31,6 +31,8 @@ export const LINE_HERO_SCENES = Object.freeze({
   nofees: { module: "js/line-hero-features.js", factory: "createNoFeesScene" },
   // Not a hero: the animated Auto Open spotlight on the Manager page (js/line-spotlight.js).
   building: { module: "js/line-hero-building.js", factory: "createBuildingEntryScene" },
+  // Not a hero either: the animated "simple management" spotlight on the Manager page.
+  control: { module: "js/line-hero-control.js", factory: "createControlScene" },
 });
 export const LINE_HERO_FRAMES = Object.freeze(["start", "still"]);
 

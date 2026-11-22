@@ -21,6 +21,8 @@ const SCENES = {
   nofees: () => import("./line-hero-features.js?v=20261116lh14").then(module => module.createNoFeesScene),
   // The Auto Open spotlight on the Manager page; js/line-spotlight.js mounts it.
   building: () => import("./line-hero-building.js?v=20261116lh14").then(module => module.createBuildingEntryScene),
+  // The "simple management" spotlight on the Manager page; js/line-spotlight.js mounts it.
+  control: () => import("./line-hero-control.js?v=20261116lh14").then(module => module.createControlScene),
 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 const FALLBACK_COPY = { play: "Play video", pause: "Pause video", replay: "Replay video", hideText: "Hide text", showText: "Show text" };

@@ -241,9 +241,9 @@ export function installAudienceList($, { items, productName = "host", assetPrefi
 // are validated before the page changes.
 // A spotlight with a scene shows that line animation (js/line-spotlight.js)
 // over the scene's own start frame; the others show their still drawing.
-const SPOTLIGHT_ART = { "auto-open": "autoopen-still.svg", "quick-guest-invite": "guest-still.svg" };
-export const SPOTLIGHT_SCENES = { "auto-open": "building", "quick-guest-invite": "guest" };
-export const LINE_SPOTLIGHT_VERSION = "20261121guest1";
+const SPOTLIGHT_ART = { "auto-open": "autoopen-still.svg", "quick-guest-invite": "guest-still.svg", "login": "control-still.svg" };
+export const SPOTLIGHT_SCENES = { "auto-open": "building", "quick-guest-invite": "guest", "login": "control" };
+export const LINE_SPOTLIGHT_VERSION = "20261122control1";
 function spotlightScene($, { scene, frames, assetPrefix, copy }) {
   const frame = frames?.get?.(scene);
   if (!frame?.start || !frame?.still) throw new Error(`Line scene frames are required for the ${scene} spotlight`);
