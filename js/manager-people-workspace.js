@@ -1,5 +1,6 @@
 // Presentation only: existing row actions, CSV flows and gate writes are reused.
 import { createManagerSectionHeading } from "./manager-section-heading.js";
+import { managerLocationArt } from "./manager-art.js";
 export function organizeManagerPeople(content, { language, tab, rows, editor, status }) {
   const he = language === "he", t = (h, e) => he ? h : e;
   const el = (tag, text, cls) => {
@@ -109,12 +110,27 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
   const searchLabel = el("label", t("חיפוש ברשומות שנטענו", "Search loaded records"));
   const search = el("input");
   search.type = "search";
-  search.placeholder = t("שם, טלפון, אימייל או מיקום", "Name, phone, email or location");
+  search.placeholder = t("שם, טלפון או אימייל", "Name, phone or email");
   search.autocomplete = "off";
   searchLabel.append(search);
+  // Floor, apartment and parking each have their own exact-match search.
+  const locationSearch = el("div", undefined, "manager-people-location-search");
+  locationSearch.setAttribute("role", "group");
+  locationSearch.setAttribute("aria-label", t("חיפוש לפי מיקום", "Search by location"));
+  const locationInputs = [["floorNumber", "floor", t("קומה", "Floor")], ["apartmentNumber", "apartment", t("דירה", "Apartment")], ["parkingNumber", "parking", t("חניה", "Parking")]].map(([key, art, label]) => {
+    const card = el("label", undefined, "manager-people-location-filter");
+    const input = el("input");
+    input.type = "search";
+    input.autocomplete = "off";
+    input.placeholder = t("מספר", "No.");
+    input.dataset.locationSearch = key;
+    card.append(managerLocationArt(art), el("span", label), input);
+    locationSearch.append(card);
+    return { key, input };
+  });
   const count = el("p", "", "manager-people-count");
   count.setAttribute("role", "status");
-  filter.append(searchLabel, count);
+  filter.append(searchLabel, locationSearch, count);
   const noMatches = el("p", t("לא נמצאו רשומות מתאימות בחיפוש. נסו שם או מספר אחר.", "No matching loaded records. Try another name or number."), "manager-people-no-matches");
   noMatches.hidden = true;
   const rendered = [];
@@ -154,19 +170,24 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
         return cell;
       });
       row.replaceChildren(person, phone, ...location, actions);
-      rendered.push({row, text: `${Object.values(data).join(" ")} +${data.countryCode} ${data.localNumber} ${data.countryCode}${data.localNumber}`.toLocaleLowerCase()});
+      rendered.push({row, data, text: `${Object.values(data).join(" ")} +${data.countryCode} ${data.localNumber} ${data.countryCode}${data.localNumber}`.toLocaleLowerCase()});
     }
   }
   const update = () => {
     const query = search.value.trim().toLocaleLowerCase();
+    const exact = locationInputs.map(({ key, input }) => [key, input.value.trim().toLocaleLowerCase()]).filter(([, value]) => value);
+    const filtering = Boolean(query || exact.length);
     let visible = 0;
-    for (const item of rendered) { item.row.hidden = !item.text.includes(query); if (!item.row.hidden) visible++; }
-    count.textContent = query
+    for (const item of rendered) {
+      item.row.hidden = !item.text.includes(query) || exact.some(([key, value]) => String(item.data[key] ?? "").trim().toLocaleLowerCase() !== value);
+      if (!item.row.hidden) visible++;
+    }
+    count.textContent = filtering
       ? t(`${visible} מתוך ${rows.length === 1 ? "רשומה אחת שנטענה" : `${rows.length} רשומות שנטענו`}`, `${visible} of ${rows.length} loaded ${rows.length === 1 ? "record" : "records"}`)
       : rows.length === 1 ? t("רשומה אחת נטענה", "1 loaded record") : t(`${rows.length} רשומות שנטענו`, `${rows.length} loaded records`);
-    noMatches.hidden = !query || visible > 0;
+    noMatches.hidden = !filtering || visible > 0;
   };
-  search.addEventListener("input", update);
+  for (const input of [search, ...locationInputs.map(item => item.input)]) input.addEventListener("input", update);
   update();
   workspace.append(header, dialog, filter);
   if (wrap) workspace.append(wrap);

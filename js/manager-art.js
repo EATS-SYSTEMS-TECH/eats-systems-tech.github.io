@@ -72,3 +72,34 @@ export function managerAccessNoteArt(kind = "arrival") {
   else group.append(svgNode("rect",{x:10,y:6,width:32,height:44,rx:6,fill:"#146BFF","fill-opacity":.06}),path("M20 17H34M20 25H34M20 33H29"),svgNode("circle",{cx:42,cy:40,r:10,fill:"white"}),path("M37 40H47M43 36L47 40L43 44"));
   svg.append(group); return svg;
 }
+
+// Floor, apartment and parking search cards, in the app's AccessNoteArt line style.
+export function managerLocationArt(kind) {
+  const svg=svgNode("svg",{viewBox:"0 0 64 64",class:`manager-location-art manager-location-art-${kind}`,"aria-hidden":"true",fill:"none"});
+  const group=svgNode("g",{stroke:"#146BFF","stroke-width":2,"stroke-linecap":"round","stroke-linejoin":"round"});
+  const path=(d,attrs={})=>svgNode("path",{d,...attrs});
+  const context={opacity:.4,"stroke-width":1.4};
+  group.append(path("M4 58H60",{opacity:.25,"stroke-width":1.3}));
+  if(kind==="floor") group.append(
+    svgNode("rect",{x:10,y:32,width:30,height:12,fill:"#146BFF","fill-opacity":.1,stroke:"none"}),
+    svgNode("rect",{x:10,y:8,width:30,height:50,rx:3}),
+    path("M10 20H40M10 44H40M17 14H21M29 14H33M17 26H21M29 26H33M17 50H21M29 50H33",context),
+    path("M10 32H40M17 38H33"),
+    path("M53 18V46",context),path("M49 23L53 18L57 23M49 41L53 46L57 41"));
+  else if(kind==="apartment") group.append(
+    path("M12 58V10H52V58",context),
+    svgNode("rect",{x:20,y:16,width:24,height:42,rx:3,fill:"#146BFF","fill-opacity":.07}),
+    svgNode("rect",{x:26,y:22,width:12,height:8,rx:2,fill:"white"}),
+    path("M30 26H34"),
+    svgNode("circle",{cx:38,cy:40,r:2}),
+    path("M24 52H40",context));
+  else group.append(
+    svgNode("rect",{x:6,y:6,width:20,height:20,rx:4,fill:"#146BFF","fill-opacity":.07}),
+    path("M13 21V11H18A3.5 3.5 0 0 1 18 18H13"),
+    path("M16 26V58",context),
+    path("M28 50V42L32 33Q33.5 30 37 30H51Q54.5 30 56 33L60 42V50Z",{fill:"#146BFF","fill-opacity":.07}),
+    path("M33 41H55",context),
+    svgNode("circle",{cx:36,cy:50,r:4,fill:"white"}),
+    svgNode("circle",{cx:52,cy:50,r:4,fill:"white"}));
+  svg.append(group); return svg;
+}

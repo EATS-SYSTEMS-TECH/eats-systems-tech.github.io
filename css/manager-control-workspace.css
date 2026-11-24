@@ -800,6 +800,11 @@ body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
 .manager-control-workspace .manager-people-filter label { display:grid; gap:8px; font-size:12px; color:#53677e; flex:1 1 260px; max-width:480px; }
 .manager-control-workspace .manager-people-filter input { box-sizing:border-box; width:100%; min-height:46px; padding:11px 14px; border:1px solid #d8e1ec; border-radius:10px; background:#fff; font:inherit; font-size:14px; color:#162e49; }
 .manager-control-workspace .manager-people-count { margin:0 0 12px; color:#61758b; font-size:12px; }
+.manager-control-workspace .manager-people-filter .manager-people-location-search { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; flex:1 1 100%; }
+.manager-control-workspace .manager-people-filter .manager-people-location-filter { display:grid; justify-items:center; gap:8px; max-width:none; padding:14px 12px 12px; border:1px solid #e3eaf3; border-radius:14px; background:#fff; color:#24405f; font-size:13px; font-weight:700; }
+.manager-control-workspace .manager-people-location-filter:focus-within { border-color:#146bff; box-shadow:0 0 0 3px rgba(20,107,255,.12); }
+.manager-control-workspace .manager-location-art { display:block; width:64px; height:64px; }
+.manager-control-workspace .manager-people-filter .manager-people-location-filter input { min-height:42px; text-align:center; font-variant-numeric:tabular-nums; }
 .manager-control-workspace .manager-people-table { width:100%; min-width:0; table-layout:fixed; }
 .manager-control-workspace .manager-people-table th:nth-child(1) { width:30%; }
 .manager-control-workspace .manager-people-table th:nth-child(2) { width:19%; }
@@ -842,6 +847,10 @@ body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
   .manager-control-workspace .manager-people-row-actions .manager-button { flex:1; margin:0; }
   .manager-control-workspace .manager-people-footer { flex-direction:column; align-items:stretch; text-align:center; }
   .manager-control-workspace .manager-people-count { margin:0; }
+  .manager-control-workspace .manager-people-filter .manager-people-location-search { gap:8px; }
+  .manager-control-workspace .manager-people-filter .manager-people-location-filter { padding:10px 6px 8px; gap:6px; }
+  .manager-control-workspace .manager-location-art { width:48px; height:48px; }
+  .manager-control-workspace .manager-people-filter .manager-people-location-filter input { padding:9px 6px; }
 }
 
 .manager-control-workspace .manager-history-workspace { min-width:0; display:grid; gap:20px; padding-block-end:100px; }
