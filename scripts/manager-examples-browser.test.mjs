@@ -257,7 +257,10 @@ test("Manager example gate, Dual Control and group use real workspace controls w
         );
         await content.getByText(/0x0*A1B2C3/, { exact: true }).waitFor();
         await tab("system");
-        await content.locator(".manager-device-card").waitFor();
+        // Internal storage and limits, then the SD card.
+        await content.locator(".manager-device-card").first().waitFor();
+        assert.equal(await content.locator(".manager-device-card h3").first().textContent(), copy("אחסון פנימי ומגבלות", "Internal storage and limits"));
+        assert.equal(await content.locator(".manager-device-card h3").nth(1).textContent(), "SD Card");
         await open("dual");
         const gatePicker = workspace.getByLabel(
           copy("בחירת שער", "Choose gate"),

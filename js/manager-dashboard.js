@@ -2920,6 +2920,22 @@ export function createManagerDashboard({
   }
   function renderStorageDetails(content, data) {
     content.append(createManagerSectionHeading({title:t("המערכת והאחסון", "System & storage"),description:t("מצב האחסון ופרטי המערכת כפי שדווחו על ידה.", "Storage status and details reported by the system."),icon:"app"}));
+    // Internal storage and the limits the system reports, in one place.
+    const limits = connection?.capabilities?.data?.limits ?? {};
+    const littleFs = data?.littleFs ?? {};
+    const history = data?.history ?? {};
+    const count = (value) => (Number.isFinite(Number(value)) && value !== null && value !== "" ? Number(value).toLocaleString(language === "he" ? "he-IL" : "en-US") : null);
+    const internalFacts = [
+      [t("אמצעי אחסון", "Storage"), history.backend ? String(history.backend).replace(/^LITTLEFS$/i, "LittleFS") : littleFs.mounted === true ? "LittleFS" : null],
+      [t("נפח פנימי", "Internal capacity"), count(littleFs.totalBytes) === null ? null : formatManagerBytes(littleFs.totalBytes, language)],
+      [t("בשימוש", "Used"), count(littleFs.usedBytes) === null ? null : formatManagerBytes(littleFs.usedBytes, language)],
+      [t("תקרת רשומות היסטוריה", "History record limit"), count(history.retentionRecords)],
+      [t("משתמשים לכל היותר", "Maximum users"), count(limits.maxUsers)],
+      [t("מנהלים לכל היותר", "Maximum administrators"), count(limits.maxAdmins)],
+      [t("אירועים לכל היותר", "Maximum events"), count(limits.maxEvents)],
+    ].filter(([, value]) => value !== null && value !== undefined && value !== "");
+    if (internalFacts.length)
+      content.append(detailCard(t("אחסון פנימי ומגבלות", "Internal storage and limits"), t("הנפח והמגבלות כפי שהמערכת מדווחת עליהם.", "Capacity and limits as reported by the system."), internalFacts));
     const sd = managerSdDetails(data, language);
     const state = sd.supported === false ? t("כרטיס SD אינו נתמך במערכת זו", "SD cards are not supported by this system")
       : sd.mounted === true ? t("כרטיס מחובר וזמין", "Card mounted and available")
