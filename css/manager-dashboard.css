@@ -1995,12 +1995,11 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
 .manager-history-phone-role { display:block; margin-top:4px; color:#64748b; font-size:11px; }
 
 /* My systems in rows: one per organization, then systems in no organization.
-   Each row scrolls sideways; a search above the rows filters them. */
-.manager-systems-search { margin:4px 0 2px; }
-.manager-systems-search-empty { margin:0; padding:16px; border:1px dashed #d6dee8; border-radius:14px; background:#fafcfe; color:#64748b; font-size:14px; text-align:center; }
-.manager-systems-search-empty[hidden], .manager-systems-row[hidden], .manager-systems-row .manager-system[hidden], .manager-systems-row-nav[hidden] { display:none !important; }
-.manager-systems-row { display:grid; gap:14px; padding:18px 0; border-top:1px solid #e6ebf2; min-width:0; }
-.manager-systems-row:first-of-type, .manager-systems-search + .manager-systems-row { border-top:0; padding-top:4px; }
+   Every row has its own system search and scrolls sideways; the scroll
+   controls stay visible even when a row holds one system or none. */
+.manager-systems-row[hidden], .manager-systems-row .manager-system[hidden], .manager-systems-row-empty[hidden] { display:none !important; }
+.manager-systems-row { display:grid; gap:12px; padding:18px 0; border-top:1px solid #e6ebf2; min-width:0; }
+.manager-systems-row:first-of-type { border-top:0; padding-top:4px; }
 .manager-systems-row-head { display:flex; align-items:center; gap:12px; min-width:0; }
 .manager-systems-row-mark { flex:none; width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:#0f172a; color:#fff; font-weight:700; font-size:16px; }
 .manager-systems-row[data-unlinked] .manager-systems-row-mark { background:#f1f5f9; color:#64748b; border:1px dashed #cbd5e1; }
@@ -2012,13 +2011,17 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
 .platform-page .manager-systems-row button.manager-systems-row-step { width:34px; height:34px; min-height:34px; min-width:0; padding:0; border:1px solid #d6dee8; border-radius:10px; background:#fff; color:#0f172a; font-size:20px; font-weight:500; line-height:1; box-shadow:none; cursor:pointer; }
 .platform-page .manager-systems-row button.manager-systems-row-step:hover:not(:disabled) { background:#f1f5f9; color:#0f172a; }
 .platform-page .manager-systems-row button.manager-systems-row-step:disabled { opacity:.35; background:#fff; color:#0f172a; cursor:default; }
-.manager-systems-row > .manager-grid { display:flex; grid-template-columns:none; gap:12px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:2px; padding:2px 2px 10px; scrollbar-width:thin; }
+.manager-systems-row-search { display:block; }
+.manager-systems-row-search-label { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.manager-systems-row-search input { box-sizing:border-box; width:min(100%,300px); min-height:40px; padding:9px 13px; border:1px solid #dfe6ee; border-radius:11px; background:#fff; color:#243a54; font:inherit; font-size:13px; }
+.manager-systems-row-search input:disabled { background:#f8fafc; color:#94a3b8; cursor:not-allowed; }
+.manager-systems-row > .manager-grid { display:flex; grid-template-columns:none; grid-auto-rows:auto; gap:12px; overflow-x:scroll; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:2px; padding:2px 2px 10px; scrollbar-width:thin; scrollbar-color:#cbd5e1 #f1f5f9; }
 .manager-systems-row > .manager-grid:focus-visible { outline:2px solid #2563eb; outline-offset:2px; border-radius:12px; }
 .manager-systems-row > .manager-grid > * { box-sizing:border-box; flex:0 0 min(300px, 84%); min-width:0; scroll-snap-align:start; }
-.manager-systems-row-empty { margin:0; padding:14px 16px; border:1px dashed #d6dee8; border-radius:14px; background:#fafcfe; color:#64748b; font-size:14px; line-height:1.5; }
+.manager-systems-row-empty { margin:0; padding:14px 16px; border:1px dashed #d6dee8; border-radius:14px; background:#fafcfe; color:#64748b; font-size:14px; line-height:1.5; display:flex; align-items:center; min-height:72px; }
 @media (max-width:560px) {
   .manager-systems-row-head { flex-wrap:wrap; }
-  .manager-systems-row-nav { display:none; }
   .manager-systems-row-tools { margin-inline-start:0; width:100%; }
-  .manager-systems-row-tools > .manager-button { width:100%; }
+  .manager-systems-row-tools > .manager-button { flex:1; }
+  .manager-systems-row-search input { width:100%; }
 }
