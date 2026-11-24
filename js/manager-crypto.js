@@ -130,42 +130,20 @@ export function uncompressed(publicHex) {
   return hexBytes("04" + publicHex.slice(2) + y.toString(16).padStart(64, "0"));
 }
 
-async function database() {
-  return new Promise((resolve, reject) => {
-    const r = indexedDB.open("wg-manager-keys", 1);
-    r.onupgradeneeded = () => r.result.createObjectStore("keys");
-    r.onerror = () => reject(new Error("Secure key storage unavailable"));
-    r.onsuccess = () => resolve(r.result);
-  });
+// F5: forward secrecy for remote sessions. Every Manager session gets its own
+// non-extractable ECDH key that lives only in memory for that session; the
+// grant already binds the session's public key, so the contract is unchanged.
+// A recorded session cannot be decrypted later from a stolen browser profile.
+export async function managerSessionKey() {
+  return crypto.subtle.generateKey({ name: "ECDH", namedCurve: "P-256" }, false, ["deriveBits"]);
 }
-export async function managerKey(uid) {
-  const db = await database();
+
+// Removes the long-lived per-account key that earlier versions stored.
+export function forgetStoredManagerKeys() {
   try {
-    const read = await new Promise((resolve, reject) => {
-      const r = db.transaction("keys").objectStore("keys").get(uid);
-      r.onsuccess = () => resolve(r.result);
-      r.onerror = () => reject(new Error("Secure key storage unavailable"));
-    });
-    if (
-      read?.privateKey?.extractable === false &&
-      read.privateKey.algorithm.name === "ECDH" &&
-      read.privateKey.algorithm.namedCurve === "P-256"
-    )
-      return read;
-    const pair = await crypto.subtle.generateKey(
-      { name: "ECDH", namedCurve: "P-256" },
-      false,
-      ["deriveBits"],
-    );
-    await new Promise((resolve, reject) => {
-      const tx = db.transaction("keys", "readwrite");
-      tx.objectStore("keys").put(pair, uid);
-      tx.oncomplete = resolve;
-      tx.onerror = () => reject(new Error("Secure key storage unavailable"));
-    });
-    return pair;
-  } finally {
-    db.close();
+    indexedDB.deleteDatabase("wg-manager-keys");
+  } catch {
+    // Storage unavailable: nothing was stored.
   }
 }
 

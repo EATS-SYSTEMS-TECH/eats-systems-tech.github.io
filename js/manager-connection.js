@@ -1,5 +1,6 @@
 import {
-  managerKey,
+  managerSessionKey,
+  forgetStoredManagerKeys,
   randomHex,
   bytesHex,
   managerHandshake,
@@ -64,7 +65,9 @@ export class ManagerConnection {
   }
   async openSession(systemId) {
     this.onState("waiting");
-    this.key = await managerKey(this.user.uid);
+    // A fresh key per session (F5); the old stored per-account key is removed.
+    forgetStoredManagerKeys();
+    this.key = await managerSessionKey();
     this.requireOpen();
     this.sessionId = randomHex(8);
     this.identity = await this.api(
@@ -268,12 +271,24 @@ export class ManagerConnection {
     return grant;
   }
   async renew(nonce) {
-    if (this.renewing || this.closed) return;
+    if (this.closed) return;
+    // F13: a challenge that arrives during a renewal is answered right after
+    // it with the newest nonce (the gate rotates it), instead of being lost.
+    if (this.renewing) {
+      this.pendingNonce = nonce;
+      return;
+    }
     this.renewing = true;
     try {
-      await this.authorize(nonce);
+      let next = nonce;
+      while (next && !this.closed) {
+        this.pendingNonce = null;
+        await this.authorize(next);
+        next = this.pendingNonce;
+      }
     } finally {
       this.renewing = false;
+      this.pendingNonce = null;
     }
   }
   async command(cmd, payload = {}, timeout = cmd === "ADMIN_LIST_HISTORY" ? 35000 : 15000) {
