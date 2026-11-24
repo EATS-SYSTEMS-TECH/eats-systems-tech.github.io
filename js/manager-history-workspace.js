@@ -63,7 +63,7 @@ export function renderManagerHistoryDays(content, { days, language, guests, more
     const symbol = node("span", undefined, "manager-history-day-symbol");
     symbol.append(managerUiIcon("calendar"));
     button.append(symbol);
-    button.append(node("span", t("יומן פעילות", "Activity log"), "manager-history-day-label"), node("strong", managerHistoryDay(day, language)), node("span", t(`${count} רשומות במערכת`, `${count} system records`), "manager-history-day-count"), node("span", t("צפייה בפעילות ←", "View activity →"), "manager-history-day-link"));
+    button.append(node("span", t("יומן פעילות", "Activity log"), "manager-history-day-label"), node("strong", managerHistoryDay(day, language)), node("span", count === 1 ? t("רשומה אחת במערכת", "1 system record") : t(`${count} רשומות במערכת`, `${count} system records`), "manager-history-day-count"), node("span", t("צפייה בפעילות ←", "View activity →"), "manager-history-day-link"));
     list.append(button);
   }
   if (!list.childElementCount) list.append(node("p", t("אין עדיין היסטוריה זמינה במערכת.", "No system history is available yet."), "manager-history-empty"));
