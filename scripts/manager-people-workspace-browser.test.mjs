@@ -93,7 +93,7 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
       const form=workspace.locator('[data-people-form]');
       assert.equal(await form.isVisible(),false,'editor stays out of the list until requested');
       assert.equal(await workspace.locator('tbody tr').count(),20);
-      assert.equal(await workspace.locator('thead th').count(),4);
+      assert.equal(await workspace.locator('thead th').count(),6);
       const capture = async suffix => {
         if(!process.env.MANAGER_PEOPLE_EVIDENCE) return;
         await mkdir(process.env.MANAGER_PEOPLE_EVIDENCE,{recursive:true});

@@ -121,7 +121,9 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
   if (table) {
     table.classList.add("manager-people-table");
     const head = table.querySelector("thead tr");
-    head.replaceChildren(...[t("פרטי קשר", "Contact"), t("טלפון", "Phone"), t("מיקום", "Location"), t("פעולות", "Actions")].map(text => {
+    // Floor, apartment and parking each get their own column.
+    const locationColumns = [["floorNumber", t("קומה", "Floor")], ["apartmentNumber", t("דירה", "Apartment")], ["parkingNumber", t("חניה", "Parking")]];
+    head.replaceChildren(...[t("פרטי קשר", "Contact"), t("טלפון", "Phone"), ...locationColumns.map(([, label]) => label), t("פעולות", "Actions")].map(text => {
       const th = el("th", text); th.scope = "col"; return th;
     }));
     for (const [index, row] of [...table.querySelectorAll("tbody tr")].entries()) {
@@ -142,11 +144,16 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
       const phone = el("td", undefined, "manager-people-phone");
       const number = el("bdi", `+${data.countryCode} ${data.localNumber}`); number.dir = "ltr";
       phone.append(number);
-      const location = el("td", undefined, "manager-people-location");
-      for (const [key, label] of [["floorNumber", t("קומה", "Floor")], ["apartmentNumber", t("דירה", "Apartment")], ["parkingNumber", t("חניה", "Parking")]]) {
-        if (data[key] !== null && data[key] !== undefined && data[key] !== "") location.append(el("span", `${label} ${data[key]}`));
-      }
-      row.replaceChildren(person, phone, location, actions);
+      const location = locationColumns.map(([key, label]) => {
+        const value = data[key] ?? "";
+        const cell = el("td", undefined, "manager-people-location");
+        // The label shows only in the stacked mobile layout, where the header is hidden.
+        cell.dataset.label = label;
+        if (value === "") cell.dataset.empty = "";
+        cell.append(el("span", value === "" ? "—" : String(value)));
+        return cell;
+      });
+      row.replaceChildren(person, phone, ...location, actions);
       rendered.push({row, text: `${Object.values(data).join(" ")} +${data.countryCode} ${data.localNumber} ${data.countryCode}${data.localNumber}`.toLocaleLowerCase()});
     }
   }
