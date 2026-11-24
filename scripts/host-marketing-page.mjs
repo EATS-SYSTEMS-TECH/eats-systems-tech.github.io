@@ -84,7 +84,7 @@ function outline($, shapes, extra = {}) {
 
 // Construct one plan with the fixed translation schema; one plan per product is featured.
 // A plan marked `sticker` (a worked example, not an offer) shows its name as a label stuck over the card's top edge.
-function offerCard($, { key, name, amount, per, translated: named, description, range, features, sticker = false, crest = "" }, product) {
+function offerCard($, { key, name, amount, per, translated: named, description, range, features, sticker = false, crest = "" }, product, pricingCopy) {
   const prefix = `${marketingKey}.pricing`;
   const featured = key === product.featured;
   const parts = [];
@@ -100,11 +100,15 @@ function offerCard($, { key, name, amount, per, translated: named, description, 
     translated($, "span", "wa-plan__per", named ? `${prefix}.${key}Per` : `${prefix}.per`, per)]);
   parts.push(price, translated($, "p", "wa-plan__range", `${prefix}.${key}Range`, range),
     translated($, "p", "wa-plan__desc", `${prefix}.${key}Desc`, description));
-  parts.push(node($, "ul", { class: "wa-plan__features" }, features.map((text, index) =>
-    node($, "li", { class: "wa-plan__feature" }, [
+  const featureRows = features.flatMap((text, index) => {
+    const slot = `${key}F${index + 1}`;
+    if (pricingCopy?.[slot] === null) return [];
+    return node($, "li", { class: "wa-plan__feature" }, [
       outline($, [["path", { d: "m5 12 5 5L20 7" }]], { width: "16", height: "16", "stroke-width": "2.5", "aria-hidden": "true" }),
-      node($, "span", { "data-i18n": `${prefix}.${key}F${index + 1}` }, text),
-    ]))));
+      node($, "span", { "data-i18n": `${prefix}.${slot}` }, text),
+    ]);
+  });
+  parts.push(node($, "ul", { class: "wa-plan__features" }, featureRows));
   parts.push(node($, "div", { class: "wa-plan__cta" }, [node($, "a", {
     class: `btn btn--${featured ? "primary" : "ghost"}`, href: "../index.html#contact", "data-i18n": `${prefix}.planCta`,
   }, "Talk to us")]));
@@ -123,7 +127,7 @@ export function installHostPricingShells($, productName = "host") {
 
 // Validate the entire destination before touching any list; missing/ambiguous
 // sections cannot leave a partly updated public fragment.
-export function installHostDetailShells($, productName = "host") {
+export function installHostDetailShells($, productName = "host", pricingCopy) {
   const product = productOf(productName);
   const [audience, pricing] = ["section.wa-audience .wa-audience__row", "section.wa-pricing .wa-pricing__grid"].map(selector => $(selector));
   if ([audience, pricing].some(selection => selection.length !== 1)) {
@@ -131,7 +135,7 @@ export function installHostDetailShells($, productName = "host") {
   }
   const chips = [translated($, "span", "wa-audience__label", `${marketingKey}.audience.label`, "Built for:"),
     ...product.audience.map(([key, text]) => translated($, "span", "wa-chip", `${marketingKey}.audience.${key}`, text))];
-  const plans = product.offers.map(offer => offerCard($, offer, product));
+  const plans = product.offers.map(offer => offerCard($, offer, product, pricingCopy));
   audience.empty().append(...chips);
   pricing.empty().addClass("wa-pricing__grid--crest").append(...plans);
 }

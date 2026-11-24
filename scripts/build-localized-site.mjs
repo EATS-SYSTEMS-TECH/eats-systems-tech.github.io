@@ -337,7 +337,7 @@ async function buildSubscriptionPage(homeData, { product, pageKey, copyDir, scen
   for (const { code: locale } of homeData.localeOptions) {
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale), hostCopy = await loadSubscriptionCopy(copyDir, locale);
     const $ = cheerio.load(source, { decodeEntities: false }), legacy = cheerio.load(details, { decodeEntities: false });
-    installHostDetailShells(legacy, product);
+    installHostDetailShells(legacy, product, hostCopy.marketing?.pricing);
     const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale], product), chrome = getNicheChrome(locale);
     prepareUseCaseShell($, locale, pageKey, bodyClass);
     fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle, benefitArt: true });

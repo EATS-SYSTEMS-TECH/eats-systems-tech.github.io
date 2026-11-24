@@ -70,7 +70,11 @@ test("all 40 Manager locales supply the shared page layout with the Manager plan
     assert.equal(content.benefits.length, 6);
     content.benefits.forEach((item) => assert.ok(BENEFIT_ICONS[item.icon], `${locale}: existing benefit icon`));
     for (const plan of ["systems", "organizations", "example"]) {
-      for (const key of ["Name", "Per", "Range", "Desc", "F1", "F2", "F3", "F4"]) assert.ok(manager.marketing.pricing[`${plan}${key}`]?.trim(), `${locale}: ${plan}${key}`);
+      for (const key of ["Name", "Per", "Range", "Desc", "F1", "F2", "F3", "F4"]) {
+        const value = manager.marketing.pricing[`${plan}${key}`];
+        if (locale === "he" && plan === "systems" && key === "F2") assert.equal(value, null);
+        else assert.ok(value?.trim(), `${locale}: ${plan}${key}`);
+      }
     }
     assert.match(manager.marketing.pricing.exampleDesc, /\$1\.90/, `${locale}: the documented USD price`);
     // At least the shared eight questions, plus any further numbered ones in the copy.
