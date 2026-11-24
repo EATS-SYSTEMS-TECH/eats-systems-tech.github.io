@@ -260,6 +260,11 @@ export function createManagerDashboard({
       FIRMWARE_RELEASE_CHANGED:t("גרסת העדכון השתנתה. בדקו שוב לפני העדכון.","The update release changed. Check again before updating."),
       TOTP_REQUIRED:t("יש להשלים אימות באמצעות אפליקציית המאמת לפני הפעולה.","Complete authenticator verification before this action."),
       RECENT_REAUTH_REQUIRED:t("נדרש אימות חשבון חדש לפני הפעולה. נסו שוב והשלימו את האימות.","A new account verification is required. Try again and complete verification."),
+      // Account re-verification opens a Google window; say what stopped it.
+      "auth/popup-blocked":t("הדפדפן חסם את חלון האימות. אפשרו חלונות קופצים לאתר ולחצו שוב.","The browser blocked the verification window. Allow pop-ups for this site and try again."),
+      "auth/popup-closed-by-user":t("חלון האימות נסגר לפני שהאימות הושלם. לא בוצע שינוי.","The verification window closed before verification finished. Nothing was changed."),
+      "auth/cancelled-popup-request":t("חלון האימות נסגר לפני שהאימות הושלם. לא בוצע שינוי.","The verification window closed before verification finished. Nothing was changed."),
+      "auth/network-request-failed":t("אין חיבור לאינטרנט לאימות החשבון. בדקו את החיבור ונסו שוב.","There is no connection for account verification. Check the connection and try again."),
       QR_LABEL_UNAVAILABLE:t("לא ניתן להכין כרגע את מדבקת WIFIGATE. נסו שוב בעוד רגע.","The WIFIGATE label cannot be prepared right now. Try again shortly."),
       FOTA_REBOOT_NOT_VERIFIED:t("לא אומתה הגרסה החדשה לאחר האתחול. התחברו שוב ובדקו את גרסת המערכת לפני ניסיון נוסף.","The new version was not verified after restart. Reconnect and check the installed version before retrying."),
       // History may use internal LittleFS on BETA boards or SD on newer hardware.
