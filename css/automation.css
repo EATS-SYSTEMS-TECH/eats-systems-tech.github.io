@@ -599,7 +599,13 @@ html[dir="rtl"] .wa-hero::after {
    the same one the homepage uses. */
 html[lang="he"] .wifigate-manager-page .niche-hero__title {
   max-width: none;
-  font-size: clamp(1.25rem, 4.4vw, 4.5rem);
+  font-size: clamp(1.25rem, 4.4vw, 4rem);
+}
+
+@media (max-width: 390px) {
+  html[lang="he"] .wifigate-manager-page .niche-hero__title {
+    font-size: clamp(1rem, 5vw, 1.25rem);
+  }
 }
 
 /* Keep the Host and Manager FAQ headings in document flow while questions scroll. */
