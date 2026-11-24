@@ -834,6 +834,10 @@ body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
 }
 @media(max-width:700px) {
   .manager-control-workspace .manager-people-tools { width:100%; }
+  /* The export menu spans the tools row on narrow screens, so it never opens past the screen edge in RTL or LTR. */
+  .manager-control-workspace .manager-people-tools { position:relative; }
+  .manager-control-workspace .manager-people-exports { position:static; }
+  .manager-control-workspace .manager-people-export-options { inset-inline:0; width:auto; max-width:none; }
   .manager-control-workspace .manager-people-tools > .primary { flex-basis:100%; }
   .manager-control-workspace .manager-people-table,.manager-control-workspace .manager-people-table tbody { display:block; }
   .manager-control-workspace .manager-people-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
