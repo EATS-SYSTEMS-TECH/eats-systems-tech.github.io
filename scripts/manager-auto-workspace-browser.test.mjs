@@ -43,7 +43,7 @@ test("Auto Open shows confirmed state, one action, local search, paged enrollmen
       await window.dashboard.ready;
     },language);
     const he=language==='he',copy=(h,e)=>he?h:e;
-    await page.locator('.manager-view > .manager-grid .manager-system button.primary').click();
+    await page.locator(':is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system button.primary').click();
     await page.locator('[data-tab="auto"]').click();
     const content=page.locator('#manager-content'),settings=content.locator('.manager-auto-settings'),list=content.locator('.manager-auto-users');
     await list.locator('.manager-auto-user').nth(9).waitFor();

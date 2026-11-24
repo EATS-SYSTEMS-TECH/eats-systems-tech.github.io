@@ -53,7 +53,7 @@ test("Guests tab invites a guest: the gate signs, Manager seals, the link is rea
       }, language);
       const he = language === "he", copy = (h, e) => he ? h : e;
       if (mode === "sample") await page.locator(".manager-examples > summary").click();
-      const card = mode === "sample" ? page.locator('[data-example-system="example-manager-gate"]') : page.locator(".manager-view > .manager-grid .manager-system");
+      const card = mode === "sample" ? page.locator('[data-example-system="example-manager-gate"]') : page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system");
       await card.getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true }).click();
       await page.locator('[data-tab="guests"]').click();
       const section = page.locator(".manager-guest-invite");

@@ -24,7 +24,7 @@ test("Manager uses the public site's white, ink and blue design across languages
       await dashboard.ready;
     }, language);
     const he = language === "he", copy = (h, e) => he ? h : e;
-    const open = page.locator(".manager-view > .manager-grid .manager-system").getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true });
+    const open = page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system").getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true });
     assert.deepEqual(await open.evaluate(button => ({ background: getComputedStyle(button).backgroundColor, radius: getComputedStyle(button).borderRadius })), { background: "rgb(17, 17, 17)", radius: "4px" });
     assert.equal(await page.locator("body").evaluate(body => getComputedStyle(body).backgroundColor), "rgb(255, 255, 255)");
     assert.equal(await page.locator('.manager-nav button[aria-current="page"]').evaluate(button => getComputedStyle(button).backgroundColor), "rgb(17, 17, 17)");

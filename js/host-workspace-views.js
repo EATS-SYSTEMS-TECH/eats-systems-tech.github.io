@@ -254,6 +254,7 @@ export function workspaceLoaders(context) {
         onChanged: (systemId) => context.systemsChanged("my-systems", systemId),
         openBookings: context.openBookings,
         canOpenBookings: context.canOpenBookings,
+        openOrganization: context.chooseOrganization,
       }),
     systems: (panel, viewCurrent) =>
       org

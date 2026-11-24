@@ -1,3 +1,4 @@
+import { createMySystemsRows } from "./my-systems-rows.js";
 import { systemsEmptyCopy } from "./systems-empty-copy.js";
 import { hostText } from "./host-locale.js";
 import { node, nameBlock } from "./host-ui.js";
@@ -5,8 +6,7 @@ import { readHostPages } from "./host-pages.js";
 import {
   readSystem,
   systemMessage,
-  systemCard,
-  systemGrid,
+  systemCard,
   organizationBadge,
   notLinkedBadge,
   iconSrc,
@@ -141,7 +141,15 @@ export async function renderMySystems(panel, context) {
     empty.append(node("h4", copy.title), node("p", copy.description));
     section.append(empty);
   } else
-    section.append(systemGrid(systems.map((system) => card(section, system, context))));
+    // The same rows as WIFIGATE Manager: one per organization, then no organization.
+    section.append(...createMySystemsRows({
+      systems,
+      organizations: context.organizations ?? [],
+      organizationOf: (system) => system.linkedOrganization?.id ?? null,
+      renderCard: (system) => card(section, system, context),
+      onOpenOrganization: context.openOrganization ? (org) => context.openOrganization(org.id) : undefined,
+      language: document.documentElement.lang === "he" ? "he" : "en",
+    }));
   await examples();
 }
 

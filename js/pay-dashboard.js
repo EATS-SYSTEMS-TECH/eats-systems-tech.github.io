@@ -1,6 +1,7 @@
 import { payRequest } from "./api/index.js";
 import qrcode from "./vendor/qrcode-generator.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
+import { createMySystemsRows } from "./my-systems-rows.js";
 import { createManagerOrganizationCard, createOrganizationLogo } from "./manager-organization-card.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { createManagerActivity } from "./manager-activity.js";
@@ -317,16 +318,21 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     const searchLabel = el("label", undefined, "manager-organization-search pay-search");
     searchLabel.append(el("span", t("חיפוש במערכות שנטענו", "Search loaded systems"), "pay-sr-only"));
     const search = el("input"); search.type = "search"; search.placeholder = t("חיפוש מערכת", "Search systems"); search.maxLength = 100;
-    searchLabel.append(search); content.append(searchLabel);
+    // My systems uses the shared search of the organization rows.
+    searchLabel.append(search); if (organizationId) content.append(searchLabel);
     const grid = el("div", undefined, "manager-grid pay-system-grid");
+    // My systems uses the same organization rows as Manager and Host.
+    const rows = el("div", undefined, "pay-system-rows");
     const emptySearch = el("p", t("לא נמצאו מערכות לחיפוש הזה.", "No systems match this search."), "pay-empty-search"); emptySearch.hidden = true;
     const paint = () => {
       grid.replaceChildren();
       const query = search.value.trim().toLocaleLowerCase(language);
-      for (const system of items.filter(system => `${system.name || ""} ${system.targetId || ""} ${system.config?.displayName || ""}`.toLocaleLowerCase(language).includes(query))) grid.append(card(system, false));
-      emptySearch.hidden = grid.childElementCount !== 0 || items.length === 0;
+      const found = items.filter(system => `${system.name || ""} ${system.targetId || ""} ${system.config?.displayName || ""}`.toLocaleLowerCase(language).includes(query));
+      if (organizationId) for (const system of found) grid.append(card(system, false));
+      else rows.replaceChildren(...(items.length ? createMySystemsRows({ systems: items, organizations: profile?.organizations ?? [], organizationOf: system => system.organization?.id ?? null, renderCard: system => card(system, false), onOpenOrganization: org => void navigateTo(org.id), searchText: system => `${system.name || ""} ${system.targetId || ""} ${system.config?.displayName || ""}`, language }) : []));
+      emptySearch.hidden = !organizationId || found.length !== 0 || items.length === 0;
     };
-    search.addEventListener("input", paint); paint(); content.append(grid, emptySearch);
+    search.addEventListener("input", paint); paint(); content.append(organizationId ? grid : rows, emptySearch);
     if (!items.length) {
       const empty = el("section", undefined, "manager-empty manager-empty-systems pay-empty");
       empty.append(icon("systems"), el("h3", organizationId ? t("עדיין אין מערכות בארגון הזה", "No systems in this organization yet") : t("המערכת הראשונה שלכם מתחילה כאן", "Your first system starts here")), el("p", organizationId ? t("בעל מערכת יכול לשייך אותה לארגון מתוך סביבת הניהול האישית שלו, אם הוא מנהל בארגון.", "A system owner who administers this organization can assign a system from their personal workspace.") : t("מערכות שקושרו לחשבון שלכם יוצגו כאן. בינתיים אפשר להתנסות בדוגמאות ולבדוק את סביבת הניהול.", "Systems linked to your account will appear here. Meanwhile, explore the examples and try the management workspace.")));

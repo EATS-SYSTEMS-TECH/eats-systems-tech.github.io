@@ -26,7 +26,7 @@ test("People renews an ageing channel before load-all, export or opening CSV imp
       api:async path=>path==='/me'?{role:'user',account:{id:'fixture'},organizations:[]}:{items:path.startsWith('/systems?')?[{...template,id:'real-fixture',status:'active'}]:[],nextCursor:null}});
     await window.dashboard.ready;
   });
-  await page.locator('.manager-view > .manager-grid .manager-system').getByRole('button',{name:'Open workspace',exact:true}).click();
+  await page.locator(':is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system').getByRole('button',{name:'Open workspace',exact:true}).click();
   await page.locator('[data-tab="users"]').click();
   await page.locator('.manager-people-workspace').waitFor();
   await page.evaluate(()=>window.lowBudget=true);
@@ -85,7 +85,7 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
       },language);
       const he=language==='he', copy=(h,e)=>he?h:e;
       if(mode==='sample') await page.locator('.manager-examples > summary').click();
-      const card=mode==='sample'?page.locator('[data-example-system="example-manager-gate"]'):page.locator('.manager-view > .manager-grid .manager-system');
+      const card=mode==='sample'?page.locator('[data-example-system="example-manager-gate"]'):page.locator(':is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system');
       await card.getByRole('button',{name:copy('פתיחת סביבת ניהול','Open workspace'),exact:true}).click();
       await page.locator('[data-tab="users"]').click();
       const workspace=page.locator('.manager-people-workspace');

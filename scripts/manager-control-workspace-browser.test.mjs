@@ -74,7 +74,7 @@ test("Factory reset ends management after acknowledgement or an uncertain reply 
   for(const language of ['he','en']) for(const uncertain of [false,true]) {
     const {page,errors}=await fixture(t,browser,origin,{language,width:390,type:'gate'});
     const he=language==='he',copy=(h,e)=>he?h:e;
-    await page.locator('.manager-view > .manager-grid .manager-system').getByRole('button',{name:copy('פתיחת סביבת ניהול','Open workspace'),exact:true}).click();
+    await page.locator(':is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system').getByRole('button',{name:copy('פתיחת סביבת ניהול','Open workspace'),exact:true}).click();
     await ready(page);
     await page.locator('[data-tab="reset"]').click();await ready(page,'reset');
     const reset=page.getByRole('button',{name:copy('איפוס להגדרות יצרן','Factory reset'),exact:true});
@@ -141,7 +141,7 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
       const { page, errors } = await fixture(t, browser, origin, { language, width, type });
       const he = language === "he";
       const copy = (h, e) => he ? h : e;
-      const realCard = page.locator(".manager-view > .manager-grid .manager-system");
+      const realCard = page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system");
       await realCard.getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true }).click();
       await ready(page);
       const workspace = page.locator(".manager-control-workspace");
@@ -272,7 +272,7 @@ test("a Roller Shutter, or a Gate that is one of its sides, has no remote Open b
     await t.test(`${variant} ${language}`, async t => {
       const { page, errors } = await fixture(t, browser, origin, { language, width: 1440, type: "roller", real });
       const copy = (h, e) => language === "he" ? h : e;
-      await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true }).click();
+      await page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system").getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true }).click();
       await ready(page);
       const content = page.locator("#manager-content");
       assert.equal(

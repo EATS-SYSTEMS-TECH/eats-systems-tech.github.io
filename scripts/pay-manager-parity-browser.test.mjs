@@ -78,7 +78,7 @@ async function fixture(browser, origin, product, language, width) {
     }
     await document.fonts.ready;
   }, { product, language, ids });
-  await page.locator(".manager-view > .manager-grid .manager-system").first().waitFor();
+  await page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system").first().waitFor();
   return { page, errors };
 }
 
@@ -125,14 +125,15 @@ test("Pay shares production Manager component geometry in both languages at phon
       const pay = await fixture(browser, origin, "pay", language, width);
       const report = { language, width, components: {} };
       try {
-        for (const selector of [".manager-shell", ".manager-nav", ".manager-main", ".manager-view", ".manager-view > .manager-grid", ".manager-nav-title"]) {
+        for (const selector of [".manager-shell", ".manager-nav", ".manager-main", ".manager-view", ".manager-nav-title"]) {
           report.components[selector] = await compare(manager.page, pay.page, selector, selector);
         }
+        report.components.rows = await compare(manager.page, pay.page, ".manager-view > .manager-systems-row > .manager-grid", ".manager-view > .pay-system-rows > .manager-systems-row > .manager-grid");
         const navLabel = language === "he" ? "המערכות שלי" : "My systems";
         const managerNav = manager.page.locator(".manager-nav").getByRole("button", { name: navLabel, exact: true });
         const payNav = pay.page.locator(".manager-nav").getByRole("button", { name: navLabel, exact: true });
         assert.deepEqual(await measure(payNav), await measure(managerNav), "selected navigation target geometry");
-        const realCards = ".manager-view > .manager-grid .manager-system";
+        const realCards = ":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system";
         assert.equal(await pay.page.locator(realCards).count(), 3, "Gate, Dual Control and Group retain the same inventory layout");
         for (let index = 0; index < 3; index++) {
           const reference = manager.page.locator(realCards).nth(index), actual = pay.page.locator(realCards).nth(index);

@@ -152,7 +152,7 @@ async function openProduct(t, site, product, language, width) {
     { product, language },
   );
   await page
-    .locator(".manager-view > .manager-grid .manager-system")
+    .locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system")
     .first()
     .waitFor();
   return { page, errors };
@@ -257,7 +257,7 @@ test("operating workspaces remain readable and keyboard accessible in both direc
           if (product !== "host")
             assert.deepEqual(
               await page
-                .locator(".manager-view > .manager-grid .manager-system .manager-muted")
+                .locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system .manager-muted")
                 .evaluateAll((items) => items.map((item) => item.textContent.split(" · ")[0])),
               language === "he"
                 ? ["שער", "שליטה כפולה", "תריס חשמלי", "קבוצה"]

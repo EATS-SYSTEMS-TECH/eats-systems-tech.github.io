@@ -45,7 +45,7 @@ async function managerFixture(t, site, language, width) {
     window.dialogs = createManagerDialog({ language });
     await document.fonts.ready;
   }, { language, records: systems(language) });
-  await page.locator(".manager-view > .manager-grid .manager-system").first().waitFor();
+  await page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system").first().waitFor();
   return { page, errors };
 }
 
@@ -93,7 +93,7 @@ test("Host uses production Manager layout and shared components with Host colors
         const navLabel = language === "he" ? "המערכות שלי" : "My systems";
         const managerNav = manager.page.locator(".manager-nav").getByRole("button", { name: navLabel, exact: true }), hostNav = host.page.locator("#host-section-navigation").getByRole("button", { name: navLabel, exact: true });
         assert.deepEqual(await measure(hostNav), await measure(managerNav), "selected sidebar control uses identical geometry");
-        const managerCards = manager.page.locator(".manager-view > .manager-grid .manager-system"), hostCards = host.page.locator('[data-workspace-view="my-systems"] .my-systems > .manager-grid .manager-system');
+        const managerCards = manager.page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system"), hostCards = host.page.locator('[data-workspace-view="my-systems"] .my-systems > .manager-systems-row > .manager-grid .manager-system');
         assert.equal(await hostCards.count(), 3);
         for (let index = 0; index < 3; index++) {
           const reference = managerCards.nth(index), actual = hostCards.nth(index);
@@ -144,7 +144,8 @@ test("Host uses production Manager layout and shared components with Host colors
         assert.equal(await host.page.locator("#host-section-navigation .manager-personal-navigation button svg").count(), await manager.page.locator(".manager-nav .manager-personal-navigation button svg").count(), "personal navigation carries Manager's icons");
         report.components.navIcon = await compare(manager.page, host.page, ".manager-nav .manager-personal-navigation button svg", "#host-section-navigation .manager-personal-navigation button svg", { height: true });
         report.components.toolbar = await compare(manager.page, host.page, ".manager-view > .manager-toolbar", '[data-workspace-view="my-systems"] .my-systems > .manager-toolbar');
-        report.components.grid = await compare(manager.page, host.page, ".manager-view > .manager-grid", '[data-workspace-view="my-systems"] .my-systems > .manager-grid');
+        report.components.grid = await compare(manager.page, host.page, ".manager-view > .manager-systems-row > .manager-grid", '[data-workspace-view="my-systems"] .my-systems > .manager-systems-row > .manager-grid');
+        report.components.rowHead = await compare(manager.page, host.page, ".manager-view > .manager-systems-row > .manager-systems-row-head", '[data-workspace-view="my-systems"] .my-systems > .manager-systems-row > .manager-systems-row-head');
         for (const selector of [".manager-examples", ".manager-examples > summary", ".manager-setup-guide", ".manager-setup-guide > summary"]) report.components[selector] = await compare(manager.page, host.page, selector, selector, { height: selector.endsWith("summary") });
         // Host keeps its own hospitality examples (no parking gate), but each
         // one is named exactly like the matching Manager example.

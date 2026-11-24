@@ -35,6 +35,7 @@ import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
 import { managerExampleSystems } from "./manager-example-data.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
+import { createMySystemsRows } from "./my-systems-rows.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
 import { createManagerConnectionNotifications } from "./manager-connection-notifications.js";
@@ -1139,17 +1140,23 @@ export function createManagerDashboard({
       if (scope) empty.dataset.organizationSection = "systems";
       view.append(empty);
     }
-    const grid = node("div", undefined, "manager-grid");
-    for (const s of systems)
-      grid.append(
-        createManagerSystemCard({
-          system: s,
-          language,
-          actions: systemActions(s, operatorAccount),
-        }),
-      );
-    if (scope) grid.dataset.organizationSection = "systems";
-    view.append(grid);
+    if (!scope && !operatorAccount) {
+      // My systems in rows: one per organization of mine (an organization
+      // without systems yet too), then the systems linked to no organization.
+      view.append(...mySystemsRows(systems));
+    } else {
+      const grid = node("div", undefined, "manager-grid");
+      for (const s of systems)
+        grid.append(
+          createManagerSystemCard({
+            system: s,
+            language,
+            actions: systemActions(s, operatorAccount),
+          }),
+        );
+      if (scope) grid.dataset.organizationSection = "systems";
+      view.append(grid);
+    }
     if (scope && !operatorAccount) {
       const help = node("div", undefined, "manager-organization-systems-help");
       help.dataset.organizationSection = "systems";
@@ -1163,6 +1170,20 @@ export function createManagerDashboard({
       examples.renderCards(view);
     }
     say("");
+  }
+  function mySystemsRows(list) {
+    // Shared with Host: one row per organization, then no organization.
+    return createMySystemsRows({
+      systems: list,
+      organizations: profile.organizations ?? [],
+      organizationOf: (s) => s.orgId ?? null,
+      renderCard: (s) => createManagerSystemCard({ system: s, language, actions: systemActions(s) }),
+      onOpenOrganization: (org) => {
+        organizationIdentities.set(org.id, org);
+        return showSystems(org.id);
+      },
+      language,
+    });
   }
   function accessNoteButton(s) {
     return button(t("פרטי גישה", "Access Note"), () =>

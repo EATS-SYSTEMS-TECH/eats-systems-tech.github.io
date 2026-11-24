@@ -32,7 +32,7 @@ test("a newly exported offline gate can be assigned before Wi-Fi or a remote ses
         await window.dashboard.ready;
       }, language);
       await page.getByRole("button", { name: he ? "המערכות שלי" : "My systems", exact: true }).click();
-      const card = page.locator(".manager-view > .manager-grid .manager-system").filter({ hasText: "Offline gate" });
+      const card = page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system").filter({ hasText: "Offline gate" });
       const menu = card.locator(".manager-system-menu");
       await menu.locator("summary").click();
       await menu.getByRole("button", { name: he ? "שיוך לארגון" : "Assign organization", exact: true }).click();

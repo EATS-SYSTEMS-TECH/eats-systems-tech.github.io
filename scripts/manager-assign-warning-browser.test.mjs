@@ -29,7 +29,7 @@ test("assigning a system to another organization warns about the gate's Wi-Fi fi
       } });
     await window.dashboard.ready;
   });
-  await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button", { name: "Open workspace", exact: true }).click();
+  await page.locator(":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system").getByRole("button", { name: "Open workspace", exact: true }).click();
   const menu = page.locator(".manager-system-menu").first();
   await menu.locator("summary").click();
   await menu.getByRole("button", { name: "Assign organization", exact: true }).click();

@@ -36,7 +36,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
       await window.dashboard.ready;
     },language);
     const he=language==='he',copy=(h,e)=>he?h:e;
-    await page.locator('.manager-view > .manager-grid .manager-system').getByRole('button',{name:language==='he'?'פתיחת סביבת ניהול':'Open workspace',exact:true}).click();
+    await page.locator(':is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system').getByRole('button',{name:language==='he'?'פתיחת סביבת ניהול':'Open workspace',exact:true}).click();
     await page.locator('[data-tab="history"]').click();
     const content=page.locator('#manager-content');
     await content.locator('[data-history-day="20261027"]').waitFor();

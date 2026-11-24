@@ -71,7 +71,7 @@ test("real and simulated Manager systems render identical cards and all ten work
           await window.dashboard.ready;
         }, language);
         const real = page.locator(
-          ".manager-view > .manager-grid .manager-system",
+          ":is(.manager-view > .manager-grid, .manager-view > .manager-systems-row > .manager-grid, .manager-view > .pay-system-rows > .manager-systems-row > .manager-grid) .manager-system",
         );
         const example = page.locator(
           '[data-example-system="example-manager-gate"]',
