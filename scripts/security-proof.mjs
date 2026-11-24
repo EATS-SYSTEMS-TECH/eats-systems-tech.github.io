@@ -1,7 +1,6 @@
 // "Did you know?" panel of the security and privacy page: the four layers that
 // protect an opening from the app, and the hacking tools our experts tried
-// against it. It describes manual opening from the app only; the starred note
-// says so, because the learned remote and Auto Open are not covered by it.
+// against manual opening from the app. The starred note excludes the backup RF remote.
 // Only the locales listed here show the panel.
 import { setLocalizedText } from "./localized-builder-document.mjs";
 
@@ -13,7 +12,7 @@ export const SECURITY_PROOF_COPY = Object.freeze({
     eyebrow: "הידעת?",
     title: "WIFI GATE נבנה לעמוד מול כלי פריצה מודרניים.",
     layersTitle: "4 שכבות הגנה",
-    layersText: "כל פתיחה מהאפליקציה מוגנת בארבע שכבות, כך שאי אפשר לקרוא אותה, לזייף אותה או להעתיק אותה.",
+    layersText: "כל פתיחה ידנית מהאפליקציה מוגנת בארבע שכבות, כך שאי אפשר לקרוא אותה, לזייף אותה או להעתיק אותה.",
     layers: Object.freeze([
       Object.freeze({ icon: "controller", title: "אימות הבקר", text: "האפליקציה מוודאת שהחיבור הוא לבקר שלכם." }),
       Object.freeze({ icon: "lock", title: "הצפנה", text: "אף אחד לא יכול לקרוא את הפקודה." }),
@@ -23,7 +22,7 @@ export const SECURITY_PROOF_COPY = Object.freeze({
     standardTitle: "תקני הצפנה בינלאומיים",
     standardText: "ההגנה בנויה על אלגוריתמים מוכרים של NIST, אותם תקנים שעליהם נשענות מערכות פיננסיות וממשלתיות, ומעליהם הוספנו שכבות הגנה משלנו.",
     testTitle: "העמדנו את ההגנה למבחן.",
-    testText: "המומחים שלנו בדקו את הפתיחה מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
+    testText: "המומחים שלנו בדקו את הפתיחה הידנית מהאפליקציה מול כלי ההעתקה והפריצה המוכרים היום:",
     tools: Object.freeze([
       Object.freeze({ name: "Flipper Zero", detail: "עם מודול הרחבה" }),
       Object.freeze({ name: "HackRF One", detail: "" }),
@@ -33,7 +32,7 @@ export const SECURITY_PROOF_COPY = Object.freeze({
     // Stated positively: the opening withstood each tool.
     result: "מוגן",
     outcome: "הפתיחה מהאפליקציה עמדה בכל הניסיונות.",
-    note: "* המידע בחלק הזה מתייחס לפתיחה ידנית מהאפליקציה בלבד, ולא לשלט או לפתיחה אוטומטית.",
+    note: "* המידע בחלק הזה לא מתייחס לשימוש בשלט RF (שלט גיבוי).",
   }),
 });
 

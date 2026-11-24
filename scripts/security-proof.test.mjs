@@ -14,8 +14,7 @@ test("the Hebrew security page shows the panel under the hero, above the three p
   assert.equal($("#security-proof-title").text().replace(/‏/g, ""), copy.title);
   assert.equal($(".security-proof__layer").length, 4);
   assert.deepEqual($(".security-proof__tool bdi").toArray().map(node => $(node).text()), copy.tools.map(tool => tool.name));
-  // The panel is scoped to manual opening from the app.
-  assert.match($(".security-proof__note").text(), /פתיחה ידנית מהאפליקציה בלבד/);
+  assert.equal($(".security-proof__note").text().replace(/\u200f/g, ""), copy.note);
   assert.equal($("link[href*='css/security-proof.css']").length, 1);
 });
 
