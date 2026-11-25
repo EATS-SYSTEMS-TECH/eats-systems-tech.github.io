@@ -2817,14 +2817,19 @@ export function createManagerDashboard({
           // would silently replace that person. Adding checks the gate first.
           const editingPhone = content.querySelector("[data-people-form]")?.dataset.editingPhone;
           if (!editingPhone) {
-            // The gate keeps the canonical number: no leading zeros.
-            const canonical = value => String(value ?? "").trim().replace(/^0+/, "");
-            const found = await connection.command(tab === "users" ? "ADMIN_LIST_USERS" : "ADMIN_LIST_ADMINS", {
-              page: { cursor: null, limit: 20 }, query: canonical(v.localNumber),
-            });
-            const rows = found?.data?.items ?? [];
-            const same = rows.find(row => canonical(row.countryCode) === canonical(v.countryCode) && canonical(row.localNumber) === canonical(v.localNumber));
-            if (same) throw new Error(tab === "users" ? "DUPLICATE_USER_PHONE" : "DUPLICATE_ADMIN_PHONE");
+            // An exact read by phone (the gate normalizes leading zeros the
+            // same way it saves): only NOT_FOUND lets a new person through.
+            let exists = true;
+            try {
+              await connection.command(tab === "users" ? "ADMIN_GET_USER" : "ADMIN_GET_ADMIN", {
+                countryCode: String(v.countryCode ?? "").trim(),
+                localNumber: String(v.localNumber ?? "").trim(),
+              });
+            } catch (error) {
+              if ((error?.code ?? error?.message) !== "NOT_FOUND") throw error;
+              exists = false;
+            }
+            if (exists) throw new Error(tab === "users" ? "DUPLICATE_USER_PHONE" : "DUPLICATE_ADMIN_PHONE");
           }
           if (!(await confirmAction(t("לשמור בשער?", "Save on the gate?"))))
             return;

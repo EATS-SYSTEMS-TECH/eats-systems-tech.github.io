@@ -176,6 +176,19 @@ export class ManagerExampleConnection {
         };
         break;
       }
+      case "ADMIN_GET_USER":
+      case "ADMIN_GET_ADMIN": {
+        // As on the gate: an exact read by phone, leading zeros normalized,
+        // and NOT_FOUND when nobody has that phone.
+        const collection = command === "ADMIN_GET_USER" ? "users" : "admins";
+        const canonical = (text) => String(text ?? "").trim().replace(/^0+/, "");
+        const person = gate[collection].find((p) =>
+          canonical(p.countryCode) === canonical(payload.countryCode) &&
+          canonical(p.localNumber) === canonical(payload.localNumber));
+        if (!person) throw Object.assign(new Error("NOT_FOUND"), { code: "NOT_FOUND", command });
+        value = { record: personRecord(person), recordRevision: gate.revision };
+        break;
+      }
       case "ADMIN_UPSERT_USER":
       case "ADMIN_UPSERT_ADMIN": {
         const collection = command === "ADMIN_UPSERT_USER" ? "users" : "admins";
