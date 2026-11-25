@@ -43,7 +43,7 @@ function heading(language, guests, subtitle) {
   const he = language === "he";
   return createManagerSectionHeading({title:guests ? (he ? "פעילות אורחים" : "Guest activity") : (he ? "היסטוריית המערכת" : "System history"),description:subtitle,icon:guests ? "account" : "history",level:"h4",className:"manager-history-header"});
 }
-export function renderManagerHistoryDays(content, { days, language, guests, more, createButton, onDay, moreButton, systemName }) {
+export function renderManagerHistoryDays(content, { days, noClockDay, language, guests, more, createButton, onDay, moreButton, systemName }) {
   const he = language === "he", t = (h,e) => he ? h : e;
   let workspace = more ? content.querySelector(".manager-history-workspace") : null;
   if (!workspace) {
@@ -63,17 +63,22 @@ export function renderManagerHistoryDays(content, { days, language, guests, more
     const symbol = node("span", undefined, "manager-history-day-symbol");
     symbol.append(managerUiIcon("calendar"));
     button.append(symbol);
-    button.append(node("span", t("יומן פעילות", "Activity log"), "manager-history-day-label"), node("strong", managerHistoryDay(day, language)), node("span", count === 1 ? t("רשומה אחת במערכת", "1 system record") : t(`${count} רשומות במערכת`, `${count} system records`), "manager-history-day-count"), node("span", t("צפייה בפעילות ←", "View activity →"), "manager-history-day-link"));
+    // The gate's no-clock day file holds records written before its clock was
+    // set (for example right after a restart): they carry no time, whatever
+    // day they happened, so the file's date is not shown as their day.
+    const noClock = noClockDay !== undefined && String(day) === String(noClockDay);
+    if (noClock) button.dataset.noClock = "true";
+    button.append(node("span", noClock ? t("ללא שעה", "No time") : t("יומן פעילות", "Activity log"), "manager-history-day-label"), node("strong", noClock ? t("לפני כיוון השעון", "Before the clock was set") : managerHistoryDay(day, language)), node("span", count === 1 ? t("רשומה אחת במערכת", "1 system record") : t(`${count} רשומות במערכת`, `${count} system records`), "manager-history-day-count"), node("span", t("צפייה בפעילות ←", "View activity →"), "manager-history-day-link"));
     list.append(button);
   }
   if (!list.childElementCount) list.append(node("p", t("אין עדיין היסטוריה זמינה במערכת.", "No system history is available yet."), "manager-history-empty"));
   if (moreButton) { moreButton.classList.add("manager-history-more-days"); workspace.append(moreButton); }
 }
-export function renderManagerHistoryRecords(content, { rows, language, guests, day, backButton, moreButton, exportButton, undecryptable = 0, systemName }) {
+export function renderManagerHistoryRecords(content, { rows, language, guests, day, noClock = false, backButton, moreButton, exportButton, undecryptable = 0, systemName }) {
   const he = language === "he", t = (h,e) => he ? h : e;
   const workspace = node("section", undefined, "manager-history-workspace");
   if (systemName) workspace.append(node("p", t(`מערכת: ${systemName}`, `System: ${systemName}`), "manager-history-system"));
-  const header = heading(language, guests, managerHistoryDay(day, language));
+  const header = heading(language, guests, noClock ? t("לפני כיוון השעון: רשומות שנכתבו לפני שהמערכת קיבלה שעה, למשל מיד אחרי הפעלה מחדש", "Before the clock was set: records written before the system had the time, for example right after a restart") : managerHistoryDay(day, language));
   const tools = node("div", undefined, "manager-history-tools");
   tools.append(backButton, exportButton);
   exportButton.disabled = !rows.length;

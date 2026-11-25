@@ -110,6 +110,7 @@ export function createManagerDashboard({
     currentTab = "overview",
     currentRows = [],
     currentUndecryptable = 0,
+    historyNoClockDay,
     currentData,
     cursor = null,
     currentView = "",
@@ -2371,8 +2372,10 @@ export function createManagerDashboard({
       return;
     }
     if (cmd === "ADMIN_LIST_HISTORY" && Array.isArray(r.data.days)) {
+      if (typeof r.data.noClockDay === "string") historyNoClockDay = r.data.noClockDay;
       renderManagerHistoryDays(content, {
-        days: r.data.days, language, guests: tab === "guests", more, createButton: button,
+        days: r.data.days, noClockDay: typeof r.data.noClockDay === "string" ? r.data.noClockDay : undefined,
+        language, guests: tab === "guests", more, createButton: button,
         systemName: currentSystem?.name || currentGate,
         onDay: day => showRead(content, cmd, { dayKey: day, page: { limit: 20, cursor: null }, ...(tab === "guests" ? { filter: { pr: [3] } } : {}) }, "items", false),
         moreButton: r.data.page?.nextCursor ? button(t("ימים נוספים", "More days"), () =>
@@ -2391,6 +2394,7 @@ export function createManagerDashboard({
         const visibleRows = currentRows.filter(row => tab !== "guests" || row[7] === 3);
         renderManagerHistoryRecords(content, {
           rows: visibleRows, language, guests: tab === "guests", day: payload.dayKey,
+          noClock: historyNoClockDay !== undefined && String(payload.dayKey) === String(historyNoClockDay),
           systemName: currentSystem?.name || currentGate,
           undecryptable: currentUndecryptable,
           backButton: button(t("חזרה לימים", "Back to days"), () => showTab(tab)),
