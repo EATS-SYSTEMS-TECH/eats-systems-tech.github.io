@@ -123,6 +123,12 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
       await page.locator('.manager-people-dialog-error').getByText(copy('כבר קיים משתמש עם מספר הטלפון הזה','A user with this phone number already exists'),{exact:false}).waitFor();
       assert.equal(await page.locator('dialog.manager-confirm-dialog[open]').count(),0,'no save confirmation for a duplicate');
       assert.equal(await workspace.getByText('Duplicate',{exact:true}).count(),0);
+      // A corrected attempt starts without the old error.
+      await form.locator('[name="localNumber"]').fill('509999991');
+      await form.getByRole('button',{name:copy('הוספת משתמש','Add user'),exact:true}).click();
+      await page.locator('dialog.manager-confirm-dialog[open]').waitFor();
+      assert.equal(await page.locator('.manager-people-dialog-error').isHidden(),true,'the previous error is cleared');
+      await page.locator('dialog.manager-confirm-dialog').getByRole('button',{name:copy('ביטול','Cancel'),exact:true}).click();
       await page.locator('dialog.manager-people-dialog').getByRole('button',{name:copy('ביטול','Cancel'),exact:true}).click();
       await workspace.getByText('Updated resident',{exact:true}).waitFor();
       await workspace.getByRole('button',{name:copy('הוספת משתמש','Add user'),exact:true}).click();

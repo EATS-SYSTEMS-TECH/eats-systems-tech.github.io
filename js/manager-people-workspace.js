@@ -63,6 +63,8 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
     failure.hidden = !error;
   };
   if (status) new MutationObserver(showFailure).observe(status, { childList: true, characterData: true, subtree: true, attributes: true, attributeFilter: ["data-state"] });
+  // A new attempt starts without the previous attempt's error.
+  editor.addEventListener("submit", () => { failure.textContent = ""; failure.hidden = true; }, true);
   const submit = editor.querySelector('button[type="submit"]');
   const actions = el("div", undefined, "manager-people-dialog-actions");
   const cancel = el("button", t("ביטול", "Cancel"), "manager-button");
