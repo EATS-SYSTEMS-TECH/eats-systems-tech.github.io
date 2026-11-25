@@ -51,7 +51,7 @@ export function renderManagerSettings({ root, language = "en", config, revision,
     PULSE_AFTER_PULSE: [t("שני פולסים", "Two pulses"), t("שני פולסים עם השהיה ביניהם.", "Two pulses with a delay between them.")],
     PULSE_AFTER_PULSE_AFTER_PULSE: [t("שלושה פולסים", "Three pulses"), t("שלושה פולסים עם שתי השהיות.", "Three pulses with two delays.")],
     TOGGLE: ["Toggle", t("מעבר בין מצב פעיל לכבוי. אין צורך בהגדרת פולסים.", "Switch between on and off. No pulse timings are needed.")],
-    PUSH_BUTTON: ["Push button", t("הפעלה במשך הלחיצה ושחרור בסיומה. אין צורך בהגדרת פולסים.", "Activate while pressed and release afterwards. No pulse timings are needed.")],
+    PUSH_BUTTON: [t("לחצן", "Push button"), t("הפעלה במשך הלחיצה ושחרור בסיומה. אין צורך בהגדרת פולסים.", "Activate while pressed and release afterwards. No pulse timings are needed.")],
   };
   const select = node("select");select.name="command";select.disabled=commandLocked;select.setAttribute("aria-label",t("בחירת אופן פתיחה","Choose an opening method"));
   for(const method of managerOpeningMethods){const option=node("option",choices[method][0]);option.value=method;select.append(option);}

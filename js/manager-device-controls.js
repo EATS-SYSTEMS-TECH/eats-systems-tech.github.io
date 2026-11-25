@@ -381,7 +381,7 @@ export async function renderManagerDeviceControls({
         );
         image.append(
           el("strong", String(result.payload.n || result.payload.i || "")),
-          el("span", `HW Type: ${managerHardwareType(result) ?? "—"}`),
+          el("span", `${t("סוג חומרה", "HW Type")}: ${managerHardwareType(result) ?? "—"}`),
           el("small", String(result.firmwareVersion || "—")),
         );
         state.textContent = t("מדבקת WIFIGATE של המערכת מוכנה לסריקה.", "This system's WIFIGATE label is ready to scan.");
@@ -445,7 +445,7 @@ export async function renderManagerDeviceControls({
       const row=el("div"), term=el("dt",name), detail=el("dd",value);
       row.append(term,detail);facts.append(row);return detail;
     };
-    const hardware = fact("HW Type",managerHardwareType(data) ?? "—");
+    const hardware = fact(t("סוג חומרה", "HW Type"),managerHardwareType(data) ?? "—");
     const installed = fact(t("גרסה מותקנת","Installed version"),String(data.firmwareVersion || "—"));
     const latest= fact(t("הגרסה העדכנית למערכת","Latest version for this system"),t("בודקים…","Checking…"));
     const decision=fact(t("האם נדרש עדכון?","Is an update needed?"),"—");

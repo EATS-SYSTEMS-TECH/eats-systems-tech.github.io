@@ -2437,7 +2437,7 @@ export function createManagerDashboard({
     const names = {
       systemName: t("שם מערכת", "System name"),
       firmwareVersion: t("גרסת קושחה", "Firmware version"),
-      hardwareType: "HW Type",
+      hardwareType: t("סוג חומרה", "HW Type"),
       maxUsers: t("מספר משתמשים מרבי", "Maximum users"),
       uptimeSec: t("זמן פעילות (שניות)", "Uptime (seconds)"),
       counts: t("כמויות", "Counts"),
