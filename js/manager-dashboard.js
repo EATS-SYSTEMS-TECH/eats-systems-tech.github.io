@@ -24,6 +24,7 @@ import { placeManagerActions } from "./manager-action-layout.js";
 import { encodeManagerCsv, managerColumns } from "./manager-csv.js";
 import { createManagerCsvDialog } from "./manager-csv-dialog.js";
 import { renderManagerSettings } from "./manager-settings.js";
+import { renderManagerSystemClock } from "./manager-system-clock.js";
 import { renderManagerDeviceControls } from "./manager-device-controls.js";
 import { renderManagerHistorySwitch } from "./manager-history-switch.js";
 import { createManagerFirmwareSource } from "./manager-firmware-source.js";
@@ -2897,6 +2898,8 @@ export function createManagerDashboard({
         if (alive() && source === context.source) { await showTab("settings"); say(t("ההגדרות נשמרו בשער.", "Settings saved on the gate."), false, "success"); }
       },
     });
+    // System clock: the last card of Settings, as in the app.
+    renderManagerSystemClock({ root: content, language, connection: context.source, confirm: confirmAction, errorText, isCurrent: alive });
   }
   function renderEventActions(content) {
     const context = { source: connection, epoch: generation, panel: tabGeneration };

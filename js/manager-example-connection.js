@@ -76,10 +76,18 @@ export class ManagerExampleConnection {
       throw new Error("EXAMPLE_CONFLICT");
     return gate;
   }
-  async command(command, payload = {}) {
+  async command(command, payload = {}, timeout, options = {}) {
     const gate = this.gate(payload.expectedRevision);
+    // As on a gate: every command sets the clock from this computer's UTC
+    // time, and a time zone the command names replaces the gate's.
+    if (Number.isInteger(options.tz)) gate.clockTz = options.tz;
+    if (!Number.isInteger(gate.clockTz)) gate.clockTz = -new Date().getTimezoneOffset() + 0;
+    this.lastClock = { set: true, utc: Math.floor(Date.now() / 1000), tz: gate.clockTz, receivedAtMs: Date.now() };
     let value;
     switch (command) {
+      case "ADMIN_PING":
+        value = { pong: true };
+        break;
       case "ADMIN_GET_OVERVIEW":
         value = {
           systemId: gate.id,

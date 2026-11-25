@@ -291,7 +291,10 @@ export class ManagerConnection {
       this.pendingNonce = null;
     }
   }
-  async command(cmd, payload = {}, timeout = cmd === "ADMIN_LIST_HISTORY" ? 35000 : 15000) {
+  // `options.tz` (minutes east of UTC) replaces the gate's own time zone for
+  // this one command: the System clock card uses it to move the gate to the
+  // computer's time zone. Every other command keeps the gate's time zone.
+  async command(cmd, payload = {}, timeout = cmd === "ADMIN_LIST_HISTORY" ? 35000 : 15000, options = {}) {
     if (this.closed || !this.session) throw new Error("DISCONNECTED");
     // The idle keep-alive must not turn a user's request into BUSY: wait for
     // the ping to finish. A user command in flight still refuses a second one.
@@ -313,7 +316,9 @@ export class ManagerConnection {
         cmd,
         freshnessMs: 15000,
         utc: Math.floor(Date.now() / 1000),
-        ...(this.timeZoneOffset === undefined
+        ...(Number.isInteger(options.tz)
+          ? { tz: String(options.tz + 0) }
+          : this.timeZoneOffset === undefined
           ? {}
           : { tz: String(this.timeZoneOffset) }),
         admin: { version: 1, requestId: crypto.randomUUID(), payload },
@@ -327,6 +332,9 @@ export class ManagerConnection {
       this.socket.send(text);
       const data = await decryptManagerResponse(this.session, await response);
       if (Number.isInteger(data.clock?.tz)) this.timeZoneOffset = data.clock.tz;
+      // The gate clock as it answered, for the System clock card.
+      if (typeof data.clock?.set === "boolean" && Number.isSafeInteger(data.clock.utc) && Number.isInteger(data.clock.tz))
+        this.lastClock = { set: data.clock.set, utc: data.clock.utc, tz: data.clock.tz, receivedAtMs: Date.now() };
       if (data.cmd !== cmd) throw new Error("RESPONSE_MISMATCH");
       if (data.status !== "OK") {
         if (cmd === "ADMIN_FACTORY_RESET_COMMIT") this.factoryResetExpected = false;

@@ -2025,3 +2025,9 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
   .manager-systems-row-tools > .manager-button { flex:1; }
   .manager-systems-row-search input { width:100%; }
 }
+
+/* System clock: the last card of the Settings tab. */
+.manager-system-clock { margin-top: 18px; }
+.manager-system-clock-status { margin: 10px 0; color: #166534; font-size: 14px; }
+.manager-system-clock-status:empty { display: none; }
+.manager-system-clock > .manager-button { margin-top: 6px; }

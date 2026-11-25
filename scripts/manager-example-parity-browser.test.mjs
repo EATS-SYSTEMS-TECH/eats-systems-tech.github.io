@@ -130,7 +130,12 @@ test("real and simulated Manager systems render identical cards and all ten work
                 document.querySelector("#manager-content")?.childElementCount >
                   0,
             );
-            contents[key] = await page.locator("#manager-content").innerHTML();
+            // The System clock card ticks: its live values are not markup.
+            contents[key] = await page.locator("#manager-content").evaluate((root) => {
+              const copy = root.cloneNode(true);
+              for (const value of copy.querySelectorAll("[data-system-clock] dd, [data-system-clock] [role=status]")) value.textContent = "";
+              return copy.innerHTML;
+            });
           }
           return contents;
         };
