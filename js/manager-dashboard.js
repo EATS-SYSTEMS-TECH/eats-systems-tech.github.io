@@ -261,6 +261,8 @@ export function createManagerDashboard({
       FIRMWARE_RELEASE_CHANGED:t("גרסת העדכון השתנתה. בדקו שוב לפני העדכון.","The update release changed. Check again before updating."),
       TOTP_REQUIRED:t("יש להשלים אימות באמצעות אפליקציית המאמת לפני הפעולה.","Complete authenticator verification before this action."),
       RECENT_REAUTH_REQUIRED:t("נדרש אימות חשבון חדש לפני הפעולה. נסו שוב והשלימו את האימות.","A new account verification is required. Try again and complete verification."),
+      DUPLICATE_USER_PHONE:t("כבר קיים משתמש עם מספר הטלפון הזה. כדי לשנות את פרטיו, בחרו ״עריכה״ ליד שמו ברשימה. לא נשמר דבר.","A user with this phone number already exists. To change their details, choose Edit next to their name. Nothing was saved."),
+      DUPLICATE_ADMIN_PHONE:t("כבר קיים מנהל עם מספר הטלפון הזה. כדי לשנות את פרטיו, בחרו ״עריכה״ ליד שמו ברשימה. לא נשמר דבר.","An administrator with this phone number already exists. To change their details, choose Edit next to their name. Nothing was saved."),
       // Account re-verification opens a Google window; say what stopped it.
       "auth/popup-blocked":t("הדפדפן חסם את חלון האימות. אפשרו חלונות קופצים לאתר ולחצו שוב.","The browser blocked the verification window. Allow pop-ups for this site and try again."),
       "auth/popup-closed-by-user":t("חלון האימות נסגר לפני שהאימות הושלם. לא בוצע שינוי.","The verification window closed before verification finished. Nothing was changed."),
@@ -2571,6 +2573,11 @@ export function createManagerDashboard({
         actions.append(
           button(t("עריכה", "Edit"), () => {
             const f = content.querySelector("[data-people-form]");
+            // The phone is the record's key on the gate: editing keeps it, as
+            // in the app, so a changed phone never leaves a second record.
+            f.dataset.editingPhone = `${r.countryCode}|${r.localNumber}`;
+            f.elements.countryCode.readOnly = true;
+            f.elements.localNumber.readOnly = true;
             for (const key of [
               "countryCode",
               "localNumber",
@@ -2806,6 +2813,19 @@ export function createManagerDashboard({
         ],
         t("הוספה / עדכון", "Add / update"),
         async (v) => {
+          // The gate saves by phone number: adding a phone that already exists
+          // would silently replace that person. Adding checks the gate first.
+          const editingPhone = content.querySelector("[data-people-form]")?.dataset.editingPhone;
+          if (!editingPhone) {
+            // The gate keeps the canonical number: no leading zeros.
+            const canonical = value => String(value ?? "").trim().replace(/^0+/, "");
+            const found = await connection.command(tab === "users" ? "ADMIN_LIST_USERS" : "ADMIN_LIST_ADMINS", {
+              page: { cursor: null, limit: 20 }, query: canonical(v.localNumber),
+            });
+            const rows = found?.data?.items ?? [];
+            const same = rows.find(row => canonical(row.countryCode) === canonical(v.countryCode) && canonical(row.localNumber) === canonical(v.localNumber));
+            if (same) throw new Error(tab === "users" ? "DUPLICATE_USER_PHONE" : "DUPLICATE_ADMIN_PHONE");
+          }
           if (!(await confirmAction(t("לשמור בשער?", "Save on the gate?"))))
             return;
           await connection.command(

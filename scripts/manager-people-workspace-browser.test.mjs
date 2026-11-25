@@ -109,10 +109,21 @@ test("People workspace keeps real/example CRUD, CSV and loaded-record search acc
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'editor fits the viewport');
       await capture('editor');
       assert.equal(await form.locator('[name="localNumber"]').inputValue(),'500000001');
+      assert.equal(await form.locator('[name="localNumber"]').evaluate(input=>input.readOnly),true,'editing keeps the phone, the record key');
       await form.locator('[name="name"]').fill('Updated resident');
       assert.equal(await page.locator('dialog.manager-people-dialog').evaluate(dialog=>dialog.open&&dialog.matches(':modal')),true,'edit opens the modal popup');
       await form.getByRole('button',{name:copy('שמירת שינויים','Save changes'),exact:true}).click();
       await page.locator('dialog.manager-confirm-dialog').getByRole('button',{name:copy('אישור','Confirm'),exact:true}).click();
+      await workspace.getByText('Updated resident',{exact:true}).waitFor();
+      // Adding a phone that already exists is refused instead of replacing that person.
+      await workspace.getByRole('button',{name:copy('הוספת משתמש','Add user'),exact:true}).click();
+      assert.equal(await form.locator('[name="localNumber"]').evaluate(input=>input.readOnly),false,'a new person has an editable phone');
+      for(const [key,value] of Object.entries({countryCode:'972',localNumber:'0500000001',name:'Duplicate',email:'dup@example.test'})) await form.locator(`[name="${key}"]`).fill(value);
+      await form.getByRole('button',{name:copy('הוספת משתמש','Add user'),exact:true}).click();
+      await page.locator('.manager-people-dialog-error').getByText(copy('כבר קיים משתמש עם מספר הטלפון הזה','A user with this phone number already exists'),{exact:false}).waitFor();
+      assert.equal(await page.locator('dialog.manager-confirm-dialog[open]').count(),0,'no save confirmation for a duplicate');
+      assert.equal(await workspace.getByText('Duplicate',{exact:true}).count(),0);
+      await page.locator('dialog.manager-people-dialog').getByRole('button',{name:copy('ביטול','Cancel'),exact:true}).click();
       await workspace.getByText('Updated resident',{exact:true}).waitFor();
       await workspace.getByRole('button',{name:copy('הוספת משתמש','Add user'),exact:true}).click();
       for(const [key,value] of Object.entries({countryCode:'972',localNumber:'509999990',name:'Added resident',email:'added@example.test'})) await form.locator(`[name="${key}"]`).fill(value);

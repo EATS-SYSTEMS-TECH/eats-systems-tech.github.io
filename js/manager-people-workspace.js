@@ -86,6 +86,9 @@ export function organizeManagerPeople(content, { language, tab, rows, editor, st
   });
   add.addEventListener("click", () => {
     editor.reset();
+    // A new person: the phone is editable and is checked against the gate.
+    delete editor.dataset.editingPhone;
+    for (const key of ["countryCode", "localNumber"]) if (editor.elements[key]) editor.elements[key].readOnly = false;
     dialog.openEditor(add.textContent);
   });
   const exports = el("details", undefined, "manager-people-exports");
