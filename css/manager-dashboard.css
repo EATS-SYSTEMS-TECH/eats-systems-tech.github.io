@@ -2031,3 +2031,7 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
 .manager-system-clock-status { margin: 10px 0; color: #166534; font-size: 14px; }
 .manager-system-clock-status:empty { display: none; }
 .manager-system-clock > .manager-button { margin-top: 6px; }
+
+/* A held gate (open or closed) on the overview. */
+.manager-override-notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 16px; padding: 14px 16px; border: 1px solid #fcd34d; border-inline-start: 4px solid #d97706; border-radius: 14px; background: #fffbeb; color: #78350f; }
+.manager-override-notice p { margin: 0; font-size: 14px; line-height: 1.6; flex: 1 1 240px; }

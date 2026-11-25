@@ -2187,6 +2187,25 @@ export function createManagerDashboard({
       });
       renderFacts(details, { ...r.data, ...(maximum !== null && maximum !== undefined ? { maxUsers: maximum } : {}) });
       details.querySelector(".manager-facts").className = "manager-detail-facts";
+      // A held gate ignores normal opening: say so on the overview, as the app
+      // shows it on the Settings row. A failed read changes nothing here.
+      if (source.capabilities?.data?.features?.includes("GATE_OVERRIDE")) {
+        try {
+          const held = (await source.command("ADMIN_GET_GATE_OVERRIDE")).data?.override?.mode;
+          if (connection === source && generation === epoch && tabGeneration === panelEpoch && currentTab === tab && (held === "FORCE_NO" || held === "FORCE_NC")) {
+            const notice = node("div", undefined, "manager-override-notice");
+            notice.setAttribute("role", "status");
+            notice.dataset.override = held;
+            notice.append(node("p", held === "FORCE_NO"
+              ? t("השער במצב פתוח קבוע. הוא נשאר פתוח עד שתחזירו אותו למצב רגיל.", "The gate is held open. It stays open until you return it to normal.")
+              : t("השער במצב סגור קבוע. פתיחה רגילה לא תפעל עד שתחזירו אותו למצב רגיל.", "The gate is held closed. Normal opening will not work until you return it to normal.")));
+            notice.append(button(t("לשינוי מצב השער", "Change the gate mode"), () => showTab("override")));
+            content.prepend(notice);
+          }
+        } catch {
+          // The overview stays as read.
+        }
+      }
       return;
     }
     if (tab === "guests") {
