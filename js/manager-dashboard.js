@@ -2740,7 +2740,11 @@ export function createManagerDashboard({
         SENSOR_INACTIVE: t("מצב החיישן אינו מאפשר את הפעולה כרגע.", "The sensor state does not allow this action right now."),
         REMOTE_OPEN_RATE_LIMITED: t("נשלחו בקשות פתיחה בתדירות גבוהה מדי. המתינו לפני ניסיון נוסף.", "Opening requests were sent too frequently. Wait before trying again."),
       };
-      const refusal = Object.hasOwn(refusals, error.reason) ? refusals[error.reason] : null;
+      // The gate sends the refusal as a gate message number; older firmware
+      // sent its text. 100 is a busy gate (also too many remote openings).
+      const byNumber = { 100: t("השער עסוק כרגע או שנשלחו יותר מדי בקשות פתיחה. המתינו רגע ונסו שוב.", "The gate is busy or too many opening requests were sent. Wait a moment and try again."), 102: refusals.OVERRIDE_FORCE_NC, 103: refusals.OVERRIDE_FORCE_NO, 1215: refusals.SENSOR_INACTIVE, 1301: refusals.EVENT_ACTIVE };
+      const refusal = Object.hasOwn(refusals, error.reason) ? refusals[error.reason]
+        : error.firmwareRefusal && Object.hasOwn(byNumber, error.reasonCode) ? byNumber[error.reasonCode] : null;
       operation.fail({
         sent,
         uncertain: sent && !simulation && !error.firmwareRefusal && error.message !== "BUSY",

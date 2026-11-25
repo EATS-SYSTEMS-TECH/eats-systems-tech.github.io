@@ -40,6 +40,11 @@ test("the overview warns while the gate is held open or closed", async (t) => {
     const notice = content.locator(".manager-override-notice");
     await notice.waitFor();
     assert.match(await notice.textContent(), he ? /סגור קבוע/ : /held closed/);
+    // A remote open is refused with the held-closed reason, not a busy session.
+    await content.getByRole("button", { name: copy("פתיחת שער", "Open gate"), exact: true }).click();
+    await page.getByRole("button", { name: copy("אישור פתיחה", "Confirm opening"), exact: true }).click();
+    await page.getByText(copy("המערכת במצב סגור קבוע ואינה מאפשרת פתיחה מרחוק.", "The system is held closed and does not allow remote opening."), { exact: true }).waitFor();
+    await page.keyboard.press("Escape");
     await notice.getByRole("button", { name: copy("לשינוי מצב השער", "Change the gate mode"), exact: true }).click();
     await content.locator("select").waitFor();
     assert.equal(await content.locator("select").inputValue(), "FORCE_NC");

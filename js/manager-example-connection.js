@@ -152,8 +152,9 @@ export class ManagerExampleConnection {
       case "ADMIN_REMOTE_OPEN":
         if (payload.expectedGateCommand !== gate.config.command)
           throw new Error("EXAMPLE_CONFLICT");
-        if (gate.override === "FORCE_NC")
-          throw new Error("EXAMPLE_HELD_CLOSED");
+        // As the gate answers a held gate: BUSY with the gate message number.
+        if (gate.override === "FORCE_NC" || gate.override === "FORCE_NO")
+          throw Object.assign(new Error("BUSY"), { code: "BUSY", reasonCode: gate.override === "FORCE_NC" ? 102 : 103, firmwareRefusal: true, command });
         if (
           gate.config.command === "TOGGLE" &&
           !["ON", "OFF"].includes(payload.state)

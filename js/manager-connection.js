@@ -340,7 +340,8 @@ export class ManagerConnection {
         if (cmd === "ADMIN_FACTORY_RESET_COMMIT") this.factoryResetExpected = false;
         throw Object.assign(
           new Error(data.admin?.error?.code ?? data.status ?? "COMMAND_FAILED"),
-          { code: data.admin?.error?.code, field: data.admin?.error?.field, reason: data.admin?.error?.message, firmwareRefusal: true, command: cmd },
+          // The gate sends its reason as a number (WIFIGATE gate messages).
+          { code: data.admin?.error?.code, field: data.admin?.error?.field, reason: data.admin?.error?.message, reasonCode: data.admin?.error?.reason, firmwareRefusal: true, command: cmd },
         );
       }
       return data.admin;
