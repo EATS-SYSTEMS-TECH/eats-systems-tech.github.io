@@ -40,6 +40,7 @@ import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import { mountFactoryWorkstation } from "./factory-workstation.js";
 import { renderFounderTag } from "./profile-roles.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
 import { createPlatformManagementGuide, mountRoleGuideButton, openRoleGuide } from "./role-guide.js";
@@ -80,6 +81,7 @@ let managerDashboard;
 let payDashboard;
 let platformDirectory;
 let reservationsAdmin;
+let factoryWorkstation;
 const directoryRoot = document.createElement("section");
 directoryRoot.id = "platform-admin-management";
 directoryRoot.className = "portal-panel platform-admin-management";
@@ -278,6 +280,9 @@ function clearPrivate() {
   factoryProfileCard.remove();
   delete adminTools.dataset.factoryVisible;
   if (factoryPage) {
+    factoryWorkstation?.close();
+    factoryWorkstation = undefined;
+    document.body.classList.remove("factory-workstation-active");
     const title = $("#platform-title");
     title.textContent = language === "he" ? "הדשבורד" : "Dashboard";
     title.removeAttribute("dir");
@@ -558,14 +563,14 @@ async function refresh() {
       title.dir = "ltr";
       document.title = factoryName + " | WIFIGATE";
       const workspace = $("#product-workspace");
-      const stateTitle = document.createElement("h2");
-      stateTitle.textContent = language === "he" ? "צריבת PROD" : "PROD flashing";
-      const summary = document.createElement("p");
-      summary.textContent = language === "he" ? "סביבת הצריבה נמצאת בפיתוח." : "The flashing workspace is in development.";
-      workspace.replaceChildren(stateTitle, summary, link(
-        language === "he" ? "חזרה לדשבורד" : "Back to dashboard",
-        "/dashboard/" + languageQuery,
-      ));
+      factoryWorkstation = mountFactoryWorkstation({
+        root: workspace,
+        identity,
+        user,
+        language,
+        signOut: () => void session?.endSession(),
+      });
+      document.body.classList.add("factory-workstation-active");
       workspace.hidden = false;
     } else if (adminPage) {
       if (identity.platformRole !== "admin") {

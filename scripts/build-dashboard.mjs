@@ -56,7 +56,8 @@ const factoryPage = path.join(root, "dashboard/factory/index.html");
 await mkdir(path.dirname(factoryPage), { recursive: true });
 await writeFile(factoryPage, profilePage
   .replace('data-product=""', 'data-product="" data-platform-view="factory"')
-  .replace("<title>Products | WIFIGATE</title>", "<title>Dashboard | WIFIGATE</title>"));
+  .replace("<title>Products | WIFIGATE</title>", "<title>Dashboard | WIFIGATE</title>")
+  .replace("  </head>", '    <link id="factory-workstation-style" rel="stylesheet" href="/css/factory-workstation.css?v=20261126factory2" />\n  </head>'));
 const managerManagementPage = path.join(
   root,
   "dashboard/manager/platform/index.html",
