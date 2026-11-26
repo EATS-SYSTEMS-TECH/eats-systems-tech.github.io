@@ -69,6 +69,7 @@ export function fixtureProfile(state) {
     },
     mfa: { enrolled: state.enrolled, verified: state.verified },
     platformRole: state.platformRole ?? null,
+    ...(state.factoryAccess !== undefined ? { factoryAccess: state.factoryAccess } : {}),
     products: {
       host: {
         state: host,
@@ -229,7 +230,8 @@ export async function scenario(browser, options = {}) {
         });
       if (url.pathname.endsWith("/login")) {
         const identity = fixtureProfile(state);
-        const denied = Object.values(identity.products).every(product => product.state === "no-plan");
+        const denied = identity.factoryAccess !== true &&
+          Object.values(identity.products).every(product => product.state === "no-plan");
         if (denied) {
           state.loginFailures = Math.min(5, (state.loginFailures ?? 0) + 1);
           const until = new Date(Date.now() + 15 * 60 * 1000).toISOString();

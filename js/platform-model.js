@@ -47,11 +47,21 @@ export function parsePlatformIdentity(value, expectedUid) {
     user,
     mfa,
     platformRole: value.platformRole === "admin" ? "admin" : null,
+    ...(Object.hasOwn(value, "factoryAccess") ? { factoryAccess: value.factoryAccess === true } : {}),
     products: {
       ...products,
       host: { ...products.host, role: products.host.role ?? null },
     },
   };
+}
+
+export function hasFactoryAccess(identity) {
+  return identity?.user?.emailVerified === true &&
+    (identity.platformRole === "admin" || identity.factoryAccess === true);
+}
+
+export function canOpenFactory(identity) {
+  return hasFactoryAccess(identity) && identity.mfa?.enrolled === true && identity.mfa.verified === true;
 }
 
 // A Host plan holder pays for Host and has My systems; anyone else in Host is
@@ -70,12 +80,12 @@ export function canOpenProduct(identity, id) {
   return state === "active" || (["host", "manager"].includes(id) && state === "pending");
 }
 
-// Sign-in is refused when no product is open to the account at all: every
-// product answers no-plan (an unverified email always does). The reason names
-// the message the sign-in page shows.
+// An admitted Factory account can set up its authenticator without a business
+// plan. Otherwise no-plan across all products still refuses the sign-in.
 export const signInRefusals = Object.freeze(["no-account", "unverified-email"]);
 
 export function signInRefusal(identity) {
+  if (hasFactoryAccess(identity)) return null;
   if (!productIds.every((id) => identity.products[id].state === "no-plan"))
     return null;
   return identity.user.emailVerified ? "no-account" : "unverified-email";
@@ -100,6 +110,7 @@ export function safeDashboardPath(value) {
     path === "/dashboard/" ||
     path === "/dashboard/platform/" ||
     path === "/dashboard/reservations/" ||
+    path === "/dashboard/factory/" ||
     path === "/dashboard/manager/platform/" ||
     path === "/dashboard/host/overview/" ||
     visibleProductIds.some((id) => path === `/dashboard/${id}/`);
@@ -110,6 +121,7 @@ export function safeDashboardPath(value) {
 export function loginDestination(identity, next, language = "en") {
   const safeNext = safeDashboardPath(next);
   const product = safeNext?.split(/[/?#]/)[2];
+  if (product === "factory" && hasFactoryAccess(identity)) return safeNext;
   if (["platform", "reservations"].includes(product) && identity.platformRole === "admin") return safeNext;
   if (product && canOpenProduct(identity, product)) return safeNext;
   return language === "he" ? "/dashboard/?lang=he" : "/dashboard/";

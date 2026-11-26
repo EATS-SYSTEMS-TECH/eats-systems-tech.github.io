@@ -1061,7 +1061,11 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-tools .platform-management-entry:hover { background: #000; color: #fff; }
 .platform-admin-tools .platform-management-entry svg { flex: 0 0 22px; }
 .platform-page:has(.platform-admin-tools:not([hidden])) { padding-bottom: 205px; }
+.platform-page:has(.platform-admin-tools[data-factory-visible="true"]:not([hidden])) { padding-bottom: 260px; }
 .platform-page:has(.platform-admin-tools[data-collapsed="true"]:not([hidden])) { padding-bottom: 100px; }
+.platform-factory-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .9rem; }
+.platform-factory-card h2 { margin: 0; text-align: start; }
+.platform-factory-card .platform-button { display: inline-flex; align-items: center; text-decoration: none; }
 @media (max-width: 600px) { .platform-admin-tools { inset-inline-start: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); } }
 .platform-management-back { display: inline-flex; gap: .5rem; align-items: center; width: fit-content; margin-block: 1.4rem 0; color: var(--muted); font-size: .9rem; text-decoration: none; }
 .platform-management-back::before { content: "←"; font-size: 1.2rem; }

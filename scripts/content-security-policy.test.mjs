@@ -23,6 +23,7 @@ const workspacePages = [
   "dashboard/pay/platform/index.html",
   "dashboard/platform/index.html",
   "dashboard/reservations/index.html",
+  "dashboard/factory/index.html",
   "reservations/index.html",
   "pay/point/index.html",
 ];
@@ -88,7 +89,7 @@ test("covered pages load without policy violations and the policy blocks injecte
       window.cspViolations.push(`${event.effectiveDirective} ${event.blockedURI}`);
     });
   });
-  for (const path of ["/login/", "/he/login/", "/dashboard/", "/dashboard/host/", "/dashboard/manager/", "/dashboard/pay/", "/dashboard/platform/", "/reservations/", "/pay/point/?id=" + "a".repeat(64)]) {
+  for (const path of ["/login/", "/he/login/", "/dashboard/", "/dashboard/host/", "/dashboard/manager/", "/dashboard/pay/", "/dashboard/platform/", "/dashboard/factory/", "/reservations/", "/pay/point/?id=" + "a".repeat(64)]) {
     await t.test(path, async () => {
       const page = await context.newPage();
       t.after(() => page.close());

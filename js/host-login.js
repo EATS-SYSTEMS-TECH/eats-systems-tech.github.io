@@ -17,7 +17,7 @@ import {
   loginPath,
   signInRefusal,
   signInRefusals,
-} from "./platform-model.js?v=20261027managerux1";
+} from "./platform-model.js?v=20261126factory1";
 import { watchSession } from "./platform-session.js?v=20261121remember30";
 import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261119remember1";
 import { requestHumanCheck } from "./login-gate-game.js?v=20261109gate2";
@@ -168,6 +168,7 @@ async function finishLogin(user) {
   }
   showProgress(copy.checking);
   const promise = portalLogin(user).then(async ({ identity: value, attempts }) => {
+    if (loginAttempt?.promise !== promise || restoredUser?.uid !== user.uid) return;
     attemptHint.set(attempts);
     updateAttempts();
     const identity = parsePlatformIdentity(value, user.uid);
@@ -187,7 +188,8 @@ async function finishLogin(user) {
   try {
     await promise;
   } catch (error) {
-    if (["PORTAL_LOGIN_DENIED", "PORTAL_LOGIN_LOCKED"].includes(error.code)) {
+    if (loginAttempt?.promise === promise && restoredUser?.uid === user.uid &&
+        ["PORTAL_LOGIN_DENIED", "PORTAL_LOGIN_LOCKED"].includes(error.code)) {
       attemptHint.set(error.details?.attempts);
       hadLock = Boolean(attemptHint.current().lockedUntil);
       refused = true;

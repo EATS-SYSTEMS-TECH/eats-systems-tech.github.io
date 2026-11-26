@@ -104,6 +104,7 @@ export const pickerPages = [
   "dashboard/manager/platform/index.html",
   "dashboard/platform/index.html",
   "dashboard/reservations/index.html",
+  "dashboard/factory/index.html",
 ];
 
 // Static hosting needs a real document for the Platform deep link: the

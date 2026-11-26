@@ -52,6 +52,11 @@ await writeFile(
       "<title>WIFIGATE Reservations</title>",
     ),
 );
+const factoryPage = path.join(root, "dashboard/factory/index.html");
+await mkdir(path.dirname(factoryPage), { recursive: true });
+await writeFile(factoryPage, profilePage
+  .replace('data-product=""', 'data-product="" data-platform-view="factory"')
+  .replace("<title>Products | WIFIGATE</title>", "<title>Dashboard | WIFIGATE</title>"));
 const managerManagementPage = path.join(
   root,
   "dashboard/manager/platform/index.html",

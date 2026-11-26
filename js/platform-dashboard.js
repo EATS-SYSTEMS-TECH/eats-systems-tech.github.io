@@ -18,6 +18,8 @@ import {
   loginPath,
   signInRefusal,
   canOpenProduct,
+  hasFactoryAccess,
+  canOpenFactory,
 } from "./platform-model.js";
 import { platformText } from "./platform-copy.js";
 import { verifyManagerRecentIdentity } from "./manager-recent-identity.js";
@@ -55,6 +57,10 @@ const payManagementPage = selectedProduct === "pay" && document.body.dataset.pay
 // WIFIGATE Reservations: a Founder page of its own, apart from the
 // Host | Pay | Manager products (For Business).
 const reservationsPage = document.body.dataset.platformView === "reservations";
+const factoryPage = document.body.dataset.platformView === "factory";
+const factoryName = "WIFIGATE Factory";
+const languageQuery = language === "he" ? "?lang=he" : "";
+const factoryPath = "/dashboard/factory/" + languageQuery;
 const adminPage = managementPage || reservationsPage;
 const managerTitle = enabled => enabled
   ? (language === "he" ? "ניהול פלטפורמה · Manager | WIFIGATE" : "Platform management · Manager | WIFIGATE")
@@ -121,6 +127,29 @@ const adminToolsContent = document.createElement("div");
 adminToolsContent.id = "platform-admin-tools-content";
 adminToolsContent.className = "platform-admin-tools-content";
 adminToolsContent.append(reservationsLink, managementEntry);
+const factoryFounderLink = document.createElement("a");
+factoryFounderLink.id = "platform-factory-founder-entry";
+factoryFounderLink.className = "platform-management-entry";
+factoryFounderLink.href = factoryPath;
+const factoryIcon = entryIcon.cloneNode(true);
+factoryIcon.querySelector("path").setAttribute("d", "M7 7h10v10H7zM10 10h4v4h-4zM9 4v3m6-3v3m-6 10v3m6-3v3M4 9h3m-3 6h3m10-6h3m-3 6h3");
+const factoryFounderLabel = document.createElement("span");
+factoryFounderLabel.dir = "ltr";
+factoryFounderLabel.textContent = factoryName;
+factoryFounderLink.append(factoryIcon, factoryFounderLabel);
+const factoryProfileCard = document.createElement("section");
+factoryProfileCard.id = "profile-factory";
+factoryProfileCard.className = "portal-panel platform-factory-card";
+factoryProfileCard.setAttribute("aria-labelledby", "profile-factory-title");
+const factoryProfileTitle = document.createElement("h2");
+factoryProfileTitle.id = "profile-factory-title";
+factoryProfileTitle.dir = "ltr";
+factoryProfileTitle.textContent = factoryName;
+const factoryProfileLink = document.createElement("a");
+factoryProfileLink.className = "platform-button";
+factoryProfileLink.href = factoryPath;
+factoryProfileLink.textContent = language === "he" ? "פתיחת סביבת הצריבה" : "Open flashing workspace";
+factoryProfileCard.append(factoryProfileTitle, factoryProfileLink);
 const adminToolsPreference = "wifigate-admin-tools-collapsed";
 function setAdminToolsCollapsed(collapsed) {
   adminTools.dataset.collapsed = String(collapsed);
@@ -166,7 +195,9 @@ for (const node of document.querySelectorAll("[data-profile-en]"))
   node.textContent =
     language === "he" ? node.dataset.profileHe : node.dataset.profileEn;
 if (!selectedProduct) {
-  const title = reservationsPage
+  const title = factoryPage
+    ? language === "he" ? "הדשבורד" : "Dashboard"
+    : reservationsPage
     ? "WIFIGATE Reservations"
     : managementPage
     ? language === "he" ? "ניהול פלטפורמה" : "Platform management"
@@ -182,6 +213,7 @@ if (!selectedProduct) {
       : language === "he"
       ? "פרטים אישיים, אבטחה, מנויים ותשלומים במקום אחד."
       : "Your personal details, security, subscriptions and payments in one place.";
+  if (factoryPage) $("[data-copy=intro]").hidden = true;
 }
 if (adminPage) {
   document.body.classList.add("platform-management-page");
@@ -242,6 +274,16 @@ function clearSecret() {
 function clearPrivate() {
   adminTools.hidden = true;
   managementEntry.hidden = true;
+  factoryFounderLink.remove();
+  factoryProfileCard.remove();
+  delete adminTools.dataset.factoryVisible;
+  if (factoryPage) {
+    const title = $("#platform-title");
+    title.textContent = language === "he" ? "הדשבורד" : "Dashboard";
+    title.removeAttribute("dir");
+    document.title = title.textContent + " | WIFIGATE";
+    $("#product-workspace").replaceChildren();
+  }
   platformDirectory?.close();
   platformDirectory = undefined;
   reservationsAdmin?.close();
@@ -297,7 +339,7 @@ function link(label, href, secondary = false) {
 function showSecurity() {
   if (!identity) return;
   $("#platform-security").hidden = false;
-  const required = productIds.some(
+  const required = (hasFactoryAccess(identity) && !identity.mfa.verified) || productIds.some(
     (id) => identity.products[id].state === "mfa-required",
   );
   $("#security-description").textContent = required
@@ -453,6 +495,7 @@ function renderProducts() {
   if (
     identity.user.emailVerified &&
     (!identity.mfa.enrolled ||
+      (hasFactoryAccess(identity) && !identity.mfa.verified) ||
       productIds.some((id) => identity.products[id].state === "mfa-required"))
   )
     showSecurity();
@@ -474,7 +517,7 @@ async function refresh() {
   $("#platform-retry").hidden = true;
   try {
     const result = await getPlatformProfile(user);
-    if (requestGeneration !== generation) return;
+    if (requestGeneration !== generation || currentUser !== user) return;
     identity = parsePlatformIdentity(result, user.uid);
     managerLoading?.advance(loadingTicket, 2);
     renderFounderTag(identity.platformRole, identity.user.emailVerified);
@@ -485,7 +528,7 @@ async function refresh() {
       return;
     }
     showIdentity();
-    mountRoleGuideButton({ product: selectedProduct || "host", language, context: () => {
+    if (!factoryPage) mountRoleGuideButton({ product: selectedProduct || "host", language, context: () => {
       const product = selectedProduct || new URLSearchParams(location.search).get("product") || "host";
       const role = identity?.products?.[product]?.role;
       return { product, plan: identity?.platformRole === "admin" ? "admin" : ["admin", "user"].includes(role) ? role : null, organizationRole: document.body.dataset.organizationRole };
@@ -501,7 +544,30 @@ async function refresh() {
       language,
       adminPage ? "management" : "",
     );
-    if (adminPage) {
+    if (factoryPage) {
+      if (!hasFactoryAccess(identity)) {
+        $("#platform-status").textContent = language === "he" ? "אין לחשבון הזה הרשאה לפתוח את המסך." : "This account does not have access to this page.";
+        return;
+      }
+      if (!canOpenFactory(identity)) {
+        showSecurity();
+        return;
+      }
+      const title = $("#platform-title");
+      title.textContent = factoryName;
+      title.dir = "ltr";
+      document.title = factoryName + " | WIFIGATE";
+      const workspace = $("#product-workspace");
+      const stateTitle = document.createElement("h2");
+      stateTitle.textContent = language === "he" ? "צריבת PROD" : "PROD flashing";
+      const summary = document.createElement("p");
+      summary.textContent = language === "he" ? "סביבת הצריבה נמצאת בפיתוח." : "The flashing workspace is in development.";
+      workspace.replaceChildren(stateTitle, summary, link(
+        language === "he" ? "חזרה לדשבורד" : "Back to dashboard",
+        "/dashboard/" + languageQuery,
+      ));
+      workspace.hidden = false;
+    } else if (adminPage) {
       if (identity.platformRole !== "admin") {
         $("#platform-status").textContent = language === "he" ? "המסך זמין למייסדי WIFIGATE בלבד." : "This page is available to Founders only.";
         return;
@@ -584,9 +650,16 @@ async function refresh() {
       }
     } else {
       renderProducts();
+      if (canOpenFactory(identity)) {
+        $("#profile-subscriptions").after(factoryProfileCard);
+      }
       if (identity.platformRole === "admin" && identity.mfa.verified) {
         adminTools.hidden = false;
         managementEntry.hidden = false;
+        if (canOpenFactory(identity)) {
+          adminToolsContent.append(factoryFounderLink);
+          adminTools.dataset.factoryVisible = "true";
+        }
       }
     }
   } catch (error) {
