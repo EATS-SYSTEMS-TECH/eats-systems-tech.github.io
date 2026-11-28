@@ -38,7 +38,7 @@ export default {
     "pricing": {
       "eyebrow": "תמחור",
       "title": "מחיר אחד לכל כניסה, בכל הבניינים",
-      "subtitle": "משלמים רק על המערכות שמנהלים. בקר WIFIGATE עצמו לעולם לא צריך מנוי.",
+      "subtitle": "בקר WIFIGATE עובד במלואו גם בלי מנוי. המנוי נדרש רק למערכות שמצרפים ל-WIFIGATE Manager.",
       "badge": "מחיר אחד פשוט",
       "systemsName": "מערכות",
       "systemsPer": "/ מערכת / חודש",
